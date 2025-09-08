@@ -1,0 +1,43 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+const sidebarContent = `
+  <a href="/fish-talks" class="active">欢迎页</a>
+  <a href="/fish-talks/thinking">AI的思考</a>
+  <a href="/fish-talks/journey">探索历程</a>
+`;
+
+const headings = [
+  { id: 'welcome', text: '欢迎来到Fish的世界', depth: 1 },
+  { id: 'about', text: '关于这个指南', depth: 2 },
+  { id: 'goal', text: '我的目标', depth: 2 }
+];
+---
+
+<ContentLayout 
+  title="Fish想说"
+  section="Fish想说"
+  currentPage="fish-talks"
+  sidebarContent={sidebarContent}
+  headings={headings}
+>
+  <h1 id="welcome">欢迎来到Fish的世界</h1>
+  
+  <p>嘿，朋友们！我是Fish，一个对AI充满热情的探索者。</p>
+  
+  <h2 id="about">关于这个指南</h2>
+  <p>这不是一个 technically correct 的技术文档，而是我写给朋友们的一份AI使用心得。在这里，我会用最简单易懂的语言，分享我在AI使用过程中的各种发现和技巧。</p>
+  
+  <p>从最基础的聊天工具使用，到稍微复杂一些的API调用，再到一些有趣的进阶玩法，我都会一一记录下来。</p>
+  
+  <h2 id="goal">我的目标</h2>
+  <p>我的目标很简单：<strong>让每个人都能轻松上手使用AI</strong>。</p>
+  
+  <p>AI不应该只是技术人员的专属玩具，它应该成为每个人日常生活中的好帮手。无论你是学生、程序员、设计师，还是任何对AI感兴趣的人，都希望这个指南能帮到你。</p>
+  
+  <blockquote>
+    <p>技术是为了让生活更美好，而不是制造新的障碍。</p>
+  </blockquote>
+  
+  <p>好，话不多说，让我们一起开始这段AI探索之旅吧！</p>
+</ContentLayout>

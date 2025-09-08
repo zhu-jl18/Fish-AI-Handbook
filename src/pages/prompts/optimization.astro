@@ -1,0 +1,43 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+const sidebarContent = `
+  <a href="/prompts">提示词工程概述</a>
+  <a href="/prompts/basics">基础技巧</a>
+  <a href="/prompts/advanced">高级策略</a>
+  <a href="/prompts/templates">实用模板</a>
+  <a href="/prompts/optimization" class="active">优化与调试</a>
+`;
+
+const headings = [
+  { id: 'introduction', text: '优化与调试', depth: 1 },
+  { id: 'testing', text: '提示词测试', depth: 2 },
+  { id: 'iteration', text: '迭代优化', depth: 2 },
+  { id: 'debugging', text: '问题调试', depth: 2 },
+  { id: 'performance', text: '性能优化', depth: 2 }
+];
+---
+
+<ContentLayout 
+  title="优化与调试"
+  section="提示词"
+  currentPage="prompts"
+  sidebarContent={sidebarContent}
+  headings={headings}
+>
+  <h1 id="introduction">优化与调试</h1>
+  
+  <p>学习如何测试、优化和调试你的提示词，获得更好的效果。</p>
+  
+  <h2 id="testing">提示词测试</h2>
+  <p>系统性地测试提示词的效果，确保输出质量。</p>
+  
+  <h2 id="iteration">迭代优化</h2>
+  <p>通过不断迭代来改进提示词的效果。</p>
+  
+  <h2 id="debugging">问题调试</h2>
+  <p>识别和解决提示词中的常见问题。</p>
+  
+  <h2 id="performance">性能优化</h2>
+  <p>优化提示词的性能，减少token使用和提高响应速度。</p>
+</ContentLayout>

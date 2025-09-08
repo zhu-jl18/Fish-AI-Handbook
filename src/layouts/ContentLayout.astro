@@ -1,0 +1,65 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import LeftSidebar from '../components/LeftSidebar.astro';
+import RightSidebar from '../components/RightSidebar.astro';
+
+const { 
+  title, 
+  section, 
+  currentPage, 
+  sidebarContent,
+  headings = []
+} = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <Header currentPage={currentPage} />
+  
+  <div class="content-wrapper">
+    <LeftSidebar section={section} currentPage={currentPage}>
+      <Fragment set:html={sidebarContent} />
+    </LeftSidebar>
+    
+    <main class="content">
+      <div class="content-inner">
+        <slot />
+      </div>
+    </main>
+    
+    <RightSidebar headings={headings} />
+  </div>
+</BaseLayout>
+
+<style>
+.content-wrapper {
+  display: flex;
+  margin-top: 60px;
+  min-height: calc(100vh - 60px);
+}
+
+.content {
+  flex: 1;
+  margin-left: 250px;
+  margin-right: 250px;
+  padding: 2rem;
+  background-color: #000;
+}
+
+.content-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .left-sidebar,
+  .right-sidebar {
+    display: none;
+  }
+  
+  .content {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+</style>

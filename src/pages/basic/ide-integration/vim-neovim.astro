@@ -1,0 +1,77 @@
+---
+import ContentLayout from '../../../layouts/ContentPageLayout.astro';
+
+const section = 'basic';
+const currentPage = 'ide-integration/vim-neovim';
+const title = 'Vim / NeoVim 配置 - 轻量级 IDE 集成';
+const sidebarContent = `
+  <a href="/basic/ide-integration">IDE集成概述</a>
+  <a href="/basic/ide-integration/cursor">Cursor编辑器</a>
+  <a href="/basic/ide-integration/vscode">VS Code插件</a>
+  <a href="/basic/ide-integration/jetbrains">JetBrains全家桶</a>
+  <a href="/basic/ide-integration/vim-neovim" class="active">Vim/NeoVim配置</a>
+  <a href="/basic/ide-integration/best-practices">最佳实践</a>
+`;
+const headings = [
+  { id: 'introduction', text: '介绍', depth: 1 },
+  { id: 'plugins', text: '推荐插件', depth: 1 },
+  { id: 'installation', text: '安装与配置', depth: 1 },
+  { id: 'workflows', text: '常用工作流', depth: 1 },
+  { id: 'tips', text: '优化与调优', depth: 1 }
+];
+---
+
+<ContentLayout
+  {title}
+  {section}
+  {currentPage}
+  {sidebarContent}
+  {headings}
+>
+
+## 介绍
+
+Vim / NeoVim 是轻量且可高度定制的编辑器，适合偏好键盘操作和低资源占用的开发者。
+
+## 推荐插件
+
+- coc.nvim / nvim-cmp: 代码补全
+- copilot.vim / codeium.nvim: AI 补全集成
+- vim-gitgutter / gitsigns: Git 变更提示
+- vim-test / neotest: 测试运行集成
+
+## 安装与配置
+
+示例（NeoVim + lazy.nvim 管理插件）:
+
+```bash
+# 安装 lazy.nvim
+git clone --filter=blob:none https://github.com/folke/lazy.nvim.git ~/.local/share/nvim/site/pack/lazy/start/lazy.nvim
+```
+
+init.lua 示例节选:
+
+```lua
+require('lazy').setup({
+  'neovim/nvim-lspconfig',
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-nvim-lsp',
+  'github/copilot.vim',
+  'nvim-lua/plenary.nvim',
+  'nvim-treesitter/nvim-treesitter'
+})
+```
+
+## 常用工作流
+
+- 代码补全 + 上下文感知建议
+- 使用 LSP 做实时诊断与重构
+- 在 git 提交前运行本地测试（neotest / vim-test）
+
+## 优化与调优
+
+- 降低 suggestions 并行数以节省资源
+- 配置本地模型或代理以减少 API 请求延迟
+- 使用异步插件加载改善启动速度
+
+</ContentLayout>

@@ -1,0 +1,427 @@
+---
+import ContentLayout from '../../../layouts/ContentPageLayout.astro';
+
+const section = 'basic';
+const currentPage = 'ide-integration/cursor';
+const title = 'Cursor编辑器 - AI原生的编程体验';
+const sidebarContent = `
+  <a href="/basic/ide-integration">IDE集成概述</a>
+  <a href="/basic/ide-integration/cursor" class="active">Cursor编辑器</a>
+  <a href="/basic/ide-integration/vscode">VS Code插件</a>
+  <a href="/basic/ide-integration/jetbrains">JetBrains全家桶</a>
+  <a href="/basic/ide-integration/vim-neovim">Vim/NeoVim配置</a>
+  <a href="/basic/ide-integration/best-practices">最佳实践</a>
+`;
+const headings = [
+  { id: 'introduction', text: '介绍', depth: 1 },
+  { id: 'philosophy', text: '设计哲学', depth: 1 },
+  { id: 'installation', text: '安装与配置', depth: 1 },
+  { id: 'core-features', text: '核心功能特性', depth: 1 },
+  { id: 'workflow', text: '工作流集成', depth: 1 },
+  { id: 'advanced-usage', text: '高级用法', depth: 1 },
+  { id: 'customization', text: '定制化配置', depth: 1 },
+  { id: 'troubleshooting', text: '问题排查', depth: 1 }
+];
+---
+
+<ContentLayout 
+  {title}
+  {section}
+  {currentPage}
+  {sidebarContent}
+  {headings}
+>
+
+## 介绍
+
+Cursor是一款革命性的AI原生代码编辑器，基于VS Code构建但深度集成了AI能力。它不仅仅是在现有编辑器上添加AI功能，而是从头开始重新思考了AI时代的编程体验。
+
+**诞生背景**:
+- 成立于2023年，由前OpenAI和Google工程师创建
+- 基于VS Code开源代码，但深度定制AI功能
+- 目标是创建"为AI时代打造的代码编辑器"
+
+**核心定位**:
+- 🚀 **AI优先**: AI功能不是附加项，而是核心体验
+- 💻 **开发者友好**: 保持传统编辑器的所有优秀特性
+- 🔧 **可扩展**: 支持VS Code的大部分扩展
+- 🌐 **多平台**: 支持Windows, macOS, Linux
+
+## 设计哲学
+
+### 1. AI作为一等公民
+在Cursor中，AI不是插件，而是编辑器的核心组成部分：
+- **无缝集成**: AI建议直接显示在代码编辑区域
+- **上下文感知**: 理解整个项目而不仅仅是当前文件
+- **主动辅助**: AI会主动提供帮助，而不仅仅是响应请求
+
+### 2. 保持开发者的控制权
+```javascript
+// Cursor的设计哲学：
+// AI建议但开发者决定
+function calculateTotal(items) {
+  // AI提供多个选项，开发者选择最适合的
+  return items.reduce((sum, item) => sum + item.price, 0); // ✓ 选择这个
+  // return items.map(item => item.price).reduce((a, b) => a + b, 0);
+  // return _.sumBy(items, 'price');
+}
+```
+
+### 3. 学习与适应
+Cursor会学习开发者的编码风格和偏好：
+- **风格适应**: 匹配项目的代码规范和格式
+- **偏好记忆**: 记住开发者常选择的AI建议
+- **个性化**: 根据使用习惯优化建议策略
+
+## 安装与配置
+
+### 系统要求
+- **操作系统**: Windows 10+, macOS 10.14+, Linux
+- **内存**: 8GB RAM minimum, 16GB recommended
+- **存储**: 500MB可用空间
+- **网络**: 需要互联网连接使用AI功能
+
+### 安装步骤
+
+#### Windows
+```bash
+# 1. 下载安装包从官网
+# 2. 运行安装程序
+# 3. 或者使用winget (预览版)
+winget install cursor
+```
+
+#### macOS
+```bash
+# 1. 下载DMG文件
+# 2. 拖拽到Applications文件夹
+# 3. 或者使用Homebrew
+brew install --cask cursor
+```
+
+#### Linux
+```bash
+# Ubuntu/Debian
+wget https://download.cursor.com/linux/deb/cursor_latest_amd64.deb
+sudo dpkg -i cursor_latest_amd64.deb
+
+# Fedora/RHEL
+wget https://download.cursor.com/linux/rpm/cursor-latest.x86_64.rpm
+sudo rpm -i cursor-latest.x86_64.rpm
+```
+
+### 初始配置
+
+#### API密钥设置
+```bash
+# 设置OpenAI API密钥
+Cursor: Open Settings (Ctrl+,)
+> 搜索 "AI"
+> 设置 "OpenAI API Key"
+
+# 或者使用环境变量
+export OPENAI_API_KEY="your-api-key"
+```
+
+#### 基础偏好设置
+```json
+// settings.json
+{
+  "cursor.ai.enabled": true,
+  "cursor.ai.suggestionFrequency": "balanced",
+  "cursor.ai.autoTrigger": true,
+  "cursor.ai.maxSuggestions": 3,
+  "cursor.ai.temperature": 0.7
+}
+```
+
+## 核心功能特性
+
+### 1. 智能代码补全 (Smart Completions)
+```javascript
+// 上下文感知的补全
+function processUserData(user) {
+  // 输入: user.
+  // AI建议: user.id, user.name, user.email, user.createdAt
+  return {
+    id: user.id,
+    name: user.name,
+    // ...
+  };
+}
+```
+
+### 2. 聊天式编程 (Chat-Based Programming)
+```
+[Chat] 帮我创建一个React用户表单组件
+
+AI: 当然！这是一个基本的React用户表单组件：
+---
+import React, { useState } from 'react';
+
+function UserForm({ onSubmit }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: ''
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formData);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input 
+        type="text"
+        value={formData.name}
+        onChange={(e) => setFormData({...formData, name: e.target.value})}
+        placeholder="姓名"
+      />
+      {/* 更多字段 */}
+    </form>
+  );
+}
+---
+```
+
+### 3. 代码生成 (Code Generation)
+```bash
+# 使用命令面板生成代码
+Ctrl+Shift+P > "Cursor: Generate Code"
+
+# 或者使用快捷键
+Ctrl+I # 生成代码块
+```
+
+### 4. 文档和注释 (Documentation)
+```javascript
+// 自动生成文档
+/**
+ * 计算订单总价
+ * @param {Array} items - 订单项目数组
+ * @param {number} discount - 折扣比例 (0-1)
+ * @returns {number} 折后总价
+ */
+function calculateTotal(items, discount = 0) {
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  return subtotal * (1 - discount);
+}
+```
+
+### 5. 调试辅助 (Debugging Help)
+```javascript
+// 诊断代码问题
+function problematicFunction(data) {
+  // AI分析: 这里可能有无限递归风险
+  if (data.length === 0) return [];
+  return [data[0]].concat(problematicFunction(data.slice(1)));
+}
+
+// 建议修复:
+function fixedFunction(data, index = 0) {
+  if (index >= data.length) return [];
+  return [data[index]].concat(fixedFunction(data, index + 1));
+}
+```
+
+### 6. 重构工具 (Refactoring)
+```javascript
+// 提取函数重构
+// 选择代码块 -> 右键 -> Refactor -> Extract Function
+const calculatedValues = data.map(item => {
+  // 提取这部分到新函数
+  const tax = item.price * 0.1;
+  const total = item.price + tax;
+  return { ...item, tax, total };
+});
+```
+
+## 工作流集成
+
+### 日常开发工作流
+
+#### 1. 新功能开发
+```bash
+# 步骤1: 使用Chat规划功能
+[Chat] 我需要一个用户认证系统，包含登录、注册、密码重置
+
+# 步骤2: 生成组件结构
+Ctrl+I 生成Auth组件骨架
+
+# 步骤3: 迭代完善
+使用AI辅助完成各个子功能
+```
+
+#### 2. 代码审查和优化
+```bash
+# 步骤1: 打开待审查文件
+# 步骤2: 使用"Review Code"功能
+# 步骤3: 根据建议进行修改
+```
+
+#### 3. 故障排查
+```bash
+# 步骤1: 描述问题现象
+[Chat] 这个函数有时候返回undefined，帮我看一下
+
+# 步骤2: AI分析可能原因
+# 步骤3: 应用修复建议
+```
+
+### 快捷键工作流
+
+| 快捷键 | 功能 | 使用场景 |
+|--------|------|----------|
+| `Ctrl+I` | 生成代码 | 需要新代码时 |
+| `Ctrl+Enter` | 接受建议 | 使用AI建议 |
+| `Ctrl+Shift+C` | 打开Chat | 需要对话帮助 |
+| `Ctrl+Shift+R` | 重构代码 | 优化代码结构 |
+| `Ctrl+Shift+D` | 调试模式 | 诊断问题 |
+
+### 命令行集成
+```bash
+# 使用Cursor命令行工具
+cursor --help
+cursor open project/
+cursor generate component Button
+```
+
+## 高级用法
+
+### 1. 自定义指令 (Custom Instructions)
+```json
+// .cursor/rules.json
+{
+  "codingStyle": {
+    "indentation": 2,
+    "semicolons": false,
+    "quoteStyle": "single"
+  },
+  "projectSpecific": {
+    "framework": "React",
+    "stateManagement": "Redux",
+    "testing": "Jest"
+  },
+  "personalPreferences": {
+    "preferAsyncAwait": true,
+    "avoidConsoleLog": true,
+    "errorHandling": "try-catch"
+  }
+}
+```
+
+### 2. 上下文管理
+```bash
+# 提供额外上下文给AI
+// .cursor/context/README.md
+/*
+项目说明: 这是一个电子商务平台
+技术栈: React, Node.js, MongoDB
+代码规范: 使用ESLint Airbnb配置
+*/
+```
+
+### 3. 批量处理
+```javascript
+// 使用Cursor批量重构
+// 1. 多文件搜索替换
+// 2. 模式匹配重构
+// 3. 项目范围的重命名
+```
+
+### 4. 集成外部工具
+```bash
+# 与Git集成
+cursor --diff # 查看代码差异
+cursor --blame # 显示修改历史
+
+# 与构建工具集成
+cursor --build # 运行构建命令
+cursor --test # 运行测试
+```
+
+## 定制化配置
+
+### 主题和外观
+```json
+// settings.json
+{
+  "workbench.colorTheme": "Cursor Dark",
+  "editor.fontFamily": "Fira Code",
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.6
+}
+```
+
+### AI行为定制
+```json
+{
+  "cursor.ai.suggestionStyle": "concise",
+  "cursor.ai.autoImport": true,
+  "cursor.ai.testGeneration": true,
+  "cursor.ai.documentationStyle": "detailed"
+}
+```
+
+### 扩展管理
+```bash
+# 安装VS Code扩展
+Ctrl+Shift+X > 搜索扩展
+
+# 推荐扩展:
+- ESLint
+- Prettier  
+- GitLens
+- Docker
+- Thunder Client (API测试)
+```
+
+## 问题排查
+
+### 常见问题
+
+#### 1. AI建议不出现
+```bash
+# 检查网络连接
+# 验证API密钥有效性
+# 检查设置中的AI功能是否启用
+```
+
+#### 2. 性能问题
+```bash
+# 关闭不需要的扩展
+# 增加内存分配
+# 检查大型文件处理
+```
+
+#### 3. 建议质量不高
+```bash
+# 提供更清晰的指令
+# 添加上下文信息
+# 调整temperature设置
+```
+
+### 调试模式
+```bash
+# 开启详细日志
+cursor --verbose
+
+# 检查AI服务状态
+cursor ai status
+
+# 重置AI缓存
+cursor ai clear-cache
+```
+
+### 获取帮助
+```bash
+# 官方文档: https://docs.cursor.com
+# 社区论坛: https://community.cursor.com
+# GitHub Issues: https://github.com/cursor-com/cursor/issues
+```
+
+Cursor编辑器代表了AI编程工具的发展方向，它通过深度集成AI能力，为开发者提供了前所未有的编程体验。掌握Cursor的使用，将显著提升开发效率和质量。
+
+</ContentLayout>

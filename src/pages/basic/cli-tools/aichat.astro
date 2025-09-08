@@ -1,0 +1,155 @@
+---
+import ContentLayout from '../../../layouts/ContentLayout.astro';
+
+const sidebarContent = `
+  <a href="/basic/cli-tools">CLI工具概述</a>
+  <a href="/basic/cli-tools/aichat" class="active">aichat</a>
+  <a href="/basic/cli-tools/codex-cli">OpenAI Codex CLI</a>
+  <a href="/basic/cli-tools/fabric">fabric</a>
+  <a href="/basic/cli-tools/trends">趋势与启示</a>
+`;
+
+const headings = [
+  { id: 'introduction', text: 'aichat：全能的LLM命令行工具', depth: 1 },
+  { id: 'installation', text: '安装配置', depth: 2 },
+  { id: 'basic-usage', text: '基础使用', depth: 2 },
+  { id: 'advanced-features', text: '高级功能', depth: 2 },
+  { id: 'configuration', text: '配置选项', depth: 2 }
+];
+---
+
+<ContentLayout 
+  title="aichat"
+  section="基础使用"
+  currentPage="basic"
+  sidebarContent={sidebarContent}
+  headings={headings}
+>
+  <h1 id="introduction">aichat：全能的LLM命令行工具</h1>
+  
+  <p>aichat是一个强大的命令行LLM工具，支持多种模型提供商，能够无缝集成到开发者的日常工作流中。</p>
+  
+  <h2 id="installation">安装配置</h2>
+  
+  <h3>使用包管理器安装</h3>
+  
+  ```bash
+  # macOS
+  brew install aichat
+  
+  # Ubuntu/Debian
+  wget https://github.com/sigoden/aichat/releases/download/v0.19.0/aichat-v0.19.0-x86_64-unknown-linux-musl.tar.gz
+  tar -xzf aichat-*.tar.gz
+  sudo mv aichat /usr/local/bin/
+  
+  # Windows
+  scoop install aichat
+  ```
+  
+  <h3>配置API密钥</h3>
+  ```bash
+  # 设置环境变量
+  export OPENAI_API_KEY="your-api-key"
+  export ANTHROPIC_API_KEY="your-claude-key" 
+  export GOOGLE_AI_API_KEY="your-gemini-key"
+  
+  # 或者使用配置文件
+  aichat --info
+  ```
+  
+  <h2 id="basic-usage">基础使用</h2>
+  
+  ### 简单对话
+  ```bash
+  # 直接提问
+  aichat "解释什么是机器学习"
+  
+  # 交互模式
+  aichat
+  ```
+  
+  ### 文件处理
+  ```bash
+  # 处理单个文件
+  aichat --file document.txt "总结这个文档的主要内容"
+  
+  # 从标准输入读取
+  cat report.md | aichat "分析这个报告并提供改进建议"
+  ```
+  
+  ### 代码生成
+  ```bash
+  # 生成代码
+  aichat "写一个Python函数来计算斐波那契数列"
+  
+  # 代码解释
+  aichat --file script.py "解释这段代码的功能"
+  ```
+  
+  <h2 id="advanced-features">高级功能</h2>
+  
+  ### 角色设定
+  ```bash
+  # 使用预设角色
+  aichat --role programmer "优化这段SQL查询"
+  
+  # 自定义角色
+  aichat --role "你是一个专业的技术文档编写助手"
+  ```
+  
+  ### 会话管理
+  ```bash
+  # 创建新会话
+  aichat --session project-review
+  
+  # 列出所有会话
+  aichat --list-sessions
+  
+  # 清除会话
+  aichat --clear-session project-review
+  ```
+  
+  ### 多模态支持
+  ```bash
+  # 图片分析（支持的模型）
+  aichat --file image.jpg "描述这张图片"
+  
+  # URL内容分析
+  aichat "总结这个网页的内容" --url "https://example.com"
+  ```
+  
+  ### 系统集成
+  ```bash
+  # Shell命令生成
+  aichat --shell "找出占用空间最大的10个文件"
+  
+  # 管道操作
+  git log --oneline | aichat "总结最近的提交记录"
+  ```
+  
+  ### 批量处理
+  ```bash
+  # 处理多个文件
+  for file in *.md; do
+    aichat "改善这个文档的语法和结构" --file "$file" --output "improved_$file"
+  done
+  ```
+  
+  <h2 id="configuration">配置选项</h2>
+  
+  ### 常用命令行选项
+  - `--model`: 指定使用的模型
+  - `--temperature`: 控制生成结果的创造性
+  - `--max-tokens`: 限制生成的最大token数
+  - `--role`: 使用预设角色
+  - `--session`: 指定会话名称
+  
+  ### 环境变量配置
+  ```bash
+  export OPENAI_API_KEY="your-api-key"
+  export AICHAT_MODEL="gpt-4"
+  ```
+  
+  aichat作为一个轻量级的终端AI工具，特别适合开发者日常使用，能够无缝集成到开发工作流中，提供即时的AI辅助。
+
+</ContentLayout>

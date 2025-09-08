@@ -1,0 +1,64 @@
+---
+const { section, currentPage } = Astro.props;
+---
+
+<div class="left-sidebar">
+  <div class="sidebar-content">
+    <div class="section-title">{section}</div>
+    <nav class="section-nav">
+      <slot />
+    </nav>
+  </div>
+</div>
+
+<style>
+.left-sidebar {
+  position: fixed;
+  left: 0;
+  top: 60px;
+  width: 250px;
+  height: calc(100vh - 60px);
+  background-color: #0a0a0a;
+  border-right: 1px solid #333;
+  overflow-y: auto;
+}
+
+.sidebar-content {
+  padding: 2rem 1rem;
+}
+
+.section-title {
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.section-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.section-nav a {
+  color: #999;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.section-nav a:hover {
+  color: #fff;
+  background-color: #1a1a1a;
+}
+
+.section-nav a.active {
+  color: #fff;
+  background-color: #2a2a2a;
+  border-left: 3px solid #4a9eff;
+}
+</style>

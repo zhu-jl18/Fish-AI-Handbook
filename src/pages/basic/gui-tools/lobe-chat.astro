@@ -1,0 +1,193 @@
+---
+import ContentLayout from '../../../layouts/ContentLayout.astro';
+
+const sidebarContent = `
+  <a href="/basic/gui-tools">GUI工具概述</a>
+  <a href="/basic/gui-tools/lobe-chat" class="active">Lobe Chat</a>
+  <a href="/basic/gui-tools/open-webui">Open WebUI</a>
+  <a href="/basic/gui-tools/lm-studio">LM Studio</a>
+  <a href="/basic/gui-tools/others">其他工具</a>
+  <a href="/basic/gui-tools/trends">趋势与启示</a>
+`;
+
+const headings = [
+  { id: 'overview', text: 'Lobe Chat：设计驱动的一站式中心', depth: 1 },
+  { id: 'features', text: '核心特性', depth: 2 },
+  { id: 'model-support', text: '模型支持', depth: 2 },
+  { id: 'deployment', text: '部署方式', depth: 2 },
+  { id: 'use-cases', text: '典型应用场景', depth: 2 },
+  { id: 'advantages', text: '优势与局限', depth: 2 }
+];
+---
+
+<ContentLayout 
+  title="Lobe Chat 详细指南"
+  section="基础使用"
+  currentPage="basic"
+  sidebarContent={sidebarContent}
+  headings={headings}
+>
+  <h1 id="overview">Lobe Chat：设计驱动的一站式中心</h1>
+  
+  <p>Lobe Chat以其卓越的设计美学和丰富的功能生态系统，为追求高品质体验的用户提供了理想的一站式解决方案。作为新一代AI聊天客户端的代表，Lobe Chat在用户体验和功能集成方面都树立了行业标杆。</p>
+  
+  <h2 id="features">核心特性</h2>
+  
+  <h3>插件生态系统（MCP Marketplace）</h3>
+  <p>Lobe Chat最突出的特色之一是其强大的插件市场。通过Model Context Protocol (MCP) 标准，用户可以安装各种扩展插件来增强AI对话的能力：</p>
+  
+  <ul>
+    <li><strong>Web搜索插件</strong> - 实时获取最新信息，打破知识截止时间的限制</li>
+    <li><strong>代码执行环境</strong> - 支持多种编程语言的代码运行和调试</li>
+    <li><strong>图像生成集成</strong> - 连接DALL-E、Stable Diffusion等图像生成服务</li>
+    <li><strong>文档处理工具</strong> - PDF、Word、Excel等文件的智能解析和问答</li>
+    <li><strong>API集成插件</strong> - 连接第三方服务，扩展AI的数据处理能力</li>
+  </ul>
+  
+  <h3>渐进式Web应用（PWA）支持</h3>
+  <p>Lobe Chat原生支持PWA技术，这意味着用户可以：</p>
+  
+  <ul>
+    <li><strong>移动端体验</strong> - 在手机和平板上获得接近原生应用的体验</li>
+    <li><strong>离线使用</strong> - 部分功能支持离线和缓存</li>
+    <li><strong>快捷方式安装</strong> - 可将Lobe Chat添加到桌面或主屏幕</li>
+    <li><strong>推送通知</strong> - 接收AI响应完成的通知提醒</li>
+  </ul>
+  
+  <h3>知识库与RAG功能</h3>
+  <p>检索增强生成（RAG）是Lobe Chat的核心功能之一：</p>
+  
+  <ul>
+    <li><strong>文件上传</strong> - 支持多种格式的文档上传和分析</li>
+    <li><strong>向量存储</strong> - 自动生成文档的向量嵌入并存储</li>
+    <li><strong>智能检索</strong> - 基于语义相似性快速找到相关内容</li>
+    <li><strong>上下文增强</strong> - 在对话中提供准确的文档引用和解释</li>
+  </ul>
+  
+  <h2 id="model-support">模型支持</h2>
+  
+  <p>Lobe Chat原生支持广泛的模型服务商，使其成为一个真正的模型聚合中心：</p>
+  
+  <h3>主要云端服务商</h3>
+  <ul>
+    <li><strong>OpenAI</strong> - GPT-4、GPT-4o、GPT-3.5-turbo等全系列模型</li>
+    <li><strong>Anthropic Claude</strong> - Claude 3 Opus、Sonnet、Haiku</li>
+    <li><strong>Google Gemini</strong> - Gemini Pro、Gemini Ultra等</li>
+    <li><strong>Cohere</strong> - Command、Command R+ 等商业模型</li>
+    <li><strong>Mistral AI</strong> - Mistral 7B、Mixtral 8x7B等</li>
+  </ul>
+  
+  <h3>本地模型支持</h3>
+  <ul>
+    <li><strong>Ollama</strong> - 轻松运行各种开源模型</li>
+    <li><strong>LM Studio</strong> - 通过API接口集成</li>
+    <li><strong>GGUF模型</strong> - 直接加载和运行GGUF格式模型</li>
+    <li><strong>自定义OpenAI兼容服务</strong> - 支持私有部署的模型服务</li>
+  </ul>
+  
+  <h2 id="deployment">部署方式</h2>
+  
+  <h3>Docker快速部署（推荐）</h3>
+  <pre><code># 使用Docker Compose部署
+version: '3.8'
+services:
+  lobe-chat:
+    image: lobehub/lobe-chat
+    container_name: lobe-chat
+    restart: always
+    ports:
+      - "3210:3210"
+    environment:
+      - OPENAI_API_KEY=your_openai_key
+      - ANTHROPIC_API_KEY=your_anthropic_key
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+    volumes:
+      - ./data:/app/data</code></pre>
+  
+  <h3>环境变量配置</h3>
+  <p>Lobe Chat通过环境变量配置各种模型服务商：</p>
+  
+  <pre><code># OpenAI配置
+OPENAI_API_KEY=sk-your-openai-api-key
+
+# Anthropic Claude配置
+ANTHROPIC_API_KEY=sk-ant-your-anthropic-key
+
+# Google Gemini配置
+GOOGLE_GENERATIVE_AI_API_KEY=your-gemini-key
+
+# Ollama本地模型配置
+OLLAMA_BASE_URL=http://localhost:11434
+
+# Azure OpenAI配置
+AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com/
+AZURE_OPENAI_API_KEY=your-azure-key
+AZURE_OPENAI_DEPLOYMENT_NAME=your-deployment-name</code></pre>
+  
+  <h3>其他部署选项</h3>
+  <ul>
+    <li><strong>Vercel部署</strong> - 一键部署到Vercel云平台</li>
+    <li><strong>本地开发环境</strong> - 通过git clone和npm run dev启动</li>
+    <li><strong>云服务器部署</strong> - 支持各种Linux发行版</li>
+  </ul>
+  
+  <h2 id="use-cases">典型应用场景</h2>
+  
+  <h3>提示词工程实验</h3>
+  <p>Lobe Chat是进行提示词工程实验的理想平台：</p>
+  <ul>
+    <li><strong>快速迭代</strong> - 界面友好，便于快速调整提示词</li>
+    <li><strong>多模型对比</strong> - 使用相同提示词测试不同模型的效果</li>
+    <li><strong>结果保存</strong> - 保存重要的对话记录和有效的提示词</li>
+    <li><strong>模板管理</strong> - 创建和管理常用的提示词模板</li>
+  </ul>
+  
+  <h3>文档分析与问答</h3>
+  <p>利用RAG功能，Lobe Chat可以成为强大的文档分析工具：</p>
+  <ul>
+    <li><strong>技术文档解读</strong> - 上传PDF文档，快速获取关键信息</li>
+    <li><strong>法律合同分析</strong> - 分析合同条款，识别关键点</li>
+    <li><strong>学术论文总结</strong> - 提取论文核心观点和结论</li>
+    <li><strong>代码库理解</strong> - 上传代码文件，理解架构和逻辑</li>
+  </ul>
+  
+  <h3>创意内容生成</h3>
+  <p>在创意工作中，Lobe Chat可以大幅提升效率：</p>
+  <ul>
+    <li><strong>文案创作</strong> - 生成广告文案、文章标题、社交媒体内容</li>
+    <li><strong>代码辅助</strong> - 生成代码片段、解释代码逻辑、调试问题</li>
+    <li><strong>设计灵感</strong> - 结合图像生成插件，获得设计灵感</li>
+    <li><strong>教学辅助</strong> - 生成教学材料、练习题、答案解析</li>
+  </ul>
+  
+  <h2 id="advantages">优势与局限</h2>
+  
+  <h3>主要优势</h3>
+  <ul>
+    <li><strong>设计精美</strong> - 现代化的界面设计，用户体验出色</li>
+    <li><strong>功能全面</strong> - 集成了聊天、RAG、插件等完整功能</li>
+    <li><strong>模型丰富</strong> - 支持几乎所有主流的AI模型</li>
+    <li><strong>部署简单</strong> - Docker部署非常方便，配置清晰</li>
+    <li><strong>社区活跃</strong> - 持续更新，问题解决及时</li>
+  </ul>
+  
+  <h3>潜在局限</h3>
+  <ul>
+    <li><strong>资源消耗</strong> - 相比轻量级客户端，资源占用较多</li>
+    <li><strong>学习曲线</strong> - 功能丰富导致初学者可能需要适应</li>
+    <li><strong>配置复杂</strong> - 多种模型服务的配置需要一定技术基础</li>
+    <li><strong>依赖环境</strong> - 部署需要Docker等环境支持</li>
+  </ul>
+  
+  <h3>适用人群</h3>
+  <ul>
+    <li><strong>追求高品质体验的用户</strong> - 注重界面设计和用户体验</li>
+    <li><strong>需要多模型对比的开发者</strong> - 需要在不同模型间切换测试</li>
+    <li><strong>企业级应用</strong> - 需要RAG功能和插件扩展的场景</li>
+    <li><strong>AI研究者</strong> - 进行提示词工程和模型效果测试</li>
+  </ul>
+  
+  <blockquote>
+    <p>Lobe Chat代表了新一代AI客户端的发展方向：不仅仅是聊天工具，而是一个完整的AI应用平台，通过插件生态和扩展功能，为用户提供无限的扩展可能性和持续进化的AI体验。</p>
+  </blockquote>
+</ContentLayout>

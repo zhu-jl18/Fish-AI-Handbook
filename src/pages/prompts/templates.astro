@@ -1,0 +1,43 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+const sidebarContent = `
+  <a href="/prompts">提示词工程概述</a>
+  <a href="/prompts/basics">基础技巧</a>
+  <a href="/prompts/advanced">高级策略</a>
+  <a href="/prompts/templates" class="active">实用模板</a>
+  <a href="/prompts/optimization">优化与调试</a>
+`;
+
+const headings = [
+  { id: 'introduction', text: '实用提示词模板', depth: 1 },
+  { id: 'content-creation', text: '内容创作模板', depth: 2 },
+  { id: 'code-related', text: '编程相关模板', depth: 2 },
+  { id: 'analysis', text: '分析类模板', depth: 2 },
+  { id: 'business', text: '商业应用模板', depth: 2 }
+];
+---
+
+<ContentLayout 
+  title="实用模板"
+  section="提示词"
+  currentPage="prompts"
+  sidebarContent={sidebarContent}
+  headings={headings}
+>
+  <h1 id="introduction">实用提示词模板</h1>
+  
+  <p>收集了常用的提示词模板，可以直接使用或根据需要进行调整。</p>
+  
+  <h2 id="content-creation">内容创作模板</h2>
+  <p>用于文章写作、社交媒体内容、营销文案等的模板。</p>
+  
+  <h2 id="code-related">编程相关模板</h2>
+  <p>代码审查、bug修复、文档生成等编程相关的提示词模板。</p>
+  
+  <h2 id="analysis">分析类模板</h2>
+  <p>数据分析、报告生成、问题诊断等分析任务的模板。</p>
+  
+  <h2 id="business">商业应用模板</h2>
+  <p>市场调研、竞品分析、商业计划等商业场景的模板。</p>
+</ContentLayout>

@@ -1,0 +1,44 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+const sidebarContent = `
+  <a href="/tech">技术向概述</a>
+  <a href="/tech/providers">主流服务商</a>
+  <a href="/tech/management">密钥管理</a>
+  <a href="/tech/security">安全最佳实践</a>
+  <a href="/tech/cost-optimization">成本优化</a>
+  <a href="/tech/monitoring" class="active">监控与告警</a>
+`;
+
+const headings = [
+  { id: 'introduction', text: '监控与告警系统', depth: 1 },
+  { id: 'usage-monitoring', text: '使用量监控', depth: 2 },
+  { id: 'performance-tracking', text: '性能追踪', depth: 2 },
+  { id: 'alert-setup', text: '告警设置', depth: 2 },
+  { id: 'reporting', text: '报告生成', depth: 2 }
+];
+---
+
+<ContentLayout 
+  title="监控与告警"
+  section="技术向"
+  currentPage="tech"
+  sidebarContent={sidebarContent}
+  headings={headings}
+>
+  <h1 id="introduction">监控与告警系统</h1>
+  
+  <p>建立完善的监控和告警系统，能够帮助您及时了解API的使用状况，快速发现和解决问题。</p>
+  
+  <h2 id="usage-monitoring">使用量监控</h2>
+  <p>实时监控API的调用次数、Token消耗量和成本支出。</p>
+  
+  <h2 id="performance-tracking">性能追踪</h2>
+  <p>追踪API响应时间、成功率和错误率等关键性能指标。</p>
+  
+  <h2 id="alert-setup">告警设置</h2>
+  <p>设置智能告警规则，在出现异常情况时及时通知相关人员。</p>
+  
+  <h2 id="reporting">报告生成</h2>
+  <p>生成定期的使用报告，帮助进行成本分析和优化决策。</p>
+</ContentLayout>
