@@ -1,26 +1,27 @@
 ---
 import ContentLayout from '../../layouts/ContentLayout.astro';
+// 映射使用示例：按需启用以读取 content/docs
+// import { DOCS_MAP } from '../../scripts/docsMap';
+// const docsDir = DOCS_MAP['basic']; // -> 02-basic-usage
 
 const sidebarContent = `
-  <a href="/basic/gui-tools" class="active">GUI工具</a>
+  <a href="/basic" class="active">基础使用概述</a>
+  <a href="/basic/gui-tools">GUI工具</a>
   <a href="/basic/cli-tools">CLI工具</a>
-  <a href="/basic/ide-integration">IDE集成</a>
-  <a href="/basic/agent-frameworks">Agent框架</a>
+  <a href="/basic/agent-frameworks">Agent</a>
 `;
 
 const headings = [
   { id: 'introduction', text: 'LLM交互方式概览', depth: 1 },
-  { id: 'gui-tools', text: 'GUI工具：桌面与网页聊天界面', depth: 2 },
-  { id: 'cli-tools', text: 'CLI工具：命令行助手', depth: 2 },
-  { id: 'ide-integration', text: 'IDE集成：AI编程助手', depth: 2 },
-  { id: 'agent-frameworks', text: 'Agent框架：自主编程代理', depth: 2 }
+  { id: 'gui-tools', text: 'GUI工具：桌面与网页聊天界面', depth: 1 },
+  { id: 'cli-tools', text: 'CLI工具：命令行助手', depth: 1 },
+  { id: 'agent-frameworks', text: 'Agent框架：自主编程代理', depth: 1 }
 ];
 ---
 
 <ContentLayout 
   title="基础使用"
   section="基础使用"
-  currentPage="basic"
   sidebarContent={sidebarContent}
   headings={headings}
 >

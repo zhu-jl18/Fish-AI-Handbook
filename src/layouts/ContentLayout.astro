@@ -3,22 +3,23 @@ import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
 import LeftSidebar from '../components/LeftSidebar.astro';
 import RightSidebar from '../components/RightSidebar.astro';
+import type { SidebarSection } from '../scripts/sidebars';
 
 const { 
   title, 
   section, 
-  currentPage, 
   sidebarContent,
+  sidebarItems,
   headings = []
-} = Astro.props;
+}: { title: string; section: string; sidebarContent?: string; sidebarItems?: SidebarSection; headings?: Array<any> } = Astro.props;
 ---
 
 <BaseLayout title={title}>
-  <Header currentPage={currentPage} />
+  <Header currentPage={section === 'DEMO' ? 'demo' : section === '技术向' ? 'tech' : section === 'Fish想说' ? 'fish-talks' : section === '基础使用' ? 'basic' : section === '提示词' ? 'prompts' : section === '进阶玩法' ? 'advanced' : section === '好玩的' ? 'fun' : section === '资源合集' ? 'resources' : 'home'} />
   
   <div class="content-wrapper">
-    <LeftSidebar section={section} currentPage={currentPage}>
-      <Fragment set:html={sidebarContent} />
+    <LeftSidebar section={section} items={sidebarItems}>
+      {sidebarContent ? <Fragment set:html={sidebarContent} /> : null}
     </LeftSidebar>
     
     <main class="content">

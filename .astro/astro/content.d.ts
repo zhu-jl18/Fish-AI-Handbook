@@ -141,33 +141,341 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"docs": {
-"01-fish-talks/01-introduction.md": {
-	id: "01-fish-talks/01-introduction.md";
-  slug: "01-fish-talks/01-introduction";
+"01-fish-talks/advanced-concepts/agent.md": {
+	id: "01-fish-talks/advanced-concepts/agent.md";
+  slug: "01-fish-talks/advanced-concepts/agent";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"01-fish-talks/index.md": {
-	id: "01-fish-talks/index.md";
-  slug: "01-fish-talks";
+"01-fish-talks/advanced-concepts/index.md": {
+	id: "01-fish-talks/advanced-concepts/index.md";
+  slug: "01-fish-talks/advanced-concepts";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"02-basic-usage/01-cli-tools.md": {
-	id: "02-basic-usage/01-cli-tools.md";
-  slug: "02-basic-usage/01-cli-tools";
+"01-fish-talks/advanced-concepts/vibe-coding.md": {
+	id: "01-fish-talks/advanced-concepts/vibe-coding.md";
+  slug: "01-fish-talks/advanced-concepts/vibe-coding";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"02-basic-usage/02-ide-integration.md": {
-	id: "02-basic-usage/02-ide-integration.md";
-  slug: "02-basic-usage/02-ide-integration";
+"01-fish-talks/advanced-concepts/workflow.md": {
+	id: "01-fish-talks/advanced-concepts/workflow.md";
+  slug: "01-fish-talks/advanced-concepts/workflow";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/glossary/api.md": {
+	id: "01-fish-talks/glossary/api.md";
+  slug: "01-fish-talks/glossary/api";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/glossary/env.md": {
+	id: "01-fish-talks/glossary/env.md";
+  slug: "01-fish-talks/glossary/env";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/glossary/interface.md": {
+	id: "01-fish-talks/glossary/interface.md";
+  slug: "01-fish-talks/glossary/interface";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/glossary/proxy.md": {
+	id: "01-fish-talks/glossary/proxy.md";
+  slug: "01-fish-talks/glossary/proxy";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/glossary/reverse-proxy.md": {
+	id: "01-fish-talks/glossary/reverse-proxy.md";
+  slug: "01-fish-talks/glossary/reverse-proxy";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/llm/brief.md": {
+	id: "01-fish-talks/llm/brief.md";
+  slug: "01-fish-talks/llm/brief";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/llm/index.md": {
+	id: "01-fish-talks/llm/index.md";
+  slug: "01-fish-talks/llm";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/llm/models.md": {
+	id: "01-fish-talks/llm/models.md";
+  slug: "01-fish-talks/llm/models";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/llm/rankings.md": {
+	id: "01-fish-talks/llm/rankings.md";
+  slug: "01-fish-talks/llm/rankings";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/model-terms/context-steps.md": {
+	id: "01-fish-talks/model-terms/context-steps.md";
+  slug: "01-fish-talks/model-terms/context-steps";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/model-terms/streaming.md": {
+	id: "01-fish-talks/model-terms/streaming.md";
+  slug: "01-fish-talks/model-terms/streaming";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/model-terms/temperature.md": {
+	id: "01-fish-talks/model-terms/temperature.md";
+  slug: "01-fish-talks/model-terms/temperature";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/model-terms/thinking.md": {
+	id: "01-fish-talks/model-terms/thinking.md";
+  slug: "01-fish-talks/model-terms/thinking";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/model-terms/token.md": {
+	id: "01-fish-talks/model-terms/token.md";
+  slug: "01-fish-talks/model-terms/token";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/preparations/github.md": {
+	id: "01-fish-talks/preparations/github.md";
+  slug: "01-fish-talks/preparations/github";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/preparations/index.md": {
+	id: "01-fish-talks/preparations/index.md";
+  slug: "01-fish-talks/preparations";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/preparations/nodejs.md": {
+	id: "01-fish-talks/preparations/nodejs.md";
+  slug: "01-fish-talks/preparations/nodejs";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/preparations/visual-studio-code.md": {
+	id: "01-fish-talks/preparations/visual-studio-code.md";
+  slug: "01-fish-talks/preparations/visual-studio-code";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/preparations/vpn.md": {
+	id: "01-fish-talks/preparations/vpn.md";
+  slug: "01-fish-talks/preparations/vpn";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"01-fish-talks/preparations/windows-terminal.md": {
+	id: "01-fish-talks/preparations/windows-terminal.md";
+  slug: "01-fish-talks/preparations/windows-terminal";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"02-basic-usage/app-integration.md": {
+	id: "02-basic-usage/app-integration.md";
+  slug: "02-basic-usage/app-integration";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"02-basic-usage/cli.md": {
+	id: "02-basic-usage/cli.md";
+  slug: "02-basic-usage/cli";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"02-basic-usage/editor-agent.md": {
+	id: "02-basic-usage/editor-agent.md";
+  slug: "02-basic-usage/editor-agent";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"02-basic-usage/index.md": {
+	id: "02-basic-usage/index.md";
+  slug: "02-basic-usage";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"02-basic-usage/webchat.md": {
+	id: "02-basic-usage/webchat.md";
+  slug: "02-basic-usage/webchat";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"03-prompts/advanced-techniques.md": {
+	id: "03-prompts/advanced-techniques.md";
+  slug: "03-prompts/advanced-techniques";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"03-prompts/basics.md": {
+	id: "03-prompts/basics.md";
+  slug: "03-prompts/basics";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"03-prompts/index.md": {
+	id: "03-prompts/index.md";
+  slug: "03-prompts";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"03-prompts/patterns.md": {
+	id: "03-prompts/patterns.md";
+  slug: "03-prompts/patterns";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"04-advanced-techniques/index.md": {
+	id: "04-advanced-techniques/index.md";
+  slug: "04-advanced-techniques";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"04-advanced-techniques/knowledge-bases/index.md": {
+	id: "04-advanced-techniques/knowledge-bases/index.md";
+  slug: "04-advanced-techniques/knowledge-bases";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"04-advanced-techniques/mcp/index.md": {
+	id: "04-advanced-techniques/mcp/index.md";
+  slug: "04-advanced-techniques/mcp";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"04-advanced-techniques/multi-agent/index.md": {
+	id: "04-advanced-techniques/multi-agent/index.md";
+  slug: "04-advanced-techniques/multi-agent";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"04-advanced-techniques/rag/index.md": {
+	id: "04-advanced-techniques/rag/index.md";
+  slug: "04-advanced-techniques/rag";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"04-advanced-techniques/vector-databases/index.md": {
+	id: "04-advanced-techniques/vector-databases/index.md";
+  slug: "04-advanced-techniques/vector-databases";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"05-demos/index.md": {
+	id: "05-demos/index.md";
+  slug: "05-demos";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"05-demos/rag-chatbot.md": {
+	id: "05-demos/rag-chatbot.md";
+  slug: "05-demos/rag-chatbot";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"06-technical-deep-dive/how-rag-works.md": {
+	id: "06-technical-deep-dive/how-rag-works.md";
+  slug: "06-technical-deep-dive/how-rag-works";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"06-technical-deep-dive/index.md": {
+	id: "06-technical-deep-dive/index.md";
+  slug: "06-technical-deep-dive";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"07-fun/ai-drawing.md": {
+	id: "07-fun/ai-drawing.md";
+  slug: "07-fun/ai-drawing";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"07-fun/index.md": {
+	id: "07-fun/index.md";
+  slug: "07-fun";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"07-fun/llm-unlocking.md": {
+	id: "07-fun/llm-unlocking.md";
+  slug: "07-fun/llm-unlocking";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"07-fun/silver-trivern.md": {
+	id: "07-fun/silver-trivern.md";
+  slug: "07-fun/silver-trivern";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"08-resources/index.md": {
+	id: "08-resources/index.md";
+  slug: "08-resources";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 };
 
@@ -179,5 +487,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = never;
+	export type ContentConfig = typeof import("./../../src/content/config.js");
 }

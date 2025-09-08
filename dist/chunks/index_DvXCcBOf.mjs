@@ -1,0 +1,12 @@
+const id = "06-technical-deep-dive/index.md";
+						const collection = "docs";
+						const slug = "06-technical-deep-dive";
+						const body = "\r\n欢迎来到技术深入章节。\r\n\r\n在这里，我们将剥开现代 AI 应用的华丽外壳，一同探究其背后强大的技术引擎。本章内容专为那些不仅想知道“如何做”，更想理解“为什么”的读者准备。\r\n\r\n我们将一起探讨：\r\n\r\n-   **核心模型架构**：如 Transformer 和注意力机制，它们是如何支撑起大语言模型的。\r\n-   **关键技术剖析**：深入讲解 RAG、Agent 等高级技术的工作流程与内部机制。\r\n-   **生态系统工具**：了解向量数据库、LLM 开发框架等在整个技术栈中所扮演的角色。\r\n\r\n理解这些底层原理，将帮助您更深刻地认识到当前 AI 技术的优势与局限，从而在应用开发中做出更明智的技术决策，并激发更具创新性的想法。\r\n\r\n准备好潜入技术的深海了吗？让我们开始吧。\r\n";
+						const data = {title:"技术深入",description:"深入探索驱动现代 AI 应用的核心技术和底层原理。"};
+						const _internal = {
+							type: 'content',
+							filePath: "X:/Projcet/AI BOOK/src/content/docs/06-technical-deep-dive/index.md",
+							rawData: undefined,
+						};
+
+export { _internal, body, collection, data, id, slug };

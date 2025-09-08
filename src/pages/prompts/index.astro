@@ -1,12 +1,11 @@
 ---
 import ContentLayout from '../../layouts/ContentLayout.astro';
+// 映射使用示例：按需启用以读取 content/docs
+// import { DOCS_MAP } from '../../scripts/docsMap';
+// const docsDir = DOCS_MAP['prompts']; // -> 03-prompts
 
 const sidebarContent = `
   <a href="/prompts" class="active">提示词工程概述</a>
-  <a href="/prompts/basics">基础技巧</a>
-  <a href="/prompts/advanced">高级策略</a>
-  <a href="/prompts/templates">实用模板</a>
-  <a href="/prompts/optimization">优化与调试</a>
 `;
 
 const headings = [
@@ -22,7 +21,6 @@ const headings = [
 <ContentLayout 
   title="提示词"
   section="提示词"
-  currentPage="prompts"
   sidebarContent={sidebarContent}
   headings={headings}
 >

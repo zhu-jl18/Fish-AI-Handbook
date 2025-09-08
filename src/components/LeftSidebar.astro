@@ -1,12 +1,39 @@
 ---
-const { section, currentPage } = Astro.props;
----
+import type { SidebarSection } from "../scripts/sidebars";
 
+const { section, items }: { section: string; items?: SidebarSection } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+// 仅在路径完全相等时高亮（普通链接）
+const isExactActive = (href?: string) => !!href && currentPath === href;
+
+// 对于包含子项的分组，允许前缀匹配
+const isGroupActive = (href?: string) => !!href && (currentPath === href || currentPath.startsWith(href + "/"));
+---
 <div class="left-sidebar">
   <div class="sidebar-content">
     <div class="section-title">{section}</div>
     <nav class="section-nav">
-      <slot />
+      {items ? (
+        items.map((entry) => (
+          // @ts-ignore - runtime shape check
+          entry.items ? (
+            <div class="group">
+              <a href={entry.href ?? "#"} class={isGroupActive(entry.href) ? "active" : undefined}>{entry.label}</a>
+              <div class="submenu">
+                {entry.items?.map((link) => (
+                  <a href={link.href} class={isExactActive(link.href) ? "active" : undefined}>{link.label}</a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            // @ts-ignore - treat as link shape
+            <a href={entry.href} class={isExactActive(entry.href) ? "active" : undefined}>{entry.label}</a>
+          )
+        ))
+      ) : (
+        <slot />
+      )}
     </nav>
   </div>
 </div>
@@ -42,6 +69,10 @@ const { section, currentPage } = Astro.props;
   gap: 0.5rem;
 }
 
+.section-nav > * {
+  flex-shrink: 0;
+}
+
 .section-nav a {
   color: #999;
   text-decoration: none;
@@ -49,6 +80,7 @@ const { section, currentPage } = Astro.props;
   border-radius: 4px;
   transition: all 0.2s ease;
   font-size: 0.9rem;
+  display: block;
 }
 
 .section-nav a:hover {
@@ -60,5 +92,43 @@ const { section, currentPage } = Astro.props;
   color: #fff;
   background-color: #2a2a2a;
   border-left: 3px solid #4a9eff;
+}
+
+/* 层级菜单样式 */
+/* 简单分组样式（回到默认） */
+.group {
+  margin: 0.25rem 0;
+}
+
+/* 注意：slot 注入的内容默认不受 scoped 样式影响。
+   为了让传入内容中的 .submenu 生效，这里使用 :global 进行样式声明。 */
+:global(.submenu) {
+  display: block;
+  width: 100%;
+  margin: 0.25rem 0;
+}
+
+:global(.submenu) a {
+  display: block;
+  padding: 0.35rem 0.75rem 0.35rem 1.75rem;
+  font-size: 0.85rem;
+  border-left: 2px solid transparent;
+  color: #999;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  margin-bottom: 0.25rem;
+}
+
+:global(.submenu) a:hover {
+  color: #fff;
+  background-color: #1a1a1a;
+  border-left-color: #4a9eff;
+}
+
+:global(.submenu) a.active {
+  color: #fff;
+  border-left-color: #4a9eff;
+  background-color: #1a1a1a;
 }
 </style>
