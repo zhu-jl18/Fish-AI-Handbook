@@ -1,0 +1,42 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('docs', '04-advanced-techniques/knowledge-bases/index');
+const { Content } = await entry.render();
+
+const sidebarContent = `
+  <a href="/advanced">工程化进阶：概览</a>
+  <div>
+    <a href="/advanced/rag">RAG（检索增强生成）</a>
+  </div>
+  <div>
+    <a href="/advanced/vector-databases">向量数据库</a>
+  </div>
+  <div>
+    <a href="/advanced/mcp">MCP（Model Context Protocol）</a>
+  </div>
+  <div>
+    <a href="/advanced/knowledge-bases" class="active">知识库</a>
+  </div>
+  <div>
+    <a href="/advanced/multi-agent">多智能体协作</a>
+  </div>
+`;
+
+const headings = [
+  { id: '为什么', text: '为什么', depth: 1 },
+  { id: '什么时候用', text: '什么时候用', depth: 2 },
+  { id: '关键步骤', text: '关键步骤', depth: 2 },
+  { id: '维护', text: '维护', depth: 2 }
+];
+---
+
+<ContentLayout 
+  title="工程化进阶 / 知识库"
+  section="进阶玩法"
+  sidebarContent={sidebarContent}
+  headings={headings}
+>
+  <Content />
+</ContentLayout>

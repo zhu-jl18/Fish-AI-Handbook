@@ -1,0 +1,26 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('docs', '08-resources/index');
+const { Content } = await entry.render();
+
+const sidebarContent = `
+  <a href="/resources" class="active">资源合集</a>
+`;
+
+const headings = [
+  { id: 'resources', text: '资源合集', depth: 1 },
+];
+---
+
+<ContentLayout 
+  title="资源合集"
+  section="资源合集"
+  sidebarContent={sidebarContent}
+  headings={headings}
+>
+  <Content />
+</ContentLayout>
+
+

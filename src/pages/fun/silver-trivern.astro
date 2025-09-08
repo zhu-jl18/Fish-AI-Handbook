@@ -1,0 +1,33 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('docs', '07-fun/silver-trivern');
+const { Content } = await entry.render();
+
+const sidebarContent = `
+  <a href="/fun">好玩的：概览</a>
+  <div>
+    <a href="/fun/llm-unlocking">大模型破限教程</a>
+  </div>
+  <div>
+    <a href="/fun/silver-trivern" class="active">Silver Trivern 酒馆使用</a>
+  </div>
+  <div>
+    <a href="/fun/ai-drawing">AI 绘图教程</a>
+  </div>
+`;
+
+const headings = [];
+---
+
+<ContentLayout 
+  title="Silver Trivern 酒馆使用"
+  section="好玩的"
+  sidebarContent={sidebarContent}
+  headings={headings}
+>
+  <Content />
+</ContentLayout>
+
+

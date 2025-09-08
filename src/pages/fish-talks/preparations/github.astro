@@ -1,0 +1,47 @@
+---
+import ContentLayout from '../../../layouts/ContentLayout.astro';
+import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('docs', '01-fish-talks/preparations/github');
+const { Content } = await entry.render();
+
+const sidebarContent = `
+  <a href="/fish-talks">鱼说必看</a>
+  <a href="/fish-talks/overview">概览</a>
+  <div>
+    <a href="/fish-talks/llm">大模型常识</a>
+    <div class="submenu">
+      <a href="/fish-talks/llm/brief">模型分类</a>
+      <a href="/fish-talks/llm/models">常见模型</a>
+      <a href="/fish-talks/llm/rankings">大模型排名</a>
+    </div>
+  </div>
+  <div>
+    <a href="/fish-talks/preparations" class="active">环境准备</a>
+    <div class="submenu">
+      <a href="/fish-talks/preparations/windows-terminal">Windows Terminal</a>
+      <a href="/fish-talks/preparations/visual-studio-code">Visual Studio Code</a>
+      <a href="/fish-talks/preparations/nodejs">Node.js</a>
+      <a href="/fish-talks/preparations/github" class="active">GitHub</a>
+      <a href="/fish-talks/preparations/vpn">VPN</a>
+    </div>
+  </div>
+`;
+
+const headings = [
+  { id: '为什么重要', text: '为什么重要', depth: 1 }
+];
+---
+
+<ContentLayout 
+  title={`Fish想说 - 环境准备 / GitHub`}
+  section="Fish想说"
+  sidebarContent={sidebarContent}
+  sidebarItems={FISH_TALKS_SIDEBAR}
+  headings={headings}
+>
+  <Content />
+</ContentLayout>
+
+

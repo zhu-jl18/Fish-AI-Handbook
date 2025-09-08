@@ -1,68 +1,39 @@
 ---
 import ContentLayout from '../../layouts/ContentLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('docs', '04-advanced-techniques/index');
+const { Content } = await entry.render();
 
 const sidebarContent = `
-  <a href="/advanced/reverse">逆向工程</a>
-  <a href="/advanced/automation">自动化工作流</a>
-  <a href="/advanced/security">安全考虑</a>
+  <a href="/advanced" class="active">工程化进阶：概览</a>
+  <div>
+    <a href="/advanced/rag">RAG（检索增强生成）</a>
+  </div>
+  <div>
+    <a href="/advanced/vector-databases">向量数据库</a>
+  </div>
+  <div>
+    <a href="/advanced/mcp">MCP（Model Context Protocol）</a>
+  </div>
+  <div>
+    <a href="/advanced/knowledge-bases">知识库</a>
+  </div>
+  <div>
+    <a href="/advanced/multi-agent">多智能体协作</a>
+  </div>
 `;
 
 const headings = [
-  { id: 'apikey-intro', text: 'APIKEY管理 - 安全使用AI服务', depth: 1 },
-  { id: 'understanding-apikeys', text: '理解API KEY', depth: 2 },
-  { id: 'secure-storage', text: '安全存储', depth: 2 },
-  { id: 'best-practices', text: '最佳实践', depth: 2 }
+  { id: '为什么读这一部分', text: '为什么读这一部分', depth: 1 }
 ];
 ---
 
 <ContentLayout 
-  title="进阶玩法"
+  title="工程化进阶：RAG、向量与多智能体"
   section="进阶玩法"
-  currentPage="advanced"
   sidebarContent={sidebarContent}
   headings={headings}
 >
-  <h1 id="apikey-intro">APIKEY管理 - 安全使用AI服务</h1>
-  
-  <h2 id="understanding-apikeys">理解API KEY</h2>
-  <p>API KEY就像是你的数字身份证，它让你能够访问各种AI服务。但是，如果这个KEY泄露了，别人就可以冒用你的账户，产生费用或者造成安全问题。</p>
-  
-  <p>一个好的API KEY应该具备以下特点：</p>
-  <ul>
-    <li>权限最小化 - 只给必要的权限</li>
-    <li>可撤销性 - 能够随时撤销和重新生成</li>
-    <li>使用限制 - 设置使用配额和限制</li>
-  </ul>
-  
-  <h2 id="secure-storage">安全存储</h2>
-  <p>绝对不要把API KEY直接写在代码里！这是最常见也是最危险的安全漏洞。</p>
-  
-  <h3>推荐的存储方式：</h3>
-  <ol>
-    <li><strong>环境变量</strong> - 最安全、最简单的方式</li>
-    <li><strong>配置文件</strong> - 使用专用的配置管理工具</li>
-    <li><strong>密钥管理服务</strong> - 如AWS Secrets Manager、HashiCorp Vault</li>
-  </ol>
-  
-  <p>环境变量示例：</p>
-  <pre><code># 在.bashrc或.zshrc中
-export OPENAI_API_KEY="your-key-here"
-
-# 在Python中使用
-import os
-api_key = os.getenv('OPENAI_API_KEY')</code></pre>
-  
-  <h2 id="best-practices">最佳实践</h2>
-  <p>以下是一些管理API KEY的最佳实践：</p>
-  
-  <ul>
-    <li><strong>定期轮换</strong> - 每3-6个月更换一次API KEY</li>
-    <li><strong>权限分离</strong> - 为不同用途创建不同的KEY</li>
-    <li><strong>监控使用</strong> - 定期检查API使用情况</li>
-    <li><strong>设置限制</strong> - 为KEY设置月度或每日使用限制</li>
-  </ul>
-  
-  <blockquote>
-    <p>安全不是一次性的任务，而是持续的习惯。养成良好的API KEY管理习惯，会让你的AI之旅更加安心。</p>
-  </blockquote>
+  <Content />
 </ContentLayout>

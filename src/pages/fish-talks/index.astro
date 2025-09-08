@@ -1,14 +1,55 @@
 ---
 import ContentLayout from '../../layouts/ContentLayout.astro';
+import { FISH_TALKS_SIDEBAR } from '../../scripts/sidebars';
+// 映射使用示例：按需启用以读取 content/docs
+// import { DOCS_MAP } from '../../scripts/docsMap';
+// const docsDir = DOCS_MAP['fish-talks']; // -> 01-fish-talks
 
 const sidebarContent = `
-  <a href="/fish-talks" class="active">欢迎页</a>
-  <a href="/fish-talks/thinking">AI的思考</a>
-  <a href="/fish-talks/journey">探索历程</a>
+  <a href="/fish-talks" class="active">Listen to me</a>
+  <a href="/fish-talks/overview">Overview</a>
+  <div>
+    <a href="/fish-talks/llm">About LLM</a>
+    <div class="submenu">
+      <a href="/fish-talks/llm/brief">Model Classification</a>
+      <a href="/fish-talks/llm/models">Famous Models</a>
+      <a href="/fish-talks/llm/rankings">Rankings of LLM</a>
+    </div>
+  </div>
+  <div>
+    <a href="/fish-talks/model-terms">模型相关术语</a>
+    <div class="submenu">
+      <a href="/fish-talks/model-terms/token">token</a>
+      <a href="/fish-talks/model-terms/temperature">温度</a>
+      <a href="/fish-talks/model-terms/streaming">流式传输</a>
+      <a href="/fish-talks/model-terms/thinking">思考</a>
+      <a href="/fish-talks/model-terms/context-steps">上下文步数</a>
+    </div>
+  </div>
+  <div>
+    <a href="/fish-talks/glossary">Related Concepts</a>
+    <div class="submenu">
+      <a href="/fish-talks/glossary/api">API</a>
+      <a href="/fish-talks/glossary/proxy">代理</a>
+      <a href="/fish-talks/glossary/reverse-proxy">反代</a>
+      <a href="/fish-talks/glossary/interface">接口</a>
+      <a href="/fish-talks/glossary/env">环境变量</a>
+    </div>
+  </div>
+  <div>
+    <a href="/fish-talks/preparations">Preparations</a>
+    <div class="submenu">
+      <a href="/fish-talks/preparations/windows-terminal">Windows Terminal</a>
+      <a href="/fish-talks/preparations/visual-studio-code">Visual Studio Code</a>
+      <a href="/fish-talks/preparations/nodejs">Node.js</a>
+      <a href="/fish-talks/preparations/github">GitHub</a>
+      <a href="/fish-talks/preparations/vpn">VPN</a>
+    </div>
+  </div>
 `;
 
 const headings = [
-  { id: 'welcome', text: '欢迎来到Fish的世界', depth: 1 },
+  { id: 'welcome', text: '欢迎来到Fish AI Handbook', depth: 1 },
   { id: 'about', text: '关于这个指南', depth: 2 },
   { id: 'goal', text: '我的目标', depth: 2 }
 ];
@@ -17,8 +58,8 @@ const headings = [
 <ContentLayout 
   title="Fish想说"
   section="Fish想说"
-  currentPage="fish-talks"
   sidebarContent={sidebarContent}
+  sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}
 >
   <h1 id="welcome">欢迎来到Fish的世界</h1>
