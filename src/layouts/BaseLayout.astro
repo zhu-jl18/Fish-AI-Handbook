@@ -1,0 +1,21 @@
+---
+import '../styles/global.css';
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title ? `${title} - Fish写给朋友们的AI使用指南` : 'Fish写给朋友们的AI使用指南'}</title>
+  <meta name="description" content="Fish写给朋友们的AI使用指南 - 简洁清晰的AI教程" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <slot />
+  <script type="module" src="/src/scripts/copy-code.js"></script>
+</body>
+</html>

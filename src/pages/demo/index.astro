@@ -1,0 +1,23 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+const sidebarContent = `
+  <a href="/demo" class="active">示例概览</a>
+`;
+
+const headings = [
+  { id: 'intro', text: '演示与案例', depth: 1 }
+];
+---
+
+<ContentLayout 
+  title="Demo"
+  section="Demo"
+  currentPage="demo"
+  sidebarContent={sidebarContent}
+  headings={headings}
+>
+  <h1 id="intro">演示与案例</h1>
+  <p>这里将收集实践示例与最佳实践工作流。你可以告诉我要添加哪些 Demo，我会按你的清单创建子页面。</p>
+</ContentLayout>
+

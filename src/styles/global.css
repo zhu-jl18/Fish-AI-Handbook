@@ -1,0 +1,220 @@
+/* 极简黑底白字主题 */
+:root {
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --border-color: #333333;
+  --accent-color: #666666;
+  --link-color: #4a9eff;
+  --link-hover-color: #66b3ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* 链接样式 */
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+}
+
+/* 代码样式 */
+code {
+  background-color: #1a1a1a;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.9em;
+  border: 1px solid #333;
+}
+
+pre {
+  background-color: #0d0d0d;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid #333;
+  position: relative;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  line-height: 1.5;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  font-size: 0.9em;
+  color: #e0e0e0;
+}
+
+/* 代码复制按钮 */
+.code-copy-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  color: #ccc;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+}
+
+.code-copy-button:hover {
+  background-color: #3a3a3a;
+  color: #fff;
+  opacity: 1;
+}
+
+.code-copy-button:active {
+  transform: scale(0.95);
+}
+
+.code-copy-button.copied {
+  background-color: #4a9eff;
+  color: #000;
+  border-color: #4a9eff;
+}
+
+/* 代码语法高亮基础样式 */
+pre .hljs-keyword {
+  color: #ff79c6;
+}
+
+pre .hljs-string {
+  color: #f1fa8c;
+}
+
+pre .hljs-number {
+  color: #bd93f9;
+}
+
+pre .hljs-comment {
+  color: #6272a4;
+}
+
+pre .hljs-function {
+  color: #50fa7b;
+}
+
+pre .hljs-operator {
+  color: #ff79c6;
+}
+
+pre .hljs-class {
+  color: #8be9fd;
+}
+
+pre .hljs-variable {
+  color: #f8f8f2;
+}
+
+/* 代码块滚动条优化 */
+pre::-webkit-scrollbar {
+  height: 6px;
+}
+
+pre::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 3px;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+/* 标题样式 */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-top: 2rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-top: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* 段落样式 */
+p {
+  margin-bottom: 1rem;
+}
+
+/* 列表样式 */
+ul, ol {
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* 引用样式 */
+blockquote {
+  border-left: 3px solid var(--accent-color);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-color);
+}

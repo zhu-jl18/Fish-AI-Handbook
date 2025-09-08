@@ -1,0 +1,174 @@
+---
+import ContentLayout from '../../../layouts/ContentPageLayout.astro';
+
+const section = 'basic';
+const currentPage = 'basic';
+const title = 'OpenAI Codex CLI - 终端代码生成工具';
+const sidebarContent = `
+  <a href="/basic/cli-tools">CLI工具概述</a>
+  <a href="/basic/cli-tools/aichat">aichat</a>
+  <a href="/basic/cli-tools/codex-cli" class="active">OpenAI Codex CLI</a>
+  <a href="/basic/cli-tools/fabric">fabric</a>
+  <a href="/basic/cli-tools/trends">趋势与启示</a>
+`;
+const headings = [
+  { id: 'introduction', text: '介绍', depth: 1 },
+  { id: 'installation', text: '安装与配置', depth: 1 },
+  { id: 'basic-usage', text: '基础使用', depth: 1 },
+  { id: 'features', text: '功能特性', depth: 1 },
+  { id: 'advanced', text: '高级用法', depth: 1 },
+  { id: 'use-cases', text: '典型使用场景', depth: 1 }
+];
+---
+
+<ContentLayout 
+  {title}
+  {section}
+  {currentPage}
+  {sidebarContent}
+  {headings}
+>
+
+## 介绍
+
+OpenAI Codex CLI是OpenAI官方提供的命令行工具，专门用于代码生成和编程辅助。它基于强大的Codex模型，能够在终端中直接生成、解释和优化代码。
+
+**核心价值**:
+- **开发者生产力**: 快速生成代码片段，减少重复编码工作
+- **学习辅助**: 帮助理解复杂代码逻辑和算法
+- **代码优化**: 提供代码重构和改进建议
+- **多语言支持**: 支持多种编程语言的代码生成
+
+## 安装与配置
+
+### 安装方法
+```bash
+# 使用npm安装
+npm install -g @openai/codex-cli
+
+# 或者使用yarn
+yarn global add @openai/codex-cli
+```
+
+### API密钥配置
+```bash
+# 设置OpenAI API密钥
+codex config set api_key your-openai-api-key
+
+# 验证配置
+codex config list
+```
+
+### 环境配置
+创建配置文件 `~/.codex/config.json`:
+```json
+{
+  "api_key": "your-api-key",
+  "model": "code-davinci-002",
+  "max_tokens": 150,
+  "temperature": 0.7
+}
+```
+
+## 基础使用
+
+### 代码生成
+```bash
+# 生成Python函数
+codex generate "写一个Python函数计算斐波那契数列"
+
+# 指定编程语言
+codex generate --language javascript "实现一个深拷贝函数"
+```
+
+### 代码解释
+```bash
+# 解释代码片段
+codex explain "def factorial(n): return 1 if n == 0 else n * factorial(n-1)"
+```
+
+### 代码翻译
+```bash
+# 将代码从一种语言转换到另一种语言
+codex translate --from python --to javascript "def add(a, b): return a + b"
+```
+
+## 功能特性
+
+### 1. 智能补全
+支持在编辑器中实时获取代码建议：
+```bash
+# 获取下一行代码建议
+codex complete "function calculateArea(radius) {"
+```
+
+### 2. 代码修复
+```bash
+# 修复语法错误
+codex fix "python代码: print('hello world'"
+```
+
+### 3. 文档生成
+```bash
+# 为函数生成文档字符串
+codex document "def process_data(data):\n    # 处理数据逻辑"
+```
+
+### 4. 测试用例生成
+```bash
+# 为函数生成测试用例
+codex test "def add(a, b): return a + b"
+```
+
+## 高级用法
+
+### 批量处理
+```bash
+# 处理多个代码文件
+for file in *.py; do
+  codex refactor "优化代码结构" < "$file" > "refactored_$file"
+done
+```
+
+### 自定义模板
+```bash
+# 使用自定义提示模板
+codex generate --template "python-function" "实现二分查找"
+```
+
+### 集成到开发流程
+```bash
+# 在git pre-commit钩子中使用
+#!/bin/bash
+codex check-style $(git diff --cached --name-only --diff-filter=ACM | grep '\.py$')
+```
+
+## 典型使用场景
+
+### 场景一：快速原型开发
+```bash
+# 快速创建Web服务器原型
+codex generate "用Python Flask创建一个简单的REST API服务器"
+```
+
+### 场景二：学习新技术
+```bash
+# 学习React组件写法
+codex generate "创建一个React函数组件，显示计数器"
+```
+
+### 场景三：代码审查辅助
+```bash
+# 检查代码潜在问题
+codex review "python代码: import os; os.system('rm -rf /')"
+```
+
+### 场景四：算法实现
+```bash
+# 实现复杂算法
+codex generate "用Python实现Dijkstra最短路径算法"
+```
+
+OpenAI Codex CLI将AI编程能力直接带入终端，让开发者能够在命令行环境中高效地进行代码生成、优化和学习，显著提升开发效率。
+
+</ContentLayout>
