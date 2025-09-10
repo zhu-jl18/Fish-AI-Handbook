@@ -4,9 +4,7 @@ import ContentLayout from '../../layouts/ContentLayout.astro';
 // import { DOCS_MAP } from '../../scripts/docsMap';
 // const docsDir = DOCS_MAP['prompts']; // -> 03-prompts
 
-const sidebarContent = `
-  <a href="/prompts" class="active">提示词工程概述</a>
-`;
+import { PROMPTS_SIDEBAR } from '../../scripts/sidebars';
 
 const headings = [
   { id: 'introduction', text: '提示词工程：与AI对话的艺术', depth: 1 },
@@ -18,10 +16,10 @@ const headings = [
 ];
 ---
 
-<ContentLayout 
+<ContentLayout
   title="提示词"
   section="提示词"
-  sidebarContent={sidebarContent}
+  sidebarItems={PROMPTS_SIDEBAR}
   headings={headings}
 >
   <h1 id="introduction">提示词工程：与AI对话的艺术</h1>

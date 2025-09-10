@@ -2,11 +2,14 @@ import { c as createComponent, r as renderComponent, a as renderTemplate } from 
 import 'kleur/colors';
 import { $ as $$ContentLayout } from '../../chunks/ContentLayout_C5Ui34GO.mjs';
 import { F as FISH_TALKS_SIDEBAR } from '../../chunks/sidebars_22da2ctk.mjs';
-import { g as getEntry } from '../../chunks/_astro_content_DvFdDXxn.mjs';
+import { g as getEntry } from '../../chunks/_astro_content_MH6PcDEO.mjs';
 export { renderers } from '../../renderers.mjs';
 
 const $$Index = createComponent(async ($$result, $$props, $$slots) => {
-  const entry = await getEntry("docs", "01-fish-talks/advanced-concepts/index");
+  let entry = await getEntry("docs", "01-fish-talks/advanced-concepts");
+  if (!entry) {
+    entry = await getEntry("docs", "01-fish-talks/advanced-concepts/index");
+  }
   const { Content } = await entry.render();
   const sidebarContent = `
   <a href="/fish-talks">\u9C7C\u8BF4\u5FC5\u770B</a>

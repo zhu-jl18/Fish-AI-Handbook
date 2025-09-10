@@ -6,18 +6,7 @@ import { getEntry } from 'astro:content';
 const entry = await getEntry('docs', '01-fish-talks/llm/rankings');
 const { Content } = await entry.render();
 
-const sidebarContent = `
-  <a href="/fish-talks">鱼说必看</a>
-  <a href="/fish-talks/overview">概览</a>
-  <div>
-    <a href="/fish-talks/llm" class="active">大模型常识</a>
-    <div class="submenu">
-      <a href="/fish-talks/llm/brief">模型分类</a>
-      <a href="/fish-talks/llm/models">常见模型</a>
-      <a href="/fish-talks/llm/rankings" class="active">大模型排名</a>
-    </div>
-  </div>
-`;
+
 
 const headings = [
   { id: '提示', text: '提示', depth: 2 },
@@ -28,7 +17,7 @@ const headings = [
 <ContentLayout 
   title="Fish想说 - 大模型排名"
   section="Fish想说"
-  sidebarContent={sidebarContent}
+  
   sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}
 >

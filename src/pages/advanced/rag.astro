@@ -1,41 +1,27 @@
 ---
-import ContentLayout from '../../layouts/ContentLayout.astro';
-import { getEntry } from 'astro:content';
+import ContentLayout from "../../layouts/ContentLayout.astro";
+import { getEntry } from "astro:content";
 
-const entry = await getEntry('docs', '04-advanced-techniques/rag/index');
-const { Content } = await entry.render();
+let entry = await getEntry("docs", "04-advanced-techniques/rag");
+if (!entry) {
+  entry = await getEntry("docs", "04-advanced-techniques/rag/index");
+}
+const { Content } = await entry!.render();
 
-const sidebarContent = `
-  <a href="/advanced">工程化进阶：概览</a>
-  <div>
-    <a href="/advanced/rag" class="active">RAG（检索增强生成）</a>
-  </div>
-  <div>
-    <a href="/advanced/vector-databases">向量数据库</a>
-  </div>
-  <div>
-    <a href="/advanced/mcp">MCP（Model Context Protocol）</a>
-  </div>
-  <div>
-    <a href="/advanced/knowledge-bases">知识库</a>
-  </div>
-  <div>
-    <a href="/advanced/multi-agent">多智能体协作</a>
-  </div>
-`;
+import { ADVANCED_TECHNIQUES_SIDEBAR } from "../../scripts/sidebars";
 
 const headings = [
-  { id: '为什么', text: '为什么', depth: 1 },
-  { id: '什么时候用', text: '什么时候用', depth: 2 },
-  { id: '关键组件', text: '关键组件', depth: 2 },
-  { id: '常见坑', text: '常见坑', depth: 2 }
+  { id: "为什么", text: "为什么", depth: 1 },
+  { id: "什么时候用", text: "什么时候用", depth: 2 },
+  { id: "关键组件", text: "关键组件", depth: 2 },
+  { id: "常见坑", text: "常见坑", depth: 2 },
 ];
 ---
 
-<ContentLayout 
+<ContentLayout
   title="工程化进阶 / RAG（检索增强生成）"
   section="进阶玩法"
-  sidebarContent={sidebarContent}
+  sidebarItems={ADVANCED_TECHNIQUES_SIDEBAR}
   headings={headings}
 >
   <Content />

@@ -69,4 +69,59 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
   },
 ];
 
+export const BASIC_USAGE_SIDEBAR: SidebarSection = [
+  { label: '基础使用概述', href: '/basic-usage' },
+  { label: 'GUI工具', href: '/basic-usage/webchat' },
+  { label: 'CLI工具', href: '/basic-usage/cli' },
+  { label: 'Agent', href: '/basic-usage/editor-agent' },
+  { label: '应用集成', href: '/basic-usage/app-integration' },
+];
+
+export const PROMPTS_SIDEBAR: SidebarSection = [
+  {
+    label: '提示词',
+    href: '/prompts',
+    items: [
+      { label: '基础知识', href: '/prompts/basics' },
+      { label: '常用模式', href: '/prompts/patterns' },
+      { label: '进阶技巧', href: '/prompts/advanced-techniques' },
+    ],
+  },
+];
+
+export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
+  {
+    label: '进阶玩法',
+    href: '/advanced',
+    items: [
+      { label: '知识库', href: '/advanced/knowledge-bases' },
+      { label: 'MCP', href: '/advanced/mcp' },
+      { label: '多智能体', href: '/advanced/multi-agent' },
+      { label: 'RAG', href: '/advanced/rag' },
+      { label: '向量数据库', href: '/advanced/vector-databases' },
+    ],
+  },
+];
+
+export const DEMO_SIDEBAR: SidebarSection = [
+  {
+    label: 'Demos',
+    href: '/demo',
+    items: [
+      { label: 'RAG 聊天机器人', href: '/demo/rag-chatbot' }
+    ],
+  },
+];
+
+export const FUN_SIDEBAR: SidebarSection = [
+  { label: '好玩的', href: '/fun' },
+  { label: 'AI 绘画', href: '/fun/ai-drawing' },
+  { label: '大模型越狱', href: '/fun/llm-unlocking' },
+  { label: '银色酒馆', href: '/fun/silver-trivern' },
+];
+
+export const RESOURCES_SIDEBAR: SidebarSection = [
+  { label: '资源合集', href: '/resources' },
+];
+
 
