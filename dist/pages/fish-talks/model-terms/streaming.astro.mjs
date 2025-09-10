@@ -2,7 +2,7 @@ import { c as createComponent, r as renderComponent, a as renderTemplate } from 
 import 'kleur/colors';
 import { $ as $$ContentLayout } from '../../../chunks/ContentLayout_C5Ui34GO.mjs';
 import { F as FISH_TALKS_SIDEBAR } from '../../../chunks/sidebars_22da2ctk.mjs';
-import { g as getEntry } from '../../../chunks/_astro_content_DvFdDXxn.mjs';
+import { g as getEntry } from '../../../chunks/_astro_content_MH6PcDEO.mjs';
 export { renderers } from '../../../renderers.mjs';
 
 const $$Streaming = createComponent(async ($$result, $$props, $$slots) => {

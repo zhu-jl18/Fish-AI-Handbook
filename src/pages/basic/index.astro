@@ -4,12 +4,7 @@ import ContentLayout from '../../layouts/ContentLayout.astro';
 // import { DOCS_MAP } from '../../scripts/docsMap';
 // const docsDir = DOCS_MAP['basic']; // -> 02-basic-usage
 
-const sidebarContent = `
-  <a href="/basic" class="active">基础使用概述</a>
-  <a href="/basic/gui-tools">GUI工具</a>
-  <a href="/basic/cli-tools">CLI工具</a>
-  <a href="/basic/agent-frameworks">Agent</a>
-`;
+import { BASIC_USAGE_SIDEBAR } from '../../scripts/sidebars';
 
 const headings = [
   { id: 'introduction', text: 'LLM交互方式概览', depth: 1 },
@@ -19,10 +14,10 @@ const headings = [
 ];
 ---
 
-<ContentLayout 
+<ContentLayout
   title="基础使用"
   section="基础使用"
-  sidebarContent={sidebarContent}
+  sidebarItems={BASIC_USAGE_SIDEBAR}
   headings={headings}
 >
   <h1 id="introduction">LLM交互方式概览</h1>

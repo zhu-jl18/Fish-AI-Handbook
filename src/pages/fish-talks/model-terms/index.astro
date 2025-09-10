@@ -2,38 +2,7 @@
 import ContentLayout from '../../../layouts/ContentLayout.astro';
 import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars';
 
-const sidebarContent = `
-  <a href="/fish-talks">Listen to me</a>
-  <a href="/fish-talks/overview">Overview</a>
-  <div>
-    <a href="/fish-talks/llm">About LLM</a>
-    <div class="submenu">
-      <a href="/fish-talks/llm/brief">Model Classification</a>
-      <a href="/fish-talks/llm/models">Famous Models</a>
-      <a href="/fish-talks/llm/rankings">Rankings of LLM</a>
-    </div>
-  </div>
-  <div>
-    <a href="/fish-talks/model-terms" class="active">模型相关术语</a>
-    <div class="submenu">
-      <a href="/fish-talks/model-terms/token">token</a>
-      <a href="/fish-talks/model-terms/temperature">温度</a>
-      <a href="/fish-talks/model-terms/streaming">流式传输</a>
-      <a href="/fish-talks/model-terms/thinking">思考</a>
-      <a href="/fish-talks/model-terms/context-steps">上下文步数</a>
-    </div>
-  </div>
-  <div>
-    <a href="/fish-talks/glossary">其他常见术语</a>
-    <div class="submenu">
-      <a href="/fish-talks/glossary/api">API</a>
-      <a href="/fish-talks/glossary/proxy">代理</a>
-      <a href="/fish-talks/glossary/reverse-proxy">反代</a>
-      <a href="/fish-talks/glossary/interface">接口</a>
-      <a href="/fish-talks/glossary/env">环境变量</a>
-    </div>
-  </div>
-`;
+
 
 const headings = [
   { id: 'terms', text: '模型相关术语 · 概览', depth: 1 }
@@ -43,7 +12,7 @@ const headings = [
 <ContentLayout 
   title="Fish想说 - 模型相关术语"
   section="Fish想说"
-  sidebarContent={sidebarContent}
+  
   sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}
 >

@@ -1,11 +1,17 @@
 import { c as createComponent, r as renderComponent, a as renderTemplate } from '../../chunks/astro/server_DMTDEdEd.mjs';
 import 'kleur/colors';
 import { $ as $$ContentLayout } from '../../chunks/ContentLayout_C5Ui34GO.mjs';
-import { g as getEntry } from '../../chunks/_astro_content_DvFdDXxn.mjs';
+import { g as getEntry } from '../../chunks/_astro_content_MH6PcDEO.mjs';
 export { renderers } from '../../renderers.mjs';
 
 const $$VectorDatabases = createComponent(async ($$result, $$props, $$slots) => {
-  const entry = await getEntry("docs", "04-advanced-techniques/vector-databases/index");
+  let entry = await getEntry("docs", "04-advanced-techniques/vector-databases");
+  if (!entry) {
+    entry = await getEntry(
+      "docs",
+      "04-advanced-techniques/vector-databases/index"
+    );
+  }
   const { Content } = await entry.render();
   const sidebarContent = `
   <a href="/advanced">\u5DE5\u7A0B\u5316\u8FDB\u9636\uFF1A\u6982\u89C8</a>

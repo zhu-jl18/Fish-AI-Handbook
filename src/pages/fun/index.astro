@@ -5,28 +5,17 @@ import { getEntry } from 'astro:content';
 const entry = await getEntry('docs', '07-fun/index');
 const { Content } = await entry.render();
 
-const sidebarContent = `
-  <a href="/fun" class="active">好玩的：概览</a>
-  <div>
-    <a href="/fun/llm-unlocking">大模型破限教程</a>
-  </div>
-  <div>
-    <a href="/fun/silver-trivern">Silver Trivern 酒馆使用</a>
-  </div>
-  <div>
-    <a href="/fun/ai-drawing">AI 绘图教程</a>
-  </div>
-`;
+import { FUN_SIDEBAR } from '../../scripts/sidebars';
 
 const headings = [
   { id: 'intro', text: '好玩的', depth: 1 },
 ];
 ---
 
-<ContentLayout 
+<ContentLayout
   title="好玩的"
   section="好玩的"
-  sidebarContent={sidebarContent}
+  sidebarItems={FUN_SIDEBAR}
   headings={headings}
 >
   <Content />

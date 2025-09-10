@@ -7,9 +7,9 @@ import ContentLayout from '../../layouts/ContentLayout.astro';
 const section = '技术向';
 const title = '技术向 - 大模型应用开发的基石';
 
-const sidebarContent = `
-  <a href="/tech" class="active">技术向概述</a>
-`;
+const sidebarItems = [
+  { label: '技术向概述', href: '/tech' },
+];
 
 const headings = [
   { id: 'intro', text: '欢迎', depth: 1 },
@@ -19,7 +19,7 @@ const headings = [
 <ContentLayout
   {title}
   {section}
-  {sidebarContent}
+  sidebarItems={sidebarItems}
   {headings}
 >
 

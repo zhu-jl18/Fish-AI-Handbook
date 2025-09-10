@@ -4,19 +4,17 @@ import ContentLayout from '../../layouts/ContentLayout.astro';
 // import { DOCS_MAP } from '../../scripts/docsMap';
 // const docsDir = DOCS_MAP['demo']; // -> 05-demos
 
-const sidebarContent = `
-  <a href="/demo" class="active">示例概览</a>
-`;
+import { DEMO_SIDEBAR } from '../../scripts/sidebars';
 
 const headings = [
   { id: 'intro', text: '演示与案例', depth: 1 }
 ];
 ---
 
-<ContentLayout 
+<ContentLayout
   title="DEMO"
   section="DEMO"
-  sidebarContent={sidebarContent}
+  sidebarItems={DEMO_SIDEBAR}
   headings={headings}
 >
   <h1 id="intro">演示与案例</h1>
