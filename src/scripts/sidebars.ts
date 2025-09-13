@@ -32,6 +32,9 @@ export function getSidebarForPath(path: string): SidebarSection {
   if (path.startsWith('/fun')) {
     return FUN_SIDEBAR
   }
+  if (path.startsWith('/posts')) {
+    return POSTS_SIDEBAR
+  }
   if (path.startsWith('/resources')) {
     return RESOURCES_SIDEBAR
   }
@@ -154,6 +157,19 @@ export const FUN_SIDEBAR: SidebarSection = [
   { label: 'AI 绘画', href: '/fun/ai-drawing' },
   { label: '大模型越狱', href: '/fun/llm-unlocking' },
   { label: '银色酒馆', href: '/fun/silver-trivern' },
+]
+
+export const POSTS_SIDEBAR: SidebarSection = [
+  { label: '折腾日常', href: '/posts' },
+  {
+    label: '分类',
+    href: '/posts',
+    items: [
+      { label: '工具', href: '/posts/category/tools' },
+      { label: '生活', href: '/posts/category/life' },
+      { label: '随笔', href: '/posts/category/notes' },
+    ],
+  },
 ]
 
 export const RESOURCES_SIDEBAR: SidebarSection = [
