@@ -1,5 +1,5 @@
 ---
-const { currentPage } = Astro.props;
+const { currentPage } = Astro.props
 ---
 
 <header class="header">
@@ -7,73 +7,85 @@ const { currentPage } = Astro.props;
     <div class="nav-container">
       <a href="/" class="logo">Fish-Book</a>
       <div class="nav-links">
-        <a href="/fish-talks" class={currentPage === 'fish-talks' ? 'active' : ''}>鱼说必看</a>
-        <a href="/basic" class={currentPage === 'basic' ? 'active' : ''}>基础用法</a>
-        <a href="/prompts" class={currentPage === 'prompts' ? 'active' : ''}>提示词</a>
-        <a href="/advanced" class={currentPage === 'advanced' ? 'active' : ''}>进阶玩法</a>
+        <a
+          href="/fish-talks"
+          class={currentPage === 'fish-talks' ? 'active' : ''}>鱼说必看</a
+        >
+        <a href="/basic-usage" class={currentPage === 'basic-usage' ? 'active' : ''}
+          >基础用法</a
+        >
+        <a href="/prompts" class={currentPage === 'prompts' ? 'active' : ''}
+          >提示词</a
+        >
+        <a href="/advanced" class={currentPage === 'advanced' ? 'active' : ''}
+          >进阶玩法</a
+        >
         <a href="/demo" class={currentPage === 'demo' ? 'active' : ''}>DEMO</a>
-        <a href="/tech" class={currentPage === 'tech' ? 'active' : ''}>技术向</a>
+        <a href="/tech" class={currentPage === 'tech' ? 'active' : ''}>技术向</a
+        >
         <a href="/fun" class={currentPage === 'fun' ? 'active' : ''}>好玩的</a>
-        <a href="/resources" class={currentPage === 'resources' ? 'active' : ''}>资源合集</a>
+        <a href="/resources" class={currentPage === 'resources' ? 'active' : ''}
+          >资源合集</a
+        >
       </div>
     </div>
   </nav>
 </header>
 
 <style>
-.header {
-  background-color: #000;
-  border-bottom: 1px solid #333;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
+  .header {
+    background-color: #000;
+    border-bottom: 1px solid #333;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
 
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 60px;
-}
+  .nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+  }
 
-.logo {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #fff;
-  text-decoration: none;
-}
+  .logo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+  }
 
-.nav-links {
-  display: flex;
-  gap: 2rem;
-}
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
 
-.nav-links a {
-  color: #999;
-  text-decoration: none;
-  font-weight: 400;
-  transition: color 0.2s ease;
-  position: relative;
-}
+  .nav-links a {
+    color: #999;
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s ease;
+    position: relative;
+  }
 
-.nav-links a:hover {
-  color: #fff;
-}
+  .nav-links a:hover {
+    color: #fff;
+  }
 
-.nav-links a.active {
-  color: #fff;
-}
+  .nav-links a.active {
+    color: #fff;
+  }
 
-.nav-links a.active::after {
-  content: '';
-  position: absolute;
-  bottom: -18px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: #4a9eff;
-}
+  .nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -18px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #4a9eff;
+  }
 </style>

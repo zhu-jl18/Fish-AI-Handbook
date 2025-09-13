@@ -1,24 +1,24 @@
 ---
-import ContentLayout from "../../layouts/ContentLayout.astro";
-import { getEntry } from "astro:content";
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { getEntry } from 'astro:content'
 
-let entry = await getEntry("docs", "04-advanced-techniques/vector-databases");
+let entry = await getEntry('docs', '04-advanced-techniques/vector-databases')
 if (!entry) {
   entry = await getEntry(
-    "docs",
-    "04-advanced-techniques/vector-databases/index"
-  );
+    'docs',
+    '04-advanced-techniques/vector-databases/index',
+  )
 }
-const { Content } = await entry!.render();
+const { Content } = await entry!.render()
 
-import { ADVANCED_TECHNIQUES_SIDEBAR } from "../../scripts/sidebars";
+import { ADVANCED_TECHNIQUES_SIDEBAR } from '../../scripts/sidebars'
 
 const headings = [
-  { id: "为什么", text: "为什么", depth: 1 },
-  { id: "什么时候需要", text: "什么时候需要", depth: 2 },
-  { id: "选择维度", text: "选择维度", depth: 2 },
-  { id: "注意", text: "注意", depth: 2 },
-];
+  { id: '为什么', text: '为什么', depth: 1 },
+  { id: '什么时候需要', text: '什么时候需要', depth: 2 },
+  { id: '选择维度', text: '选择维度', depth: 2 },
+  { id: '注意', text: '注意', depth: 2 },
+]
 ---
 
 <ContentLayout

@@ -1,0 +1,28 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { BASIC_USAGE_SIDEBAR } from '../../scripts/sidebars'
+import { getEntry } from 'astro:content'
+
+const entry = await getEntry('docs', '02-basic-usage/webchat')
+const { Content } = await entry.render()
+
+// 相对路径信息
+const editPath = `src/content/docs/02-basic-usage/webchat.md`
+
+const headings = [
+  { id: '为什么先从网页开始', text: '为什么先从网页开始', depth: 1 },
+  { id: '三大主力选手2025年最新', text: '三大主力选手（2025年最新）', depth: 1 },
+  { id: '实际使用建议', text: '实际使用建议', depth: 1 },
+  { id: '使用注意事项', text: '使用注意事项', depth: 1 },
+]
+---
+
+<ContentLayout
+  title="官方WebChat - 最简单粗暴的开始"
+  section="基础使用"
+  sidebarItems={BASIC_USAGE_SIDEBAR}
+  headings={headings}
+  editPath={editPath}
+>
+  <Content />
+</ContentLayout>

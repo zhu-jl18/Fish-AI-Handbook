@@ -6,7 +6,7 @@ template:
   output:
     format: markdown
     filename: docs/stories/{{epic_num}}.{{story_num}}.{{story_title_short}}.md
-    title: "Story {{epic_num}}.{{story_num}}: {{story_title_short}}"
+    title: 'Story {{epic_num}}.{{story_num}}: {{story_title_short}}'
 
 workflow:
   mode: interactive
@@ -108,7 +108,7 @@ sections:
     sections:
       - id: agent-model
         title: Agent Model Used
-        template: "{{agent_model_name_version}}"
+        template: '{{agent_model_name_version}}'
         instruction: Record the specific AI agent model and version used for development
         owner: dev-agent
         editors: [dev-agent]

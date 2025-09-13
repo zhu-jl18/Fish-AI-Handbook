@@ -1,66 +1,146 @@
 ---
-import BaseLayout from './BaseLayout.astro';
-import Header from '../components/Header.astro';
-import LeftSidebar from '../components/LeftSidebar.astro';
-import RightSidebar from '../components/RightSidebar.astro';
-import type { SidebarSection } from '../scripts/sidebars';
+import BaseLayout from './BaseLayout.astro'
+import Header from '../components/Header.astro'
+import LeftSidebar from '../components/LeftSidebar.astro'
+import RightSidebar from '../components/RightSidebar.astro'
+import { getSidebarForPath } from '../scripts/sidebars'
 
-const { 
-  title, 
-  section, 
-  sidebarContent,
-  sidebarItems,
-  headings = []
-}: { title: string; section: string; sidebarContent?: string; sidebarItems?: SidebarSection; headings?: Array<any> } = Astro.props;
+// 根据当前路径获取正确的侧边栏数据
+const currentPath = Astro.url.pathname
+const sidebarItems = getSidebarForPath(currentPath)
+
+// 从 Astro.props 中获取其他属性
+const {
+  title,
+  section,
+  headings = [],
+  editPath = null,
+} = Astro.props
 ---
 
 <BaseLayout title={title}>
-  <Header currentPage={section === 'DEMO' ? 'demo' : section === '技术向' ? 'tech' : section === 'Fish想说' ? 'fish-talks' : section === '基础使用' ? 'basic' : section === '提示词' ? 'prompts' : section === '进阶玩法' ? 'advanced' : section === '好玩的' ? 'fun' : section === '资源合集' ? 'resources' : 'home'} />
-  
+  <Header
+    currentPage={section === 'DEMO'
+      ? 'demo'
+      : section === '技术向'
+        ? 'tech'
+        : section === 'Fish想说'
+          ? 'fish-talks'
+          : section === '基础使用'
+            ? 'basic'
+            : section === '提示词'
+              ? 'prompts'
+              : section === '进阶玩法'
+                ? 'advanced'
+                : section === '好玩的'
+                  ? 'fun'
+                  : section === '资源合集'
+                    ? 'resources'
+                    : 'home'}
+  />
+
   <div class="content-wrapper">
-    <LeftSidebar section={section} items={sidebarItems}>
-      {sidebarContent ? <Fragment set:html={sidebarContent} /> : null}
-    </LeftSidebar>
-    
+    <LeftSidebar section={section} items={sidebarItems} />
+
     <main class="content">
       <div class="content-inner">
+        {editPath && (
+          <details class="file-path-details">
+            <summary class="file-path-summary">📁 文件路径信息</summary>
+            <div class="file-path-content">
+              <code>{editPath}</code>
+            </div>
+          </details>
+        )}
         <slot />
       </div>
     </main>
-    
+
     <RightSidebar headings={headings} />
   </div>
 </BaseLayout>
 
 <style>
-.content-wrapper {
-  display: flex;
-  margin-top: 60px;
-  min-height: calc(100vh - 60px);
-}
+  .content-wrapper {
+    display: flex;
+    margin-top: 60px;
+    min-height: calc(100vh - 60px);
+  }
 
-.content {
-  flex: 1;
-  margin-left: 250px;
-  margin-right: 250px;
-  padding: 2rem;
-  background-color: #000;
-}
+  .content {
+    flex: 1;
+    margin-left: 250px;
+    margin-right: 250px;
+    padding: 2rem;
+    background-color: #000;
+  }
 
-.content-inner {
-  max-width: 800px;
-  margin: 0 auto;
-}
+  .content-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
 
-@media (max-width: 1024px) {
-  .left-sidebar,
-  .right-sidebar {
+  .file-path-details {
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .file-path-summary {
+    background-color: #1a1a1a;
+    color: #ccc;
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    margin: 0;
+    border: none;
+    font-size: 0.9rem;
+    user-select: none;
+    list-style: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .file-path-summary:hover {
+    background-color: #222;
+    color: #fff;
+  }
+
+  .file-path-summary::marker {
+    content: none;
+  }
+
+  .file-path-summary::-webkit-details-marker {
     display: none;
   }
-  
-  .content {
-    margin-left: 0;
-    margin-right: 0;
+
+  .file-path-content {
+    padding: 1rem;
+    background-color: #0a0a0a;
+    border-top: 1px solid #333;
   }
-}
+
+  .file-path-content code {
+    background-color: #1e1e1e;
+    color: #4a9eff;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: block;
+    word-break: break-all;
+  }
+
+
+  @media (max-width: 1024px) {
+    .left-sidebar,
+    .right-sidebar {
+      display: none;
+    }
+
+    .content {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
 </style>

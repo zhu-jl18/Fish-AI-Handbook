@@ -1,10 +1,13 @@
 ---
-import ContentLayout from '../../layouts/ContentLayout.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro'
 // 映射使用示例：按需启用以读取 content/docs
 // import { DOCS_MAP } from '../../scripts/docsMap';
 // const docsDir = DOCS_MAP['prompts']; // -> 03-prompts
 
-import { PROMPTS_SIDEBAR } from '../../scripts/sidebars';
+import { PROMPTS_SIDEBAR } from '../../scripts/sidebars'
+
+// 添加相对路径信息
+const editPath = `src/pages/prompts/index.astro`
 
 const headings = [
   { id: 'introduction', text: '提示词工程：与AI对话的艺术', depth: 1 },
@@ -12,8 +15,8 @@ const headings = [
   { id: 'importance', text: '为什么提示词如此重要', depth: 2 },
   { id: 'basic-principles', text: '基本原则', depth: 2 },
   { id: 'common-types', text: '常见类型', depth: 2 },
-  { id: 'getting-started', text: '入门指南', depth: 2 }
-];
+  { id: 'getting-started', text: '入门指南', depth: 2 },
+]
 ---
 
 <ContentLayout
@@ -21,36 +24,48 @@ const headings = [
   section="提示词"
   sidebarItems={PROMPTS_SIDEBAR}
   headings={headings}
+  editPath={editPath}
 >
   <h1 id="introduction">提示词工程：与AI对话的艺术</h1>
-  
-  <p>提示词工程（Prompt Engineering）是与大语言模型有效沟通的关键技能。一个精心设计的提示词可以让AI输出精准、有用的结果，而模糊的提示词则可能得到令人困惑的回应。</p>
-  
+
+  <p>
+    提示词工程（Prompt
+    Engineering）是与大语言模型有效沟通的关键技能。一个精心设计的提示词可以让AI输出精准、有用的结果，而模糊的提示词则可能得到令人困惑的回应。
+  </p>
+
   <div class="highlight-box">
     <h4>🎯 核心理念</h4>
-    <p>提示词工程不是简单的"问答"，而是一门关于如何精确表达意图、引导AI思考方式的艺术和科学。</p>
+    <p>
+      提示词工程不是简单的"问答"，而是一门关于如何精确表达意图、引导AI思考方式的艺术和科学。
+    </p>
   </div>
-  
+
   <h2 id="what-is-prompt">什么是提示词</h2>
-  
-  <p>提示词（Prompt）是你发送给AI模型的文本输入，它包含了你的指令、问题、上下文信息和期望的输出格式。提示词是人类与AI之间的接口，决定了AI的响应质量和相关性。</p>
-  
+
+  <p>
+    提示词（Prompt）是你发送给AI模型的文本输入，它包含了你的指令、问题、上下文信息和期望的输出格式。提示词是人类与AI之间的接口，决定了AI的响应质量和相关性。
+  </p>
+
   <div class="example-comparison">
     <div class="example bad">
       <h4>❌ 模糊的提示词</h4>
       <p><code>"写一篇文章"</code></p>
       <p class="result">结果：AI可能写出任何主题、任何长度、任何风格的文章</p>
     </div>
-    
+
     <div class="example good">
       <h4>✅ 精确的提示词</h4>
-      <p><code>"写一篇800字的技术博客文章，介绍React Hooks的使用方法，包含3个实际代码示例，目标读者是有1-2年经验的前端开发者"</code></p>
+      <p>
+        <code
+          >"写一篇800字的技术博客文章，介绍React
+          Hooks的使用方法，包含3个实际代码示例，目标读者是有1-2年经验的前端开发者"</code>
+      </p>
       <p class="result">结果：AI会生成符合具体要求的高质量内容</p>
     </div>
   </div>
-  
+
   <h2 id="importance">为什么提示词如此重要</h2>
-  
+
   <h3>1. 决定输出质量</h3>
   <p>相同的模型，不同的提示词可能产生完全不同质量的输出：</p>
   <ul>
@@ -59,7 +74,7 @@ const headings = [
     <li><strong>完整性</strong> - 详细的格式和内容要求</li>
     <li><strong>相关性</strong> - 精准的目标受众和使用场景</li>
   </ul>
-  
+
   <h3>2. 控制成本效率</h3>
   <p>好的提示词能够：</p>
   <ul>
@@ -68,7 +83,7 @@ const headings = [
     <li>降低Token消耗</li>
     <li>节省开发时间</li>
   </ul>
-  
+
   <h3>3. 实现复杂功能</h3>
   <p>通过精心设计的提示词，可以让AI执行：</p>
   <ul>
@@ -77,9 +92,9 @@ const headings = [
     <li>角色扮演和风格模拟</li>
     <li>复杂的分析和判断</li>
   </ul>
-  
+
   <h2 id="basic-principles">基本原则</h2>
-  
+
   <div class="principles-grid">
     <div class="principle-card">
       <h4>🎯 明确性原则</h4>
@@ -89,7 +104,7 @@ const headings = [
         <p><strong>差：</strong> "这篇文章讲什么"</p>
       </div>
     </div>
-    
+
     <div class="principle-card">
       <h4>📝 结构化原则</h4>
       <p>使用清晰的结构组织你的提示词，包括角色、任务、要求、示例等。</p>
@@ -97,7 +112,7 @@ const headings = [
         <p><strong>结构：</strong> 角色设定 → 具体任务 → 输出格式 → 注意事项</p>
       </div>
     </div>
-    
+
     <div class="principle-card">
       <h4>🔍 上下文原则</h4>
       <p>提供足够的背景信息，帮助AI理解任务的具体情境。</p>
@@ -105,7 +120,7 @@ const headings = [
         <p><strong>包含：</strong> 目标受众、使用场景、专业领域、预期效果</p>
       </div>
     </div>
-    
+
     <div class="principle-card">
       <h4>📊 示例原则</h4>
       <p>提供具体的示例来展示期望的输出格式和质量标准。</p>
@@ -114,9 +129,9 @@ const headings = [
       </div>
     </div>
   </div>
-  
+
   <h2 id="common-types">常见类型</h2>
-  
+
   <h3>1. 指令型提示词</h3>
   <p>直接告诉AI要做什么：</p>
   <div class="code-example">
@@ -128,7 +143,7 @@ const headings = [
 - 使用正式的书面语
 - 检查语法和拼写</code></pre>
   </div>
-  
+
   <h3>2. 角色扮演型提示词</h3>
   <p>让AI扮演特定角色：</p>
   <div class="code-example">
@@ -136,7 +151,7 @@ const headings = [
 请为新手开发者解释React中的状态管理概念，使用简单易懂的语言，
 并提供一个具体的代码示例。</code></pre>
   </div>
-  
+
   <h3>3. 推理型提示词</h3>
   <p>引导AI进行逐步推理：</p>
   <div class="code-example">
@@ -151,7 +166,7 @@ const headings = [
 
 请一步步进行分析。</code></pre>
   </div>
-  
+
   <h3>4. 模板填充型提示词</h3>
   <p>提供结构化的输出模板：</p>
   <div class="code-example">
@@ -172,9 +187,9 @@ const headings = [
 ### 建议
 [给出具体改进建议]</code></pre>
   </div>
-  
+
   <h2 id="getting-started">入门指南</h2>
-  
+
   <h3>第一步：学会提出好问题</h3>
   <div class="step-guide">
     <div class="step">
@@ -182,27 +197,33 @@ const headings = [
       <p>选择一个具体、明确的任务开始练习</p>
       <div class="step-example">
         <p><strong>任务：</strong> 写一个产品介绍</p>
-        <p><strong>提示词：</strong> "为iPhone 15写一个200字的产品介绍，突出其主要特性，目标用户是年轻的科技爱好者"</p>
+        <p>
+          <strong>提示词：</strong> "为iPhone 15写一个200字的产品介绍，突出其主要特性，目标用户是年轻的科技爱好者"
+        </p>
       </div>
     </div>
-    
+
     <div class="step">
       <h4>2. 逐步增加复杂度</h4>
       <p>在基础版本上添加更多要求和约束</p>
       <div class="step-example">
-        <p><strong>升级版：</strong> "...同时包含技术规格对比，使用营销友好的语调，最后加上购买建议"</p>
+        <p>
+          <strong>升级版：</strong> "...同时包含技术规格对比，使用营销友好的语调，最后加上购买建议"
+        </p>
       </div>
     </div>
-    
+
     <div class="step">
       <h4>3. 迭代优化</h4>
       <p>根据输出结果调整和优化提示词</p>
       <div class="step-example">
-        <p><strong>优化：</strong> 如果输出太技术化，加上"避免过于专业的术语"</p>
+        <p>
+          <strong>优化：</strong> 如果输出太技术化，加上"避免过于专业的术语"
+        </p>
       </div>
     </div>
   </div>
-  
+
   <h3>第二步：建立提示词模板库</h3>
   <div class="template-categories">
     <div class="category">
@@ -214,7 +235,7 @@ const headings = [
         <li>产品描述</li>
       </ul>
     </div>
-    
+
     <div class="category">
       <h4>💻 代码相关</h4>
       <ul>
@@ -224,7 +245,7 @@ const headings = [
         <li>性能优化</li>
       </ul>
     </div>
-    
+
     <div class="category">
       <h4>📊 数据分析</h4>
       <ul>
@@ -234,7 +255,7 @@ const headings = [
         <li>可视化建议</li>
       </ul>
     </div>
-    
+
     <div class="category">
       <h4>🎯 业务应用</h4>
       <ul>
@@ -245,7 +266,7 @@ const headings = [
       </ul>
     </div>
   </div>
-  
+
   <h3>第三步：持续学习和改进</h3>
   <div class="learning-path">
     <ol>
@@ -255,7 +276,7 @@ const headings = [
       <li><strong>分享和交流</strong> - 与社区分享经验</li>
     </ol>
   </div>
-  
+
   <div class="next-steps-box">
     <h4>🚀 下一步学习路径</h4>
     <p>现在你已经了解了提示词工程的基础知识，建议按以下顺序深入学习：</p>
@@ -263,200 +284,202 @@ const headings = [
       <li><a href="/prompts/basics">基础技巧</a> - 掌握核心写作技法</li>
       <li><a href="/prompts/advanced">高级策略</a> - 学习复杂场景的处理</li>
       <li><a href="/prompts/templates">实用模板</a> - 获取现成的模板库</li>
-      <li><a href="/prompts/optimization">优化与调试</a> - 提升效果的专业技巧</li>
+      <li>
+        <a href="/prompts/optimization">优化与调试</a> - 提升效果的专业技巧
+      </li>
     </ol>
   </div>
 </ContentLayout>
 
 <style>
-.highlight-box {
-  background-color: #1e293b;
-  border-left: 4px solid #4a9eff;
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  border-radius: 0 8px 8px 0;
-}
+  .highlight-box {
+    background-color: #1e293b;
+    border-left: 4px solid #4a9eff;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+  }
 
-.highlight-box h4 {
-  margin-top: 0;
-  color: #4a9eff;
-}
+  .highlight-box h4 {
+    margin-top: 0;
+    color: #4a9eff;
+  }
 
-.example-comparison {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
+  .example-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
 
-.example {
-  padding: 1.5rem;
-  border-radius: 8px;
-  border: 2px solid;
-}
+  .example {
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid;
+  }
 
-.example.bad {
-  background-color: #2d1b1b;
-  border-color: #ef4444;
-}
+  .example.bad {
+    background-color: #2d1b1b;
+    border-color: #ef4444;
+  }
 
-.example.good {
-  background-color: #1b2d1b;
-  border-color: #10b981;
-}
+  .example.good {
+    background-color: #1b2d1b;
+    border-color: #10b981;
+  }
 
-.example h4 {
-  margin-top: 0;
-}
+  .example h4 {
+    margin-top: 0;
+  }
 
-.example.bad h4 {
-  color: #ef4444;
-}
+  .example.bad h4 {
+    color: #ef4444;
+  }
 
-.example.good h4 {
-  color: #10b981;
-}
+  .example.good h4 {
+    color: #10b981;
+  }
 
-.example code {
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 0.5rem;
-  border-radius: 4px;
-  display: block;
-  margin: 0.5rem 0;
-}
+  .example code {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 0.5rem;
+    border-radius: 4px;
+    display: block;
+    margin: 0.5rem 0;
+  }
 
-.result {
-  font-style: italic;
-  color: #a6adc8;
-  font-size: 0.9rem;
-}
+  .result {
+    font-style: italic;
+    color: #a6adc8;
+    font-size: 0.9rem;
+  }
 
-.principles-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
 
-.principle-card {
-  background-color: #1e1e2e;
-  border: 1px solid #313244;
-  border-radius: 8px;
-  padding: 1.5rem;
-  transition: transform 0.2s ease;
-}
+  .principle-card {
+    background-color: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.2s ease;
+  }
 
-.principle-card:hover {
-  transform: translateY(-2px);
-}
+  .principle-card:hover {
+    transform: translateY(-2px);
+  }
 
-.principle-card h4 {
-  margin-top: 0;
-  color: #4a9eff;
-}
+  .principle-card h4 {
+    margin-top: 0;
+    color: #4a9eff;
+  }
 
-.principle-example {
-  background-color: #2a2a3e;
-  padding: 1rem;
-  border-radius: 4px;
-  margin-top: 1rem;
-  font-size: 0.9rem;
-}
+  .principle-example {
+    background-color: #2a2a3e;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
 
-.code-example {
-  background-color: #1e1e2e;
-  border: 1px solid #313244;
-  border-radius: 8px;
-  margin: 1rem 0;
-}
+  .code-example {
+    background-color: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
 
-.code-example pre {
-  margin: 0;
-  padding: 1.5rem;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-}
+  .code-example pre {
+    margin: 0;
+    padding: 1.5rem;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+  }
 
-.step-guide {
-  margin: 2rem 0;
-}
+  .step-guide {
+    margin: 2rem 0;
+  }
 
-.step {
-  background-color: #1e1e2e;
-  border: 1px solid #313244;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin: 1rem 0;
-}
+  .step {
+    background-color: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
 
-.step h4 {
-  margin-top: 0;
-  color: #4a9eff;
-}
+  .step h4 {
+    margin-top: 0;
+    color: #4a9eff;
+  }
 
-.step-example {
-  background-color: #2a2a3e;
-  padding: 1rem;
-  border-radius: 4px;
-  margin-top: 1rem;
-  font-size: 0.9rem;
-}
+  .step-example {
+    background-color: #2a2a3e;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
 
-.template-categories {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
+  .template-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
 
-.category {
-  background-color: #1e1e2e;
-  border: 1px solid #313244;
-  border-radius: 8px;
-  padding: 1.5rem;
-}
+  .category {
+    background-color: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
 
-.category h4 {
-  margin-top: 0;
-  color: #4a9eff;
-}
+  .category h4 {
+    margin-top: 0;
+    color: #4a9eff;
+  }
 
-.learning-path {
-  background-color: #1e1e2e;
-  border: 1px solid #313244;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin: 2rem 0;
-}
+  .learning-path {
+    background-color: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
 
-.learning-path ol {
-  margin: 0;
-}
+  .learning-path ol {
+    margin: 0;
+  }
 
-.learning-path li {
-  margin-bottom: 0.5rem;
-}
+  .learning-path li {
+    margin-bottom: 0.5rem;
+  }
 
-.next-steps-box {
-  background-color: #2d1b69;
-  border-left: 4px solid #10b981;
-  padding: 1.5rem;
-  margin: 2rem 0;
-  border-radius: 0 8px 8px 0;
-}
+  .next-steps-box {
+    background-color: #2d1b69;
+    border-left: 4px solid #10b981;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 8px 8px 0;
+  }
 
-.next-steps-box h4 {
-  margin-top: 0;
-  color: #10b981;
-}
+  .next-steps-box h4 {
+    margin-top: 0;
+    color: #10b981;
+  }
 
-.next-steps-box a {
-  color: #4a9eff;
-  text-decoration: none;
-}
+  .next-steps-box a {
+    color: #4a9eff;
+    text-decoration: none;
+  }
 
-.next-steps-box a:hover {
-  text-decoration: underline;
-}
+  .next-steps-box a:hover {
+    text-decoration: underline;
+  }
 </style>

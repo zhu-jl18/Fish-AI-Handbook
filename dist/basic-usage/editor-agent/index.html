@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>
+      AI代码编辑器 - 配对编程的未来 - Fish写给朋友们的AI使用指南
+    </title><meta name="description" content="Fish写给朋友们的AI使用指南 - 简洁清晰的AI教程"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"><style>:root{--bg-color: #000000;--text-color: #ffffff;--border-color: #333333;--accent-color: #666666;--link-color: #4a9eff;--link-hover-color: #66b3ff}*{margin:0;padding:0;box-sizing:border-box}html{height:100%;scroll-behavior:smooth}body{background-color:var(--bg-color);color:var(--text-color);font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;font-size:16px;line-height:1.6;height:100%;overflow-x:hidden}a{color:var(--link-color);text-decoration:none;transition:color .2s ease}a:hover{color:var(--link-hover-color)}code{background-color:#1a1a1a;padding:2px 6px;border-radius:4px;font-family:SF Mono,Monaco,Cascadia Code,Roboto Mono,Consolas,Courier New,monospace;font-size:.9em;border:1px solid #333}pre{background-color:#0d0d0d;padding:1.5rem;border-radius:8px;overflow-x:auto;margin:1.5rem 0;border:1px solid #333;position:relative;font-family:SF Mono,Monaco,Cascadia Code,Roboto Mono,Consolas,Courier New,monospace;line-height:1.5}pre code{background-color:transparent;padding:0;border:none;font-size:.9em;color:#e0e0e0}.code-copy-button{position:absolute;top:.75rem;right:.75rem;background-color:#2a2a2a;border:1px solid #444;color:#ccc;padding:.4rem .8rem;border-radius:4px;font-size:.8rem;font-family:inherit;cursor:pointer;transition:all .2s ease;opacity:.7}.code-copy-button:hover{background-color:#3a3a3a;color:#fff;opacity:1}.code-copy-button:active{transform:scale(.95)}.code-copy-button.copied{background-color:#4a9eff;color:#000;border-color:#4a9eff}pre .hljs-keyword{color:#ff79c6}pre .hljs-string{color:#f1fa8c}pre .hljs-number{color:#bd93f9}pre .hljs-comment{color:#6272a4}pre .hljs-function{color:#50fa7b}pre .hljs-operator{color:#ff79c6}pre .hljs-class{color:#8be9fd}pre .hljs-variable{color:#f8f8f2}pre::-webkit-scrollbar{height:6px}pre::-webkit-scrollbar-track{background:#0d0d0d}pre::-webkit-scrollbar-thumb{background:#444;border-radius:3px}pre::-webkit-scrollbar-thumb:hover{background:#666}h1,h2,h3,h4,h5,h6{font-weight:600;margin-bottom:1rem;line-height:1.3}h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]{scroll-margin-top:80px}h1{font-size:2.5rem;margin-top:2rem}h2{font-size:2rem;margin-top:2rem;border-bottom:1px solid var(--border-color);padding-bottom:.5rem}h3{font-size:1.5rem;margin-top:1.5rem}p{margin-bottom:1rem}ul,ol{margin-bottom:1rem;padding-left:2rem}li{margin-bottom:.5rem}blockquote{border-left:3px solid var(--accent-color);padding-left:1rem;margin:1rem 0;font-style:italic}::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-track{background:var(--bg-color)}::-webkit-scrollbar-thumb{background:var(--accent-color);border-radius:4px}::-webkit-scrollbar-thumb:hover{background:var(--border-color)}.header[data-astro-cid-3ef6ksr2]{background-color:#000;border-bottom:1px solid #333;position:sticky;top:0;z-index:100}.nav-container[data-astro-cid-3ef6ksr2]{max-width:1400px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;height:60px}.logo[data-astro-cid-3ef6ksr2]{font-size:1.2rem;font-weight:600;color:#fff;text-decoration:none}.nav-links[data-astro-cid-3ef6ksr2]{display:flex;gap:2rem}.nav-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{color:#999;text-decoration:none;font-weight:400;transition:color .2s ease;position:relative}.nav-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]:hover,.nav-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{color:#fff}.nav-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active:after{content:"";position:absolute;bottom:-18px;left:0;right:0;height:2px;background-color:#4a9eff}
+.left-sidebar[data-astro-cid-ryjzjgvk]{position:fixed;left:0;top:60px;width:250px;height:calc(100vh - 60px);background-color:#0a0a0a;border-right:1px solid #333;overflow-y:auto}.sidebar-content[data-astro-cid-ryjzjgvk]{padding:2rem 1rem}.section-title[data-astro-cid-ryjzjgvk]{font-size:.9rem;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;font-weight:600}.section-nav[data-astro-cid-ryjzjgvk]{display:flex;flex-direction:column;gap:.5rem}.section-nav[data-astro-cid-ryjzjgvk]>[data-astro-cid-ryjzjgvk]{flex-shrink:0}.section-nav[data-astro-cid-ryjzjgvk] a[data-astro-cid-ryjzjgvk]{color:#999;text-decoration:none;padding:.5rem 1rem;border-radius:4px;transition:all .2s ease;font-size:.9rem;display:block}.section-nav[data-astro-cid-ryjzjgvk] a[data-astro-cid-ryjzjgvk]:hover{color:#fff;background-color:#1a1a1a}.section-nav[data-astro-cid-ryjzjgvk] a[data-astro-cid-ryjzjgvk].active{color:#fff;background-color:#2a2a2a;border-left:3px solid #4a9eff}.group[data-astro-cid-ryjzjgvk]{margin:.25rem 0}.submenu{display:block;width:100%;margin:.25rem 0}.submenu a[data-astro-cid-ryjzjgvk]{display:block;padding:.35rem .75rem .35rem 1.75rem;font-size:.85rem;border-left:2px solid transparent;color:#999;text-decoration:none;border-radius:4px;transition:all .2s ease;margin-bottom:.25rem}.submenu a[data-astro-cid-ryjzjgvk]:hover{color:#fff;background-color:#1a1a1a;border-left-color:#4a9eff}.submenu a[data-astro-cid-ryjzjgvk].active{color:#fff;border-left-color:#4a9eff;background-color:#1a1a1a}.right-sidebar[data-astro-cid-zujyv34g]{position:fixed;right:0;top:60px;width:250px;height:calc(100vh - 60px);background-color:#0a0a0a;border-left:1px solid #333;overflow-y:auto;padding:2rem 1rem}.toc-title[data-astro-cid-zujyv34g]{font-size:.9rem;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;font-weight:600}.toc-nav[data-astro-cid-zujyv34g]{display:flex;flex-direction:column;gap:.3rem}.toc-link[data-astro-cid-zujyv34g]{color:#999;text-decoration:none;font-size:.8rem;transition:color .2s ease;line-height:1.4}.toc-link[data-astro-cid-zujyv34g]:hover{color:#fff}.toc-2[data-astro-cid-zujyv34g]{padding-left:0}.toc-3[data-astro-cid-zujyv34g]{padding-left:1rem;font-size:.75rem}.toc-4[data-astro-cid-zujyv34g]{padding-left:2rem;font-size:.7rem}.content-wrapper[data-astro-cid-scuu7fyy]{display:flex;margin-top:60px;min-height:calc(100vh - 60px)}.content[data-astro-cid-scuu7fyy]{flex:1;margin-left:250px;margin-right:250px;padding:2rem;background-color:#000}.content-inner[data-astro-cid-scuu7fyy]{max-width:800px;margin:0 auto}@media (max-width: 1024px){.left-sidebar[data-astro-cid-scuu7fyy],.right-sidebar[data-astro-cid-scuu7fyy]{display:none}.content[data-astro-cid-scuu7fyy]{margin-left:0;margin-right:0}}
+</style></head> <body>  <header class="header" data-astro-cid-3ef6ksr2> <nav class="nav" data-astro-cid-3ef6ksr2> <div class="nav-container" data-astro-cid-3ef6ksr2> <a href="/" class="logo" data-astro-cid-3ef6ksr2>Fish-Book</a> <div class="nav-links" data-astro-cid-3ef6ksr2> <a href="/fish-talks" class="" data-astro-cid-3ef6ksr2>鱼说必看</a> <a href="/basic-usage" class="" data-astro-cid-3ef6ksr2>基础用法</a> <a href="/prompts" class="" data-astro-cid-3ef6ksr2>提示词</a> <a href="/advanced" class="" data-astro-cid-3ef6ksr2>进阶玩法</a> <a href="/demo" class="" data-astro-cid-3ef6ksr2>DEMO</a> <a href="/tech" class="" data-astro-cid-3ef6ksr2>技术向</a> <a href="/fun" class="" data-astro-cid-3ef6ksr2>好玩的</a> <a href="/resources" class="" data-astro-cid-3ef6ksr2>资源合集</a> </div> </div> </nav> </header>  <div class="content-wrapper" data-astro-cid-scuu7fyy> <div class="left-sidebar" data-astro-cid-ryjzjgvk> <div class="sidebar-content" data-astro-cid-ryjzjgvk> <div class="section-title" data-astro-cid-ryjzjgvk>基础使用</div> <nav class="section-nav" data-astro-cid-ryjzjgvk> <div class="group" data-astro-cid-ryjzjgvk> <a href="/basic-usage" class="active" data-astro-cid-ryjzjgvk> 基础使用 </a> <div class="submenu" data-astro-cid-ryjzjgvk> <a href="/basic-usage/webchat" data-astro-cid-ryjzjgvk> 官方WebChat </a><a href="/basic-usage/app-integration" data-astro-cid-ryjzjgvk> 第三方集成聊天软件 </a><a href="/basic-usage/cli" data-astro-cid-ryjzjgvk> CLI命令行工具 </a><a href="/basic-usage/editor-agent" data-astro-cid-ryjzjgvk> AI代码编辑器 </a><a href="/basic-usage/mobile-apps" data-astro-cid-ryjzjgvk> 移动端AI应用 </a> </div> </div> </nav> </div> </div>  <main class="content" data-astro-cid-scuu7fyy> <div class="content-inner" data-astro-cid-scuu7fyy>  <h2 id="为啥代码编辑器集成这么香">为啥代码编辑器集成这么香</h2>
+<p><strong>沉浸式体验：</strong> 不用切换窗口，直接在IDE里和AI对话</p>
+<p><strong>理解整个项目：</strong> AI能看到所有文件，知道项目结构和依赖关系</p>
+<p><strong>实时协作：</strong> 写一半的代码AI能接着写，改错的地方AI能立即提醒</p>
+<p><strong>学习成本低：</strong> 还是熟悉的编辑器，只是多了个超级聪明的助手</p>
+<h2 id="2025年主流选择对比">2025年主流选择对比</h2>
+<h3 id="cursor---ai原生编辑器新宠">Cursor - AI原生编辑器（新宠）</h3>
+<p><strong>为啥火：</strong></p>
+<ul>
+<li>专为AI协作设计，不是插件是原生功能</li>
+<li>基于VS Code，熟悉界面 + AI增强</li>
+<li>支持Claude 3.5 Sonnet、GPT-4等15+模型</li>
+<li>Tab键补全平均320ms响应，超快</li>
+</ul>
+<p><strong>特色功能：</strong></p>
+<ul>
+<li><strong>Ctrl+K：</strong> 选中代码，描述需求，AI帮你修改</li>
+<li><strong>Ctrl+L：</strong> 打开聊天，可以讨论整个项目</li>
+<li><strong>Composer：</strong> AI帮你同时编辑多个文件</li>
+<li><strong>Apply按钮：</strong> AI修改建议可以一键应用</li>
+</ul>
+<p><strong>价格：</strong> 免费版够用，Pro版$20/月</p>
+<p><strong>适合：</strong> 想要最新AI体验的开发者</p>
+<p><em>[占位：Cursor界面截图 - 显示AI聊天和代码生成]</em></p>
+<hr>
+<h3 id="github-copilot---老牌王者">GitHub Copilot - 老牌王者</h3>
+<p><strong>2025年大更新：</strong></p>
+<ul>
+<li>支持Claude 3.5、Gemini 1.5等多模型选择</li>
+<li>新增Copilot Agent模式，能跨文件理解和修改</li>
+<li>Vision功能：能看懂截图和图表</li>
+<li>企业级团队协作功能</li>
+</ul>
+<p><strong>优势：</strong></p>
+<ul>
+<li>生态最成熟，与VS Code深度集成</li>
+<li>代码补全质量很高，训练数据最丰富</li>
+<li>企业支持最好，安全性有保障</li>
+</ul>
+<p><strong>价格：</strong> $10/月个人，$19/月企业</p>
+<p><strong>适合：</strong> 企业开发者，看重稳定性的团队</p>
+<p><em>[占位：Copilot 2025新功能截图 - 显示多模型选择]</em></p>
+<hr>
+<h3 id="vs-code--国产插件">VS Code + 国产插件</h3>
+<h4 id="roocode插件">RooCode插件</h4>
+<ul>
+<li>支持国内主流大模型（通义千问、文心一言等）</li>
+<li>项目理解能力强，支持中文对话</li>
+<li>免费使用，网络稳定</li>
+<li>专为中国开发者优化</li>
+</ul>
+<h4 id="codeium免费替代">Codeium（免费替代）</h4>
+<ul>
+<li>完全免费使用，功能对标Copilot</li>
+<li>支持70+编程语言</li>
+<li>本地处理，响应速度快</li>
+<li>隐私保护做得不错</li>
+</ul>
+<p><em>[占位：VS Code插件市场截图 - 显示各种AI插件]</em></p>
+<hr>
+<h3 id="windterm--warp---终端--ai">WindTerm / Warp - 终端 + AI</h3>
+<p><strong>特色：</strong></p>
+<ul>
+<li>现代化终端界面</li>
+<li>内置AI命令补全和解释</li>
+<li>适合喜欢终端工作的开发者</li>
+</ul>
+<h2 id="实战使用指南">实战使用指南</h2>
+<h3 id="第一次设置以cursor为例">第一次设置（以Cursor为例）</h3>
+<ol>
+<li><strong>下载安装：</strong> 去cursor.sh官网下载</li>
+<li><strong>导入设置：</strong> 可以直接导入VS Code的配置和插件</li>
+<li><strong>配置API：</strong> 设置里添加OpenAI或Claude API密钥</li>
+<li><strong>开始使用：</strong> 打开项目，试试Ctrl+K和Ctrl+L</li>
+</ol>
+<h3 id="日常工作流">日常工作流</h3>
+<h4 id="需求分析阶段">需求分析阶段</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Ctrl+L 打开聊天：</span></span>
+<span class="line"><span>"我要实现一个用户登录功能，包括邮箱验证、密码加密、记住登录状态，你建议如何设计？"</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="编码阶段">编码阶段</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>选中一段代码，Ctrl+K：</span></span>
+<span class="line"><span>"把这个函数改成async/await的写法，添加错误处理"</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="调试阶段">调试阶段</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>贴入错误信息：</span></span>
+<span class="line"><span>"这个TypeError是什么原因？帮我修复"</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="重构阶段">重构阶段</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>选中整个文件，Ctrl+L：</span></span>
+<span class="line"><span>"这个组件太大了，帮我拆分成多个小组件，保持功能不变"</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="高级技巧">高级技巧</h3>
+<h4 id="项目级理解">项目级理解</h4>
+<p>让AI先了解你的项目：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>"请分析这个项目的架构，理解主要的文件结构和技术栈"</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="代码风格统一">代码风格统一</h4>
+<p>设置项目规范：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>"这个项目使用TypeScript + React，请确保所有生成的代码都符合这个风格，使用函数式组件"</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="渐进式重构">渐进式重构</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>"我想把这个类组件改成函数组件，但要分步骤进行，先给我一个计划"</span></span>
+<span class="line"><span></span></span></code></pre>
+<p><em>[占位：AI配对编程流程图 - 显示从需求到上线的完整流程]</em></p>
+<h2 id="性能对比2025年数据">性能对比（2025年数据）</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>工具</th><th>响应速度</th><th>上下文理解</th><th>多语言支持</th><th>价格</th></tr></thead><tbody><tr><td>Cursor</td><td>320ms</td><td>优秀</td><td>70+</td><td>$0-20/月</td></tr><tr><td>Copilot</td><td>890ms</td><td>很好</td><td>80+</td><td>$10-19/月</td></tr><tr><td>RooCode</td><td>400ms</td><td>良好</td><td>30+</td><td>免费</td></tr><tr><td>Codeium</td><td>250ms</td><td>良好</td><td>70+</td><td>免费</td></tr></tbody></table>
+<h2 id="选择建议">选择建议</h2>
+<p><strong>想要最新体验：</strong> Cursor（AI原生设计）
+<strong>企业开发：</strong> GitHub Copilot（最稳定可靠）
+<strong>预算有限：</strong> Codeium（免费且好用）<br>
+<strong>国内用户：</strong> RooCode（网络稳定，中文友好）</p>
+<h2 id="最佳实践">最佳实践</h2>
+<h3 id="提示词技巧">提示词技巧</h3>
+<p><strong>好的描述：</strong></p>
+<ul>
+<li>“把这个API改成RESTful风格，使用Express.js，添加错误处理和参数验证”</li>
+</ul>
+<p><strong>不好的描述：</strong></p>
+<ul>
+<li>“改一下这个代码”</li>
+</ul>
+<h3 id="工作节奏">工作节奏</h3>
+<ol>
+<li><strong>小步快跑：</strong> 每次让AI改一小部分，测试通过再继续</li>
+<li><strong>及时测试：</strong> AI写完代码立即运行测试，发现问题马上修复</li>
+<li><strong>代码审查：</strong> 重要代码让AI再审查一遍，检查潜在问题</li>
+</ol>
+<h3 id="学习模式">学习模式</h3>
+<p><strong>边用边学：</strong></p>
+<ul>
+<li>让AI解释它生成的代码</li>
+<li>问”为什么这样写？”</li>
+<li>学习新的编程模式和技巧</li>
+</ul>
+<p><em>[占位：AI配对编程最佳实践图 - 显示工作流程]</em></p>
+<h2 id="注意事项">注意事项</h2>
+<p><strong>不要过度依赖：</strong> AI是助手不是替代品，核心逻辑还得自己思考</p>
+<p><strong>代码质量：</strong> AI生成的代码要仔细检查，特别是安全相关部分</p>
+<p><strong>版本控制：</strong> 勤提交，AI改错了能快速回滚</p>
+<p><strong>学习心态：</strong> 把AI当老师，学习它的编程思路和技巧</p>
+<hr>
+<p>到这里，四种AI使用方式就都介绍完了。建议从网页版开始，逐步尝试其他工具，找到最适合你的工作方式！</p>  </div> </main> <div class="right-sidebar" data-astro-cid-zujyv34g> <div class="toc-content" data-astro-cid-zujyv34g> <div class="toc-title" data-astro-cid-zujyv34g>目录</div> <nav class="toc-nav" data-astro-cid-zujyv34g> <a href="#为啥代码编辑器集成这么香" class="toc-link toc-1" data-astro-cid-zujyv34g> 为啥代码编辑器集成这么香 </a><a href="#2025年主流选择对比" class="toc-link toc-1" data-astro-cid-zujyv34g> 2025年主流选择对比 </a><a href="#实战使用指南" class="toc-link toc-1" data-astro-cid-zujyv34g> 实战使用指南 </a><a href="#性能对比2025年数据" class="toc-link toc-1" data-astro-cid-zujyv34g> 性能对比（2025年数据） </a><a href="#选择建议" class="toc-link toc-1" data-astro-cid-zujyv34g> 选择建议 </a><a href="#最佳实践" class="toc-link toc-1" data-astro-cid-zujyv34g> 最佳实践 </a><a href="#注意事项" class="toc-link toc-1" data-astro-cid-zujyv34g> 注意事项 </a> </nav> </div> </div>  </div>  <script type="module">
+      import '../scripts/copy-code.js'
+    </script> </body> </html> 

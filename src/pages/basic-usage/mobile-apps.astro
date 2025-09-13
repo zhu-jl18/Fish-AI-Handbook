@@ -1,0 +1,26 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { BASIC_USAGE_SIDEBAR } from '../../scripts/sidebars'
+import { getEntry } from 'astro:content'
+
+const entry = await getEntry('docs', '02-basic-usage/mobile-apps')
+const { Content } = await entry.render()
+
+// 相对路径信息
+const editPath = `src/content/docs/02-basic-usage/mobile-apps.md`
+
+const headings = [
+  { id: '占位内容-待补充', text: '占位内容 - 待补充', depth: 1 },
+  { id: '建议内容方向', text: '建议内容方向', depth: 2 },
+]
+---
+
+<ContentLayout
+  title="移动端AI应用 - 随时随地的智能助手"
+  section="基础使用"
+  sidebarItems={BASIC_USAGE_SIDEBAR}
+  headings={headings}
+  editPath={editPath}
+>
+  <Content />
+</ContentLayout>

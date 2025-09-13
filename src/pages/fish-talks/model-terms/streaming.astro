@@ -1,30 +1,25 @@
 ---
-import ContentLayout from '../../../layouts/ContentLayout.astro';
-import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars';
-import { getEntry } from 'astro:content';
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
+import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '01-fish-talks/model-terms/streaming');
-const { Content } = await entry.render();
-
-
+const entry = await getEntry('docs', '01-fish-talks/model-terms/streaming')
+const { Content } = await entry.render()
 
 const headings = [
   { id: 'streaming', text: '什么是流式传输（Streaming）', depth: 1 },
   { id: 'benefit', text: '为什么要用流式', depth: 2 },
   { id: 'protocols', text: '常见实现方式', depth: 2 },
   { id: 'frontend', text: '前端渲染与用户体验', depth: 2 },
-  { id: 'server', text: '后端实现要点', depth: 2 }
-];
+  { id: 'server', text: '后端实现要点', depth: 2 },
+]
 ---
 
-<ContentLayout 
+<ContentLayout
   title={`Fish想说 - 模型相关术语 / ${entry.data.title}`}
   section="Fish想说"
-  
   sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}
 >
   <Content />
 </ContentLayout>
-
-

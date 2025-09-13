@@ -1,17 +1,42 @@
 export type SidebarLink = {
-  label: string;
-  href: string;
-  activeMatch?: RegExp | string;
-};
+  label: string
+  href: string
+  activeMatch?: RegExp | string
+}
 
 export type SidebarGroup = {
-  label: string;
-  href?: string;
-  items?: Array<SidebarLink>;
-  openMatch?: RegExp | string;
-};
+  label: string
+  href?: string
+  items?: Array<SidebarLink>
+  openMatch?: RegExp | string
+}
 
-export type SidebarSection = Array<SidebarLink | SidebarGroup>;
+export type SidebarSection = Array<SidebarLink | SidebarGroup>
+
+export function getSidebarForPath(path: string): SidebarSection {
+  if (path.startsWith('/fish-talks')) {
+    return FISH_TALKS_SIDEBAR
+  }
+  if (path.startsWith('/basic-usage')) {
+    return BASIC_USAGE_SIDEBAR
+  }
+  if (path.startsWith('/prompts')) {
+    return PROMPTS_SIDEBAR
+  }
+  if (path.startsWith('/advanced')) {
+    return ADVANCED_TECHNIQUES_SIDEBAR
+  }
+  if (path.startsWith('/demo')) {
+    return DEMO_SIDEBAR
+  }
+  if (path.startsWith('/fun')) {
+    return FUN_SIDEBAR
+  }
+  if (path.startsWith('/resources')) {
+    return RESOURCES_SIDEBAR
+  }
+  return []
+}
 
 export const FISH_TALKS_SIDEBAR: SidebarSection = [
   { label: '鱼说必看', href: '/fish-talks' },
@@ -51,8 +76,14 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
     label: '环境准备',
     href: '/fish-talks/preparations',
     items: [
-      { label: 'Windows Terminal', href: '/fish-talks/preparations/windows-terminal' },
-      { label: 'Visual Studio Code', href: '/fish-talks/preparations/visual-studio-code' },
+      {
+        label: 'Windows Terminal',
+        href: '/fish-talks/preparations/windows-terminal',
+      },
+      {
+        label: 'Visual Studio Code',
+        href: '/fish-talks/preparations/visual-studio-code',
+      },
       { label: 'Node.js', href: '/fish-talks/preparations/nodejs' },
       { label: 'GitHub', href: '/fish-talks/preparations/github' },
       { label: 'VPN', href: '/fish-talks/preparations/vpn' },
@@ -63,19 +94,26 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
     href: '/fish-talks/advanced-concepts',
     items: [
       { label: 'Agent（智能体）', href: '/fish-talks/advanced-concepts/agent' },
-      { label: 'Vibe Coding（氛围编程）', href: '/fish-talks/advanced-concepts/vibe-coding' },
-      { label: 'Workflow（工作流）', href: '/fish-talks/advanced-concepts/workflow' },
+      {
+        label: 'Vibe Coding（氛围编程）',
+        href: '/fish-talks/advanced-concepts/vibe-coding',
+      },
+      {
+        label: 'Workflow（工作流）',
+        href: '/fish-talks/advanced-concepts/workflow',
+      },
     ],
   },
-];
+]
 
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
-  { label: '基础使用概述', href: '/basic-usage' },
-  { label: 'GUI工具', href: '/basic-usage/webchat' },
-  { label: 'CLI工具', href: '/basic-usage/cli' },
-  { label: 'Agent', href: '/basic-usage/editor-agent' },
-  { label: '应用集成', href: '/basic-usage/app-integration' },
-];
+  { label: '基础使用', href: '/basic-usage' },
+  { label: '官方WebChat', href: '/basic-usage/webchat' },
+  { label: '第三方集成聊天软件', href: '/basic-usage/app-integration' },
+  { label: 'CLI命令行工具', href: '/basic-usage/cli' },
+  { label: 'AI代码编辑器', href: '/basic-usage/editor-agent' },
+  { label: '移动端AI应用', href: '/basic-usage/mobile-apps' },
+]
 
 export const PROMPTS_SIDEBAR: SidebarSection = [
   {
@@ -87,7 +125,7 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
       { label: '进阶技巧', href: '/prompts/advanced-techniques' },
     ],
   },
-];
+]
 
 export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
   {
@@ -101,27 +139,23 @@ export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
       { label: '向量数据库', href: '/advanced/vector-databases' },
     ],
   },
-];
+]
 
 export const DEMO_SIDEBAR: SidebarSection = [
   {
     label: 'Demos',
     href: '/demo',
-    items: [
-      { label: 'RAG 聊天机器人', href: '/demo/rag-chatbot' }
-    ],
+    items: [{ label: 'RAG 聊天机器人', href: '/demo/rag-chatbot' }],
   },
-];
+]
 
 export const FUN_SIDEBAR: SidebarSection = [
   { label: '好玩的', href: '/fun' },
   { label: 'AI 绘画', href: '/fun/ai-drawing' },
   { label: '大模型越狱', href: '/fun/llm-unlocking' },
   { label: '银色酒馆', href: '/fun/silver-trivern' },
-];
+]
 
 export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
-];
-
-
+]

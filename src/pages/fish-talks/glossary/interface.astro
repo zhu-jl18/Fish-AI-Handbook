@@ -1,26 +1,19 @@
 ---
-import ContentLayout from '../../../layouts/ContentLayout.astro';
-import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars';
-import { getEntry } from 'astro:content';
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
+import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '01-fish-talks/glossary/interface');
-const { Content } = await entry.render();
+const entry = await getEntry('docs', '01-fish-talks/glossary/interface')
+const { Content } = await entry.render()
 
-
-
-const headings = [
-  { id: '为什么要懂接口', text: '为什么要懂接口', depth: 1 }
-];
+const headings = [{ id: '为什么要懂接口', text: '为什么要懂接口', depth: 1 }]
 ---
 
-<ContentLayout 
+<ContentLayout
   title={`Fish想说 - 其他常见术语 / ${entry.data.title}`}
   section="Fish想说"
-  
   sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}
 >
   <Content />
 </ContentLayout>
-
-

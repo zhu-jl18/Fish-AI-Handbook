@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>
+      第三方集成聊天软件 - 一个客户端搞定所有AI - Fish写给朋友们的AI使用指南
+    </title><meta name="description" content="Fish写给朋友们的AI使用指南 - 简洁清晰的AI教程"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"><style>:root{--bg-color: #000000;--text-color: #ffffff;--border-color: #333333;--accent-color: #666666;--link-color: #4a9eff;--link-hover-color: #66b3ff}*{margin:0;padding:0;box-sizing:border-box}html{height:100%;scroll-behavior:smooth}body{background-color:var(--bg-color);color:var(--text-color);font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;font-size:16px;line-height:1.6;height:100%;overflow-x:hidden}a{color:var(--link-color);text-decoration:none;transition:color .2s ease}a:hover{color:var(--link-hover-color)}code{background-color:#1a1a1a;padding:2px 6px;border-radius:4px;font-family:SF Mono,Monaco,Cascadia Code,Roboto Mono,Consolas,Courier New,monospace;font-size:.9em;border:1px solid #333}pre{background-color:#0d0d0d;padding:1.5rem;border-radius:8px;overflow-x:auto;margin:1.5rem 0;border:1px solid #333;position:relative;font-family:SF Mono,Monaco,Cascadia Code,Roboto Mono,Consolas,Courier New,monospace;line-height:1.5}pre code{background-color:transparent;padding:0;border:none;font-size:.9em;color:#e0e0e0}.code-copy-button{position:absolute;top:.75rem;right:.75rem;background-color:#2a2a2a;border:1px solid #444;color:#ccc;padding:.4rem .8rem;border-radius:4px;font-size:.8rem;font-family:inherit;cursor:pointer;transition:all .2s ease;opacity:.7}.code-copy-button:hover{background-color:#3a3a3a;color:#fff;opacity:1}.code-copy-button:active{transform:scale(.95)}.code-copy-button.copied{background-color:#4a9eff;color:#000;border-color:#4a9eff}pre .hljs-keyword{color:#ff79c6}pre .hljs-string{color:#f1fa8c}pre .hljs-number{color:#bd93f9}pre .hljs-comment{color:#6272a4}pre .hljs-function{color:#50fa7b}pre .hljs-operator{color:#ff79c6}pre .hljs-class{color:#8be9fd}pre .hljs-variable{color:#f8f8f2}pre::-webkit-scrollbar{height:6px}pre::-webkit-scrollbar-track{background:#0d0d0d}pre::-webkit-scrollbar-thumb{background:#444;border-radius:3px}pre::-webkit-scrollbar-thumb:hover{background:#666}h1,h2,h3,h4,h5,h6{font-weight:600;margin-bottom:1rem;line-height:1.3}h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]{scroll-margin-top:80px}h1{font-size:2.5rem;margin-top:2rem}h2{font-size:2rem;margin-top:2rem;border-bottom:1px solid var(--border-color);padding-bottom:.5rem}h3{font-size:1.5rem;margin-top:1.5rem}p{margin-bottom:1rem}ul,ol{margin-bottom:1rem;padding-left:2rem}li{margin-bottom:.5rem}blockquote{border-left:3px solid var(--accent-color);padding-left:1rem;margin:1rem 0;font-style:italic}::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-track{background:var(--bg-color)}::-webkit-scrollbar-thumb{background:var(--accent-color);border-radius:4px}::-webkit-scrollbar-thumb:hover{background:var(--border-color)}.header[data-astro-cid-3ef6ksr2]{background-color:#000;border-bottom:1px solid #333;position:sticky;top:0;z-index:100}.nav-container[data-astro-cid-3ef6ksr2]{max-width:1400px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;height:60px}.logo[data-astro-cid-3ef6ksr2]{font-size:1.2rem;font-weight:600;color:#fff;text-decoration:none}.nav-links[data-astro-cid-3ef6ksr2]{display:flex;gap:2rem}.nav-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{color:#999;text-decoration:none;font-weight:400;transition:color .2s ease;position:relative}.nav-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]:hover,.nav-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{color:#fff}.nav-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active:after{content:"";position:absolute;bottom:-18px;left:0;right:0;height:2px;background-color:#4a9eff}
+.left-sidebar[data-astro-cid-ryjzjgvk]{position:fixed;left:0;top:60px;width:250px;height:calc(100vh - 60px);background-color:#0a0a0a;border-right:1px solid #333;overflow-y:auto}.sidebar-content[data-astro-cid-ryjzjgvk]{padding:2rem 1rem}.section-title[data-astro-cid-ryjzjgvk]{font-size:.9rem;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;font-weight:600}.section-nav[data-astro-cid-ryjzjgvk]{display:flex;flex-direction:column;gap:.5rem}.section-nav[data-astro-cid-ryjzjgvk]>[data-astro-cid-ryjzjgvk]{flex-shrink:0}.section-nav[data-astro-cid-ryjzjgvk] a[data-astro-cid-ryjzjgvk]{color:#999;text-decoration:none;padding:.5rem 1rem;border-radius:4px;transition:all .2s ease;font-size:.9rem;display:block}.section-nav[data-astro-cid-ryjzjgvk] a[data-astro-cid-ryjzjgvk]:hover{color:#fff;background-color:#1a1a1a}.section-nav[data-astro-cid-ryjzjgvk] a[data-astro-cid-ryjzjgvk].active{color:#fff;background-color:#2a2a2a;border-left:3px solid #4a9eff}.group[data-astro-cid-ryjzjgvk]{margin:.25rem 0}.submenu{display:block;width:100%;margin:.25rem 0}.submenu a[data-astro-cid-ryjzjgvk]{display:block;padding:.35rem .75rem .35rem 1.75rem;font-size:.85rem;border-left:2px solid transparent;color:#999;text-decoration:none;border-radius:4px;transition:all .2s ease;margin-bottom:.25rem}.submenu a[data-astro-cid-ryjzjgvk]:hover{color:#fff;background-color:#1a1a1a;border-left-color:#4a9eff}.submenu a[data-astro-cid-ryjzjgvk].active{color:#fff;border-left-color:#4a9eff;background-color:#1a1a1a}.right-sidebar[data-astro-cid-zujyv34g]{position:fixed;right:0;top:60px;width:250px;height:calc(100vh - 60px);background-color:#0a0a0a;border-left:1px solid #333;overflow-y:auto;padding:2rem 1rem}.toc-title[data-astro-cid-zujyv34g]{font-size:.9rem;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;font-weight:600}.toc-nav[data-astro-cid-zujyv34g]{display:flex;flex-direction:column;gap:.3rem}.toc-link[data-astro-cid-zujyv34g]{color:#999;text-decoration:none;font-size:.8rem;transition:color .2s ease;line-height:1.4}.toc-link[data-astro-cid-zujyv34g]:hover{color:#fff}.toc-2[data-astro-cid-zujyv34g]{padding-left:0}.toc-3[data-astro-cid-zujyv34g]{padding-left:1rem;font-size:.75rem}.toc-4[data-astro-cid-zujyv34g]{padding-left:2rem;font-size:.7rem}.content-wrapper[data-astro-cid-scuu7fyy]{display:flex;margin-top:60px;min-height:calc(100vh - 60px)}.content[data-astro-cid-scuu7fyy]{flex:1;margin-left:250px;margin-right:250px;padding:2rem;background-color:#000}.content-inner[data-astro-cid-scuu7fyy]{max-width:800px;margin:0 auto}@media (max-width: 1024px){.left-sidebar[data-astro-cid-scuu7fyy],.right-sidebar[data-astro-cid-scuu7fyy]{display:none}.content[data-astro-cid-scuu7fyy]{margin-left:0;margin-right:0}}
+</style></head> <body>  <header class="header" data-astro-cid-3ef6ksr2> <nav class="nav" data-astro-cid-3ef6ksr2> <div class="nav-container" data-astro-cid-3ef6ksr2> <a href="/" class="logo" data-astro-cid-3ef6ksr2>Fish-Book</a> <div class="nav-links" data-astro-cid-3ef6ksr2> <a href="/fish-talks" class="" data-astro-cid-3ef6ksr2>鱼说必看</a> <a href="/basic-usage" class="" data-astro-cid-3ef6ksr2>基础用法</a> <a href="/prompts" class="" data-astro-cid-3ef6ksr2>提示词</a> <a href="/advanced" class="" data-astro-cid-3ef6ksr2>进阶玩法</a> <a href="/demo" class="" data-astro-cid-3ef6ksr2>DEMO</a> <a href="/tech" class="" data-astro-cid-3ef6ksr2>技术向</a> <a href="/fun" class="" data-astro-cid-3ef6ksr2>好玩的</a> <a href="/resources" class="" data-astro-cid-3ef6ksr2>资源合集</a> </div> </div> </nav> </header>  <div class="content-wrapper" data-astro-cid-scuu7fyy> <div class="left-sidebar" data-astro-cid-ryjzjgvk> <div class="sidebar-content" data-astro-cid-ryjzjgvk> <div class="section-title" data-astro-cid-ryjzjgvk>基础使用</div> <nav class="section-nav" data-astro-cid-ryjzjgvk> <div class="group" data-astro-cid-ryjzjgvk> <a href="/basic-usage" class="active" data-astro-cid-ryjzjgvk> 基础使用 </a> <div class="submenu" data-astro-cid-ryjzjgvk> <a href="/basic-usage/webchat" data-astro-cid-ryjzjgvk> 官方WebChat </a><a href="/basic-usage/app-integration" data-astro-cid-ryjzjgvk> 第三方集成聊天软件 </a><a href="/basic-usage/cli" data-astro-cid-ryjzjgvk> CLI命令行工具 </a><a href="/basic-usage/editor-agent" data-astro-cid-ryjzjgvk> AI代码编辑器 </a><a href="/basic-usage/mobile-apps" data-astro-cid-ryjzjgvk> 移动端AI应用 </a> </div> </div> </nav> </div> </div>  <main class="content" data-astro-cid-scuu7fyy> <div class="content-inner" data-astro-cid-scuu7fyy>  <h2 id="为啥要用第三方工具">为啥要用第三方工具</h2>
+<p><strong>一个软件搞定所有AI：</strong> 不用在ChatGPT、Claude、Gemini之间来回切换，直接对比哪个回答更好</p>
+<p><strong>自定义程度更高：</strong> 可以设置专门的工作助手（比如专门写代码的、专门改文案的）</p>
+<p><strong>数据隐私更好：</strong> 用自己的API密钥，对话记录保存在本地，不担心泄露</p>
+<p><strong>成本更可控：</strong> 按实际使用量付费，比包月更划算</p>
+<h2 id="2025年值得推荐的工具">2025年值得推荐的工具</h2>
+<h3 id="chatbox---简洁好用适合入门">ChatBox - 简洁好用，适合入门</h3>
+<p><strong>特点：</strong></p>
+<ul>
+<li>开源免费，界面超干净</li>
+<li>支持ChatGPT、Claude、Gemini等主流模型</li>
+<li>本地存储对话，隐私安全</li>
+<li>跨平台：Windows、Mac、手机都能用</li>
+</ul>
+<p><strong>下载：</strong> GitHub搜索”Bin-Huang/chatbox”</p>
+<p><strong>配置：</strong> 需要自己准备API密钥（后面会教怎么搞）</p>
+<p><em>[占位：ChatBox界面截图 - 显示多模型切换功能]</em></p>
+<hr>
+<h3 id="cherry-studio---功能强大工作流神器">Cherry Studio - 功能强大，工作流神器</h3>
+<p><strong>特点：</strong></p>
+<ul>
+<li>界面更现代，功能更丰富</li>
+<li>支持”工作流”，把多步操作自动化</li>
+<li>社区有很多现成的工作流模板</li>
+<li>支持团队协作功能</li>
+</ul>
+<p><strong>适合人群：</strong> 有一定经验的用户，需要复杂工作流的朋友</p>
+<p><strong>下载：</strong> 官网 cherry-studio.com</p>
+<p><em>[占位：Cherry Studio工作流界面截图 - 显示自动化流程]</em></p>
+<hr>
+<h3 id="lobe-chat---颜值担当开源生态">Lobe Chat - 颜值担当，开源生态</h3>
+<p><strong>特点：</strong></p>
+<ul>
+<li>UI设计超漂亮，用起来很舒服</li>
+<li>插件生态丰富，能接各种外部服务</li>
+<li>支持语音对话，体验接近ChatGPT官方</li>
+<li>完全开源，可以自己部署</li>
+</ul>
+<p><strong>下载：</strong> GitHub搜索”lobehub/lobe-chat”</p>
+<p><em>[占位：Lobe Chat界面截图 - 显示插件市场]</em></p>
+<hr>
+<h3 id="新秀推荐nextchatopenwebui">新秀推荐：NextChat、OpenWebUI</h3>
+<p><strong>NextChat：</strong></p>
+<ul>
+<li>网页版和客户端都有</li>
+<li>支持自定义模型接入</li>
+<li>界面简洁，上手快</li>
+</ul>
+<p><strong>OpenWebUI：</strong></p>
+<ul>
+<li>可以自己部署的ChatGPT界面</li>
+<li>支持本地模型（Ollama）</li>
+<li>适合有技术基础的朋友</li>
+</ul>
+<h2 id="实际使用指南">实际使用指南</h2>
+<h3 id="第一步选工具">第一步：选工具</h3>
+<p><strong>新手建议：</strong> ChatBox（简单稳定）
+<strong>进阶用户：</strong> Cherry Studio（功能丰富）<br>
+<strong>颜值党：</strong> Lobe Chat（界面漂亮）</p>
+<h3 id="第二步搞api密钥">第二步：搞API密钥</h3>
+<p>各家都需要API密钥才能用：</p>
+<p><strong>ChatGPT API：</strong></p>
+<ul>
+<li>去 platform.openai.com 注册</li>
+<li>充值最少$5开始使用</li>
+<li>按使用量计费，比包月便宜</li>
+</ul>
+<p><strong>Claude API：</strong></p>
+<ul>
+<li>去 console.anthropic.com 注册</li>
+<li>新用户有免费额度</li>
+<li>价格便宜，质量很高</li>
+</ul>
+<p><strong>Gemini API：</strong></p>
+<ul>
+<li>去 aistudio.google.com 申请</li>
+<li>免费额度超大方</li>
+<li>完全够个人使用</li>
+</ul>
+<p><em>[占位：API申请流程截图 - 显示各平台注册步骤]</em></p>
+<h3 id="第三步配置使用">第三步：配置使用</h3>
+<p>以ChatBox为例：</p>
+<ol>
+<li>下载安装ChatBox</li>
+<li>打开设置，选择API提供商</li>
+<li>输入API密钥</li>
+<li>选择模型开始聊天</li>
+</ol>
+<p><strong>小技巧：</strong> 可以同时配置多个API，切换对比效果</p>
+<h3 id="第四步高级玩法">第四步：高级玩法</h3>
+<p><strong>多模型对比：</strong>
+同一个问题发给GPT-4、Claude、Gemini，看谁回答得更好</p>
+<p><strong>自定义助手：</strong></p>
+<ul>
+<li>代码助手：专门帮你写代码、debug</li>
+<li>文案助手：专门优化文案、写营销文</li>
+<li>翻译助手：专业翻译，保持语气</li>
+</ul>
+<p><strong>工作流自动化：</strong>（Cherry Studio）</p>
+<ul>
+<li>写文章 → 自动优化 → 生成摘要 → 翻译多语言</li>
+</ul>
+<h2 id="成本参考2025年最新">成本参考（2025年最新）</h2>
+<p><strong>ChatGPT API：</strong></p>
+<ul>
+<li>GPT-4o：$5/1M tokens（约75万字）</li>
+<li>GPT-4o-mini：$0.15/1M tokens（超便宜）</li>
+</ul>
+<p><strong>Claude API：</strong></p>
+<ul>
+<li>Claude 3.5 Sonnet：$3/1M tokens</li>
+<li>Claude 3 Haiku：$0.25/1M tokens</li>
+</ul>
+<p><strong>Gemini API：</strong></p>
+<ul>
+<li>2.5 Pro：前200万tokens/月免费</li>
+<li>Flash：完全免费</li>
+</ul>
+<p><strong>实际花费：</strong> 普通用户每月$2-10足够，比包月省很多</p>
+<h2 id="注意事项">注意事项</h2>
+<p><strong>网络问题：</strong> 某些地区API访问可能需要代理</p>
+<p><strong>数据备份：</strong> 定期导出对话记录，避免丢失</p>
+<p><strong>合规使用：</strong> 不要用来做违法违规的事情</p>
+<p><strong>密钥安全：</strong> API密钥别泄露，定期更换</p>
+<hr>
+<p>下一步：如果你是程序员，可以试试命令行工具，在终端里直接和AI对话更高效！</p>  </div> </main> <div class="right-sidebar" data-astro-cid-zujyv34g> <div class="toc-content" data-astro-cid-zujyv34g> <div class="toc-title" data-astro-cid-zujyv34g>目录</div> <nav class="toc-nav" data-astro-cid-zujyv34g> <a href="#为啥要用第三方工具" class="toc-link toc-1" data-astro-cid-zujyv34g> 为啥要用第三方工具 </a><a href="#2025年值得推荐的工具" class="toc-link toc-1" data-astro-cid-zujyv34g> 2025年值得推荐的工具 </a><a href="#实际使用指南" class="toc-link toc-1" data-astro-cid-zujyv34g> 实际使用指南 </a><a href="#成本参考2025年最新" class="toc-link toc-1" data-astro-cid-zujyv34g> 成本参考（2025年最新） </a><a href="#注意事项" class="toc-link toc-1" data-astro-cid-zujyv34g> 注意事项 </a> </nav> </div> </div>  </div>  <script type="module">
+      import '../scripts/copy-code.js'
+    </script> </body> </html> 

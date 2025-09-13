@@ -1,23 +1,16 @@
 ---
-import ContentLayout from '../../../layouts/ContentLayout.astro';
-import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars';
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
 
-
-
-const headings = [
-  { id: 'terms', text: '模型相关术语 · 概览', depth: 1 }
-];
+const headings = [{ id: 'terms', text: '模型相关术语 · 概览', depth: 1 }]
 ---
 
-<ContentLayout 
+<ContentLayout
   title="Fish想说 - 模型相关术语"
   section="Fish想说"
-  
   sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}
 >
   <h1 id="terms">模型相关术语 · 概览</h1>
   <p>选择左侧具体词条查看详情。</p>
 </ContentLayout>
-
-

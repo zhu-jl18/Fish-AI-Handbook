@@ -1,30 +1,29 @@
 ---
-import ContentLayout from '../../../layouts/ContentLayout.astro';
-import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars';
-import { getEntry } from 'astro:content';
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
+import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '01-fish-talks/llm/models');
-const { Content } = await entry.render();
+const entry = await getEntry('docs', '01-fish-talks/llm/models')
+const { Content } = await entry.render()
 
-
+// 添加相对路径信息
+const editPath = `src/content/docs/01-fish-talks/llm/models.md`
 
 const headings = [
   { id: 'openai-家族', text: 'OpenAI 家族', depth: 2 },
   { id: 'anthropic-家族', text: 'Anthropic 家族', depth: 2 },
   { id: 'google-家族（gemini）', text: 'Google 家族（Gemini）', depth: 2 },
   { id: '开源阵营（示例）', text: '开源阵营（示例）', depth: 2 },
-  { id: '如何选择', text: '如何选择', depth: 2 }
-];
+  { id: '如何选择', text: '如何选择', depth: 2 },
+]
 ---
 
-<ContentLayout 
+<ContentLayout
   title="Fish想说 - 常见模型"
   section="Fish想说"
-  
   sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}
+  editPath={editPath}
 >
   <Content />
 </ContentLayout>
-
-

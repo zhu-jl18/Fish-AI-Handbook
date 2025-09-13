@@ -1,30 +1,37 @@
 ---
-import ContentLayout from '../../../layouts/ContentLayout.astro';
-import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars';
-import { getEntry } from 'astro:content';
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
+import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '01-fish-talks/llm/rankings');
-const { Content } = await entry.render();
+const entry = await getEntry('docs', '01-fish-talks/llm/rankings')
+const { Content } = await entry.render()
 
-
+// 添加相对路径信息
+const editPath = `src/content/docs/01-fish-talks/llm/rankings.md`
 
 const headings = [
   { id: '提示', text: '提示', depth: 2 },
-  { id: 'lmarena', text: 'LMArena', depth: 2 }
-];
+  { id: 'lmarena', text: 'LMArena', depth: 2 },
+]
 ---
 
-<ContentLayout 
+<ContentLayout
   title="Fish想说 - 大模型排名"
   section="Fish想说"
-  
   sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}
+  editPath={editPath}
 >
   <Content />
   <h2 id="lmarena">LMArena</h2>
-  <iframe src="https://lmarena.ai/" style="width: 100%; height: 70vh; border: 1px solid #333; border-radius: 6px;" loading="lazy"></iframe>
-  <p>若内嵌不可用，请访问：<a href="https://lmarena.ai/" target="_blank" rel="noopener">LMArena 官网</a></p>
+  <iframe
+    src="https://lmarena.ai/"
+    style="width: 100%; height: 70vh; border: 1px solid #333; border-radius: 6px;"
+    loading="lazy"></iframe>
+  <p>
+    若内嵌不可用，请访问：<a
+      href="https://lmarena.ai/"
+      target="_blank"
+      rel="noopener">LMArena 官网</a>
+  </p>
 </ContentLayout>
-
-

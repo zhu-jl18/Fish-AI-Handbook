@@ -1,12 +1,10 @@
 ---
-import ContentLayout from '../../../layouts/ContentLayout.astro';
-import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars';
-import { getEntry } from 'astro:content';
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
+import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '01-fish-talks/model-terms/token');
-const { Content } = await entry.render();
-
-
+const entry = await getEntry('docs', '01-fish-talks/model-terms/token')
+const { Content } = await entry.render()
 
 const headings = [
   { id: 'token', text: 'token 是什么', depth: 1 },
@@ -14,18 +12,15 @@ const headings = [
   { id: 'zh', text: '中文与 token 的差异', depth: 2 },
   { id: 'limits', text: '上下文长度与费用', depth: 2 },
   { id: 'estimate', text: '快速估算与示例', depth: 2 },
-  { id: 'tips', text: '使用建议', depth: 2 }
-];
+  { id: 'tips', text: '使用建议', depth: 2 },
+]
 ---
 
-<ContentLayout 
+<ContentLayout
   title={`Fish想说 - 模型相关术语 / ${entry.data.title}`}
   section="Fish想说"
-  
   sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}
 >
   <Content />
 </ContentLayout>
-
-
