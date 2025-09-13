@@ -1,6 +1,6 @@
 ---
-title: "Windows Terminal"
-description: "统一的命令行入口，方便使用各类 CLI 工具（如模型SDK、部署脚本）"
+title: 'Windows Terminal'
+description: '统一的命令行入口，方便使用各类 CLI 工具（如模型SDK、部署脚本）'
 ---
 
 ## 为什么需要它

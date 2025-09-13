@@ -1,21 +1,24 @@
 ---
-import ContentLayout from "../../layouts/ContentLayout.astro";
-import { getEntry } from "astro:content";
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { getEntry } from 'astro:content'
 
-let entry = await getEntry("docs", "04-advanced-techniques/rag");
+let entry = await getEntry('docs', '04-advanced-techniques/rag')
 if (!entry) {
-  entry = await getEntry("docs", "04-advanced-techniques/rag/index");
+  entry = await getEntry('docs', '04-advanced-techniques/rag/index')
 }
-const { Content } = await entry!.render();
+const { Content } = await entry!.render()
 
-import { ADVANCED_TECHNIQUES_SIDEBAR } from "../../scripts/sidebars";
+import { ADVANCED_TECHNIQUES_SIDEBAR } from '../../scripts/sidebars'
+
+// 添加相对路径信息
+const editPath = `src/content/docs/04-advanced-techniques/rag/index.md`
 
 const headings = [
-  { id: "为什么", text: "为什么", depth: 1 },
-  { id: "什么时候用", text: "什么时候用", depth: 2 },
-  { id: "关键组件", text: "关键组件", depth: 2 },
-  { id: "常见坑", text: "常见坑", depth: 2 },
-];
+  { id: '为什么', text: '为什么', depth: 1 },
+  { id: '什么时候用', text: '什么时候用', depth: 2 },
+  { id: '关键组件', text: '关键组件', depth: 2 },
+  { id: '常见坑', text: '常见坑', depth: 2 },
+]
 ---
 
 <ContentLayout
@@ -23,6 +26,7 @@ const headings = [
   section="进阶玩法"
   sidebarItems={ADVANCED_TECHNIQUES_SIDEBAR}
   headings={headings}
+  editPath={editPath}
 >
   <Content />
 </ContentLayout>

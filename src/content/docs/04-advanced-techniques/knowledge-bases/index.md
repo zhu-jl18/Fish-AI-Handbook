@@ -1,6 +1,6 @@
 ---
-title: "知识库 (Knowledge Bases)"
-description: "理解什么是知识库，以及如何构建和利用它们来增强 AI 应用。"
+title: '知识库 (Knowledge Bases)'
+description: '理解什么是知识库，以及如何构建和利用它们来增强 AI 应用。'
 ---
 
 ## 什么是知识库？
@@ -20,12 +20,12 @@ description: "理解什么是知识库，以及如何构建和利用它们来增
 
 知识库可以有多种形式，常见的包括：
 
--   **文档集合 (Document Collections)**：
-    这是最常见的形式，由一系列文档（如 PDF, Word, HTML, Markdown 文件）组成。通常需要与向量数据库结合使用，以实现高效的语义检索。
--   **结构化数据库 (Structured Databases)**：
-    传统的 SQL 或 NoSQL 数据库也可以作为知识库。AI Agent 可以通过生成查询语句（如 SQL 查询）来从中获取精确信息。
--   **知识图谱 (Knowledge Graphs)**：
-    一种更高级的形式，它以“实体-关系-实体”的图结构来存储信息。知识图谱能让 AI 更好地理解实体间的复杂关系，进行更深度的推理。
+- **文档集合 (Document Collections)**：
+  这是最常见的形式，由一系列文档（如 PDF, Word, HTML, Markdown 文件）组成。通常需要与向量数据库结合使用，以实现高效的语义检索。
+- **结构化数据库 (Structured Databases)**：
+  传统的 SQL 或 NoSQL 数据库也可以作为知识库。AI Agent 可以通过生成查询语句（如 SQL 查询）来从中获取精确信息。
+- **知识图谱 (Knowledge Graphs)**：
+  一种更高级的形式，它以“实体-关系-实体”的图结构来存储信息。知识图谱能让 AI 更好地理解实体间的复杂关系，进行更深度的推理。
 
 ## 如何构建一个知识库？
 

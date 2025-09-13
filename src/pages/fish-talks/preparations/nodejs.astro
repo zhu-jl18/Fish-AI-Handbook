@@ -1,26 +1,19 @@
 ---
-import ContentLayout from '../../../layouts/ContentLayout.astro';
-import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars';
-import { getEntry } from 'astro:content';
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
+import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '01-fish-talks/preparations/nodejs');
-const { Content } = await entry.render();
+const entry = await getEntry('docs', '01-fish-talks/preparations/nodejs')
+const { Content } = await entry.render()
 
-
-
-const headings = [
-  { id: '为什么重要', text: '为什么重要', depth: 1 }
-];
+const headings = [{ id: '为什么重要', text: '为什么重要', depth: 1 }]
 ---
 
-<ContentLayout 
+<ContentLayout
   title={`Fish想说 - 环境准备 / Node.js`}
   section="Fish想说"
-  
   sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}
 >
   <Content />
 </ContentLayout>
-
-

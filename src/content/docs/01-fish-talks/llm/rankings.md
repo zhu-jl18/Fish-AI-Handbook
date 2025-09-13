@@ -1,6 +1,6 @@
 ---
-title: "大模型排名"
-description: "接入 LMArena 排名并教你如何解读榜单"
+title: '大模型排名'
+description: '接入 LMArena 排名并教你如何解读榜单'
 ---
 
 ## 怎么看榜单

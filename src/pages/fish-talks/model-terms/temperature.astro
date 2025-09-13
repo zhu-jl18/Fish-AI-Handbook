@@ -1,30 +1,25 @@
 ---
-import ContentLayout from '../../../layouts/ContentLayout.astro';
-import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars';
-import { getEntry } from 'astro:content';
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
+import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '01-fish-talks/model-terms/temperature');
-const { Content } = await entry.render();
-
-
+const entry = await getEntry('docs', '01-fish-talks/model-terms/temperature')
+const { Content } = await entry.render()
 
 const headings = [
   { id: 'temperature', text: '温度（temperature）是什么', depth: 1 },
   { id: 'effect', text: '它如何影响输出', depth: 2 },
   { id: 'ranges', text: '常见取值与建议', depth: 2 },
   { id: 'compare', text: '与top_p、top_k的关系', depth: 2 },
-  { id: 'tips', text: '实战建议', depth: 2 }
-];
+  { id: 'tips', text: '实战建议', depth: 2 },
+]
 ---
 
-<ContentLayout 
+<ContentLayout
   title={`Fish想说 - 模型相关术语 / ${entry.data.title}`}
   section="Fish想说"
-  
   sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}
 >
   <Content />
 </ContentLayout>
-
-

@@ -1,6 +1,6 @@
 ---
-title: "Visual Studio Code"
-description: "轻量但强大的编辑器，是 AI 编程与文档撰写的工作台"
+title: 'Visual Studio Code'
+description: '轻量但强大的编辑器，是 AI 编程与文档撰写的工作台'
 ---
 
 ## 官方地址

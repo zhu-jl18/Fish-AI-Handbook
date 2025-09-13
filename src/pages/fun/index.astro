@@ -1,15 +1,11 @@
 ---
-import ContentLayout from '../../layouts/ContentLayout.astro';
-import { getEntry } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { FUN_SIDEBAR } from '../../scripts/sidebars'
 
-const entry = await getEntry('docs', '07-fun/index');
-const { Content } = await entry.render();
+// 添加相对路径信息
+const editPath = `src/pages/fun/index.astro`
 
-import { FUN_SIDEBAR } from '../../scripts/sidebars';
-
-const headings = [
-  { id: 'intro', text: '好玩的', depth: 1 },
-];
+const headings = [{ id: 'intro', text: '好玩的', depth: 1 }]
 ---
 
 <ContentLayout
@@ -17,8 +13,8 @@ const headings = [
   section="好玩的"
   sidebarItems={FUN_SIDEBAR}
   headings={headings}
+  editPath={editPath}
 >
-  <Content />
+  <h1 id="intro">好玩的</h1>
+  <p>这里是一些有趣的AI应用和玩法。</p>
 </ContentLayout>
-
-

@@ -1,6 +1,6 @@
 ---
-title: "示例1：构建个人文档问答机器人"
-description: "学习如何使用 RAG 技术，让 AI 模型能够回答关于您私有文档的问题。"
+title: '示例1：构建个人文档问答机器人'
+description: '学习如何使用 RAG 技术，让 AI 模型能够回答关于您私有文档的问题。'
 ---
 
 ## 1. 项目背景
@@ -11,11 +11,11 @@ description: "学习如何使用 RAG 技术，让 AI 模型能够回答关于您
 
 ## 2. 技术选型
 
--   **编程语言**: Python
--   **核心框架**: LangChain / LlamaIndex (两者都是流行的 LLM 应用开发框架，提供了 RAG 的完整实现)
--   **LLM**: OpenAI GPT-3.5/4 或任何本地开源模型
--   **嵌入模型 (Embedding Model)**: `text-embedding-ada-002` 或开源的 `bge-large-zh` 等
--   **向量数据库 (Vector Database)**: ChromaDB / FAISS (轻量级的本地向量数据库，适合快速原型开发)
+- **编程语言**: Python
+- **核心框架**: LangChain / LlamaIndex (两者都是流行的 LLM 应用开发框架，提供了 RAG 的完整实现)
+- **LLM**: OpenAI GPT-3.5/4 或任何本地开源模型
+- **嵌入模型 (Embedding Model)**: `text-embedding-ada-002` 或开源的 `bge-large-zh` 等
+- **向量数据库 (Vector Database)**: ChromaDB / FAISS (轻量级的本地向量数据库，适合快速原型开发)
 
 ## 3. 实现步骤
 
@@ -45,7 +45,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 # 定义分割器
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000, 
+    chunk_size=1000,
     chunk_overlap=200
 )
 
@@ -69,7 +69,7 @@ embeddings = OpenAIEmbeddings()
 # 创建向量数据库，并将文档块嵌入后存入
 # persist_directory 参数会将数据库保存到本地磁盘
 vector_store = Chroma.from_documents(
-    documents=chunks, 
+    documents=chunks,
     embedding=embeddings,
     persist_directory="./chroma_db"
 )
@@ -109,10 +109,10 @@ template = """
 你是一个问答助手。请根据以下提供的上下文来回答用户的问题。
 如果你在上下文中找不到答案，就说你不知道。
 
-上下文: 
+上下文:
 {context}
 
-问题: 
+问题:
 {question}
 """
 prompt = PromptTemplate.from_template(template)

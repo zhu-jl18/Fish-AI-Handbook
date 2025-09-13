@@ -1,20 +1,20 @@
 ---
-import ContentLayout from "../../layouts/ContentLayout.astro";
-import { getEntry } from "astro:content";
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { getEntry } from 'astro:content'
 
-let entry = await getEntry("docs", "04-advanced-techniques/mcp");
+let entry = await getEntry('docs', '04-advanced-techniques/mcp')
 if (!entry) {
-  entry = await getEntry("docs", "04-advanced-techniques/mcp/index");
+  entry = await getEntry('docs', '04-advanced-techniques/mcp/index')
 }
-const { Content } = await entry!.render();
+const { Content } = await entry!.render()
 
-import { ADVANCED_TECHNIQUES_SIDEBAR } from "../../scripts/sidebars";
+import { ADVANCED_TECHNIQUES_SIDEBAR } from '../../scripts/sidebars'
 
 const headings = [
-  { id: "为什么", text: "为什么", depth: 1 },
-  { id: "什么时候用", text: "什么时候用", depth: 2 },
-  { id: "要点", text: "要点", depth: 2 },
-];
+  { id: '为什么', text: '为什么', depth: 1 },
+  { id: '什么时候用', text: '什么时候用', depth: 2 },
+  { id: '要点', text: '要点', depth: 2 },
+]
 ---
 
 <ContentLayout

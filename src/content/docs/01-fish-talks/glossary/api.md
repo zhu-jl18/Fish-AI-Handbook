@@ -1,6 +1,6 @@
 ---
-title: "API"
-description: "API 是服务之间的调用契约，是把大模型接入到产品中的第一步"
+title: 'API'
+description: 'API 是服务之间的调用契约，是把大模型接入到产品中的第一步'
 ---
 
 # 为什么要懂 API
@@ -32,19 +32,22 @@ description: "API 是服务之间的调用契约，是把大模型接入到产�
 ## 最小示例（伪代码）
 
 ```ts
-const res = await fetch("/v1/chat/completions", {
-  method: "POST",
-  headers: { "Authorization": `Bearer ${API_KEY}`, "Content-Type": "application/json" },
+const res = await fetch('/v1/chat/completions', {
+  method: 'POST',
+  headers: {
+    Authorization: `Bearer ${API_KEY}`,
+    'Content-Type': 'application/json',
+  },
   body: JSON.stringify({
-    model: "gpt-4o-mini",
+    model: 'gpt-4o-mini',
     messages: [
-      { role: "system", content: "你是助理" },
-      { role: "user", content: "帮我总结这段文本" }
+      { role: 'system', content: '你是助理' },
+      { role: 'user', content: '帮我总结这段文本' },
     ],
     temperature: 0.2,
-    stream: true
-  })
-});
+    stream: true,
+  }),
+})
 ```
 
 > 结论：会 API，你才能把“会用模型”升级为“会做 AI 应用”。

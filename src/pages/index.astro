@@ -1,11 +1,11 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Header from '../components/Header.astro'
 ---
 
 <BaseLayout title="首页">
   <Header currentPage="home" />
-  
+
   <main class="main-content">
     <div class="hero">
       <h1>Fish写给朋友们的AI使用指南</h1>
@@ -25,78 +25,82 @@ import Header from '../components/Header.astro';
 </BaseLayout>
 
 <style>
-.main-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-  height: calc(100vh - 60px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero {
-  text-align: center;
-  width: 100%;
-}
-
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #fff 0%, #999 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-subtitle {
-  font-size: 1.2rem;
-  color: #999;
-  margin-bottom: 3rem;
-}
-
-.hero-links {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(120px, 1fr));
-  gap: 1rem;
-  justify-items: center;
-  align-items: stretch;
-  margin-top: 3rem;
-}
-
-.hero-link {
-  color: #4a9eff;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 0.9rem 1rem;
-  border: 1px solid #4a9eff;
-  border-radius: 5px;
-  transition: all 0.2s ease;
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-
-.hero-link:hover {
-  background-color: #4a9eff;
-  color: #000;
-}
-
-@media (max-width: 1200px) {
-  .main-content { max-width: 1000px; }
-  .hero-links { grid-template-columns: repeat(3, minmax(140px, 1fr)); }
-}
-
-@media (max-width: 768px) {
   .main-content {
-    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
+  .hero {
+    text-align: center;
+    width: 100%;
+  }
+
   .hero h1 {
-    font-size: 2rem;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 0%, #999 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    color: #999;
+    margin-bottom: 3rem;
+  }
+
   .hero-links {
-    grid-template-columns: repeat(2, minmax(120px, 1fr));
-    gap: 0.8rem;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    gap: 1rem;
+    justify-items: center;
+    align-items: stretch;
+    margin-top: 3rem;
   }
-}
+
+  .hero-link {
+    color: #4a9eff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.9rem 1rem;
+    border: 1px solid #4a9eff;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-link:hover {
+    background-color: #4a9eff;
+    color: #000;
+  }
+
+  @media (max-width: 1200px) {
+    .main-content {
+      max-width: 1000px;
+    }
+    .hero-links {
+      grid-template-columns: repeat(3, minmax(140px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .main-content {
+      padding: 2rem 1rem;
+    }
+    .hero h1 {
+      font-size: 2rem;
+    }
+    .hero-links {
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      gap: 0.8rem;
+    }
+  }
 </style>

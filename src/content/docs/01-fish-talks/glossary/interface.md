@@ -1,6 +1,6 @@
 ---
-title: "接口"
-description: "OpenAI / Gemini / Anthropic 与兼容接口的差异与 Base URL 配置"
+title: '接口'
+description: 'OpenAI / Gemini / Anthropic 与兼容接口的差异与 Base URL 配置'
 ---
 
 # 为什么要懂“接口”
@@ -76,23 +76,23 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:gen
 
 ```ts
 // 统一读取配置并创建简单客户端
-const baseUrl = process.env.MODEL_BASE_URL || "https://api.openai.com/v1";
-const apiKey  = process.env.MODEL_API_KEY  || "";
+const baseUrl = process.env.MODEL_BASE_URL || 'https://api.openai.com/v1'
+const apiKey = process.env.MODEL_API_KEY || ''
 
 async function ask(prompt: string) {
   const res = await fetch(`${baseUrl}/chat/completions`, {
-    method: "POST",
+    method: 'POST',
     headers: {
       Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: process.env.MODEL_NAME || "gpt-4o-mini",
-      messages: [{ role: "user", content: prompt }],
+      model: process.env.MODEL_NAME || 'gpt-4o-mini',
+      messages: [{ role: 'user', content: prompt }],
       stream: false,
     }),
-  });
-  return res.json();
+  })
+  return res.json()
 }
 ```
 

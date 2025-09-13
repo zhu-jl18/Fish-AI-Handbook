@@ -1,13 +1,13 @@
 ---
-import ContentLayout from '../../layouts/ContentLayout.astro';
-import { getEntry } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '07-fun/ai-drawing');
-const { Content } = await entry.render();
+const entry = await getEntry('docs', '07-fun/ai-drawing')
+const { Content } = await entry.render()
 
-import { FUN_SIDEBAR } from '../../scripts/sidebars';
+import { FUN_SIDEBAR } from '../../scripts/sidebars'
 
-const headings = [];
+const headings = []
 ---
 
 <ContentLayout
@@ -18,5 +18,3 @@ const headings = [];
 >
   <Content />
 </ContentLayout>
-
-

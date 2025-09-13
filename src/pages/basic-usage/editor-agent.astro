@@ -1,0 +1,31 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { BASIC_USAGE_SIDEBAR } from '../../scripts/sidebars'
+import { getEntry } from 'astro:content'
+
+const entry = await getEntry('docs', '02-basic-usage/editor-agent')
+const { Content } = await entry.render()
+
+// 相对路径信息
+const editPath = `src/content/docs/02-basic-usage/editor-agent.md`
+
+const headings = [
+  { id: '为啥代码编辑器集成这么香', text: '为啥代码编辑器集成这么香', depth: 1 },
+  { id: '2025年主流选择对比', text: '2025年主流选择对比', depth: 1 },
+  { id: '实战使用指南', text: '实战使用指南', depth: 1 },
+  { id: '性能对比2025年数据', text: '性能对比（2025年数据）', depth: 1 },
+  { id: '选择建议', text: '选择建议', depth: 1 },
+  { id: '最佳实践', text: '最佳实践', depth: 1 },
+  { id: '注意事项', text: '注意事项', depth: 1 },
+]
+---
+
+<ContentLayout
+  title="AI代码编辑器 - 配对编程的未来"
+  section="基础使用"
+  sidebarItems={BASIC_USAGE_SIDEBAR}
+  headings={headings}
+  editPath={editPath}
+>
+  <Content />
+</ContentLayout>

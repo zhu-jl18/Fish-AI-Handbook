@@ -1,6 +1,6 @@
 ---
-title: "Vibe Coding（氛围编程）"
-description: "把 AI 当成结对伙伴，通过连续上下文与高频反馈快速产出"
+title: 'Vibe Coding（氛围编程）'
+description: '把 AI 当成结对伙伴，通过连续上下文与高频反馈快速产出'
 ---
 
 ## 为什么重要

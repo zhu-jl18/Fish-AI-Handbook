@@ -6,6 +6,7 @@ description: 入门到进阶，快速上手 AI 绘图（文生图）。
 ## 选择模型
 
 常见模型：
+
 - Stable Diffusion 系列（SD1.5/SDXL）
 - Flux、Playground、DALL·E（云端）
 
@@ -26,6 +27,7 @@ description: 入门到进阶，快速上手 AI 绘图（文生图）。
 ```
 
 例子：
+
 ```
 A cyberpunk street at night, neon signs, rainy, reflective ground,
 wide-angle lens, cinematic lighting, highly detailed, 4k, masterpiece

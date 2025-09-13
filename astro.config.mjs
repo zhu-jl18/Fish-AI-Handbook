@@ -1,7 +1,10 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from 'astro/config'
 
 export default defineConfig({
   site: 'https://fish-ai-book.vercel.app',
   title: 'Fish写给朋友们的AI使用指南',
-  output: 'static'
-});
+  output: 'static',
+  devToolbar: {
+    enabled: true
+  }
+})

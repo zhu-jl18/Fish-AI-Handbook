@@ -1,6 +1,6 @@
 ---
-title: "进阶概念概览"
-description: "当你准备把 AI 从demo做成系统时，需要理解的关键理念"
+title: '进阶概念概览'
+description: '当你准备把 AI 从demo做成系统时，需要理解的关键理念'
 ---
 
 ## 为什么这些概念重要

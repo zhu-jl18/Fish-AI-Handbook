@@ -1,6 +1,6 @@
 ---
-title: "思考"
-description: "介绍思维链、隐式推理与可控思考等概念"
+title: '思考'
+description: '介绍思维链、隐式推理与可控思考等概念'
 ---
 
 # 思考（Thinking）是什么

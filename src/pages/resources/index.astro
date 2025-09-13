@@ -1,14 +1,11 @@
 ---
-import ContentLayout from '../../layouts/ContentLayout.astro';
-import { getEntry } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { RESOURCES_SIDEBAR } from '../../scripts/sidebars'
 
-const entry = await getEntry('docs', '08-resources/index');
-const { Content } = await entry.render();
+// 添加相对路径信息
+const editPath = `src/pages/resources/index.astro`
 
-import { RESOURCES_SIDEBAR } from '../../scripts/sidebars';
-const headings = [
-  { id: 'resources', text: '资源合集', depth: 1 },
-];
+const headings = [{ id: 'resources', text: '资源合集', depth: 1 }]
 ---
 
 <ContentLayout
@@ -16,8 +13,8 @@ const headings = [
   section="资源合集"
   sidebarItems={RESOURCES_SIDEBAR}
   headings={headings}
+  editPath={editPath}
 >
-  <Content />
+  <h1 id="resources">资源合集</h1>
+  <p>这里收集了AI相关的优质资源和工具。</p>
 </ContentLayout>
-
-

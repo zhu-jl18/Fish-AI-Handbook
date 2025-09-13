@@ -6,7 +6,7 @@ template:
   output:
     format: markdown
     filename: docs/architecture.md
-    title: "{{project_name}} Brownfield Enhancement Architecture"
+    title: '{{project_name}} Brownfield Enhancement Architecture'
 
 workflow:
   mode: interactive
@@ -64,11 +64,11 @@ sections:
           - id: available-docs
             title: Available Documentation
             type: bullet-list
-            template: "- {{existing_docs_summary}}"
+            template: '- {{existing_docs_summary}}'
           - id: constraints
             title: Identified Constraints
             type: bullet-list
-            template: "- {{constraint}}"
+            template: '- {{constraint}}'
       - id: changelog
         title: Change Log
         type: table
@@ -123,7 +123,8 @@ sections:
       - id: existing-stack
         title: Existing Technology Stack
         type: table
-        columns: [Category, Current Technology, Version, Usage in Enhancement, Notes]
+        columns:
+          [Category, Current Technology, Version, Usage in Enhancement, Notes]
         instruction: Document the current stack that must be maintained or integrated with
       - id: new-tech-additions
         title: New Technology Additions
@@ -148,7 +149,7 @@ sections:
         repeatable: true
         sections:
           - id: model
-            title: "{{model_name}}"
+            title: '{{model_name}}'
             template: |
               **Purpose:** {{model_purpose}}
               **Integration:** {{integration_with_existing}}
@@ -191,7 +192,7 @@ sections:
         repeatable: true
         sections:
           - id: component
-            title: "{{component_name}}"
+            title: '{{component_name}}'
             template: |
               **Responsibility:** {{component_description}}
               **Integration Points:** {{integration_points}}
@@ -234,7 +235,7 @@ sections:
         repeatable: true
         sections:
           - id: endpoint
-            title: "{{endpoint_name}}"
+            title: '{{endpoint_name}}'
             template: |
               - **Method:** {{http_method}}
               - **Endpoint:** {{endpoint_path}}
@@ -245,12 +246,12 @@ sections:
                 title: Request
                 type: code
                 language: json
-                template: "{{request_schema}}"
+                template: '{{request_schema}}'
               - id: response
                 title: Response
                 type: code
                 language: json
-                template: "{{response_schema}}"
+                template: '{{response_schema}}'
 
   - id: external-api-integration
     title: External API Integration
@@ -259,7 +260,7 @@ sections:
     repeatable: true
     sections:
       - id: external-api
-        title: "{{api_name}} API"
+        title: '{{api_name}} API'
         template: |
           - **Purpose:** {{api_purpose}}
           - **Documentation:** {{api_docs_url}}
@@ -288,7 +289,7 @@ sections:
         type: code
         language: plaintext
         instruction: Document relevant parts of current structure
-        template: "{{existing_structure_relevant_parts}}"
+        template: '{{existing_structure_relevant_parts}}'
       - id: new-file-organization
         title: New File Organization
         type: code
@@ -363,7 +364,7 @@ sections:
         title: Enhancement-Specific Standards
         condition: New patterns needed for enhancement
         repeatable: true
-        template: "- **{{standard_name}}:** {{standard_description}}"
+        template: '- **{{standard_name}}:** {{standard_description}}'
       - id: integration-rules
         title: Critical Integration Rules
         template: |

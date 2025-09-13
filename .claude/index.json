@@ -7,9 +7,7 @@
       "name": "root",
       "language": "Astro/TypeScript",
       "type": "Astro Website",
-      "entry_points": [
-        "src/pages/index.astro"
-      ],
+      "entry_points": ["src/pages/index.astro"],
       "important_files": [
         "astro.config.mjs",
         "package.json",
@@ -19,10 +17,7 @@
         "files_scanned": 120,
         "total_files_estimated": 250,
         "percentage": 48.0,
-        "missing_areas": [
-          "test_strategy",
-          "quality_tools"
-        ]
+        "missing_areas": ["test_strategy", "quality_tools"]
       }
     }
   ],
@@ -30,11 +25,7 @@
     "total_files_estimated": 250,
     "files_scanned": 120,
     "coverage_percentage": 48.0,
-    "ignored_dirs": [
-      "node_modules/**",
-      ".git/**",
-      "dist/**"
-    ],
+    "ignored_dirs": ["node_modules/**", ".git/**", "dist/**"],
     "truncated": true,
     "truncation_reason": "Initial file list scan was truncated due to a large number of files."
   },

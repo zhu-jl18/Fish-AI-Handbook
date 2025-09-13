@@ -1,26 +1,23 @@
 ---
-import ContentLayout from '../../../layouts/ContentLayout.astro';
-import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars';
-import { getEntry } from 'astro:content';
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
+import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '01-fish-talks/llm/index');
-const { Content } = await entry.render();
+const entry = await getEntry('docs', '01-fish-talks/llm')
+const { Content } = await entry.render()
 
+// 添加相对路径信息
+const editPath = `src/content/docs/01-fish-talks/llm/index.md`
 
-
-const headings = [
-  { id: '你会了解', text: '你会了解', depth: 1 }
-];
+const headings = [{ id: '你会了解', text: '你会了解', depth: 1 }]
 ---
 
-<ContentLayout 
+<ContentLayout
   title="Fish想说 - 大模型常识"
   section="Fish想说"
-  
   sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}
+  editPath={editPath}
 >
   <Content />
 </ContentLayout>
-
-
