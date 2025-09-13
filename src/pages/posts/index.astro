@@ -1,0 +1,51 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { getCollection } from 'astro:content'
+
+const posts = await getCollection('posts', ({ data }) => !data.draft)
+const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+
+const headings = [
+  { id: 'all-posts', text: '全部帖子', depth: 2 },
+]
+---
+
+<ContentLayout
+  title="折腾日常"
+  section="折腾日常"
+  headings={headings}
+  editPath={'src/pages/posts/index.astro'}
+>
+  <h1>折腾日常</h1>
+  <p>记录日常的灵感、好用的小工具、生活里的折腾和碎碎念。不卷技术，轻松一点。</p>
+
+  <h2 id="all-posts">全部帖子</h2>
+  <ul class="post-list">
+    {sorted.map((p) => (
+      <li class="post-item">
+        <a href={`/posts/${p.slug}`}>{p.data.title}</a>
+        <div class="meta">
+          <span>{p.data.date.toISOString().slice(0, 10)}</span>
+          <span class="dot">•</span>
+          <a href={`/posts/category/${p.data.category}`}>{p.data.category}</a>
+          {p.data.tags.length > 0 && (
+            <span class="tags"># {p.data.tags.join(' # ')}</span>
+          )}
+        </div>
+        <p class="desc">{p.data.description}</p>
+      </li>
+    ))}
+  </ul>
+</ContentLayout>
+
+<style>
+  .post-list { list-style: none; padding: 0; margin: 1rem 0; }
+  .post-item { padding: 1rem 0; border-bottom: 1px solid #222; }
+  .post-item a { color: #fff; text-decoration: none; font-weight: 600; }
+  .post-item a:hover { color: #4a9eff; }
+  .meta { color: #888; font-size: 0.85rem; margin-top: 0.25rem; }
+  .meta .dot { margin: 0 0.5rem; }
+  .tags { margin-left: 0.5rem; color: #aaa; }
+  .desc { color: #bbb; margin: 0.35rem 0 0; }
+</style>
+

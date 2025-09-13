@@ -1,0 +1,58 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { getCollection, render } from 'astro:content'
+
+export async function getStaticPaths() {
+  const entries = await getCollection('posts', ({ data }) => !data.draft)
+  return entries.map((e) => ({ params: { slug: e.slug } }))
+}
+
+interface Props { params: { slug: string } }
+const { params } = Astro as unknown as Props
+const slug = params.slug
+
+const entry = (await getCollection('posts')).find((p) => p.slug === slug)
+if (!entry) {
+  throw new Error(`Post not found: ${slug}`)
+}
+
+const { Content } = await render(entry)
+
+const headings = [
+  { id: 'post', text: entry.data.title, depth: 1 },
+]
+---
+
+<ContentLayout
+  title={entry.data.title}
+  section="折腾日常"
+  headings={headings}
+  editPath={`src/content/posts/${entry.slug}.md`}
+>
+  <article class="post">
+    <h1 id="post">{entry.data.title}</h1>
+    <div class="meta">
+      <span>{entry.data.date.toISOString().slice(0, 10)}</span>
+      <span class="dot">•</span>
+      <a href={`/posts/category/${entry.data.category}`}>{entry.data.category}</a>
+      {entry.data.tags.length > 0 && (
+        <span class="tags"># {entry.data.tags.join(' # ')}</span>
+      )}
+    </div>
+
+    {entry.data.cover && <img class="cover" src={entry.data.cover} alt={entry.data.title} />}
+
+    <div class="content">
+      <Content />
+    </div>
+  </article>
+</ContentLayout>
+
+<style>
+  .post .meta { color: #888; font-size: 0.85rem; margin: 0.5rem 0 1rem; }
+  .post .meta .dot { margin: 0 0.5rem; }
+  .post .tags { margin-left: 0.5rem; color: #aaa; }
+  .post .cover { width: 100%; border-radius: 6px; margin: 1rem 0; border: 1px solid #222; }
+  .post .content :global(img) { max-width: 100%; border-radius: 6px; }
+  .post .content :global(a) { color: #4a9eff; }
+</style>
