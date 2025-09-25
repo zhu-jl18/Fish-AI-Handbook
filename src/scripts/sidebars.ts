@@ -14,6 +14,9 @@ export type SidebarGroup = {
 export type SidebarSection = Array<SidebarLink | SidebarGroup>
 
 export function getSidebarForPath(path: string): SidebarSection {
+  if (path.startsWith('/setup')) {
+    return SETUP_SIDEBAR
+  }
   if (path.startsWith('/fish-talks')) {
     return FISH_TALKS_SIDEBAR
   }
@@ -31,9 +34,6 @@ export function getSidebarForPath(path: string): SidebarSection {
   }
   if (path.startsWith('/fun')) {
     return FUN_SIDEBAR
-  }
-  if (path.startsWith('/posts')) {
-    return POSTS_SIDEBAR
   }
   if (path.startsWith('/resources')) {
     return RESOURCES_SIDEBAR
@@ -75,23 +75,7 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
       { label: '环境变量', href: '/fish-talks/glossary/env' },
     ],
   },
-  {
-    label: '环境准备',
-    href: '/fish-talks/preparations',
-    items: [
-      {
-        label: 'Windows Terminal',
-        href: '/fish-talks/preparations/windows-terminal',
-      },
-      {
-        label: 'Visual Studio Code',
-        href: '/fish-talks/preparations/visual-studio-code',
-      },
-      { label: 'Node.js', href: '/fish-talks/preparations/nodejs' },
-      { label: 'GitHub', href: '/fish-talks/preparations/github' },
-      { label: 'VPN', href: '/fish-talks/preparations/vpn' },
-    ],
-  },
+  // 环境准备迁移到新章节 SETUP
   {
     label: '进阶概念',
     href: '/fish-talks/advanced-concepts',
@@ -119,15 +103,26 @@ export const BASIC_USAGE_SIDEBAR: SidebarSection = [
 ]
 
 export const PROMPTS_SIDEBAR: SidebarSection = [
+  { label: '提示词', href: '/prompts' },
   {
-    label: '提示词',
-    href: '/prompts',
+    label: '基础知识',
+    href: '/prompts/basics',
     items: [
-      { label: '基础知识', href: '/prompts/basics' },
-      { label: '常用模式', href: '/prompts/patterns' },
-      { label: '进阶技巧', href: '/prompts/advanced-techniques' },
+      { label: '提示词基础', href: '/prompts/basics/intro' },
+      { label: '结构与规范', href: '/prompts/basics/structure' },
+      { label: '注意事项', href: '/prompts/basics/dos-and-donts' },
     ],
   },
+  {
+    label: '常用模式',
+    href: '/prompts/patterns',
+    items: [
+      { label: 'Few-shot', href: '/prompts/patterns/few-shot' },
+      { label: 'Role Prompting', href: '/prompts/patterns/role-prompting' },
+      { label: 'Chain-of-Thought', href: '/prompts/patterns/chain-of-thought' },
+    ],
+  },
+  { label: '进阶技巧', href: '/prompts/advanced' },
 ]
 
 export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
@@ -159,19 +154,23 @@ export const FUN_SIDEBAR: SidebarSection = [
   { label: '银色酒馆', href: '/fun/silver-trivern' },
 ]
 
-export const POSTS_SIDEBAR: SidebarSection = [
-  { label: '折腾日常', href: '/posts' },
-  {
-    label: '分类',
-    href: '/posts',
-    items: [
-      { label: '工具', href: '/posts/category/tools' },
-      { label: '生活', href: '/posts/category/life' },
-      { label: '随笔', href: '/posts/category/notes' },
-    ],
-  },
-]
 
 export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
+]
+
+// 新的“配置指南/环境配置”章节
+export const SETUP_SIDEBAR: SidebarSection = [
+  { label: '配置指南', href: '/setup' },
+  {
+    label: '环境准备',
+    href: '/setup/preparations',
+    items: [
+      { label: 'Windows Terminal', href: '/setup/preparations/windows-terminal' },
+      { label: 'Visual Studio Code', href: '/setup/preparations/visual-studio-code' },
+      { label: 'Node.js', href: '/setup/preparations/nodejs' },
+      { label: 'GitHub', href: '/setup/preparations/github' },
+      { label: 'VPN', href: '/setup/preparations/vpn' },
+    ],
+  },
 ]

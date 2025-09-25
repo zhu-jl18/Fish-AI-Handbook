@@ -2,6 +2,8 @@
 
 > 一个简洁、友好的 AI 使用指南网站，旨在帮助朋友们更好地理解和使用人工智能工具。
 
+提示：如果你是第一次部署静态网站，或需要更详细的图文步骤与排错建议，请查看扩展文档《README.zh-CN.md》（萌新部署指南）。
+
 ## 📖 关于本项目
 
 这是一个基于 [Astro.js](https://astro.build/) 框架构建的静态网站，提供清晰易懂的 AI 使用指导和实用信息。无论你是 AI 新手还是有一定经验的用户，都能在这里找到有价值的内容。
@@ -50,12 +52,12 @@
 
 ## 📦 可用脚本
 
-| 命令 | 描述 |
-| --- | --- |
-| `npm run dev` | 启动开发服务器（支持热重载） |
-| `npm run build` | 构建生产版本 |
-| `npm run preview` | 本地预览构建后的网站 |
-| `npm start` | 同 `npm run dev` |
+| 命令              | 描述                         |
+| ----------------- | ---------------------------- |
+| `npm run dev`     | 启动开发服务器（支持热重载） |
+| `npm run build`   | 构建生产版本                 |
+| `npm run preview` | 本地预览构建后的网站         |
+| `npm start`       | 同 `npm run dev`             |
 
 ## 📁 项目结构
 
@@ -113,6 +115,10 @@ npm run build
 - **Netlify**: 拖拽 dist 文件夹即可部署
 - **GitHub Pages**: 使用 GitHub Actions 自动部署
 - **Cloudflare Pages**: 快速全球 CDN 分发
+
+想要一步一步的详细部署步骤（Vercel / Netlify / GitHub Pages / Cloudflare Pages）和常见问题排查，请参考：
+
+- 《README.zh-CN.md》：更详细的面向萌新的部署指南
 
 ## 🤝 贡献指南
 

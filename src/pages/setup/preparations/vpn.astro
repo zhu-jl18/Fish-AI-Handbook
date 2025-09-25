@@ -1,0 +1,17 @@
+---
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { SETUP_SIDEBAR } from '../../../scripts/sidebars'
+import { getEntry } from 'astro:content'
+
+const entry = await getEntry('docs', '01-fish-talks/preparations/vpn')
+const { Content } = await entry.render()
+---
+
+<ContentLayout
+  title={`配置指南 - 环境准备 / VPN`}
+  section="配置指南"
+  sidebarItems={SETUP_SIDEBAR}
+  headings={[]}
+>
+  <Content />
+</ContentLayout>

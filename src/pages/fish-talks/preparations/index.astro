@@ -1,32 +1,14 @@
 ---
 import ContentLayout from '../../../layouts/ContentLayout.astro'
-import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
-
-const headings = [
-  { id: '为什么先做环境准备', text: '为什么先做环境准备', depth: 1 },
-]
+import { SETUP_SIDEBAR } from '../../../scripts/sidebars'
 ---
 
 <ContentLayout
-  title={`Fish想说 - 环境准备 / 概览`}
-  section="Fish想说"
-  sidebarItems={FISH_TALKS_SIDEBAR}
-  headings={headings}
+  title={`配置指南 - 环境准备（已迁移）`}
+  section="配置指南"
+  sidebarItems={SETUP_SIDEBAR}
+  headings={[]}
 >
-  <h1 id="为什么先做环境准备">为什么先做环境准备</h1>
-  <p><strong>稳定连通</strong>：没有稳定的网络与代理，任何体验都不可靠。</p>
-  <p>
-    <strong>更高效率</strong
-    >：顺手的终端、编辑器与包管理器，能把"会用"变成"用得快"。
-  </p>
-  <p><strong>降低门槛</strong>：标准化环境方便你和朋友一起协作、复现问题。</p>
-
-  <h2>你将准备什么</h2>
-  <ul>
-    <li>Windows Terminal（或 iTerm/Terminal）：统一配置的命令行环境</li>
-    <li>Visual Studio Code：常用扩展与快捷键</li>
-    <li>Node.js：脚手架、前端工具链与 SDK 生态</li>
-    <li>GitHub：代码托管与协作</li>
-    <li>VPN/代理：连通国外模型与依赖下载</li>
-  </ul>
+  <meta http-equiv="refresh" content="0; url=/setup/preparations" />
+  <p>本模块已迁移到新的章节：<a href="/setup/preparations">配置指南 / 环境准备</a>。</p>
 </ContentLayout>

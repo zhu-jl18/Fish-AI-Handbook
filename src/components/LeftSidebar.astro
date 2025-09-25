@@ -15,7 +15,6 @@ const isGroupActive = (href?: string) =>
 
 <div class="left-sidebar">
   <div class="sidebar-content">
-    <div class="section-title">{section}</div>
     <nav class="section-nav">
       {
         items ? (
@@ -68,25 +67,22 @@ const isGroupActive = (href?: string) =>
     background-color: #0a0a0a;
     border-right: 1px solid #333;
     overflow-y: auto;
+    /* 统一侧边栏字号与行高，避免被页面内容影响 */
+    font-size: 14px;
+    line-height: 1.45;
   }
 
   .sidebar-content {
-    padding: 2rem 1rem;
+    padding: 1.25rem 0.75rem;
   }
 
-  .section-title {
-    font-size: 0.9rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 1rem;
-    font-weight: 600;
-  }
+  /* 移除顶部标题展示，避免视觉不协调 */
+  .section-title { display: none; }
 
   .section-nav {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.35rem; /* 统一顶层条目间距，更紧凑 */
   }
 
   .section-nav > * {
@@ -96,59 +92,70 @@ const isGroupActive = (href?: string) =>
   .section-nav a {
     color: #999;
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    padding: 0.4rem 0.75rem;
+    border-radius: 3px;
     transition: all 0.2s ease;
-    font-size: 0.9rem;
+    /* 随容器字号等比缩放，保持层级统一 */
+    font-size: 0.95em;
     display: block;
   }
 
-  .section-nav a:hover {
-    color: #fff;
-    background-color: #1a1a1a;
+  .section-nav a:hover,
+  .section-nav a:focus,
+  .section-nav a:active {
+    color: var(--link-hover-color);
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
   }
 
   .section-nav a.active {
-    color: #fff;
-    background-color: #2a2a2a;
-    border-left: 3px solid #4a9eff;
+    /* 仅改变文字为主题蓝色，不使用背景与左侧竖条 */
+    color: var(--link-color);
+    background-color: transparent;
+    border-left: none;
   }
 
   /* 层级菜单样式 */
-  /* 简单分组样式（回到默认） */
-  .group {
-    margin: 0.25rem 0;
-  }
+  /* 顶层分组不额外叠加间距，统一交给 .section-nav 的 gap 控制 */
+  .group { margin: 0; }
 
   /* 注意：slot 注入的内容默认不受 scoped 样式影响。
    为了让传入内容中的 .submenu 生效，这里使用 :global 进行样式声明。 */
   :global(.submenu) {
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    margin: 0.25rem 0;
+    gap: 0.2rem; /* 统一子项间距，略微收紧 */
+    margin: 0.2rem 0 0; /* 与上方分组标题间距更紧凑 */
   }
 
   :global(.submenu) a {
     display: block;
-    padding: 0.35rem 0.75rem 0.35rem 1.75rem;
-    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem 0.3rem 1.4rem;
+    font-size: 0.9em;
     border-left: 2px solid transparent;
     color: #999;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 3px;
     transition: all 0.2s ease;
-    margin-bottom: 0.25rem;
+    margin: 0; /* 间距由父级 gap 控制，避免页面之间不一致 */
   }
 
-  :global(.submenu) a:hover {
-    color: #fff;
-    background-color: #1a1a1a;
-    border-left-color: #4a9eff;
+  :global(.submenu) a:hover,
+  :global(.submenu) a:focus,
+  :global(.submenu) a:active {
+    color: var(--link-hover-color);
+    background-color: transparent;
+    border-left-color: transparent;
+    outline: none;
+    box-shadow: none;
   }
 
   :global(.submenu) a.active {
-    color: #fff;
-    border-left-color: #4a9eff;
-    background-color: #1a1a1a;
+    /* 子项选中同样仅变为主题蓝，不加背景与边框 */
+    color: var(--link-color);
+    border-left-color: transparent;
+    background-color: transparent;
   }
 </style>

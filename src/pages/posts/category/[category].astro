@@ -1,63 +1,23 @@
 ---
 import ContentLayout from '../../../layouts/ContentLayout.astro'
-import { getCollection } from 'astro:content'
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts', ({ data }) => !data.draft)
-  const categories = Array.from(new Set(posts.map((p) => p.data.category)))
-  return categories.map((c) => ({ params: { category: c } }))
+  // 折腾日常已下线，不再生成任何分类页
+  return []
 }
 
-interface Props { params: { category: string } }
-const { params } = Astro as unknown as Props
-const { category } = params
-
-const posts = await getCollection('posts', ({ data }) => !data.draft && data.category === category)
-const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-
 const headings = [
-  { id: 'category', text: `分类：${category}` , depth: 2 },
+  { id: 'offline', text: '该栏目已下线', depth: 2 },
 ]
 ---
 
 <ContentLayout
-  title={`分类：${category}`}
+  title={`折腾日常`}
   section="折腾日常"
   headings={headings}
   editPath={'src/pages/posts/category/[category].astro'}
 >
-  <h1 id="category">分类：{category}</h1>
-
-  {sorted.length === 0 ? (
-    <p>这个分类下还没有内容。</p>
-  ) : (
-    <ul class="post-list">
-      {sorted.map((p) => (
-        <li class="post-item">
-          <a href={`/posts/${p.slug}`}>{p.data.title}</a>
-          <div class="meta">
-            <span>{p.data.date.toISOString().slice(0, 10)}</span>
-            <span class="dot">•</span>
-            <a href={`/posts/category/${p.data.category}`}>{p.data.category}</a>
-            {p.data.tags.length > 0 && (
-              <span class="tags"># {p.data.tags.join(' # ')}</span>
-            )}
-          </div>
-          <p class="desc">{p.data.description}</p>
-        </li>
-      ))}
-    </ul>
-  )}
+  <div style="display:none"></div>
 </ContentLayout>
-
-<style>
-  .post-list { list-style: none; padding: 0; margin: 1rem 0; }
-  .post-item { padding: 1rem 0; border-bottom: 1px solid #222; }
-  .post-item a { color: #fff; text-decoration: none; font-weight: 600; }
-  .post-item a:hover { color: #4a9eff; }
-  .meta { color: #888; font-size: 0.85rem; margin-top: 0.25rem; }
-  .meta .dot { margin: 0 0.5rem; }
-  .tags { margin-left: 0.5rem; color: #aaa; }
-  .desc { color: #bbb; margin: 0.35rem 0 0; }
-</style>
+<!-- posts 分类页已停用，不再显示任何帖子 -->
 

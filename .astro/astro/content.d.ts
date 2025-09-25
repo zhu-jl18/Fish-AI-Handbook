@@ -519,91 +519,14 @@ declare module 'astro:content' {
   slug: "readme";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".md"] };
-"fun/midjourney-avatars.md": {
-	id: "fun/midjourney-avatars.md";
-  slug: "fun/midjourney-avatars";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".md"] };
-"life/desktop-cleanup.md": {
-	id: "life/desktop-cleanup.md";
-  slug: "life/desktop-cleanup";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".md"] };
-"life/travel-power-kit.md": {
-	id: "life/travel-power-kit.md";
-  slug: "life/travel-power-kit";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".md"] };
-"life/wallpaper-of-the-week-01.md": {
-	id: "life/wallpaper-of-the-week-01.md";
-  slug: "life/wallpaper-of-the-week-01";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".md"] };
-"notes/15min-daily-retro.md": {
-	id: "notes/15min-daily-retro.md";
-  slug: "notes/15min-daily-retro";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".md"] };
-"notes/focus-in-fragments.md": {
-	id: "notes/focus-in-fragments.md";
-  slug: "notes/focus-in-fragments";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".md"] };
-"notes/hello-posts.md": {
-	id: "notes/hello-posts.md";
-  slug: "notes/hello-posts";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".md"] };
-"notes/how-to-write.md": {
-	id: "notes/how-to-write.md";
-  slug: "notes/how-to-write";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".md"] };
-"notes/writing-backlog.md": {
-	id: "notes/writing-backlog.md";
-  slug: "notes/writing-backlog";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".md"] };
-"tools/notion-to-obsidian.md": {
-	id: "tools/notion-to-obsidian.md";
-  slug: "tools/notion-to-obsidian";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".md"] };
-"tools/screenshot-annotation-flow.md": {
-	id: "tools/screenshot-annotation-flow.md";
-  slug: "tools/screenshot-annotation-flow";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
 } & { render(): Render[".md"] };
 "tools/windows-terminal-workflow.md": {
 	id: "tools/windows-terminal-workflow.md";
   slug: "tools/windows-terminal-workflow";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
 } & { render(): Render[".md"] };
 };
 
