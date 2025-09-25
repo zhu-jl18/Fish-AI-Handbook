@@ -25,7 +25,7 @@ cover: "/images/posts/windows-terminal-setup.png"
 
 ## 常用别名
 
-```pwsh
+```powershell
 # path=null start=null
 # 示例：在 $PROFILE 中添加
 Set-Alias ll Get-ChildItem

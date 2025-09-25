@@ -11,8 +11,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.5.1",
-    "astro": "^4.0.0"
+    "@astrojs/sitemap": "^3.6.0",
+    "astro": "^5.13.10"
   },
   "devDependencies": {
     "prettier": "^3.6.2",

@@ -24,6 +24,8 @@ const {
       ? 'demo'
       : section === '技术向'
         ? 'tech'
+        : section === '配置指南'
+          ? 'setup'
         : section === 'Fish想说'
           ? 'fish-talks'
           : section === '基础使用'
@@ -34,9 +36,7 @@ const {
                 ? 'advanced'
                 : section === '好玩的'
                   ? 'fun'
-                  : section === '折腾日常'
-                    ? 'posts'
-                    : section === '资源合集'
+                  : section === '资源合集'
                       ? 'resources'
                       : 'home'}
   />

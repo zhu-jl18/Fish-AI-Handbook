@@ -1,19 +1,14 @@
 ---
 import ContentLayout from '../../../layouts/ContentLayout.astro'
-import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
-import { getEntry } from 'astro:content'
-
-const entry = await getEntry('docs', '01-fish-talks/preparations/nodejs')
-const { Content } = await entry.render()
-
-const headings = [{ id: '为什么重要', text: '为什么重要', depth: 1 }]
+import { SETUP_SIDEBAR } from '../../../scripts/sidebars'
 ---
 
 <ContentLayout
-  title={`Fish想说 - 环境准备 / Node.js`}
-  section="Fish想说"
-  sidebarItems={FISH_TALKS_SIDEBAR}
-  headings={headings}
+  title={`配置指南 - 环境准备 / Node.js（已迁移）`}
+  section="配置指南"
+  sidebarItems={SETUP_SIDEBAR}
+  headings={[]}
 >
-  <Content />
+  <meta http-equiv="refresh" content="0; url=/setup/preparations/nodejs" />
+  <p>页面已迁移至 <a href="/setup/preparations/nodejs">配置指南 / 环境准备 / Node.js</a>。</p>
 </ContentLayout>
