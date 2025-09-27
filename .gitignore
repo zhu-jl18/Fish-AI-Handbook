@@ -30,6 +30,16 @@ pnpm-debug.log*
 .bmad/
 !.bmad-core/
 
+# local AI assistants & docs
+.claude/
+CLAUDE.md
+claude.md
+WARP.md
+
+# codebuddy & bmad core (ignore)
+.codebuddy/
+.bmad-core/
+
 # misc temporaries
 temp_*
 *_before_fix.*
