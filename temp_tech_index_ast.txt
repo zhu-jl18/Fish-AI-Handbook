@@ -1,21 +1,22 @@
 ---
 import ContentLayout from '../../layouts/ContentLayout.astro'
-import { TECH_SIDEBAR } from '../../scripts/sidebars'
 // 映射使用示例：按需启用以读取 content/docs
 // import { DOCS_MAP } from '../../scripts/docsMap';
 // const docsDir = DOCS_MAP['tech']; // -> 06-technical-deep-dive
 
 const section = '技术向'
-const title = '技术向 - 大模型应用开发的火石'
+const title = '技术向 - 大模型应用开发的基石'
 
-// 显示“文件路径信息”
+// 添加相对路径信息
 const editPath = `src/pages/tech/index.astro`
+
+const sidebarItems = [{ label: '技术向概述', href: '/tech' }]
 
 const headings = [{ id: 'intro', text: '欢迎', depth: 1 }]
 ---
 
-<ContentLayout {title} {section} sidebarItems={TECH_SIDEBAR} {headings} {editPath}>
+<ContentLayout {title} {section} sidebarItems={sidebarItems} {headings} {editPath}>
   ## 欢迎
-  这是“技术向”模块的占位主页。后续将补充更详细的技术文档与实践示例。
+  这里是“技术向”模块的欢迎页。根据你的要求，仅保留欢迎页骨架，映射用法见文件顶部注释。你可直接在此处补充内容。
 </ContentLayout>
 
