@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+
+# astro build output
+dist/
+.astro/
+
+# env
+.env
+.env.*
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
