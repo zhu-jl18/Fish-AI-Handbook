@@ -5,27 +5,41 @@ import LeftSidebar from '../components/LeftSidebar.astro'
 import RightSidebar from '../components/RightSidebar.astro'
 import { getSidebarForPath } from '../scripts/sidebars'
 
+// 根据当前路径获取正确的侧边栏数据
 const currentPath = Astro.url.pathname
 const sidebarItems = getSidebarForPath(currentPath)
 
-const { title, section, headings = [], editPath = null } = Astro.props
-
-const sectionToNav: Record<string, string> = {
-  DEMO: 'demo',
-  技术向: 'tech',
-  配置指南: 'setup',
-  鱼说必看: 'fish-talks',
-  基础用法: 'basic-usage',
-  提示词: 'prompts',
-  进阶玩法: 'advanced',
-  好玩的: 'fun',
-  资源合集: 'resources',
-}
-const currentKey = sectionToNav[section] ?? 'home'
+// 从 Astro.props 中获取其他属性
+const {
+  title,
+  section,
+  headings = [],
+  editPath = null,
+} = Astro.props
 ---
 
 <BaseLayout title={title}>
-  <Header currentPage={currentKey} />
+  <Header
+    currentPage={section === 'DEMO'
+      ? 'demo'
+      : section === '技术向'
+        ? 'tech'
+        : section === '配置指南'
+          ? 'setup'
+        : section === 'Fish想说'
+          ? 'fish-talks'
+          : section === '基础使用'
+            ? 'basic'
+            : section === '提示词'
+              ? 'prompts'
+              : section === '进阶玩法'
+                ? 'advanced'
+                : section === '好玩的'
+                  ? 'fun'
+                  : section === '资源合集'
+                      ? 'resources'
+                      : 'home'}
+  />
 
   <div class="content-wrapper">
     <LeftSidebar section={section} items={sidebarItems} />
@@ -119,6 +133,7 @@ const currentKey = sectionToNav[section] ?? 'home'
     word-break: break-all;
   }
 
+
   @media (max-width: 1024px) {
     .left-sidebar,
     .right-sidebar {
@@ -131,4 +146,3 @@ const currentKey = sectionToNav[section] ?? 'home'
     }
   }
 </style>
-
