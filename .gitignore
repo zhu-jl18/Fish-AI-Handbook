@@ -20,3 +20,17 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# local tools & IDE
+.vercel/
+.vscode/
+.idea/
+
+# bmad ephemeral (keep .bmad-core)
+.bmad
+.bmad/
+!.bmad-core/
+
+# misc temporaries
+temp_*
+*_before_fix.*
+sidebars_out.ts
