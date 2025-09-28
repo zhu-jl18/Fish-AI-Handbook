@@ -1,6 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Header from '../components/Header.astro'
+
+const heroLinks = [
+  { href: '/fish-talks', label: '鱼说必看' },
+  { href: '/setup', label: '配置指南' },
+  { href: '/basic-usage', label: '基础用法' },
+  { href: '/prompts', label: '提示词' },
+  { href: '/advanced', label: '进阶玩法' },
+  { href: '/demo', label: 'DEMO' },
+  { href: '/tech', label: '技术向' },
+  { href: '/fun', label: '好玩的' },
+  { href: '/resources', label: '资源合集' },
+]
 ---
 
 <BaseLayout title="首页">
@@ -11,14 +23,9 @@ import Header from '../components/Header.astro'
       <h1>Fish写给朋友们的AI使用指南</h1>
       <p class="hero-subtitle">简洁清晰的AI教程，从基础使用到进阶玩法</p>
       <div class="hero-links">
-        <a href="/fish-talks" class="hero-link">Fish想说</a>
-        <a href="/basic-usage" class="hero-link">基础使用</a>
-        <a href="/prompts" class="hero-link">提示词</a>
-        <a href="/advanced" class="hero-link">进阶玩法</a>
-        <a href="/demo" class="hero-link">DEMO</a>
-        <a href="/tech" class="hero-link">技术向</a>
-        <a href="/fun" class="hero-link">好玩的</a>
-        <a href="/resources" class="hero-link">资源合集</a>
+        {heroLinks.map((link) => (
+          <a href={link.href} class="hero-link">{link.label}</a>
+        ))}
       </div>
     </div>
   </main>
@@ -57,9 +64,9 @@ import Header from '../components/Header.astro'
 
   .hero-links {
     display: grid;
-    grid-template-columns: repeat(4, minmax(120px, 1fr));
-    gap: 1rem;
-    justify-items: center;
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+    gap: 1.2rem;
+    justify-items: stretch;
     align-items: stretch;
     margin-top: 3rem;
   }
@@ -68,13 +75,13 @@ import Header from '../components/Header.astro'
     color: #4a9eff;
     text-decoration: none;
     font-weight: 600;
-    padding: 0.9rem 1rem;
+    padding: 0.95rem 1.2rem;
     border: 1px solid #4a9eff;
-    border-radius: 5px;
+    border-radius: 6px;
     transition: all 0.2s ease;
-    display: block;
-    width: 100%;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .hero-link:hover {
@@ -88,6 +95,13 @@ import Header from '../components/Header.astro'
     }
     .hero-links {
       grid-template-columns: repeat(3, minmax(140px, 1fr));
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .hero-links {
+      grid-template-columns: repeat(2, minmax(130px, 1fr));
     }
   }
 
@@ -99,7 +113,6 @@ import Header from '../components/Header.astro'
       font-size: 2rem;
     }
     .hero-links {
-      grid-template-columns: repeat(2, minmax(120px, 1fr));
       gap: 0.8rem;
     }
   }

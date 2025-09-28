@@ -100,17 +100,37 @@ export const BASIC_USAGE_SIDEBAR: SidebarSection = [
 export const PROMPTS_SIDEBAR: SidebarSection = [
   { label: '提示词', href: '/prompts' },
   {
-    label: '提示模式',
-    href: '/prompts/patterns',
+    label: '交互基础',
+    href: '/prompts/interaction-basics',
     items: [
-      { label: 'Few-shot', href: '/prompts/patterns/few-shot' },
-      { label: 'Role Prompting', href: '/prompts/patterns/role-prompting' },
-      { label: 'Chain-of-Thought', href: '/prompts/patterns/chain-of-thought' },
+      { label: '定义', href: '/prompts/interaction-basics/definition' },
+      { label: '必要性', href: '/prompts/interaction-basics/necessity' },
+      { label: '好与坏', href: '/prompts/interaction-basics/good-vs-bad' },
     ],
   },
-  { label: '进阶用法', href: '/prompts/advanced' },
-  { label: '模板', href: '/prompts/templates' },
-  { label: '优化', href: '/prompts/optimization' },
+  { label: '上下文学习', href: '/prompts/context-learning' },
+  {
+    label: '对话层级',
+    href: '/prompts/dialogue-levels',
+    items: [
+      { label: '系统提示词', href: '/prompts/dialogue-levels/system-prompts' },
+      { label: '助手消息', href: '/prompts/dialogue-levels/assistant-messages' },
+      { label: '用户提示词', href: '/prompts/dialogue-levels/user-prompts' },
+      { label: '一个例子', href: '/prompts/dialogue-levels/example' },
+    ],
+  },
+  {
+    label: '实用技巧',
+    href: '/prompts/practical-tips',
+    items: [
+      { label: '优先级', href: '/prompts/practical-tips/priority' },
+      { label: '指令遵循', href: '/prompts/practical-tips/instruction-following' },
+      { label: '提示词增强', href: '/prompts/practical-tips/prompt-amplification' },
+      { label: '自我迭代', href: '/prompts/practical-tips/self-iteration' },
+    ],
+  },
+  { label: '高级框架', href: '/prompts/advanced-frameworks' },
+  { label: '好用范例', href: '/prompts/handy-examples' },
 ]
 
 export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
@@ -146,13 +166,26 @@ export const SETUP_SIDEBAR: SidebarSection = [
     label: '环境准备',
     href: '/setup/prerequisites',
     items: [
-      { label: 'Windows Terminal', href: '/setup/prerequisites/windows-terminal' },
-      { label: 'Visual Studio Code', href: '/setup/prerequisites/visual-studio-code' },
+      { label: '终端', href: '/setup/prerequisites/terminal' },
+      { label: 'Vs Code', href: '/setup/prerequisites/vs-code' },
       { label: 'Node.js', href: '/setup/prerequisites/nodejs' },
       { label: 'GitHub', href: '/setup/prerequisites/github' },
       { label: 'VPN', href: '/setup/prerequisites/vpn' },
     ],
   },
+  {
+    label: 'Cherry Studio',
+    href: '/setup/cherrystudio',
+    items: [
+      { label: '模型服务', href: '/setup/cherrystudio/model-services' },
+      { label: '定义助手', href: '/setup/cherrystudio/assistant-definitions' },
+      { label: '显示美化', href: '/setup/cherrystudio/ui-enhancement' },
+      { label: '数据设置', href: '/setup/cherrystudio/data-settings' },
+      { label: '其他', href: '/setup/cherrystudio/others' },
+    ],
+  },
+  { label: 'Claude Code', href: '/setup/claude-code' },
+  { label: 'Codex', href: '/setup/codex' },
 ]
 
 export const TECH_SIDEBAR: SidebarSection = [
