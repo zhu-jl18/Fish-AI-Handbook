@@ -1,17 +1,26 @@
 ---
 import ContentLayout from "../../../layouts/ContentLayout.astro"
 import { TECH_SIDEBAR } from "../../../scripts/sidebars"
-import { getEntry } from "astro:content"
 
-const entry = await getEntry("docs", "07-technical-deep-dive/2api/LMArena2api")
-const { Content } = await entry.render()
+const title = "LMArena2api"
 ---
 
 <ContentLayout
-  title={entry?.data?.title ?? "LMArena2api"}
+  title={`2API · ${title}`}
   section="技术向"
   sidebarItems={TECH_SIDEBAR}
   headings={[]}
 >
-  <Content />
+  <article class="placeholder">
+    <p>此页面预留给 LMArena2api 的对接与使用说明，后续会补充详细内容。</p>
+  </article>
 </ContentLayout>
+
+<style>
+  .placeholder {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1rem;
+  }
+</style>
