@@ -8,7 +8,7 @@ import { getSidebarForPath } from '../scripts/sidebars'
 const currentPath = Astro.url.pathname
 const sidebarItems = getSidebarForPath(currentPath)
 
-const { title, section, headings = [], editPath = null } = Astro.props
+const { title, section, headings = [] } = Astro.props
 
 const sectionToNav: Record<string, string> = {
   DEMO: 'demo',
@@ -32,14 +32,7 @@ const currentKey = sectionToNav[section] ?? 'home'
 
     <main class="content">
       <div class="content-inner">
-        {editPath && (
-          <details class="file-path-details">
-            <summary class="file-path-summary">📁 文件路径信息</summary>
-            <div class="file-path-content">
-              <code>{editPath}</code>
-            </div>
-          </details>
-        )}
+
         <slot />
       </div>
     </main>
@@ -68,56 +61,7 @@ const currentKey = sectionToNav[section] ?? 'home'
     margin: 0 auto;
   }
 
-  .file-path-details {
-    background-color: #111;
-    border: 1px solid #333;
-    border-radius: 6px;
-    margin-bottom: 1.5rem;
-    padding: 0;
-    overflow: hidden;
-  }
 
-  .file-path-summary {
-    background-color: #1a1a1a;
-    color: #ccc;
-    cursor: pointer;
-    padding: 0.75rem 1rem;
-    margin: 0;
-    border: none;
-    font-size: 0.9rem;
-    user-select: none;
-    list-style: none;
-    transition: background-color 0.2s ease;
-  }
-
-  .file-path-summary:hover {
-    background-color: #222;
-    color: #fff;
-  }
-
-  .file-path-summary::marker {
-    content: none;
-  }
-
-  .file-path-summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .file-path-content {
-    padding: 1rem;
-    background-color: #0a0a0a;
-    border-top: 1px solid #333;
-  }
-
-  .file-path-content code {
-    background-color: #1e1e1e;
-    color: #4a9eff;
-    padding: 0.5rem;
-    border-radius: 4px;
-    font-family: 'Courier New', monospace;
-    display: block;
-    word-break: break-all;
-  }
 
   @media (max-width: 1024px) {
     .left-sidebar,

@@ -1,21 +1,24 @@
 ---
-import ContentLayout from '../../layouts/ContentLayout.astro'
-import { TECH_SIDEBAR } from '../../scripts/sidebars'
-// 映射使用示例：按需启用以读取 content/docs
-// import { DOCS_MAP } from '../../scripts/docsMap';
-// const docsDir = DOCS_MAP['tech']; // -> 06-technical-deep-dive
+import ContentLayout from "../../layouts/ContentLayout.astro"
+import { TECH_SIDEBAR } from "../../scripts/sidebars"
+import { getEntry } from "astro:content"
 
-const section = '技术向'
-const title = '技术向 - 大模型应用开发的火石'
-
-// 显示“文件路径信息”
-const editPath = `src/pages/tech/index.astro`
-
-const headings = [{ id: 'intro', text: '欢迎', depth: 1 }]
+const entry = await getEntry("docs", "07-technical-deep-dive")
+let Content: any = null
+let hasContent = false
+if (entry) {
+  try {
+    const rendered = await entry.render()
+    Content = rendered.Content
+    hasContent = true
+  } catch (error) {
+    console.error("Error rendering content:", error)
+    hasContent = false
+  }
+}
 ---
 
-<ContentLayout {title} {section} sidebarItems={TECH_SIDEBAR} {headings} {editPath}>
-  ## 欢迎
-  这是“技术向”模块的占位主页。后续将补充更详细的技术文档与实践示例。
+<ContentLayout title={entry?.data?.title ?? "技术向"} section="技术向" sidebarItems={TECH_SIDEBAR} headings={[]}>
+  {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
 

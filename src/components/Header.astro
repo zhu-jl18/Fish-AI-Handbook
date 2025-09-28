@@ -7,8 +7,9 @@ const { currentPage } = Astro.props
     <div class="nav-container">
       <a href="/" class="logo">Fish-Book</a>
       <div class="nav-links">
-        <a href="/fish-talks" class={currentPage === 'fish-talks' ? 'active' : ''}
-          >鱼说必看</a
+        <a
+          href="/fish-talks"
+          class={currentPage === 'fish-talks' ? 'active' : ''}>鱼说必看</a
         >
         <a href="/setup" class={currentPage === 'setup' ? 'active' : ''}
           >配置指南</a
@@ -23,7 +24,8 @@ const { currentPage } = Astro.props
           >进阶玩法</a
         >
         <a href="/demo" class={currentPage === 'demo' ? 'active' : ''}>DEMO</a>
-        <a href="/tech" class={currentPage === 'tech' ? 'active' : ''}>技术向</a>
+        <a href="/tech" class={currentPage === 'tech' ? 'active' : ''}>技术向</a
+        >
         <a href="/fun" class={currentPage === 'fun' ? 'active' : ''}>好玩的</a>
         <a href="/resources" class={currentPage === 'resources' ? 'active' : ''}
           >资源合集</a
@@ -31,9 +33,9 @@ const { currentPage } = Astro.props
       </div>
     </div>
   </nav>
-  </header>
+</header>
 
-  <style>
+<style>
   .header {
     background-color: #000;
     border-bottom: 1px solid #333;
@@ -89,5 +91,4 @@ const { currentPage } = Astro.props
     height: 2px;
     background-color: #4a9eff;
   }
-  </style>
-
+</style>
