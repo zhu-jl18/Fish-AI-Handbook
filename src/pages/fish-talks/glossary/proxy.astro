@@ -4,13 +4,19 @@ import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
 const entry = await getEntry('docs', '01-fish-talks/glossary/proxy')
-const { Content } = await entry.render()
+let Content: any
+if (entry) {
+  const rendered = await entry.render()
+  Content = rendered.Content
+} else {
+  Content = () => null
+}
 
 const headings = [{ id: '为什么要懂代理', text: '为什么要懂代理', depth: 1 }]
 ---
 
 <ContentLayout
-  title={`Fish想说 - 其他常见术语 / ${entry.data.title}`}
+  title={`Fish想说 - 其他常见术语 / ${entry?.data?.title ?? "代理"}`}
   section="Fish想说"
   sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}

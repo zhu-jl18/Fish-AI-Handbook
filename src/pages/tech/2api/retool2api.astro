@@ -1,0 +1,24 @@
+---
+import ContentLayout from "../../../layouts/ContentLayout.astro"
+import { TECH_SIDEBAR } from "../../../scripts/sidebars"
+import { getEntry } from "astro:content"
+
+const entry = await getEntry("docs", "07-technical-deep-dive/2api/retool2api")
+let Content: any = null
+let hasContent = false
+if (entry) {
+  try {
+    const rendered = await entry.render()
+    Content = rendered.Content
+    hasContent = true
+  } catch (error) {
+    console.error("Error rendering content:", error)
+    hasContent = false
+  }
+}
+---
+
+<ContentLayout title={entry?.data?.title ?? "Retool2API"} section="技术向" sidebarItems={TECH_SIDEBAR} headings={[]}>
+  {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
+</ContentLayout>
+

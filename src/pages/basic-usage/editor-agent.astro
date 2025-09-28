@@ -4,10 +4,20 @@ import { BASIC_USAGE_SIDEBAR } from '../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
 const entry = await getEntry('docs', '02-basic-usage/editor-agent')
-const { Content } = await entry.render()
+let Content: any = null
+let hasContent = false
+try {
+  if (entry) {
+    const rendered = await entry.render()
+    Content = rendered.Content
+    hasContent = true
+  }
+} catch (e) {
+  console.error('Render error: editor-agent', e)
+  hasContent = false
+}
 
 // 相对路径信息
-const editPath = `src/content/docs/02-basic-usage/editor-agent.md`
 
 const headings = [
   { id: '为啥代码编辑器集成这么香', text: '为啥代码编辑器集成这么香', depth: 1 },
@@ -25,7 +35,7 @@ const headings = [
   section="基础使用"
   sidebarItems={BASIC_USAGE_SIDEBAR}
   headings={headings}
-  editPath={editPath}
+
 >
-  <Content />
+  {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>

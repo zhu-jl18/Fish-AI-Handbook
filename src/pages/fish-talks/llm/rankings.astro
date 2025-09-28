@@ -4,10 +4,15 @@ import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
 const entry = await getEntry('docs', '01-fish-talks/llm/rankings')
-const { Content } = await entry.render()
+let Content: any
+if (entry) {
+  const rendered = await entry.render()
+  Content = rendered.Content
+} else {
+  Content = () => null
+}
 
 // 添加相对路径信息
-const editPath = `src/content/docs/01-fish-talks/llm/rankings.md`
 
 const headings = [
   { id: '提示', text: '提示', depth: 2 },
@@ -20,7 +25,7 @@ const headings = [
   section="Fish想说"
   sidebarItems={FISH_TALKS_SIDEBAR}
   headings={headings}
-  editPath={editPath}
+
 >
   <Content />
   <h2 id="lmarena">LMArena</h2>

@@ -2,16 +2,28 @@
 import ContentLayout from '../../layouts/ContentLayout.astro'
 import { getEntry } from 'astro:content'
 
-let entry = await getEntry('docs', '04-advanced-techniques')
-if (!entry) {
-  entry = await getEntry('docs', '04-advanced-techniques/index')
+const primaryId = '05-advanced-techniques'
+const fallbackId = '05-advanced-techniques/index'
+let entry = (await getEntry('docs', primaryId)) ?? (await getEntry('docs', fallbackId))
+
+let Content: any = null
+let hasContent = false
+let title = '工程化进阶：RAG、向量与多智能体'
+if (entry) {
+  try {
+    const rendered = await entry.render()
+    Content = rendered.Content
+    title = entry?.data?.title ?? title
+    hasContent = true
+  } catch (error) {
+    console.error("Error rendering content:", error)
+    hasContent = false
+  }
 }
-const { Content } = await entry!.render()
 
 import { ADVANCED_TECHNIQUES_SIDEBAR } from '../../scripts/sidebars'
 
-// 添加相对路径信息
-const editPath = `src/content/docs/04-advanced-techniques/index.md`
+
 
 const headings = [
   { id: '为什么读这一部分', text: '为什么读这一部分', depth: 1 },
@@ -23,7 +35,7 @@ const headings = [
   section="进阶玩法"
   sidebarItems={ADVANCED_TECHNIQUES_SIDEBAR}
   headings={headings}
-  editPath={editPath}
+
 >
-  <Content />
+  {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
