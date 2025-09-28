@@ -1,35 +1,23 @@
 ---
-import ContentLayout from '../../layouts/ContentLayout.astro'
-import { getEntry } from 'astro:content'
+import ContentLayout from "../../layouts/ContentLayout.astro"
+import { ADVANCED_TECHNIQUES_SIDEBAR } from "../../scripts/sidebars"
+import { getEntry } from "astro:content"
 
-let entry = await getEntry('docs', '05-advanced-techniques/vector-databases')
+const entry = await getEntry("docs", "05-advanced-techniques/vector-databases")
 let Content: any = null
-let hasContent = false
-try {
-  if (entry) {
-    const rendered = await entry.render()
-    Content = rendered.Content
-    hasContent = true
-  }
-} catch (e) {
-  console.error('Render error: advanced/vector-databases', e)
+if (entry) {
+  const rendered = await entry.render()
+  Content = rendered.Content
 }
-
-import { ADVANCED_TECHNIQUES_SIDEBAR } from '../../scripts/sidebars'
-
-const headings = [
-  { id: '为什么', text: '为什么', depth: 1 },
-  { id: '什么时候需要', text: '什么时候需要', depth: 2 },
-  { id: '选择维度', text: '选择维度', depth: 2 },
-  { id: '注意', text: '注意', depth: 2 },
-]
+const section = "\u8fdb\u9636\u73a9\u6cd5"
+const title = entry?.data?.title ?? "\u5411\u91cf\u6570\u636e\u5e93"
 ---
 
 <ContentLayout
-  title="工程化进阶 / 向量数据库"
-  section="进阶玩法"
+  title={title}
+  section={section}
   sidebarItems={ADVANCED_TECHNIQUES_SIDEBAR}
-  headings={headings}
+  headings={[]}
 >
-  {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
+  {Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
