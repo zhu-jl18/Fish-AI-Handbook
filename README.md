@@ -2,14 +2,16 @@
 
 本项目由我借助 AI 建立与维护，README 仅面向“未来的我”。目标：能在数分钟内回忆技术栈和原理，并按步骤完成新增/修改/删除与部署。
 
-目录（快速跳转）
-- 技术架构说明
-- 内容管理指南（含 1/2/3 级页面完整示例）
-- 开发维护流程
-- 最佳实践与项目内约定
-- Vercel 部署指南
+## 目录（快速跳转）
+<a id="toc"></a>
+- [技术架构说明](#overview)
+- [内容管理指南（含 1/2/3 级页面完整示例）](#contrib)
+- [开发维护流程](#maintenance)
+- [最佳实践与项目内约定](#rules)
+- [Vercel 部署指南](#vercel)
 
 ## 1) 技术架构说明
+<a id="overview"></a> [回到目录](#toc)
 
 - 核心技术栈
   - Astro 静态站点（`output: 'static'`）；MDX：`@astrojs/mdx`；代码高亮：Shiki。
@@ -19,6 +21,7 @@
 - 组件与数据流原理（示意）
 
 ```mermaid
+%% 组件与数据流原理（示意）
 flowchart LR
   URL["Request: /tech/2api/retool2api/"] --> CL["ContentLayout.astro"]
   subgraph Layout
@@ -27,10 +30,11 @@ flowchart LR
     CL --> HD["Header"]
     CL --> RS["RightSidebar"]
   end
-  PG["src/pages/*.astro"] -->|getEntry('docs', '编号-别名/...')| MD["src/content/docs/*.md"]
+  PG["src/pages/*.astro"] -->|getEntry docs_path| MD["src/content/docs/*.md"]
 ```
 
 ## 2) 内容管理指南（含 1/2/3 级示例）
+<a id="contrib"></a> [回到目录](#toc)
 
 规则：最多三级。一级/二级 = “文件夹 + index.md”；三级 = 单个 `.md`。
 
@@ -91,6 +95,7 @@ flowchart LR
   - 删除：同时删除 Markdown 与 astro 页面，并从 `sidebars.ts` 移除链接，避免死链。
 
 ## 3) 开发维护流程
+<a id="maintenance"></a> [回到目录](#toc)
 
 ```
 npm install      # 安装依赖
@@ -107,6 +112,7 @@ npm run format   # 代码格式化
 - 编码：统一 UTF‑8；Windows 终端启用 UTF‑8。
 
 ## 4) 最佳实践与项目内约定
+<a id="rules"></a> [回到目录](#toc)
 
 - 顶层内容目录命名：`编号-别名`，如 `01-fish-talks/`、`07-technical-deep-dive/`。
 - 深度不超过三级：一级/二级 = 文件夹 + index.md；三级 = 单页 md。
@@ -119,6 +125,7 @@ npm run format   # 代码格式化
   - 首页“基础使用”：`/basic-usage`
 
 ## 5) Vercel 部署指南
+<a id="vercel"></a> [回到目录](#toc)
 
 方式 A：直接连接 GitHub（推荐）
 1. 推送仓库到 GitHub。
