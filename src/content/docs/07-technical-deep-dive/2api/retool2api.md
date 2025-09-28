@@ -1,6 +1,6 @@
 ---
-title: 2API · Retool2API
-description: Retool2API 的使用与配置指南。
+title: 2API · retool2api
+description: retool2api 的使用与接入指引。
 ---
 
-retool2api 我让 claude 给我增加了一个ui管理页面....本地部署的 ，非流满血
+retool2api 是 claude 为我们提供的一个 UI 反向页面....巴拉巴拉 写的不咋样 也不知道对不对

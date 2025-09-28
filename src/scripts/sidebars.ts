@@ -35,7 +35,9 @@ export function getSidebarForPath(path: string): SidebarSection {
   if (path.startsWith('/fun')) {
     return FUN_SIDEBAR
   }
-  if (path.startsWith('/tech')) { return TECH_SIDEBAR }
+  if (path.startsWith('/tech')) {
+    return TECH_SIDEBAR
+  }
   if (path.startsWith('/resources')) {
     return RESOURCES_SIDEBAR
   }
@@ -44,14 +46,13 @@ export function getSidebarForPath(path: string): SidebarSection {
 
 export const FISH_TALKS_SIDEBAR: SidebarSection = [
   { label: '鱼说必看', href: '/fish-talks' },
-  { label: '概览', href: '/fish-talks' },
   {
     label: '大模型常识',
     href: '/fish-talks/llm',
     items: [
-      { label: '模型分类', href: '/fish-talks/llm/brief' },
-      { label: '常见模型', href: '/fish-talks/llm/models' },
-      { label: '大模型排名', href: '/fish-talks/llm/rankings' },
+      { label: '模型概览', href: '/fish-talks/llm/brief' },
+      { label: '知名模型', href: '/fish-talks/llm/models' },
+      { label: '模型排行榜', href: '/fish-talks/llm/rankings' },
     ],
   },
   {
@@ -60,47 +61,40 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
     items: [
       { label: 'token', href: '/fish-talks/model-terms/token' },
       { label: '温度', href: '/fish-talks/model-terms/temperature' },
-      { label: '流式传输', href: '/fish-talks/model-terms/streaming' },
-      { label: '思考', href: '/fish-talks/model-terms/thinking' },
-      { label: '上下文步数', href: '/fish-talks/model-terms/context-steps' },
+      { label: '流式输出', href: '/fish-talks/model-terms/streaming' },
+      { label: '思维链', href: '/fish-talks/model-terms/thinking' },
+      { label: '上下文长度', href: '/fish-talks/model-terms/context-steps' },
     ],
   },
   {
-    label: '其他常见术语',
+    label: '基础词汇表',
     href: '/fish-talks/glossary',
     items: [
       { label: 'API', href: '/fish-talks/glossary/api' },
       { label: '代理', href: '/fish-talks/glossary/proxy' },
-      { label: '反代', href: '/fish-talks/glossary/reverse-proxy' },
+      { label: '反向代理', href: '/fish-talks/glossary/reverse-proxy' },
       { label: '接口', href: '/fish-talks/glossary/interface' },
       { label: '环境变量', href: '/fish-talks/glossary/env' },
     ],
   },
-  // 环境准备迁移到新章节 SETUP
   {
-    label: '进阶概念',
-    href: '/fish-talks/advanced-concepts',
+    label: '流行词汇',
+    href: '/fish-talks/buzzwords',
     items: [
-      { label: 'Agent（智能体）', href: '/fish-talks/advanced-concepts/agent' },
-      {
-        label: 'Vibe Coding（氛围编程）',
-        href: '/fish-talks/advanced-concepts/vibe-coding',
-      },
-      {
-        label: 'Workflow（工作流）',
-        href: '/fish-talks/advanced-concepts/workflow',
-      },
+      { label: 'Agent', href: '/fish-talks/buzzwords/agent' },
+      { label: 'Vibe Coding', href: '/fish-talks/buzzwords/vibe-coding' },
+      { label: 'Workflow', href: '/fish-talks/buzzwords/workflow' },
     ],
   },
 ]
 
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
   { label: '基础使用', href: '/basic-usage' },
-  { label: '官方WebChat', href: '/basic-usage/webchat' },
-  { label: '第三方集成聊天软件', href: '/basic-usage/app-integration' },
-  { label: 'CLI命令行工具', href: '/basic-usage/cli' },
-  { label: 'AI代码编辑器', href: '/basic-usage/editor-agent' },
-  { label: '移动端AI应用', href: '/basic-usage/mobile-apps' },
+  { label: '官方 WebChat', href: '/basic-usage/webchat' },
+  { label: '接入常见应用', href: '/basic-usage/app-integration' },
+  { label: 'CLI 使用', href: '/basic-usage/cli' },
+  { label: 'AI 编辑器', href: '/basic-usage/editor-agent' },
+  { label: '移动端应用', href: '/basic-usage/mobile-apps' },
 ]
 
 export const PROMPTS_SIDEBAR: SidebarSection = [
@@ -114,46 +108,38 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
       { label: 'Chain-of-Thought', href: '/prompts/patterns/chain-of-thought' },
     ],
   },
-  { label: '进阶技巧', href: '/prompts/advanced' },
+  { label: '进阶用法', href: '/prompts/advanced' },
   { label: '模板', href: '/prompts/templates' },
   { label: '优化', href: '/prompts/optimization' },
 ]
 
 export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
-  {
-    label: '进阶玩法',
-    href: '/advanced',
-    items: [
-      { label: '知识库', href: '/advanced/knowledge-bases' },
-      { label: 'MCP', href: '/advanced/mcp' },
-      { label: '多智能体', href: '/advanced/multi-agent' },
-      { label: 'RAG', href: '/advanced/rag' },
-      { label: '向量数据库', href: '/advanced/vector-databases' },
-    ],
-  },
+  { label: '进阶玩法', href: '/advanced' },
+  { label: '知识库', href: '/advanced/knowledge-bases' },
+  { label: 'MCP', href: '/advanced/mcp' },
+  { label: '多智能体', href: '/advanced/multi-agent' },
+  { label: 'RAG', href: '/advanced/rag' },
+  { label: '向量数据库', href: '/advanced/vector-databases' },
 ]
 
 export const DEMO_SIDEBAR: SidebarSection = [
-  {
-    label: 'Demos',
-    href: '/demo',
-    items: [{ label: 'RAG 聊天机器人', href: '/demo/rag-chatbot' }],
-  },
+  { label: 'DEMO', href: '/demo' },
+  { label: 'RAG 助手示例', href: '/demo/rag-chatbot' },
 ]
 
 export const FUN_SIDEBAR: SidebarSection = [
   { label: '好玩的', href: '/fun' },
   { label: 'AI 绘画', href: '/fun/ai-drawing' },
-  { label: '大模型越狱', href: '/fun/llm-unlocking' },
-  { label: '银色酒馆', href: '/fun/silver-trivern' },
+  { label: '模型解锁', href: '/fun/llm-unlocking' },
+  { label: '角色扮演', href: '/fun/silver-trivern' },
 ]
-
 
 export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
+  { label: 'API KEY', href: '/resources/api-key' },
+  { label: '代理节点', href: '/resources/proxy-nodes' },
 ]
 
-// 新的“配置指南/环境配置”章节
 export const SETUP_SIDEBAR: SidebarSection = [
   { label: '配置指南', href: '/setup' },
   {
@@ -169,21 +155,35 @@ export const SETUP_SIDEBAR: SidebarSection = [
   },
 ]
 
-
-// 技术向 (tech)
 export const TECH_SIDEBAR: SidebarSection = [
   { label: '技术向', href: '/tech' },
   {
     label: '2API',
     href: '/tech/2api',
     items: [
-      { label: 'Retool2API', href: '/tech/2api/retool2api' },
+      { label: 'retool2api', href: '/tech/2api/retool2api' },
+      { label: 'qwen2api', href: '/tech/2api/qwen2api' },
+      { label: 'pplx2api', href: '/tech/2api/pplx2api' },
+      { label: 'deepinfra2api', href: '/tech/2api/deepinfra2api' },
+      { label: 'zai2api', href: '/tech/2api/zai2api' },
+      { label: 'LMArena2api', href: '/tech/2api/LMArena2api' },
+      { label: 'highlight2api', href: '/tech/2api/highlight2api' },
+      { label: 'warp2api', href: '/tech/2api/warp2api' },
+      { label: 'cerebras2api', href: '/tech/2api/cerebras2api' },
     ],
   },
   { label: 'API 管理', href: '/tech/api-management' },
-  { label: 'UltraThink', href: '/tech/ultrathink' },
+  {
+    label: '部署平台',
+    href: '/tech/deployment-platforms',
+    items: [
+      { label: 'Cloudflare', href: '/tech/deployment-platforms/cloudflare' },
+      { label: 'Vercel', href: '/tech/deployment-platforms/vercel' },
+      { label: 'Deno', href: '/tech/deployment-platforms/deno' },
+      { label: 'Supabase', href: '/tech/deployment-platforms/supabase' },
+      { label: 'Render', href: '/tech/deployment-platforms/render' },
+      { label: 'Railway', href: '/tech/deployment-platforms/railway' },
+      { label: 'Koyeb', href: '/tech/deployment-platforms/koyeb' },
+    ],
+  },
 ]
-
-
-
-
