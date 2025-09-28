@@ -1,12 +1,12 @@
 export const DOCS_MAP = {
   'fish-talks': '01-fish-talks',
-  basic: '02-basic-usage',
-  prompts: '03-prompts',
-  advanced: '04-advanced-techniques',
-  demo: '05-demos',
-  tech: '06-technical-deep-dive',
-  fun: '07-fun',
-  resources: '08-resources',
+  'basic-usage': '02-basic-usage',
+  prompts: '04-prompts',
+  advanced: '05-advanced-techniques',
+  demo: '06-demos',
+  tech: '07-technical-deep-dive',
+  fun: '08-fun',
+  resources: '09-resources',
 } as const
 
 export type DocsSection = keyof typeof DOCS_MAP

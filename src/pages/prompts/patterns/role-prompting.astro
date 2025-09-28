@@ -1,0 +1,18 @@
+---
+import ContentLayout from "../../../layouts/ContentLayout.astro"
+import { PROMPTS_SIDEBAR } from "../../../scripts/sidebars"
+import { getEntry } from "astro:content"
+
+const entry = await getEntry("docs", "04-prompts/patterns/role-prompting")
+let Content: any
+if (entry) {
+  const rendered = await entry.render()
+  Content = rendered.Content
+} else {
+  Content = () => null
+}
+---
+
+<ContentLayout title={entry?.data?.title ?? "Role Prompting"} section="提示词" sidebarItems={PROMPTS_SIDEBAR} headings={[]}>
+  <Content />
+</ContentLayout>
