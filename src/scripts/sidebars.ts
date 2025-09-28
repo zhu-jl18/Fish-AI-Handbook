@@ -106,16 +106,7 @@ export const BASIC_USAGE_SIDEBAR: SidebarSection = [
 export const PROMPTS_SIDEBAR: SidebarSection = [
   { label: '提示词', href: '/prompts' },
   {
-    label: '基础知识',
-    href: '/prompts/basics',
-    items: [
-      { label: '提示词基础', href: '/prompts/basics/intro' },
-      { label: '结构与规范', href: '/prompts/basics/structure' },
-      { label: '注意事项', href: '/prompts/basics/dos-and-donts' },
-    ],
-  },
-  {
-    label: '常用模式',
+    label: '提示模式',
     href: '/prompts/patterns',
     items: [
       { label: 'Few-shot', href: '/prompts/patterns/few-shot' },
@@ -124,6 +115,8 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
     ],
   },
   { label: '进阶技巧', href: '/prompts/advanced' },
+  { label: '模板', href: '/prompts/templates' },
+  { label: '优化', href: '/prompts/optimization' },
 ]
 
 export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
@@ -190,5 +183,7 @@ export const TECH_SIDEBAR: SidebarSection = [
   { label: 'API 管理', href: '/tech/api-management' },
   { label: 'UltraThink', href: '/tech/ultrathink' },
 ]
+
+
 
 

@@ -24,6 +24,7 @@ pnpm-debug.log*
 .vercel/
 .vscode/
 .idea/
+.serena/
 
 # bmad ephemeral (keep .bmad-core)
 .bmad
@@ -44,3 +45,6 @@ WARP.md
 temp_*
 *_before_fix.*
 sidebars_out.ts
+__tmp_*
+*.old
+*.bak
