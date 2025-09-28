@@ -1,35 +1,23 @@
 ---
-import ContentLayout from '../../layouts/ContentLayout.astro'
-import { getEntry } from 'astro:content'
+import ContentLayout from "../../layouts/ContentLayout.astro"
+import { ADVANCED_TECHNIQUES_SIDEBAR } from "../../scripts/sidebars"
+import { getEntry } from "astro:content"
 
-let entry = await getEntry('docs', '05-advanced-techniques/multi-agent')
+const entry = await getEntry("docs", "05-advanced-techniques/multi-agent")
 let Content: any = null
-let hasContent = false
-try {
-  if (entry) {
-    const rendered = await entry.render()
-    Content = rendered.Content
-    hasContent = true
-  }
-} catch (e) {
-  console.error('Render error: advanced/multi-agent', e)
+if (entry) {
+  const rendered = await entry.render()
+  Content = rendered.Content
 }
-
-import { ADVANCED_TECHNIQUES_SIDEBAR } from '../../scripts/sidebars'
-
-const headings = [
-  { id: '为什么', text: '为什么', depth: 1 },
-  { id: '什么时候用', text: '什么时候用', depth: 2 },
-  { id: '常见拓扑', text: '常见拓扑', depth: 2 },
-  { id: '风险', text: '风险', depth: 2 },
-]
+const section = "\u8fdb\u9636\u73a9\u6cd5"
+const title = entry?.data?.title ?? "\u591a\u667a\u80fd\u4f53"
 ---
 
 <ContentLayout
-  title="工程化进阶 / 多智能体协作"
-  section="进阶玩法"
+  title={title}
+  section={section}
   sidebarItems={ADVANCED_TECHNIQUES_SIDEBAR}
-  headings={headings}
+  headings={[]}
 >
-  {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
+  {Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
