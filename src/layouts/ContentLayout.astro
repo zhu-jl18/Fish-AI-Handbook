@@ -10,18 +10,10 @@ const sidebarItems = getSidebarForPath(currentPath)
 
 const { title, section, headings = [] } = Astro.props
 
-const sectionToNav: Record<string, string> = {
-  DEMO: 'demo',
-  技术向: 'tech',
-  配置指南: 'setup',
-  鱼说必看: 'fish-talks',
-  基础用法: 'basic-usage',
-  提示词: 'prompts',
-  进阶玩法: 'advanced',
-  好玩的: 'fun',
-  资源合集: 'resources',
-}
-const currentKey = sectionToNav[section] ?? 'home'
+// 基于 URL 别名推导导航高亮键（不依赖中文文案）
+const first = currentPath.split('/').filter(Boolean)[0] ?? 'home'
+const navKeys = new Set(['fish-talks','setup','basic-usage','prompts','advanced','demo','tech','fun','resources'])
+const currentKey = navKeys.has(first) ? first : 'home'
 ---
 
 <BaseLayout title={title}>
@@ -32,7 +24,6 @@ const currentKey = sectionToNav[section] ?? 'home'
 
     <main class="content">
       <div class="content-inner">
-
         <slot />
       </div>
     </main>
@@ -61,8 +52,6 @@ const currentKey = sectionToNav[section] ?? 'home'
     margin: 0 auto;
   }
 
-
-
   @media (max-width: 1024px) {
     .left-sidebar,
     .right-sidebar {
@@ -75,4 +64,3 @@ const currentKey = sectionToNav[section] ?? 'home'
     }
   }
 </style>
-
