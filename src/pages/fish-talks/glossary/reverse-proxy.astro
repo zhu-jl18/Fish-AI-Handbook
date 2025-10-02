@@ -12,16 +12,13 @@ if (entry) {
   Content = () => null
 }
 
-const headings = [
-  { id: '为什么要懂反向代理', text: '为什么要懂反向代理', depth: 1 },
-]
+// 目录由 RightSidebar 自动生成
 ---
 
 <ContentLayout
-  title={`Fish想说 - 其他常见术语 / ${entry?.data?.title ?? "反向代理"}`}
-  section="Fish想说"
+  title={`鱼说 - 相关概念 / ${entry?.data?.title ?? "反向代理"}`}
+  section="鱼说必看"
   sidebarItems={FISH_TALKS_SIDEBAR}
-  headings={headings}
 >
   <Content />
 </ContentLayout>

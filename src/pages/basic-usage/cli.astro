@@ -4,37 +4,14 @@ import { BASIC_USAGE_SIDEBAR } from '../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
 const entry = await getEntry('docs', '02-basic-usage/cli')
-let Content: any = null
-let hasContent = false
-try {
-  if (entry) {
-    const rendered = await entry.render()
-    Content = rendered.Content
-    hasContent = true
-  }
-} catch (e) {
-  console.error('Render error: cli', e)
-  hasContent = false
-}
-
-// 相对路径信息
-
-const headings = [
-  { id: '为啥程序员都爱cli工具', text: '为啥程序员都爱CLI工具', depth: 1 },
-  { id: '2025年最值得用的cli工具', text: '2025年最值得用的CLI工具', depth: 1 },
-  { id: '实战应用场景', text: '实战应用场景', depth: 1 },
-  { id: '高级技巧', text: '高级技巧', depth: 1 },
-  { id: '成本对比2025年', text: '成本对比（2025年）', depth: 1 },
-  { id: '选择建议', text: '选择建议', depth: 1 },
-]
+const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
-  title="CLI命令行工具 - 程序员的终端神器"
-  section="基础使用"
+  title={entry?.data?.title ?? 'CLI 工具包 - 开发者的命令行助手'}
+  section="基础用法"
   sidebarItems={BASIC_USAGE_SIDEBAR}
-  headings={headings}
-
 >
-  {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
+  {rendered ? <rendered.Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
+

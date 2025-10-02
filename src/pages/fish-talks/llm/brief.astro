@@ -4,32 +4,14 @@ import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
 const entry = await getEntry('docs', '01-fish-talks/llm/brief')
-let Content: any
-if (entry) {
-  const rendered = await entry.render()
-  Content = rendered.Content
-} else {
-  Content = () => null
-}
-
-// 添加相对路径信息
-
-const headings = [
-  { id: '为什么要先懂分类', text: '为什么要先懂分类', depth: 1 },
-  { id: '按能力', text: '按能力', depth: 2 },
-  { id: '按模态', text: '按模态', depth: 2 },
-  { id: '按部署', text: '按部署', depth: 2 },
-  { id: '按上下文窗口', text: '按上下文窗口', depth: 2 },
-  { id: '选择建议', text: '选择建议', depth: 2 },
-]
+const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
-  title="Fish想说 - 模型分类"
-  section="Fish想说"
+  title={entry?.data?.title ?? '模型概览'}
+  section="鱼说必看"
   sidebarItems={FISH_TALKS_SIDEBAR}
-  headings={headings}
-
 >
-  <Content />
+  {rendered ? <rendered.Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
+

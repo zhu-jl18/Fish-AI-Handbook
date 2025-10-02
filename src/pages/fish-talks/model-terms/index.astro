@@ -1,16 +1,14 @@
 ---
 import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
-
-const headings = [{ id: 'terms', text: '模型相关术语 · 概览', depth: 1 }]
 ---
 
 <ContentLayout
-  title="Fish想说 - 模型相关术语"
-  section="Fish想说"
+  title="鱼说 - 模型术语"
+  section="鱼说必看"
   sidebarItems={FISH_TALKS_SIDEBAR}
-  headings={headings}
 >
-  <h1 id="terms">模型相关术语 · 概览</h1>
-  <p>选择左侧具体词条查看详情。</p>
+  <h1 id="terms">模型术语 · 导航</h1>
+  <p>从左侧选择一个术语查看详细解释。</p>
 </ContentLayout>
+

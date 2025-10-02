@@ -17,14 +17,13 @@ try {
 
 import { FUN_SIDEBAR } from '../../scripts/sidebars'
 
-const headings = []
+// 目录由 RightSidebar 自动生成
 ---
 
 <ContentLayout
-  title="Silver Trivern 酒馆使用"
+  title="Silver Trivern 使用"
   section="好玩的"
   sidebarItems={FUN_SIDEBAR}
-  headings={headings}
 >
   {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
