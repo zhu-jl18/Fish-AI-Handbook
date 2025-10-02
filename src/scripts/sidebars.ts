@@ -14,40 +14,22 @@ export type SidebarGroup = {
 export type SidebarSection = Array<SidebarLink | SidebarGroup>
 
 export function getSidebarForPath(path: string): SidebarSection {
-  if (path.startsWith('/setup')) {
-    return SETUP_SIDEBAR
-  }
-  if (path.startsWith('/fish-talks')) {
-    return FISH_TALKS_SIDEBAR
-  }
-  if (path.startsWith('/basic-usage')) {
-    return BASIC_USAGE_SIDEBAR
-  }
-  if (path.startsWith('/prompts')) {
-    return PROMPTS_SIDEBAR
-  }
-  if (path.startsWith('/advanced')) {
-    return ADVANCED_TECHNIQUES_SIDEBAR
-  }
-  if (path.startsWith('/demo')) {
-    return DEMO_SIDEBAR
-  }
-  if (path.startsWith('/fun')) {
-    return FUN_SIDEBAR
-  }
-  if (path.startsWith('/tech')) {
-    return TECH_SIDEBAR
-  }
-  if (path.startsWith('/resources')) {
-    return RESOURCES_SIDEBAR
-  }
+  if (path.startsWith('/setup')) return SETUP_SIDEBAR
+  if (path.startsWith('/fish-talks')) return FISH_TALKS_SIDEBAR
+  if (path.startsWith('/basic-usage')) return BASIC_USAGE_SIDEBAR
+  if (path.startsWith('/prompts')) return PROMPTS_SIDEBAR
+  if (path.startsWith('/advanced')) return ADVANCED_TECHNIQUES_SIDEBAR
+  if (path.startsWith('/demo')) return DEMO_SIDEBAR
+  if (path.startsWith('/fun')) return FUN_SIDEBAR
+  if (path.startsWith('/tech')) return TECH_SIDEBAR
+  if (path.startsWith('/resources')) return RESOURCES_SIDEBAR
   return []
 }
 
 export const FISH_TALKS_SIDEBAR: SidebarSection = [
   { label: '鱼说必看', href: '/fish-talks' },
   {
-    label: '大模型常识',
+    label: '模型认知',
     href: '/fish-talks/llm',
     items: [
       { label: '模型概览', href: '/fish-talks/llm/brief' },
@@ -56,18 +38,18 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
     ],
   },
   {
-    label: '模型相关术语',
+    label: '模型术语',
     href: '/fish-talks/model-terms',
     items: [
       { label: 'token', href: '/fish-talks/model-terms/token' },
       { label: '温度', href: '/fish-talks/model-terms/temperature' },
       { label: '流式输出', href: '/fish-talks/model-terms/streaming' },
-      { label: '思维链', href: '/fish-talks/model-terms/thinking' },
-      { label: '上下文长度', href: '/fish-talks/model-terms/context-steps' },
+      { label: '思维', href: '/fish-talks/model-terms/thinking' },
+      { label: '上下文步数', href: '/fish-talks/model-terms/context-steps' },
     ],
   },
   {
-    label: '基础词汇表',
+    label: '通用词汇',
     href: '/fish-talks/glossary',
     items: [
       { label: 'API', href: '/fish-talks/glossary/api' },
@@ -89,9 +71,9 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
 ]
 
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
-  { label: '基础使用', href: '/basic-usage' },
+  { label: '基础用法', href: '/basic-usage' },
   { label: '官方 WebChat', href: '/basic-usage/webchat' },
-  { label: '接入常见应用', href: '/basic-usage/app-integration' },
+  { label: '应用集成', href: '/basic-usage/app-integration' },
   { label: 'CLI 使用', href: '/basic-usage/cli' },
   { label: 'AI 编辑器', href: '/basic-usage/editor-agent' },
   { label: '移动端应用', href: '/basic-usage/mobile-apps' },
@@ -113,9 +95,9 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
     label: '对话层级',
     href: '/prompts/dialogue-levels',
     items: [
-      { label: '系统提示词', href: '/prompts/dialogue-levels/system-prompts' },
+      { label: '系统提示', href: '/prompts/dialogue-levels/system-prompts' },
       { label: '助手消息', href: '/prompts/dialogue-levels/assistant-messages' },
-      { label: '用户提示词', href: '/prompts/dialogue-levels/user-prompts' },
+      { label: '用户提示', href: '/prompts/dialogue-levels/user-prompts' },
       { label: '一个例子', href: '/prompts/dialogue-levels/example' },
     ],
   },
@@ -144,14 +126,14 @@ export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
 
 export const DEMO_SIDEBAR: SidebarSection = [
   { label: 'DEMO', href: '/demo' },
-  { label: 'RAG 助手示例', href: '/demo/rag-chatbot' },
+  { label: 'RAG 演示', href: '/demo/rag-chatbot' },
 ]
 
 export const FUN_SIDEBAR: SidebarSection = [
   { label: '好玩的', href: '/fun' },
   { label: 'AI 绘画', href: '/fun/ai-drawing' },
   { label: '模型解锁', href: '/fun/llm-unlocking' },
-  { label: '角色扮演', href: '/fun/silver-trivern' },
+  { label: 'Silver Trivern', href: '/fun/silver-trivern' },
 ]
 
 export const RESOURCES_SIDEBAR: SidebarSection = [
@@ -178,8 +160,8 @@ export const SETUP_SIDEBAR: SidebarSection = [
     href: '/setup/cherrystudio',
     items: [
       { label: '模型服务', href: '/setup/cherrystudio/model-services' },
-      { label: '定义助手', href: '/setup/cherrystudio/assistant-definitions' },
-      { label: '显示美化', href: '/setup/cherrystudio/ui-enhancement' },
+      { label: '助手配置', href: '/setup/cherrystudio/assistant-definitions' },
+      { label: 'UI 增强', href: '/setup/cherrystudio/ui-enhancement' },
       { label: '数据设置', href: '/setup/cherrystudio/data-settings' },
       { label: '其他', href: '/setup/cherrystudio/others' },
     ],
@@ -220,3 +202,4 @@ export const TECH_SIDEBAR: SidebarSection = [
     ],
   },
 ]
+

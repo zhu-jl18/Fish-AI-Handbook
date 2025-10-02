@@ -4,39 +4,23 @@ import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
 const entry = await getEntry('docs', '01-fish-talks/llm/rankings')
-let Content: any
-if (entry) {
-  const rendered = await entry.render()
-  Content = rendered.Content
-} else {
-  Content = () => null
-}
-
-// 添加相对路径信息
-
-const headings = [
-  { id: '提示', text: '提示', depth: 2 },
-  { id: 'lmarena', text: 'LMArena', depth: 2 },
-]
+const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
-  title="Fish想说 - 大模型排名"
-  section="Fish想说"
+  title={entry?.data?.title ?? '模型排行榜'}
+  section="鱼说必看"
   sidebarItems={FISH_TALKS_SIDEBAR}
-  headings={headings}
-
 >
-  <Content />
+  {rendered ? <rendered.Content /> : <div>文档未找到或渲染失败</div>}
   <h2 id="lmarena">LMArena</h2>
   <iframe
     src="https://lmarena.ai/"
     style="width: 100%; height: 70vh; border: 1px solid #333; border-radius: 6px;"
     loading="lazy"></iframe>
   <p>
-    若内嵌不可用，请访问：<a
-      href="https://lmarena.ai/"
-      target="_blank"
-      rel="noopener">LMArena 官网</a>
+    如果嵌入无法正常显示，可前往
+    <a href="https://lmarena.ai/" target="_blank" rel="noopener">LMArena 官网</a>
   </p>
 </ContentLayout>
+
