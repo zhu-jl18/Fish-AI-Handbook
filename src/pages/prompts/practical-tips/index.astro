@@ -17,6 +17,6 @@ try {
 }
 ---
 
-<ContentLayout title={entry?.data?.title ?? "实用技巧"} section="提示词" sidebarItems={PROMPTS_SIDEBAR} headings={[]}>
+<ContentLayout title={entry?.data?.title ?? "实用技巧"} section="提示词" sidebarItems={PROMPTS_SIDEBAR}>
   {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>

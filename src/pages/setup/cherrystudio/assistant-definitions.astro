@@ -8,10 +8,9 @@ const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
-  title={entry?.data?.title ?? "CherryStudio · 定义助手"}
+  title={entry?.data?.title ?? "CherryStudio · 助手配置"}
   section="配置指南"
   sidebarItems={SETUP_SIDEBAR}
-  headings={[]}
 >
   {rendered ? <rendered.Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
