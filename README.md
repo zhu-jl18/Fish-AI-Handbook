@@ -23,7 +23,7 @@
 ```mermaid
 %% 组件与数据流原理（示意）
 flowchart LR
-  URL["Request: /tech/2api/retool2api/"] --> CL["ContentLayout.astro"]
+URL["Request: /resources/2api/"]
   subgraph Layout
     CL -->|Astro.url.pathname| SB["getSidebarForPath()"]
     SB --> LS["LeftSidebar"]
@@ -38,8 +38,8 @@ flowchart LR
 
 规则：最多三级。一级/二级 = “文件夹 + index.md”；三级 = 单个 `.md`。
 
-- 新增“顶级章节（一级）”示例：新增 `playground`（假设排序号 10）
-  1. 内容：`src/content/docs/10-playground/index.md`
+- 新增“顶级章节（一级）”示例：新增 `playground`（假设排序号 07）
+  1. 内容：`src/content/docs/07-playground/index.md`
      ```markdown
      ---
      title: Playground
@@ -51,7 +51,7 @@ flowchart LR
      ---
      import ContentLayout from '../../layouts/ContentLayout.astro'
      import { getEntry } from 'astro:content'
-     const entry = await getEntry('docs','10-playground')
+const entry = await getEntry('docs','07-playground')
      const { Content } = await entry.render()
      ---
      <ContentLayout title={entry?.data?.title || 'Playground'} section="Playground" headings={[]}>
@@ -64,29 +64,29 @@ flowchart LR
      export const PLAYGROUND_SIDEBAR=[{ label:'Playground', href:'/playground' }]
      ```
 
-- 新增“二级 + 三级页面”示例：在 `07-technical-deep-dive` 下新增二级 `best-practices`，以及三级 `tracing.md`
+- 新增“二级 + 三级页面”示例：在 `03-prompts` 下新增二级 `best-practices`，以及三级 `tracing.md`
   1. 内容层：
-     - `src/content/docs/07-technical-deep-dive/best-practices/index.md`
-     - `src/content/docs/07-technical-deep-dive/best-practices/tracing.md`
+     - `src/content/docs/03-prompts/best-practices/index.md`
+     - `src/content/docs/03-prompts/best-practices/tracing.md`
   2. 路由层：
-     - `src/pages/tech/best-practices/index.astro` 读取二级 index
-     - `src/pages/tech/best-practices/tracing.astro` 读取三级 md
+     - `src/pages/prompts/best-practices/index.astro` 读取二级 index
+     - `src/pages/prompts/best-practices/tracing.astro` 读取三级 md
      ```astro
      ---
      import ContentLayout from '../../../layouts/ContentLayout.astro'
      import { getEntry } from 'astro:content'
-     const entry = await getEntry('docs','07-technical-deep-dive/best-practices')
+     const entry = await getEntry('docs','03-prompts/best-practices')
      const { Content } = await entry.render()
      ---
-     <ContentLayout title={entry?.data?.title || 'Best Practices'} section="技术向" headings={[]}>
+     <ContentLayout title={entry?.data?.title || 'Best Practices'} section="提示词" headings={[]}>
        <Content />
      </ContentLayout>
      ```
-  3. 侧栏：在 `TECH_SIDEBAR` 下添加：
+  3. 侧栏：在 `PROMPTS_SIDEBAR` 下添加：
      ```ts
      {
-       label:'Best Practices', href:'/tech/best-practices',
-       items:[{label:'Tracing', href:'/tech/best-practices/tracing'}]
+       label:'Best Practices', href:'/prompts/best-practices',
+       items:[{label:'Tracing', href:'/prompts/best-practices/tracing'}]
      }
      ```
 
@@ -114,14 +114,14 @@ npm run format   # 代码格式化
 ## 4) 最佳实践与项目内约定
 <a id="rules"></a> [回到目录](#toc)
 
-- 顶层内容目录命名：`编号-别名`，如 `01-fish-talks/`、`07-technical-deep-dive/`。
+- 顶层内容目录命名：`编号-别名`，如 `01-fish-talks/`、`06-resources/`、`99-setup/`。
 - 深度不超过三级：一级/二级 = 文件夹 + index.md；三级 = 单页 md。
 - 路由与内容一一对应：新增时同步补 astro 与侧栏条目。
 - 命名：路由/文件名 kebab-case；侧栏 label 简短统一；组件/脚本沿用现有驼峰风格。
 - 版本控制：不提交 `dist/`、`.astro/`、工具本地数据；小步提交（`content:`/`nav:`/`layout:`/`fix:`/`build:`）。
 - 快查：
-  - Setup 前置页：`/setup/prerequisites/*`
-  - 技术向：`/tech/*`，侧栏常量 `TECH_SIDEBAR`
+  - 配置指南（置底）：`/setup/*`
+  - 资源合集：`/resources/*`（含 2API `/resources/2api`、云平台 `/resources/cloud-platforms`）
   - 首页“基础使用”：`/basic-usage`
 
 ## 5) Vercel 部署指南

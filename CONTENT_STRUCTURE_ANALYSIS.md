@@ -1,5 +1,11 @@
 # 网站内容结构分析报告
 
+> 2025-10 更新摘要（与当前仓库一致）
+> - 顶层目录严格递增：01-fish-talks、02-basic-usage、03-prompts、04-advanced-techniques、05-fun、06-resources、99-setup
+> - 移除“技术向(tech)”与“DEMO”一级入口及其所有页面
+> - 在“资源合集(06-resources)”下新增二级页面：2API、云平台；两页仅罗列原三级页面标题
+> - 配置指南移动至末尾并编号为 99-setup；其下“环境准备”拆分为二级直达页（Terminal、VS Code、Node.js、GitHub、VPN），Cherry Studio 合并为单页
+
 ## 当前内容层级结构
 
 ### 一级分类（9个主分类）
