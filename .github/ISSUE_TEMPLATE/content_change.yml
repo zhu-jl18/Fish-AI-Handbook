@@ -1,0 +1,24 @@
+name: Content change request
+description: 请求新增/修改/删除文档内容
+labels: [content]
+body:
+  - type: input
+    attributes:
+      label: 相关路径
+      placeholder: 例如 src/content/docs/03-prompts/best-practices/index.md
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 变更说明
+      placeholder: 新增/修改/删除了什么？为什么？
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: 自检清单
+      options:
+        - label: 已添加/更新 frontmatter（title、description）
+        - label: 路由 .astro 与内容路径一致（getEntry）
+        - label: 已同步更新 sidebars 与顶部导航（如涉及）
+        - label: 本地构建通过（npm run build）

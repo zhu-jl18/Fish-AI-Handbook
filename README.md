@@ -11,6 +11,11 @@
 - [Vercel 部署指南](#vercel)
 
 ## 1) 技术架构说明
+
+> 目录与排序（当前规范）
+> - 顶层严格递增：01-fish-talks、02-basic-usage、03-prompts、04-advanced-techniques、05-fun、06-resources、99-setup（置底）
+> - 不允许跳号；新增一级目录按顺序加 1；Setup 固定 99
+> - “技术向/DEMO”已移除；原“技术向”内容已合并为“资源合集”的 2API 与 云平台 两个二级页面
 <a id="overview"></a> [回到目录](#toc)
 
 - 核心技术栈
@@ -95,6 +100,16 @@ const entry = await getEntry('docs','07-playground')
   - 删除：同时删除 Markdown 与 astro 页面，并从 `sidebars.ts` 移除链接，避免死链。
 
 ## 3) 开发维护流程
+
+内容 Frontmatter（必填）
+```yaml
+---
+title: 标题
+description: 页面简介（必填，未填写将构建失败）
+---
+```
+
+更多协作与提交流程，请参考 CONTRIBUTING.md。
 <a id="maintenance"></a> [回到目录](#toc)
 
 ```
