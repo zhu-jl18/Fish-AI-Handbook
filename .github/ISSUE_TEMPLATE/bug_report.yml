@@ -1,0 +1,32 @@
+name: Bug report
+description: 报告一个问题或错误
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: 复现步骤
+      description: 请描述如何复现问题
+      placeholder: |
+        1. 访问 /xxx
+        2. 点击 yyy
+        3. 看到错误 zzz
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 期望行为
+      placeholder: 应该发生什么？
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 实际行为
+      placeholder: 实际发生了什么？
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 相关日志/截图
+      placeholder: 截图、控制台输出、构建日志等
+    validations:
+      required: false
