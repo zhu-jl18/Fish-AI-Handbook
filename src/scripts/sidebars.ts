@@ -18,9 +18,7 @@ export function getSidebarForPath(path: string): SidebarSection {
   if (path.startsWith('/basic-usage')) return BASIC_USAGE_SIDEBAR
   if (path.startsWith('/prompts')) return PROMPTS_SIDEBAR
   if (path.startsWith('/advanced')) return ADVANCED_TECHNIQUES_SIDEBAR
-  if (path.startsWith('/demo')) return DEMO_SIDEBAR
   if (path.startsWith('/fun')) return FUN_SIDEBAR
-  if (path.startsWith('/tech')) return TECH_SIDEBAR
   if (path.startsWith('/resources')) return RESOURCES_SIDEBAR
   if (path.startsWith('/setup')) return SETUP_SIDEBAR
   return []
@@ -124,10 +122,6 @@ export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
   { label: '向量数据库', href: '/advanced/vector-databases' },
 ]
 
-export const DEMO_SIDEBAR: SidebarSection = [
-  { label: 'DEMO', href: '/demo' },
-  { label: 'RAG 演示', href: '/demo/rag-chatbot' },
-]
 
 export const FUN_SIDEBAR: SidebarSection = [
   { label: '好玩的', href: '/fun' },
@@ -140,6 +134,8 @@ export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
   { label: 'API KEY', href: '/resources/api-key' },
   { label: '代理节点', href: '/resources/proxy-nodes' },
+  { label: '2API', href: '/resources/2api' },
+  { label: '云平台', href: '/resources/cloud-platforms' },
 ]
 
 export const SETUP_SIDEBAR: SidebarSection = [
@@ -154,36 +150,4 @@ export const SETUP_SIDEBAR: SidebarSection = [
   { label: 'Codex', href: '/setup/codex' },
 ]
 
-export const TECH_SIDEBAR: SidebarSection = [
-  { label: '技术向', href: '/tech' },
-  {
-    label: '2API',
-    href: '/tech/2api',
-    items: [
-      { label: 'retool2api', href: '/tech/2api/retool2api' },
-      { label: 'qwen2api', href: '/tech/2api/qwen2api' },
-      { label: 'pplx2api', href: '/tech/2api/pplx2api' },
-      { label: 'deepinfra2api', href: '/tech/2api/deepinfra2api' },
-      { label: 'zai2api', href: '/tech/2api/zai2api' },
-      { label: 'LMArena2api', href: '/tech/2api/LMArena2api' },
-      { label: 'highlight2api', href: '/tech/2api/highlight2api' },
-      { label: 'warp2api', href: '/tech/2api/warp2api' },
-      { label: 'cerebras2api', href: '/tech/2api/cerebras2api' },
-    ],
-  },
-  { label: 'API 管理', href: '/tech/api-management' },
-  {
-    label: '部署平台',
-    href: '/tech/deployment-platforms',
-    items: [
-      { label: 'Cloudflare', href: '/tech/deployment-platforms/cloudflare' },
-      { label: 'Vercel', href: '/tech/deployment-platforms/vercel' },
-      { label: 'Deno', href: '/tech/deployment-platforms/deno' },
-      { label: 'Supabase', href: '/tech/deployment-platforms/supabase' },
-      { label: 'Render', href: '/tech/deployment-platforms/render' },
-      { label: 'Railway', href: '/tech/deployment-platforms/railway' },
-      { label: 'Koyeb', href: '/tech/deployment-platforms/koyeb' },
-    ],
-  },
-]
 

@@ -3,7 +3,7 @@ import ContentLayout from "../../layouts/ContentLayout.astro"
 import { ADVANCED_TECHNIQUES_SIDEBAR } from "../../scripts/sidebars"
 import { getEntry } from "astro:content"
 
-const entry = await getEntry("docs", "05-advanced-techniques/vector-databases")
+const entry = await getEntry("docs", "04-advanced-techniques/vector-databases")
 let Content: any = null
 if (entry) {
   const rendered = await entry.render()
