@@ -3,7 +3,7 @@ import ContentLayout from '../../layouts/ContentLayout.astro'
 import { SETUP_SIDEBAR } from '../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '10-setup/vs-code')
+const entry = await getEntry('docs', '99-setup/vs-code')
 const rendered = entry && (await entry.render())
 ---
 
