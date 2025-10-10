@@ -1,6 +1,13 @@
-﻿# Fish AI Handbook（维护者维护手册）
+# Fish AI Handbook（维护者维护手册）
 
 本项目由我借助 AI 建立与维护，README 仅面向“未来的我”。目标：能在数分钟内回忆技术栈和原理，并按步骤完成新增/修改/删除与部署。
+
+协作入口（快速访问）
+- 开发协作规范：CONTRIBUTING.md
+- AI 协作指南：AI_AGENT_GUIDE.md
+- Warp 专用指南：WARP.md
+- PR 模板：.github/PULL_REQUEST_TEMPLATE.md
+- Issue 模板：.github/ISSUE_TEMPLATE/
 
 ## 目录（快速跳转）
 <a id="toc"></a>
