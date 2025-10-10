@@ -40,7 +40,7 @@
 示例片段（Mermaid 架构示意，详见 README）：
 ```mermaid
 flowchart LR
-  URL["/tech/2api/retool2api/"] --> CL["ContentLayout.astro"]
+  URL["/resources/2api/"] --> CL["ContentLayout.astro"]
   subgraph Layout
     CL -->|Astro.url.pathname| SB["getSidebarForPath()"]
     SB --> LS["LeftSidebar"]
@@ -94,7 +94,7 @@ if (path.startsWith('/playground')) return PLAYGROUND_SIDEBAR
 ---
 import ContentLayout from '../../layouts/ContentLayout.astro'
 import { getEntry } from 'astro:content'
-const entry = await getEntry('docs', '10-playground')
+const entry = await getEntry('docs', '07-playground')
 const { Content } = await entry.render()
 ---
 <ContentLayout title={entry?.data?.title || 'Playground'} section="Playground" headings={[]}>
@@ -104,7 +104,7 @@ const { Content } = await entry.render()
 
 新增“二级 + 三级页面”
 1) 内容：二级 `index.md` 与三级 `*.md`
-2) 路由：`/tech/best-practices/index.astro` 与 `/tech/best-practices/tracing.astro`
+2) 路由：`/prompts/best-practices/index.astro` 与 `/prompts/best-practices/tracing.astro`
 3) 侧栏：二级 `items` 内包含三级链接
 4) 自检：二/三级路由均可达
 
@@ -113,10 +113,10 @@ const { Content } = await entry.render()
 ---
 import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { getEntry } from 'astro:content'
-const entry = await getEntry('docs', '07-technical-deep-dive/best-practices/tracing')
+const entry = await getEntry('docs', '03-prompts/best-practices/tracing')
 const { Content } = await entry.render()
 ---
-<ContentLayout title={entry?.data?.title || 'Tracing'} section="技术向" headings={[]}>
+<ContentLayout title={entry?.data?.title || 'Tracing'} section="提示词" headings={[]}>
   <Content />
 </ContentLayout>
 ```
