@@ -14,7 +14,6 @@ export type SidebarGroup = {
 export type SidebarSection = Array<SidebarLink | SidebarGroup>
 
 export function getSidebarForPath(path: string): SidebarSection {
-  if (path.startsWith('/setup')) return SETUP_SIDEBAR
   if (path.startsWith('/fish-talks')) return FISH_TALKS_SIDEBAR
   if (path.startsWith('/basic-usage')) return BASIC_USAGE_SIDEBAR
   if (path.startsWith('/prompts')) return PROMPTS_SIDEBAR
@@ -23,6 +22,7 @@ export function getSidebarForPath(path: string): SidebarSection {
   if (path.startsWith('/fun')) return FUN_SIDEBAR
   if (path.startsWith('/tech')) return TECH_SIDEBAR
   if (path.startsWith('/resources')) return RESOURCES_SIDEBAR
+  if (path.startsWith('/setup')) return SETUP_SIDEBAR
   return []
 }
 
@@ -144,28 +144,12 @@ export const RESOURCES_SIDEBAR: SidebarSection = [
 
 export const SETUP_SIDEBAR: SidebarSection = [
   { label: '配置指南', href: '/setup' },
-  {
-    label: '环境准备',
-    href: '/setup/prerequisites',
-    items: [
-      { label: '终端', href: '/setup/prerequisites/terminal' },
-      { label: 'Vs Code', href: '/setup/prerequisites/vs-code' },
-      { label: 'Node.js', href: '/setup/prerequisites/nodejs' },
-      { label: 'GitHub', href: '/setup/prerequisites/github' },
-      { label: 'VPN', href: '/setup/prerequisites/vpn' },
-    ],
-  },
-  {
-    label: 'Cherry Studio',
-    href: '/setup/cherrystudio',
-    items: [
-      { label: '模型服务', href: '/setup/cherrystudio/model-services' },
-      { label: '助手配置', href: '/setup/cherrystudio/assistant-definitions' },
-      { label: 'UI 增强', href: '/setup/cherrystudio/ui-enhancement' },
-      { label: '数据设置', href: '/setup/cherrystudio/data-settings' },
-      { label: '其他', href: '/setup/cherrystudio/others' },
-    ],
-  },
+  { label: 'Terminal', href: '/setup/terminal' },
+  { label: 'Vs Code', href: '/setup/vs-code' },
+  { label: 'Node.js', href: '/setup/nodejs' },
+  { label: 'GitHub', href: '/setup/github' },
+  { label: 'VPN', href: '/setup/vpn' },
+  { label: 'Cherry Studio', href: '/setup/cherrystudio' },
   { label: 'Claude Code', href: '/setup/claude-code' },
   { label: 'Codex', href: '/setup/codex' },
 ]
