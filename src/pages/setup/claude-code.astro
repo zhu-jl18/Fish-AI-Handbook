@@ -18,6 +18,6 @@ if (entry) {
 }
 ---
 
-<ContentLayout title={entry?.data?.title ?? "Claude Code"} section="配置指南" sidebarItems={SETUP_SIDEBAR} headings={[]}>
+<ContentLayout title={entry?.data?.title ?? "Claude Code"} section="配置指南" sidebarItems={SETUP_SIDEBAR}>
   {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
