@@ -1,5 +1,11 @@
 ---
 title: 环境准备 · Node.js
+
+description: Node.js 的安装与基础配置。
+---
+
+# Node.js 的安装与基础配置
+=======
 description: Node.js 的核心作用、npm/npx 生态系统详解，以及为什么 AI 编程工具选择 npm 作为默认安装手段。
 ---
 
@@ -281,4 +287,3 @@ npm config set registry https://registry.npmjs.org
 3. **自动化脚本**：编写一键环境搭建脚本
 
 这份指南聚焦于 Node.js 生态系统的核心价值和 AI 编程工具的选择逻辑，帮助开发者理解现代 JavaScript 开发的基础设施。
-
