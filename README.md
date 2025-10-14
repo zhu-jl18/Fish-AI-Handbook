@@ -23,6 +23,11 @@
 > - 顶层严格递增：01-fish-talks、02-basic-usage、03-prompts、04-advanced-techniques、05-fun、06-resources、99-setup（置底）
 > - 不允许跳号；新增一级目录按顺序加 1；Setup 固定 99
 > - “技术向/DEMO”已移除；原“技术向”内容已合并为“资源合集”的 2API 与 云平台 两个二级页面
+> 
+> **进阶玩法模块重构（2025-10）：**
+> - 知识库模块：整合 RAG 与向量数据库，分为“原理概述”与“实践指南”两个三级子页面
+> - multi-agent → agents：重命名为 Agents（多智能体）
+> - 新增 Workflow 模块：包含 Spec Kit、Open Spec、BMAD、Flowise、Dify 等内容
 <a id="overview"></a> [回到目录](#toc)
 
 - 核心技术栈
