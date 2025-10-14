@@ -88,11 +88,17 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
 
 export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
   { label: '进阶玩法', href: '/advanced' },
-  { label: '知识库', href: '/advanced/knowledge-bases' },
+  {
+    label: '知识库',
+    href: '/advanced/knowledge-bases',
+    items: [
+      { label: '原理概述', href: '/advanced/knowledge-bases/principles' },
+      { label: '实践指南', href: '/advanced/knowledge-bases/implementation' },
+    ],
+  },
   { label: 'MCP', href: '/advanced/mcp' },
-  { label: '多智能体', href: '/advanced/multi-agent' },
-  { label: 'RAG', href: '/advanced/rag' },
-  { label: '向量数据库', href: '/advanced/vector-databases' },
+  { label: 'Agents', href: '/advanced/agents' },
+  { label: 'Workflow', href: '/advanced/workflow' },
 ]
 
 
