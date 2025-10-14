@@ -89,8 +89,7 @@
    - 当前: 二级目录 + index.md
    - 建议: 改为 `02-basic-usage/webchat.md`（单文件）
 
-2. **`src/content/docs/02-basic-usage/app-integration/index.md`**
-3. **`src/content/docs/02-basic-usage/cli/index.md`**
+2. **`src/content/docs/02-basic-usage/others/index.md`**
 4. **`src/content/docs/02-basic-usage/editor-agent/index.md`**
 5. **`src/content/docs/02-basic-usage/mobile-apps/index.md`**
 
