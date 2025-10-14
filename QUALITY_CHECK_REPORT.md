@@ -97,11 +97,13 @@
 7. **`src/content/docs/03-prompts/advanced-frameworks/index.md`**
 8. **`src/content/docs/03-prompts/handy-examples/index.md`**
 
-9. **`src/content/docs/04-advanced-techniques/knowledge-bases/index.md`**
-10. **`src/content/docs/04-advanced-techniques/mcp/index.md`**
-11. **`src/content/docs/04-advanced-techniques/multi-agent/index.md`**
-12. **`src/content/docs/04-advanced-techniques/rag/index.md`**
-13. **`src/content/docs/04-advanced-techniques/vector-databases/index.md`**
+9. **`src/content/docs/04-advanced-techniques/knowledge-bases/index.md`** ✅
+   - **注意**：该目录已扩展为包含三级子页面：principles.md 与 implementation.md
+10. **`src/content/docs/04-advanced-techniques/mcp/index.md`** ✅
+11. **`src/content/docs/04-advanced-techniques/agents/index.md`** ✅
+   - **注意**：原 multi-agent 已重命名为 agents
+12. **`src/content/docs/04-advanced-techniques/workflow/index.md`** ✅
+   - **注意**：新增的工作流模块
 
 14. **`src/content/docs/05-fun/ai-drawing/index.md`**
 15. **`src/content/docs/05-fun/llm-unlocking/index.md`**
