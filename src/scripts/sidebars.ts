@@ -26,46 +26,11 @@ export function getSidebarForPath(path: string): SidebarSection {
 
 export const FISH_TALKS_SIDEBAR: SidebarSection = [
   { label: '鱼说必看', href: '/fish-talks' },
-  {
-    label: '模型认知',
-    href: '/fish-talks/llm',
-    items: [
-      { label: '模型概览', href: '/fish-talks/llm/brief' },
-      { label: '知名模型', href: '/fish-talks/llm/models' },
-      { label: '模型排行榜', href: '/fish-talks/llm/rankings' },
-    ],
-  },
-  {
-    label: '模型术语',
-    href: '/fish-talks/model-terms',
-    items: [
-      { label: 'token', href: '/fish-talks/model-terms/token' },
-      { label: '温度', href: '/fish-talks/model-terms/temperature' },
-      { label: '流式输出', href: '/fish-talks/model-terms/streaming' },
-      { label: '思维', href: '/fish-talks/model-terms/thinking' },
-      { label: '上下文步数', href: '/fish-talks/model-terms/context-steps' },
-    ],
-  },
-  {
-    label: '通用词汇',
-    href: '/fish-talks/glossary',
-    items: [
-      { label: 'API', href: '/fish-talks/glossary/api' },
-      { label: '代理', href: '/fish-talks/glossary/proxy' },
-      { label: '反向代理', href: '/fish-talks/glossary/reverse-proxy' },
-      { label: '接口', href: '/fish-talks/glossary/interface' },
-      { label: '环境变量', href: '/fish-talks/glossary/env' },
-    ],
-  },
-  {
-    label: '流行词汇',
-    href: '/fish-talks/buzzwords',
-    items: [
-      { label: 'Agent', href: '/fish-talks/buzzwords/agent' },
-      { label: 'Vibe Coding', href: '/fish-talks/buzzwords/vibe-coding' },
-      { label: 'Workflow', href: '/fish-talks/buzzwords/workflow' },
-    ],
-  },
+  { label: '模型介绍', href: '/fish-talks/llm-info' },
+  { label: '模型排行', href: '/fish-talks/llm-rankings' },
+  { label: '模型参数', href: '/fish-talks/model-params' },
+  { label: '相关词汇', href: '/fish-talks/related-terms' },
+  { label: '流行词汇', href: '/fish-talks/buzz' },
 ]
 
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
