@@ -8,10 +8,9 @@ description: 基础用法总览：WebChat、IDE、CLI、APP、Mobile 以及 Cher
 推荐阅读顺序：
 - WebChat：/basic-usage/webchat
 - AI IDE：/basic-usage/editor-agent
-- 相关应用（APP）：/basic-usage/app-integration
-- 移动端应用（Mobile）：/basic-usage/mobile-apps
+- Mobile：/basic-usage/mobile-apps
 - Cherry Studio（使用向）：/basic-usage/cherrystudio
 - Claude Code（使用向）：/basic-usage/claude-code
 - Codex（使用向）：/basic-usage/codex
-- 其他CLI：/basic-usage/cli
+- Others：/basic-usage/others
 

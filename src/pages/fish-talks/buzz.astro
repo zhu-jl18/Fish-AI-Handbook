@@ -3,12 +3,12 @@ import ContentLayout from '../../layouts/ContentLayout.astro'
 import { FISH_TALKS_SIDEBAR } from '../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '01-fish-talks/glossary')
+const entry = await getEntry('docs', '01-fish-talks/buzz')
 const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
-  title={entry?.data?.title ?? '术语扫盲'}
+  title={entry?.data?.title ?? '流行词汇'}
   section="鱼说必看"
   sidebarItems={FISH_TALKS_SIDEBAR}
 >

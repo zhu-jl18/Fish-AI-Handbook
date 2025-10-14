@@ -53,6 +53,28 @@ const currentKey = navKeys.has(first) ? first : 'home'
     width: 100%;
   }
 
+  /* 内容区域标题紧凑样式 - 仅影响阅读内容，不影响侧边栏 */
+  .content-inner :global(h1) {
+    font-size: clamp(1.8rem, 1.8vw + 0.6rem, 2.1rem);
+    margin-top: calc(var(--section-spacing) * 0.8);
+    margin-bottom: 1.1rem;
+  }
+
+  .content-inner :global(h2) {
+    font-size: clamp(1.45rem, 1.2vw + 0.9rem, 1.8rem);
+    margin-top: calc(var(--section-spacing) * 0.8);
+    margin-bottom: 0.85rem;
+    border-bottom: 1px solid var(--heading-divider-color);
+    padding-bottom: 0.5rem;
+  }
+
+  .content-inner :global(h3) {
+    font-size: clamp(1.2rem, 0.9vw + 0.85rem, 1.4rem);
+    margin-top: 1.6rem;
+    margin-bottom: 0.6rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
   @media (max-width: 1440px) {
     .content {
       padding: 2.75rem 2.5rem;
