@@ -36,13 +36,12 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
   { label: '基础用法', href: '/basic-usage' },
   { label: 'WebChat', href: '/basic-usage/webchat' },
-  { label: '相关应用', href: '/basic-usage/app-integration' },
   { label: 'AI IDE', href: '/basic-usage/editor-agent' },
-  { label: '移动端应用', href: '/basic-usage/mobile-apps' },
+  { label: 'Mobile', href: '/basic-usage/mobile-apps' },
   { label: 'Cherry Studio', href: '/basic-usage/cherrystudio' },
   { label: 'Claude Code', href: '/basic-usage/claude-code' },
   { label: 'Codex', href: '/basic-usage/codex' },
-  { label: '其他CLI', href: '/basic-usage/cli' },
+  { label: 'Others', href: '/basic-usage/others' },
 ]
 
 export const PROMPTS_SIDEBAR: SidebarSection = [
