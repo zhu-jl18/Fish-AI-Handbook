@@ -1,5 +1,5 @@
 ---
-title: '多智能体 (Multi-Agent)'
+title: 'Agents（多智能体）'
 description: '探索如何让多个独立的 AI 智能体协同工作，以解决复杂问题。'
 ---
 
