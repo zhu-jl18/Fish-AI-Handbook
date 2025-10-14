@@ -26,58 +26,28 @@ export function getSidebarForPath(path: string): SidebarSection {
 
 export const FISH_TALKS_SIDEBAR: SidebarSection = [
   { label: '鱼说必看', href: '/fish-talks' },
+  { label: 'Models', href: '/fish-talks/models' },
+  { label: '模型排行', href: '/fish-talks/llm-rankings' },
   {
-    label: '模型认知',
-    href: '/fish-talks/llm',
-    items: [
-      { label: '模型概览', href: '/fish-talks/llm/brief' },
-      { label: '知名模型', href: '/fish-talks/llm/models' },
-      { label: '模型排行榜', href: '/fish-talks/llm/rankings' },
-    ],
-  },
-  {
-    label: '模型术语',
-    href: '/fish-talks/model-terms',
-    items: [
-      { label: 'token', href: '/fish-talks/model-terms/token' },
-      { label: '温度', href: '/fish-talks/model-terms/temperature' },
-      { label: '流式输出', href: '/fish-talks/model-terms/streaming' },
-      { label: '思维', href: '/fish-talks/model-terms/thinking' },
-      { label: '上下文步数', href: '/fish-talks/model-terms/context-steps' },
-    ],
-  },
-  {
-    label: '通用词汇',
+    label: '术语扫盲',
     href: '/fish-talks/glossary',
     items: [
-      { label: 'API', href: '/fish-talks/glossary/api' },
-      { label: '代理', href: '/fish-talks/glossary/proxy' },
-      { label: '反向代理', href: '/fish-talks/glossary/reverse-proxy' },
-      { label: '接口', href: '/fish-talks/glossary/interface' },
-      { label: '环境变量', href: '/fish-talks/glossary/env' },
+      { label: '模型参数', href: '/fish-talks/glossary/model-params' },
+      { label: 'AI概念', href: '/fish-talks/glossary/ai-concepts' },
     ],
   },
-  {
-    label: '流行词汇',
-    href: '/fish-talks/buzzwords',
-    items: [
-      { label: 'Agent', href: '/fish-talks/buzzwords/agent' },
-      { label: 'Vibe Coding', href: '/fish-talks/buzzwords/vibe-coding' },
-      { label: 'Workflow', href: '/fish-talks/buzzwords/workflow' },
-    ],
-  },
+  { label: '流行词汇', href: '/fish-talks/buzz' },
 ]
 
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
   { label: '基础用法', href: '/basic-usage' },
   { label: 'WebChat', href: '/basic-usage/webchat' },
-  { label: '相关应用', href: '/basic-usage/app-integration' },
   { label: 'AI IDE', href: '/basic-usage/editor-agent' },
-  { label: '移动端应用', href: '/basic-usage/mobile-apps' },
+  { label: 'Mobile', href: '/basic-usage/mobile-apps' },
   { label: 'Cherry Studio', href: '/basic-usage/cherrystudio' },
   { label: 'Claude Code', href: '/basic-usage/claude-code' },
   { label: 'Codex', href: '/basic-usage/codex' },
-  { label: '其他CLI', href: '/basic-usage/cli' },
+  { label: 'Others', href: '/basic-usage/others' },
 ]
 
 export const PROMPTS_SIDEBAR: SidebarSection = [
@@ -118,11 +88,17 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
 
 export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
   { label: '进阶玩法', href: '/advanced' },
-  { label: '知识库', href: '/advanced/knowledge-bases' },
+  {
+    label: '知识库',
+    href: '/advanced/knowledge-bases',
+    items: [
+      { label: '原理概述', href: '/advanced/knowledge-bases/principles' },
+      { label: '实践指南', href: '/advanced/knowledge-bases/implementation' },
+    ],
+  },
   { label: 'MCP', href: '/advanced/mcp' },
-  { label: '多智能体', href: '/advanced/multi-agent' },
-  { label: 'RAG', href: '/advanced/rag' },
-  { label: '向量数据库', href: '/advanced/vector-databases' },
+  { label: 'Agents', href: '/advanced/agents' },
+  { label: 'Workflow', href: '/advanced/workflow' },
 ]
 
 

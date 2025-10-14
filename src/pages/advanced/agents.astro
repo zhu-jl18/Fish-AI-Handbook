@@ -1,0 +1,22 @@
+---
+import ContentLayout from "../../layouts/ContentLayout.astro"
+import { ADVANCED_TECHNIQUES_SIDEBAR } from "../../scripts/sidebars"
+import { getEntry } from "astro:content"
+
+const entry = await getEntry("docs", "04-advanced-techniques/agents")
+let Content: any = null
+if (entry) {
+  const rendered = await entry.render()
+  Content = rendered.Content
+}
+const section = "\u8fdb\u9636\u73a9\u6cd5"
+const title = entry?.data?.title ?? "Agents"
+---
+
+<ContentLayout
+  title={title}
+  section={section}
+  sidebarItems={ADVANCED_TECHNIQUES_SIDEBAR}
+>
+  {Content ? <Content /> : <div>文档未找到或渲染失败</div>}
+</ContentLayout>

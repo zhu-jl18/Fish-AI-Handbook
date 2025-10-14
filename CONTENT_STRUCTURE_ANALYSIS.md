@@ -53,14 +53,13 @@
     └── workflow.md
 ```
 
-#### 02-basic-usage（基础用法）- 5个二级，无三级
+#### 02-basic-usage（基础用法）- 4个二级，无三级
 ```
 ├── index.md
 ├── webchat/index.md      # 官方 WebChat
-├── app-integration/index.md # 应用集成
-├── cli/index.md          # CLI 使用
 ├── editor-agent/index.md  # AI 编辑器
-└── mobile-apps/index.md   # 移动端应用
+├── mobile-apps/index.md   # Mobile
+└── others/index.md       # Others (其他工具)
 ```
 
 #### 03-setup（配置指南）- 3个二级，11个三级页面
@@ -109,14 +108,16 @@
 └── handy-examples/index.md      # 好用范例
 ```
 
-#### 05-advanced-techniques（进阶玩法）- 5个二级，无三级
+#### 04-advanced-techniques（进阶玩法）- 4个二级，5个三级
 ```
 ├── index.md
-├── knowledge-bases/index.md    # 知识库
+├── knowledge-bases/          # 知识库
+│   ├── index.md
+│   ├── principles.md         # 原理概述（融合 RAG 与向量存储）
+│   └── implementation.md     # 实践指南
 ├── mcp/index.md               # MCP
-├── multi-agent/index.md       # 多智能体
-├── rag/index.md              # RAG
-└── vector-databases/index.md  # 向量数据库
+├── agents/index.md            # Agents（原 multi-agent）
+└── workflow/index.md          # Workflow（工作流）
 ```
 
 #### 06-demos（DEMO）- 空，只有1个页面
