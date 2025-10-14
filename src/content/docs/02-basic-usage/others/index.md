@@ -1,5 +1,5 @@
 ---
-title: 'CLI命令行工具 - 程序员的终端神器'
+title: 'Others - 命令行工具与其他应用'
 description: '不离开终端就能调用AI，真正的Vibe Coding'
 ---
 

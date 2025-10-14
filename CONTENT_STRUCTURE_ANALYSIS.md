@@ -53,14 +53,13 @@
     └── workflow.md
 ```
 
-#### 02-basic-usage（基础用法）- 5个二级，无三级
+#### 02-basic-usage（基础用法）- 4个二级，无三级
 ```
 ├── index.md
 ├── webchat/index.md      # 官方 WebChat
-├── app-integration/index.md # 应用集成
-├── cli/index.md          # CLI 使用
 ├── editor-agent/index.md  # AI 编辑器
-└── mobile-apps/index.md   # 移动端应用
+├── mobile-apps/index.md   # Mobile
+└── others/index.md       # Others (其他工具)
 ```
 
 #### 03-setup（配置指南）- 3个二级，11个三级页面
