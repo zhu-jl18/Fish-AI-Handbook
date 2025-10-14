@@ -26,10 +26,16 @@ export function getSidebarForPath(path: string): SidebarSection {
 
 export const FISH_TALKS_SIDEBAR: SidebarSection = [
   { label: '鱼说必看', href: '/fish-talks' },
-  { label: '模型介绍', href: '/fish-talks/llm-info' },
+  { label: 'Models', href: '/fish-talks/models' },
   { label: '模型排行', href: '/fish-talks/llm-rankings' },
-  { label: '模型参数', href: '/fish-talks/model-params' },
-  { label: '相关词汇', href: '/fish-talks/related-terms' },
+  {
+    label: '术语扫盲',
+    href: '/fish-talks/glossary',
+    items: [
+      { label: '模型参数', href: '/fish-talks/glossary/model-params' },
+      { label: 'AI概念', href: '/fish-talks/glossary/ai-concepts' },
+    ],
+  },
   { label: '流行词汇', href: '/fish-talks/buzz' },
 ]
 
