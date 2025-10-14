@@ -1,7 +1,17 @@
 ---
 title: 基础使用
-description: 四种主流AI使用方式的导航与导读（占位）。
+description: 基础用法总览：WebChat、IDE、CLI、APP、Mobile 以及 Cherry Studio、Claude Code、Codex 的使用向导航与导读。
 ---
 
-此页面为“基础使用”模块索引（占位）。
+本页聚焦“使用”而非“配置”。对应工具的安装与环境配置请前往“配置指南（/setup/*）”。
+
+推荐阅读顺序：
+- WebChat：/basic-usage/webchat
+- AI IDE：/basic-usage/editor-agent
+- 相关应用（APP）：/basic-usage/app-integration
+- 移动端应用（Mobile）：/basic-usage/mobile-apps
+- Cherry Studio（使用向）：/basic-usage/cherrystudio
+- Claude Code（使用向）：/basic-usage/claude-code
+- Codex（使用向）：/basic-usage/codex
+- 其他CLI：/basic-usage/cli
 
