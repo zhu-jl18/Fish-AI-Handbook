@@ -83,7 +83,7 @@ Agent：
 - 文档检索助手
 - 个人笔记助手
 
-**相关阅读：** [进阶玩法 - RAG](/advanced/rag)
+**相关阅读：** [进阶玩法 - 知识库原理](/advanced/knowledge-bases/principles)
 
 ---
 
