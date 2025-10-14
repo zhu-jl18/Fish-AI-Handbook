@@ -1,0 +1,16 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { FISH_TALKS_SIDEBAR } from '../../scripts/sidebars'
+import { getEntry } from 'astro:content'
+
+const entry = await getEntry('docs', '01-fish-talks/related-terms')
+const rendered = entry && (await entry.render())
+---
+
+<ContentLayout
+  title={entry?.data?.title ?? '相关词汇'}
+  section="鱼说必看"
+  sidebarItems={FISH_TALKS_SIDEBAR}
+>
+  {rendered ? <rendered.Content /> : <div>文档未找到或渲染失败</div>}
+</ContentLayout>
