@@ -1,0 +1,15 @@
+---
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { getEntry } from 'astro:content'
+
+const entry = await getEntry('docs', '03-prompts/context/request-body')
+const { Content } = await entry.render()
+---
+
+<ContentLayout
+  title={entry?.data?.title || '请求体'}
+  section="提示词"
+  headings={[]}
+>
+  <Content />
+</ContentLayout>

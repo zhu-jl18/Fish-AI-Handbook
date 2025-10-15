@@ -10,6 +10,7 @@ description: 终端工具安装与配置指南
 ## Windows Terminal
 
 ### 安装方式
+
 1. **Microsoft Store**（推荐）
    - 打开 Microsoft Store
    - 搜索 "Windows Terminal"
@@ -28,11 +29,13 @@ description: 终端工具安装与配置指南
 ### 基础配置
 
 #### 设置默认终端
+
 1. 打开 Windows Terminal
 2. 按 `Ctrl + ,` 打开设置
 3. 在 "启动" 选项中设置默认配置文件为 PowerShell 7
 
 #### 外观美化
+
 - **主题**：One Half Dark
 - **字体**：Cascadia Code（支持连字）
 - **透明度**：95%
@@ -41,22 +44,27 @@ description: 终端工具安装与配置指南
 ### PowerShell 7 配置
 
 #### 安装 PowerShell 7
+
 ```powershell
 winget install Microsoft.PowerShell
 ```
 
 #### 配置 Oh My Posh
+
 1. 安装 Oh My Posh
+
    ```powershell
    winget install JanDeDobbeleer.OhMyPosh -s winget
    ```
 
 2. 安装 Nerd 字体
+
    ```powershell
    oh-my-posh font install CascadiaCode
    ```
 
 3. 编辑配置文件
+
    ```powershell
    notepad $PROFILE
    ```
@@ -69,19 +77,23 @@ winget install Microsoft.PowerShell
 ## macOS Terminal
 
 ### iTerm2
+
 推荐使用 iTerm2 替代原生终端
 
 #### 安装
+
 ```bash
 brew install --cask iterm2
 ```
 
 #### 配置
+
 1. **配色方案**：Dracula / Nord
 2. **字体**：MesloLGS NF
 3. **快捷键**：配置分屏快捷键
 
 ### Oh My Zsh
+
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
@@ -89,11 +101,13 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ## Linux Terminal
 
 ### 终端模拟器选择
+
 - **GNOME**：GNOME Terminal
 - **KDE**：Konsole
 - **轻量级**：Alacritty / Kitty
 
 ### Zsh + Oh My Zsh
+
 ```bash
 # 安装 Zsh
 sudo apt install zsh
@@ -108,12 +122,14 @@ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 ## 通用配置建议
 
 ### 必装插件
+
 1. **自动补全**：zsh-autosuggestions
 2. **语法高亮**：zsh-syntax-highlighting
 3. **快速跳转**：z / autojump
 4. **Git 增强**：git plugin
 
 ### 常用别名
+
 ```bash
 alias ll='ls -alh'
 alias gs='git status'
@@ -125,6 +141,7 @@ alias cls='clear'
 ## VS Code 集成终端
 
 ### 设置默认终端
+
 ```json
 {
   "terminal.integrated.defaultProfile.windows": "PowerShell",
@@ -134,6 +151,7 @@ alias cls='clear'
 ```
 
 ### 字体配置
+
 ```json
 {
   "terminal.integrated.fontFamily": "'Cascadia Code', 'MesloLGS NF', monospace",
@@ -144,15 +162,18 @@ alias cls='clear'
 ## 故障排除
 
 ### Windows 执行策略问题
+
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 ### 字体显示问题
+
 - 确保安装了 Nerd Fonts
 - 在终端设置中选择支持的字体
 
 ### 性能优化
+
 - 关闭不必要的动画效果
 - 限制历史记录大小
 - 使用 GPU 加速渲染

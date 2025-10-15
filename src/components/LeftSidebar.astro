@@ -5,12 +5,27 @@ const { section, items }: { section: string; items?: SidebarSection } =
   Astro.props
 const currentPath = Astro.url.pathname
 
+// 规范化路径：移除尾部斜杠（根路径除外）
+const normalizePath = (path: string) => {
+  if (!path || path === '/') return '/'
+  return path.endsWith('/') ? path.slice(0, -1) : path
+}
+
+const normalizedCurrentPath = normalizePath(currentPath)
+
 // 仅在路径完全相等时高亮（普通链接）
-const isExactActive = (href?: string) => !!href && currentPath === href
+const isExactActive = (href?: string) =>
+  !!href && normalizedCurrentPath === normalizePath(href)
 
 // 对于包含子项的分组，允许前缀匹配
-const isGroupActive = (href?: string) =>
-  !!href && (currentPath === href || currentPath.startsWith(href + '/'))
+const isGroupActive = (href?: string) => {
+  if (!href) return false
+  const normalizedHref = normalizePath(href)
+  return (
+    normalizedCurrentPath === normalizedHref ||
+    normalizedCurrentPath.startsWith(normalizedHref + '/')
+  )
+}
 ---
 
 <div class="left-sidebar">
@@ -77,7 +92,9 @@ const isGroupActive = (href?: string) =>
   }
 
   /* 移除顶部标题展示，避免视觉不协调 */
-  .section-title { display: none; }
+  .section-title {
+    display: none;
+  }
 
   .section-nav {
     display: flex;
@@ -118,7 +135,9 @@ const isGroupActive = (href?: string) =>
 
   /* 层级菜单样式 */
   /* 顶层分组不额外叠加间距，统一交给 .section-nav 的 gap 控制 */
-  .group { margin: 0; }
+  .group {
+    margin: 0;
+  }
 
   /* 注意：slot 注入的内容默认不受 scoped 样式影响。
    为了让传入内容中的 .submenu 生效，这里使用 :global 进行样式声明。 */
