@@ -1,0 +1,6 @@
+{
+  "recurse": true,
+  "concurrency": 20,
+  "timeout": 20000,
+  "linksToSkip": ["^https?://", "^mailto:", "^tel:"]
+}
