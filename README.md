@@ -62,38 +62,39 @@ URL["Request: /resources/2api/"]
 规则：最多三级。一级/二级 = “文件夹 + index.md”；三级 = 单个 `.md`。
 
 - 新增“顶级章节（一级）”示例：新增 `playground`（假设排序号 07）
-  1. 内容：`src/content/docs/07-playground/index.md`
+  1.  内容：`src/content/docs/07-playground/index.md`
 
-     ```markdown
-     ---
-     title: Playground
-     ---
+      ```markdown
+      ---
+      title: Playground
+      ---
 
-     # Playground 概览
-     ```
+      # Playground 概览
+      ```
 
-  2. 路由：`src/pages/playground/index.astro`
-   
-     ```astro
-     ---
-     import ContentLayout from '../../layouts/ContentLayout.astro'
-     import { getEntry } from 'astro:content'
-const entry = await getEntry('docs','07-playground')
-     const { Content } = await entry.render()
-     ---
-     <ContentLayout title={entry?.data?.title || 'Playground'} section="Playground" headings={[]}>
-       <Content />
-     </ContentLayout>
-     ```
+  2.  路由：`src/pages/playground/index.astro`
 
-  3. 侧栏：在 `src/scripts/sidebars.ts` 的选择器与对应 `SIDEBAR` 中按你需要添加：
-   
-     ```ts
-     if (path.startsWith('/playground')) return PLAYGROUND_SIDEBAR
-     export const PLAYGROUND_SIDEBAR = [
-       { label: 'Playground', href: '/playground' },
-     ]
-     ```
+           ```astro
+           ---
+           import ContentLayout from '../../layouts/ContentLayout.astro'
+           import { getEntry } from 'astro:content'
+
+      const entry = await getEntry('docs','07-playground')
+      const { Content } = await entry.render()
+      ---
+      <ContentLayout title={entry?.data?.title || 'Playground'} section="Playground" headings={[]}>
+      <Content />
+      </ContentLayout>
+      ```
+
+  3.  侧栏：在 `src/scripts/sidebars.ts` 的选择器与对应 `SIDEBAR` 中按你需要添加：
+
+      ```ts
+      if (path.startsWith('/playground')) return PLAYGROUND_SIDEBAR
+      export const PLAYGROUND_SIDEBAR = [
+        { label: 'Playground', href: '/playground' },
+      ]
+      ```
 
 - 新增“二级 + 三级页面”示例：在 `03-prompts` 下新增二级 `best-practices`，以及三级 `tracing.md`
   1. 内容层：

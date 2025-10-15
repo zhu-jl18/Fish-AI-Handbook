@@ -60,11 +60,13 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
       { label: '好与坏', href: '/prompts/interaction-basics/good-vs-bad' },
     ],
   },
-  { label: 'Context', href: '/prompts/context' },
   {
-    label: '对话层级',
-    href: '/prompts/dialogue-levels',
-    items: [{ label: '请求体', href: '/prompts/dialogue-levels/example' }],
+    label: 'Context',
+    href: '/prompts/context',
+    items: [
+      { label: '对话层级', href: '/prompts/context/dialogue-levels' },
+      { label: '请求体', href: '/prompts/context/request-body' },
+    ],
   },
   { label: '实用技巧', href: '/prompts/practical-tips' },
   { label: '高级框架', href: '/prompts/advanced-frameworks' },

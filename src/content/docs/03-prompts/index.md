@@ -13,11 +13,11 @@ description: 提示词章节导览与结构说明。
   - [Necessity](/prompts/interaction-basics/basics)
   - [好与坏](/prompts/interaction-basics/good-vs-bad)
 - [Context](/prompts/context)
-- 对话层级（Dialogue Levels）
-  - [请求体](/prompts/dialogue-levels/example)
+  - [对话层级](/prompts/context/dialogue-levels)
+  - [请求体](/prompts/context/request-body)
 - [实用技巧](/prompts/practical-tips)
 - [高级框架](/prompts/advanced-frameworks)
 - [Examples](/prompts/examples)
 - [扩展阅读](/prompts/extended-reading)
 
-> 注：原有的“定义/必要性”“系统提示/助手消息/用户提示”“实用技巧子页”等已合并或移除，旧链接已做重定向。
+> 注：原有的“定义/必要性”“系统提示/助手消息/用户提示”“实用技巧子页”等已合并或移除；旧链接已彻底移除，不再保留重定向。
