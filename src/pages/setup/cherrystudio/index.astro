@@ -7,6 +7,10 @@ const entry = await getEntry('docs', '99-setup/cherrystudio')
 const { Content } = await entry.render()
 ---
 
-<ContentLayout title={entry?.data?.title ?? "CherryStudio"} section="配置指南" sidebarItems={SETUP_SIDEBAR}>
+<ContentLayout
+  title={entry?.data?.title ?? 'CherryStudio'}
+  section="配置指南"
+  sidebarItems={SETUP_SIDEBAR}
+>
   <Content />
 </ContentLayout>

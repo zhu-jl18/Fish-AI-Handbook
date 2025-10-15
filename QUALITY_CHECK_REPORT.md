@@ -7,14 +7,14 @@
 
 ## 📊 检查概览
 
-| 检查项目 | 状态 | 发现问题数 |
-|---------|------|-----------|
-| 侧栏链接完整性 | ⚠️ 警告 | 1 |
-| 路由文件完整性 | ⚠️ 警告 | 4 |
-| 目录结构规范 | ✅ 通过 | 0 |
-| Frontmatter 完整性 | ✅ 通过 | 0 |
-| 孤立文件检测 | ⚠️ 警告 | 3 |
-| 命名规范 | ✅ 通过 | 0 |
+| 检查项目           | 状态    | 发现问题数 |
+| ------------------ | ------- | ---------- |
+| 侧栏链接完整性     | ⚠️ 警告 | 1          |
+| 路由文件完整性     | ⚠️ 警告 | 4          |
+| 目录结构规范       | ✅ 通过 | 0          |
+| Frontmatter 完整性 | ✅ 通过 | 0          |
+| 孤立文件检测       | ⚠️ 警告 | 3          |
+| 命名规范           | ✅ 通过 | 0          |
 
 ---
 
@@ -42,6 +42,7 @@
 - **影响**: 这些页面是硬编码的占位页面，未使用 Astro Content Collections
 
 **修复建议**:
+
 1. **方案 A（推荐）**: 删除这些路由文件，因为侧栏中已有 `interaction-basics` 系列
 2. **方案 B**: 创建对应的内容文件并在侧栏中添加链接
 3. **方案 C**: 在侧栏中添加这些页面的链接配置
@@ -71,7 +72,8 @@
    - 路径: `/prompts/basics/structure`
    - 建议: 删除或添加到侧栏
 
-**影响**: 
+**影响**:
+
 - 这些页面可以直接访问，但用户无法通过侧栏导航找到
 - 可能是早期版本遗留的页面
 
@@ -90,20 +92,23 @@
    - 建议: 改为 `02-basic-usage/webchat.md`（单文件）
 
 2. **`src/content/docs/02-basic-usage/others/index.md`**
-4. **`src/content/docs/02-basic-usage/editor-agent/index.md`**
-5. **`src/content/docs/02-basic-usage/mobile-apps/index.md`**
+3. **`src/content/docs/02-basic-usage/editor-agent/index.md`**
+4. **`src/content/docs/02-basic-usage/mobile-apps/index.md`**
 
-6. **`src/content/docs/03-prompts/context-learning/index.md`**
-7. **`src/content/docs/03-prompts/advanced-frameworks/index.md`**
-8. **`src/content/docs/03-prompts/handy-examples/index.md`**
+5. **`src/content/docs/03-prompts/context-learning/index.md`**
+6. **`src/content/docs/03-prompts/advanced-frameworks/index.md`**
+7. **`src/content/docs/03-prompts/handy-examples/index.md`**
 
-9. **`src/content/docs/04-advanced-techniques/knowledge-bases/index.md`** ✅
+8. **`src/content/docs/04-advanced-techniques/knowledge-bases/index.md`** ✅
    - **注意**：该目录已扩展为包含三级子页面：principles.md 与 implementation.md
-10. **`src/content/docs/04-advanced-techniques/mcp/index.md`** ✅
-11. **`src/content/docs/04-advanced-techniques/agents/index.md`** ✅
-   - **注意**：原 multi-agent 已重命名为 agents
+9. **`src/content/docs/04-advanced-techniques/mcp/index.md`** ✅
+10. **`src/content/docs/04-advanced-techniques/agents/index.md`** ✅
+
+- **注意**：原 multi-agent 已重命名为 agents
+
 12. **`src/content/docs/04-advanced-techniques/workflow/index.md`** ✅
-   - **注意**：新增的工作流模块
+
+- **注意**：新增的工作流模块
 
 14. **`src/content/docs/05-fun/ai-drawing/index.md`**
 15. **`src/content/docs/05-fun/llm-unlocking/index.md`**
@@ -111,7 +116,8 @@
 
 **注意**: 这不是错误，只是可以优化的结构问题。当前结构是合法的，但不是最简洁的。
 
-**修复建议**: 
+**修复建议**:
+
 - **低优先级**: 这些结构在功能上没有问题
 - 如果未来这些页面会添加子页面，保持当前结构是合理的
 - 如果确定只是单页内容，可以简化为单文件结构
@@ -131,6 +137,7 @@
 - ✅ 深度不超过 3 层
 
 **顶层目录清单**:
+
 ```
 01-fish-talks/          # 鱼说必看
 02-basic-usage/         # 基础使用
@@ -153,6 +160,7 @@
 - ✅ Frontmatter 格式正确
 
 **示例检查文件**:
+
 - `01-fish-talks/index.md` ✅
 - `02-basic-usage/index.md` ✅
 - `03-prompts/index.md` ✅
@@ -170,6 +178,7 @@
 #### 已验证的侧栏链接（共 **63 个**）:
 
 **FISH_TALKS_SIDEBAR** (17 个链接):
+
 - ✅ `/fish-talks` → `src/pages/fish-talks/index.astro`
 - ✅ `/fish-talks/llm` → `src/pages/fish-talks/llm/index.astro`
 - ✅ `/fish-talks/llm/brief` → `src/pages/fish-talks/llm/brief.astro`
@@ -193,21 +202,27 @@
 - ✅ `/fish-talks/buzzwords/workflow` → `src/pages/fish-talks/buzzwords/workflow.astro`
 
 **BASIC_USAGE_SIDEBAR** (6 个链接):
+
 - ✅ 所有链接都有对应的路由文件
 
 **PROMPTS_SIDEBAR** (14 个链接):
+
 - ✅ 所有链接都有对应的路由文件
 
 **ADVANCED_TECHNIQUES_SIDEBAR** (6 个链接):
+
 - ✅ 所有链接都有对应的路由文件
 
 **FUN_SIDEBAR** (4 个链接):
+
 - ✅ 所有链接都有对应的路由文件
 
 **RESOURCES_SIDEBAR** (5 个链接):
+
 - ✅ 所有链接都有对应的路由文件
 
 **SETUP_SIDEBAR** (9 个链接):
+
 - ✅ 所有链接都有对应的路由文件
 
 ---
@@ -227,20 +242,20 @@
 
 ### 文件数量统计
 
-| 类型 | 数量 |
-|-----|------|
-| Markdown 内容文件 (.md) | 69 |
-| Astro 路由文件 (.astro) | 73 |
-| 侧栏链接配置 | 63 |
-| 顶层目录 | 7 |
+| 类型                    | 数量 |
+| ----------------------- | ---- |
+| Markdown 内容文件 (.md) | 69   |
+| Astro 路由文件 (.astro) | 73   |
+| 侧栏链接配置            | 63   |
+| 顶层目录                | 7    |
 
 ### 层级深度分布
 
-| 深度 | 文件数量 | 示例 |
-|------|---------|------|
-| 1 级 (index) | 7 | `01-fish-talks/index.md` |
-| 2 级 (folder/index) | 22 | `01-fish-talks/llm/index.md` |
-| 3 级 (folder/folder/file) | 40 | `01-fish-talks/llm/brief.md` |
+| 深度                      | 文件数量 | 示例                         |
+| ------------------------- | -------- | ---------------------------- |
+| 1 级 (index)              | 7        | `01-fish-talks/index.md`     |
+| 2 级 (folder/index)       | 22       | `01-fish-talks/llm/index.md` |
+| 3 级 (folder/folder/file) | 40       | `01-fish-talks/llm/brief.md` |
 
 ✅ **无超过 3 层深度的文件**
 
@@ -293,7 +308,8 @@ mkdir -p src/content/docs/03-prompts/basics
 
 **检查方法**: 扫描所有 Markdown 文件，查找内部链接
 
-**检查结果**: 
+**检查结果**:
+
 - ℹ️ 未发现使用相对路径的内部链接
 - ✅ 大部分链接使用外部 URL（如 https://...）
 - ℹ️ Astro 项目通常依赖路由系统而非 Markdown 内部链接
@@ -307,6 +323,7 @@ mkdir -p src/content/docs/03-prompts/basics
 **总分: 95/100**
 
 ### 优点 ✅
+
 1. ✅ 目录结构严格遵守规范，编号连续无跳号
 2. ✅ 所有内容文件都包含完整的 frontmatter
 3. ✅ 侧栏配置的所有链接都有对应的路由文件
@@ -314,10 +331,12 @@ mkdir -p src/content/docs/03-prompts/basics
 5. ✅ 深度控制良好，无超过 3 层的嵌套
 
 ### 需改进 ⚠️
+
 1. ⚠️ 存在 4 个孤立的路由文件（`prompts/basics/*`）
 2. ⚠️ 部分二级目录只有单个 index.md（可优化但非必需）
 
 ### 建议 💡
+
 1. 删除或整合 `prompts/basics` 相关的孤立页面
 2. 考虑为未来扩展保留当前的目录结构
 3. 定期运行自动化检查脚本（参见下文）

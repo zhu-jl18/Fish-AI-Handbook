@@ -18,9 +18,10 @@ test('右侧目录自动生成且可点击跳转与滚动高亮', async ({ page 
   await target.click()
 
   // URL hash 应更新为对应 id
-  await expect.poll(() => page.url()).toContain(`#${encodeURIComponent(targetId ?? '')}`)
+  await expect
+    .poll(() => page.url())
+    .toContain(`#${encodeURIComponent(targetId ?? '')}`)
 
   // 对应目录项应带有 active class
   await expect(target).toHaveClass(/active/)
 })
-

@@ -1,14 +1,14 @@
 ---
-import ContentLayout from "../../../layouts/ContentLayout.astro"
-import { RESOURCES_SIDEBAR } from "../../../scripts/sidebars"
-import { getEntry } from "astro:content"
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { RESOURCES_SIDEBAR } from '../../../scripts/sidebars'
+import { getEntry } from 'astro:content'
 
-const entry = await getEntry("docs", "06-resources/proxy-nodes")
+const entry = await getEntry('docs', '06-resources/proxy-nodes')
 const { Content } = await entry.render()
 ---
 
 <ContentLayout
-  title={entry?.data?.title ?? "代理节点"}
+  title={entry?.data?.title ?? '代理节点'}
   section="资源合集"
   sidebarItems={RESOURCES_SIDEBAR}
 >

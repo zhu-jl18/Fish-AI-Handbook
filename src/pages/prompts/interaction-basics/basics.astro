@@ -3,7 +3,7 @@ import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { PROMPTS_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '03-prompts/dialogue-levels')
+const entry = await getEntry('docs', '03-prompts/interaction-basics/basics')
 let Content: any = null
 let hasContent = false
 try {
@@ -13,12 +13,12 @@ try {
     hasContent = true
   }
 } catch (e) {
-  console.error('Render error: prompts/dialogue-levels', e)
+  console.error('Render error: prompts/interaction-basics/basics', e)
 }
 ---
 
 <ContentLayout
-  title={entry?.data?.title ?? '对话层级'}
+  title={entry?.data?.title ?? '基础概念与必要性'}
   section="提示词"
   sidebarItems={PROMPTS_SIDEBAR}
 >

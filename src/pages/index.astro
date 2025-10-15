@@ -21,9 +21,13 @@ const heroLinks = [
       <h1>Fish写给朋友们的AI使用指南</h1>
       <p class="hero-subtitle">简洁清晰的AI教程，从基础使用到进阶玩法</p>
       <div class="hero-links">
-        {heroLinks.map((link) => (
-          <a href={link.href} class="hero-link">{link.label}</a>
-        ))}
+        {
+          heroLinks.map((link) => (
+            <a href={link.href} class="hero-link">
+              {link.label}
+            </a>
+          ))
+        }
       </div>
     </div>
   </main>
@@ -115,4 +119,3 @@ const heroLinks = [
     }
   }
 </style>
-

@@ -7,6 +7,10 @@ const entry = await getEntry('docs', '06-resources/cloud-platforms')
 const { Content } = await entry.render()
 ---
 
-<ContentLayout title={entry?.data?.title ?? '云平台'} section="资源合集" sidebarItems={RESOURCES_SIDEBAR}>
+<ContentLayout
+  title={entry?.data?.title ?? '云平台'}
+  section="资源合集"
+  sidebarItems={RESOURCES_SIDEBAR}
+>
   <Content />
 </ContentLayout>
