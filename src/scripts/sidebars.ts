@@ -84,6 +84,7 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
   },
   { label: '高级框架', href: '/prompts/advanced-frameworks' },
   { label: '好用范例', href: '/prompts/handy-examples' },
+  { label: '扩展阅读', href: '/prompts/extended-reading' },
 ]
 
 export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
