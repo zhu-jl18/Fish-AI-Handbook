@@ -34,12 +34,17 @@ function ensureUniqueId(base: string, exist: Set<string>): string {
 
 export function collectHeadings(
   root: ParentNode,
-  options?: { min?: number; max?: number }
+  options?: { min?: number; max?: number },
 ): TocItem[] {
   const min = options?.min ?? 2
   const max = options?.max ?? 4
-  const selectors = Array.from({ length: max - min + 1 }, (_, i) => `h${i + min}`)
-  const nodes = Array.from(root.querySelectorAll<HTMLElement>(selectors.join(',')))
+  const selectors = Array.from(
+    { length: max - min + 1 },
+    (_, i) => `h${i + min}`,
+  )
+  const nodes = Array.from(
+    root.querySelectorAll<HTMLElement>(selectors.join(',')),
+  )
 
   const used = new Set<string>()
   const items: TocItem[] = []
@@ -65,7 +70,7 @@ export function collectHeadings(
 export function mountToc(
   container: HTMLElement,
   items: TocItem[],
-  options?: { onClick?: (id: string) => void }
+  options?: { onClick?: (id: string) => void },
 ) {
   container.innerHTML = ''
   for (const it of items) {
@@ -89,7 +94,7 @@ export function mountToc(
 
 export function observeActive(
   items: TocItem[],
-  onActive: (id: string) => void
+  onActive: (id: string) => void,
 ) {
   const observer = new IntersectionObserver(
     (entries) => {
@@ -105,7 +110,7 @@ export function observeActive(
       // 提前激活，避免滚到顶才高亮
       rootMargin: '-40% 0px -55% 0px',
       threshold: [0, 0.25, 0.5, 0.75, 1],
-    }
+    },
   )
   items.forEach((i) => observer.observe(i.el))
   return () => observer.disconnect()
@@ -113,7 +118,7 @@ export function observeActive(
 
 export function setupRightSidebar(
   rootSelector = '.content-inner',
-  navSelector = '.toc-nav'
+  navSelector = '.toc-nav',
 ) {
   const root = document.querySelector(rootSelector)
   const nav = document.querySelector(navSelector) as HTMLElement | null

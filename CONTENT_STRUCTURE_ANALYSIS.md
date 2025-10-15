@@ -1,6 +1,7 @@
 # 网站内容结构分析报告
 
 > 2025-10 更新摘要（与当前仓库一致）
+>
 > - 顶层目录严格递增：01-fish-talks、02-basic-usage、03-prompts、04-advanced-techniques、05-fun、06-resources、99-setup
 > - 移除“技术向(tech)”与“DEMO”一级入口及其所有页面
 > - 在“资源合集(06-resources)”下新增二级页面：2API、云平台；两页仅罗列原三级页面标题
@@ -12,7 +13,7 @@
 
 ```
 01-fish-talks/       # 鱼说必看
-02-basic-usage/      # 基础用法  
+02-basic-usage/      # 基础用法
 03-setup/           # 配置指南
 04-prompts/         # 提示词
 05-advanced-techniques/ # 进阶玩法
@@ -25,6 +26,7 @@
 ### 详细三级结构
 
 #### 01-fish-talks（鱼说必看）- 4个二级，16个三级页面
+
 ```
 ├── index.md
 ├── llm/（模型认知）
@@ -54,6 +56,7 @@
 ```
 
 #### 02-basic-usage（基础用法）- 4个二级，无三级
+
 ```
 ├── index.md
 ├── webchat/index.md      # 官方 WebChat
@@ -63,6 +66,7 @@
 ```
 
 #### 03-setup（配置指南）- 3个二级，11个三级页面
+
 ```
 ├── index.md
 ├── prerequisites/（环境准备）
@@ -84,6 +88,7 @@
 ```
 
 #### 04-prompts（提示词）- 6个二级，13个三级页面
+
 ```
 ├── index.md
 ├── interaction-basics/（交互基础）
@@ -109,6 +114,7 @@
 ```
 
 #### 04-advanced-techniques（进阶玩法）- 4个二级，5个三级
+
 ```
 ├── index.md
 ├── knowledge-bases/          # 知识库
@@ -121,12 +127,14 @@
 ```
 
 #### 06-demos（DEMO）- 空，只有1个页面
+
 ```
 ├── index.md
 └── rag-chatbot（在侧栏但文件缺失）
 ```
 
 #### 07-technical-deep-dive（技术向）- 3个二级，18个三级页面
+
 ```
 ├── index.md
 ├── 2api/
@@ -153,6 +161,7 @@
 ```
 
 #### 08-fun（好玩的）- 3个二级，无三级
+
 ```
 ├── index.md
 ├── ai-drawing/index.md      # AI 绘画
@@ -161,6 +170,7 @@
 ```
 
 #### 09-resources（资源合集）- 2个二级，无三级
+
 ```
 ├── index.md
 ├── api-key/index.md       # API KEY
@@ -170,23 +180,28 @@
 ## 结构问题分析
 
 ### 1. 层级深度不一致
+
 - **问题**：有些章节有丰富的三级内容（如 01-fish-talks 有16个三级页面），而有些只有二级（如 02-basic-usage、05-advanced-techniques）
 - **影响**：用户体验不统一，有些内容过于集中，有些又过于分散
 
 ### 2. 内容分类重叠
+
 - **01-fish-talks** 包含了基础概念、术语、词汇等入门内容
 - **04-prompts** 有大量三级页面，可能过度细分
 - **05-advanced-techniques** 和 **07-technical-deep-dive** 界限模糊
 
 ### 3. 空章节和缺失文件
+
 - **06-demos** 几乎是空的（侧栏显示 rag-chatbot 但文件缺失）
 - 多个二级目录只有 index.md，内容单薄
 
 ### 4. 命名不一致
+
 - 中英文混用（如 "2api"、"MCP"、"RAG"）
 - 文件命名风格不统一（LMArena2api.md 大小写混用）
 
 ### 5. 内容权重失衡
+
 - **07-technical-deep-dive/2api** 有9个具体API实现，占比过大
 - **09-resources** 只有2个子项，内容过少
 
@@ -207,9 +222,9 @@
     └── prompts/        # 提示词技巧（简化原 04-prompts）
 
 03-setup-config/        # 安装配置（保持现状，但简化）
-    ├── prerequisites/  
+    ├── prerequisites/
     ├── tools/          # 各种工具配置
-    └── troubleshooting/ 
+    └── troubleshooting/
 
 04-advanced/           # 进阶技术（合并 05 和 07）
     ├── architectures/  # RAG、MCP、多智能体等
@@ -217,8 +232,8 @@
     └── deployment/     # 部署方案
 
 05-resources/          # 资源中心（扩充）
-    ├── api-providers/  
-    ├── tools-list/    
+    ├── api-providers/
+    ├── tools-list/
     ├── demos/         # 示例项目
     └── community/     # 社区资源
 
@@ -231,12 +246,12 @@
 
 ```
 01-beginner/           # 初学者
-    ├── first-steps/   
-    ├── basic-usage/   
+    ├── first-steps/
+    ├── basic-usage/
     └── common-questions/
 
 02-intermediate/       # 中级用户
-    ├── setup-guide/   
+    ├── setup-guide/
     ├── prompt-engineering/
     └── tool-integration/
 
@@ -319,6 +334,24 @@
    - 创建快速索引页面
 
 ## 执行优先级
+
+1. **P0 - 立即修复**：缺失文件、死链接
+2. **P1 - 本周内**：命名规范统一、空章节处理
+3. **P2 - 本月内**：内容重组、层级优化
+4. **P3 - 计划中**：导航系统、用户体验优化
+
+---
+
+## 2025-10 Prompts 章节重构执行记录（已完成）
+
+- 交互基础：合并 definition.md 与 necessity.md → basics.md；保留 good-vs-bad.md
+- 上下文学习：重命名为 context（显示名“上下文”）
+- 对话层级：合并 system/assistant/user 三页入 index.md；保留 example.md
+- 实用技巧：删除全部三级叶子页，仅保留 index.md（占位）
+- 好用范例：重命名为 examples（显示名“Examples”）
+- 侧边栏：同步更新为简化后的二级结构
+- 路由：全库替换旧路由；astro.config.mjs 新增 redirects 兼容旧链接
+- 构建：本地构建通过，页面可用
 
 1. **P0 - 立即修复**：缺失文件、死链接
 2. **P1 - 本周内**：命名规范统一、空章节处理

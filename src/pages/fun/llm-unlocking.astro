@@ -20,10 +20,6 @@ import { FUN_SIDEBAR } from '../../scripts/sidebars'
 // 目录由 RightSidebar 自动生成
 ---
 
-<ContentLayout
-  title="模型解锁教程"
-  section="好玩的"
-  sidebarItems={FUN_SIDEBAR}
->
+<ContentLayout title="模型解锁教程" section="好玩的" sidebarItems={FUN_SIDEBAR}>
   {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>

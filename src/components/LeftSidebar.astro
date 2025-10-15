@@ -14,15 +14,17 @@ const normalizePath = (path: string) => {
 const normalizedCurrentPath = normalizePath(currentPath)
 
 // 仅在路径完全相等时高亮（普通链接）
-const isExactActive = (href?: string) => 
+const isExactActive = (href?: string) =>
   !!href && normalizedCurrentPath === normalizePath(href)
 
 // 对于包含子项的分组，允许前缀匹配
 const isGroupActive = (href?: string) => {
   if (!href) return false
   const normalizedHref = normalizePath(href)
-  return normalizedCurrentPath === normalizedHref || 
-         normalizedCurrentPath.startsWith(normalizedHref + '/')
+  return (
+    normalizedCurrentPath === normalizedHref ||
+    normalizedCurrentPath.startsWith(normalizedHref + '/')
+  )
 }
 ---
 
@@ -90,7 +92,9 @@ const isGroupActive = (href?: string) => {
   }
 
   /* 移除顶部标题展示，避免视觉不协调 */
-  .section-title { display: none; }
+  .section-title {
+    display: none;
+  }
 
   .section-nav {
     display: flex;
@@ -131,7 +135,9 @@ const isGroupActive = (href?: string) => {
 
   /* 层级菜单样式 */
   /* 顶层分组不额外叠加间距，统一交给 .section-nav 的 gap 控制 */
-  .group { margin: 0; }
+  .group {
+    margin: 0;
+  }
 
   /* 注意：slot 注入的内容默认不受 scoped 样式影响。
    为了让传入内容中的 .submenu 生效，这里使用 :global 进行样式声明。 */

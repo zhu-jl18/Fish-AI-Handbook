@@ -56,34 +56,19 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
     label: '交互基础',
     href: '/prompts/interaction-basics',
     items: [
-      { label: '定义', href: '/prompts/interaction-basics/definition' },
-      { label: '必要性', href: '/prompts/interaction-basics/necessity' },
+      { label: '基础概念与必要性', href: '/prompts/interaction-basics/basics' },
       { label: '好与坏', href: '/prompts/interaction-basics/good-vs-bad' },
     ],
   },
-  { label: '上下文学习', href: '/prompts/context-learning' },
+  { label: '上下文', href: '/prompts/context' },
   {
     label: '对话层级',
     href: '/prompts/dialogue-levels',
-    items: [
-      { label: '系统提示', href: '/prompts/dialogue-levels/system-prompts' },
-      { label: '助手消息', href: '/prompts/dialogue-levels/assistant-messages' },
-      { label: '用户提示', href: '/prompts/dialogue-levels/user-prompts' },
-      { label: '一个例子', href: '/prompts/dialogue-levels/example' },
-    ],
+    items: [{ label: '一个例子', href: '/prompts/dialogue-levels/example' }],
   },
-  {
-    label: '实用技巧',
-    href: '/prompts/practical-tips',
-    items: [
-      { label: '优先级', href: '/prompts/practical-tips/priority' },
-      { label: '指令遵循', href: '/prompts/practical-tips/instruction-following' },
-      { label: '提示词增强', href: '/prompts/practical-tips/prompt-amplification' },
-      { label: '自我迭代', href: '/prompts/practical-tips/self-iteration' },
-    ],
-  },
+  { label: '实用技巧', href: '/prompts/practical-tips' },
   { label: '高级框架', href: '/prompts/advanced-frameworks' },
-  { label: '好用范例', href: '/prompts/handy-examples' },
+  { label: 'Examples', href: '/prompts/examples' },
   { label: '扩展阅读', href: '/prompts/extended-reading' },
 ]
 
@@ -101,7 +86,6 @@ export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
   { label: 'Agents', href: '/advanced/agents' },
   { label: 'Workflow', href: '/advanced/workflow' },
 ]
-
 
 export const FUN_SIDEBAR: SidebarSection = [
   { label: '好玩的', href: '/fun' },
@@ -129,5 +113,3 @@ export const SETUP_SIDEBAR: SidebarSection = [
   { label: 'Claude Code', href: '/setup/claude-code' },
   { label: 'Codex', href: '/setup/codex' },
 ]
-
-

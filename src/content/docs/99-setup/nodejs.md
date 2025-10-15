@@ -241,6 +241,7 @@ npx cowsay "Coding!"
 ### 常见问题
 
 #### PATH 问题
+
 ```bash
 # 检查 Node.js 是否在 PATH 中
 where node
@@ -251,6 +252,7 @@ set PATH=%PATH%;C:\Program Files\nodejs
 ```
 
 #### 权限问题
+
 ```bash
 # 使用管理员权限运行终端
 # 或配置本地包目录
@@ -258,6 +260,7 @@ npm config set prefix "%USERPROFILE%\npm-global"
 ```
 
 #### 镜像源优化（中国用户）
+
 ```bash
 # 使用淘宝镜像加速
 npm config set registry https://registry.npmmirror.com
@@ -281,4 +284,3 @@ npm config set registry https://registry.npmjs.org
 3. **自动化脚本**：编写一键环境搭建脚本
 
 这份指南聚焦于 Node.js 生态系统的核心价值和 AI 编程工具的选择逻辑，帮助开发者理解现代 JavaScript 开发的基础设施。
-
