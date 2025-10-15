@@ -24,29 +24,16 @@ This document records the structural changes applied to the Prompts chapter.
 - /prompts/interaction-basics/basics
 - /prompts/interaction-basics/good-vs-bad
 - /prompts/context
-- /prompts/dialogue-levels/ (with /example)
+  - /prompts/context/dialogue-levels
+  - /prompts/context/request-body
 - /prompts/practical-tips
 - /prompts/advanced-frameworks
 - /prompts/examples
 - /prompts/extended-reading
 
-## Redirects
-
-Old → New
-
-- /prompts/interaction-basics/definition → /prompts/interaction-basics/basics
-- /prompts/interaction-basics/necessity → /prompts/interaction-basics/basics
-- /prompts/context-learning → /prompts/context
-- /prompts/dialogue-levels/system-prompts → /prompts/dialogue-levels/
-- /prompts/dialogue-levels/assistant-messages → /prompts/dialogue-levels/
-- /prompts/dialogue-levels/user-prompts → /prompts/dialogue-levels/
-- /prompts/practical-tips/priority → /prompts/practical-tips/
-- /prompts/practical-tips/instruction-following → /prompts/practical-tips/
-- /prompts/practical-tips/prompt-amplification → /prompts/practical-tips/
-- /prompts/practical-tips/self-iteration → /prompts/practical-tips/
-- /prompts/handy-examples → /prompts/examples
-
 ## Notes
+
+- Legacy redirects have been removed for a strict, clean URL structure.
 
 - Only one H1 per page; merged sections are H2 and below.
 - Frontmatter standardized to minimal fields (title, optional description).
