@@ -10,11 +10,11 @@ description: 提示词章节导览与结构说明。
 ## 结构导航
 
 - 交互基础（Interaction Basics）
-  - [基础概念与必要性](/prompts/interaction-basics/basics)
+  - [Necessity](/prompts/interaction-basics/basics)
   - [好与坏](/prompts/interaction-basics/good-vs-bad)
-- [上下文](/prompts/context)
+- [Context](/prompts/context)
 - 对话层级（Dialogue Levels）
-  - [一个例子](/prompts/dialogue-levels/example)
+  - [请求体](/prompts/dialogue-levels/example)
 - [实用技巧](/prompts/practical-tips)
 - [高级框架](/prompts/advanced-frameworks)
 - [Examples](/prompts/examples)

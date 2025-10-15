@@ -63,6 +63,7 @@ URL["Request: /resources/2api/"]
 
 - 新增“顶级章节（一级）”示例：新增 `playground`（假设排序号 07）
   1. 内容：`src/content/docs/07-playground/index.md`
+
      ```markdown
      ---
      title: Playground
@@ -70,6 +71,7 @@ URL["Request: /resources/2api/"]
 
      # Playground 概览
      ```
+
   2. 路由：`src/pages/playground/index.astro`
      `astro
      ---
@@ -97,6 +99,7 @@ const entry = await getEntry('docs','07-playground')
   2. 路由层：
      - `src/pages/prompts/best-practices/index.astro` 读取二级 index
      - `src/pages/prompts/best-practices/tracing.astro` 读取三级 md
+
      ```astro
      ---
      import ContentLayout from '../../../layouts/ContentLayout.astro'
@@ -113,6 +116,7 @@ const entry = await getEntry('docs','07-playground')
        <Content />
      </ContentLayout>
      ```
+
   3. 侧栏：在 `PROMPTS_SIDEBAR` 下添加：
      ```ts
      {

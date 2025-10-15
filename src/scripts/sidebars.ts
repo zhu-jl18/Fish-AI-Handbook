@@ -56,15 +56,15 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
     label: '交互基础',
     href: '/prompts/interaction-basics',
     items: [
-      { label: '基础概念与必要性', href: '/prompts/interaction-basics/basics' },
+      { label: 'Necessity', href: '/prompts/interaction-basics/basics' },
       { label: '好与坏', href: '/prompts/interaction-basics/good-vs-bad' },
     ],
   },
-  { label: '上下文', href: '/prompts/context' },
+  { label: 'Context', href: '/prompts/context' },
   {
     label: '对话层级',
     href: '/prompts/dialogue-levels',
-    items: [{ label: '一个例子', href: '/prompts/dialogue-levels/example' }],
+    items: [{ label: '请求体', href: '/prompts/dialogue-levels/example' }],
   },
   { label: '实用技巧', href: '/prompts/practical-tips' },
   { label: '高级框架', href: '/prompts/advanced-frameworks' },
