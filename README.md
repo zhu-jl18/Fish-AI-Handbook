@@ -81,10 +81,15 @@ URL["Request: /resources/2api/"]
 
       const entry = await getEntry('docs','07-playground')
       const { Content } = await entry.render()
-      ---
+
+      ***
+
       <ContentLayout title={entry?.data?.title || 'Playground'} section="Playground" headings={[]}>
       <Content />
       </ContentLayout>
+
+      ```
+
       ```
 
   3.  侧栏：在 `src/scripts/sidebars.ts` 的选择器与对应 `SIDEBAR` 中按你需要添加：
@@ -148,11 +153,12 @@ description: 页面简介（必填，未填写将构建失败）
 <a id="maintenance"></a> [回到目录](#toc)
 
 ```
-npm install      # 安装依赖
-npm run dev      # 本地开发（默认 4321）
-npm run build    # 生成 dist/
-npm run preview  # 预览 dist/
-npm run format   # 代码格式化
+npm install        # 安装依赖
+npm run dev        # 本地开发（默认 4321）
+npm run build      # 生成 dist/
+npm run preview    # 预览 dist/
+npm run format     # 代码格式化
+npm run test:links # 检测站内死链/断链（基于 dist/，仅检查站内链接）
 ```
 
 常见问题
