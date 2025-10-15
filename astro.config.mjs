@@ -7,12 +7,12 @@ export default defineConfig({
   output: 'static',
   integrations: [mdx()],
   devToolbar: {
-    enabled: true
+    enabled: true,
   },
   markdown: {
     shikiConfig: {
       theme: 'dark-plus',
-      wrap: true
-    }
-  }
+      wrap: true,
+    },
+  },
 })
