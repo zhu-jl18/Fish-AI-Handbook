@@ -42,11 +42,20 @@
   font-weight: 600;
 }
 
-.toc-2 { padding-left: 0; }
-.toc-3 { padding-left: 1rem; font-size: 0.75rem; }
-.toc-4 { padding-left: 2rem; font-size: 0.72rem; }
-
-@media (max-width: 1024px) {
-  .right-sidebar { display: none; }
+.toc-2 {
+  padding-left: 0;
+}
+.toc-3 {
+  padding-left: 1rem;
+  font-size: 0.75rem;
+}
+.toc-4 {
+  padding-left: 2rem;
+  font-size: 0.72rem;
 }
 
+@media (max-width: 1024px) {
+  .right-sidebar {
+    display: none;
+  }
+}

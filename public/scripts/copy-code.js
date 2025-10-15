@@ -1,1 +1,30 @@
-document.addEventListener('DOMContentLoaded',()=>{const e=document.querySelectorAll('pre');e.forEach(e=>{const t=document.createElement('button');t.className='code-copy-button',t.textContent='Copy',e.appendChild(t),t.addEventListener('click',()=>{const o=e.querySelector('code');if(!o)return;const n=o.innerText;navigator.clipboard.writeText(n).then(()=>{t.textContent='Copied!',t.classList.add('copied'),setTimeout(()=>{t.textContent='Copy',t.classList.remove('copied')},2e3)}).catch(e=>{console.error('Failed to copy code: ',e),t.textContent='Error',setTimeout(()=>{t.textContent='Copy'},2e3)})})})});
+document.addEventListener('DOMContentLoaded', () => {
+  const e = document.querySelectorAll('pre')
+  e.forEach((e) => {
+    const t = document.createElement('button')
+    ;((t.className = 'code-copy-button'),
+      (t.textContent = 'Copy'),
+      e.appendChild(t),
+      t.addEventListener('click', () => {
+        const o = e.querySelector('code')
+        if (!o) return
+        const n = o.innerText
+        navigator.clipboard
+          .writeText(n)
+          .then(() => {
+            ;((t.textContent = 'Copied!'),
+              t.classList.add('copied'),
+              setTimeout(() => {
+                ;((t.textContent = 'Copy'), t.classList.remove('copied'))
+              }, 2e3))
+          })
+          .catch((e) => {
+            ;(console.error('Failed to copy code: ', e),
+              (t.textContent = 'Error'),
+              setTimeout(() => {
+                t.textContent = 'Copy'
+              }, 2e3))
+          })
+      }))
+  })
+})

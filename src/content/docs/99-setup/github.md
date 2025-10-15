@@ -164,6 +164,7 @@ git push origin --tags  # 推送所有标签
 ### 核心 Git 插件
 
 #### GitLens
+
 增强 Git 功能的核心插件：
 
 ```json
@@ -176,6 +177,7 @@ git push origin --tags  # 推送所有标签
 ```
 
 #### Git History
+
 可视化提交历史和分支图：
 
 ```json
@@ -186,6 +188,7 @@ git push origin --tags  # 推送所有标签
 ```
 
 #### Git Graph
+
 交互式分支可视化：
 
 ```json
@@ -198,6 +201,7 @@ git push origin --tags  # 推送所有标签
 ### AI 辅助编程
 
 #### GitHub Copilot
+
 AI 代码补全和建议：
 
 ```json
@@ -418,21 +422,21 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-    - run: npm ci
-    - run: npm test
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npm test
 ```
 
 ### 常用工作流示例
@@ -444,9 +448,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-and-test:
@@ -456,15 +460,15 @@ jobs:
         node-version: [16.x, 18.x, 20.x]
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
 ```
 
 #### 自动部署
@@ -474,19 +478,19 @@ name: Deploy to Vercel
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Deploy to Vercel
-      run: |
-        npm i -g vercel
-        vercel --prod --yes
-      env:
-        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      - uses: actions/checkout@v4
+      - name: Deploy to Vercel
+        run: |
+          npm i -g vercel
+          vercel --prod --yes
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 ```
 
 ### 市场热门 Actions
@@ -542,11 +546,13 @@ flowchart TD
 #### PR 创建步骤
 
 1. **创建功能分支**：
+
    ```bash
    git checkout -b feature/add-github-docs
    ```
 
 2. **开发和提交**：
+
    ```bash
    git add .
    git commit -m "docs: add comprehensive GitHub guide"
@@ -639,9 +645,9 @@ flowchart TD
 
 1. **main**：生产就绪代码
 2. **develop**：开发主分支
-3. **feature/***：功能开发分支
-4. **release/***：发布准备分支
-5. **hotfix/***：紧急修复分支
+3. **feature/\***：功能开发分支
+4. **release/\***：发布准备分支
+5. **hotfix/\***：紧急修复分支
 
 #### 快速开发实践
 

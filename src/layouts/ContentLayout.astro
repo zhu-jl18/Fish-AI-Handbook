@@ -12,7 +12,17 @@ const { title, section, headings = [] } = Astro.props
 
 // 基于 URL 别名推导导航高亮键（不依赖中文文案）
 const first = currentPath.split('/').filter(Boolean)[0] ?? 'home'
-const navKeys = new Set(['fish-talks','setup','basic-usage','prompts','advanced','demo','tech','fun','resources'])
+const navKeys = new Set([
+  'fish-talks',
+  'setup',
+  'basic-usage',
+  'prompts',
+  'advanced',
+  'demo',
+  'tech',
+  'fun',
+  'resources',
+])
 const currentKey = navKeys.has(first) ? first : 'home'
 ---
 

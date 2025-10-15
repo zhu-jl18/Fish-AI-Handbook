@@ -18,18 +18,21 @@ description: '不离开终端就能调用AI，真正的Vibe Coding'
 ### Claude Code - 王者之选（强烈推荐）
 
 **为啥最好用：**
+
 - Anthropic官方出品，专为编程优化
-- 能理解整个代码仓库，不只是单个文件  
+- 能理解整个代码仓库，不只是单个文件
 - 自动处理git状态、测试结果、错误日志
 - 200k token上下文，"把整个项目塞进脑子里"
 
 **安装：**
+
 ```bash
 # 需要先有Claude订阅（Pro版$20/月，值得）
 curl -L https://claude.ai/download/cli | sh
 ```
 
 **实战例子：**
+
 ```bash
 # 直接让它帮你修bug
 claude "帮我修复这个登录问题，用户反馈点击按钮没反应"
@@ -41,30 +44,34 @@ claude "根据当前git diff生成合适的提交信息"
 claude "把这个组件重构成TypeScript，保持所有功能"
 ```
 
-*[占位：Claude Code终端使用截图 - 显示代码生成过程]*
+_[占位：Claude Code终端使用截图 - 显示代码生成过程]_
 
 ---
 
 ### Gemini CLI - 免费王者
 
 **为啥推荐：**
+
 - 谷歌出品，完全免费使用
 - 100万token上下文（约75万字），超大容量
 - 支持实时搜索，信息永远最新
 - 安装简单，配置方便
 
 **安装：**
+
 ```bash
 pip install google-generativeai
 ```
 
 **配置：**
+
 ```bash
 # 去 aistudio.google.com 申请API密钥
 export GOOGLE_API_KEY="你的密钥"
 ```
 
 **实战例子：**
+
 ```bash
 # 分析大型日志文件
 cat big_log.txt | gemini "找出所有错误并分类统计"
@@ -76,24 +83,27 @@ gemini "根据这个API代码生成使用文档" < api.py
 gemini "2025年最新的Python安全最佳实践"
 ```
 
-*[占位：Gemini CLI使用截图 - 显示大文件处理能力]*
+_[占位：Gemini CLI使用截图 - 显示大文件处理能力]_
 
 ---
 
 ### Rovo Dev CLI - 新秀黑马（免费！）
 
 **特色：**
+
 - Claude Sonnet 4和GPT-5两个顶级模型
 - 每天2000万token免费额度（太大方了）
 - 24小时重置，基本用不完
 - 功能完全对标Claude Code
 
 **安装：**
+
 ```bash
 npm install -g @rovo-dev/cli
 ```
 
 **使用：**
+
 ```bash
 # 和Claude Code几乎一样的体验
 rovo "帮我优化这个数据库查询性能"
@@ -104,12 +114,14 @@ rovo "帮我优化这个数据库查询性能"
 ### 本地部署选择：Ollama
 
 **优势：**
+
 - 完全本地运行，数据不出本机
 - 支持各种开源模型（Llama、CodeLlama等）
 - 一次安装，永久使用
 - 适合对隐私要求高的场景
 
 **安装：**
+
 ```bash
 # macOS/Linux
 curl -fsSL https://ollama.ai/install.sh | sh
@@ -118,6 +130,7 @@ curl -fsSL https://ollama.ai/install.sh | sh
 ```
 
 **使用：**
+
 ```bash
 # 安装模型
 ollama pull llama3.2
@@ -130,7 +143,7 @@ echo "写一个快速排序算法" | ollama run codellama
 cat main.py | ollama run llama3.2 "审查这段代码"
 ```
 
-*[占位：Ollama本地模型截图 - 显示隐私安全优势]*
+_[占位：Ollama本地模型截图 - 显示隐私安全优势]_
 
 ## 实战应用场景
 
@@ -157,7 +170,7 @@ tail -1000 error.log | claude "分析错误模式并给出解决建议"
 # 性能分析
 cat access.log | claude "分析访问模式，找出性能瓶颈" > performance_report.md
 
-# 安全审计  
+# 安全审计
 grep "403\|404\|500" access.log | claude "分析异常访问，检测潜在攻击"
 ```
 
@@ -243,7 +256,7 @@ fi
 **尝鲜党：** Rovo Dev（新工具体验）
 **隐私党：** Ollama（本地部署）
 
-*[占位：CLI工具对比图表 - 显示功能和成本对比]*
+_[占位：CLI工具对比图表 - 显示功能和成本对比]_
 
 ---
 
