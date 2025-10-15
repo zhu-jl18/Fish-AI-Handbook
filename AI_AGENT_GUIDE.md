@@ -36,7 +36,7 @@
   - 布局：`src/layouts/`
   - 组件：`src/components/`
   - 侧栏与选择：`src/scripts/sidebars.ts`
-- 常用命令：`npm install`、`npm run dev`、`npm run build`、`npm run preview`、`npm run format`
+- 常用命令：`npm install`、`npm run dev`、`npm run build`、`npm run preview`、`npm run format`、`npm run test:links`
 - 内容层级：最多三级（一级/二级=文件夹+index.md；三级=单页 md）
 - 命名：目录顶层 `编号-别名`；文件/路由 kebab-case；组件/脚本驼峰；不提交 `dist/`、`.astro/`
 
@@ -65,7 +65,7 @@ flowchart LR
 - 路由与布局 Agent
   - 允许：在 `src/pages/**` 新建/改 `.astro` 并引用 `ContentLayout`
   - 禁止：破坏全局布局与组件接口
-  - 完成：本地预览无 404/报错，导航高亮正常
+- 完成：本地预览无 404/报错，导航高亮正常；`npm run test:links` 通过
 - 侧栏维护 Agent
   - 允许：维护 `src/scripts/sidebars.ts` 的选择与 `SIDEBAR` 常量
   - 禁止：加入与路由不对应的条目

@@ -69,11 +69,12 @@ npm install
 npm run dev   # 默认 4321（Playwright 测试会复用 4321）
 ```
 
-- 构建与预览：
+- 构建与预览与链接检测：
 
 ```bash
 npm run build
 npm run preview
+npm run test:links  # 站内死链/断链扫描（基于 dist/）
 ```
 
 - 格式化：
