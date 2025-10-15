@@ -73,7 +73,8 @@ URL["Request: /resources/2api/"]
      ```
 
   2. 路由：`src/pages/playground/index.astro`
-     `astro
+   
+     ```astro
      ---
      import ContentLayout from '../../layouts/ContentLayout.astro'
      import { getEntry } from 'astro:content'
@@ -83,8 +84,10 @@ const entry = await getEntry('docs','07-playground')
      <ContentLayout title={entry?.data?.title || 'Playground'} section="Playground" headings={[]}>
        <Content />
      </ContentLayout>
-     `
+     ```
+
   3. 侧栏：在 `src/scripts/sidebars.ts` 的选择器与对应 `SIDEBAR` 中按你需要添加：
+   
      ```ts
      if (path.startsWith('/playground')) return PLAYGROUND_SIDEBAR
      export const PLAYGROUND_SIDEBAR = [
