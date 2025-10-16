@@ -14,8 +14,20 @@ const { title } = Astro.props
     </title>
     <meta name="description" content="Fish-Book - 实用的 AI 使用手册" />
     <!-- 自托管中文字体预加载：当前使用 ttf；后续可替换为 woff2 以减小体积 -->
-    <link rel="preload" href="/fonts/NotoSansSC-Regular.ttf" as="font" type="font/ttf" crossorigin />
-    <link rel="preload" href="/fonts/NotoSansSC-SemiBold.ttf" as="font" type="font/ttf" crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/NotoSansSC-Regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/NotoSansSC-SemiBold.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
 
     <!-- 已移除外部 Google Fonts 引用，使用系统英文栈与本地中文字体 -->
   </head>
