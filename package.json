@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && pagefind --site dist --glob \"**/{fish-talks,basic-usage,prompts,advanced,fun,resources,setup}/**/index.html\" --exclude-selectors \"header,nav,footer,.left-sidebar,.right-sidebar\"",
+    "build": "astro build && pagefind --site dist --exclude-selectors \"header,nav,footer,.left-sidebar,.right-sidebar,[data-pagefind-ignore='true']\"",
     "preview": "astro preview",
+    "preview:search": "npm run build && astro preview",
     "astro": "astro",
     "format": "prettier --write .",
     "test:e2e": "playwright test",
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.6",
+    "@pagefind/default-ui": "^1.4.0",
     "astro": "^5.13.10",
     "fish-ai-book": "file:"
   },
