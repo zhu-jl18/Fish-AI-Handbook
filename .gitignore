@@ -48,3 +48,9 @@ sidebars_out.ts
 __tmp_*
 *.old
 *.bak
+
+# test artifacts
+test-results/
+
+# test artifacts
+test-results/
