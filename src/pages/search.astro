@@ -5,8 +5,29 @@ import ContentLayout from '../layouts/ContentLayout.astro'
 <ContentLayout title="搜索" section="搜索">
   <div>
     <h1>搜索</h1>
-    <p>
-      站内搜索即将上线。当前仅提供入口占位，后续会接入 Pagefind 或 Algolia。
-    </p>
+    <div id="search"></div>
   </div>
+  
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+  <script type="module">
+    import { PagefindUI } from '/pagefind/pagefind-ui.js';
+    new PagefindUI({
+      element: '#search',
+      showSubResults: false,
+      showImages: false,
+      bundlePath: '/pagefind/',
+      translations: {
+        placeholder: '搜索文档...',
+        zero_results: '未找到结果',
+        clear_search: '清除',
+        load_more: '加载更多'
+      }
+    });
+  </script>
+  
+  <style>
+    #search {
+      margin-top: 2rem;
+    }
+  </style>
 </ContentLayout>
