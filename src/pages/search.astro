@@ -9,20 +9,35 @@ import ContentLayout from '../layouts/ContentLayout.astro'
   </div>
   
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
-  <script type="module">
-    import { PagefindUI } from '/pagefind/pagefind-ui.js';
-    new PagefindUI({
-      element: '#search',
-      showSubResults: false,
-      showImages: false,
-      bundlePath: '/pagefind/',
-      translations: {
-        placeholder: '搜索文档...',
-        zero_results: '未找到结果',
-        clear_search: '清除',
-        load_more: '加载更多'
+  <script src="/pagefind/pagefind-ui.js" is:inline></script>
+  <script>
+    (function () {
+      const container = document.getElementById('search')
+      function init() {
+        if (typeof window.PagefindUI === 'function') {
+          new window.PagefindUI({
+            element: '#search',
+            showSubResults: false,
+            showImages: false,
+            bundlePath: '/pagefind/',
+            translations: {
+              placeholder: '搜索文档...',
+              zero_results: '未找到结果',
+              clear_search: '清除',
+              load_more: '加载更多',
+            },
+          })
+        } else if (container) {
+          container.innerHTML = '<p style="color:#bbb">未检测到搜索索引。请先执行 <code>npm run build</code> 然后 <code>npm run preview</code>。</p>'
+          console.warn('PagefindUI 未加载，可能是 /pagefind 目录不存在（未构建）')
+        }
       }
-    });
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init)
+      } else {
+        init()
+      }
+    })()
   </script>
   
   <style>
