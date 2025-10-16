@@ -33,7 +33,7 @@ const currentKey = navKeys.has(first) ? first : 'home'
     <LeftSidebar section={section} items={sidebarItems} />
 
     <main id="main-content" class="content">
-      <div class="content-inner">
+      <div class="content-inner" data-pagefind-body>
         <slot />
       </div>
     </main>
