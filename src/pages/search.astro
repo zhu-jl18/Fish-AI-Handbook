@@ -1,48 +1,74 @@
 ---
 import ContentLayout from '../layouts/ContentLayout.astro'
+
+const q = Astro.url.searchParams.get('q') ?? ''
+const base = import.meta.env.BASE_URL ?? '/'
+const bundlePath = (base.endsWith('/') ? base : base + '/') + 'pagefind/'
 ---
 
 <ContentLayout title="搜索" section="搜索">
-  <div>
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+
+  <div data-pagefind-ignore="true">
     <h1>搜索</h1>
-    <div id="search"></div>
+    <div id="search" data-bundle-path={bundlePath} data-initial={q}></div>
   </div>
-  
-  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
-  <script src="/pagefind/pagefind-ui.js" is:inline></script>
-  <script>
-    (function () {
+
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
       const container = document.getElementById('search')
-      function init() {
-        if (typeof window.PagefindUI === 'function') {
-          new window.PagefindUI({
-            element: '#search',
-            showSubResults: false,
-            showImages: false,
-            bundlePath: '/pagefind/',
-            translations: {
-              placeholder: '搜索文档...',
-              zero_results: '未找到结果',
-              clear_search: '清除',
-              load_more: '加载更多',
-            },
-          })
-        } else if (container) {
-          container.innerHTML = '<p style="color:#bbb">未检测到搜索索引。请先执行 <code>npm run build</code> 然后 <code>npm run preview</code>。</p>'
-          console.warn('PagefindUI 未加载，可能是 /pagefind 目录不存在（未构建）')
-        }
+      const bundlePath = container?.dataset.bundlePath || '/pagefind/'
+      const initial = container?.dataset.initial || ''
+
+      const ui = new PagefindUI({
+        element: '#search',
+        showSubResults: false,
+        showImages: false,
+        bundlePath,
+        translations: {
+          placeholder: '搜索文档…',
+          zero_results: '没有找到与"{term}"相关的内容',
+          clear_search: '清除',
+          load_more: '加载更多',
+        },
+      })
+
+      if (initial) {
+        setTimeout(() => {
+          const input = document.querySelector('#search input')
+          if (input) input.value = initial
+          if (typeof ui.triggerSearch === 'function') {
+            ui.triggerSearch(initial)
+          }
+        }, 100)
       }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init)
-      } else {
-        init()
+
+      if (
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1'
+      ) {
+        fetch('/pagefind/pagefind.js', { method: 'HEAD' }).catch(() => {
+          const note = document.createElement('div')
+          note.textContent =
+            '提示：开发模式仅展示搜索框。要体验完整搜索，请运行：npm run preview:search'
+          note.style.fontSize = '12px'
+          note.style.opacity = '0.7'
+          note.style.marginBottom = '8px'
+          note.style.padding = '8px'
+          note.style.backgroundColor = '#fffbea'
+          note.style.border = '1px solid #ffc107'
+          note.style.borderRadius = '4px'
+          container?.prepend(note)
+        })
       }
-    })()
+    })
   </script>
-  
+
   <style>
     #search {
-      margin-top: 2rem;
+      margin-top: 1rem;
     }
   </style>
 </ContentLayout>
