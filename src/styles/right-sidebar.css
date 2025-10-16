@@ -54,6 +54,22 @@
   font-size: 0.72rem;
 }
 
+.back-to-top {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  color: #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.back-to-top:hover {
+  background-color: #2a2a2a;
+  color: #fff;
+}
+
 @media (max-width: 1024px) {
   .right-sidebar {
     display: none;

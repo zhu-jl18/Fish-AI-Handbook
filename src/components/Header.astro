@@ -29,6 +29,9 @@ const { currentPage } = Astro.props
           >配置指南</a
         >
       </div>
+      <div class="nav-actions">
+        <a href="/search" class="search-link" aria-label="搜索">搜索</a>
+      </div>
     </div>
   </nav>
 </header>
@@ -49,6 +52,7 @@ const { currentPage } = Astro.props
     justify-content: space-between;
     align-items: center;
     height: 60px;
+    gap: 1rem;
   }
   .logo {
     font-size: 1.2rem;
@@ -56,10 +60,21 @@ const { currentPage } = Astro.props
     color: #fff;
     text-decoration: none;
   }
-  .nav-links {
+.nav-links {
     display: flex;
     gap: 2rem;
+    align-items: center;
   }
+
+  .nav-actions .search-link {
+    color: #999;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #333;
+    border-radius: 6px;
+    transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+  }
+  .nav-actions .search-link:hover { color: #fff; border-color: #444; background: #111; }
   .nav-links a {
     color: #999;
     text-decoration: none;

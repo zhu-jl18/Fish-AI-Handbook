@@ -204,14 +204,5 @@ npm run test:links # 检测站内死链/断链（基于 dist/，仅检查站内�
 
 vercel.json 说明
 
-- Astro 静态站不需要额外配置；我已将 `vercel.json` 清理为无“noindex”头（允许被收录）。如果你需要禁止搜索引擎收录，可改为：
-  ```json
-  {
-    "headers": [
-      {
-        "source": "/(.*)",
-        "headers": [{ "key": "X-Robots-Tag", "value": "noindex,nofollow" }]
-      }
-    ]
-  }
-  ```
+- 当前站点“统一不收录”：BaseLayout 注入 `<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">`，且 `public/robots.txt` 为 `Disallow: /`；`vercel.json` 仅为字体提供长缓存头。
+- 如需允许收录：删除 BaseLayout 的 robots meta；将 `public/robots.txt` 改为允许；按需在 `vercel.json` 增加站点级 `X-Robots-Tag` 头或留空。

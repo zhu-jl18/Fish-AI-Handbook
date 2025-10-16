@@ -32,7 +32,7 @@ const currentKey = navKeys.has(first) ? first : 'home'
   <div class="content-wrapper">
     <LeftSidebar section={section} items={sidebarItems} />
 
-    <main class="content">
+    <main id="main-content" class="content">
       <div class="content-inner">
         <slot />
       </div>
@@ -58,7 +58,7 @@ const currentKey = navKeys.has(first) ? first : 'home'
   }
 
   .content-inner {
-    max-width: 720px;
+    max-width: 780px;
     margin: 0 auto;
     width: 100%;
   }
