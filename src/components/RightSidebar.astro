@@ -9,6 +9,7 @@ const { headings = [] } = Astro.props
   <div class="toc-content">
     <div class="toc-title">目录</div>
     <nav class="toc-nav"></nav>
+    <button class="back-to-top" aria-label="返回顶部">↑ 返回顶部</button>
   </div>
 </div>
 
@@ -16,6 +17,10 @@ const { headings = [] } = Astro.props
   import { setupRightSidebar } from '/src/scripts/toc.ts'
   // 构建目录并启用滚动高亮
   const stop = setupRightSidebar('.content-inner', '.toc-nav')
+  const btn = document.querySelector('.right-sidebar .back-to-top')
+  if (btn) btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  })
   if (import.meta?.hot) {
     import.meta.hot.on('vite:beforeUpdate', () => stop && stop())
   }

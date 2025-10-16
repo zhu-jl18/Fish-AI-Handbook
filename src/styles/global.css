@@ -1,28 +1,65 @@
-/* 极简黑底白字主题 */
+/* 暗色主题 - 统一设计令牌 */
 :root {
+  color-scheme: dark;
+  
+  /* 背景与表面 */
   --bg-color: #000000;
+  --bg-elevated: #0a0a0a;
+  
+  /* 文本 */
   --text-color: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.65);
+  
+  /* 边框与分隔 */
   --border-color: #333333;
-  --accent-color: #666666;
-  --link-color: #4a9eff;
-  --link-hover-color: #66b3ff;
+  --heading-divider-color: rgba(255, 255, 255, 0.12);
+  
+  /* 强调与交互 - 默认冷色系（蓝紫） */
+  --accent-color: #5670FF;
+  --link-color: #5B8CFF;
+  --link-hover-color: #7AA6FF;
+  
+  /* 代码块 */
+  --code-bg: #0d0d0d;
+  --inline-code-bg: #1a1a1a;
+  
+  /* 阴影 */
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  
+  /* 字体栈 - 中文优先 Noto Sans SC，英文 Inter */
   --font-family-base:
-    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    'Noto Sans SC', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, sans-serif;
   --font-family-heading:
-    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    'Noto Sans SC', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, sans-serif;
   --font-family-mono:
-    'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New',
+    ui-monospace, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New',
     monospace;
+  
+  /* 字号与行高 */
   --font-size-base: 16px;
   --font-size-lg: 16px;
-  --line-height-base: 1.68;
+  --line-height-base: 1.7;
   --heading-line-height: 1.3;
   --heading-letter-spacing: -0.015em;
   --paragraph-spacing: 1.4rem;
   --section-spacing: 2.75rem;
-  --heading-divider-color: rgba(255, 255, 255, 0.12);
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  src: url('/fonts/NotoSansSC-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Sans SC';
+  src: url('/fonts/NotoSansSC-SemiBold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
 }
 
 * {
@@ -45,6 +82,7 @@ body {
   letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   height: 100%;
   overflow-x: hidden;
 }
@@ -69,38 +107,71 @@ a {
   transition: color 0.2s ease;
 }
 
+/* 焦点可见样式（可达性） */
+:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* 跳到正文（仅键盘可见） */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  background: #111;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  z-index: 10000;
+}
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
 a:hover {
   color: var(--link-hover-color);
 }
 
-/* 代码样式 */
+/* 行内代码样式 */
 code {
-  background-color: #1a1a1a;
+  background-color: var(--inline-code-bg);
   padding: 2px 6px;
   border-radius: 4px;
   font-family: var(--font-family-mono);
   font-size: 0.9em;
-  border: 1px solid #333;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
 }
 
-pre {
-  background-color: #0d0d0d;
+/* Shiki 代码块基础样式 */
+pre.astro-code {
+  background-color: var(--code-bg) !important;
   padding: 1.5rem;
   border-radius: 8px;
   overflow-x: auto;
   margin: 1.75rem 0;
-  border: 1px solid #333;
+  border: 1px solid var(--border-color);
   position: relative;
   font-family: var(--font-family-mono);
-  line-height: 1.5;
+  line-height: 1.6;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
-pre code {
+pre.astro-code code {
   background-color: transparent;
   padding: 0;
   border: none;
   font-size: 0.9em;
-  color: #e0e0e0;
+  color: inherit;
+  display: block;
+}
+
+pre.astro-code .line {
+  display: block;
+  min-height: 1em;
 }
 
 /* 代码复制按钮 */
@@ -136,55 +207,25 @@ pre code {
   border-color: #4a9eff;
 }
 
-/* 代码语法高亮基础样式 */
-pre .hljs-keyword {
-  color: #ff79c6;
-}
-
-pre .hljs-string {
-  color: #f1fa8c;
-}
-
-pre .hljs-number {
-  color: #bd93f9;
-}
-
-pre .hljs-comment {
-  color: #6272a4;
-}
-
-pre .hljs-function {
-  color: #50fa7b;
-}
-
-pre .hljs-operator {
-  color: #ff79c6;
-}
-
-pre .hljs-class {
-  color: #8be9fd;
-}
-
-pre .hljs-variable {
-  color: #f8f8f2;
-}
+/* Shiki 语法高亮由主题控制，此处仅保留结构样式 */
 
 /* 代码块滚动条优化 */
-pre::-webkit-scrollbar {
-  height: 6px;
+pre.astro-code::-webkit-scrollbar {
+  height: 8px;
 }
 
-pre::-webkit-scrollbar-track {
-  background: #0d0d0d;
+pre.astro-code::-webkit-scrollbar-track {
+  background: var(--code-bg);
+  border-radius: 4px;
 }
 
-pre::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: 3px;
+pre.astro-code::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
 }
 
-pre::-webkit-scrollbar-thumb:hover {
-  background: #666;
+pre.astro-code::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
 }
 
 /* 标题样式 */
@@ -278,9 +319,23 @@ li > p {
 /* 引用样式 */
 blockquote {
   border-left: 3px solid var(--accent-color);
-  padding-left: 1rem;
-  margin: 1rem 0;
+  padding-left: 1.2rem;
+  margin: 1.5rem 0;
   font-style: italic;
+  color: var(--text-muted);
+  background-color: var(--bg-elevated);
+  padding: 1rem 1rem 1rem 1.2rem;
+  border-radius: 4px;
+}
+
+/* 优先满足减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* 滚动条样式 */
