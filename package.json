@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && pagefind --source dist --glob \"**/{fish-talks,basic-usage,prompts,advanced,fun,resources,setup}/**/index.html\" --exclude-selectors \"header,nav,footer,.left-sidebar,.right-sidebar\"",
+    "build": "astro build && pagefind --site dist --glob \"**/{fish-talks,basic-usage,prompts,advanced,fun,resources,setup}/**/index.html\" --exclude-selectors \"header,nav,footer,.left-sidebar,.right-sidebar\"",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write .",
