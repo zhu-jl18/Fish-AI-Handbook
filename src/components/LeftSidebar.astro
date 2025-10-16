@@ -1,8 +1,11 @@
 ---
-import type { SidebarSection } from '../scripts/sidebars'
+import type {
+  SidebarSection,
+  SidebarGroup,
+  SidebarLink,
+} from '../scripts/sidebars'
 
-const { section, items }: { section: string; items?: SidebarSection } =
-  Astro.props
+const { items }: { items?: SidebarSection } = Astro.props
 const currentPath = Astro.url.pathname
 
 // 规范化路径：移除尾部斜杠（根路径除外）
@@ -26,6 +29,9 @@ const isGroupActive = (href?: string) => {
     normalizedCurrentPath.startsWith(normalizedHref + '/')
   )
 }
+
+const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
+  'items' in entry
 ---
 
 <div class="left-sidebar" data-current-path={currentPath}>
@@ -34,8 +40,7 @@ const isGroupActive = (href?: string) => {
       {
         items ? (
           items.map((entry) =>
-            // @ts-ignore - runtime shape check
-            entry.items ? (
+            isGroup(entry) ? (
               <div class="group" data-href={entry.href ?? '#'}>
                 <a
                   href={entry.href ?? '#'}
@@ -43,7 +48,11 @@ const isGroupActive = (href?: string) => {
                 >
                   {entry.label}
                 </a>
-                <button class="group-toggle" aria-label="展开/收起分组" aria-expanded={isGroupActive(entry.href)}>
+                <button
+                  class="group-toggle"
+                  aria-label="展开/收起分组"
+                  aria-expanded={isGroupActive(entry.href)}
+                >
                   ▾
                 </button>
                 <div class="submenu">
@@ -58,14 +67,13 @@ const isGroupActive = (href?: string) => {
                 </div>
               </div>
             ) : (
-              // @ts-ignore - treat as link shape
               <a
                 href={entry.href}
                 class={isExactActive(entry.href) ? 'active' : undefined}
               >
                 {entry.label}
               </a>
-            ),
+            )
           )
         ) : (
           <slot />
@@ -76,7 +84,9 @@ const isGroupActive = (href?: string) => {
 </div>
 
 <script>
-  const root = document.currentScript?.closest('.left-sidebar')
+  const root =
+    document.currentScript?.closest('.left-sidebar') ||
+    document.querySelector('.left-sidebar')
   ;(() => {
     if (!root) return
     const currentPath = root.getAttribute('data-current-path') || '/'
@@ -89,11 +99,17 @@ const isGroupActive = (href?: string) => {
       // 读取记忆
       const key = `sidebar:group:${href}`
       const remembered = localStorage.getItem(key)
-      const shouldOpenByPath = currentPath === href || currentPath.startsWith(href + '/')
-      let collapsed = remembered === '0' ? false : remembered === '1' ? true : !shouldOpenByPath
+      const shouldOpenByPath =
+        currentPath === href || currentPath.startsWith(href + '/')
+      let collapsed =
+        remembered === '0'
+          ? false
+          : remembered === '1'
+            ? true
+            : !shouldOpenByPath
       function apply() {
         g.classList.toggle('collapsed', collapsed)
-        toggle.setAttribute('aria-expanded', String(!collapsed))
+        toggle?.setAttribute('aria-expanded', String(!collapsed))
       }
       apply()
       toggle.addEventListener('click', (e) => {
@@ -183,12 +199,20 @@ const isGroupActive = (href?: string) => {
     border: none;
     color: #888;
     cursor: pointer;
-    transition: transform 0.2s ease, color 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      color 0.2s ease;
   }
-  .group .group-toggle:hover { color: #fff; }
-  .group.collapsed .group-toggle { transform: rotate(-90deg); }
+  .group .group-toggle:hover {
+    color: #fff;
+  }
+  .group.collapsed .group-toggle {
+    transform: rotate(-90deg);
+  }
 
-  .group.collapsed .submenu { display: none; }
+  .group.collapsed .submenu {
+    display: none;
+  }
 
   /* 注意：slot 注入的内容默认不受 scoped 样式影响。
    为了让传入内容中的 .submenu 生效，这里使用 :global 进行样式声明。 */

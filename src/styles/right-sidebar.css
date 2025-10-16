@@ -63,7 +63,9 @@
   color: #ccc;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 .back-to-top:hover {
   background-color: #2a2a2a;
