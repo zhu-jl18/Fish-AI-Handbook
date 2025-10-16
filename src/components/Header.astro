@@ -60,7 +60,7 @@ const { currentPage } = Astro.props
     color: #fff;
     text-decoration: none;
   }
-.nav-links {
+  .nav-links {
     display: flex;
     gap: 2rem;
     align-items: center;
@@ -72,9 +72,16 @@ const { currentPage } = Astro.props
     padding: 0.25rem 0.5rem;
     border: 1px solid #333;
     border-radius: 6px;
-    transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease;
   }
-  .nav-actions .search-link:hover { color: #fff; border-color: #444; background: #111; }
+  .nav-actions .search-link:hover {
+    color: #fff;
+    border-color: #444;
+    background: #111;
+  }
   .nav-links a {
     color: #999;
     text-decoration: none;
