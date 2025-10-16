@@ -73,7 +73,7 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
               >
                 {entry.label}
               </a>
-            )
+            ),
           )
         ) : (
           <slot />
