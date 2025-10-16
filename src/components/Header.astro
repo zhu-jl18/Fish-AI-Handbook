@@ -30,7 +30,22 @@ const { currentPage } = Astro.props
         >
       </div>
       <div class="nav-actions">
-        <a href="/search" class="search-link" aria-label="搜索">搜索</a>
+        <a href="/search" class="search-button" aria-label="搜索文档">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </a>
       </div>
     </div>
   </nav>
@@ -66,22 +81,29 @@ const { currentPage } = Astro.props
     align-items: center;
   }
 
-  .nav-actions .search-link {
+  .nav-actions {
+    display: flex;
+    align-items: center;
+  }
+  .search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
     color: #999;
-    text-decoration: none;
-    padding: 0.25rem 0.5rem;
+    background: #0f0f0f;
     border: 1px solid #333;
     border-radius: 6px;
-    transition:
-      color 0.2s ease,
-      background-color 0.2s ease,
-      border-color 0.2s ease;
+    text-decoration: none;
+    transition: all 0.2s ease;
   }
-  .nav-actions .search-link:hover {
+  .search-button:hover {
     color: #fff;
-    border-color: #444;
-    background: #111;
+    border-color: #555;
+    background: #1a1a1a;
   }
+
   .nav-links a {
     color: #999;
     text-decoration: none;
