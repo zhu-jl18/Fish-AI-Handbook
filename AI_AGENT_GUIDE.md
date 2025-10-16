@@ -272,18 +272,14 @@ content: 新增「Playground」一级章节并接入侧栏
 ## 9. 部署与 SEO 约定
 
 - Vercel：Node 20；Build: `npm run build`；Output: `dist`
-- 默认允许收录；如需 noindex，使用：
-
-```json
-{
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex,nofollow" }]
-    }
-  ]
-}
-```
+- 当前策略：默认不收录。
+  - BaseLayout 注入 `<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">`
+  - `public/robots.txt` 为 `Disallow: /`
+  - `vercel.json` 仅为 `/fonts/(.*)` 添加长缓存与 CORS 头，不控制收录
+- 如需允许收录：
+  - 移除 BaseLayout 中的 robots meta
+  - 将 `public/robots.txt` 改为允许（或删除该文件）
+  - 按需在 `vercel.json` 增加/移除全站 `X-Robots-Tag` 头
 
 示例片段（部署核对清单）：
 
@@ -293,6 +289,7 @@ content: 新增「Playground」一级章节并接入侧栏
 [ ] Build: npm run build
 [ ] Output: dist
 [ ] Node: 20
+[ ] Robots 策略符合预期（不收录/可收录）
 ```
 
 ---
