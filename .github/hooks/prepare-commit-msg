@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+MSGFILE="$1"
+[ -n "$MSGFILE" ] || exit 0
+[ -f "$MSGFILE" ] || exit 0
+if grep -qiE '^[[:space:]]*co-authored-by[[:space:]]*:[[:space:]]*.*<[[:space:]]*dev@warp\.dev[[:space:]]*>[[:space:]]*$' "$MSGFILE"; then
+  exit 0
+fi
+git interpret-trailers --in-place --trailer "Co-authored-by=Warp <dev@warp.dev>" "$MSGFILE"
+exit 0
