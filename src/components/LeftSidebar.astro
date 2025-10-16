@@ -28,7 +28,7 @@ const isGroupActive = (href?: string) => {
 }
 ---
 
-<div class="left-sidebar">
+<div class="left-sidebar" data-current-path={currentPath}>
   <div class="sidebar-content">
     <nav class="section-nav">
       {
@@ -36,13 +36,16 @@ const isGroupActive = (href?: string) => {
           items.map((entry) =>
             // @ts-ignore - runtime shape check
             entry.items ? (
-              <div class="group">
+              <div class="group" data-href={entry.href ?? '#'}>
                 <a
                   href={entry.href ?? '#'}
                   class={isGroupActive(entry.href) ? 'active' : undefined}
                 >
                   {entry.label}
                 </a>
+                <button class="group-toggle" aria-label="展开/收起分组" aria-expanded={isGroupActive(entry.href)}>
+                  ▾
+                </button>
                 <div class="submenu">
                   {entry.items?.map((link) => (
                     <a
@@ -71,6 +74,37 @@ const isGroupActive = (href?: string) => {
     </nav>
   </div>
 </div>
+
+<script>
+  const root = document.currentScript?.closest('.left-sidebar')
+  ;(() => {
+    if (!root) return
+    const currentPath = root.getAttribute('data-current-path') || '/'
+    const groups = root.querySelectorAll('.group')
+    groups.forEach((g) => {
+      const href = g.getAttribute('data-href') || ''
+      const toggle = g.querySelector('.group-toggle')
+      const submenu = g.querySelector('.submenu')
+      if (!toggle || !submenu) return
+      // 读取记忆
+      const key = `sidebar:group:${href}`
+      const remembered = localStorage.getItem(key)
+      const shouldOpenByPath = currentPath === href || currentPath.startsWith(href + '/')
+      let collapsed = remembered === '0' ? false : remembered === '1' ? true : !shouldOpenByPath
+      function apply() {
+        g.classList.toggle('collapsed', collapsed)
+        toggle.setAttribute('aria-expanded', String(!collapsed))
+      }
+      apply()
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault()
+        collapsed = !collapsed
+        localStorage.setItem(key, collapsed ? '1' : '0')
+        apply()
+      })
+    })
+  })()
+</script>
 
 <style>
   .left-sidebar {
@@ -137,7 +171,24 @@ const isGroupActive = (href?: string) => {
   /* 顶层分组不额外叠加间距，统一交给 .section-nav 的 gap 控制 */
   .group {
     margin: 0;
+    position: relative;
   }
+
+  .group .group-toggle {
+    position: absolute;
+    right: 6px;
+    top: 4px;
+    padding: 2px 6px;
+    background: transparent;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  .group .group-toggle:hover { color: #fff; }
+  .group.collapsed .group-toggle { transform: rotate(-90deg); }
+
+  .group.collapsed .submenu { display: none; }
 
   /* 注意：slot 注入的内容默认不受 scoped 样式影响。
    为了让传入内容中的 .submenu 生效，这里使用 :global 进行样式声明。 */

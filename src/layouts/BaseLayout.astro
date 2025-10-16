@@ -13,15 +13,16 @@ const { title } = Astro.props
       {title ? `${title} - Fish-Book · AI 使用手册` : 'Fish-Book · AI 使用手册'}
     </title>
     <meta name="description" content="Fish-Book - 实用的 AI 使用手册" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- 自托管中文字体预加载：当前使用 ttf；后续可替换为 woff2 以减小体积 -->
+    <link rel="preload" href="/fonts/NotoSansSC-Regular.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/NotoSansSC-SemiBold.ttf" as="font" type="font/ttf" crossorigin />
+
+    <!-- 已移除外部 Google Fonts 引用，使用系统英文栈与本地中文字体 -->
   </head>
   <body>
+    <a href="#main-content" class="skip-link">跳到正文</a>
     <slot />
     <script type="module" src="/scripts/copy-code.js"></script>
+    <script type="module" src="/scripts/lightbox.js"></script>
   </body>
 </html>
