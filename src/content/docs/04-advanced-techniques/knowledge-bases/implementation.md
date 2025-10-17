@@ -238,29 +238,6 @@ collection_v2 = client.get_or_create_collection("kb_v2")
 
 ## 检索与重排实践
 
-```mermaid
-graph TB
-    A[用户查询] --> B[查询处理]
-    B --> C[向量检索]
-    B --> D[BM25检索]
-    
-    C --> E[向量相似度匹配]
-    D --> F[关键词匹配]
-    
-    E --> G[融合器<br/>Ensemble Retriever]
-    F --> G
-    
-    G --> H[重排序<br/>Reranker]
-    H --> I[最终结果]
-    
-    J[元数据过滤] --> G
-    K[缓存层] --> B
-    K --> I
-    
-    style A fill:#fbbf24,stroke:#f59e0b
-    style I fill:#34d399,stroke:#10b981
-    style H fill:#a78bfa,stroke:#8b5cf6
-```
 
 ### Hybrid 检索实现
 

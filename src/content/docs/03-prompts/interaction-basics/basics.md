@@ -146,19 +146,6 @@ prompt = """
 
 大语言模型通过以下方式理解和处理提示词：
 
-```mermaid
-graph TB
-    A[提示词输入] --> B[文本编码]
-    B --> C[语义理解]
-    C --> D[上下文关联]
-    D --> E[知识检索]
-    E --> F[逻辑推理]
-    F --> G[内容生成]
-    G --> H[输出格式化]
-
-    style C fill:#e8f5e8
-    style F fill:#fff2cc
-```
 
 ### 注意力机制
 
@@ -189,18 +176,6 @@ prompt = """
 
 ### 提示词优化循环
 
-```mermaid
-graph LR
-    A[初始提示词] --> B[测试输出]
-    B --> C[效果评估]
-    C --> D{满足需求?}
-    D -->|否| E[优化调整]
-    E --> A
-    D -->|是| F[最终版本]
-
-    style C fill:#ffebee
-    style E fill:#e8f5e8
-```
 
 ## 总结
 
