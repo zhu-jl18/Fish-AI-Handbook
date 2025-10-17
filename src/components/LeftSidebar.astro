@@ -128,13 +128,13 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
     top: 60px;
     width: var(--sidebar-width);
     height: calc(100vh - 60px);
-    background-color: var(--bg-sidebar);
-    border-radius: var(--border-radius);
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 0;
     overflow-y: auto;
     /* 统一侧边栏字号与行高，避免被页面内容影响 */
     font-size: 14px;
     line-height: 1.45;
-    border: 1px solid var(--border-color);
+    border: none;
   }
 
   .sidebar-content {
