@@ -112,7 +112,7 @@ body {
 
 /* 链接样式 */
 a {
-  color: #60a5fa;
+  color: var(--link-color);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s, color 0.2s;
@@ -120,7 +120,7 @@ a {
 
 a:hover {
   color: #93bbfc;
-  border-bottom-color: #60a5fa;
+  border-bottom-color: var(--link-color);
 }
 
 /* 焦点可见样式（可达性） */
