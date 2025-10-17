@@ -9,19 +9,19 @@ description: 基础用法总览：WebChat、IDE、CLI、APP、Mobile 以及 Cher
 
 ### AI 使用场景分类
 
-**1. 🌐 网页端**
+**1. 网页端**
 - WebChat - ChatGPT/Claude等在线对话平台
 
-**2. 💻 桌面端**
+**2. 桌面端**
 - Cherry Studio - 多模型聚合管理工具
 - Claude Code - AI编程助手
 - Codex - 本地大模型运行环境
 
-**3. 📱 移动端**
+**3. 移动端**
 - 官方App - 各AI服务商的官方移动应用
 - 第三方客户端 - 功能增强的移动客户端
 
-**4. 🛠️ 开发工具**
+**4. 开发工具**
 - VS Code插件 - 编辑器内集成AI能力
 - Cursor - AI原生代码编辑器
 - 命令行工具 - CLI方式调用AI服务
