@@ -7,32 +7,24 @@ description: 基础用法总览：WebChat、IDE、CLI、APP、Mobile 以及 Cher
 
 ## AI 工具使用场景概览
 
-```mermaid
-graph TB
-    A[AI 使用场景] --> B[网页端]
-    A --> C[桌面端]
-    A --> D[移动端]
-    A --> E[开发工具]
-    
-    B --> B1[WebChat<br/>ChatGPT/Claude等]
-    
-    C --> C1[Cherry Studio<br/>多模型聚合]
-    C --> C2[Claude Code<br/>AI编程助手]
-    C --> C3[Codex<br/>本地大模型]
-    
-    D --> D1[官方App]
-    D --> D2[第三方客户端]
-    
-    E --> E1[VS Code插件]
-    E --> E2[Cursor]
-    E --> E3[命令行工具]
-    
-    style A fill:#3b82f6,stroke:#2563eb,color:#fff
-    style B fill:#10b981,stroke:#059669,color:#fff
-    style C fill:#8b5cf6,stroke:#7c3aed,color:#fff
-    style D fill:#f59e0b,stroke:#d97706,color:#fff
-    style E fill:#ef4444,stroke:#dc2626,color:#fff
-```
+### AI 使用场景分类
+
+**1. 网页端**
+- WebChat - ChatGPT/Claude等在线对话平台
+
+**2. 桌面端**
+- Cherry Studio - 多模型聚合管理工具
+- Claude Code - AI编程助手
+- Codex - 本地大模型运行环境
+
+**3. 移动端**
+- 官方App - 各AI服务商的官方移动应用
+- 第三方客户端 - 功能增强的移动客户端
+
+**4. 开发工具**
+- VS Code插件 - 编辑器内集成AI能力
+- Cursor - AI原生代码编辑器
+- 命令行工具 - CLI方式调用AI服务
 
 推荐阅读顺序：
 
