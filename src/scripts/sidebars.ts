@@ -36,7 +36,15 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
       { label: 'AI概念', href: '/fish-talks/glossary/ai-concepts' },
     ],
   },
-  { label: '流行词汇', href: '/fish-talks/buzz' },
+  {
+    label: '流行词汇',
+    href: '/fish-talks/buzz',
+    items: [
+      { label: 'Vibe Coding', href: '/fish-talks/buzz/vibe-coding' },
+      { label: 'Agent', href: '/fish-talks/buzz/agent' },
+      { label: 'Workflow', href: '/fish-talks/buzz/workflow' },
+    ],
+  },
 ]
 
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
