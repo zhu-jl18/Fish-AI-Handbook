@@ -30,36 +30,47 @@ const currentKey = navKeys.has(first) ? first : 'home'
   <Header currentPage={currentKey} />
 
   <div class="content-wrapper">
-    <LeftSidebar section={section} items={sidebarItems} />
+    <div class="layout-container">
+      <LeftSidebar section={section} items={sidebarItems} />
 
-    <main id="main-content" class="content">
-      <div class="content-inner" data-pagefind-body>
-        <slot />
-      </div>
-    </main>
+      <main id="main-content" class="content">
+        <div class="content-inner" data-pagefind-body>
+          <slot />
+        </div>
+      </main>
 
-    <RightSidebar headings={headings} />
+      <RightSidebar headings={headings} />
+    </div>
   </div>
 </BaseLayout>
 
 <style>
   .content-wrapper {
     display: flex;
+    justify-content: center;
     margin-top: 60px;
     min-height: calc(100vh - 60px);
+    width: 100%;
+    background-color: var(--bg-color);
+  }
+
+  .layout-container {
+    display: flex;
+    gap: var(--layout-gap);
+    max-width: var(--layout-max-width);
+    width: 100%;
+    position: relative;
   }
 
   .content {
     flex: 1;
-    margin-left: 250px;
-    margin-right: 250px;
-    padding: 3rem 3.5rem;
-    background-color: var(--bg-color);
+    padding: 2.5rem;
+    background-color: var(--bg-content);
+    border-radius: var(--border-radius);
+    max-width: var(--content-max-width);
   }
 
   .content-inner {
-    max-width: 780px;
-    margin: 0 auto;
     width: 100%;
   }
 
@@ -86,33 +97,36 @@ const currentKey = navKeys.has(first) ? first : 'home'
   }
 
   @media (max-width: 1440px) {
+    .layout-container {
+      padding: 0 1rem;
+    }
+    
     .content {
-      padding: 2.75rem 2.5rem;
+      padding: 2.25rem;
     }
   }
 
   @media (max-width: 1200px) {
     .content {
-      padding: 2.5rem 2rem;
+      padding: 2rem;
     }
   }
 
   @media (max-width: 1024px) {
-    .left-sidebar,
-    .right-sidebar {
-      display: none;
+    .layout-container {
+      gap: 0;
     }
 
     .content {
-      margin-left: 0;
-      margin-right: 0;
-      padding: 2.25rem 1.75rem;
+      border-radius: 0;
+      max-width: 100%;
+      padding: 2rem 1.5rem;
     }
   }
 
   @media (max-width: 768px) {
     .content {
-      padding: 2rem 1.25rem;
+      padding: 1.5rem 1rem;
     }
   }
 </style>

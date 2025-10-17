@@ -1,21 +1,21 @@
 .right-sidebar {
-  position: fixed;
-  right: 0;
+  position: sticky;
   top: 60px;
-  width: 250px;
+  width: var(--sidebar-width);
   height: calc(100vh - 60px);
-  background-color: #0a0a0a;
-  border-left: 1px solid #333;
+  background-color: var(--bg-sidebar);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
   overflow-y: auto;
-  padding: 2rem 1rem;
+  padding: 1.5rem;
 }
 
 .toc-title {
-  font-size: 0.9rem;
-  color: #666;
+  font-size: 0.875rem;
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.25rem;
   font-weight: 600;
 }
 
@@ -26,50 +26,58 @@
 }
 
 .toc-link {
-  color: #999;
+  color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.8rem;
-  transition: color 0.2s ease;
-  line-height: 1.4;
+  font-size: 0.8125rem;
+  transition: all 0.2s ease;
+  line-height: 1.5;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--border-radius-sm);
+  display: block;
 }
 
 .toc-link:hover {
-  color: #fff;
+  color: var(--link-hover-color);
+  background-color: rgba(99, 102, 241, 0.05);
 }
 
 .toc-link.active {
-  color: #fff;
+  color: var(--link-color);
   font-weight: 600;
+  background-color: rgba(99, 102, 241, 0.1);
 }
 
 .toc-2 {
-  padding-left: 0;
+  padding-left: 0.75rem;
 }
 .toc-3 {
-  padding-left: 1rem;
-  font-size: 0.75rem;
+  padding-left: 1.75rem;
+  font-size: 0.78125rem;
 }
 .toc-4 {
-  padding-left: 2rem;
-  font-size: 0.72rem;
+  padding-left: 2.75rem;
+  font-size: 0.75rem;
 }
 
 .back-to-top {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   width: 100%;
-  padding: 0.5rem 0.75rem;
-  background-color: #1a1a1a;
-  border: 1px solid #333;
-  color: #ccc;
-  border-radius: 6px;
+  padding: 0.625rem 1rem;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
+  font-size: 0.875rem;
   transition:
     background-color 0.2s ease,
-    color 0.2s ease;
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 .back-to-top:hover {
-  background-color: #2a2a2a;
-  color: #fff;
+  background-color: rgba(99, 102, 241, 0.1);
+  color: var(--link-color);
+  border-color: rgba(99, 102, 241, 0.3);
 }
 
 @media (max-width: 1024px) {

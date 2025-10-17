@@ -65,22 +65,17 @@ URL["Request: /resources/2api/"]
 
   2.  路由：`src/pages/playground/index.astro`
 
-           ```astro
-           ---
-           import ContentLayout from '../../layouts/ContentLayout.astro'
-           import { getEntry } from 'astro:content'
-
+      ```astro
+      ---
+      import ContentLayout from '../../layouts/ContentLayout.astro'
+      import { getEntry } from 'astro:content'
       const entry = await getEntry('docs','07-playground')
       const { Content } = await entry.render()
-
-      ***
+      ---
 
       <ContentLayout title={entry?.data?.title || 'Playground'} section="Playground" headings={[]}>
-      <Content />
+        <Content />
       </ContentLayout>
-
-      ```
-
       ```
 
   3.  侧栏：在 `src/scripts/sidebars.ts` 的选择器与对应 `SIDEBAR` 中按你需要添加：
@@ -188,19 +183,14 @@ npm run preview
 
 ## Mermaid 图表
 
-本站支持 Mermaid 图表（客户端渲染）。写法：在 Markdown 中使用三引号代码块并指定语言为 `mermaid`。
+本站支持 Mermaid 图表（客户端渲染）。直接在 Markdown 中使用 `mermaid` 代码块即可：
 
-```markdown
 ```mermaid
 graph LR
   A --> B
 ```
-```
 
-- 渲染实现：`/scripts/mermaid-init.js` 会在客户端查找 `pre[data-language="mermaid"] code`，将其替换为 `.mermaid` 容器，并通过 CDN 动态加载 `mermaid@10` 进行渲染。
-- 主题与安全：使用 `theme: 'dark'`、`securityLevel: 'loose'`，与站点深色样式一致。
-- 失败降级：若 CDN 不可达或图表语法错误，将保留原始代码块，保证可读性。
-- 开发与预览：`npm run dev` / `npm run preview` 均可本地验证（需网络可访问 jsDelivr）。
+更多用法与实现细节请见 `AI_AGENT_GUIDE.md`。
 
 ## 4) 最佳实践与项目内约定
 
