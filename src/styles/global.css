@@ -16,10 +16,10 @@
   --border-color: rgba(255, 255, 255, 0.08);
   --heading-divider-color: rgba(255, 255, 255, 0.08);
 
-  /* 强调与交互 - 默认冷色系（蓝紫） */
-  --accent-color: #a78bfa;
-  --link-color: #c4b5fd;
-  --link-hover-color: #ddd6fe;
+  /* 强调与交互 - 黑白灰科技感 */
+  --accent-color: #666666;
+  --link-color: #b0b0b0;
+  --link-hover-color: #ffffff;
 
   /* 布局变量 */
   --layout-max-width: 1440px;
@@ -31,7 +31,7 @@
 
   /* 代码块 */
   --code-bg: #1a1b26;
-  --inline-code-bg: rgba(139, 92, 246, 0.1);
+  --inline-code-bg: rgba(255, 255, 255, 0.05);
 
   /* 阴影 */
   --shadow-color: rgba(0, 0, 0, 0.4);
@@ -112,20 +112,20 @@ body {
 
 /* 链接样式 */
 a {
-  color: #c4b5fd;
+  color: var(--link-color);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s, color 0.2s;
 }
 
 a:hover {
-  color: #ddd6fe;
-  border-bottom-color: #c4b5fd;
+  color: var(--link-hover-color);
+  border-bottom-color: transparent;
 }
 
 /* 焦点可见样式（可达性） */
 :focus-visible {
-  outline: 2px solid var(--accent-color);
+  outline: 1px solid #555555;
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -154,7 +154,7 @@ code {
   border-radius: var(--border-radius-sm);
   font-family: var(--font-family-mono);
   font-size: 0.875em;
-  border: 1px solid rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--text-color);
 }
 
@@ -237,9 +237,9 @@ pre.astro-code .line {
 }
 
 .code-copy-button.copied {
-  background: var(--accent-color);
-  color: #000;
-  border-color: var(--accent-color);
+  background: #333333;
+  color: #ffffff;
+  border-color: #555555;
 }
 
 /* Shiki 语法高亮由主题控制，此处仅保留结构样式 */
@@ -260,7 +260,7 @@ pre.astro-code::-webkit-scrollbar-thumb {
 }
 
 pre.astro-code::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-color);
+  background: #888888;
 }
 
 /* 标题样式 */
@@ -384,12 +384,12 @@ blockquote {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-color);
+  background: #555555;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--border-color);
+  background: #888888;
 }
 
 /* ==================== Mermaid 图表样式 ==================== */
