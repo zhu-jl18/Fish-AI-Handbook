@@ -59,6 +59,7 @@ const currentKey = navKeys.has(first) ? first : 'home'
     gap: var(--layout-gap);
     max-width: var(--layout-max-width);
     width: 100%;
+    padding: 0 calc(var(--layout-gap) + 1rem);
     position: relative;
   }
 
@@ -98,7 +99,7 @@ const currentKey = navKeys.has(first) ? first : 'home'
 
   @media (max-width: 1440px) {
     .layout-container {
-      padding: 0 1rem;
+      padding: 0 calc(var(--layout-gap) * 0.75);
     }
     
     .content {
@@ -115,6 +116,7 @@ const currentKey = navKeys.has(first) ? first : 'home'
   @media (max-width: 1024px) {
     .layout-container {
       gap: 0;
+      padding: 0;
     }
 
     .content {
