@@ -12,43 +12,39 @@ description: 3分钟了解这个手册能帮你做什么，以及如何快速上
 
 ## 📚 手册结构一览
 
-```mermaid
-graph TD
-    A[Fish AI Handbook] --> B[🐟 鱼说必看]
-    A --> C[🎮 基础用法]
-    A --> D[✍️ 提示词]
-    A --> E[🚀 进阶玩法]
-    A --> F[🎨 好玩的]
-    A --> G[📦 资源合集]
-    A --> H[⚙️ 配置指南]
-    
-    B --> B1[Models]
-    B --> B2[模型排行]
-    B --> B3[术语扫盲]
-    B --> B4[流行词汇]
-    
-    C --> C1[WebChat]
-    C --> C2[IDE集成]
-    C --> C3[移动端]
-    
-    D --> D1[基础交互]
-    D --> D2[进阶技巧]
-    D --> D3[实用范例]
-    
-    E --> E1[知识库/RAG]
-    E --> E2[MCP]
-    E --> E3[Agents]
-    E --> E4[Workflow]
-    
-    style A fill:#3b82f6,stroke:#2563eb,color:#fff
-    style B fill:#8b5cf6,stroke:#7c3aed,color:#fff
-    style C fill:#10b981,stroke:#059669,color:#fff
-    style D fill:#f59e0b,stroke:#d97706,color:#fff
-    style E fill:#ef4444,stroke:#dc2626,color:#fff
-    style F fill:#ec4899,stroke:#db2777,color:#fff
-    style G fill:#06b6d4,stroke:#0891b2,color:#fff
-    style H fill:#6366f1,stroke:#4f46e5,color:#fff
-```
+### Fish AI Handbook 内容架构
+
+本手册按照以下结构组织内容：
+
+**主要章节：**
+
+1. **🐟 鱼说必看** - 建立AI基础认知
+   - Models - 认识主流AI模型
+   - 模型排行 - 各模型性能对比
+   - 术语扫盲 - 理解关键概念
+   - 流行词汇 - AI圈黑话解读
+
+2. **🎮 基础用法** - 快速上手AI工具
+   - WebChat - 网页聊天界面
+   - IDE集成 - 开发环境集成
+   - 移动端 - 手机端使用
+
+3. **✍️ 提示词** - 掌握与AI对话技巧
+   - 基础交互 - 入门级对话方法
+   - 进阶技巧 - 高级提示词技术
+   - 实用范例 - 场景化示例
+
+4. **🚀 进阶玩法** - 构建AI应用
+   - 知识库/RAG - 检索增强生成
+   - MCP - 模型连接协议
+   - Agents - AI智能体
+   - Workflow - 工作流设计
+
+5. **🎨 好玩的** - 探索AI创意应用
+
+6. **📦 资源合集** - 工具与服务推荐
+
+7. **⚙️ 配置指南** - 环境搭建指南
 
 ### 🐟 鱼说必看（你在这里）
 
