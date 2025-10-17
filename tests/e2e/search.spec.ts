@@ -22,7 +22,10 @@ test.describe('搜索功能', () => {
     await expect(searchInput).toBeVisible({ timeout: 10000 })
 
     // 输入框占位符：兼容三点省略号和单字符省略号
-    await expect(searchInput).toHaveAttribute('placeholder', /搜索文档…|搜索文档\.\.\./)
+    await expect(searchInput).toHaveAttribute(
+      'placeholder',
+      /搜索文档…|搜索文档\.\.\./,
+    )
 
     // 测试输入
     await searchInput.fill('RAG')
