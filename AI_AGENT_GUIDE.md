@@ -40,7 +40,7 @@
 - 内容层级：最多三级（一级/二级=文件夹+index.md；三级=单页 md）
 - 命名：目录顶层 `编号-别名`；文件/路由 kebab-case；组件/脚本驼峰；不提交 `dist/`、`.astro/`
 
-示例片段（Mermaid 架构示意，详见 README）：
+示例片段（架构示意，详见 README）：
 
 ```mermaid
 flowchart LR
@@ -56,21 +56,6 @@ flowchart LR
 
 ---
 
-## Mermaid 渲染实现（写作与调试）
-
-- 写法：在 Markdown 中使用三引号并标注语言为 `mermaid`。示例：
-
-```mermaid
-graph LR
-  A --> B
-```
-
-- 渲染流程：客户端脚本 `/scripts/mermaid-init.js` 会查找 `pre[data-language="mermaid"] code`，替换为 `.mermaid` 容器，并通过 CDN 动态加载 `mermaid@10` 完成渲染。
-- 主题与安全：`theme: 'dark'`、`securityLevel: 'loose'`，与站点深色样式对齐。
-- 失败降级：CDN 不可达或语法错误时，保留原始代码块，确保可读。
-- 本地验证：`npm run dev` 或 `npm run preview` 可查看渲染效果（需网络可访问 jsDelivr）。
-
----
 
 ## 2. 角色与能力矩阵
 
