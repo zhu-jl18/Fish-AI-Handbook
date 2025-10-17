@@ -3,6 +3,15 @@
 ## 已完成的任务
 
 ### 2025-10-17
+- [x] 移除 Mermaid 集成
+  - 删除客户端渲染脚本 mermaid-init.js
+  - 移除 BaseLayout.astro 中的脚本引用
+  - 清理 global.css 中的 Mermaid 相关样式
+  - 删除 Mermaid E2E 测试文件
+  - 将 10 个文档中的 Mermaid 图表转换为文字描述
+  - 保留项目根目录文档（README.md、AI_AGENT_GUIDE.md 等）中的 Mermaid 内容
+
+### 2025-10-17（早期）
 - [x] Mermaid 图表渲染
   - 实现客户端渲染方案
   - 支持所有 Mermaid 图表类型
