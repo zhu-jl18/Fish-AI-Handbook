@@ -7,7 +7,22 @@
 
 ## [Unreleased]
 
-（暂无）
+### Removed
+
+- 移除 Mermaid 图表支持
+  - 删除客户端渲染脚本 `public/scripts/mermaid-init.js`
+  - 从 `BaseLayout.astro` 中移除 Mermaid 脚本引用
+  - 清理 `global.css` 中的 Mermaid 相关样式（.mermaid-container、.mermaid、.mermaid-error）
+  - 删除 Mermaid E2E 测试文件 `tests/e2e/mermaid.spec.ts`
+
+### Changed
+
+- 将所有文档中的 Mermaid 图表转换为结构化文字描述
+  - 更新 10 个文档文件，保持内容信息完整性
+  - 流程图转换为步骤列表
+  - 层级图转换为缩进结构
+  - 使用文字和箭头符号（→）表示流程方向
+  - 保留项目根目录文档（README.md、AI_AGENT_GUIDE.md、CHANGELOG.md、TODO.md）中的 Mermaid 内容
 
 ## [2025-10-17]
 
