@@ -181,16 +181,6 @@ npm run preview
 
 搜索索引在 `npm run build` 时自动生成，仅索引文档内容（`src/content/docs`），不包含导航、侧边栏等界面元素。
 
-## Mermaid 图表
-
-本站支持 Mermaid 图表（客户端渲染）。直接在 Markdown 中使用 `mermaid` 代码块即可：
-
-```mermaid
-graph LR
-  A --> B
-```
-
-更多用法与实现细节请见 `AI_AGENT_GUIDE.md`。
 
 ## 4) 最佳实践与项目内约定
 
