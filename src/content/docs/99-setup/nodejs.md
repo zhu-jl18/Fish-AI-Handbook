@@ -145,9 +145,9 @@ npm run deploy                 # 一键部署
 1. 访问 [Node.js 官网](https://nodejs.org/)
 2. 下载 Windows 版本（推荐 LTS 版）
 3. 双击 `.msi` 文件，勾选以下选项：
-   - ✅ Add to PATH
-   - ✅ Install npm package manager
-   - ✅ Install tools for native modules
+   - Add to PATH
+   - Install npm package manager
+   - Install tools for native modules
 
 #### 验证安装
 
