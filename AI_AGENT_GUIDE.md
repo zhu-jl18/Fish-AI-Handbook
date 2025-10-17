@@ -142,6 +142,50 @@ const { Content } = await entry.render()
 </ContentLayout>
 ```
 
+实际案例：buzz页面重构（2025-10-17）
+
+将流行词汇从单页改为多级结构：
+
+1. 内容层：
+   - `src/content/docs/01-fish-talks/buzz/index.md` - 二级主页
+   - `src/content/docs/01-fish-talks/buzz/agent.md` - Agent智能体
+   - `src/content/docs/01-fish-talks/buzz/vibe-coding.md` - 氛围编程
+   - `src/content/docs/01-fish-talks/buzz/workflow.md` - 工作流
+
+2. 路由层（统一模板格式）：
+
+   ```astro
+   ---
+   import ContentLayout from '../../../layouts/ContentLayout.astro'
+   import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
+   import { getEntry } from 'astro:content'
+
+   const entry = await getEntry('docs', '01-fish-talks/buzz/agent')
+   const rendered = entry && (await entry.render())
+   ---
+
+   <ContentLayout
+     title={entry?.data?.title ?? 'Agent - 智能体'}
+     section="鱼说必看"
+     sidebarItems={FISH_TALKS_SIDEBAR}
+   >
+     {rendered ? <rendered.Content /> : <div>文档未找到或渲染失败</div>}
+   </ContentLayout>
+   ```
+
+3. 侧栏配置：
+   ```ts
+   {
+     label: '流行词汇',
+     href: '/fish-talks/buzz',
+     items: [
+       { label: 'Vibe Coding', href: '/fish-talks/buzz/vibe-coding' },
+       { label: 'Agent', href: '/fish-talks/buzz/agent' },
+       { label: 'Workflow', href: '/fish-talks/buzz/workflow' },
+     ],
+   }
+   ```
+
 删除内容
 
 - 同时删除 Markdown 与 astro 页面，并从 `sidebars.ts` 移除条目
