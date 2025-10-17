@@ -73,7 +73,7 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
               >
                 {entry.label}
               </a>
-            ),
+            )
           )
         ) : (
           <slot />
@@ -128,13 +128,13 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
     top: 60px;
     width: var(--sidebar-width);
     height: calc(100vh - 60px);
-    background-color: var(--bg-sidebar);
-    border-radius: var(--border-radius);
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 0;
     overflow-y: auto;
     /* 统一侧边栏字号与行高，避免被页面内容影响 */
     font-size: 14px;
     line-height: 1.45;
-    border: 1px solid var(--border-color);
+    border: none;
   }
 
   .sidebar-content {
@@ -171,15 +171,15 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
   .section-nav a:focus,
   .section-nav a:active {
     color: var(--link-hover-color);
-    background-color: rgba(99, 102, 241, 0.05);
+    background-color: rgba(255, 255, 255, 0.03);
     outline: none;
     box-shadow: none;
   }
 
   .section-nav a.active {
-    /* 仅改变文字为主题蓝色，不使用背景与左侧竖条 */
-    color: var(--link-color);
-    background-color: rgba(99, 102, 241, 0.1);
+    /* 高亮当前页面 */
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.06);
     border-left: none;
   }
 
@@ -240,17 +240,17 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
   :global(.submenu) a:focus,
   :global(.submenu) a:active {
     color: var(--link-hover-color);
-    background-color: rgba(99, 102, 241, 0.05);
+    background-color: rgba(255, 255, 255, 0.03);
     border-left-color: transparent;
     outline: none;
     box-shadow: none;
   }
 
   :global(.submenu) a.active {
-    /* 子项选中同样仅变为主题蓝，不加背景与边框 */
-    color: var(--link-color);
+    /* 子项选中高亮 */
+    color: #ffffff;
     border-left-color: transparent;
-    background-color: rgba(99, 102, 241, 0.1);
+    background-color: rgba(255, 255, 255, 0.06);
   }
 
   @media (max-width: 1024px) {
