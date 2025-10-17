@@ -75,7 +75,7 @@ html {
 
 body {
   background-color: var(--bg-color);
-  color: var(--text-color);
+  color: rgba(226, 232, 240, 0.95);
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
@@ -102,9 +102,15 @@ body {
 
 /* 链接样式 */
 a {
-  color: var(--link-color);
+  color: #60a5fa;
   text-decoration: none;
-  transition: color 0.2s ease;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+a:hover {
+  color: #93bbfc;
+  border-bottom-color: #60a5fa;
 }
 
 /* 焦点可见样式（可达性） */
@@ -131,10 +137,6 @@ a {
   top: 12px;
 }
 
-a:hover {
-  color: var(--link-hover-color);
-}
-
 /* 行内代码样式 */
 code {
   background-color: var(--inline-code-bg);
@@ -148,16 +150,33 @@ code {
 
 /* Shiki 代码块基础样式 */
 pre.astro-code {
-  background-color: var(--code-bg) !important;
+  background-color: rgba(15, 23, 42, 0.6) !important;
   padding: 1.5rem;
   border-radius: 8px;
   overflow-x: auto;
   margin: 1.75rem 0;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(139, 92, 246, 0.2);
   position: relative;
   font-family: var(--font-family-mono);
   line-height: 1.6;
   box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+/* 代码块语言标签 */
+pre.astro-code[data-language]::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.6);
+  background: rgba(51, 65, 85, 0.5);
+  border-radius: 8px 0 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 1;
+  pointer-events: none;
 }
 
 pre.astro-code code {
@@ -177,34 +196,40 @@ pre.astro-code .line {
 /* 代码复制按钮 */
 .code-copy-button {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background-color: #2a2a2a;
-  border: 1px solid #444;
-  color: #ccc;
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(17, 24, 39, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  color: rgba(226, 232, 240, 0.85);
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1;
   font-family: inherit;
   cursor: pointer;
-  transition: all 0.2s ease;
-  opacity: 0.7;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.08s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  backdrop-filter: blur(6px);
+  z-index: 2;
 }
 
 .code-copy-button:hover {
-  background-color: #3a3a3a;
+  background: rgba(30, 41, 59, 0.7);
+  border-color: rgba(148, 163, 184, 0.35);
   color: #fff;
-  opacity: 1;
 }
 
 .code-copy-button:active {
-  transform: scale(0.95);
+  transform: translateY(1px);
 }
 
 .code-copy-button.copied {
-  background-color: #4a9eff;
+  background: var(--accent-color);
   color: #000;
-  border-color: #4a9eff;
+  border-color: var(--accent-color);
 }
 
 /* Shiki 语法高亮由主题控制，此处仅保留结构样式 */
@@ -361,11 +386,13 @@ blockquote {
 .mermaid-container {
   margin: 1.5rem 0;
   overflow-x: auto;
-  background-color: var(--code-bg);
+  background-color: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(71, 85, 105, 0.3);
   border-radius: 8px;
   padding: 1rem;
   display: flex;
   justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .mermaid {

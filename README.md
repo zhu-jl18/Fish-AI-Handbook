@@ -23,19 +23,9 @@
 
 ## 1) 技术架构说明
 
-> 目录与排序（当前规范）
->
-> - 顶层严格递增：01-fish-talks、02-basic-usage、03-prompts、04-advanced-techniques、05-fun、06-resources、99-setup（置底）
-> - 不允许跳号；新增一级目录按顺序加 1；Setup 固定 99
-> - “技术向/DEMO”已移除；原“技术向”内容已合并为“资源合集”的 2API 与 云平台 两个二级页面
->
-> **进阶玩法模块重构（2025-10）：**
->
-> - 知识库模块：整合 RAG 与向量数据库，分为“原理概述”与“实践指南”两个三级子页面
-> - multi-agent → agents：重命名为 Agents（多智能体）
-> - 新增 Workflow 模块：包含 Spec Kit、Open Spec、BMAD、Flowise、Dify 等内容
->   <a id="overview"></a> [回到目录](#toc)
-
+- 目录与排序（当前规范）
+  - 顶层严格递增：01-fish-talks、02-basic-usage、03-prompts、04-advanced-techniques、05-fun、06-resources、99-setup（置底）
+  - 不允许跳号；新增一级目录按顺序加 1；Setup 固定 99
 - 核心技术栈
   - Astro 静态站点（`output: 'static'`）；MDX：`@astrojs/mdx`；代码高亮：Shiki。
 - 目录结构（关键）
@@ -195,6 +185,22 @@ npm run preview
 ### 构建配置
 
 搜索索引在 `npm run build` 时自动生成，仅索引文档内容（`src/content/docs`），不包含导航、侧边栏等界面元素。
+
+## Mermaid 图表
+
+本站支持 Mermaid 图表（客户端渲染）。写法：在 Markdown 中使用三引号代码块并指定语言为 `mermaid`。
+
+```markdown
+```mermaid
+graph LR
+  A --> B
+```
+```
+
+- 渲染实现：`/scripts/mermaid-init.js` 会在客户端查找 `pre[data-language="mermaid"] code`，将其替换为 `.mermaid` 容器，并通过 CDN 动态加载 `mermaid@10` 进行渲染。
+- 主题与安全：使用 `theme: 'dark'`、`securityLevel: 'loose'`，与站点深色样式一致。
+- 失败降级：若 CDN 不可达或图表语法错误，将保留原始代码块，保证可读性。
+- 开发与预览：`npm run dev` / `npm run preview` 均可本地验证（需网络可访问 jsDelivr）。
 
 ## 4) 最佳实践与项目内约定
 
