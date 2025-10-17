@@ -104,24 +104,21 @@ const { currentPage } = Astro.props
     background: #1a1a1a;
   }
 
-  $1
-  border: none;
-}
-
+  .nav-links a {
+    color: #999;
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s ease;
+    position: relative;
+  }
   .nav-links a:hover {
     color: #fff;
   }
   .nav-links a.active {
-    color: #fff;
-  }
-  .nav-links a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -18px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: var(--link-color);
+    color: #c4b5fd;
+    background-color: rgba(196, 181, 253, 0.1);
+    padding: 4px 12px;
+    border-radius: 6px;
   }
 
   @media (max-width: 1440px) {

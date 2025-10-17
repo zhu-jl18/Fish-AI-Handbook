@@ -17,9 +17,9 @@
   --heading-divider-color: rgba(255, 255, 255, 0.08);
 
   /* 强调与交互 - 默认冷色系（蓝紫） */
-  --accent-color: #6366f1;
-  --link-color: #818cf8;
-  --link-hover-color: #a5b4fc;
+  --accent-color: #a78bfa;
+  --link-color: #c4b5fd;
+  --link-hover-color: #ddd6fe;
 
   /* 布局变量 */
   --layout-max-width: 1440px;
@@ -112,15 +112,15 @@ body {
 
 /* 链接样式 */
 a {
-  color: var(--link-color);
+  color: #c4b5fd;
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s, color 0.2s;
 }
 
 a:hover {
-  color: #93bbfc;
-  border-bottom-color: var(--link-color);
+  color: #ddd6fe;
+  border-bottom-color: #c4b5fd;
 }
 
 /* 焦点可见样式（可达性） */
