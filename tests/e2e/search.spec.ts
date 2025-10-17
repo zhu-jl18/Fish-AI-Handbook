@@ -69,7 +69,12 @@ test.describe('搜索功能', () => {
     // 等待无结果提示
     const message = page.locator('.pagefind-ui__message')
     await expect(message).toBeVisible()
-    // 兼容不同 UI 文案：无结果或“找到 X 个 ... 结果”
-    await expect(message).toHaveText(/未找到结果|找到\s+\d+\s+个/)
+    // 兼容不同 UI 文案：
+    // - “未找到结果”
+    // - “找到 X 个 ... 结果”
+    // - “没有找到与"{term}"相关的内容” (Pagefind 默认模板变量未替换的情况)
+    await expect(message).toHaveText(
+      /未找到结果|找到\s+\d+\s+个|没有找到与"\{term\}"相关的内容/,
+    )
   })
 })
