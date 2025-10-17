@@ -38,13 +38,13 @@
 
 .toc-link:hover {
   color: var(--link-hover-color);
-  background-color: rgba(196, 181, 253, 0.05);
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
 .toc-link.active {
-  color: var(--link-color);
+  color: #ffffff;
   font-weight: 600;
-  background-color: rgba(167, 139, 250, 0.08);
+  background-color: rgba(255, 255, 255, 0.06);
 }
 
 .toc-2 {
@@ -75,9 +75,9 @@
     border-color 0.2s ease;
 }
 .back-to-top:hover {
-  background-color: rgba(167, 139, 250, 0.08);
-  color: var(--link-color);
-  border-color: rgba(167, 139, 250, 0.3);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 1024px) {

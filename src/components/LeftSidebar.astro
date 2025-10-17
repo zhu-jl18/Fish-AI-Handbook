@@ -73,7 +73,7 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
               >
                 {entry.label}
               </a>
-            ),
+            )
           )
         ) : (
           <slot />
@@ -171,15 +171,15 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
   .section-nav a:focus,
   .section-nav a:active {
     color: var(--link-hover-color);
-    background-color: rgba(196, 181, 253, 0.05);
+    background-color: rgba(255, 255, 255, 0.03);
     outline: none;
     box-shadow: none;
   }
 
   .section-nav a.active {
-    /* 仅改变文字为主题蓝色，不使用背景与左侧竖条 */
-    color: var(--link-color);
-    background-color: rgba(167, 139, 250, 0.08);
+    /* 高亮当前页面 */
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.06);
     border-left: none;
   }
 
@@ -240,17 +240,17 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
   :global(.submenu) a:focus,
   :global(.submenu) a:active {
     color: var(--link-hover-color);
-    background-color: rgba(196, 181, 253, 0.05);
+    background-color: rgba(255, 255, 255, 0.03);
     border-left-color: transparent;
     outline: none;
     box-shadow: none;
   }
 
   :global(.submenu) a.active {
-    /* 子项选中同样仅变为主题蓝，不加背景与边框 */
-    color: var(--link-color);
+    /* 子项选中高亮 */
+    color: #ffffff;
     border-left-color: transparent;
-    background-color: rgba(167, 139, 250, 0.08);
+    background-color: rgba(255, 255, 255, 0.06);
   }
 
   @media (max-width: 1024px) {
