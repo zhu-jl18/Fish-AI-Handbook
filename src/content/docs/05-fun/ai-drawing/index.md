@@ -3,6 +3,24 @@ title: AI 绘图教程
 description: 入门到进阶，快速上手 AI 绘图（文生图）。
 ---
 
+## AI 绘图工作流程
+
+```mermaid
+graph LR
+    A[想法/创意] --> B[选择模型]
+    B --> C[编写提示词]
+    C --> D[设置参数]
+    D --> E[生成图像]
+    E --> F{满意?}
+    F -->|否| G[调整提示词/参数]
+    G --> E
+    F -->|是| H[后期处理]
+    H --> I[最终作品]
+    
+    style A fill:#fbbf24,stroke:#f59e0b
+    style I fill:#34d399,stroke:#10b981
+```
+
 ## 选择模型
 
 常见模型：

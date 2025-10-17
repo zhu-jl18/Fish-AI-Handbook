@@ -7,6 +7,25 @@ description: 知识库构建流程、工具选型与常见问题排查
 
 构建高质量的知识库，数据准备是最关键的第一步。
 
+```mermaid
+flowchart TD
+    A[原始数据源] --> B[数据采集]
+    B --> C[数据清洗]
+    C --> D[去重处理]
+    D --> E[文档切分]
+    E --> F[元数据标注]
+    F --> G[向量化]
+    G --> H[存入向量数据库]
+    
+    B --> B1[PDF/Word/HTML]
+    B --> B2[数据库]
+    B --> B3[API接口]
+    B --> B4[网页抓取]
+    
+    style A fill:#f3f4f6,stroke:#9ca3af
+    style H fill:#34d399,stroke:#10b981
+```
+
 ### 1. 数据采集
 
 **数据源类型**：
@@ -220,6 +239,30 @@ collection_v2 = client.get_or_create_collection("kb_v2")
 ---
 
 ## 检索与重排实践
+
+```mermaid
+graph TB
+    A[用户查询] --> B[查询处理]
+    B --> C[向量检索]
+    B --> D[BM25检索]
+    
+    C --> E[向量相似度匹配]
+    D --> F[关键词匹配]
+    
+    E --> G[融合器<br/>Ensemble Retriever]
+    F --> G
+    
+    G --> H[重排序<br/>Reranker]
+    H --> I[最终结果]
+    
+    J[元数据过滤] --> G
+    K[缓存层] --> B
+    K --> I
+    
+    style A fill:#fbbf24,stroke:#f59e0b
+    style I fill:#34d399,stroke:#10b981
+    style H fill:#a78bfa,stroke:#8b5cf6
+```
 
 ### Hybrid 检索实现
 
