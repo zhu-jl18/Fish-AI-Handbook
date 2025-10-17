@@ -180,7 +180,6 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
     /* 仅改变文字为主题蓝色，不使用背景与左侧竖条 */
     color: var(--link-color);
     background-color: rgba(99, 102, 241, 0.1);
-    border-left: none;
   }
 
   /* 层级菜单样式 */
@@ -228,7 +227,6 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
     display: block;
     padding: 0.4rem 0.75rem 0.4rem 2rem;
     font-size: 0.875em;
-    border-left: 2px solid transparent;
     color: var(--text-muted);
     text-decoration: none;
     border-radius: var(--border-radius-sm);
@@ -241,7 +239,6 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
   :global(.submenu) a:active {
     color: var(--link-hover-color);
     background-color: rgba(99, 102, 241, 0.05);
-    border-left-color: transparent;
     outline: none;
     box-shadow: none;
   }
@@ -249,7 +246,6 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
   :global(.submenu) a.active {
     /* 子项选中同样仅变为主题蓝，不加背景与边框 */
     color: var(--link-color);
-    border-left-color: transparent;
     background-color: rgba(99, 102, 241, 0.1);
   }
 
