@@ -3,14 +3,14 @@ title: 模型参数详解
 description: Temperature、Top-P、Top-K等参数如何影响AI输出
 ---
 
-## 🎛️ 模型参数是什么
+## 模型参数是什么
 
 想象你在调节收音机的旋钮...模型参数就像这些旋钮，  
 调整它们可以改变AI的"性格"和输出风格。
 
 ---
 
-## 🌡️ Temperature（温度）
+## Temperature（温度）
 
 **作用：** 控制输出的随机性与创造性
 
@@ -38,7 +38,7 @@ AI生成每个词时会计算所有可能词的概率分布。Temperature决定�
 
 ---
 
-## 🎯 Top-P（核采样）
+## Top-P（核采样）
 
 **作用：** 从累积概率达到P的词中选择
 
@@ -185,7 +185,7 @@ response = ai.generate(
 
 ---
 
-## 🎨 其他常见参数
+## 其他常见参数
 
 ### Frequency Penalty（频率惩罚）
 
@@ -232,7 +232,7 @@ response = ai.generate(
 
 ---
 
-## 💡 参数组合建议
+## 参数组合建议
 
 ### 📝 编程/翻译（要求精确）
 
@@ -256,7 +256,7 @@ response = ai.generate(
 }
 ```
 
-### ✍️ 创意写作（发散思维）
+### 创意写作（发散思维）
 
 ```json
 {
@@ -268,7 +268,7 @@ response = ai.generate(
 }
 ```
 
-### 🔍 事实查询（严格）
+### 事实查询（严格）
 
 ```json
 {
@@ -280,7 +280,7 @@ response = ai.generate(
 
 ---
 
-## 🔍 实战技巧
+## 实战技巧
 
 ### 技巧1：Temperature与Top-P不要同时设高
 
