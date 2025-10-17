@@ -156,16 +156,11 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
     flex-shrink: 0;
   }
 
-  .section-nav a {
-    color: var(--text-muted);
-    text-decoration: none;
-    padding: 0.5rem 0.875rem;
-    border-radius: var(--border-radius-sm);
-    transition: all 0.2s ease;
-    /* 随容器字号等比缩放，保持层级统一 */
-    font-size: 0.95em;
-    display: block;
+  $1
+    border: none;
+    border-bottom: 0;
   }
+
 
   .section-nav a:hover,
   .section-nav a:focus,
