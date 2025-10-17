@@ -60,9 +60,9 @@ const { currentPage } = Astro.props
     z-index: 100;
   }
   .nav-container {
-    max-width: 1400px;
+    max-width: var(--layout-max-width);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 calc(var(--layout-gap) + 1rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -125,5 +125,23 @@ const { currentPage } = Astro.props
     right: 0;
     height: 2px;
     background-color: #4a9eff;
+  }
+
+  @media (max-width: 1440px) {
+    .nav-container {
+      padding: 0 calc(var(--layout-gap) * 0.75);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .nav-container {
+      padding: 0 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav-container {
+      padding: 0 1rem;
+    }
   }
 </style>
