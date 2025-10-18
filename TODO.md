@@ -1,51 +1,11 @@
 # TODO List
 
-## 已完成的任务
+> 维护规则： 当用户验收确认过后 删除掉 对应的 todo 子项即可
 
-### 2025-10-17
 
-- [x] 移除 Mermaid 集成
-  - 删除客户端渲染脚本 mermaid-init.js
-  - 移除 BaseLayout.astro 中的脚本引用
-  - 清理 global.css 中的 Mermaid 相关样式
-  - 删除 Mermaid E2E 测试文件
-  - 将 10 个文档中的 Mermaid 图表转换为文字描述
-  - 保留项目根目录文档（README.md、AI_AGENT_GUIDE.md 等）中的 Mermaid 内容
+- 实现 GitHub 样式的复制按钮
+- 实现 GitHub 样式的网站头顶
 
-### 2025-10-17（早期）
 
-- [x] Mermaid 图表渲染
-  - 实现客户端渲染方案
-  - 支持所有 Mermaid 图表类型
-  - 配置深色主题
-  - 添加错误处理
-  - 新增 E2E 校验 Mermaid 渲染为 SVG
-- [x] Buzz 页面重构
-  - 将流行词汇从单页改为多级结构
-  - 新增 Agent、Vibe Coding、Workflow 子页面
-- [x] 样式优化
-  - 优化代码块样式，添加语言标签显示
-  - 改进链接样式，添加悬停下划线效果
-  - 提升文本对比度
-  - 优化 Mermaid 图表容器样式
 
-### 之前完成
 
-- [x] 站内搜索接入 - Pagefind 集成，仅索引文档内容
-- [x] 二级页面折叠 - LeftSidebar 分组可折叠并记忆状态
-- [x] SEO 优化 - 禁止搜索引擎收录（robots meta + robots.txt）
-
-## 本次修复
-
-- [x] 调整搜索反馈消息文案的 E2E 断言，兼容多种文本
-
-## 本次美化
-
-- [x] 右侧边栏目录标题居中显示（.toc-title 增加 text-align: center;）
-
-## 待完成的任务
-
-- [x] 优化页面布局，将两侧的sidebar向中间收拢，减少视觉上的割裂程度，详细比例参考github的仓库页面。
-- [x] 持续优化文档格式统一性
-- [ ] 实现 GitHub 样式的复制按钮
-- [ ] 实现 GitHub 样式的网站头顶
