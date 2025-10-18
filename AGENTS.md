@@ -86,14 +86,17 @@
 1. 内容：`src/content/docs/<序号-别名>/index.md`（含 `title`）
 2. 路由：`src/pages/<别名>/index.astro` 包裹 `ContentLayout`
 3. 侧栏：在 `src/scripts/sidebars.ts` 注册路径选择与条目
-4. 自检：预览无 404，`npm run test:links` 通过
+4. 自检：预览无 404；运行：
+   - `npm run preview:search`（含搜索索引的预览）
+   - `npm run test:links`（仅站内）
+   - `npm run test:e2e`（如有 E2E 变更）
 
 新增二级/三级
 
 1. 内容：二级 `index.md` 与三级 `*.md`
 2. 路由：为二/三级各建 `.astro` 并读取对应 docs entry
 3. 侧栏：二级 `items` 内挂三级链接
-4. 自检：二/三级路由均可达
+4. 自检：二/三级路由均可达；运行上述“自检命令”
 
 修改/删除
 
@@ -119,6 +122,7 @@
 - 默认短答：1-3 句/要点；命令前说明意图
 - 不确定先澄清，最小化试错
 - 执行结果透明：列出变更点与验证结论
+  - 结论必须包含：构建/预览/链接/E2E 的结果摘要；CHANGELOG 是否已更新；是否检查了交叉文档引用
 
 示例片段（最小澄清）：
 
@@ -154,6 +158,8 @@
 - 命名/层级/编码（UTF‑8）符合约定
 - 新增内容标题、层级、侧栏展示正确
 - 不产生外部未授权链接与新文件（除非授权）
+- 必跑命令完成且通过：`build`、`preview:search`、`test:links`、`test:e2e`（如适用）
+- CHANGELOG.md 已更新，相关文档引用已同步
 
 示例片段（自检清单）：
 

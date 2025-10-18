@@ -10,7 +10,8 @@
 ### Added
 
 - 文档重构：
-  - 新增 WARP.md、CLAUDE.md、CURSOR.md（各 Agent 的差异化实践页）
+  - 新增 WARP.md、CLAUDE.md、CURSOR.md（均指向 AGENTS.md）
+  - README 增加“文档结构可视化”一节，提升可读性
 
 ### Removed
 
@@ -31,6 +32,9 @@
   - 保留项目根目录文档（README.md、AGENTS.md、CHANGELOG.md、TODO.md）中的 Mermaid 内容
 - README 强收敛：删除重复的内容管理与开发流程示例，统一指向 CONTRIBUTING.md 与 AGENTS.md；补充 Agent 专项文档导航
 - 分支策略文档：保护分支统一为 `main`，所有改动通过 PR 合入
+- AGENTS：强化验证要求，新增必须运行 `preview:search` 与 `test:e2e`（如适用），并在 DOD 中要求更新 CHANGELOG 与交叉文档引用
+- CONTRIBUTING：新增“必跑校验（加强版）”、变更登记与交叉维护清单
+- PR 模板：新增预览、内链检查、E2E、CHANGELOG 与交叉引用检查项
 
 ### Removed
 
