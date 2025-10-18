@@ -239,8 +239,8 @@
 
 ---
 
-## 附：专项指南（差异化实践）
+## 附：不同AI助手的专属md均会被引导指向AGENTS.md
 
-- WARP.md（终端助手）
-- CLAUDE.md（内容/协作）
-- CURSOR.md（多文件同步/重构）
+- WARP.md（AI终端代码助手Warp）
+- CLAUDE.md（AI CLI工具 Claude Code）
+- CURSOR.md（AI 编辑器 Cursor）
