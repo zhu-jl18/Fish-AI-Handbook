@@ -115,7 +115,9 @@ a {
   color: var(--link-color);
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition: border-color 0.2s, color 0.2s;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
 }
 
 a:hover {
@@ -158,108 +160,104 @@ code {
   color: var(--text-color);
 }
 
-/* Shiki 代码块基础样式 */
-pre.astro-code {
+/* ============================================
+   Expressive Code 自定义样式
+   ============================================ */
+
+/* 代码块容器 */
+.expressive-code {
+  margin: 0.75rem 0 !important;
+  border-radius: var(--border-radius) !important;
+  overflow: hidden;
+  border: 1px solid var(--border-color) !important;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* 代码块主体 */
+.expressive-code pre {
+  margin: 0 !important;
+  padding: 1rem 1.25rem !important;
+  line-height: 1.4 !important;
+  font-size: 0.9rem !important;
   background-color: var(--code-bg) !important;
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-  overflow-x: auto;
-  margin: 1.75rem 0;
-  border: 1px solid var(--border-color);
-  position: relative;
-  font-family: var(--font-family-mono);
-  line-height: 1.6;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-/* 代码块语言标签 */
-pre.astro-code[data-language]::before {
-  content: attr(data-language);
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 2px 8px;
-  font-size: 12px;
-  color: rgba(226, 232, 240, 0.6);
-  background: rgba(51, 65, 85, 0.5);
-  border-radius: 8px 0 4px 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  z-index: 1;
-  pointer-events: none;
-}
-
-pre.astro-code code {
-  background-color: transparent;
-  padding: 0;
+/* 语言标签框架 */
+.expressive-code .frame {
   border: none;
-  font-size: 0.9em;
-  color: inherit;
-  display: block;
 }
 
-pre.astro-code .line {
-  display: block;
-  min-height: 1em;
+/* 语言标签样式 */
+.expressive-code .header {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  padding: 0.5rem 1rem !important;
 }
 
-/* 代码复制按钮 */
-.code-copy-button {
-  position: absolute;
-  top: 0.6rem;
-  right: 0.6rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  background: rgba(17, 24, 39, 0.55);
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  color: rgba(226, 232, 240, 0.85);
-  padding: 0.35rem 0.7rem;
-  border-radius: 6px;
-  font-size: 12px;
-  line-height: 1;
-  font-family: inherit;
-  cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.08s ease;
-  box-shadow: 0 2px 8px var(--shadow-color);
-  backdrop-filter: blur(6px);
-  z-index: 2;
+.expressive-code .title {
+  color: var(--text-muted) !important;
+  font-size: 0.7rem !important;
+  font-family: var(--font-family-mono) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-weight: 500 !important;
 }
 
-.code-copy-button:hover {
-  background: rgba(30, 41, 59, 0.7);
-  border-color: rgba(148, 163, 184, 0.35);
-  color: #fff;
+/* 复制按钮样式 */
+.expressive-code .copy button {
+  position: absolute !important;
+  top: 0.6rem !important;
+  right: 0.6rem !important;
+  padding: 0.25rem 0.5rem !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 4px !important;
+  color: var(--text-muted) !important;
+  font-size: 0.65rem !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  opacity: 0 !important;
+  z-index: 10 !important;
 }
 
-.code-copy-button:active {
-  transform: translateY(1px);
+.expressive-code:hover .copy button {
+  opacity: 1 !important;
 }
 
-.code-copy-button.copied {
-  background: #333333;
-  color: #ffffff;
-  border-color: #555555;
+.expressive-code .copy button:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-color) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Shiki 语法高亮由主题控制，此处仅保留结构样式 */
+.expressive-code .copy button:active {
+  transform: translateY(1px) !important;
+}
 
-/* 代码块滚动条优化 */
-pre.astro-code::-webkit-scrollbar {
+.expressive-code .copy button[data-copied] {
+  color: #666666 !important;
+  border-color: #666666 !important;
+  opacity: 1 !important;
+}
+
+/* 代码块滚动条 */
+.expressive-code pre::-webkit-scrollbar {
   height: 8px;
 }
 
-pre.astro-code::-webkit-scrollbar-track {
+.expressive-code pre::-webkit-scrollbar-track {
   background: var(--code-bg);
   border-radius: 4px;
 }
 
-pre.astro-code::-webkit-scrollbar-thumb {
+.expressive-code pre::-webkit-scrollbar-thumb {
   background: var(--border-color);
   border-radius: 4px;
 }
 
-pre.astro-code::-webkit-scrollbar-thumb:hover {
+.expressive-code pre::-webkit-scrollbar-thumb:hover {
   background: #888888;
 }
 
@@ -391,4 +389,3 @@ blockquote {
 ::-webkit-scrollbar-thumb:hover {
   background: #888888;
 }
-

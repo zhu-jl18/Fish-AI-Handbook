@@ -13,7 +13,7 @@ description: '打开网页就能用，不折腾配置直接开搞'
 
 **地址：** `https://chat.openai.com/`
 
-**目前版本：** GPT-4o、GPT-4o-mini、o1、o3（2025年最新）
+**目前版本：** GPT-4o、GPT-4o-mini、o1、o3
 
 **为啥推荐：**
 
@@ -33,7 +33,7 @@ _[占位：ChatGPT界面截图 - 显示GPT商店和对话界面]_
 
 **地址：** `https://claude.ai/`
 
-**目前版本：** Claude 4 Opus、Claude 3.5 Sonnet（2025年更新）
+**目前版本：** Claude 4 Opus、Claude 3.5 Sonnet
 
 **为啥推荐：**
 

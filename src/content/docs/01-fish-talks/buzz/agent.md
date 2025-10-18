@@ -3,11 +3,11 @@ title: Agent - 智能体
 description: 深入理解AI Agent的概念、架构与应用，掌握智能体开发的核心要素
 ---
 
-# Agent（智能体）
+# Agent
 
 ## 什么是Agent
 
-**Agent（智能体）**是具有自主性、目标导向性和环境适应性的AI系统。它不仅能理解和生成文本，还能主动采取行动、使用工具、保持记忆，并在复杂环境中完成任务。
+**Agent**是具有自主性、目标导向性和环境适应性的AI系统。它不仅能理解和生成文本，还能主动采取行动、使用工具、保持记忆，并在复杂环境中完成任务。
 
 ### 核心组成
 
@@ -177,15 +177,15 @@ class SimpleAgent:
         self.tools = tools
         self.memory = []
 
-    def run(self, task):
+    def run:
         # 1. 理解任务
-        plan = self.llm.plan(task)
+        plan = self.llm.plan
         # 2. 执行动作
         for action in plan:
             result = self.tools[action].execute()
-            self.memory.append(result)
+            self.memory.append
         # 3. 总结输出
-        return self.llm.summarize(self.memory)
+        return self.llm.summarize
 ```
 
 ### 2. 逐步增强能力
@@ -263,4 +263,4 @@ Agent不仅是工具的升级，更代表着人机协作的新范式：
 - **从个体到群体**：Agent社会的形成和演化
 - **从工具到伙伴**：建立信任和长期协作关系
 
-> 🌟 **核心洞察**：Agent的本质是让AI从"回答问题"进化到"解决问题"。掌握Agent技术，就是掌握AI时代的生产力工具。
+> **核心洞察**：Agent的本质是让AI从"回答问题"进化到"解决问题"。掌握Agent技术，就是掌握AI时代的生产力工具。

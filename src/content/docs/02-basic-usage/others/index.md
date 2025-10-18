@@ -251,10 +251,10 @@ fi
 
 ## 选择建议
 
-**专业程序员：** Claude Code（最专业）
-**预算有限：** Gemini CLI（免费最强）
-**尝鲜党：** Rovo Dev（新工具体验）
-**隐私党：** Ollama（本地部署）
+**专业程序员：** Claude Code
+**预算有限：** Gemini CLI
+**尝鲜党：** Rovo Dev
+**隐私党：** Ollama
 
 _[占位：CLI工具对比图表 - 显示功能和成本对比]_
 

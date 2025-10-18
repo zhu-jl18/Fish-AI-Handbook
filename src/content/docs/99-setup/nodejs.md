@@ -35,7 +35,7 @@ npm run dev
 
 ### npm 的核心价值
 
-npm（Node Package Manager）是 Node.js 生态系统的核心，解决了软件开发中的依赖管理难题：
+npm是 Node.js 生态系统的核心，解决了软件开发中的依赖管理难题：
 
 - **海量包源**：超过 200 万个开源包，涵盖几乎所有开发需求
 - **标准化管理**：统一的依赖声明、版本控制、安装流程
@@ -167,7 +167,7 @@ npx --version
 
 ### 包管理器安装（可选）
 
-#### 使用 winget（推荐）
+#### 使用 winget
 
 ```bash
 # 安装 LTS 版本
@@ -181,9 +181,9 @@ npm --version
 #### 使用 Chocolatey
 
 ```bash
-# 安装 Chocolatey（管理员权限）
+# 安装 Chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force
-iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+iex.DownloadString)
 
 # 安装 Node.js
 choco install nodejs-lts
@@ -201,7 +201,7 @@ node script.js
 node
 
 # 执行代码片段
-node -e "console.log('Hello')"
+node -e "console.log"
 node -p "Math.PI"
 ```
 

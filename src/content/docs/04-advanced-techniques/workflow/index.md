@@ -1,5 +1,5 @@
 ---
-title: 'Workflow（工作流）'
+title: 'Workflow'
 description: '探索 AI 工作流的设计规范与可视化编排工具，掌握复杂 AI 应用的组合与自动化方法。'
 ---
 
@@ -50,16 +50,18 @@ description: '探索 AI 工作流的设计规范与可视化编排工具，掌�
 
 ### BMAD 方法
 
-**BMAD (Business Metrics, Actions, Data)** 是一种以业务目标为导向的工作流设计方法论。
+**BMAD** 是一种以业务目标为导向的工作流设计方法论。
 
 **BMAD 循环模型：**
 
 **核心循环：**
-- **Business Metrics（业务指标）** → **Actions（行动方案）**
-- **Actions（行动方案）** → **Data（数据支撑）**  
-- **Data（数据支撑）** → **Business Metrics（业务指标）**
+
+- **Business Metrics** → **Actions**
+- **Actions** → **Data**
+- **Data** → **Business Metrics**
 
 **支撑环节：**
+
 - Business Metrics → 定义成功标准 → **明确目标**
 - Actions → 设计执行路径 → **实施计划**
 - Data → 收集反馈数据 → **持续优化**
@@ -68,19 +70,19 @@ description: '探索 AI 工作流的设计规范与可视化编排工具，掌�
 
 它强调：
 
-1. **Business（业务目标）**
+1. **Business**
    - 明确工作流要解决的业务问题是什么
    - 定义成功的关键指标（KPI）
 
-2. **Metrics（指标）**
+2. **Metrics**
    - 如何衡量工作流的效果
    - 设计可量化的评估体系
 
-3. **Actions（行动）**
+3. **Actions**
    - 需要执行哪些具体操作
    - 操作的优先级和依赖关系
 
-4. **Data（数据闭环）**
+4. **Data**
    - 数据从哪里来，流向哪里
    - 如何利用反馈数据持续优化
 
@@ -212,14 +214,14 @@ docker compose up -d
 
 根据你的项目需求选择合适的工具：
 
-| 需求                 | 推荐工具                                  |
-| -------------------- | ----------------------------------------- |
-| 快速验证想法         | **Flowise**                               |
-| 学习 RAG 和 Agent    | **Flowise** / **LangFlow**                |
-| 企业级生产应用       | **Dify**                                  |
-| 需要丰富的第三方集成 | **n8n**                                   |
-| 事件驱动场景         | **Pipedream**                             |
-| 完全自定义和编程控制 | **LangChain** / **LlamaIndex** (代码框架) |
+| 需求                 | 推荐工具                       |
+| -------------------- | ------------------------------ |
+| 快速验证想法         | **Flowise**                    |
+| 学习 RAG 和 Agent    | **Flowise** / **LangFlow**     |
+| 企业级生产应用       | **Dify**                       |
+| 需要丰富的第三方集成 | **n8n**                        |
+| 事件驱动场景         | **Pipedream**                  |
+| 完全自定义和编程控制 | **LangChain** / **LlamaIndex** |
 
 ---
 
