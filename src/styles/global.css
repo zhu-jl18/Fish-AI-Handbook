@@ -115,7 +115,9 @@ a {
   color: var(--link-color);
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition: border-color 0.2s, color 0.2s;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
 }
 
 a:hover {
@@ -169,7 +171,9 @@ pre.astro-code {
   position: relative;
   font-family: var(--font-family-mono);
   line-height: 1.6;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* 代码块语言标签 */
@@ -220,7 +224,11 @@ pre.astro-code .line {
   line-height: 1;
   font-family: inherit;
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.08s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.08s ease;
   box-shadow: 0 2px 8px var(--shadow-color);
   backdrop-filter: blur(6px);
   z-index: 2;
@@ -391,4 +399,3 @@ blockquote {
 ::-webkit-scrollbar-thumb:hover {
   background: #888888;
 }
-

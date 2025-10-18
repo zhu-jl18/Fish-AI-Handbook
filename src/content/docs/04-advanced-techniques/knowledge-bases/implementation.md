@@ -10,6 +10,7 @@ description: 知识库构建流程、工具选型与常见问题排查
 **知识库数据处理流程：**
 
 **主流程：**
+
 1. **原始数据源** → **数据采集**
 2. **数据采集** → **数据清洗**
 3. **数据清洗** → **去重处理**
@@ -19,6 +20,7 @@ description: 知识库构建流程、工具选型与常见问题排查
 7. **向量化** → **存入向量数据库**
 
 **数据采集支持的格式：**
+
 - PDF/Word/HTML 文档
 - 数据库
 - API 接口
@@ -76,11 +78,7 @@ description: 知识库构建流程、工具选型与常见问题排查
 ```python
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-splitter = RecursiveCharacterTextSplitter(
-    chunk_size=512,           # 每块大小
-    chunk_overlap=50,         # 重叠部分
-    separators=["\n\n", "\n", "。", "!", "?", "；"]  # 优先分割符
-)
+splitter = RecursiveCharacterTextSplitter
 ```
 
 ### 5. 元数据设计
@@ -156,7 +154,7 @@ splitter = RecursiveCharacterTextSplitter(
 # ChromaDB - 无需配置，开箱即用
 import chromadb
 client = chromadb.Client()
-collection = client.create_collection("my_kb")
+collection = client.create_collection
 ```
 
 **生产阶段**：
@@ -176,10 +174,7 @@ collection = client.create_collection("my_kb")
 from openai import OpenAI
 client = OpenAI()
 
-response = client.embeddings.create(
-    model="text-embedding-3-small",
-    input="要嵌入的文本"
-)
+response = client.embeddings.create
 ```
 
 **方案 2：本地部署开源模型**
@@ -187,8 +182,8 @@ response = client.embeddings.create(
 ```python
 from sentence_transformers import SentenceTransformer
 
-model = SentenceTransformer('BAAI/bge-small-zh-v1.5')
-embeddings = model.encode(["文本1", "文本2"])
+model = SentenceTransformer
+embeddings = model.encode
 ```
 
 **选择建议**：
@@ -203,10 +198,10 @@ embeddings = model.encode(["文本1", "文本2"])
 ```python
 BATCH_SIZE = 100
 
-for i in range(0, len(documents), BATCH_SIZE):
+for i in range, BATCH_SIZE):
     batch = documents[i:i + BATCH_SIZE]
-    embeddings = embed_model.encode(batch)
-    vector_db.add(embeddings, metadata=batch_metadata)
+    embeddings = embed_model.encode
+    vector_db.add
 ```
 
 **并发加速**：
@@ -214,8 +209,8 @@ for i in range(0, len(documents), BATCH_SIZE):
 ```python
 from concurrent.futures import ThreadPoolExecutor
 
-with ThreadPoolExecutor(max_workers=4) as executor:
-    futures = [executor.submit(process_batch, batch)
+with ThreadPoolExecutor as executor:
+    futures = [executor.submit
                for batch in batches]
 ```
 
@@ -230,14 +225,13 @@ with ThreadPoolExecutor(max_workers=4) as executor:
 **示例**：
 
 ```python
-collection_v1 = client.get_or_create_collection("kb_v1")
-collection_v2 = client.get_or_create_collection("kb_v2")
+collection_v1 = client.get_or_create_collection
+collection_v2 = client.get_or_create_collection
 ```
 
 ---
 
 ## 检索与重排实践
-
 
 ### Hybrid 检索实现
 
@@ -247,17 +241,14 @@ collection_v2 = client.get_or_create_collection("kb_v2")
 from langchain.retrievers import EnsembleRetriever
 
 # 向量检索器
-vector_retriever = vectorstore.as_retriever(search_kwargs={"k": 10})
+vector_retriever = vectorstore.as_retriever
 
 # BM25 检索器
 from langchain.retrievers import BM25Retriever
-bm25_retriever = BM25Retriever.from_documents(documents)
+bm25_retriever = BM25Retriever.from_documents
 
 # 融合检索器（权重可调）
-ensemble_retriever = EnsembleRetriever(
-    retrievers=[vector_retriever, bm25_retriever],
-    weights=[0.7, 0.3]  # 向量 70%，BM25 30%
-)
+ensemble_retriever = EnsembleRetriever
 ```
 
 ### 元数据过滤
@@ -265,14 +256,7 @@ ensemble_retriever = EnsembleRetriever(
 **按时间、类别等条件过滤**：
 
 ```python
-results = vectorstore.similarity_search(
-    query="用户问题",
-    k=5,
-    filter={
-        "category": "技术文档",
-        "created_at": {"$gte": "2024-01-01"}
-    }
-)
+results = vectorstore.similarity_search
 ```
 
 ### 重排序集成
@@ -283,11 +267,8 @@ results = vectorstore.similarity_search(
 from langchain.retrievers import ContextualCompressionRetriever
 from langchain.retrievers.document_compressors import CohereRerank
 
-compressor = CohereRerank(model="rerank-multilingual-v2.0")
-compression_retriever = ContextualCompressionRetriever(
-    base_compressor=compressor,
-    base_retriever=vector_retriever
-)
+compressor = CohereRerank
+compression_retriever = ContextualCompressionRetriever
 ```
 
 ### 缓存策略
@@ -314,17 +295,9 @@ compression_retriever = ContextualCompressionRetriever(
 
 ```python
 from ragas import evaluate
-from ragas.metrics import (
-    faithfulness,
-    answer_relevancy,
-    context_precision,
-    context_recall
-)
+from ragas.metrics import
 
-results = evaluate(
-    dataset=test_dataset,
-    metrics=[faithfulness, answer_relevancy, context_precision]
-)
+results = evaluate
 ```
 
 ### 在线 A/B 测试
@@ -370,7 +343,7 @@ results = evaluate(
 
 **解决方案**：
 
-- 减小 chunk_size（如从 1024 降到 512）
+- 减小 chunk_size
 - 使用语义分割而非固定窗口
 - 增加 chunk_overlap 避免截断
 

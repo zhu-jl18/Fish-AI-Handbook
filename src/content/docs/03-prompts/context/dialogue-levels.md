@@ -9,7 +9,7 @@ description: 理解大语言模型对话中的System、Assistant和User三个层
 
 ## 正确的三层结构（基于OpenAI API）
 
-### 1. System Role（系统角色）
+### 1. System Role
 
 **定义：**
 
@@ -52,7 +52,7 @@ description: 理解大语言模型对话中的System、Assistant和User三个层
 
 ---
 
-### 2. User Role（用户角色）
+### 2. User Role
 
 **定义：**
 
@@ -119,7 +119,7 @@ description: 理解大语言模型对话中的System、Assistant和User三个层
 
 ---
 
-### 3. Assistant Role（助手角色）
+### 3. Assistant Role
 
 **正确定义：**
 
