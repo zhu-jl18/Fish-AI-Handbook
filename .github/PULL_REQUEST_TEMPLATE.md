@@ -7,7 +7,12 @@
 - [ ] 路由 .astro 与内容路径一致（getEntry 指向正确的新编号目录）
 - [ ] 已同步更新侧栏（src/scripts/sidebars.ts）与顶部导航（如涉及）
 - [ ] 本地构建通过：`npm run build`
-- [ ] 如有交互改动，已考虑/更新 E2E 测试（Playwright）
+- [ ] 启动预览并生成索引：`npm run preview:search`
+- [ ] 站内链接检查：`npm run test:links`
+- [ ] 如有交互改动，已考虑/更新并运行 E2E 测试（`npm run test:e2e`）
+--
+- [ ] 已在 CHANGELOG.md 的 [Unreleased] 中登记本次变更
+- [ ] 已检查并同步必要的文档引用（README/AGENTS/CONTRIBUTING/Agent 指南）
 
 变更说明（What & Why）
 
