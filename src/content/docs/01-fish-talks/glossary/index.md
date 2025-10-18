@@ -16,7 +16,7 @@ AI领域的术语又多又杂，Temperature、Top-P、Agent、MCP...
 
 **控制AI输出的关键开关**
 
-- **Temperature（温度）** - 控制创造性和随机性
+- **Temperature** - 控制创造性和随机性
 - **Top-P / Top-K** - 控制采样范围
 - **Token** - 计费与长度单位
 - **Max Tokens** - 输出长度限制
@@ -32,13 +32,13 @@ AI领域的术语又多又杂，Temperature、Top-P、Agent、MCP...
 
 **理解AI技术的核心概念**
 
-- **Context（上下文）** - AI的“记忆”
-- **Agent（智能体）** - 能自主行动的AI
-- **MCP（Model Context Protocol）** - 模型上下文协议
-- **RAG（检索增强生成）** - 让AI查资料
-- **Prompt（提示词）** - 如何与AI对话
-- **Embedding（嵌入/向量化）** - 让AI理解相似度
-- **Fine-tuning（微调）** - 让AI学会你的风格
+- **Context** - AI的“记忆”
+- **Agent** - 能自主行动的AI
+- **MCP** - 模型上下文协议
+- **RAG** - 让AI查资料
+- **Prompt** - 如何与AI对话
+- **Embedding** - 让AI理解相似度
+- **Fine-tuning** - 让AI学会你的风格
 
 > **什么时候用：** 想深入理解AI原理或构建AI应用时
 

@@ -37,7 +37,7 @@ description: 终端工具安装与配置指南
 #### 外观美化
 
 - **主题**：One Half Dark
-- **字体**：Cascadia Code（支持连字）
+- **字体**：Cascadia Code
 - **透明度**：95%
 - **亚克力效果**：开启
 
