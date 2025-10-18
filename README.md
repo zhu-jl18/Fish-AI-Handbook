@@ -5,228 +5,62 @@
 ## 项目文档
 
 - 开发协作规范：CONTRIBUTING.md
-- AI 协作指南：AI_AGENT_GUIDE.md
+- AI Agent 规则：AGENTS.md
 - Warp 专用指南：WARP.md
+- Claude 专用指南：CLAUDE.md
+- Cursor 专用指南：CURSOR.md
 - PR 模板：.github/PULL_REQUEST_TEMPLATE.md
 - Issue 模板：.github/ISSUE_TEMPLATE/
 
-## 目录（快速跳转）
-
-<a id="toc"></a>
-
-- [技术架构说明](#overview)
-- [内容管理指南（含 1/2/3 级页面完整示例）](#contrib)
-- [开发维护流程](#maintenance)
-- [搜索功能](#search)
-- [最佳实践与项目内约定](#rules)
-- [Vercel 部署指南](#vercel)
-
-## 1) 技术架构说明
-
-- 目录与排序（当前规范）
-  - 顶层严格递增：01-fish-talks、02-basic-usage、03-prompts、04-advanced-techniques、05-fun、06-resources、99-setup（置底）
-  - 不允许跳号；新增一级目录按顺序加 1；Setup 固定 99
-- 核心技术栈
-  - Astro 静态站点（`output: 'static'`）；MDX：`@astrojs/mdx`；代码高亮：Shiki。
-- 目录结构（关键）
-  - `src/pages/` 路由（.astro）；`src/content/docs/` 内容（Markdown）。
-  - `src/layouts/` 布局；`src/components/` 通用组件；`src/scripts/sidebars.ts` 左侧栏清单与选择逻辑。
-- 组件与数据流原理（示意）
-
-```mermaid
-%% 组件与数据流原理（示意）
-flowchart LR
-URL["Request: /resources/2api/"]
-URL --> PG["src/pages/resources/2api.astro"]
-PG -->|"getEntry('docs', '06-resources/2api')"| MD["src/content/docs/06-resources/2api.md"]
-PG --> CL["ContentLayout"]
-  subgraph ContentLayout
-    direction TB
-    PATH["Astro.url.pathname"] --> SB["getSidebarForPath()"]
-    SB --> LS["LeftSidebar"]
-    PATH --> HD["Header"]
-    PATH --> RS["RightSidebar"]
-  end
-CL --> BL["BaseLayout"]
-```
-
-## 2) 内容管理指南（含 1/2/3 级示例）
-
-<a id="contrib"></a> [回到目录](#toc)
-
-规则：最多三级。一级/二级 = “文件夹 + index.md”；三级 = 单个 `.md`。
-
-- 新增“顶级章节（一级）”示例：新增 `playground`（假设排序号 07）
-  1.  内容：`src/content/docs/07-playground/index.md`
-
-      ```markdown
-      ---
-      title: Playground
-      ---
-
-      # Playground 概览
-      ```
-
-  2.  路由：`src/pages/playground/index.astro`
-
-      ```astro
-      ---
-      import ContentLayout from '../../layouts/ContentLayout.astro'
-      import { getEntry } from 'astro:content'
-      const entry = await getEntry('docs', '07-playground')
-      const { Content } = await entry.render()
-      ---
-
-      <ContentLayout
-        title={entry?.data?.title || 'Playground'}
-        section="Playground"
-        headings={[]}
-      >
-        <Content />
-      </ContentLayout>
-      ```
-
-  3.  侧栏：在 `src/scripts/sidebars.ts` 的选择器与对应 `SIDEBAR` 中按你需要添加：
-
-      ```ts
-      if (path.startsWith('/playground')) return PLAYGROUND_SIDEBAR
-      export const PLAYGROUND_SIDEBAR = [
-        { label: 'Playground', href: '/playground' },
-      ]
-      ```
-
-- 新增“二级 + 三级页面”示例：在 `03-prompts` 下新增二级 `best-practices`，以及三级 `tracing.md`
-  1. 内容层：
-     - `src/content/docs/03-prompts/best-practices/index.md`
-     - `src/content/docs/03-prompts/best-practices/tracing.md`
-  2. 路由层：
-     - `src/pages/prompts/best-practices/index.astro` 读取二级 index
-     - `src/pages/prompts/best-practices/tracing.astro` 读取三级 md
-
-     ```astro
-     ---
-     import ContentLayout from '../../../layouts/ContentLayout.astro'
-     import { getEntry } from 'astro:content'
-     const entry = await getEntry('docs', '03-prompts/best-practices')
-     const { Content } = await entry.render()
-     ---
-
-     <ContentLayout
-       title={entry?.data?.title || 'Best Practices'}
-       section="提示词"
-       headings={[]}
-     >
-       <Content />
-     </ContentLayout>
-     ```
-
-  3. 侧栏：在 `PROMPTS_SIDEBAR` 下添加：
-     ```ts
-     {
-       label:'Best Practices', href:'/prompts/best-practices',
-       items:[{label:'Tracing', href:'/prompts/best-practices/tracing'}]
-     }
-     ```
-
-- 修改/删除内容
-  - 修改：改对应 Markdown/astro 即可；新增小节时同步补 astro 页面与侧栏条目。
-  - 删除：同时删除 Markdown 与 astro 页面，并从 `sidebars.ts` 移除链接，避免死链。
-
-## 3) 开发维护流程
-
-内容 Frontmatter（必填）
-
-```yaml
----
-title: 标题
-description: 页面简介（必填，未填写将构建失败）
----
-```
-
-更多协作与提交流程，请参考 CONTRIBUTING.md。
-<a id="maintenance"></a> [回到目录](#toc)
+## 快速开始（速查）
 
 ```
 npm install        # 安装依赖
 npm run dev        # 本地开发（默认 4321）
-npm run build      # 生成 dist/
+npm run build      # 生成 dist/ 并构建搜索索引
 npm run preview    # 预览 dist/
+npm run test:links # 基于 dist/ 的站内断链检测
 npm run format     # 代码格式化
-npm run test:links # 检测站内死链/断链（基于 dist/，仅检查站内链接）
 ```
 
-常见问题
+更多流程与示例请见 CONTRIBUTING.md（唯一事实源）。
 
-- 404：侧栏链接与 `src/pages/**` 不一致；或仅加了侧栏条目但未创建 astro 页面。
-- Header 高亮错位：已改为"基于别名"，与中文文案脱钩。
-- 构建失败：多半是对象字面量缺逗号、字符串里混入 `\n` 等。
-- 编码：统一 UTF‑8；Windows 终端启用 UTF‑8。
+## 架构速览
 
-## 搜索功能
+- 框架：Astro（静态导出）+ MDX；代码高亮：Shiki
+- 目录：内容 `src/content/docs/`；路由 `src/pages/`；布局 `src/layouts/`；组件 `src/components/`；侧栏逻辑 `src/scripts/sidebars.ts`
+- 内容层级：最多三级（一级/二级=文件夹+index.md；三级=单页 md）
+- 顶层目录命名：`NN-alias`（01..06、99-setup 置底）
 
-<a id="search"></a> [回到目录](#toc)
+## 常见坑与反模式
 
-本站使用 [Pagefind](https://pagefind.app/) 提供静态搜索功能。
+- 仅改侧栏未建路由页面，导致 404
+- frontmatter 缺 `description` 导致构建失败
+- 路由与内容路径不一致，`getEntry` 读取失败
+- 在根提交 `dist/`、`.astro/`、或工具本地数据
 
-- 顶部导航的搜索入口为放大镜按钮，点击跳转至 `/search` 页面。
+## 变更记录
 
-### 开发说明
+- 见 CHANGELOG.md（遵循 Keep a Changelog）
 
-搜索功能需要先生成索引：
+## 适用范围
 
-```bash
-# 构建站点并生成搜索索引
-npm run build
+- 本 README 仅面向维护者与“未来的我”，作为最小必要信息与导航。
+- AI 的通用行为与边界见 AGENTS.md；具体流程始终以 CONTRIBUTING.md 为准。
 
-# 预览带搜索功能的站点（或使用一键命令）
-npm run preview
-# 等价：npm run preview:search  # 先 build 再 preview
-```
+## 运维与应急速查
 
-注意：`npm run dev` 开发模式下搜索功能不可用，因为需要先构建静态文件才能生成索引。
-
-### 构建配置
-
-搜索索引在 `npm run build` 时自动生成，仅索引文档内容（`src/content/docs`），不包含导航、侧边栏等界面元素。
-
-
-更多说明见 `AI_AGENT_GUIDE.md`。
-
-## 4) 最佳实践与项目内约定
-
-<a id="rules"></a> [回到目录](#toc)
-
-- 顶层内容目录命名：`编号-别名`，如 `01-fish-talks/`、`06-resources/`、`99-setup/`。
-- 深度不超过三级：一级/二级 = 文件夹 + index.md；三级 = 单页 md。
-- 路由与内容一一对应：新增时同步补 astro 与侧栏条目。
-- 命名：路由/文件名 kebab-case；侧栏 label 简短统一；组件/脚本沿用现有驼峰风格。
-- 版本控制：不提交 `dist/`、`.astro/`、工具本地数据；小步提交（`content:`/`nav:`/`layout:`/`fix:`/`build:`）。
-- 快查：
-  - 配置指南（置底）：`/setup/*`
-  - 资源合集：`/resources/*`（含 2API `/resources/2api`、云平台 `/resources/cloud-platforms`）
-  - 首页“基础使用”：`/basic-usage`
-
-## 5) Vercel 部署指南
-
-<a id="vercel"></a> [回到目录](#toc)
-
-方式 A：直接连接 GitHub（推荐）
-
-1. 推送仓库到 GitHub。
-2. 登录 Vercel → New Project → Import Git Repository。
-3. Framework 自动识别 Astro；保持默认：
-   - Install Command: `npm install`
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-   - Node: 20（可在 Settings → Environment 里指定）
-4. Deploy，完成后可在 Domains 绑定自有域名。
-
-方式 B：手动上传
-
-1. 本地 `npm run build`，得到 `dist/`。
-2. Vercel New Project → 选择“上传” → 拖拽 dist/。
-
-vercel.json 说明
-
-- 当前站点“统一不收录”：BaseLayout 注入 `<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">`，且 `public/robots.txt` 为 `Disallow: /`；`vercel.json` 仅为字体提供长缓存头。
-- 如需允许收录：删除 BaseLayout 的 robots meta；将 `public/robots.txt` 改为允许；按需在 `vercel.json` 增加站点级 `X-Robots-Tag` 头或留空。
+- 依赖维护
+  - 查看/升级：`npm outdated` / `npm update`
+  - 锁文件策略：仅通过 `npm` 改动，不手改 `package-lock.json`
+- 搜索索引
+  - 已在 `npm run build` 后自动生成 Pagefind 索引；预览：`npm run preview`
+- 链接检查
+  - `npm run test:links` 仅检查站内链接（已忽略外链/邮件/电话）
+- 收录策略
+  - 当前不收录：BaseLayout Robots meta + `public/robots.txt` Disallow
+  - 允许收录：移除 Robots meta + 放开 `robots.txt` + 按需修改 `vercel.json`
+- 常见应急
+  - 404：补齐对应 `src/pages/**` 与侧栏条目，路径与 `getEntry` 保持一致
+  - 构建失败：多为对象缺逗号或字符串 `\n` 混入，按报错定位
+  - Header 高亮错位：基于“别名”匹配，不与中文文案绑定

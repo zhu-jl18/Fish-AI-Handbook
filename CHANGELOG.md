@@ -7,6 +7,11 @@
 
 ## [Unreleased]
 
+### Added
+
+- 文档重构：
+  - 新增 WARP.md、CLAUDE.md、CURSOR.md（各 Agent 的差异化实践页）
+
 ### Removed
 
 - 移除 Mermaid 图表支持
@@ -23,7 +28,13 @@
   - 流程图转换为步骤列表
   - 层级图转换为缩进结构
   - 使用文字和箭头符号（→）表示流程方向
-  - 保留项目根目录文档（README.md、AI_AGENT_GUIDE.md、CHANGELOG.md、TODO.md）中的 Mermaid 内容
+  - 保留项目根目录文档（README.md、AGENTS.md、CHANGELOG.md、TODO.md）中的 Mermaid 内容
+- README 强收敛：删除重复的内容管理与开发流程示例，统一指向 CONTRIBUTING.md 与 AGENTS.md；补充 Agent 专项文档导航
+- 分支策略文档：保护分支统一为 `main`，所有改动通过 PR 合入
+
+### Removed
+
+- 移除 AI_AGENT_RULES.md，通用规则并入 AGENTS.md 作为唯一规则文件
 
 ## [2025-10-17]
 
