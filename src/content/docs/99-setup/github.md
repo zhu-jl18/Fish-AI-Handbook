@@ -585,7 +585,7 @@ jobs:
 #### 示例配置
 
 ```yaml
-# .github/protected-branches.yml (概念性)
+# .github/protected-branches.yml
 main:
   required_status_checks:
     strict: true
@@ -628,10 +628,12 @@ main:
 **Git Flow 工作流程：**
 
 **主分支流程：**
+
 - **main分支** → **创建release分支** → **测试通过后合并到main** → **打标签发布**
 - **main分支** → **创建hotfix分支** → **测试通过后合并到main** → **打标签发布**
 
 **开发分支流程：**
+
 1. **开发新功能** → **创建feature分支**
 2. **创建feature分支** → **开发完成**
 3. **开发完成** → **合并到develop分支**
@@ -669,7 +671,7 @@ git push origin feature/new-docs
 #### 提交信息规范
 
 ```bash
-# 格式: type(scope): description
+# 格式: type: description
 git commit -m "docs: add GitHub Actions workflow examples"
 
 # 类型:
