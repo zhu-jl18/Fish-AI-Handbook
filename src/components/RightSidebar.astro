@@ -34,7 +34,7 @@ const { headings = [] } = Astro.props
   import { setupRightSidebar } from '/scripts/toc.js'
   // 构建目录并启用滚动高亮
   const stop = setupRightSidebar('.content-inner', '.toc-nav')
-  const btn = document.querySelector('.right-sidebar .back-to-top')
+  const btn = document.querySelector('.back-to-top')
   if (btn)
     btn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' })
