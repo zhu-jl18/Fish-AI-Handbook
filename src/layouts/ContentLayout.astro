@@ -65,7 +65,7 @@ const currentKey = navKeys.has(first) ? first : 'home'
 
   .content {
     flex: 1;
-    padding: 2.5rem;
+    padding: 1.5rem 2.5rem 2.5rem 2.5rem;
     background-color: var(--bg-content);
     border-radius: var(--border-radius);
     max-width: var(--content-max-width);
@@ -73,6 +73,11 @@ const currentKey = navKeys.has(first) ? first : 'home'
 
   .content-inner {
     width: 100%;
+  }
+
+  /* 移除第一个标题的顶部外边距，确保与侧边栏对齐 */
+  .content-inner > :global(:is(h1, h2, h3, h4, h5, h6):first-child) {
+    margin-top: 0;
   }
 
   /* 内容区域标题更紧凑（仅作用于正文，不影响侧边栏） */
@@ -125,13 +130,13 @@ const currentKey = navKeys.has(first) ? first : 'home'
     }
 
     .content {
-      padding: 2.25rem;
+      padding: 1.5rem 2.25rem 2.25rem 2.25rem;
     }
   }
 
   @media (max-width: 1200px) {
     .content {
-      padding: 2rem;
+      padding: 1.5rem 2rem 2rem 2rem;
     }
   }
 
@@ -144,13 +149,13 @@ const currentKey = navKeys.has(first) ? first : 'home'
     .content {
       border-radius: 0;
       max-width: 100%;
-      padding: 2rem 1.5rem;
+      padding: 1.5rem 1.5rem 2rem 1.5rem;
     }
   }
 
   @media (max-width: 768px) {
     .content {
-      padding: 1.5rem 1rem;
+      padding: 1.5rem 1rem 1.5rem 1rem;
     }
   }
 </style>
