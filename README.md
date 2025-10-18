@@ -37,13 +37,17 @@
 %% 组件与数据流原理（示意）
 flowchart LR
 URL["Request: /resources/2api/"]
-  subgraph Layout
-    CL -->|Astro.url.pathname| SB["getSidebarForPath()"]
+URL --> PG["src/pages/resources/2api.astro"]
+PG -->|"getEntry('docs', '06-resources/2api')"| MD["src/content/docs/06-resources/2api.md"]
+PG --> CL["ContentLayout"]
+  subgraph ContentLayout
+    direction TB
+    PATH["Astro.url.pathname"] --> SB["getSidebarForPath()"]
     SB --> LS["LeftSidebar"]
-    CL --> HD["Header"]
-    CL --> RS["RightSidebar"]
+    PATH --> HD["Header"]
+    PATH --> RS["RightSidebar"]
   end
-  PG["src/pages/*.astro"] -->|getEntry docs_path| MD["src/content/docs/*.md"]
+CL --> BL["BaseLayout"]
 ```
 
 ## 2) 内容管理指南（含 1/2/3 级示例）
