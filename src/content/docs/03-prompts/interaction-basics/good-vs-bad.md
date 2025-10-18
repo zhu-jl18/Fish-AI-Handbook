@@ -14,6 +14,7 @@ description: 提示词质量对比分析与实例讲解。
 **提示词质量评估维度对比：**
 
 **坏提示词评分（满分1.0）：**
+
 - 明确性：0.2
 - 具体性：0.1
 - 上下文：0.1
@@ -22,6 +23,7 @@ description: 提示词质量对比分析与实例讲解。
 - 约束条件：0.1
 
 **一般提示词评分（满分1.0）：**
+
 - 明确性：0.6
 - 具体性：0.5
 - 上下文：0.4
@@ -30,6 +32,7 @@ description: 提示词质量对比分析与实例讲解。
 - 约束条件：0.4
 
 **好提示词评分（满分1.0）：**
+
 - 明确性：0.9
 - 具体性：0.9
 - 上下文：0.8
@@ -70,7 +73,7 @@ description: 提示词质量对比分析与实例讲解。
 ```
 请编写一个Python函数，要求如下：
 1. 函数名：calculate_grade_average
-2. 输入参数：students_scores（字典列表，格式：[{"name": "张三", "score": 85}, ...]）
+2. 输入参数：students_scores
 3. 功能：计算所有学生的平均成绩，并按成绩等级统计
 4. 成绩等级标准：
    - 90-100分：优秀
@@ -145,7 +148,7 @@ description: 提示词质量对比分析与实例讲解。
 - 操作系统：Windows 11家庭版
 - 处理器：Intel i5-10210U
 - 内存：8GB DDR4
-- 硬盘：256GB SSD（使用150GB）
+- 硬盘：256GB SSD
 - 使用时长：约2年
 
 ## 具体症状
@@ -338,8 +341,7 @@ description: 提示词质量对比分析与实例讲解。
 - [ ] 是否考虑了可能的边界情况？
 - [ ] 语言表达是否简洁明了？
 
-## 📊 质量提升效果对比
-
+## 质量提升效果对比
 
 ## 持续改进策略
 
@@ -368,21 +370,20 @@ class PromptEvaluator:
             "clarity": 0.2         # 清晰度权重
         }
 
-    def evaluate(self, prompt, output, expected):
+    def evaluate:
         scores = {}
-        scores["relevance"] = self.calculate_relevance(output, expected)
-        scores["completeness"] = self.calculate_completeness(output, expected)
-        scores["accuracy"] = self.calculate_accuracy(output, expected)
-        scores["clarity"] = self.calculate_clarity(output)
+        scores["relevance"] = self.calculate_relevance
+        scores["completeness"] = self.calculate_completeness
+        scores["accuracy"] = self.calculate_accuracy
+        scores["clarity"] = self.calculate_clarity
 
         # 计算加权总分
-        total_score = sum(scores[criterion] * weight
-                         for criterion, weight in self.criteria.items())
+        total_score = sum)
 
         return {
             "scores": scores,
             "total_score": total_score,
-            "recommendation": self.get_recommendation(total_score)
+            "recommendation": self.get_recommendation
         }
 ```
 

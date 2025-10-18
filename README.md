@@ -69,11 +69,15 @@ URL["Request: /resources/2api/"]
       ---
       import ContentLayout from '../../layouts/ContentLayout.astro'
       import { getEntry } from 'astro:content'
-      const entry = await getEntry('docs','07-playground')
+      const entry = await getEntry('docs', '07-playground')
       const { Content } = await entry.render()
       ---
 
-      <ContentLayout title={entry?.data?.title || 'Playground'} section="Playground" headings={[]}>
+      <ContentLayout
+        title={entry?.data?.title || 'Playground'}
+        section="Playground"
+        headings={[]}
+      >
         <Content />
       </ContentLayout>
       ```
@@ -180,7 +184,6 @@ npm run preview
 ### 构建配置
 
 搜索索引在 `npm run build` 时自动生成，仅索引文档内容（`src/content/docs`），不包含导航、侧边栏等界面元素。
-
 
 ## Mermaid 图表（仅 GitHub 预览）
 

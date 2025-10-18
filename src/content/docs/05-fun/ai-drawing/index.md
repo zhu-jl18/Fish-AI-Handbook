@@ -23,14 +23,14 @@ description: 入门到进阶，快速上手 AI 绘图（文生图）。
 常见模型：
 
 - Stable Diffusion 系列（SD1.5/SDXL）
-- Flux、Playground、DALL·E（云端）
+- Flux、Playground、DALL·E
 
-本地推荐：Stable Diffusion + ComfyUI（或 Automatic1111）。
+本地推荐：Stable Diffusion + ComfyUI。
 
 ## 基本概念
 
-- **Prompt（正向提示）**：你想要的元素与风格。
-- **Negative Prompt（反向提示）**：你不想要的元素。
+- **Prompt**：你想要的元素与风格。
+- **Negative Prompt**：你不想要的元素。
 - **CFG / Guidance**：文本到图像的严格程度。
 - **Steps**：采样步数，步数越高越精细但更慢。
 - **Seed**：随机种子，可复现结果。
@@ -59,7 +59,7 @@ low quality, blurry, extra fingers, bad anatomy, watermark, jpeg artifacts
 - 分辨率：1024×1024 起
 - Steps：25–40
 - CFG：5–7
-- Sampler：DPM++ 2M Karras（或 Euler a）
+- Sampler：DPM++ 2M Karras
 
 ## 进阶：控制与修复
 
