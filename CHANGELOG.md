@@ -36,6 +36,10 @@
 - CONTRIBUTING：新增“必跑校验（加强版）”、变更登记与交叉维护清单
 - PR 模板：新增预览、内链检查、E2E、CHANGELOG 与交叉引用检查项
 
+### Fixed
+
+- 修复返回顶部按钮选择器错误，按钮现在可以正常工作
+
 ### Removed
 
 - 移除 AI_AGENT_RULES.md，通用规则并入 AGENTS.md 作为唯一规则文件
