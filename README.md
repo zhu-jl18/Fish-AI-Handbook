@@ -2,7 +2,7 @@
 
 本项目由我借助 AI 建立与维护，README 仅面向“未来的我”。目标：能在数分钟内回忆技术栈和原理，并按步骤完成新增/修改/删除与部署。
 
-协作入口（快速访问）
+## 项目文档
 
 - 开发协作规范：CONTRIBUTING.md
 - AI 协作指南：AI_AGENT_GUIDE.md
@@ -185,14 +185,6 @@ npm run preview
 
 搜索索引在 `npm run build` 时自动生成，仅索引文档内容（`src/content/docs`），不包含导航、侧边栏等界面元素。
 
-## Mermaid 图表（仅 GitHub 预览）
-
-在 GitHub 上可直接渲染下述 Mermaid 代码块；本站不支持 Mermaid 客户端渲染。
-
-```mermaid
-graph LR
-  A --> B
-```
 
 更多说明见 `AI_AGENT_GUIDE.md`。
 
