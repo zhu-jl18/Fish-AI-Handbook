@@ -12,7 +12,7 @@
     "format": "prettier --write .",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
-    "test:links": "npm run build && linkinator ./dist --config linkinator.config.json --fail"
+    "test:links": "npm run build && linkinator ./dist/index.html --recurse --config linkinator.config.json --fail --skip \"^https?://\" --skip \"^mailto:\" --skip \"^tel:\""
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.6",

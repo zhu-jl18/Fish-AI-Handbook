@@ -90,6 +90,19 @@ npm run test:e2e
 npm run test:e2e:headed
 ```
 
+必跑校验（加强版）
+
+- 构建：`npm run build`
+- 预览（含搜索索引）：`npm run preview:search`
+- 站内链接：`npm run test:links`
+- 端到端测试：`npm run test:e2e`（如有 E2E 场景变更，需新增/更新用例）
+
+## 与 AI 协作
+
+- 本仓库面向多类 AI Agent，通用行为与边界请见 AGENTS.md。
+- 使用 AI 工具前，请在对话开头明确要求其严格遵循 AGENTS.md，并告知本文件是流程与实现的唯一事实源。
+- 流程细节（目录/层级/路由/侧栏/提交规范）以本文件为准。
+
 ## 提交信息与分支
 
 - 提交前缀建议：
@@ -100,7 +113,19 @@ npm run test:e2e:headed
   - `build:` 构建与配置
   - `docs:` 文档说明
   - `refactor:` 结构性重构
-- 分支建议：feature/<短描述>；合并前确保本地构建与测试通过
+- 分支与工作流：
+  - 保护分支：`main`（禁止直接提交，默认仅超级管理员可 push）
+  - 创建分支：从远程 `main` 新建并切换
+    - 示例：`git fetch origin && git checkout -b feature/<短描述> origin/main`
+  - 提交与推送：本地小步提交，推送远程同名分支
+  - 合并方式：一律通过 PR 合入 `main`，禁止直接在 `main` 提交
+  - 合并前：确保 `npm run build`、`npm run test:links` 通过
+
+## 变更登记与交叉维护
+
+- 必须更新 CHANGELOG.md（[Unreleased] 下按 Added/Changed/Fixed/Removed 分类）
+- 自查并同步相关文档引用：README.md、AGENTS.md、CONTRIBUTING.md、WARP/CLAUDE/CURSOR.md
+- 提交信息建议包含 Why/What/How 与验证结果摘要
 
 ## PR 检查清单（见 .github/PULL_REQUEST_TEMPLATE.md）
 
