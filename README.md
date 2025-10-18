@@ -32,6 +32,22 @@ npm run format     # 代码格式化
 - 内容层级：最多三级（一级/二级=文件夹+index.md；三级=单页 md）
 - 顶层目录命名：`NN-alias`（01..06、99-setup 置底）
 
+## 文档结构可视化
+
+```
+src/
+├─ content/
+│  └─ docs/              # 文档内容（Markdown/MDX）
+├─ pages/                # 路由（.astro，一一对应内容）
+├─ layouts/              # 通用布局（如 ContentLayout）
+├─ components/           # 组件（通用 UI）
+└─ scripts/
+   └─ sidebars.ts        # 左侧栏清单与选择逻辑
+
+public/                  # 静态资源（robots.txt、字体等）
+dist/                    # 构建输出（由 build 生成）
+```
+
 ## 常见坑与反模式
 
 - 仅改侧栏未建路由页面，导致 404
