@@ -30,8 +30,8 @@
   --border-radius-sm: 8px;
 
   /* 代码块 */
-  --code-bg: #1a1b26;
-  --inline-code-bg: rgba(255, 255, 255, 0.05);
+  --code-bg: #1e1e1e;
+  --inline-code-bg: #262626;
 
   /* 阴影 */
   --shadow-color: rgba(0, 0, 0, 0.4);
@@ -92,6 +92,33 @@
   --color-toc-hover: rgba(255, 255, 255, 0.5);
   --color-toc-bg-hover: var(--surface-tint-02);
   --color-toc-bg-active: var(--surface-tint-06);
+
+  /* Motion durations */
+  --motion-duration-xxs: 80ms;
+  --motion-duration-xs: 120ms;
+  --motion-duration-sm: 160ms;
+  --motion-duration-md: 200ms;
+  --motion-duration-lg: 280ms;
+  --motion-duration-xl: 400ms;
+  --motion-duration-xxl: 600ms;
+  /* Feedback duration */
+  --motion-duration-feedback: 2000ms;
+
+  /* Motion easing */
+  --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --motion-ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Radius tokens (alias existing) */
+  --radius-sm: var(--border-radius-sm);
+  --radius-md: var(--border-radius);
+  --radius-lg: 16px;
+  --radius-code: 6px;
+
+  /* Code colors (extended) */
+  --code-border: #2a2a2a;
+  --code-fg: #d4d4d4;
 }
 
 @font-face {
@@ -153,8 +180,8 @@ a {
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition:
-    border-color 0.2s,
-    color 0.2s;
+    border-color var(--motion-duration-sm) var(--motion-ease-standard),
+    color var(--motion-duration-sm) var(--motion-ease-standard);
 }
 
 a:hover {
@@ -190,11 +217,11 @@ a:hover {
 code {
   background-color: var(--inline-code-bg);
   padding: 3px 8px;
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--radius-md);
   font-family: var(--font-family-mono);
   font-size: 0.875em;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-color);
+  border: 1px solid var(--code-border);
+  color: var(--code-fg);
 }
 
 /* ============================================
@@ -203,8 +230,8 @@ code {
 
 /* 代码块容器 */
 .expressive-code {
-  margin: 0.75rem 0 !important;
-  border-radius: var(--border-radius) !important;
+  margin: 0.5rem 0 !important;
+  border-radius: var(--radius-code) !important;
   overflow: hidden;
   border: 1px solid var(--border-color) !important;
   box-shadow:
@@ -254,7 +281,12 @@ code {
   color: var(--text-muted) !important;
   font-size: 0.65rem !important;
   cursor: pointer !important;
-  transition: all 0.2s ease !important;
+  transition:
+    opacity var(--motion-duration-sm) var(--motion-ease-standard) !important,
+    transform var(--motion-duration-sm) var(--motion-ease-standard) !important,
+    background-color var(--motion-duration-sm) var(--motion-ease-standard) !important,
+    border-color var(--motion-duration-sm) var(--motion-ease-standard) !important,
+    color var(--motion-duration-sm) var(--motion-ease-standard) !important;
   opacity: 0 !important;
   z-index: 10 !important;
 }
@@ -282,6 +314,60 @@ code {
 /* 代码块滚动条 */
 .expressive-code pre::-webkit-scrollbar {
   height: 8px;
+}
+
+/* 通用代码块样式（非 Expressive Code 的预格式化代码） */
+pre,
+pre code,
+.prose pre,
+.code-block {
+  background-color: var(--code-bg);
+  color: var(--code-fg);
+  border: 1px solid var(--code-border);
+  border-radius: var(--radius-code);
+  margin: 0.5rem 0;
+}
+
+/* 自定义复制按钮（脚本生成） */
+.code-copy-button {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 10;
+  transition:
+    opacity var(--motion-duration-sm) var(--motion-ease-standard),
+    background-color var(--motion-duration-sm) var(--motion-ease-standard),
+    color var(--motion-duration-sm) var(--motion-ease-standard),
+    border-color var(--motion-duration-sm) var(--motion-ease-standard),
+    transform var(--motion-duration-sm) var(--motion-ease-standard);
+}
+
+pre:hover > .code-copy-button {
+  opacity: 1;
+}
+
+.code-copy-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.code-copy-button:active {
+  transform: translateY(1px);
+}
+
+.code-copy-button.copied {
+  color: var(--color-accent-gray);
+  border-color: var(--color-accent-gray);
+  opacity: 1;
 }
 
 .expressive-code pre::-webkit-scrollbar-track {
@@ -400,10 +486,20 @@ blockquote {
 
 /* 优先满足减少动画偏好 */
 @media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-xxs: 0ms;
+    --motion-duration-xs: 0ms;
+    --motion-duration-sm: 0ms;
+    --motion-duration-md: 0ms;
+    --motion-duration-lg: 0ms;
+    --motion-duration-xl: 0ms;
+    --motion-duration-xxl: 0ms;
+    --motion-duration-feedback: 1ms;
+  }
   * {
-    animation-duration: 0.001ms !important;
+    animation-duration: 0ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
+    transition-duration: 0ms !important;
     scroll-behavior: auto !important;
   }
 }
