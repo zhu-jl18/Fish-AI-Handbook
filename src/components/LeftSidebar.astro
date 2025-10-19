@@ -42,21 +42,23 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
           items.map((entry) =>
             isGroup(entry) ? (
               <div class="group" data-href={entry.href ?? '#'}>
-                <a
-                  href={entry.href ?? '#'}
-                  class={isGroupActive(entry.href) ? 'active' : undefined}
-                >
-                  {entry.label}
-                </a>
-                <button
-                  class="group-toggle"
-                  aria-label="切换分组"
-                  aria-expanded={isGroupActive(entry.href)}
-                >
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M3 5l3 3 3-3"/>
-                  </svg>
-                </button>
+                <div class="group-header">
+                  <a
+                    href={entry.href ?? '#'}
+                    class={isGroupActive(entry.href) ? 'active' : undefined}
+                  >
+                    {entry.label}
+                  </a>
+                  <button
+                    class="group-toggle"
+                    aria-label="切换分组"
+                    aria-expanded={isGroupActive(entry.href)}
+                  >
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M3 5l3 3 3-3"/>
+                    </svg>
+                  </button>
+                </div>
                 <div class="submenu">
                   {entry.items?.map((link) => (
                     <a
@@ -189,14 +191,17 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
   /* 顶层分组不额外叠加间距，统一交给 .section-nav 的 gap 控制 */
   .group {
     margin: 0;
+  }
+
+  .group-header {
     position: relative;
   }
 
-  .group .group-toggle {
+  .group-header .group-toggle {
     position: absolute;
     right: 12px;
-    top: 0.7rem; /* 固定在父级链接那一行的垂直居中位置 */
-    transform: rotate(0deg);
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
     width: 24px;
     height: 24px;
     display: grid;
@@ -211,13 +216,14 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
   }
 
   /* 悬停分组时显示 */
-  .group:hover .group-toggle {
+  .group-header:hover .group-toggle,
+  .group-header:focus-within .group-toggle {
     opacity: 1;
   }
 
   /* 展开时旋转180° */
-  .group.collapsed .group-toggle {
-    transform: rotate(-180deg);
+  .group.collapsed .group-header .group-toggle {
+    transform: translateY(-50%) rotate(-180deg);
   }
 
   /* 键盘聚焦时也显示（可访问性） */
@@ -226,7 +232,7 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
   }
 
   /* 悬停按钮自身时提亮 */
-  .group .group-toggle:hover {
+  .group-header .group-toggle:hover {
     color: var(--color-text-white);
   }
 
