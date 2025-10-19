@@ -38,14 +38,14 @@
 }
 
 .toc-link:hover {
-  color: var(--link-hover-color);
-  background-color: rgba(255, 255, 255, 0.03);
+  color: var(--color-toc-hover);
+  background-color: var(--color-toc-bg-hover);
 }
 
 .toc-link.active {
-  color: #ffffff;
+  color: var(--color-text-white);
   font-weight: 600;
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: var(--color-toc-bg-active);
 }
 
 .toc-2 {
@@ -69,9 +69,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(17, 24, 39, 0.65);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  color: rgba(226, 232, 240, 0.9);
+  background: var(--color-bg-overlay-dark);
+  border: 1px solid var(--color-border-overlay);
+  color: var(--color-text-overlay);
   border-radius: 50%;
   cursor: pointer;
   backdrop-filter: blur(8px);
@@ -80,9 +80,9 @@
   z-index: 100;
 }
 .back-to-top:hover {
-  background: rgba(30, 41, 59, 0.85);
-  color: #ffffff;
-  border-color: rgba(148, 163, 184, 0.4);
+  background: var(--color-bg-overlay-hover);
+  color: var(--color-text-white);
+  border-color: var(--color-border-overlay-hover);
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
