@@ -1,5 +1,32 @@
 // Enhance code blocks: copy (selection-first) and long-code collapse
 ;(function () {
+  // Read CSS duration token like "160ms" or "0.2s" and return milliseconds
+  function readCssDurationVar(varName, fallbackMs = 2000) {
+    try {
+      const raw = getComputedStyle(document.documentElement)
+        .getPropertyValue(varName)
+        .trim()
+      if (!raw) return fallbackMs
+      const m = raw.match(/^([\d.]+)\s*(ms|s)$/i)
+      if (!m) return fallbackMs
+      const val = parseFloat(m[1])
+      return m[2].toLowerCase() === 's' ? val * 1000 : val
+    } catch (_) {
+      return fallbackMs
+    }
+  }
+  function withReducedMotion(ms) {
+    try {
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+      return mq && mq.matches ? 1 : ms
+    } catch (_) {
+      return ms
+    }
+  }
+  function feedbackDurationMs() {
+    return withReducedMotion(readCssDurationVar('--motion-duration-feedback', 2000))
+  }
+
   function getSelectedTextWithin(element) {
     const selection = window.getSelection()
     if (!selection || selection.rangeCount === 0) return ''
@@ -24,7 +51,7 @@
         setTimeout(() => {
           btn.textContent = 'Copy'
           btn.classList.remove('copied')
-        }, 2000)
+        }, feedbackDurationMs())
       } catch (err) {
         console.error('Failed to copy code: ', err)
         btn.textContent = 'Error'

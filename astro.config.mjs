@@ -18,7 +18,7 @@ export default defineConfig({
         codeLineHeight: '1.4',
         codePaddingBlock: '1rem',
         codePaddingInline: '1.25rem',
-        borderRadius: '0.5rem',
+        borderRadius: '6px',
         borderWidth: '1px',
       },
       frames: {
