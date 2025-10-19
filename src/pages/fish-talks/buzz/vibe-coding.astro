@@ -12,5 +12,6 @@ const rendered = entry && (await entry.render())
   section="鱼说必看"
   sidebarItems={FISH_TALKS_SIDEBAR}
 >
+  {entry?.data?.title && <h1>{entry.data.title}</h1>}
   {rendered ? <rendered.Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
