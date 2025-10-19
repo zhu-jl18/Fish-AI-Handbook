@@ -195,8 +195,8 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
   .group .group-toggle {
     position: absolute;
     right: 12px;
-    top: 50%;
-    transform: translateY(-50%) rotate(0deg);
+    top: 0.7rem; /* 固定在父级链接那一行的垂直居中位置 */
+    transform: rotate(0deg);
     width: 24px;
     height: 24px;
     display: grid;
@@ -217,7 +217,7 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
 
   /* 展开时旋转180° */
   .group.collapsed .group-toggle {
-    transform: translateY(-50%) rotate(-180deg);
+    transform: rotate(-180deg);
   }
 
   /* 键盘聚焦时也显示（可访问性） */
