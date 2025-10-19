@@ -53,8 +53,8 @@ const { currentPage } = Astro.props
 
 <style>
   .header {
-    background-color: #000;
-    border-bottom: 1px solid #333;
+    background-color: var(--color-pure-black);
+    border-bottom: 1px solid var(--color-border-dark);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -72,7 +72,7 @@ const { currentPage } = Astro.props
   .logo {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--color-text-white);
     text-decoration: none;
   }
   .nav-links {
@@ -91,32 +91,32 @@ const { currentPage } = Astro.props
     justify-content: center;
     width: 36px;
     height: 36px;
-    color: #999;
-    background: #0f0f0f;
-    border: 1px solid #333;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-button);
+    border: 1px solid var(--color-border-dark);
     border-radius: 6px;
     text-decoration: none;
     transition: all 0.2s ease;
   }
   .search-button:hover {
-    color: #fff;
-    border-color: #555;
-    background: #1a1a1a;
+    color: var(--color-text-white);
+    border-color: var(--color-border-hover);
+    background: var(--color-bg-button-hover);
   }
 
   .nav-links a {
-    color: #999;
+    color: var(--color-text-secondary);
     text-decoration: none;
     font-weight: 400;
     transition: color 0.2s ease;
     position: relative;
   }
   .nav-links a:hover {
-    color: #fff;
+    color: var(--color-text-white);
   }
   .nav-links a.active {
-    color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--color-text-white);
+    background-color: var(--surface-tint-08);
     padding: 4px 12px;
     border-radius: 6px;
   }
