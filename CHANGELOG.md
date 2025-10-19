@@ -9,40 +9,32 @@
 
 ### Added
 
-- 文档重构：
-  - 新增 WARP.md、CLAUDE.md、CURSOR.md（均指向 AGENTS.md）
-  - README 增加“文档结构可视化”一节，提升可读性
-
-### Removed
-
-- 移除 Mermaid 图表支持
-  - 删除客户端渲染脚本 `public/scripts/mermaid-init.js`
-  - 从 `BaseLayout.astro` 中移除 Mermaid 脚本引用
-  - 清理 `global.css` 中的 Mermaid 相关样式（.mermaid-container、.mermaid、.mermaid-error）
-  - 删除 Mermaid E2E 测试文件 `tests/e2e/mermaid.spec.ts`
+- 设计令牌（Design Tokens）：在 `global.css` 的 `:root` 增加一组颜色/表面令牌（保持原数值不变），用于统一管理：
+  - 基础与边框：`--color-pure-black`、`--color-border-dark`、`--color-border-hover` 等
+  - 文本与灰阶：`--color-text-white`、`--color-text-secondary`、`--color-accent-gray`
+  - 浮层/TOC：`--color-bg-overlay-*`、`--color-text-overlay`、`--color-toc-*`
+  - 半透明表面：`--surface-tint-02/03/06/08`
 
 ### Changed
 
-- 右侧边栏 TOC 标题“目录”居中显示（仅样式调整，不影响其余元素）
-- 将所有文档中的 Mermaid 图表转换为结构化文字描述
-  - 更新 10 个文档文件，保持内容信息完整性
-  - 流程图转换为步骤列表
-  - 层级图转换为缩进结构
-  - 使用文字和箭头符号（→）表示流程方向
-  - 保留项目根目录文档（README.md、AGENTS.md、CHANGELOG.md、TODO.md）中的 Mermaid 内容
-- README 强收敛：删除重复的内容管理与开发流程示例，统一指向 CONTRIBUTING.md 与 AGENTS.md；补充 Agent 专项文档导航
-- 分支策略文档：保护分支统一为 `main`，所有改动通过 PR 合入
-- AGENTS：强化验证要求，新增必须运行 `preview:search` 与 `test:e2e`（如适用），并在 DOD 中要求更新 CHANGELOG 与交叉文档引用
-- CONTRIBUTING：新增“必跑校验（加强版）”、变更登记与交叉维护清单
-- PR 模板：新增预览、内链检查、E2E、CHANGELOG 与交叉引用检查项
+- 样式重构（不改变视觉表现）：用上面的设计令牌替换以下文件中的硬编码颜色
+  - `src/components/Header.astro`
+  - `src/styles/global.css`
+  - `src/styles/right-sidebar.css`
+  - `src/components/LeftSidebar.astro`
+- 右侧目录（TOC）悬停效果降级一档，保持 Active 对比度不变
+  - Hover：使用更柔和的文字与更轻的背景（`--color-toc-hover` + `--color-toc-bg-hover`）
+  - Active：维持 `--surface-tint-06` 与字重 600
 
 ### Fixed
 
-- 修复返回顶部按钮选择器错误，按钮现在可以正常工作
+- 左侧栏分组切换按钮的垂直对齐与位置漂移问题
+  - 将按钮定位锚点固定在父级链接那一行（新增 `.group-header` 包裹），展开/收起在同一位置
+  - 优化按钮命中区域（24×24）与可访问性（hover/聚焦可见）
 
 ### Removed
 
-- 移除 AI_AGENT_RULES.md，通用规则并入 AGENTS.md 作为唯一规则文件
+- 无
 
 ## [2025-10-17]
 
