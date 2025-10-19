@@ -55,6 +55,43 @@
   --heading-letter-spacing: -0.015em;
   --paragraph-spacing: 1.4rem;
   --section-spacing: 2.75rem;
+
+  /* 基础与边框 */
+  --color-pure-black: #000;
+  --color-bg-deep: #111;
+  --color-border-dark: #333;
+  --color-border-hover: #555;
+
+  /* 文本与语义灰 */
+  --color-text-white: #ffffff;
+  --color-text-secondary: #999;
+  --color-accent-gray: #666666;
+
+  /* 按钮与深色背景 */
+  --color-bg-button: #0f0f0f;
+  --color-bg-button-hover: #1a1a1a;
+
+  /* 滚动条 */
+  --color-scrollbar: #555555;
+  --color-scrollbar-hover: #888888;
+
+  /* 右侧目录/浮层相关（现值不变，仅变量化） */
+  --color-bg-overlay-dark: rgba(17, 24, 39, 0.65);
+  --color-border-overlay: rgba(148, 163, 184, 0.2);
+  --color-bg-overlay-hover: rgba(30, 41, 59, 0.85);
+  --color-border-overlay-hover: rgba(148, 163, 184, 0.4);
+  --color-text-overlay: rgba(226, 232, 240, 0.9);
+
+  /* 通用浅色覆写（用于 hover/active 等半透明白） */
+  --surface-tint-02: rgba(255, 255, 255, 0.02);
+  --surface-tint-03: rgba(255, 255, 255, 0.03);
+  --surface-tint-06: rgba(255, 255, 255, 0.06);
+  --surface-tint-08: rgba(255, 255, 255, 0.08);
+
+  /* 右侧 TOC 专用（仅 hover 降调；active 按现有对比度保留） */
+  --color-toc-hover: rgba(255, 255, 255, 0.5);
+  --color-toc-bg-hover: var(--surface-tint-02);
+  --color-toc-bg-active: var(--surface-tint-06);
 }
 
 @font-face {
@@ -127,7 +164,7 @@ a:hover {
 
 /* 焦点可见样式（可达性） */
 :focus-visible {
-  outline: 1px solid #555555;
+  outline: 1px solid var(--color-scrollbar);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -137,11 +174,11 @@ a:hover {
   position: absolute;
   left: -9999px;
   top: -9999px;
-  background: #111;
-  color: #fff;
+  background: var(--color-bg-deep);
+  color: var(--color-text-white);
   padding: 8px 12px;
   border-radius: 6px;
-  border: 1px solid #333;
+  border: 1px solid var(--color-border-dark);
   z-index: 10000;
 }
 .skip-link:focus {
@@ -237,8 +274,8 @@ code {
 }
 
 .expressive-code .copy button[data-copied] {
-  color: #666666 !important;
-  border-color: #666666 !important;
+  color: var(--color-accent-gray) !important;
+  border-color: var(--color-accent-gray) !important;
   opacity: 1 !important;
 }
 
@@ -258,7 +295,7 @@ code {
 }
 
 .expressive-code pre::-webkit-scrollbar-thumb:hover {
-  background: #888888;
+  background: var(--color-scrollbar-hover);
 }
 
 /* 标题样式 */
@@ -382,10 +419,10 @@ blockquote {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #555555;
+  background: var(--color-scrollbar);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #888888;
+  background: var(--color-scrollbar-hover);
 }
