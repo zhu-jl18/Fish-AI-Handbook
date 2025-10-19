@@ -9,9 +9,9 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
   webServer: {
-    command: 'npm run dev',
+    command: 'npm run preview:search',
     port: 4321,
     reuseExistingServer: true,
-    timeout: 60_000,
+    timeout: 120_000,
   },
 })
