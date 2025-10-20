@@ -24,7 +24,9 @@
     }
   }
   function feedbackDurationMs() {
-    return withReducedMotion(readCssDurationVar('--motion-duration-feedback', 2000))
+    return withReducedMotion(
+      readCssDurationVar('--motion-duration-feedback', 2000),
+    )
   }
 
   function getSelectedTextWithin(element) {
