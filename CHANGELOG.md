@@ -19,9 +19,15 @@
   - 支持可选的常用汉字缓冲列表（scripts/common-zh-1000.txt）
   - 生成字符集供 pyftsubset 使用
 - 添加 `tsconfig.json`，提供 Astro 项目标准 TypeScript 配置，包含严格类型检查和路径别名支持
+- 新增 `npm run type-check` 脚本，用于 TypeScript 类型检查（使用 `tsc --noEmit`），增强代码质量保证
 
 ### Changed
 
+- **CSS 样式优先级优化**：通过提高选择器特异性替代 !important，提升样式可维护性
+  - 减少 !important 使用从 47 个降至 5 个（减少 89.4%）
+  - 对 Expressive Code 代码块相关选择器加倍类名（`.expressive-code.expressive-code`）以提升特异性
+  - 保留无障碍相关的必要 !important（`prefers-reduced-motion` 和 `.visually-hidden`）
+  - 不改变视觉表现，仅优化 CSS 架构
 - 样式重构（不改变视觉表现）：用上面的设计令牌替换以下文件中的硬编码颜色
   - `src/components/Header.astro`
   - `src/styles/global.css`
