@@ -23,6 +23,7 @@ python scripts/build_used_charset.py
 ```
 
 脚本会：
+
 - 扫描 `src/content/docs/**/*.{md,mdx}` 的所有文档
 - 过滤掉代码块、行内代码和 HTML 标签
 - 收集实际使用的字符
@@ -32,11 +33,13 @@ python scripts/build_used_charset.py
 #### 2. 生成字体子集
 
 确保已安装依赖：
+
 ```bash
 pip install fonttools brotli
 ```
 
 生成 WOFF2 子集（需要原始 TTF 文件）：
+
 ```bash
 pyftsubset public/fonts/NotoSansSC-Regular.ttf \
   --text-file=scripts/used-chars.txt \
@@ -89,6 +92,7 @@ ls -lh public/fonts/
 **问题**: 页面出现缺字（口口/豆腐字）
 
 **解决**:
+
 1. 检查新增内容是否包含特殊字符
 2. 重新运行 `python scripts/build_used_charset.py`
 3. 重新生成 WOFF2 子集
@@ -97,6 +101,7 @@ ls -lh public/fonts/
 **问题**: pyftsubset 命令未识别
 
 **解决**:
+
 ```bash
 # 使用 Python 模块方式调用
 python -m fonttools subset [参数...]
