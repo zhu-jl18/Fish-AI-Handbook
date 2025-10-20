@@ -126,7 +126,7 @@
 - 命名/层级/编码（UTF‑8）符合约定
 - 新增内容标题、层级、侧栏展示正确
 - 不产生外部未授权链接与新文件（除非授权）
-- 必跑命令完成且通过：`build`、`preview:search`、`test:links`、`test:e2e`（如适用）
+- 必跑命令完成且通过：`build`、`preview:search`、`test:links`、`type-check`、`test:e2e`（如适用）
 - CHANGELOG.md 已更新，相关文档引用已同步
 
 示例片段（自检清单）：
