@@ -54,8 +54,16 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
                     aria-label="切换分组"
                     aria-expanded={isGroupActive(entry.href)}
                   >
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M3 5l3 3 3-3"/>
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      aria-hidden="true"
+                    >
+                      <path d="M3 5l3 3 3-3" />
                     </svg>
                   </button>
                 </div>
@@ -211,7 +219,10 @@ const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
     border: none;
     padding: 0;
     opacity: 0;
-    transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      color 0.2s ease;
     cursor: pointer;
   }
 

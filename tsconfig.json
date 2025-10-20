@@ -29,13 +29,6 @@
       "@content/*": ["src/content/*"]
     }
   },
-  "include": [
-    "src/**/*",
-    ".astro/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    ".astro"
-  ]
+  "include": ["src/**/*", ".astro/**/*"],
+  "exclude": ["node_modules", "dist", ".astro"]
 }
