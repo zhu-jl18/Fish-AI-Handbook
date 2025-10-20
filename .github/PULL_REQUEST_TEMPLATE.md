@@ -1,44 +1,62 @@
-# Pull Request Template
+# Pull Request
 
-请在提交前完成以下检查项（勾选）：
+## ✅ 核心检查（所有 PR 必需）
 
-- [ ] 顶层目录编号符合 01..06、99（置底）规范，未跳号
-- [ ] 新增或修改的 Markdown 均包含必填 frontmatter（title、description）
-- [ ] 路由 .astro 与内容路径一致（getEntry 指向正确的新编号目录）
-- [ ] 已同步更新侧栏（src/scripts/sidebars.ts）与顶部导航（如涉及）
 - [ ] 本地构建通过：`npm run build`
-- [ ] 启动预览并生成索引：`npm run preview:search`
-- [ ] 站内链接检查：`npm run test:links`
-- [ ] 如有交互改动，已考虑/更新并运行 E2E 测试（`npm run test:e2e`）
-- [ ] 如涉及 UI 变化，已附上“前后对比截图”（见下方模板）
---
-- [ ] 已在 CHANGELOG.md 的 [Unreleased] 中登记本次变更
-- [ ] 已检查并同步必要的文档引用（README/AGENTS/CONTRIBUTING/Agent 指南）
+- [ ] 代码格式化：`npm run format`
+- [ ] CHANGELOG.md 已更新（[Unreleased] 节）
 
-变更说明（What & Why）
-
-- 说明此次变更的目的、范围与影响：
-
-测试与验证（How）
-
-- 列出你做过的验证步骤（如构建、预览、测试用例）
-
-视觉对比（可选，建议 UI 变更时填写）
+## 📄 内容变更检查（如涉及，请勾选）
 
 <details>
-<summary>点击展开：前后对比截图（Before / After）</summary>
+<summary>仅当新增/修改文档内容时展开</summary>
 
-> 截图建议：相同分辨率、相同缩放、相同页面与滚动位置；必要时圈出关键差异。
-
-| Before | After |
-| --- | --- |
-| <!-- 将“变更前”截图拖动到此处粘贴 --> | <!-- 将“变更后”截图拖动到此处粘贴 --> |
-
-> 备注（可选）：
-- 说明关键变化点与可访问性考虑（如对比度、焦点可见性）
+- [ ] 目录编号符合 01-06、99 规范，未跳号
+- [ ] Markdown 包含必填 frontmatter（title、description）
+- [ ] 路由 .astro 与内容路径一致
+- [ ] 已更新侧栏配置（src/scripts/sidebars.ts）
+- [ ] 站内链接检查通过：`npm run test:links`
 
 </details>
 
-附加信息
+## 🎨 UI/交互变更检查（如涉及，请勾选）
 
-- 相关 Issue/讨论链接：
+<details>
+<summary>仅当涉及视觉或交互改动时展开</summary>
+
+- [ ] 已附上前后对比截图（见下方模板）
+- [ ] E2E 测试通过：`npm run test:e2e`（如有相关测试）
+
+</details>
+
+---
+
+## 变更说明
+
+**目的与影响：**
+<!-- 说明此次变更的 What & Why -->
+
+**验证步骤：**
+<!-- 列出你执行的验证命令和结果 -->
+
+---
+
+## 视觉对比（UI 变更时填写）
+
+<details>
+<summary>点击展开：前后对比截图</summary>
+
+| Before                          | After                          |
+| ------------------------------- | ------------------------------ |
+| <!-- 拖入变更前截图 --> | <!-- 拖入变更后截图 --> |
+
+**关键变化说明：**
+<!-- 简述主要差异点 -->
+
+</details>
+
+---
+
+## 附加信息
+
+<!-- 相关 Issue 或讨论链接 -->
