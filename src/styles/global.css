@@ -216,8 +216,8 @@ a:hover {
 /* 行内代码样式 */
 code {
   background-color: var(--inline-code-bg);
-  padding: 3px 8px;
-  border-radius: var(--radius-md);
+  padding: 2px 6px;
+  border-radius: 4px;
   font-family: var(--font-family-mono);
   font-size: 0.875em;
   border: 1px solid var(--code-border);
@@ -284,8 +284,10 @@ code {
   transition:
     opacity var(--motion-duration-sm) var(--motion-ease-standard) !important,
     transform var(--motion-duration-sm) var(--motion-ease-standard) !important,
-    background-color var(--motion-duration-sm) var(--motion-ease-standard) !important,
-    border-color var(--motion-duration-sm) var(--motion-ease-standard) !important,
+    background-color var(--motion-duration-sm) var(--motion-ease-standard)
+      !important,
+    border-color var(--motion-duration-sm) var(--motion-ease-standard)
+      !important,
     color var(--motion-duration-sm) var(--motion-ease-standard) !important;
   opacity: 0 !important;
   z-index: 10 !important;
