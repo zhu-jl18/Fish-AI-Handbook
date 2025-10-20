@@ -95,6 +95,7 @@ npm run test:e2e:headed
 - 构建：`npm run build`
 - 预览（含搜索索引）：`npm run preview:search`
 - 站内链接：`npm run test:links`
+- 类型检查：`npm run type-check`
 - 端到端测试：`npm run test:e2e`（如有 E2E 场景变更，需新增/更新用例）
 
 ## 与 AI 协作

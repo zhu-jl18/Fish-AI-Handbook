@@ -229,23 +229,23 @@ code {
    ============================================ */
 
 /* 代码块容器 */
-.expressive-code {
-  margin: 0.5rem 0 !important;
-  border-radius: var(--radius-code) !important;
+.expressive-code.expressive-code {
+  margin: 0.5rem 0;
+  border-radius: var(--radius-code);
   overflow: hidden;
-  border: 1px solid var(--border-color) !important;
+  border: 1px solid var(--border-color);
   box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* 代码块主体 */
-.expressive-code pre {
-  margin: 0 !important;
-  padding: 1rem 1.25rem !important;
-  line-height: 1.4 !important;
-  font-size: 0.9rem !important;
-  background-color: var(--code-bg) !important;
+.expressive-code.expressive-code pre {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  line-height: 1.4;
+  font-size: 0.9rem;
+  background-color: var(--code-bg);
 }
 
 /* 语言标签框架 */
@@ -254,63 +254,61 @@ code {
 }
 
 /* 语言标签样式 */
-.expressive-code .header {
-  background: rgba(255, 255, 255, 0.03) !important;
-  border-bottom: 1px solid var(--border-color) !important;
-  padding: 0.5rem 1rem !important;
+.expressive-code.expressive-code .header {
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
 }
 
-.expressive-code .title {
-  color: var(--text-muted) !important;
-  font-size: 0.7rem !important;
-  font-family: var(--font-family-mono) !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-  font-weight: 500 !important;
+.expressive-code.expressive-code .title {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-family: var(--font-family-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
 }
 
 /* 复制按钮样式 */
-.expressive-code .copy button {
-  position: absolute !important;
-  top: 0.6rem !important;
-  right: 0.6rem !important;
-  padding: 0.25rem 0.5rem !important;
-  background: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 4px !important;
-  color: var(--text-muted) !important;
-  font-size: 0.65rem !important;
-  cursor: pointer !important;
+.expressive-code.expressive-code .copy button {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  cursor: pointer;
   transition:
-    opacity var(--motion-duration-sm) var(--motion-ease-standard) !important,
-    transform var(--motion-duration-sm) var(--motion-ease-standard) !important,
-    background-color var(--motion-duration-sm) var(--motion-ease-standard)
-      !important,
-    border-color var(--motion-duration-sm) var(--motion-ease-standard)
-      !important,
-    color var(--motion-duration-sm) var(--motion-ease-standard) !important;
-  opacity: 0 !important;
-  z-index: 10 !important;
+    opacity var(--motion-duration-sm) var(--motion-ease-standard),
+    transform var(--motion-duration-sm) var(--motion-ease-standard),
+    background-color var(--motion-duration-sm) var(--motion-ease-standard),
+    border-color var(--motion-duration-sm) var(--motion-ease-standard),
+    color var(--motion-duration-sm) var(--motion-ease-standard);
+  opacity: 0;
+  z-index: 10;
 }
 
-.expressive-code:hover .copy button {
-  opacity: 1 !important;
+.expressive-code.expressive-code:hover .copy button {
+  opacity: 1;
 }
 
-.expressive-code .copy button:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-  color: var(--text-color) !important;
-  border-color: rgba(255, 255, 255, 0.2) !important;
+.expressive-code.expressive-code .copy button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.expressive-code .copy button:active {
-  transform: translateY(1px) !important;
+.expressive-code.expressive-code .copy button:active {
+  transform: translateY(1px);
 }
 
-.expressive-code .copy button[data-copied] {
-  color: var(--color-accent-gray) !important;
-  border-color: var(--color-accent-gray) !important;
-  opacity: 1 !important;
+.expressive-code.expressive-code .copy button[data-copied] {
+  color: var(--color-accent-gray);
+  border-color: var(--color-accent-gray);
+  opacity: 1;
 }
 
 /* 代码块滚动条 */
