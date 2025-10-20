@@ -14,6 +14,10 @@
   - 文本与灰阶：`--color-text-white`、`--color-text-secondary`、`--color-accent-gray`
   - 浮层/TOC：`--color-bg-overlay-*`、`--color-text-overlay`、`--color-toc-*`
   - 半透明表面：`--surface-tint-02/03/06/08`
+- 字体子集化工具脚本 `scripts/build_used_charset.py`：
+  - 自动提取文档中实际使用的字符
+  - 支持可选的常用汉字缓冲列表（scripts/common-zh-1000.txt）
+  - 生成字符集供 pyftsubset 使用
 
 ### Changed
 
@@ -25,6 +29,14 @@
 - 右侧目录（TOC）悬停效果降级一档，保持 Active 对比度不变
   - Hover：使用更柔和的文字与更轻的背景（`--color-toc-hover` + `--color-toc-bg-hover`）
   - Active：维持 `--surface-tint-06` 与字重 600
+- **字体加载性能优化**：Noto Sans SC 从 TTF 转换为 WOFF2 子集
+  - 提取文档实际使用的1237个字符（含中文、英文、标点符号）
+  - 生成 Regular (400) 与 SemiBold (600) 两个字重的 WOFF2 子集
+  - 更新 `src/styles/global.css` 的 @font-face 声明
+  - 更新 `src/layouts/BaseLayout.astro` 的字体预加载标签
+  - 删除原始 TTF 文件
+  - **体积减少**：从 20.6MB 降至 366KB（减少 98.2%）
+  - 提供可维护的脚本，方便未来增量更新字符集
 
 ### Fixed
 
