@@ -1,0 +1,6 @@
+
+Name                      SizeKB
+----                      ------
+NotoSansSC-Regular.woff2  181.50
+NotoSansSC-SemiBold.woff2 184.40
+
