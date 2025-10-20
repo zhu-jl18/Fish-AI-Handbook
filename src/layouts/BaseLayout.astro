@@ -13,19 +13,19 @@ const { title } = Astro.props
       {title ? `${title} - Fish-Book · AI 使用手册` : 'Fish-Book · AI 使用手册'}
     </title>
     <meta name="description" content="Fish-Book - 实用的 AI 使用手册" />
-    <!-- 自托管中文字体预加载：当前使用 ttf；后续可替换为 woff2 以减小体积 -->
+    <!-- 自托管中文字体预加载（已使用 woff2 子集） -->
     <link
       rel="preload"
-      href="/fonts/NotoSansSC-Regular.ttf"
+      href="/fonts/NotoSansSC-Regular.woff2"
       as="font"
-      type="font/ttf"
+      type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="/fonts/NotoSansSC-SemiBold.ttf"
+      href="/fonts/NotoSansSC-SemiBold.woff2"
       as="font"
-      type="font/ttf"
+      type="font/woff2"
       crossorigin
     />
 
