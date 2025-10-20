@@ -1,5 +1,5 @@
 ---
-title: 术语扫盲 - AI相关概念速查
+title: 术语扫盲
 description: 快速搞懂模型参数、AI概念等关键术语
 ---
 
