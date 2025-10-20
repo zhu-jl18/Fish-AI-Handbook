@@ -71,25 +71,80 @@ export function mountToc(
   container: HTMLElement,
   items: TocItem[],
   options?: { onClick?: (id: string) => void },
-) {
+): { idToLink: Map<string, HTMLAnchorElement>; idToGroup: Map<string, HTMLElement>; groupEls: HTMLElement[] } {
   container.innerHTML = ''
+
+  // 按最近的 h2 分组
+  const groups: { h2: TocItem; children: TocItem[] }[] = []
+  let current: { h2: TocItem; children: TocItem[] } | null = null
   for (const it of items) {
-    const a = document.createElement('a')
-    a.href = `#${encodeURIComponent(it.id)}`
-    a.textContent = it.text || it.id
-    a.className = `toc-link toc-${it.depth}`
-    a.setAttribute('data-id', it.id)
-    a.addEventListener('click', (e) => {
+    if (it.depth === 2) {
+      current = { h2: it, children: [] }
+      groups.push(current)
+    } else if (current) {
+      current.children.push(it)
+    }
+  }
+
+  const idToLink = new Map<string, HTMLAnchorElement>()
+  const idToGroup = new Map<string, HTMLElement>()
+  const groupEls: HTMLElement[] = []
+
+  for (const g of groups) {
+    const groupEl = document.createElement('div')
+    groupEl.className = 'toc-group'
+    groupEl.setAttribute('data-id', g.h2.id)
+
+    const a2 = document.createElement('a')
+    a2.href = `#${encodeURIComponent(g.h2.id)}`
+    a2.textContent = g.h2.text || g.h2.id
+    a2.title = g.h2.text || g.h2.id
+    a2.className = 'toc-link toc-2'
+    a2.setAttribute('data-id', g.h2.id)
+    idToLink.set(g.h2.id, a2)
+    idToGroup.set(g.h2.id, groupEl)
+    a2.addEventListener('click', (e) => {
       e.preventDefault()
-      const target = document.getElementById(it.id)
+      const target = document.getElementById(g.h2.id)
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        history.replaceState(null, '', `#${encodeURIComponent(it.id)}`)
-        options?.onClick?.(it.id)
+        history.replaceState(null, '', `#${encodeURIComponent(g.h2.id)}`)
+        options?.onClick?.(g.h2.id)
       }
     })
-    container.appendChild(a)
+    groupEl.appendChild(a2)
+
+    if (g.children.length) {
+      const sub = document.createElement('div')
+      sub.className = 'toc-sub'
+      for (const it of g.children) {
+        const a = document.createElement('a')
+        a.href = `#${encodeURIComponent(it.id)}`
+        a.textContent = it.text || it.id
+        a.title = it.text || it.id
+        a.className = `toc-link toc-${it.depth}`
+        a.setAttribute('data-id', it.id)
+        idToLink.set(it.id, a)
+        idToGroup.set(it.id, groupEl)
+        a.addEventListener('click', (e) => {
+          e.preventDefault()
+          const target = document.getElementById(it.id)
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            history.replaceState(null, '', `#${encodeURIComponent(it.id)}`)
+            options?.onClick?.(it.id)
+          }
+        })
+        sub.appendChild(a)
+      }
+      groupEl.appendChild(sub)
+    }
+
+    container.appendChild(groupEl)
+    groupEls.push(groupEl)
   }
+
+  return { idToLink, idToGroup, groupEls }
 }
 
 export function observeActive(
@@ -125,26 +180,36 @@ export function setupRightSidebar(
   if (!root || !nav) return () => {}
   const items = collectHeadings(root)
 
+  const mounted = mountToc(nav, items)
+
   let clickLockUntil = 0
   function setActive(id: string) {
-    const links = nav.querySelectorAll<HTMLAnchorElement>('a.toc-link')
-    links.forEach((a) => a.classList.toggle('active', a.dataset.id === id))
+    // 激活链接
+    mounted.idToLink.forEach((el, key) => {
+      el.classList.toggle('active', key === id)
+    })
+    // 展开所属分组（默认仅显示 h2）
+    const activeGroup = mounted.idToGroup.get(id) || null
+    mounted.groupEls.forEach((g) => {
+      g.classList.toggle('expanded', g === activeGroup)
+    })
   }
 
-  // 点击时先行设置高亮，并在短时间内忽略滚动观察的干扰
-  mountToc(nav, items, {
-    onClick: (id) => {
-      setActive(id)
-      clickLockUntil = Date.now() + 800 // 800ms 内不被滚动回调覆盖
-    },
-  })
-
+  // 滚动观察：激活并展开对应分组
   const stop = observeActive(items, (id) => {
     if (Date.now() < clickLockUntil) return
     setActive(id)
   })
 
-  // 如果初始包含 hash，尝试高亮
+  // 点击时先行设置高亮，并在短时间内忽略滚动观察的干扰
+  mounted.idToLink.forEach((a, id) => {
+    a.addEventListener('click', () => {
+      setActive(id)
+      clickLockUntil = Date.now() + 800 // 800ms 内不被滚动回调覆盖
+    })
+  })
+
+  // 如果初始包含 hash，尝试高亮并展开对应分组
   if (location.hash) {
     const id = decodeURIComponent(location.hash.slice(1))
     setActive(id)
