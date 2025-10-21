@@ -27,8 +27,7 @@ response = ai.generate
 
 # 创意写作 - 要求新颖
 response = ai.generate
-```
-
+```text
 **工作原理：**  
 AI生成每个词时会计算所有可能词的概率分布。Temperature决定如何从这个分布中采样：
 
@@ -101,7 +100,7 @@ Token是AI"读"和"写"的基本单位：
 
 **示例：**
 
-```
+```text
 "Hello, world!" ≈ 4 tokens
 - "Hello" → 1 token
 - "," → 1 token
@@ -115,8 +114,7 @@ Token是AI"读"和"写"的基本单位：
 - "世" → 1 token
 - "界" → 1 token
 - "！" → 1 token
-```
-
+```text
 ### 为什么重要？
 
 1. **决定上下文长度**
@@ -175,8 +173,7 @@ response = ai.generate
 
 # 要求详细文章
 response = ai.generate
-```
-
+```text
 ---
 
 ## 其他常见参数
@@ -219,8 +216,7 @@ response = ai.generate
 ```python
 # 生成对话，遇到分隔符就停止
 response = ai.generate
-```
-
+```text
 ---
 
 ## 参数组合建议
@@ -234,8 +230,7 @@ response = ai.generate
   "max_tokens": 2000,
   "frequency_penalty": 0.0
 }
-```
-
+```text
 ### 日常对话（平衡）
 
 ```json
@@ -245,8 +240,7 @@ response = ai.generate
   "max_tokens": 1000,
   "presence_penalty": 0.2
 }
-```
-
+```text
 ### 创意写作（发散思维）
 
 ```json
@@ -257,8 +251,7 @@ response = ai.generate
   "presence_penalty": 0.3,
   "max_tokens": 3000
 }
-```
-
+```text
 ### 事实查询（严格）
 
 ```json
@@ -267,8 +260,7 @@ response = ai.generate
   "top_p": 1.0,
   "max_tokens": 500
 }
-```
-
+```text
 ---
 
 ## 实战技巧
@@ -282,8 +274,7 @@ response = ai.generate
   "temperature": 1.0,
   "top_p": 1.0
 }
-```
-
+```text
 结果：输出太随机，质量下降
 
 **正确：**
@@ -293,8 +284,7 @@ response = ai.generate
   "temperature": 0.8,
   "top_p": 0.9
 }
-```
-
+```text
 ### 技巧2：使用Token预估控制成本
 
 ```python
@@ -304,8 +294,7 @@ output_tokens = 2000  # 预期输出
 
 cost = (input_tokens * 0.15 + output_tokens * 0.60) / 1_000_000
 print
-```
-
+```text
 ### 技巧3：根据任务动态调整
 
 ```python
@@ -316,8 +305,7 @@ def get_params:
         return {"temperature": 0.9, "max_tokens": 3000}
     elif task_type == "chat":
         return {"temperature": 0.7, "max_tokens": 1000}
-```
-
+```text
 ---
 
 ## 进阶理解
@@ -326,10 +314,9 @@ def get_params:
 
 Temperature通过Softmax函数调整概率分布：
 
-```
+```text
 P = exp / Σ exp
-```
-
+```text
 - T越小，高分词的优势越明显（确定性强）
 - T越大，各个词的概率趋于平均（随机性强）
 
