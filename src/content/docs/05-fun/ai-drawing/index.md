@@ -54,7 +54,7 @@ wide-angle lens, cinematic lighting, highly detailed, 4k, masterpiece
 low quality, blurry, extra fingers, bad anatomy, watermark, jpeg artifacts
 ```
 
-## 基础参数建议（SDXL）
+## 基础参数建议
 
 - 分辨率：1024×1024 起
 - Steps：25–40

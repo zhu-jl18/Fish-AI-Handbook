@@ -1,6 +1,6 @@
 ---
-title: 环境准备 · GitHub
-description: GitHub 账户与基础操作、Git 版本管理、VSCode 插件配置、多账号管理、Actions 自动化和团队协作实践。
+title: 环境准备 · Git
+description: Git 版本管理基础、VSCode 插件配置、多账号管理、GitHub 集成、Actions 自动化和团队协作实践。
 ---
 
 ## GitHub 账号的必要性
@@ -99,11 +99,11 @@ git branch -D feature/abandoned-feature  # 强制删除
 git checkout main
 git merge feature/new-feature
 
-# 变基（线性历史）
+# 变基
 git checkout feature/new-feature
 git rebase main
 
-# 交互式变基（修改提交历史）
+# 交互式变基
 git rebase -i HEAD~3
 ```
 
@@ -501,7 +501,7 @@ jobs:
 - **codecov/codecov-action**：代码覆盖率报告
 - **docker/build-push-action**：构建和推送 Docker 镜像
 
-## 团队协作实例（以本文档网站为例）
+## 团队协作实例
 
 ### 项目成员管理和权限设置
 
