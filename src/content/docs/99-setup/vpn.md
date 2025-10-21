@@ -1,5 +1,5 @@
 ---
-title: 环境准备 · VPN
+title: VPN
 description: 科学上网/网络代理的配置（占位）。
 ---
 

@@ -164,10 +164,6 @@
   - BaseLayout 注入 `<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">`
   - `public/robots.txt` 为 `Disallow: /`
   - `vercel.json` 仅为 `/fonts/(.*)` 添加长缓存与 CORS 头，不控制收录
-- 如需允许收录：
-  - 移除 BaseLayout 中的 robots meta
-  - 将 `public/robots.txt` 改为允许（或删除该文件）
-  - 按需在 `vercel.json` 增加/移除全站 `X-Robots-Tag` 头
 
 示例片段（部署核对清单）：
 
@@ -196,9 +192,3 @@
 ```
 
 ---
-
-## 附：不同AI助手的专属md均会被引导指向AGENTS.md
-
-- WARP.md（AI终端代码助手Warp）
-- CLAUDE.md（AI CLI工具 Claude Code）
-- CURSOR.md（AI 编辑器 Cursor）

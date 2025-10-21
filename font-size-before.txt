@@ -1,6 +1,0 @@
-
-Name                      SizeKB
-----                      ------
-NotoSansSC-Regular.ttf  10312.60
-NotoSansSC-SemiBold.ttf 10302.50
-

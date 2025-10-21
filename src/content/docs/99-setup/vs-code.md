@@ -1,5 +1,5 @@
 ---
-title: 环境准备 · Vs Code
+title: Vs Code
 description: Vs Code 的安装与基础配置占位。
 ---
 

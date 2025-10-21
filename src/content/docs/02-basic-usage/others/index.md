@@ -1,5 +1,5 @@
 ---
-title: 'Others - 命令行工具与其他应用'
+title: 'Others'
 description: '不离开终端就能调用AI，真正的Vibe Coding'
 ---
 
@@ -15,7 +15,7 @@ description: '不离开终端就能调用AI，真正的Vibe Coding'
 
 ## 2025年最值得用的CLI工具
 
-### Claude Code - 王者之选（强烈推荐）
+### Claude Code
 
 **为啥最好用：**
 
@@ -48,7 +48,7 @@ _[占位：Claude Code终端使用截图 - 显示代码生成过程]_
 
 ---
 
-### Gemini CLI - 免费王者
+### Gemini CLI
 
 **为啥推荐：**
 
@@ -87,7 +87,7 @@ _[占位：Gemini CLI使用截图 - 显示大文件处理能力]_
 
 ---
 
-### Rovo Dev CLI - 新秀黑马（免费！）
+### Rovo Dev CLI
 
 **特色：**
 
@@ -111,7 +111,7 @@ rovo "帮我优化这个数据库查询性能"
 
 ---
 
-### 本地部署选择：Ollama
+### Ollama
 
 **优势：**
 
