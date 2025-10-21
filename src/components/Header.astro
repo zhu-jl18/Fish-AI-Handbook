@@ -5,7 +5,13 @@ const { currentPage } = Astro.props
 <header class="header">
   <nav class="nav">
     <div class="nav-container">
-      <a href="/" class="logo">Fish-Book</a>
+      <a href="/" class="logo" aria-label="回到主页">
+        <span class="logo-mark">F</span>
+        <span class="logo-copy">
+          <span class="logo-name">Fish AI Handbook</span>
+          <span class="logo-meta">Docs & Patterns</span>
+        </span>
+      </a>
       <div class="nav-links">
         <a
           href="/fish-talks"
@@ -33,18 +39,21 @@ const { currentPage } = Astro.props
         <a href="/search" class="search-button" aria-label="搜索文档">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
+            width="18"
+            height="18"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
+            aria-hidden="true"
           >
             <circle cx="11" cy="11" r="8"></circle>
             <path d="m21 21-4.35-4.35"></path>
           </svg>
+          <span class="search-label">搜索或跳转</span>
+          <kbd class="search-shortcut">/</kbd>
         </a>
       </div>
     </div>
@@ -53,34 +62,67 @@ const { currentPage } = Astro.props
 
 <style>
   .header {
-    background-color: var(--color-pure-black);
-    border-bottom: 1px solid var(--color-border-dark);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 120;
+    background: transparent;
+  }
+  .nav {
+    width: 100%;
   }
   .nav-container {
     max-width: var(--layout-max-width);
     margin: 0 auto;
-    padding: 0 calc(var(--layout-gap) + 1rem);
-    display: flex;
-    justify-content: space-between;
+    padding: 0 calc(var(--layout-gap) + 1.25rem);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    height: 60px;
-    gap: 1rem;
+    height: 64px;
+    gap: 2.25rem;
   }
   .logo {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--color-text-white);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     text-decoration: none;
+    color: var(--header-text-strong);
+  }
+  .logo-mark {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--header-accent-border);
+    background: var(--header-mark-bg);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--header-accent);
+    letter-spacing: 0.05em;
+  }
+  .logo-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    line-height: 1.1;
+  }
+  .logo-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .logo-meta {
+    font-size: 0.75rem;
+    color: var(--header-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
   .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: center;
+    justify-content: center;
   }
-
   .nav-actions {
     display: flex;
     align-items: center;
@@ -89,53 +131,114 @@ const { currentPage } = Astro.props
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    color: var(--color-text-secondary);
-    background: var(--color-bg-button);
-    border: 1px solid var(--color-border-dark);
-    border-radius: 6px;
+    gap: 0.65rem;
+    color: var(--header-text);
+    background: var(--header-search-bg);
+    border: 1px solid var(--header-accent-border);
+    border-radius: 999px;
     text-decoration: none;
-    transition: all 0.2s ease;
+    padding: 0.35rem 0.85rem 0.35rem 0.75rem;
+    transition:
+      color var(--motion-duration-sm) var(--motion-ease-standard),
+      border-color var(--motion-duration-sm) var(--motion-ease-standard),
+      background-color var(--motion-duration-sm) var(--motion-ease-standard);
+    font-size: 0.8rem;
   }
   .search-button:hover {
-    color: var(--color-text-white);
-    border-color: var(--color-border-hover);
-    background: var(--color-bg-button-hover);
+    color: var(--header-text-strong);
+    border-color: var(--header-accent-border-strong);
+    background: var(--header-search-bg-hover);
   }
-
+  .search-label {
+    display: none;
+  }
+  .search-shortcut {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.1rem 0.4rem;
+    border-radius: 6px;
+    border: 1px solid var(--header-shortcut-border);
+    background: var(--header-shortcut-bg);
+    color: var(--header-text-muted);
+    font-family: var(--font-family-mono);
+    font-size: 0.65rem;
+    line-height: 1;
+  }
   .nav-links a {
-    color: var(--color-text-secondary);
+    color: var(--header-text);
     text-decoration: none;
-    font-weight: 400;
-    transition: color 0.2s ease;
-    position: relative;
+    font-weight: 500;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition:
+      color var(--motion-duration-sm) var(--motion-ease-standard),
+      border-color var(--motion-duration-sm) var(--motion-ease-standard),
+      background-color var(--motion-duration-sm) var(--motion-ease-standard);
+    letter-spacing: 0.01em;
   }
   .nav-links a:hover {
-    color: var(--color-text-white);
+    color: var(--header-accent);
+    border-color: var(--header-accent-border);
+    background: var(--header-pill-hover);
   }
   .nav-links a.active {
-    color: var(--color-text-white);
-    background-color: var(--surface-tint-08);
-    padding: 4px 12px;
-    border-radius: 6px;
+    color: var(--header-accent);
+    border-color: var(--header-accent-border-strong);
+    background: var(--header-pill-active);
   }
-
   @media (max-width: 1440px) {
     .nav-container {
-      padding: 0 calc(var(--layout-gap) * 0.75);
+      padding: 0 calc(var(--layout-gap) * 0.85);
+      gap: 1.5rem;
     }
   }
-
   @media (max-width: 1024px) {
     .nav-container {
       padding: 0 1.5rem;
+      grid-template-columns: auto 1fr;
+      row-gap: 0.75rem;
+      align-content: center;
+      height: auto;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .nav-links {
+      grid-column: 1 / -1;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    .nav-actions {
+      justify-self: end;
+    }
+    .search-label {
+      display: inline;
     }
   }
-
   @media (max-width: 768px) {
     .nav-container {
       padding: 0 1rem;
+    }
+    .logo-name {
+      font-size: 0.9rem;
+    }
+    .logo-meta {
+      font-size: 0.7rem;
+    }
+    .nav-links {
+      gap: 0.75rem;
+    }
+    .nav-links a {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.85rem;
+    }
+    .search-button {
+      gap: 0.5rem;
+      padding: 0.3rem 0.7rem;
+    }
+    .search-shortcut {
+      display: none;
     }
   }
 </style>
