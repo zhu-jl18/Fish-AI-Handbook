@@ -79,8 +79,7 @@ description: 知识库构建流程、工具选型与常见问题排查
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 splitter = RecursiveCharacterTextSplitter
-```
-
+```text
 ### 5. 元数据设计
 
 为每个文档块添加元数据，方便后续过滤和追溯。
@@ -99,8 +98,7 @@ splitter = RecursiveCharacterTextSplitter
   "doc_id": "文档唯一 ID",
   "chunk_index": "当前块在文档中的序号"
 }
-```
-
+```text
 ---
 
 ## 向量数据库选型
@@ -155,8 +153,7 @@ splitter = RecursiveCharacterTextSplitter
 import chromadb
 client = chromadb.Client()
 collection = client.create_collection
-```
-
+```text
 **生产阶段**：
 
 - 优先考虑 **Qdrant**（开源 + 高性能）或 **Pinecone**（托管服务）
@@ -175,8 +172,7 @@ from openai import OpenAI
 client = OpenAI()
 
 response = client.embeddings.create
-```
-
+```text
 **方案 2：本地部署开源模型**
 
 ```python
@@ -184,8 +180,7 @@ from sentence_transformers import SentenceTransformer
 
 model = SentenceTransformer
 embeddings = model.encode
-```
-
+```text
 **选择建议**：
 
 - API：快速、无需 GPU、成本可预测
@@ -202,8 +197,7 @@ for i in range, BATCH_SIZE):
     batch = documents[i:i + BATCH_SIZE]
     embeddings = embed_model.encode
     vector_db.add
-```
-
+```text
 **并发加速**：
 
 ```python
@@ -212,8 +206,7 @@ from concurrent.futures import ThreadPoolExecutor
 with ThreadPoolExecutor as executor:
     futures = [executor.submit
                for batch in batches]
-```
-
+```text
 ### 版本管理
 
 **数据版本化**：
@@ -227,8 +220,7 @@ with ThreadPoolExecutor as executor:
 ```python
 collection_v1 = client.get_or_create_collection
 collection_v2 = client.get_or_create_collection
-```
-
+```text
 ---
 
 ## 检索与重排实践
@@ -249,16 +241,14 @@ bm25_retriever = BM25Retriever.from_documents
 
 # 融合检索器（权重可调）
 ensemble_retriever = EnsembleRetriever
-```
-
+```text
 ### 元数据过滤
 
 **按时间、类别等条件过滤**：
 
 ```python
 results = vectorstore.similarity_search
-```
-
+```text
 ### 重排序集成
 
 **使用 Cohere Rerank**：
@@ -269,8 +259,7 @@ from langchain.retrievers.document_compressors import CohereRerank
 
 compressor = CohereRerank
 compression_retriever = ContextualCompressionRetriever
-```
-
+```text
 ### 缓存策略
 
 **查询缓存**：
@@ -298,8 +287,7 @@ from ragas import evaluate
 from ragas.metrics import
 
 results = evaluate
-```
-
+```text
 ### 在线 A/B 测试
 
 **分流策略**：
