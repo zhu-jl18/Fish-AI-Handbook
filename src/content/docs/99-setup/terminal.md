@@ -47,8 +47,7 @@ description: 终端工具安装与配置指南
 
 ```powershell
 winget install Microsoft.PowerShell
-```
-
+```bash
 #### 配置 Oh My Posh
 
 1. 安装 Oh My Posh
@@ -84,8 +83,7 @@ winget install Microsoft.PowerShell
 
 ```bash
 brew install --cask iterm2
-```
-
+```bash
 #### 配置
 
 1. **配色方案**：Dracula / Nord
@@ -96,8 +94,7 @@ brew install --cask iterm2
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
+```bash
 ## Linux Terminal
 
 ### 终端模拟器选择
@@ -117,8 +114,7 @@ chsh -s $(which zsh)
 
 # 安装 Oh My Zsh
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
+```bash
 ## 通用配置建议
 
 ### 必装插件
@@ -136,8 +132,7 @@ alias gs='git status'
 alias gp='git pull'
 alias gpu='git push'
 alias cls='clear'
-```
-
+```bash
 ## VS Code 集成终端
 
 ### 设置默认终端
@@ -148,8 +143,7 @@ alias cls='clear'
   "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.defaultProfile.linux": "zsh"
 }
-```
-
+```bash
 ### 字体配置
 
 ```json
@@ -157,16 +151,14 @@ alias cls='clear'
   "terminal.integrated.fontFamily": "'Cascadia Code', 'MesloLGS NF', monospace",
   "terminal.integrated.fontSize": 14
 }
-```
-
+```bash
 ## 故障排除
 
 ### Windows 执行策略问题
 
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-
+```bash
 ### 字体显示问题
 
 - 确保安装了 Nerd Fonts
