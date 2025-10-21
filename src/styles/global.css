@@ -253,20 +253,9 @@ code {
   border: none;
 }
 
-/* 语言标签样式 */
+/* 语言标签样式 - 完全隐藏 */
 .expressive-code.expressive-code .header {
-  background: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid var(--border-color);
-  padding: 0.5rem 1rem;
-}
-
-.expressive-code.expressive-code .title {
-  color: var(--text-muted);
-  font-size: 0.7rem;
-  font-family: var(--font-family-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 500;
+  display: none;
 }
 
 /* 复制按钮样式 */
@@ -314,60 +303,6 @@ code {
 /* 代码块滚动条 */
 .expressive-code pre::-webkit-scrollbar {
   height: 8px;
-}
-
-/* 通用代码块样式（非 Expressive Code 的预格式化代码） */
-pre,
-pre code,
-.prose pre,
-.code-block {
-  background-color: var(--code-bg);
-  color: var(--code-fg);
-  border: 1px solid var(--code-border);
-  border-radius: var(--radius-code);
-  margin: 0.5rem 0;
-}
-
-/* 自定义复制按钮（脚本生成） */
-.code-copy-button {
-  position: absolute;
-  top: 0.6rem;
-  right: 0.6rem;
-  padding: 0.25rem 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  color: var(--text-muted);
-  font-size: 0.65rem;
-  cursor: pointer;
-  opacity: 0;
-  z-index: 10;
-  transition:
-    opacity var(--motion-duration-sm) var(--motion-ease-standard),
-    background-color var(--motion-duration-sm) var(--motion-ease-standard),
-    color var(--motion-duration-sm) var(--motion-ease-standard),
-    border-color var(--motion-duration-sm) var(--motion-ease-standard),
-    transform var(--motion-duration-sm) var(--motion-ease-standard);
-}
-
-pre:hover > .code-copy-button {
-  opacity: 1;
-}
-
-.code-copy-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-color);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.code-copy-button:active {
-  transform: translateY(1px);
-}
-
-.code-copy-button.copied {
-  color: var(--color-accent-gray);
-  border-color: var(--color-accent-gray);
-  opacity: 1;
 }
 
 .expressive-code pre::-webkit-scrollbar-track {
