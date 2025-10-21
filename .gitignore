@@ -54,3 +54,6 @@ test-results/
 
 # test artifacts
 test-results/
+
+# compressed build artifacts
+dist.zip
