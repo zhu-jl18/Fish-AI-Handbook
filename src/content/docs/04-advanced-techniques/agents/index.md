@@ -15,9 +15,9 @@ description: 'The ultra evo of llm'
 ## 知名 Agents（截至 2025‑10）
 
 产品示例
+
 - Cursor — 编码 Agent：IDE 内自动改码、跨文件重构、测试与任务执行（https://cursor.com/）
 - GitHub Copilot Workspace — 编码 Agent：基于 Issue/PR 的计划、编辑与提交（https://github.com/features/copilot）
 - Perplexity Agents — 研究/检索 Agent：多步检索、工具调用与任务执行（https://www.perplexity.ai/）
 - Manus — 桌面/系统自动化 Agent：跨应用操作、脚本执行与长时任务（https://manus.ai, https://manus.so）
 - Kimi OK Computer — 桌面 UI 代理：跨应用自动执行任务（https://kimi.moonshot.cn/ok-computer）
-
