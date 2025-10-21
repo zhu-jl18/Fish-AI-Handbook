@@ -38,8 +38,7 @@ create-react-app my-app
 
 # npx 方式：直接运行，一步到位
 npx create-react-app my-app
-```
-
+```bash
 ## 为什么 AI 编程依赖 Node.js 生态
 
 现代 AI 编程工具，无论是本地代码助手（Cursor、Claude Code）还是云端生成服务（v0.dev），都普遍将 Node.js 和 npm 作为其技术栈的核心部分。原因如下：
@@ -56,8 +55,7 @@ npm install -g typescript       # 类型检查与代码补全
 npm install -g eslint           # 代码质量与风格检查
 npm install -g prettier         # 自动化代码格式化
 npm install -g vercel           # 一键部署与预览
-```
-
+```bash
 ## Windows 平台安装指南
 
 ### 官方安装程序（推荐）
@@ -77,8 +75,7 @@ node -v
 # 验证 npm 版本
 npm -v
 # > 10.2.4 或更高版本
-```
-
+```bash
 ### 包管理器安装（可选）
 
 对于习惯使用包管理器的开发者，可通过 `winget` 或 `Chocolatey` 安装。
@@ -88,8 +85,7 @@ npm -v
 ```powershell
 # 安装 Node.js LTS 版本
 winget install OpenJS.NodeJS.LTS
-```
-
+```bash
 #### 使用 Chocolatey
 
 ```powershell
@@ -98,8 +94,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 # 安装 Node.js LTS 版本
 choco install nodejs-lts
-```
-
+```bash
 ## 核心命令速查
 
 ### `node`：运行 JavaScript
@@ -113,8 +108,7 @@ node
 
 # 直接执行单行代码
 node -e "console.log('Hello from Node.js')"
-```
-
+```bash
 ### `npm`：管理项目依赖
 
 ```bash
@@ -132,8 +126,7 @@ npm uninstall lodash
 
 # 运行在 package.json 中定义的脚本
 npm run dev
-```
-
+```bash
 ### `npx`：执行工具命令
 
 ```bash
@@ -145,8 +138,7 @@ npx http-server .
 
 # 运行任意 npm 包中的命令
 npx cowsay "AI is fun!"
-```
-
+```bash
 ## 常见问题与解决方案
 
 ### `command not found` (命令未找到)
@@ -171,4 +163,4 @@ npm config set registry https://registry.npmmirror.com
 # 验证是否切换成功
 npm config get registry
 # > https://registry.npmmirror.com/
-```
+```bash
