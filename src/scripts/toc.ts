@@ -71,7 +71,11 @@ export function mountToc(
   container: HTMLElement,
   items: TocItem[],
   options?: { onClick?: (id: string) => void },
-): { idToLink: Map<string, HTMLAnchorElement>; idToGroup: Map<string, HTMLElement>; groupEls: HTMLElement[] } {
+): {
+  idToLink: Map<string, HTMLAnchorElement>
+  idToGroup: Map<string, HTMLElement>
+  groupEls: HTMLElement[]
+} {
   container.innerHTML = ''
 
   // 按最近的 h2 分组

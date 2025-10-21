@@ -1,5 +1,5 @@
 ---
-title: 'MCP '
+title: 'MCP'
 description: '理解模型上下文协议（MCP）如何为 AI 与外部世界的交互建立标准。'
 ---
 
