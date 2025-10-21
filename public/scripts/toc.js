@@ -21,7 +21,7 @@ function ensureUniqueId(base, used) {
 
 export function collectHeadings(root, options) {
   const min = (options && options.min) || 2
-  const max = (options && options.max) || 4
+  const max = (options && options.max) || 2
   const selectors = Array.from(
     { length: max - min + 1 },
     (_, i) => `h${i + min}`,
@@ -93,31 +93,7 @@ export function mountToc(container, items, options) {
 
     groupEl.appendChild(a2)
 
-    if (g.children.length) {
-      const sub = document.createElement('div')
-      sub.className = 'toc-sub'
-      for (const it of g.children) {
-        const a = document.createElement('a')
-        a.href = `#${encodeURIComponent(it.id)}`
-        a.textContent = it.text || it.id
-        a.title = it.text || it.id
-        a.className = `toc-link toc-${it.depth}`
-        a.setAttribute('data-id', it.id)
-        idToLink.set(it.id, a)
-        idToGroup.set(it.id, groupEl)
-        a.addEventListener('click', (e) => {
-          e.preventDefault()
-          const target = document.getElementById(it.id)
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-            history.replaceState(null, '', `#${encodeURIComponent(it.id)}`)
-            options && options.onClick && options.onClick(it.id)
-          }
-        })
-        sub.appendChild(a)
-      }
-      groupEl.appendChild(sub)
-    }
+    // 仅渲染 H2，不渲染子级（H3/H4）
 
     container.appendChild(groupEl)
     groupEls.push(groupEl)
