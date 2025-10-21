@@ -152,8 +152,7 @@ description: 理解大语言模型对话中的System、Assistant和User三个层
   { "role": "assistant", "content": "Hi! How can I help you?" },
   { "role": "user", "content": "What's the weather?" }
 ]
-```
-
+```text
 这里assistant消息是为了让AI知道它之前已经回复过什么，以保持对话的连贯性。
 
 ---
