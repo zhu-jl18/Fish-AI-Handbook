@@ -12,7 +12,7 @@ AI领域的术语又多又杂，Temperature、Top-P、Agent、MCP...
 
 ---
 
-## [模型参数 →](/fish-talks/glossary/model-params)
+## [模型参数](/fish-talks/glossary/model-params)
 
 **控制AI输出的关键开关**
 
@@ -24,11 +24,9 @@ AI领域的术语又多又杂，Temperature、Top-P、Agent、MCP...
 
 > **什么时候用：** 想调整AI的“性格”和输出风格时
 
-**[详细了解 →](/fish-talks/glossary/model-params)**
-
 ---
 
-## [AI概念 →](/fish-talks/glossary/ai-concepts)
+## [AI概念](/fish-talks/glossary/ai-concepts)
 
 **理解AI技术的核心概念**
 
@@ -40,28 +38,4 @@ AI领域的术语又多又杂，Temperature、Top-P、Agent、MCP...
 - **Embedding** - 让AI理解相似度
 - **Fine-tuning** - 让AI学会你的风格
 
-> **什么时候用：** 想深入理解AI原理或构建AI应用时
-
-**[详细了解 →](/fish-talks/glossary/ai-concepts)**
-
 ---
-
-## 小结
-
-这些概念不用一次全记住，遇到时再回来查就行！
-
-**按使用频率排序：**
-
-1. **Token / Context** - 几乎每次用AI都会遇到
-2. **Temperature** - 很多工具都会让你设置
-3. **Prompt** - 学会了能大幅提升AI效果
-4. **Agent / RAG** - 未来的趋势，值得了解
-5. **MCP / Embedding / Fine-tuning** - 深入技术时再学
-
----
-
-## 相关阅读
-
-- **[提示词章节 →](/prompts)** - 学会写好Prompt
-- **[进阶玩法 →](/advanced)** - 深入技术实现
-- **[基础用法 →](/basic-usage)** - 在不同工具中如何设置这些参数

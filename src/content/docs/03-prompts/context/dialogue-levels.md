@@ -7,7 +7,7 @@ description: 理解大语言模型对话中的System、Assistant和User三个层
 
 在与大语言模型的交互中，对话由三个不同层级的角色组成：系统提示（System）、助手消息（Assistant）和用户提示（User）。理解这三个层级及其作用，是构建高效AI应用的基础。
 
-## 正确的三层结构（基于OpenAI API）
+## 正确的三层结构
 
 ### 1. System Role
 
