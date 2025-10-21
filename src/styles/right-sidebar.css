@@ -3,7 +3,7 @@
   top: 60px;
   width: var(--sidebar-width);
   height: calc(100vh - 60px);
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--surface-tint-02);
   border-radius: 0;
   border: none;
   overflow-y: auto;
@@ -26,6 +26,19 @@
   gap: 0.3rem;
 }
 
+/* 分组容器与子级 */
+.toc-group {
+  margin-bottom: 0.35rem;
+}
+.toc-sub {
+  display: none; /* 默认收起，滚动或点击对应 h2 时展开 */
+  padding-left: 0.75rem;
+  margin-top: 0.2rem;
+}
+.toc-group.expanded .toc-sub {
+  display: block;
+}
+
 .toc-link {
   color: var(--text-muted);
   text-decoration: none;
@@ -38,6 +51,9 @@
   padding: 0.375rem 0.75rem;
   border-radius: var(--border-radius-sm);
   display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 单行省略 */
 }
 
 .toc-link:hover {
@@ -55,12 +71,13 @@
   padding-left: 0.75rem;
 }
 .toc-3 {
-  padding-left: 1.75rem;
+  padding-left: 1.25rem;
   font-size: 0.78125rem;
 }
 .toc-4 {
-  padding-left: 2.75rem;
+  padding-left: 2rem;
   font-size: 0.75rem;
+  opacity: 0.85;
 }
 
 .back-to-top {
