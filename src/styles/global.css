@@ -88,10 +88,26 @@
   --surface-tint-06: rgba(255, 255, 255, 0.06);
   --surface-tint-08: rgba(255, 255, 255, 0.08);
 
-  /* 右侧 TOC 专用（仅 hover 降调；active 按现有对比度保留） */
-  --color-toc-hover: rgba(255, 255, 255, 0.5);
-  --color-toc-bg-hover: var(--surface-tint-02);
-  --color-toc-bg-active: var(--surface-tint-06);
+  /* 右侧 TOC 专用 */
+  --color-toc-border: rgba(140, 200, 255, 0.65);
+  --color-toc-text: rgba(226, 232, 240, 0.55);
+  --color-toc-hover: rgba(226, 232, 240, 0.8);
+  --color-toc-active: #ffffff;
+
+  /* Header 专用 */
+  --header-text: rgba(226, 232, 240, 0.68);
+  --header-text-muted: rgba(226, 232, 240, 0.52);
+  --header-text-strong: rgba(226, 232, 240, 0.92);
+  --header-accent: rgba(150, 210, 255, 0.95);
+  --header-accent-border: rgba(150, 210, 255, 0.35);
+  --header-accent-border-strong: rgba(150, 210, 255, 0.55);
+  --header-mark-bg: rgba(150, 210, 255, 0.08);
+  --header-pill-hover: rgba(150, 210, 255, 0.12);
+  --header-pill-active: rgba(150, 210, 255, 0.2);
+  --header-search-bg: rgba(10, 12, 16, 0.6);
+  --header-search-bg-hover: rgba(10, 12, 16, 0.82);
+  --header-shortcut-bg: rgba(255, 255, 255, 0.05);
+  --header-shortcut-border: rgba(255, 255, 255, 0.12);
 
   /* Motion durations */
   --motion-duration-xxs: 80ms;
