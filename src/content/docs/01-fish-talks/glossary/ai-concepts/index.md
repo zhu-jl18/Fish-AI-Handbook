@@ -1,9 +1,9 @@
 ---
 title: AI核心概念速查
-description: Agent、MCP、RAG、Context等AI技术概念一次搞懂
+description: Brief introduction to agent、MCP、RAG、context
 ---
 
-## 🧠 Context
+## Context
 
 **简单理解：** AI的"短期记忆"
 
@@ -170,21 +170,3 @@ Embedding → [-0.5, 0.3, -0.2, ...]
 - 维护成本
 
 ---
-
-## 小结
-
-这些概念不用一次全记住，遇到时再回来查就行！
-
-**按使用频率排序：**
-
-1. **Context** - 几乎每次用AI都会遇到
-2. **Prompt** - 学会了能大幅提升AI效果
-3. **Agent** - 未来的趋势，值得了解
-4. **RAG** - 想做AI应用必须懂
-5. **MCP / Embedding / Fine-tuning** - 深入技术时再学
-
-**下一步：**
-
-- [提示词章节](/prompts) - 学会写好Prompt
-- [进阶玩法](/advanced) - 深入技术实现
-- [模型参数](/fish-talks/glossary/model-params) - 了解如何调整AI行为
