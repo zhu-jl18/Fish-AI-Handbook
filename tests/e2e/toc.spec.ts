@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 test('右侧目录自动生成且可点击跳转与滚动高亮', async ({ page }) => {
-  await page.goto('/setup/github')
+  await page.goto('/setup/git')
 
   // 等待右侧目录渲染
   const tocLinks = page.locator('.toc-nav a.toc-link')
