@@ -93,7 +93,13 @@ export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
     ],
   },
   { label: 'MCP', href: '/advanced/mcp' },
-  { label: 'Agents', href: '/advanced/agents' },
+  {
+    label: 'Agents',
+    href: '/advanced/agents',
+    items: [
+      { label: '构建指南', href: '/advanced/agents/agent-build' },
+    ],
+  },
   { label: 'Workflow', href: '/advanced/workflow' },
 ]
 
