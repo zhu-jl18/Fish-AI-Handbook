@@ -37,7 +37,7 @@ export function collectHeadings(
   options?: { min?: number; max?: number },
 ): TocItem[] {
   const min = options?.min ?? 2
-  const max = options?.max ?? 4
+  const max = options?.max ?? 2
   const selectors = Array.from(
     { length: max - min + 1 },
     (_, i) => `h${i + min}`,
@@ -73,82 +73,36 @@ export function mountToc(
   options?: { onClick?: (id: string) => void },
 ): {
   idToLink: Map<string, HTMLAnchorElement>
-  idToGroup: Map<string, HTMLElement>
-  groupEls: HTMLElement[]
 } {
   container.innerHTML = ''
 
-  // 按最近的 h2 分组
-  const groups: { h2: TocItem; children: TocItem[] }[] = []
-  let current: { h2: TocItem; children: TocItem[] } | null = null
-  for (const it of items) {
-    if (it.depth === 2) {
-      current = { h2: it, children: [] }
-      groups.push(current)
-    } else if (current) {
-      current.children.push(it)
-    }
-  }
-
   const idToLink = new Map<string, HTMLAnchorElement>()
-  const idToGroup = new Map<string, HTMLElement>()
-  const groupEls: HTMLElement[] = []
+  const list = document.createElement('div')
+  list.className = 'toc-list'
 
-  for (const g of groups) {
-    const groupEl = document.createElement('div')
-    groupEl.className = 'toc-group'
-    groupEl.setAttribute('data-id', g.h2.id)
-
-    const a2 = document.createElement('a')
-    a2.href = `#${encodeURIComponent(g.h2.id)}`
-    a2.textContent = g.h2.text || g.h2.id
-    a2.title = g.h2.text || g.h2.id
-    a2.className = 'toc-link toc-2'
-    a2.setAttribute('data-id', g.h2.id)
-    idToLink.set(g.h2.id, a2)
-    idToGroup.set(g.h2.id, groupEl)
-    a2.addEventListener('click', (e) => {
+  for (const it of items) {
+    if (it.depth !== 2) continue
+    const link = document.createElement('a')
+    link.href = `#${encodeURIComponent(it.id)}`
+    link.textContent = it.text || it.id
+    link.title = it.text || it.id
+    link.className = 'toc-link toc-2'
+    link.setAttribute('data-id', it.id)
+    idToLink.set(it.id, link)
+    link.addEventListener('click', (e) => {
       e.preventDefault()
-      const target = document.getElementById(g.h2.id)
+      const target = document.getElementById(it.id)
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        history.replaceState(null, '', `#${encodeURIComponent(g.h2.id)}`)
-        options?.onClick?.(g.h2.id)
+        history.replaceState(null, '', `#${encodeURIComponent(it.id)}`)
+        options?.onClick?.(it.id)
       }
     })
-    groupEl.appendChild(a2)
-
-    if (g.children.length) {
-      const sub = document.createElement('div')
-      sub.className = 'toc-sub'
-      for (const it of g.children) {
-        const a = document.createElement('a')
-        a.href = `#${encodeURIComponent(it.id)}`
-        a.textContent = it.text || it.id
-        a.title = it.text || it.id
-        a.className = `toc-link toc-${it.depth}`
-        a.setAttribute('data-id', it.id)
-        idToLink.set(it.id, a)
-        idToGroup.set(it.id, groupEl)
-        a.addEventListener('click', (e) => {
-          e.preventDefault()
-          const target = document.getElementById(it.id)
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-            history.replaceState(null, '', `#${encodeURIComponent(it.id)}`)
-            options?.onClick?.(it.id)
-          }
-        })
-        sub.appendChild(a)
-      }
-      groupEl.appendChild(sub)
-    }
-
-    container.appendChild(groupEl)
-    groupEls.push(groupEl)
+    list.appendChild(link)
   }
 
-  return { idToLink, idToGroup, groupEls }
+  container.appendChild(list)
+  return { idToLink }
 }
 
 export function observeActive(
@@ -185,6 +139,7 @@ export function setupRightSidebar(
   const items = collectHeadings(root)
 
   const mounted = mountToc(nav, items)
+  const observedItems = items.filter((it) => mounted.idToLink.has(it.id))
 
   let clickLockUntil = 0
   function setActive(id: string) {
@@ -192,15 +147,10 @@ export function setupRightSidebar(
     mounted.idToLink.forEach((el, key) => {
       el.classList.toggle('active', key === id)
     })
-    // 展开所属分组（默认仅显示 h2）
-    const activeGroup = mounted.idToGroup.get(id) || null
-    mounted.groupEls.forEach((g) => {
-      g.classList.toggle('expanded', g === activeGroup)
-    })
   }
 
-  // 滚动观察：激活并展开对应分组
-  const stop = observeActive(items, (id) => {
+  // 滚动观察：激活当前项
+  const stop = observeActive(observedItems, (id) => {
     if (Date.now() < clickLockUntil) return
     setActive(id)
   })
