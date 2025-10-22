@@ -47,9 +47,12 @@
     ui-monospace, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas,
     'Courier New', monospace;
 
-  /* 字号与行高 */
-  --font-size-base: 16px;
-  --font-size-lg: 16px;
+  /* 字号与行高 
+   * 注意：正文字号配置位于 src/config/theme.ts，此处变量值需与其保持同步
+   * 或在 ContentLayout.astro 中通过内联样式覆盖
+   */
+  --font-size-base: 14px;  /* 正文基础字号（桌面端） */
+  --font-size-lg: 14px;    /* 大屏字号（1280px+，可与 base 不同） */
   --line-height-base: 1.7;
   --heading-line-height: 1.3;
   --heading-letter-spacing: -0.015em;
@@ -167,7 +170,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
+  font-size: 16px; /* body 基础字号，用于 Header/侧边栏等非正文区域 */
   line-height: var(--line-height-base);
   letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
@@ -175,19 +178,6 @@ body {
   text-rendering: optimizeLegibility;
   height: 100%;
   overflow-x: hidden;
-}
-
-@media (min-width: 1440px) {
-  body {
-    font-size: var(--font-size-lg);
-  }
-}
-
-@media (max-width: 720px) {
-  body {
-    font-size: 16px;
-    line-height: 1.7;
-  }
 }
 
 /* 链接样式 */
