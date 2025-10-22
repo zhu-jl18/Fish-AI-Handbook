@@ -4,6 +4,12 @@ import Header from '../components/Header.astro'
 import LeftSidebar from '../components/LeftSidebar.astro'
 import RightSidebar from '../components/RightSidebar.astro'
 import { getSidebarForPath } from '../scripts/sidebars'
+import { theme, getCurrentNavKey } from '../config/index'
+
+/**
+ * 正文字体等排版尺寸由 src/config/theme.ts 控制
+ * 通过内联样式将 theme 配置注入到 .content-inner，确保仅影响正文区域
+ */
 
 const currentPath = Astro.url.pathname
 const sidebarItems = getSidebarForPath(currentPath)
@@ -11,19 +17,7 @@ const sidebarItems = getSidebarForPath(currentPath)
 const { title, section, headings = [] } = Astro.props
 
 // 基于 URL 别名推导导航高亮键（不依赖中文文案）
-const first = currentPath.split('/').filter(Boolean)[0] ?? 'home'
-const navKeys = new Set([
-  'fish-talks',
-  'setup',
-  'basic-usage',
-  'prompts',
-  'advanced',
-  'demo',
-  'tech',
-  'fun',
-  'resources',
-])
-const currentKey = navKeys.has(first) ? first : 'home'
+const currentKey = getCurrentNavKey(currentPath)
 ---
 
 <BaseLayout title={title}>
@@ -34,7 +28,11 @@ const currentKey = navKeys.has(first) ? first : 'home'
       <LeftSidebar section={section} items={sidebarItems} />
 
       <main id="main-content" class="content">
-        <div class="content-inner" data-pagefind-body>
+        <div 
+          class="content-inner" 
+          data-pagefind-body
+          style={`--font-size-base: ${theme.fontSizeBase}; --font-size-lg: ${theme.fontSizeLg}; --line-height-base: ${theme.lineHeightBase};`}
+        >
           <slot />
         </div>
       </main>
@@ -73,6 +71,8 @@ const currentKey = navKeys.has(first) ? first : 'home'
 
   .content-inner {
     width: 100%;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
   }
 
   /* 移除第一个标题的顶部外边距，确保与侧边栏对齐 */

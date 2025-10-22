@@ -9,6 +9,22 @@
 
 ### Added
 
+- **统一配置系统**：建立集中式配置管理体系，提升代码可维护性与模板化能力
+  - 新增 `src/config/site.ts`：站点元数据（URL、标题、描述、Logo、SEO robots）
+  - 新增 `src/config/navigation.ts`：导航配置（导航项、路由映射、当前导航键推导）
+  - 新增 `src/config/code.ts`：代码块配置（Expressive Code 主题与样式）
+  - 扩展 `src/config/theme.ts`：主题配置（排版、布局、响应式断点）
+  - 新增 `src/config/index.ts`：统一导出入口
+  - 新增 `src/config/README.md`：配置系统完整文档与使用指南
+  - 应用到 `astro.config.mjs`、`BaseLayout.astro`、`Header.astro`、`ContentLayout.astro`
+  - 消除硬编码：导航链接、站点信息、SEO 策略均从配置读取
+  - 支持类型安全：所有配置项具有完整 TypeScript 类型定义
+- **正文字体配置化**：新增 `src/config/theme.ts` 主题配置文件，集中管理正文排版参数
+  - 将正文字体大小、行高等参数抽取为可配置项
+  - 支持独立设置桌面端（fontSizeBase）和大屏（fontSizeLg）字号
+  - 通过 ContentLayout.astro 内联样式注入，确保仅影响正文区域
+  - 当前配置：正文基础字号 14px（原 16px），行高 1.7
+  - 后续调整：仅需修改 theme.ts 文件即可
 - 设计令牌（Design Tokens）：在 `global.css` 的 `:root` 增加一组颜色/表面令牌（保持原数值不变），用于统一管理：
   - 基础与边框：`--color-pure-black`、`--color-border-dark`、`--color-border-hover` 等
   - 文本与灰阶：`--color-text-white`、`--color-text-secondary`、`--color-accent-gray`
