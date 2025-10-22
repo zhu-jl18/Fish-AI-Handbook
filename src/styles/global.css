@@ -105,6 +105,7 @@
   --header-accent-border: rgba(150, 210, 255, 0.35);
   --header-accent-border-strong: rgba(150, 210, 255, 0.55);
   --header-mark-bg: rgba(150, 210, 255, 0.08);
+  --header-divider: rgba(255, 255, 255, 0.14);
   --header-pill-hover: rgba(150, 210, 255, 0.12);
   --header-pill-active: rgba(150, 210, 255, 0.2);
   --header-search-bg: rgba(10, 12, 16, 0.6);
