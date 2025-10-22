@@ -14,6 +14,7 @@ const rendered = entry && (await entry.render())
   title={entry?.data?.title ?? '好与坏'}
   section="提示词"
   sidebarItems={PROMPTS_SIDEBAR}
+  contributors={entry?.data?.contributors}
 >
   {rendered ? <rendered.Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
