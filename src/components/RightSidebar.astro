@@ -2,13 +2,187 @@
 // 自动化目录（TOC）组件：在客户端扫描正文 h2/h3/h4 构建目录
 // 内容作者无需在各页面传入 headings，完全解耦内容与目录
 import '../styles/right-sidebar.css'
-const { headings = [] } = Astro.props
+import siteConfig from '../config/site'
+import type {
+  SidebarSection,
+  SidebarGroup,
+  SidebarLink,
+} from '../scripts/sidebars'
+
+type ContributorInput =
+  | string
+  | {
+      username?: string
+      name?: string
+      link?: string
+      avatar?: string
+    }
+
+type Contributor = {
+  username: string
+  name: string
+  link: string
+  avatar: string
+}
+
+const {
+  structure = [],
+  currentPath = '/',
+  contributors,
+}: {
+  structure?: SidebarSection
+  currentPath?: string
+  contributors?: ContributorInput[] | null
+} = Astro.props
+
+const normalizePath = (path: string) => {
+  if (!path || path === '/') return '/'
+  return path.endsWith('/') ? path.slice(0, -1) : path
+}
+
+const normalizedCurrentPath = normalizePath(currentPath)
+
+const isExactActive = (href?: string) =>
+  !!href && normalizedCurrentPath === normalizePath(href)
+
+const resolvedStructure = Array.isArray(structure) ? structure : []
+
+const resolveContributor = (entry: ContributorInput): Contributor | null => {
+  if (!entry) return null
+  if (typeof entry === 'string') {
+    const username = entry.trim()
+    if (!username) return null
+    return {
+      username,
+      name: username,
+      link: `https://github.com/${username}`,
+      avatar: `https://github.com/${username}.png`,
+    }
+  }
+  const username = entry.username?.trim() ?? entry.name?.trim()
+  if (!username) return null
+  const finalName = entry.name?.trim() || username
+  const link =
+    entry.link?.trim() || `https://github.com/${entry.username ?? username}`
+  const avatar =
+    entry.avatar?.trim() || `https://github.com/${entry.username ?? username}.png`
+  return { username, name: finalName, link, avatar }
+}
+
+const contributorList: Contributor[] = []
+const seen = new Set<string>()
+
+if (Array.isArray(contributors)) {
+  for (const item of contributors) {
+    const resolved = resolveContributor(item)
+    if (!resolved) continue
+    if (seen.has(resolved.username)) continue
+    seen.add(resolved.username)
+    contributorList.push(resolved)
+  }
+}
+
+if (
+  contributorList.length === 0 &&
+  typeof contributors === 'undefined' &&
+  siteConfig.defaultContributor
+) {
+  contributorList.push({
+    username: siteConfig.defaultContributor.username,
+    name: siteConfig.defaultContributor.name,
+    link: siteConfig.defaultContributor.link,
+    avatar: siteConfig.defaultContributor.avatar,
+  })
+}
+
+const isGroup = (
+  entry: SidebarLink | SidebarGroup,
+): entry is SidebarGroup => 'items' in entry
+
+const isGroupActive = (entry: SidebarGroup) => {
+  if (entry.href && isExactActive(entry.href)) return true
+  if (!entry.items) return false
+  return entry.items.some((item) => isExactActive(item.href))
+}
 ---
 
 <div class="right-sidebar">
-  <div class="toc-content">
-    <div class="toc-title">目录</div>
-    <nav class="toc-nav"></nav>
+  <div class="sidebar-scroll">
+    {
+      resolvedStructure.length > 0 ? (
+        <section class="panel structure-panel">
+          <header class="panel-header">
+            <span class="panel-title">页面结构</span>
+          </header>
+          <nav class="structure-nav">
+            {resolvedStructure.map((entry) =>
+              isGroup(entry) ? (
+                <div class="structure-group">
+                  <a
+                    href={entry.href ?? entry.items?.[0]?.href ?? '#'}
+                    class={`structure-link ${isGroupActive(entry) ? 'active' : ''}`}
+                  >
+                    {entry.label}
+                  </a>
+                  {entry.items && entry.items.length > 0 ? (
+                    <div class="structure-subnav">
+                      {entry.items.map((link) => (
+                        <a
+                          href={link.href}
+                          class={`structure-sublink ${isExactActive(link.href) ? 'active' : ''}`}
+                        >
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              ) : (
+                <a
+                  href={entry.href}
+                  class={`structure-link ${isExactActive(entry.href) ? 'active' : ''}`}
+                >
+                  {entry.label}
+                </a>
+              ),
+            )}
+          </nav>
+        </section>
+      ) : null
+    }
+    {
+      contributorList.length > 0 ? (
+        <section class="panel contributors-panel">
+          <header class="panel-header">
+            <span class="panel-title">Contributors</span>
+          </header>
+          <div class="contributors-list">
+            {contributorList.map((person) => (
+              <a
+                class="contributor-card"
+                href={person.link}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <img src={person.avatar} alt={person.name} loading="lazy" />
+                <div class="contributor-meta">
+                  <span class="contributor-name">{person.name}</span>
+                  <span class="contributor-handle">@{person.username}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      ) : null
+    }
+    <section class="panel toc-panel">
+      <header class="panel-header">
+        <span class="panel-title">本文目录</span>
+      </header>
+      <div class="toc-content">
+        <nav class="toc-nav"></nav>
+      </div>
+    </section>
   </div>
 </div>
 
