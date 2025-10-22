@@ -30,8 +30,8 @@
   --border-radius-sm: 8px;
 
   /* 代码块 */
-  --code-bg: #1e1e1e;
-  --inline-code-bg: #262626;
+  --code-bg: #0d1117;
+  --inline-code-bg: #161b22;
 
   /* 阴影 */
   --shadow-color: rgba(0, 0, 0, 0.4);
@@ -141,8 +141,8 @@
   --radius-code: 6px;
 
   /* Code colors (extended) */
-  --code-border: #2a2a2a;
-  --code-fg: #d4d4d4;
+  --code-border: #30363d;
+  --code-fg: #c9d1d9;
 }
 
 @font-face {
@@ -240,74 +240,86 @@ code {
    ============================================ */
 
 /* 代码块容器 */
-.expressive-code.expressive-code {
-  margin: 0.5rem 0;
+.expressive-code {
+  position: relative;
+  margin: 1.25rem 0;
   border-radius: var(--radius-code);
+  border: 1px solid var(--code-border);
+  background: var(--code-bg);
   overflow: hidden;
-  border: 1px solid var(--border-color);
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: none;
 }
 
-/* 代码块主体 */
-.expressive-code.expressive-code pre {
+.expressive-code :where(.frame, .ec-frame) {
+  border: none;
+  background: transparent;
+}
+
+.expressive-code pre {
   margin: 0;
-  padding: 1rem 1.25rem;
-  line-height: 1.4;
-  font-size: 0.9rem;
-  background-color: var(--code-bg);
+  background: transparent;
+  color: var(--code-fg);
 }
 
-/* 语言标签框架 */
-.expressive-code .frame {
+.expressive-code :where(.header, .ec-toolbar) {
+  position: static;
+  display: block;
+  padding: 0;
+  margin: 0;
+  height: 0;
   border: none;
 }
 
-/* 语言标签样式 - 完全隐藏 */
-.expressive-code.expressive-code .header {
+.expressive-code :where(.header, .ec-toolbar) > :not([class*='copy']) {
   display: none;
 }
 
-/* 复制按钮样式 */
-.expressive-code.expressive-code .copy button {
+.expressive-code :where(.copy, .ec-toolbar__copy) {
   position: absolute;
   top: 0.6rem;
   right: 0.6rem;
-  padding: 0.25rem 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  color: var(--text-muted);
-  font-size: 0.65rem;
-  cursor: pointer;
-  transition:
-    opacity var(--motion-duration-sm) var(--motion-ease-standard),
-    transform var(--motion-duration-sm) var(--motion-ease-standard),
-    background-color var(--motion-duration-sm) var(--motion-ease-standard),
-    border-color var(--motion-duration-sm) var(--motion-ease-standard),
-    color var(--motion-duration-sm) var(--motion-ease-standard);
-  opacity: 0;
-  z-index: 10;
+  z-index: 1;
 }
 
-.expressive-code.expressive-code:hover .copy button {
+.expressive-code :where(.copy, .ec-toolbar__copy) button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.45rem;
+  border-radius: 6px;
+  background: rgba(240, 246, 252, 0.08);
+  border: 1px solid rgba(240, 246, 252, 0.16);
+  color: rgba(201, 209, 217, 0.8);
+  font-size: 0.7rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity var(--motion-duration-sm) var(--motion-ease-standard),
+    background-color var(--motion-duration-sm) var(--motion-ease-standard),
+    border-color var(--motion-duration-sm) var(--motion-ease-standard),
+    color var(--motion-duration-sm) var(--motion-ease-standard),
+    transform var(--motion-duration-sm) var(--motion-ease-standard);
+}
+
+.expressive-code:hover :where(.copy, .ec-toolbar__copy) button {
   opacity: 1;
 }
 
-.expressive-code.expressive-code .copy button:hover {
-  background: rgba(255, 255, 255, 0.1);
+.expressive-code :where(.copy, .ec-toolbar__copy) button:hover {
+  background: rgba(240, 246, 252, 0.16);
+  border-color: rgba(240, 246, 252, 0.28);
   color: var(--text-color);
-  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.expressive-code.expressive-code .copy button:active {
+.expressive-code :where(.copy, .ec-toolbar__copy) button:active {
   transform: translateY(1px);
 }
 
-.expressive-code.expressive-code .copy button[data-copied] {
-  color: var(--color-accent-gray);
-  border-color: var(--color-accent-gray);
+.expressive-code :where(.copy, .ec-toolbar__copy) button[data-copied] {
+  background: rgba(34, 197, 94, 0.16);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: rgba(56, 255, 135, 0.85);
   opacity: 1;
 }
 
