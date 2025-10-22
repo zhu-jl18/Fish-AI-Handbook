@@ -111,6 +111,10 @@
   --header-search-bg-hover: rgba(10, 12, 16, 0.82);
   --header-shortcut-bg: rgba(255, 255, 255, 0.05);
   --header-shortcut-border: rgba(255, 255, 255, 0.12);
+  --header-icon-bg: rgba(255, 255, 255, 0.04);
+  --header-icon-bg-hover: rgba(255, 255, 255, 0.08);
+  --header-icon-border: rgba(255, 255, 255, 0.12);
+  --header-icon-border-hover: rgba(255, 255, 255, 0.2);
 
   /* Motion durations */
   --motion-duration-xxs: 80ms;
