@@ -11,6 +11,7 @@ const rendered = entry && (await entry.render())
   title={entry?.data?.title ?? 'AI 编辑器 - 你的写作与改稿助手'}
   section="基础用法"
   sidebarItems={BASIC_USAGE_SIDEBAR}
+  contributors={entry?.data?.contributors}
 >
   {rendered ? <rendered.Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>

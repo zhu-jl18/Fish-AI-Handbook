@@ -47,9 +47,12 @@
     ui-monospace, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas,
     'Courier New', monospace;
 
-  /* 字号与行高 */
-  --font-size-base: 16px;
-  --font-size-lg: 16px;
+  /* 字号与行高 
+   * 注意：正文字号配置位于 src/config/theme.ts，此处变量值需与其保持同步
+   * 或在 ContentLayout.astro 中通过内联样式覆盖
+   */
+  --font-size-base: 14px;  /* 正文基础字号（桌面端） */
+  --font-size-lg: 14px;    /* 大屏字号（1280px+，可与 base 不同） */
   --line-height-base: 1.7;
   --heading-line-height: 1.3;
   --heading-letter-spacing: -0.015em;
@@ -88,10 +91,30 @@
   --surface-tint-06: rgba(255, 255, 255, 0.06);
   --surface-tint-08: rgba(255, 255, 255, 0.08);
 
-  /* 右侧 TOC 专用（仅 hover 降调；active 按现有对比度保留） */
-  --color-toc-hover: rgba(255, 255, 255, 0.5);
-  --color-toc-bg-hover: var(--surface-tint-02);
-  --color-toc-bg-active: var(--surface-tint-06);
+  /* 右侧 TOC 专用 */
+  --color-toc-border: rgba(140, 200, 255, 0.65);
+  --color-toc-text: rgba(226, 232, 240, 0.55);
+  --color-toc-hover: rgba(226, 232, 240, 0.8);
+  --color-toc-active: #ffffff;
+
+  /* Header 专用 */
+  --header-text: rgba(226, 232, 240, 0.68);
+  --header-text-muted: rgba(226, 232, 240, 0.52);
+  --header-text-strong: rgba(226, 232, 240, 0.92);
+  --header-accent: rgba(150, 210, 255, 0.95);
+  --header-accent-border: rgba(150, 210, 255, 0.35);
+  --header-accent-border-strong: rgba(150, 210, 255, 0.55);
+  --header-mark-bg: rgba(150, 210, 255, 0.08);
+  --header-pill-hover: rgba(150, 210, 255, 0.12);
+  --header-pill-active: rgba(150, 210, 255, 0.2);
+  --header-search-bg: rgba(10, 12, 16, 0.6);
+  --header-search-bg-hover: rgba(10, 12, 16, 0.82);
+  --header-shortcut-bg: rgba(255, 255, 255, 0.05);
+  --header-shortcut-border: rgba(255, 255, 255, 0.12);
+  --header-icon-bg: rgba(255, 255, 255, 0.04);
+  --header-icon-bg-hover: rgba(255, 255, 255, 0.08);
+  --header-icon-border: rgba(255, 255, 255, 0.12);
+  --header-icon-border-hover: rgba(255, 255, 255, 0.2);
 
   /* Motion durations */
   --motion-duration-xxs: 80ms;
@@ -151,7 +174,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
+  font-size: 16px; /* body 基础字号，用于 Header/侧边栏等非正文区域 */
   line-height: var(--line-height-base);
   letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
@@ -159,19 +182,6 @@ body {
   text-rendering: optimizeLegibility;
   height: 100%;
   overflow-x: hidden;
-}
-
-@media (min-width: 1440px) {
-  body {
-    font-size: var(--font-size-lg);
-  }
-}
-
-@media (max-width: 720px) {
-  body {
-    font-size: 16px;
-    line-height: 1.7;
-  }
 }
 
 /* 链接样式 */
