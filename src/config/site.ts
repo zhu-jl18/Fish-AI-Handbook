@@ -20,6 +20,13 @@ export type SiteConfig = {
   logoMeta: string
   /** 搜索按钮文案 */
   searchLabel: string
+  /** 默认贡献者信息（用于未配置 contributors 的页面） */
+  defaultContributor: {
+    username: string
+    name: string
+    link: string
+    avatar: string
+  }
   /** SEO robots 策略 */
   robots: {
     /** 是否允许索引 */
@@ -46,6 +53,12 @@ const siteConfig: SiteConfig = {
   logoName: 'Fish AI Handbook',
   logoMeta: 'Docs & Patterns',
   searchLabel: '搜索或跳转',
+  defaultContributor: {
+    username: 'zhu-jl18',
+    name: 'zhu-jl18',
+    link: 'https://github.com/zhu-jl18',
+    avatar: 'https://github.com/zhu-jl18.png',
+  },
   robots: {
     noindex: true,
     nofollow: true,

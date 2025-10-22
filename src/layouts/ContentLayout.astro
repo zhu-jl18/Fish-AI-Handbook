@@ -1,7 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro'
 import Header from '../components/Header.astro'
-import LeftSidebar from '../components/LeftSidebar.astro'
 import RightSidebar from '../components/RightSidebar.astro'
 import { getSidebarForPath } from '../scripts/sidebars'
 import { theme, getCurrentNavKey } from '../config/index'
@@ -14,7 +13,17 @@ import { theme, getCurrentNavKey } from '../config/index'
 const currentPath = Astro.url.pathname
 const sidebarItems = getSidebarForPath(currentPath)
 
-const { title, section, headings = [] } = Astro.props
+const {
+  title,
+  section,
+  headings = [],
+  contributors,
+}: {
+  title: string
+  section: string
+  headings?: any[]
+  contributors?: any
+} = Astro.props
 
 // 基于 URL 别名推导导航高亮键（不依赖中文文案）
 const currentKey = getCurrentNavKey(currentPath)
@@ -25,8 +34,6 @@ const currentKey = getCurrentNavKey(currentPath)
 
   <div class="content-wrapper">
     <div class="layout-container">
-      <LeftSidebar section={section} items={sidebarItems} />
-
       <main id="main-content" class="content">
         <div 
           class="content-inner" 
@@ -37,7 +44,12 @@ const currentKey = getCurrentNavKey(currentPath)
         </div>
       </main>
 
-      <RightSidebar headings={headings} />
+      <RightSidebar
+        headings={headings}
+        structure={sidebarItems}
+        currentPath={currentPath}
+        contributors={contributors}
+      />
     </div>
   </div>
 </BaseLayout>
@@ -63,7 +75,7 @@ const currentKey = getCurrentNavKey(currentPath)
 
   .content {
     flex: 1;
-    padding: 1.5rem 2.5rem 2.5rem 2.5rem;
+    padding: 1.5rem 2rem 2.5rem 2rem;
     background-color: transparent;
     border-radius: 0;
     max-width: var(--content-max-width);
@@ -130,13 +142,13 @@ const currentKey = getCurrentNavKey(currentPath)
     }
 
     .content {
-      padding: 1.5rem 2.25rem 2.25rem 2.25rem;
+      padding: 1.5rem 1.85rem 2.25rem 1.85rem;
     }
   }
 
   @media (max-width: 1200px) {
     .content {
-      padding: 1.5rem 2rem 2rem 2rem;
+      padding: 1.5rem 1.75rem 2rem 1.75rem;
     }
   }
 
