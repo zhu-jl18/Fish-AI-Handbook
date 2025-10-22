@@ -10,6 +10,7 @@
     "preview:search": "npm run build && astro preview",
     "astro": "astro",
     "format": "prettier --write .",
+    "lint:markdown": "node ./scripts/lint-markdown-code-blocks.mjs",
     "type-check": "tsc --noEmit",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
