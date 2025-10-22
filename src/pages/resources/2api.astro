@@ -11,6 +11,7 @@ const { Content } = await entry.render()
   title={entry?.data?.title ?? '2API'}
   section="资源合集"
   sidebarItems={RESOURCES_SIDEBAR}
+  contributors={entry?.data?.contributors}
 >
   <Content />
 </ContentLayout>
