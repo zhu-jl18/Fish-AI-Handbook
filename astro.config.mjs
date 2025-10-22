@@ -1,33 +1,18 @@
 import { defineConfig } from 'astro/config'
 import mdx from '@astrojs/mdx'
 import astroExpressiveCode from 'astro-expressive-code'
+import { siteConfig, codeConfig } from './src/config/index.ts'
 
 export default defineConfig({
-  site: 'https://aibook.functorfish.dpdns.org',
-  title: 'Fish写给朋友们的AI使用指南',
+  site: siteConfig.url,
+  title: siteConfig.title,
   output: 'static',
-  redirects: {
-    '/setup/github': '/setup/git',
-  },
   integrations: [
     astroExpressiveCode({
-      themes: ['dark-plus'],
-      defaultProps: {
-        wrap: true,
-        preserveIndent: true,
-      },
-      styleOverrides: {
-        codeFontSize: '0.9rem',
-        codeLineHeight: '1.4',
-        codePaddingBlock: '1rem',
-        codePaddingInline: '1.25rem',
-        borderRadius: '6px',
-        borderWidth: '1px',
-      },
-      frames: {
-        showCopyToClipboardButton: true,
-        extractFileNameFromCode: true,
-      },
+      themes: codeConfig.themes,
+      defaultProps: codeConfig.defaultProps,
+      styleOverrides: codeConfig.styleOverrides,
+      frames: codeConfig.frames,
     }),
     mdx(),
   ],
