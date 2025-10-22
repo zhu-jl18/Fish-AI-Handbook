@@ -1,4 +1,6 @@
 ---
+import { siteConfig, navigationConfig } from '../config/index'
+
 const { currentPage } = Astro.props
 ---
 
@@ -6,34 +8,23 @@ const { currentPage } = Astro.props
   <nav class="nav">
     <div class="nav-container">
       <a href="/" class="logo" aria-label="回到主页">
-        <span class="logo-mark">F</span>
+        <span class="logo-mark">{siteConfig.logoMark}</span>
         <span class="logo-copy">
-          <span class="logo-name">Fish AI Handbook</span>
-          <span class="logo-meta">Docs & Patterns</span>
+          <span class="logo-name">{siteConfig.logoName}</span>
+          <span class="logo-meta">{siteConfig.logoMeta}</span>
         </span>
       </a>
       <div class="nav-links">
-        <a
-          href="/fish-talks"
-          class={currentPage === 'fish-talks' ? 'active' : ''}>鱼说必看</a
-        >
-        <a
-          href="/basic-usage"
-          class={currentPage === 'basic-usage' ? 'active' : ''}>基础用法</a
-        >
-        <a href="/prompts" class={currentPage === 'prompts' ? 'active' : ''}
-          >提示词</a
-        >
-        <a href="/advanced" class={currentPage === 'advanced' ? 'active' : ''}
-          >进阶玩法</a
-        >
-        <a href="/fun" class={currentPage === 'fun' ? 'active' : ''}>好玩的</a>
-        <a href="/resources" class={currentPage === 'resources' ? 'active' : ''}
-          >资源合集</a
-        >
-        <a href="/setup" class={currentPage === 'setup' ? 'active' : ''}
-          >配置指南</a
-        >
+        {
+          navigationConfig.items.map((item) => (
+            <a
+              href={item.href}
+              class={currentPage === item.key ? 'active' : ''}
+            >
+              {item.label}
+            </a>
+          ))
+        }
       </div>
       <div class="nav-actions">
         <a href="/search" class="search-button" aria-label="搜索文档">
@@ -52,7 +43,7 @@ const { currentPage } = Astro.props
             <circle cx="11" cy="11" r="8"></circle>
             <path d="m21 21-4.35-4.35"></path>
           </svg>
-          <span class="search-label">搜索或跳转</span>
+          <span class="search-label">{siteConfig.searchLabel}</span>
           <kbd class="search-shortcut">/</kbd>
         </a>
       </div>

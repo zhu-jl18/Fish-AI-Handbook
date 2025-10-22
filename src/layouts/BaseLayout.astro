@@ -1,6 +1,10 @@
 ---
 import '../styles/global.css'
+import { siteConfig, getRobotsContent } from '../config/index'
+
 const { title } = Astro.props
+const pageTitle = title ? `${title} - ${siteConfig.titleFull}` : siteConfig.titleFull
+const robotsContent = getRobotsContent(siteConfig.robots)
 ---
 
 <!doctype html>
@@ -8,11 +12,9 @@ const { title } = Astro.props
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex" />
-    <title>
-      {title ? `${title} - Fish-Book · AI 使用手册` : 'Fish-Book · AI 使用手册'}
-    </title>
-    <meta name="description" content="Fish-Book - 实用的 AI 使用手册" />
+    <meta name="robots" content={robotsContent} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={siteConfig.description} />
     <!-- 自托管中文字体预加载（已使用 woff2 子集） -->
     <link
       rel="preload"
