@@ -39,7 +39,7 @@ git clone https://github.com/username/repository.git
 
 # 查看仓库状态
 git status
-```bash
+```
 ### 文件操作基础
 
 ```bash
@@ -52,7 +52,7 @@ git commit -m "提交说明"
 
 # 查看提交历史
 git log --oneline
-```bash
+```
 ### 远程仓库操作
 
 ```bash
@@ -64,7 +64,7 @@ git push -u origin main
 
 # 拉取远程最新更改
 git pull origin main
-```bash
+```
 ## Git 版本管理操作
 
 ### 分支管理
@@ -87,7 +87,7 @@ git switch -c feature/new-feature  # Git 2.23+
 # 删除分支
 git branch -d feature/completed-feature
 git branch -D feature/abandoned-feature  # 强制删除
-```bash
+```
 ### 合并与变基
 
 ```bash
@@ -101,7 +101,7 @@ git rebase main
 
 # 交互式变基
 git rebase -i HEAD~3
-```bash
+```
 ### 冲突解决
 
 当合并或变基时发生冲突：
@@ -122,7 +122,7 @@ git add resolved-file.txt
 
 # 完成合并
 git commit
-```bash
+```
 ### 版本回退
 
 ```bash
@@ -137,7 +137,7 @@ git reset --hard HEAD~1
 
 # 撤销特定提交
 git revert commit-hash
-```bash
+```
 ### 标签管理
 
 ```bash
@@ -150,7 +150,7 @@ git tag -a v1.0.0 -m "Release version 1.0.0"
 # 推送标签到远程
 git push origin v1.0.0
 git push origin --tags  # 推送所有标签
-```bash
+```
 ## Git VSCode 插件推荐和配置
 
 ### 核心 Git 插件
@@ -166,7 +166,7 @@ git push origin --tags  # 推送所有标签
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false
 }
-```bash
+```
 #### Git History
 
 可视化提交历史和分支图：
@@ -176,7 +176,7 @@ git push origin --tags  # 推送所有标签
   "gitHistory.showFileHistory": true,
   "gitHistory.showFolderHistory": true
 }
-```bash
+```
 #### Git Graph
 
 交互式分支可视化：
@@ -186,7 +186,7 @@ git push origin --tags  # 推送所有标签
   "git-graph.maxDepthOfRepoSearch": 10,
   "git-graph.showStatusBarItem": true
 }
-```bash
+```
 ### AI 辅助编程
 
 #### GitHub Copilot
@@ -200,7 +200,7 @@ AI 代码补全和建议：
   },
   "github.copilot.editor.enableAutoCompletions": true
 }
-```bash
+```
 ### 配置建议
 
 ```json
@@ -211,7 +211,7 @@ AI 代码补全和建议：
   "git.defaultCloneDirectory": "D:\\Projects",
   "git.ignoreLegacyWarning": true
 }
-```bash
+```
 ## Git Bash 使用指南
 
 ### Git Bash 简介
@@ -242,7 +242,7 @@ grep "pattern" file.txt  # 搜索文本
 # 权限管理
 chmod +x script.sh    # 添加执行权限
 chown user:group file.txt  # 更改所有者
-```bash
+```
 ### Git Bash 与 Windows 命令行的区别
 
 | 操作       | Windows CMD     | Git Bash                   |
@@ -269,7 +269,7 @@ Ctrl+D        # 退出或发送EOF
 # 别名设置
 echo "alias gs='git status'" >> ~/.bashrc
 source ~/.bashrc
-```bash
+```
 ## 多 GitHub 账号管理
 
 ### SSH 密钥配置
@@ -282,7 +282,7 @@ ssh-keygen -t ed25519 -C "personal@example.com" -f ~/.ssh/id_ed25519_personal
 
 # 生成工作账号密钥
 ssh-keygen -t ed25519 -C "work@company.com" -f ~/.ssh/id_ed25519_work
-```bash
+```
 #### 配置 SSH 客户端
 
 编辑 `~/.ssh/config` 文件：
@@ -299,7 +299,7 @@ Host work-github
     HostName github.com
     User git
     IdentityFile ~/.ssh/id_ed25519_work
-```bash
+```
 ### Git 配置管理
 
 #### 全局配置
@@ -311,7 +311,7 @@ git config --global user.email "your.email@example.com"
 
 # 查看配置
 git config --global --list
-```bash
+```
 #### 项目级配置
 
 ```bash
@@ -319,7 +319,7 @@ git config --global --list
 cd /path/to/project
 git config user.name "Work Name"
 git config user.email "work.email@company.com"
-```bash
+```
 #### 条件配置（推荐）
 
 使用 `.gitconfig` 文件进行条件配置：
@@ -327,7 +327,7 @@ git config user.email "work.email@company.com"
 ```bash
 # 编辑全局 .gitconfig
 git config --global --edit
-```bash
+```
 添加条件配置：
 
 ```ini
@@ -340,14 +340,14 @@ git config --global --edit
 
 [includeIf "gitdir:~/personal/"]
     path = ~/.gitconfig-personal
-```bash
+```
 创建工作配置 `~/.gitconfig-work`：
 
 ```ini
 [user]
     name = Work Name
     email = work@company.com
-```bash
+```
 ### 不同项目的账号切换
 
 ```bash
@@ -356,7 +356,7 @@ git clone git@github-personal:username/repo.git ~/personal/project
 
 # 工作项目使用工作账号
 git clone git@work-github:organization/repo.git ~/work/project
-```bash
+```
 ### 常见问题解决
 
 #### SSH 连接测试
@@ -367,7 +367,7 @@ ssh -T git@github-personal
 
 # 测试工作账号连接
 ssh -T git@work-github
-```bash
+```
 #### 权限问题排查
 
 ```bash
@@ -377,7 +377,7 @@ ssh-add -l
 # 添加密钥到代理
 ssh-add ~/.ssh/id_ed25519_personal
 ssh-add ~/.ssh/id_ed25519_work
-```bash
+```
 ## GitHub Actions 基础介绍
 
 ### Actions 概念和工作原理
@@ -412,7 +412,7 @@ jobs:
           node-version: '18'
       - run: npm ci
       - run: npm test
-```bash
+```
 ### 常用工作流示例
 
 #### Node.js 项目 CI
@@ -443,7 +443,7 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
-```bash
+```
 #### 自动部署
 
 ```yaml
@@ -464,7 +464,7 @@ jobs:
           vercel --prod --yes
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-```bash
+```
 ### 市场热门 Actions
 
 - **actions/checkout**：检出代码
@@ -495,7 +495,7 @@ jobs:
 ```bash
 # 通过 GitHub 界面邀请协作者
 # Settings → Collaborators → Add people
-```bash
+```
 ### Pull Request 工作流程
 
 #### 标准 PR 流程
@@ -567,7 +567,7 @@ main:
     dismiss_stale_reviews: true
   restrictions: null
   enforce_admins: true
-```bash
+```
 ### 代码审查流程
 
 #### 审查要点
@@ -634,7 +634,7 @@ git rebase origin/develop
 
 # 推送并创建 PR
 git push origin feature/new-docs
-```bash
+```
 ### 协作最佳实践
 
 #### 提交信息规范
@@ -651,7 +651,7 @@ git commit -m "docs: add GitHub Actions workflow examples"
 # refactor: 代码重构
 # test: 测试相关
 # chore: 构建工具或辅助工具的变动
-```bash
+```
 #### 冲突避免策略
 
 1. **小步提交**：减少冲突可能性
