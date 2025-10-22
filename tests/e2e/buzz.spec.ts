@@ -21,10 +21,16 @@ test.describe('流行词汇页面测试', () => {
     ).toBeVisible()
 
     // 检查侧边栏子项存在
-    const sidebar = page.locator('.left-sidebar')
-    await expect(sidebar.locator('text=Vibe Coding')).toBeVisible()
-    await expect(sidebar.locator('text=Agent')).toBeVisible()
-    await expect(sidebar.locator('text=Workflow')).toBeVisible()
+    const structure = page.locator('.structure-nav')
+    await expect(
+      structure.locator('.structure-sublink[href="/fish-talks/buzz/vibe-coding"]'),
+    ).toBeVisible()
+    await expect(
+      structure.locator('.structure-sublink[href="/fish-talks/buzz/agent"]'),
+    ).toBeVisible()
+    await expect(
+      structure.locator('.structure-sublink[href="/fish-talks/buzz/workflow"]'),
+    ).toBeVisible()
   })
 
   test('Vibe Coding页面正常加载', async ({ page }) => {
@@ -42,7 +48,7 @@ test.describe('流行词汇页面测试', () => {
 
     // 检查侧边栏高亮
     const activeLink = page.locator(
-      '.left-sidebar a[href="/fish-talks/buzz/vibe-coding"]',
+      '.structure-sublink[href="/fish-talks/buzz/vibe-coding"]',
     )
     await expect(activeLink).toHaveClass(/active/)
   })
@@ -60,7 +66,7 @@ test.describe('流行词汇页面测试', () => {
 
     // 检查侧边栏高亮
     const activeLink = page.locator(
-      '.left-sidebar a[href="/fish-talks/buzz/agent"]',
+      '.structure-sublink[href="/fish-talks/buzz/agent"]',
     )
     await expect(activeLink).toHaveClass(/active/)
   })
@@ -83,7 +89,7 @@ test.describe('流行词汇页面测试', () => {
 
     // 检查侧边栏高亮
     const activeLink = page.locator(
-      '.left-sidebar a[href="/fish-talks/buzz/workflow"]',
+      '.structure-sublink[href="/fish-talks/buzz/workflow"]',
     )
     await expect(activeLink).toHaveClass(/active/)
   })
@@ -95,15 +101,15 @@ test.describe('流行词汇页面测试', () => {
     await expect(page).toHaveURL(/\/fish-talks\/buzz\/vibe-coding/)
 
     // 通过侧边栏切换到agent
-    await page.click('.left-sidebar a[href="/fish-talks/buzz/agent"]')
+    await page.click('.structure-sublink[href="/fish-talks/buzz/agent"]')
     await expect(page).toHaveURL(/\/fish-talks\/buzz\/agent/)
 
     // 通过侧边栏切换到workflow
-    await page.click('.left-sidebar a[href="/fish-talks/buzz/workflow"]')
+    await page.click('.structure-sublink[href="/fish-talks/buzz/workflow"]')
     await expect(page).toHaveURL(/\/fish-talks\/buzz\/workflow/)
 
     // 返回buzz首页
-    await page.click('.left-sidebar a[href="/fish-talks/buzz"]:not(.toc-link)')
+    await page.click('.structure-link[href="/fish-talks/buzz"]')
     await expect(page).toHaveURL(/\/fish-talks\/buzz$/)
   })
 })

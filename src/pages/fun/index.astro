@@ -22,6 +22,7 @@ if (entry) {
   title={entry?.data?.title ?? '好玩的'}
   section="好玩的"
   sidebarItems={FUN_SIDEBAR}
+  contributors={entry?.data?.contributors}
 >
   {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>

@@ -10,6 +10,7 @@ const { Content } = await entry.render()
   title={entry?.data?.title || '请求体'}
   section="提示词"
   headings={[]}
+  contributors={entry?.data?.contributors}
 >
   <Content />
 </ContentLayout>

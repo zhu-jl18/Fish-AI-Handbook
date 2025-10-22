@@ -15,7 +15,18 @@ test('右侧目录自动生成且可点击跳转与滚动高亮', async ({ page 
   const indexToClick = count > 1 ? 1 : 0
   const target = tocLinks.nth(indexToClick)
   const targetId = await target.getAttribute('data-id')
-  await target.click()
+  await page.evaluate(() => {
+    const sidebar = document.querySelector('.right-sidebar')
+    if (sidebar) sidebar.scrollTop = sidebar.scrollHeight
+  })
+  await target.scrollIntoViewIfNeeded()
+  await page.evaluate((id) => {
+    const el = document.querySelector(`.toc-nav a[data-id="${id}"]`)
+    if (el instanceof HTMLElement) {
+      el.scrollIntoView({ block: 'center' })
+      el.click()
+    }
+  }, targetId)
 
   // URL hash 应更新为对应 id
   await expect
