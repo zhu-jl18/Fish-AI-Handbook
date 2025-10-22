@@ -42,16 +42,16 @@ export type CodeConfig = {
  * 修改此处即可全局调整代码块样式
  */
 const codeConfig: CodeConfig = {
-  themes: ['dark-plus'],
+  themes: ['github-dark'],
   defaultProps: {
     wrap: true,
     preserveIndent: true,
   },
   styleOverrides: {
-    codeFontSize: '0.9rem',
-    codeLineHeight: '1.4',
-    codePaddingBlock: '1rem',
-    codePaddingInline: '1.25rem',
+    codeFontSize: '0.92rem',
+    codeLineHeight: '1.55',
+    codePaddingBlock: '0.75rem',
+    codePaddingInline: '1rem',
     borderRadius: '6px',
     borderWidth: '1px',
   },

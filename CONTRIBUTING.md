@@ -75,6 +75,7 @@ npm run dev   # 默认 4321（Playwright 测试会复用 4321）
 npm run build
 npm run preview
 npm run test:links  # 站内死链/断链扫描（基于 dist/）
+npm run lint:markdown  # 校验 Markdown 代码块闭合与语法
 ```
 
 - 格式化：
@@ -93,6 +94,7 @@ npm run test:e2e:headed
 必跑校验（加强版）
 
 - 构建：`npm run build`
+- Markdown 代码块：`npm run lint:markdown`
 - 预览（含搜索索引）：`npm run preview:search`
 - 站内链接：`npm run test:links`
 - 类型检查：`npm run type-check`
