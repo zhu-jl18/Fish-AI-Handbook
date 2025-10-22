@@ -1,29 +1,32 @@
 ---
 import BaseLayout from './BaseLayout.astro'
 import Header from '../components/Header.astro'
-import LeftSidebar from '../components/LeftSidebar.astro'
 import RightSidebar from '../components/RightSidebar.astro'
 import { getSidebarForPath } from '../scripts/sidebars'
+import { theme, getCurrentNavKey } from '../config/index'
+
+/**
+ * 正文字体等排版尺寸由 src/config/theme.ts 控制
+ * 通过内联样式将 theme 配置注入到 .content-inner，确保仅影响正文区域
+ */
 
 const currentPath = Astro.url.pathname
 const sidebarItems = getSidebarForPath(currentPath)
 
-const { title, section, headings = [] } = Astro.props
+const {
+  title,
+  section,
+  headings = [],
+  contributors,
+}: {
+  title: string
+  section: string
+  headings?: any[]
+  contributors?: any
+} = Astro.props
 
 // 基于 URL 别名推导导航高亮键（不依赖中文文案）
-const first = currentPath.split('/').filter(Boolean)[0] ?? 'home'
-const navKeys = new Set([
-  'fish-talks',
-  'setup',
-  'basic-usage',
-  'prompts',
-  'advanced',
-  'demo',
-  'tech',
-  'fun',
-  'resources',
-])
-const currentKey = navKeys.has(first) ? first : 'home'
+const currentKey = getCurrentNavKey(currentPath)
 ---
 
 <BaseLayout title={title}>
@@ -31,15 +34,22 @@ const currentKey = navKeys.has(first) ? first : 'home'
 
   <div class="content-wrapper">
     <div class="layout-container">
-      <LeftSidebar section={section} items={sidebarItems} />
-
       <main id="main-content" class="content">
-        <div class="content-inner" data-pagefind-body>
+        <div 
+          class="content-inner" 
+          data-pagefind-body
+          style={`--font-size-base: ${theme.fontSizeBase}; --font-size-lg: ${theme.fontSizeLg}; --line-height-base: ${theme.lineHeightBase};`}
+        >
           <slot />
         </div>
       </main>
 
-      <RightSidebar headings={headings} />
+      <RightSidebar
+        headings={headings}
+        structure={sidebarItems}
+        currentPath={currentPath}
+        contributors={contributors}
+      />
     </div>
   </div>
 </BaseLayout>
@@ -65,14 +75,16 @@ const currentKey = navKeys.has(first) ? first : 'home'
 
   .content {
     flex: 1;
-    padding: 1.5rem 2.5rem 2.5rem 2.5rem;
-    background-color: var(--bg-content);
-    border-radius: var(--border-radius);
+    padding: 1.5rem 2rem 2.5rem 2rem;
+    background-color: transparent;
+    border-radius: 0;
     max-width: var(--content-max-width);
   }
 
   .content-inner {
     width: 100%;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
   }
 
   /* 移除第一个标题的顶部外边距，确保与侧边栏对齐 */
@@ -130,13 +142,13 @@ const currentKey = navKeys.has(first) ? first : 'home'
     }
 
     .content {
-      padding: 1.5rem 2.25rem 2.25rem 2.25rem;
+      padding: 1.5rem 1.85rem 2.25rem 1.85rem;
     }
   }
 
   @media (max-width: 1200px) {
     .content {
-      padding: 1.5rem 2rem 2rem 2rem;
+      padding: 1.5rem 1.75rem 2rem 1.75rem;
     }
   }
 

@@ -1,6 +1,8 @@
 ---
 title: 流行词汇
 description: 深入了解AI领域的热门概念，掌握前沿技术趋势
+contributors:
+  - zhu-jl18
 ---
 
 # 流行词汇
