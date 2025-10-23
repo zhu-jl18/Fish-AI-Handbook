@@ -126,4 +126,5 @@ export const SETUP_SIDEBAR: SidebarSection = [
   { label: 'Cherry Studio', href: '/setup/cherrystudio' },
   { label: 'Claude Code', href: '/setup/claude-code' },
   { label: 'Codex', href: '/setup/codex' },
+  { label: 'MCP Router', href: '/setup/mcp-router' },
 ]
