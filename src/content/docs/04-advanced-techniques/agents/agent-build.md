@@ -49,6 +49,7 @@ for event in agent.stream(
 ):
     print(event["messages"][-1])
 ```
+
 ### 2. 状态管理（StateGraph）
 
 LangGraph 的核心是状态图：
@@ -82,6 +83,7 @@ workflow.set_entry_point("analyze")
 memory = MemorySaver()
 app = workflow.compile(checkpointer=memory)
 ```
+
 ### 3. 控制流模式
 
 **条件分支：**
@@ -98,6 +100,7 @@ workflow.add_conditional_edges(
     {"prioritize": "filter", "report": "report"}
 )
 ```
+
 **并行执行：**
 
 ```python
@@ -106,6 +109,7 @@ workflow.add_node("quality_check", check_quality)
 workflow.add_edge("analyze", "security_check")
 workflow.add_edge("analyze", "quality_check")
 ```
+
 **人类审批（Human-in-the-Loop）：**
 
 ```python
@@ -119,6 +123,7 @@ def risky_operation(state: AgentState):
 
 workflow.add_node("deploy", risky_operation)
 ```
+
 ---
 
 ## 工具集成
@@ -142,6 +147,7 @@ def execute_code(code: str, language: str = "python") -> str:
     result = sandbox.run(code, language)
     return result
 ```
+
 ### MCP（Model Context Protocol）
 
 Anthropic 2024 年底推出的工具标准，支持跨工具复用：
@@ -160,6 +166,7 @@ def search_symbols(query: str) -> list[dict]:
 # Agent 连接 MCP
 agent.add_mcp_server("http://localhost:8080")
 ```
+
 ---
 
 ## 记忆系统
@@ -177,6 +184,7 @@ app = workflow.compile(checkpointer=checkpointer)
 config = {"configurable": {"thread_id": "pr-123"}}
 app.invoke(input, config=config)  # 自动加载历史
 ```
+
 ### 长期记忆（向量数据库）
 
 ```python
@@ -193,6 +201,7 @@ def retrieve_context(query: str) -> str:
     docs = vectorstore.similarity_search(query, k=3)
     return "\n".join([d.page_content for d in docs])
 ```
+
 ---
 
 ## 观测与调试
@@ -207,12 +216,14 @@ os.environ["LANGCHAIN_PROJECT"] = "code-reviewer"
 
 # 自动上传 Trace，可视化每一步决策
 ```
+
 ### LangGraph Studio
 
 ```bash
 pip install langgraph-studio
 langgraph dev  # 启动本地调试服务器
 ```
+
 访问 `http://localhost:8000` 可视化调试状态图、查看检查点。
 
 ---
@@ -236,6 +247,7 @@ langgraph dev  # 启动本地调试服务器
 ```bash
 langgraph deploy  # 一键部署到 LangSmith 平台
 ```
+
 自动提供：持久化存储、断点恢复、流式输出、监控告警。
 
 **自托管：**
@@ -254,6 +266,7 @@ async def run_agent(request: dict):
     result = await agent_graph.ainvoke(request["input"], config)
     return result
 ```
+
 ---
 
 ## 安全与治理
@@ -269,6 +282,7 @@ class SecureAgent:
         if tool_name not in self.allowed:
             raise PermissionError(f"工具 {tool_name} 未授权")
 ```
+
 ### 2. 输出过滤
 
 ```python
@@ -281,6 +295,7 @@ def sanitize_output(text: str) -> str:
     # 移除 PII（邮箱、电话、密钥）
     return redact_pii(text, results)
 ```
+
 ### 3. 审计日志
 
 ```python
@@ -296,6 +311,7 @@ def audit_tool_call(tool: str, args: dict, result: any):
         result_type=type(result).__name__
     )
 ```
+
 ---
 
 ## 最佳实践

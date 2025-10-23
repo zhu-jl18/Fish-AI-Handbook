@@ -80,4 +80,3 @@ export function getRobotsContent(config: SiteConfig['robots']): string {
   if (config.noimageindex) tags.push('noimageindex')
   return tags.join(', ')
 }
-

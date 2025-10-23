@@ -53,6 +53,7 @@ dist/                    # 构建输出（由 build 生成）
 - 仅改侧栏未建路由页面，导致 404
 - frontmatter 缺 `description` 导致构建失败
 - 路由与内容路径不一致，`getEntry` 读取失败
+- 三级误用"文件夹+index.md"（应为单页 .md）；Astro 不报错但违反层级约定
 - 在根提交 `dist/`、`.astro/`、或工具本地数据
 
 ## 变更记录
