@@ -127,9 +127,7 @@ export const SETUP_SIDEBAR: SidebarSection = [
   {
     label: 'Claude Code',
     href: '/setup/claude-code',
-    items: [
-      { label: 'CCR', href: '/setup/claude-code/ccr' },
-    ],
+    items: [{ label: 'CCR', href: '/setup/claude-code/ccr' }],
   },
   { label: 'Codex', href: '/setup/codex' },
   { label: 'MCP Router', href: '/setup/mcp-router' },

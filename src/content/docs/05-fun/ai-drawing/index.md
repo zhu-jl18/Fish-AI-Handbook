@@ -40,17 +40,20 @@ description: 入门到进阶，快速上手 AI 绘图（文生图）。
 ```text
 主体 + 场景 + 风格 + 镜头 + 光影 + 细节 + 画幅
 ```
+
 例子：
 
 ```text
 A cyberpunk street at night, neon signs, rainy, reflective ground,
 wide-angle lens, cinematic lighting, highly detailed, 4k, masterpiece
 ```
+
 ## 负面提示词模板
 
 ```text
 low quality, blurry, extra fingers, bad anatomy, watermark, jpeg artifacts
 ```
+
 ## 基础参数建议
 
 - 分辨率：1024×1024 起
