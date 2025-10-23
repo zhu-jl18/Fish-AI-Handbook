@@ -9,6 +9,11 @@
 
 ### Added
 
+- **配置指南：MCP Router**：新增 "MCP Router" 二级页面（内容、路由、侧栏）
+  - 内容文件：`src/content/docs/99-setup/mcp-router/index.md`
+  - 路由文件：`src/pages/setup/mcp-router/index.astro`
+  - 侧栏更新：在 `SETUP_SIDEBAR` 中在 Codex 后添加 MCP Router 条目
+  - 页面内容为占位框架，后续可替换为正式内容
 - **统一配置系统**：建立集中式配置管理体系，提升代码可维护性与模板化能力
   - 新增 `src/config/site.ts`：站点元数据（URL、标题、描述、Logo、SEO robots）
   - 新增 `src/config/navigation.ts`：导航配置（导航项、路由映射、当前导航键推导）
