@@ -3,7 +3,9 @@ import '../styles/global.css'
 import { siteConfig, getRobotsContent } from '../config/index'
 
 const { title } = Astro.props
-const pageTitle = title ? `${title} - ${siteConfig.titleFull}` : siteConfig.titleFull
+const pageTitle = title
+  ? `${title} - ${siteConfig.titleFull}`
+  : siteConfig.titleFull
 const robotsContent = getRobotsContent(siteConfig.robots)
 ---
 

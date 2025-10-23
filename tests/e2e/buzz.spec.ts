@@ -23,7 +23,9 @@ test.describe('流行词汇页面测试', () => {
     // 检查侧边栏子项存在
     const structure = page.locator('.structure-nav')
     await expect(
-      structure.locator('.structure-sublink[href="/fish-talks/buzz/vibe-coding"]'),
+      structure.locator(
+        '.structure-sublink[href="/fish-talks/buzz/vibe-coding"]',
+      ),
     ).toBeVisible()
     await expect(
       structure.locator('.structure-sublink[href="/fish-talks/buzz/agent"]'),

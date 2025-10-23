@@ -30,6 +30,7 @@ description: '不离开终端就能调用AI，真正的Vibe Coding'
 # 需要先有Claude订阅（Pro版$20/月，值得）
 curl -L https://claude.ai/download/cli | sh
 ```
+
 **实战例子：**
 
 ```bash
@@ -42,6 +43,7 @@ claude "根据当前git diff生成合适的提交信息"
 # 代码重构
 claude "把这个组件重构成TypeScript，保持所有功能"
 ```
+
 _[占位：Claude Code终端使用截图 - 显示代码生成过程]_
 
 ---
@@ -60,12 +62,14 @@ _[占位：Claude Code终端使用截图 - 显示代码生成过程]_
 ```bash
 pip install google-generativeai
 ```
+
 **配置：**
 
 ```bash
 # 去 aistudio.google.com 申请API密钥
 export GOOGLE_API_KEY="你的密钥"
 ```
+
 **实战例子：**
 
 ```bash
@@ -78,6 +82,7 @@ gemini "根据这个API代码生成使用文档" < api.py
 # 实时信息查询
 gemini "2025年最新的Python安全最佳实践"
 ```
+
 _[占位：Gemini CLI使用截图 - 显示大文件处理能力]_
 
 ---
@@ -96,12 +101,14 @@ _[占位：Gemini CLI使用截图 - 显示大文件处理能力]_
 ```bash
 npm install -g @rovo-dev/cli
 ```
+
 **使用：**
 
 ```bash
 # 和Claude Code几乎一样的体验
 rovo "帮我优化这个数据库查询性能"
 ```
+
 ---
 
 ### Ollama
@@ -121,6 +128,7 @@ curl -fsSL https://ollama.ai/install.sh | sh
 
 # Windows: 去官网下载installer
 ```
+
 **使用：**
 
 ```bash
@@ -134,6 +142,7 @@ echo "写一个快速排序算法" | ollama run codellama
 # 处理文件
 cat main.py | ollama run llama3.2 "审查这段代码"
 ```
+
 _[占位：Ollama本地模型截图 - 显示隐私安全优势]_
 
 ## 实战应用场景
@@ -151,6 +160,7 @@ git diff main..feature-branch | claude "审查这个PR的变更，指出潜在�
 # 发布记录
 git log --oneline -10 | claude "生成这个版本的更新日志"
 ```
+
 ### 日志分析神器
 
 ```bash
@@ -163,6 +173,7 @@ cat access.log | claude "分析访问模式，找出性能瓶颈" > performance_
 # 安全审计
 grep "403\|404\|500" access.log | claude "分析异常访问，检测潜在攻击"
 ```
+
 ### 代码生成与重构
 
 ```bash
@@ -175,6 +186,7 @@ find . -name "*.py" -exec claude "按照PEP8标准格式化" < {} > {}.formatted
 # API文档生成
 claude "生成这个接口的OpenAPI文档" < router.js > api.yaml
 ```
+
 ### 数据处理自动化
 
 ```bash
@@ -187,6 +199,7 @@ cat config.yaml | claude "转换为JSON格式并验证语法" > config.json
 # 配置文件生成
 claude "根据这个需求生成nginx配置" < requirements.txt > nginx.conf
 ```
+
 ## 高级技巧
 
 ### 管道符组合拳
@@ -198,6 +211,7 @@ cat code.js | \
   claude "转换为TypeScript" | \
   prettier --stdin-filepath code.ts > code.ts
 ```
+
 ### 别名设置
 
 ```bash
@@ -209,6 +223,7 @@ alias ai-explain="claude '详细解释这段代码的作用和原理'"
 # 然后就能这样用：
 cat complex_function.py | ai-explain
 ```
+
 ### 快捷脚本
 
 ```bash
@@ -223,6 +238,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     git commit -m "$message"
 fi
 ```
+
 ## 成本对比（2025年）
 
 **Claude Code：** $20/月订阅，无使用限制，最佳体验
