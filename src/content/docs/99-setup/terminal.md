@@ -54,4 +54,18 @@ Undoubtedly是这个：**Terminus**，Github Student Pack 免费领取会员，�
 sudo 
 ```
 
+## 其他碎碎念
+
+一些常见地小技巧：
+
+配置代理
+```powershell
+http_proxy: http://127.0.0.1:7890
+https_proxy: https//127.0.0.1:7890
+```
+临时导入环境变量：
+```bash
+set $VAR_NAME = "your-value"
+```
+
 
