@@ -15,6 +15,7 @@
   - 三级：单页 `.md` 文件（**禁止**使用"文件夹+index.md"）
 
 **正确示例**：
+
 ```
 03-prompts/
 ├── index.md              # 一级
@@ -25,6 +26,7 @@
 ```
 
 **错误示例**（勿模仿）：
+
 ```
 03-prompts/
 ├── context/
@@ -164,6 +166,7 @@ npm run test:e2e:headed
 - ❌ 二级路径与三级路径重复（如同时存在 `01-fish-talks/model-params/` 和 `01-fish-talks/glossary/model-params/`）
 
 **原因**：
+
 - Astro 的 `getEntry` 对两种结构都能识别，不会报错
 - 但"文件夹+index.md"用于三级会破坏层级约定，导致后续维护混乱
 
