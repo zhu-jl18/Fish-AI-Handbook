@@ -14,6 +14,10 @@
   - 路由文件：`src/pages/setup/claude-code/ccr.astro`
   - 侧栏更新：将 `SETUP_SIDEBAR` 中的 Claude Code 从单项改为带子项的分组结构
   - 页面内容包含插件简介、安装、基础配置、高级用法、常见问题等章节（占位框架）
+ - **术语扫盲：衍生词**：新增 glossary 下三级页面“衍生词”（derived-terms）与路由
+  - 内容文件：`src/content/docs/01-fish-talks/glossary/derived-terms.md`
+  - 路由文件：`src/pages/fish-talks/glossary/derived-terms.astro`
+  - 侧栏更新：在“术语扫盲”分组下新增子项“衍生词”
 
 ### Changed
 
@@ -46,7 +50,10 @@
 
 ### Removed
 
-- 无
+- **移除“流行词汇（buzz）”模块**
+  - 删除内容：`src/content/docs/01-fish-talks/buzz/` 全部文件
+  - 删除路由：`src/pages/fish-talks/buzz/` 全部页面
+  - 删除测试：`tests/e2e/buzz.spec.ts`
 
 ## [2025-10-23]
 
