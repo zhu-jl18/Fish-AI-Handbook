@@ -124,7 +124,13 @@ export const SETUP_SIDEBAR: SidebarSection = [
   { label: 'Git', href: '/setup/git' },
   { label: 'VPN', href: '/setup/vpn' },
   { label: 'Cherry Studio', href: '/setup/cherrystudio' },
-  { label: 'Claude Code', href: '/setup/claude-code' },
+  {
+    label: 'Claude Code',
+    href: '/setup/claude-code',
+    items: [
+      { label: 'CCR', href: '/setup/claude-code/ccr' },
+    ],
+  },
   { label: 'Codex', href: '/setup/codex' },
   { label: 'MCP Router', href: '/setup/mcp-router' },
 ]
