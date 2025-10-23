@@ -5,4 +5,4 @@ description: Hello World
 
 ## Hi there!
 
-at this chapter, i want introduce the basic knowledge of AI.
+At this chapter, I want to introduce the basic knowledge of AI.

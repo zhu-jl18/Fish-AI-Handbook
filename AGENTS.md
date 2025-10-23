@@ -99,12 +99,14 @@
 ## 3.1 三级结构陷阱与强制约束
 
 ⚠️ **容错性陷阱**：Astro 的 `getEntry('docs', '01-fish-talks/glossary/ai-concepts')` 可同时识别：
+
 - `glossary/ai-concepts.md`（正确：单页）
 - `glossary/ai-concepts/index.md`（错误：文件夹结构）
 
 虽然构建不报错，但后者违反三级规范，会导致结构混乱与路径歧义。
 
 **正确结构**：
+
 ```
 01-fish-talks/
 ├── glossary/
@@ -114,6 +116,7 @@
 ```
 
 **错误结构**（禁止）：
+
 ```
 01-fish-talks/
 ├── glossary/
