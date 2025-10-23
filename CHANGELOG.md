@@ -9,6 +9,32 @@
 
 ### Added
 
+- **配置指南：Claude Code - CCR**：新增 Claude Code 的 CCR 插件三级页面
+  - 内容文件：`src/content/docs/99-setup/claude-code/ccr.md`
+  - 路由文件：`src/pages/setup/claude-code/ccr.astro`
+  - 侧栏更新：将 `SETUP_SIDEBAR` 中的 Claude Code 从单项改为带子项的分组结构
+  - 页面内容包含插件简介、安装、基础配置、高级用法、常见问题等章节（占位框架）
+
+### Changed
+
+- **Claude Code 路由结构重构**：将二级页面改为支持三级子页面的目录结构
+  - 迁移：`src/pages/setup/claude-code.astro` → `src/pages/setup/claude-code/index.astro`
+  - 更新导入路径层级：从 `../../` 提升为 `../../../`（因目录层级增加）
+  - 路由访问保持不变：`/setup/claude-code` 仍为二级页面入口
+  - 新增三级页面：`/setup/claude-code/ccr`
+
+### Fixed
+
+- 无
+
+### Removed
+
+- 无
+
+## [2025-10-23]
+
+### Added
+
 - **配置指南：MCP Router**：新增 "MCP Router" 二级页面（内容、路由、侧栏）
   - 内容文件：`src/content/docs/99-setup/mcp-router/index.md`
   - 路由文件：`src/pages/setup/mcp-router/index.astro`
@@ -44,6 +70,11 @@
 
 ### Changed
 
+- **99-setup 文件结构规范化**：将所有二级页面迁移为文件夹+index.md结构
+  - 迁移文件：git.md → git/index.md, nodejs.md → nodejs/index.md, terminal.md → terminal/index.md, vpn.md → vpn/index.md, vs-code.md → vs-code/index.md
+  - 符合项目规范：二级页面必须使用文件夹+index.md形式，便于后续扩展三级页面
+  - 路由和侧边栏无需修改：Astro 的 getEntry 自动识别两种结构
+  - 内容完整保留，frontmatter 无损，UTF-8 编码正确
 - **代码块样式重构**：完全迁移至 Expressive Code 原生配置系统
   - 移除 `src/styles/global.css` 中 107 行手动维护的样式覆盖代码
   - 通过 `src/config/code.ts` 的 `styleOverrides` 配置统一管理所有代码块样式
