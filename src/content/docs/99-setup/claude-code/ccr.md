@@ -1,36 +1,70 @@
 ---
 title: CCR
-description: Claude Code Rules 插件的安装与配置指南。
+description: Claude Code Router 插件的安装与配置全指南。
 ---
 
-本文为占位内容，将在后续迭代中补充真实配置细节。请参考本项目其他配置页面的写作风格与结构保持一致。
+ccr是用来管理和接入不同渠道模型的一个good choice，尽管有很多这样的轮子，我还是会推荐它，它的优势在于：
+- 支持热切换
+- 细分的子路由
+- 不同openai接口的支持
+- 作为代理可以接入其他管理工具
 
-## 插件简介
+作者是[musistudio](https://github.com/musistudio)，ccr的github仓库是[claude-code-router](https://github.com/musistudio/claude-code-router)。
 
-CCR（Claude Code Rules）是 Claude Code 的规则扩展插件，用于统一代码智能补全与规则校验体验。
+##  Quick Start
 
-## 安装
+安装 很简单，可以`npm` 也可以`docker`，它的本质是一个代理，这里我推荐`npm`安装方式：
+```bash
+npm install -g @musistudio/claude-code-router@latest
+```
+使用方法：
+```bash
+ccr start # 启动ccr服务
+ccr ui   # 打开ccr ui 界面
+```
+打开UI界面之后 配置即可，如果已有配置，那么
+```bash
+ccr code # 启动claude code
+```
 
-- 在目标编辑器的插件市场搜索并安装：Claude Code Rules（CCR）。
-- 如需离线安装，请在团队制品库中获取对应版本包。
+##  Settings Ref
 
-## 基础配置
+这里我只教如何接入qwencode，从而免费使用qwen3-coder-plus
 
-- 在工作区或用户级配置中启用 CCR。
-- 示例占位键位（根据实际实现替换）：
-  - ccr.enable: true
-  - ccr.rulesPreset: "recommended"
+首先打开ccr的ui管理界面，导入自定义路由路径，他在你的json文件里长这样：
+```json
+ "transformers": [
+    {
+      "name": "qwen-cli",
+      "path": "C:\\Users\\Travis\\.claude-code-router\\plugins\\qwen-cli.js",
+      "options": {}
+    }
+  ],
+```
 
-## 高级用法
+这里我们要导入[`qwen-cli.js`](https://gist.github.com/musistudio/f5a67841ced39912fd99e42200d5ca8b)
+然后你要做什么呢？确保你下载安装了qwen code，在终端里输入qwen进行登录，它会自动生成一个认证文件
+`oauth_creds.json`这个插件会自动寻找这个认证文件，完成它的工作，你只需要添加供应商，然后在Transformer里选择`qwen-cli`，再填写模型名字和api_base_url即可，参考配置：
 
-- 项目级规则覆盖：在项目根目录新增配置文件（如 .ccrrc 或 ccr.config），实现团队化规则落地。
-- 与 CI 集成：在 CI 任务中增加 CCR 校验步骤，保障 PR 质量。
+```json
+{
+      "name": "✅qwen-cli", 
+      "api_base_url": "https://portal.qwen.ai/v1/chat/completions", 
+      "api_key": "sk-xxx", 
+      "models": [
+        "qwen3-coder-plus"
+      ],
+      "transformer": {
+        "use": [
+          "qwen-cli"
+        ]
+      }
+    }
+```
 
-## 常见问题
+## 碎碎念
 
-- 插件未生效：确认已启用并与 Claude Code 主插件版本兼容。
-- 规则冲突：逐步缩小生效范围或禁用冲突条目。
+这篇教程已经够喂饭了。
 
-## 参考与后续
 
-- 后续将补充：规则清单、最佳实践范例、常见 IDE 的 UI 引导截图。
+建议搭配其他思考模型使用，如gemini-2.5-pro或者glm-4.6。当然也有其他接入qwen-code的方式，放在其他章节讲解了。
