@@ -52,4 +52,3 @@ export function getCurrentNavKey(pathname: string): string {
   const firstSegment = pathname.split('/').filter(Boolean)[0] ?? 'home'
   return navigationConfig.validKeys.has(firstSegment) ? firstSegment : 'home'
 }
-

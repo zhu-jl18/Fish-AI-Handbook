@@ -6,8 +6,7 @@ import Header from '../components/Header.astro'
 <BaseLayout title="首页">
   <Header currentPage="home" />
 
-  <main id="main-content" class="main-content">
-  </main>
+  <main id="main-content" class="main-content"></main>
 </BaseLayout>
 
 <style>
@@ -18,6 +17,8 @@ import Header from '../components/Header.astro'
   }
 
   @media (max-width: 768px) {
-    .main-content { padding: 2rem 1rem; }
+    .main-content {
+      padding: 2rem 1rem;
+    }
   }
 </style>
