@@ -65,7 +65,8 @@ const resolveContributor = (entry: ContributorInput): Contributor | null => {
   const link =
     entry.link?.trim() || `https://github.com/${entry.username ?? username}`
   const avatar =
-    entry.avatar?.trim() || `https://github.com/${entry.username ?? username}.png`
+    entry.avatar?.trim() ||
+    `https://github.com/${entry.username ?? username}.png`
   return { username, name: finalName, link, avatar }
 }
 
@@ -95,9 +96,8 @@ if (
   })
 }
 
-const isGroup = (
-  entry: SidebarLink | SidebarGroup,
-): entry is SidebarGroup => 'items' in entry
+const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
+  'items' in entry
 
 const isGroupActive = (entry: SidebarGroup) => {
   if (entry.href && isExactActive(entry.href)) return true

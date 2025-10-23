@@ -131,6 +131,7 @@ docker run -d -p 3000:3000 flowiseai/flowise
 npm install -g flowise
 npx flowise start
 ```
+
 访问 `http://localhost:3000` 即可开始使用。
 
 ---
@@ -182,6 +183,7 @@ git clone https://github.com/langgenius/dify.git
 cd dify/docker
 docker compose up -d
 ```
+
 访问 `http://localhost` 开始使用。
 
 ---
