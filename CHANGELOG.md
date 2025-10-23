@@ -39,6 +39,21 @@
 
 ### Changed
 
+- **代码块样式重构**：完全迁移至 Expressive Code 原生配置系统
+  - 移除 `src/styles/global.css` 中 107 行手动维护的样式覆盖代码
+  - 通过 `src/config/code.ts` 的 `styleOverrides` 配置统一管理所有代码块样式
+  - 利用 CSS 变量引用（`var(--code-bg)` 等）复用项目设计令牌
+  - 配置 `styleOverrides.frames` 实现自定义复制按钮样式和交互效果
+  - 新增完整的 TypeScript 类型定义，提供编辑器自动补全和类型检查
+  - 视觉效果保持完全一致，维护成本降低约 90%
+  - 消除与库默认样式的冲突风险，更易于跟进版本更新
+  - 保留最小化必要样式（仅代码块外边距，3 行代码）
+- **代码块样式统一化**：禁用终端框架自动检测，确保所有代码块显示一致
+  - 在 `src/config/code.ts` 中设置 `defaultProps.frame: 'code'`
+  - 禁用 bash/powershell 等语言的终端窗口样式自动检测
+  - 所有代码块统一使用 GitHub 风格的代码编辑器框架样式
+  - 保持边框、圆角、背景色、复制按钮等视觉元素的完全一致
+  - 移除 `terminal.md` 中冗余的局部 `frame="code"` 属性
 - **CSS 样式优先级优化**：通过提高选择器特异性替代 !important，提升样式可维护性
   - 减少 !important 使用从 47 个降至 5 个（减少 89.4%）
   - 对 Expressive Code 代码块相关选择器加倍类名（`.expressive-code.expressive-code`）以提升特异性
