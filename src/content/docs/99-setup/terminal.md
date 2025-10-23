@@ -1,179 +1,57 @@
 ---
 title: Terminal
-description: 终端工具安装与配置指南
+description: 终端工具安装与配置全指南
 ---
 
-# Terminal 终端配置
+本页根据我的使用体验来，介绍如何安装和配置终端工具，提升玩AI的体验。
 
-本页面介绍如何安装和配置现代终端工具，提升开发体验。
+## Brief Intro
 
-## Windows Terminal
+终端三个组成部分： [终端外壳] + [内核shell] + [shell插件]，以最常见默认的cmd终端来说，它就是默认的外壳+cmd shell且无插件，这样非常地ugly而且也convenient，那么自然要对这三个 分别配置以进行优化和美化了。
 
-### 安装方式
+## General Use
 
-1. **Microsoft Store**（推荐）
-   - 打开 Microsoft Store
-   - 搜索 "Windows Terminal"
-   - 点击安装
-
-2. **GitHub Release**
-   - 访问 [Windows Terminal Releases](https://github.com/microsoft/terminal/releases)
-   - 下载最新版本的 `.msixbundle` 文件
-   - 双击安装
-
-3. **命令行安装**
-   
+首先如果是玩Linux的自然不用我来教了，这里就默认都是Windows系统了，那么只推荐一个就是微软官方的 **Windows Terminal**（配置和集成都十分地方便），安装形式我只推荐命令行安装（因为其他安装方式真的会有bug）：
 ```powershell
 winget install Microsoft.WindowsTerminal
 ```
-
-### 基础配置
-
-#### 设置默认终端
-
-1. 打开 Windows Terminal
-2. 按 `Ctrl + ,` 打开设置
-3. 在 "启动" 选项中设置默认配置文件为 PowerShell 7
-
-#### 外观美化
-
-- **主题**：One Half Dark
-- **字体**：Cascadia Code
-- **透明度**：95%
-- **亚克力效果**：开启
-
-### PowerShell 7 配置
-
-#### 安装 PowerShell 7
-
+接下来安装 **powershell7**（原始的PowerShell实在太老旧了，并且cmd也太古老了，很多命令都不支持）：
 ```powershell
 winget install Microsoft.PowerShell
 ```
 
-#### 配置 Oh My Posh
-
-1. 安装 Oh My Posh
-
+终端美化分为两部分，一部分是对wt的美化，一部分是对集成的pwsh7的美化。对于wt，有可视化的配置选项，也可以直接抄我的json：
+```json
+{}
+```
+对于pwsh7的美化，自然是要接入**oh-my-posh**了，先安装：
 ```powershell
 winget install JanDeDobbeleer.OhMyPosh -s winget
 ```
-
-2. 安装 Nerd 字体
-
-```powershell
-oh-my-posh font install CascadiaCode
-```
-
-3. 编辑配置文件
-
+然后让oh-my-posh接管pwsh7:
 ```powershell
 notepad $PROFILE
 ```
-
-4. 添加配置
-   
+配置：
 ```powershell
 oh-my-posh init pwsh | Invoke-Expression
 ```
 
-## macOS Terminal
+此外，我们需要一些插件来优化命令输入等，我推荐**Clink**。
 
-### iTerm2
+同理，对于**Git Bash**、**CMD**配置的整体流程差不多，详情参考文档。
 
-推荐使用 iTerm2 替代原生终端
+## For SSH
 
-#### 安装
+Undoubtedly是这个：**Terminus**，Github Student Pack 免费领取会员，很方便后续连接自己的小服务器。使用上也很简单，几乎完全地图形化界面：
 
+![Terminus示意图]()
+
+## WSL Specified
+
+这个本质上是个Linux系统，我推荐 `Fish Shell` + `oh-my-posh`的组合，由于Linux环境下配置实在是太简单了，直接参照官方文档复制如下命令即可。
 ```bash
-brew install --cask iterm2
+sudo 
 ```
 
-#### 配置
 
-1. **配色方案**：Dracula / Nord
-2. **字体**：MesloLGS NF
-3. **快捷键**：配置分屏快捷键
-
-### Oh My Zsh
-
-```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
-## Linux Terminal
-
-### 终端模拟器选择
-
-- **GNOME**：GNOME Terminal
-- **KDE**：Konsole
-- **轻量级**：Alacritty / Kitty
-
-### Zsh + Oh My Zsh
-
-```bash
-# 安装 Zsh
-sudo apt install zsh
-
-# 设置为默认 Shell
-chsh -s $(which zsh)
-
-# 安装 Oh My Zsh
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-## 通用配置建议
-
-### 必装插件
-
-1. **自动补全**：zsh-autosuggestions
-2. **语法高亮**：zsh-syntax-highlighting
-3. **快速跳转**：z / autojump
-4. **Git 增强**：git plugin
-
-### 常用别名
-
-```bash
-alias ll='ls -alh'
-alias gs='git status'
-alias gp='git pull'
-alias gpu='git push'
-alias cls='clear'
-```
-
-## VS Code 集成终端
-
-### 设置默认终端
-
-```json
-{
-  "terminal.integrated.defaultProfile.windows": "PowerShell",
-  "terminal.integrated.defaultProfile.osx": "zsh",
-  "terminal.integrated.defaultProfile.linux": "zsh"
-}
-```
-### 字体配置
-
-```json
-{
-  "terminal.integrated.fontFamily": "'Cascadia Code', 'MesloLGS NF', monospace",
-  "terminal.integrated.fontSize": 14
-}
-```
-
-## 故障排除
-
-### Windows 执行策略问题
-
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-
-### 字体显示问题
-
-- 确保安装了 Nerd Fonts
-- 在终端设置中选择支持的字体
-
-### 性能优化
-
-- 关闭不必要的动画效果
-- 限制历史记录大小
-- 使用 GPU 加速渲染
