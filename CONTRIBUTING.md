@@ -45,11 +45,13 @@ description: 简短描述（必填，未填将导致构建失败）
 
 ## 新增内容的标准流程（示例）
 
-1. 新增一级章节（假设 07-playground）
+1. 新增一级章节（假设 08-playground）
 
-- 内容：`src/content/docs/07-playground/index.md`
-- 路由：`src/pages/playground/index.astro` 读取 `getEntry('docs','07-playground')`
-- 侧栏：在 `sidebars.ts` 中为 `/playground` 注册对应条目（如需要）
+- 内容：`src/content/docs/08-playground/index.md`
+- 路由：`src/pages/playground/index.astro` 读取 `getEntry('docs','08-playground')`
+- 导航：在 `src/config/navigation.ts` 添加导航项 `{ key: 'playground', href: '/playground', label: '名称' }`
+- 映射：在 `src/scripts/docsMap.ts` 添加 `playground: '08-playground'`
+- 侧栏：在 `sidebars.ts` 中为 `/playground` 注册对应条目
 
 2. 新增二级 + 三级页面（以 prompts 为例）
 

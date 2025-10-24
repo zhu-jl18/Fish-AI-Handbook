@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- **理论学习章节导航**：修复理论学习（07-theoretical）章节缺失顶部导航入口的问题
+  - 在 `src/config/navigation.ts` 中添加理论学习导航项，位于第 7 位（资源合集之后、配置指南之前）
+  - 在 `src/scripts/docsMap.ts` 中添加 `theoretical: '07-theoretical'` 映射
+  - 确保配置格式与其他一级页面完全一致
+
+## [2025-10-24]
+
 ### Added
 
 - **基础用法：AI 应用**：新增 "AI 应用" 二级页面（内容、路由、侧栏）
@@ -25,10 +34,10 @@
   - 路由文件：`src/pages/setup/claude-code/ccr.astro`
   - 侧栏更新：将 `SETUP_SIDEBAR` 中的 Claude Code 从单项改为带子项的分组结构
   - 页面内容包含插件简介、安装、基础配置、高级用法、常见问题等章节（占位框架）
- - **术语扫盲：衍生词**：新增 glossary 下三级页面“衍生词”（derived-terms）与路由
-  - 内容文件：`src/content/docs/01-fish-talks/glossary/derived-terms.md`
-  - 路由文件：`src/pages/fish-talks/glossary/derived-terms.astro`
-  - 侧栏更新：在“术语扫盲”分组下新增子项“衍生词”
+- **术语扫盲：衍生词**：新增 glossary 下三级页面“衍生词”（derived-terms）与路由
+- 内容文件：`src/content/docs/01-fish-talks/glossary/derived-terms.md`
+- 路由文件：`src/pages/fish-talks/glossary/derived-terms.astro`
+- 侧栏更新：在“术语扫盲”分组下新增子项“衍生词”
 
 ### Changed
 
