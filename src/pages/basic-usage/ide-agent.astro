@@ -3,7 +3,7 @@ import ContentLayout from '../../layouts/ContentLayout.astro'
 import { BASIC_USAGE_SIDEBAR } from '../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '02-basic-usage/editor-agent')
+const entry = await getEntry('docs', '02-basic-usage/ide-agent')
 const rendered = entry && (await entry.render())
 ---
 

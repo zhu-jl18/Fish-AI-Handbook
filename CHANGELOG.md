@@ -9,6 +9,11 @@
 
 ### Added
 
+- **基础用法：AI 应用**：新增 "AI 应用" 二级页面（内容、路由、侧栏）
+  - 内容文件：`src/content/docs/02-basic-usage/ai-apps/index.md`
+  - 路由文件：`src/pages/basic-usage/ai-apps.astro`
+  - 侧栏更新：在 `BASIC_USAGE_SIDEBAR` 中添加 AI 应用条目，替代原 Others 页面
+  - 页面涵盖生产力工具、创意工具、专业工具等 AI 应用分类与使用建议
 - **理论学习章节**：新增 07-theoretical 一级章节，专注于 AI 理论知识与学术研究
   - 内容文件：`src/content/docs/07-theoretical/index.md`（一级页面）
   - 内容文件：`src/content/docs/07-theoretical/grpo/index.md`（二级页面 GRPO）
@@ -27,6 +32,12 @@
 
 ### Changed
 
+- **基础用法：编辑器重命名**：将 AI IDE 从 editor-agent 重命名为 ide-agent，统一命名规范
+  - 内容迁移：`src/content/docs/02-basic-usage/editor-agent/` → `ide-agent/`
+  - 路由重构：`src/pages/basic-usage/editor-agent.astro` → `ide-agent.astro`
+  - 侧栏更新：`BASIC_USAGE_SIDEBAR` 中路径从 `/basic-usage/editor-agent` 改为 `/basic-usage/ide-agent`
+  - 索引页更新：`02-basic-usage/index.md` 中引用链接同步更新
+  - 完全删除旧路径，无重定向
 - **鱼说必看 - 结构重构**：将"模型排行"从二级页面迁移为 Models 下的三级页面
   - 内容迁移：`llm-rankings/index.md` → `models/llm-rankings.md`（三级单页）
   - 路由重构：`models.astro` → `models/index.astro`；新增 `models/llm-rankings.astro`
@@ -65,7 +76,13 @@
 
 ### Removed
 
-- **移除“流行词汇（buzz）”模块**
+- **基础用法：移除 Others 页面**
+  - 删除内容：`src/content/docs/02-basic-usage/others/` 文件夹及 `index.md`
+  - 删除路由：`src/pages/basic-usage/others.astro`
+  - 侧栏移除：从 `BASIC_USAGE_SIDEBAR` 中移除 Others 条目
+  - 索引页更新：从 `02-basic-usage/index.md` 中移除 Others 引用
+  - 由新的"AI 应用"页面替代
+- **移除"流行词汇（buzz）"模块**
   - 删除内容：`src/content/docs/01-fish-talks/buzz/` 全部文件
   - 删除路由：`src/pages/fish-talks/buzz/` 全部页面
   - 删除测试：`tests/e2e/buzz.spec.ts`
