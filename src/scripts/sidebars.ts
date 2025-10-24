@@ -30,9 +30,7 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
   {
     label: 'Models',
     href: '/fish-talks/models',
-    items: [
-      { label: '模型排名', href: '/fish-talks/models/llm-rankings' },
-    ],
+    items: [{ label: '模型排名', href: '/fish-talks/models/llm-rankings' }],
   },
   {
     label: '术语扫盲',

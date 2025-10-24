@@ -1,11 +1,11 @@
 ---
-title: Use Cherry 
+title: Use Cherry
 description: how to use cherry studio
 ---
 
 ## Chat
 
-## Agent 
+## Agent
 
 ## 知识库
 
