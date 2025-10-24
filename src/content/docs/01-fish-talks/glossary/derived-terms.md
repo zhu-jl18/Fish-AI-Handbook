@@ -9,12 +9,8 @@ description: some derived terms
 - Full-finetuning
 - Adapter-finetuning
 
-## Agent 
+## Agent
 
 ## Vibe Coding
 
 ## Specflow
-
-
-
-

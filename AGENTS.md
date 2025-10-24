@@ -72,8 +72,9 @@
 
 1. 内容：`src/content/docs/<序号-别名>/index.md`（含 `title`）
 2. 路由：`src/pages/<别名>/index.astro` 包裹 `ContentLayout`
-3. 侧栏：在 `src/scripts/sidebars.ts` 注册路径选择与条目
-4. 自检：预览无 404；运行：
+3. 导航：在 `src/config/navigation.ts` 添加导航项，在 `src/scripts/docsMap.ts` 添加映射
+4. 侧栏：在 `src/scripts/sidebars.ts` 注册路径选择与条目
+5. 自检：预览无 404；运行：
    - `npm run preview:search`（含搜索索引的预览）
    - `npm run test:links`（仅站内）
    - `npm run test:e2e`（如有 E2E 变更）
