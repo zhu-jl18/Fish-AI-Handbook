@@ -4,11 +4,10 @@
 
 ## 项目文档
 
-- 开发协作规范：CONTRIBUTING.md
-- AI Agent 规则：AGENTS.md
-- Warp 专用指南：WARP.md
-- Claude 专用指南：CLAUDE.md
-- Cursor 专用指南：CURSOR.md
+- 开发协作规范（人类和AI通用）：CONTRIBUTING.md
+- AI Agent 通用规则（适用Claude Code，Codex等AI Agent）：AGENTS.md
+- Warp 专用规则：WARP.md
+- Cursor 专用规则：.cursor/*
 - PR 模板：.github/PULL_REQUEST_TEMPLATE.md
 - Issue 模板：.github/ISSUE_TEMPLATE/
 
