@@ -9,6 +9,12 @@
 
 ### Added
 
+- **理论学习章节**：新增 07-theoretical 一级章节，专注于 AI 理论知识与学术研究
+  - 内容文件：`src/content/docs/07-theoretical/index.md`（一级页面）
+  - 内容文件：`src/content/docs/07-theoretical/grpo/index.md`（二级页面 GRPO）
+  - 路由文件：`src/pages/theoretical/index.astro` 和 `src/pages/theoretical/grpo/index.astro`
+  - 侧栏更新：在 `src/scripts/sidebars.ts` 新增 `THEORETICAL_SIDEBAR` 常量，并在 `getSidebarForPath` 中注册 `/theoretical` 路径
+  - 访问路径：`/theoretical` 和 `/theoretical/grpo`
 - **配置指南：Claude Code - CCR**：新增 Claude Code 的 CCR 插件三级页面
   - 内容文件：`src/content/docs/99-setup/claude-code/ccr.md`
   - 路由文件：`src/pages/setup/claude-code/ccr.astro`
