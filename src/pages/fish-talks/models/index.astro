@@ -1,14 +1,14 @@
 ---
-import ContentLayout from '../../layouts/ContentLayout.astro'
-import { FISH_TALKS_SIDEBAR } from '../../scripts/sidebars'
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { FISH_TALKS_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '01-fish-talks/llm-rankings')
+const entry = await getEntry('docs', '01-fish-talks/models')
 const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
-  title={entry?.data?.title ?? '模型排行'}
+  title={entry?.data?.title ?? 'Models'}
   section="鱼说必看"
   sidebarItems={FISH_TALKS_SIDEBAR}
   contributors={entry?.data?.contributors}

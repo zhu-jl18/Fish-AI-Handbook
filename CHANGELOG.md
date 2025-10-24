@@ -21,6 +21,15 @@
 
 ### Changed
 
+- **鱼说必看 - 结构重构**：将"模型排行"从二级页面迁移为 Models 下的三级页面
+  - 内容迁移：`llm-rankings/index.md` → `models/llm-rankings.md`（三级单页）
+  - 路由重构：`models.astro` → `models/index.astro`；新增 `models/llm-rankings.astro`
+  - 侧栏更新：Models 改为带子项的分组结构，新增"模型排名"子项
+  - 完全删除旧路径：移除 `01-fish-talks/llm-rankings/` 和 `pages/fish-talks/llm-rankings.astro`
+  - 访问路径：`/fish-talks/models/llm-rankings`
+- **文档规范强化：禁止路径重定向原则**：在 AGENTS.md、CONTRIBUTING.md、README.md 中明确
+  - 内容结构调整时必须完全删除旧路径，重新构建路由，禁止使用重定向
+  - 原则：确保完全一致性、简洁性和可维护性
 - **文档规范强化：三级内容结构陷阱防范**：修正并补充 AGENTS.md、CONTRIBUTING.md、WARP.md、README.md 中关于三级内容结构的表述
   - **问题根因**：原表述"三级 `*.md`"存在歧义，未排除"文件夹+index.md"结构；Astro 的 `getEntry` 对两种结构都识别（容错性），导致错误结构不报错
   - **AGENTS.md（4处）**：
