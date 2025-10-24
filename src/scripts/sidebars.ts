@@ -48,12 +48,12 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
   { label: '基础用法', href: '/basic-usage' },
   { label: 'WebChat', href: '/basic-usage/webchat' },
-  { label: 'AI IDE', href: '/basic-usage/editor-agent' },
+  { label: 'AI IDE', href: '/basic-usage/ide-agent' },
   { label: 'Mobile', href: '/basic-usage/mobile-apps' },
   { label: 'Cherry Studio', href: '/basic-usage/cherrystudio' },
   { label: 'Claude Code', href: '/basic-usage/claude-code' },
   { label: 'Codex', href: '/basic-usage/codex' },
-  { label: 'Others', href: '/basic-usage/others' },
+  { label: 'AI 应用', href: '/basic-usage/ai-apps' },
 ]
 
 export const PROMPTS_SIDEBAR: SidebarSection = [
