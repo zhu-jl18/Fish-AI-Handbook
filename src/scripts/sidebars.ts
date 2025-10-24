@@ -20,6 +20,7 @@ export function getSidebarForPath(path: string): SidebarSection {
   if (path.startsWith('/advanced')) return ADVANCED_TECHNIQUES_SIDEBAR
   if (path.startsWith('/fun')) return FUN_SIDEBAR
   if (path.startsWith('/resources')) return RESOURCES_SIDEBAR
+  if (path.startsWith('/theoretical')) return THEORETICAL_SIDEBAR
   if (path.startsWith('/setup')) return SETUP_SIDEBAR
   return []
 }
@@ -111,6 +112,11 @@ export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '代理节点', href: '/resources/proxy-nodes' },
   { label: '2API', href: '/resources/2api' },
   { label: '云平台', href: '/resources/cloud-platforms' },
+]
+
+export const THEORETICAL_SIDEBAR: SidebarSection = [
+  { label: '理论学习', href: '/theoretical' },
+  { label: 'GRPO', href: '/theoretical/grpo' },
 ]
 
 export const SETUP_SIDEBAR: SidebarSection = [
