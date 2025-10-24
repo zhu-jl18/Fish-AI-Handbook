@@ -96,13 +96,13 @@ const codeConfig: CodeConfig = {
     // 使用项目设计令牌,保持与全局样式一致
     borderRadius: '6px',
     borderWidth: '1px',
-    borderColor: 'var(--code-border)',       // #30363d - GitHub 风格边框
+    borderColor: 'var(--code-border)', // #30363d - GitHub 风格边框
     codeFontSize: '0.92rem',
     codeLineHeight: '1.55',
     codePaddingBlock: '0.75rem',
     codePaddingInline: '1rem',
-    codeBackground: 'var(--code-bg)',        // #0d1117
-    codeForeground: 'var(--code-fg)',        // #c9d1d9
+    codeBackground: 'var(--code-bg)', // #0d1117
+    codeForeground: 'var(--code-fg)', // #c9d1d9
 
     // 滚动条样式 - 复用全局滚动条配置
     scrollbarThumbColor: 'var(--border-color)',
@@ -138,4 +138,3 @@ const codeConfig: CodeConfig = {
 }
 
 export default codeConfig
-

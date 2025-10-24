@@ -8,26 +8,27 @@ description: VsCode的基础配置与使用。
 ## General Settings
 
 两种配置方式,一种通过UI界面,一种通过`settings.json`
+
 ```json
 {}
 ```
-VsCode和有一个叫作工作区的概念。
 
+VsCode和有一个叫作工作区的概念。
 
 ## Useful Plugins
 
 - Markdown All in One
 - [Chinese (Simplified) (简体中文)](Language Pack for Visual Studio Code
-https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
+  https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
 - GitLens
 - GitGraph
-  
-## Advanced 
+
+## Advanced
 
 定制工作区:
 
-
 进阶插件:
+
 - Docker
 - WSL
 - Remote Codespace

@@ -11,8 +11,29 @@
 ## 内容结构与 Frontmatter
 
 - 深度最多 3 级：
-  - 一级/二级：文件夹 + index.md
-  - 三级：单页 md
+  - 一级/二级：文件夹 + index.md（可含子页面）
+  - 三级：单页 `.md` 文件（**禁止**使用"文件夹+index.md"）
+
+**正确示例**：
+
+```
+03-prompts/
+├── index.md              # 一级
+├── context/
+│   ├── index.md          # 二级
+│   ├── dialogue-levels.md  # 三级 ✓
+│   └── request-body.md     # 三级 ✓
+```
+
+**错误示例**（勿模仿）：
+
+```
+03-prompts/
+├── context/
+│   ├── dialogue-levels/
+│   │   └── index.md      # 三级用文件夹 ✗
+```
+
 - 所有内容文件必须包含 frontmatter：
 
 ```yaml
@@ -44,6 +65,16 @@ description: 简短描述（必填，未填将导致构建失败）
 
 - 修改：编辑对应 Markdown/astro
 - 删除：删除 Markdown 与 astro 页面，并从 `sidebars.ts` 移除对应链接，防止死链
+
+4. 结构调整与迁移（强制规范）
+
+**禁止使用路径重定向**，进行内容结构调整时必须遵循以下原则：
+
+- **完全删除旧路径**：同步删除旧的内容目录（`src/content/docs/**`）和路由文件（`src/pages/**`）
+- **重新构建新路由**：按新结构创建内容和路由，确保符合三级规范（三级必须使用单页 .md）
+- **更新所有引用**：修改侧栏配置、站内链接、测试用例中的路径引用
+- **禁止重定向**：不得在 `vercel.json`、`astro.config.mjs` 或其他配置文件中添加 301/302/307 等重定向规则
+- **质量保证**：确保完全一致性、简洁性和可维护性，避免路径歧义和维护负担
 
 ## 特殊约定
 
@@ -137,6 +168,17 @@ npm run test:e2e:headed
 - 路由 `.astro` 与内容路径一致（getEntry）
 - 侧栏/导航是否同步更新
 - 构建是否通过、无 404 与死链
+
+## 结构反模式（禁止）
+
+- ❌ 三级使用"文件夹+index.md"（如 `glossary/ai-concepts/index.md`）
+- ❌ 超过三级深度（如 `prompts/context/levels/basic/index.md`）
+- ❌ 二级路径与三级路径重复（如同时存在 `01-fish-talks/model-params/` 和 `01-fish-talks/glossary/model-params/`）
+
+**原因**：
+
+- Astro 的 `getEntry` 对两种结构都能识别，不会报错
+- 但"文件夹+index.md"用于三级会破坏层级约定，导致后续维护混乱
 
 ## 常见问题
 
