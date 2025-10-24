@@ -20,29 +20,27 @@ export function getSidebarForPath(path: string): SidebarSection {
   if (path.startsWith('/advanced')) return ADVANCED_TECHNIQUES_SIDEBAR
   if (path.startsWith('/fun')) return FUN_SIDEBAR
   if (path.startsWith('/resources')) return RESOURCES_SIDEBAR
+  if (path.startsWith('/theoretical')) return THEORETICAL_SIDEBAR
   if (path.startsWith('/setup')) return SETUP_SIDEBAR
   return []
 }
 
 export const FISH_TALKS_SIDEBAR: SidebarSection = [
   { label: '鱼说必看', href: '/fish-talks' },
-  { label: 'Models', href: '/fish-talks/models' },
-  { label: '模型排行', href: '/fish-talks/llm-rankings' },
+  {
+    label: 'Models',
+    href: '/fish-talks/models',
+    items: [
+      { label: '模型排名', href: '/fish-talks/models/llm-rankings' },
+    ],
+  },
   {
     label: '术语扫盲',
     href: '/fish-talks/glossary',
     items: [
       { label: '模型参数', href: '/fish-talks/glossary/model-params' },
       { label: 'AI概念', href: '/fish-talks/glossary/ai-concepts' },
-    ],
-  },
-  {
-    label: '流行词汇',
-    href: '/fish-talks/buzz',
-    items: [
-      { label: 'Vibe Coding', href: '/fish-talks/buzz/vibe-coding' },
-      { label: 'Agent', href: '/fish-talks/buzz/agent' },
-      { label: 'Workflow', href: '/fish-talks/buzz/workflow' },
+      { label: '衍生词', href: '/fish-talks/glossary/derived-terms' },
     ],
   },
 ]
@@ -50,12 +48,12 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
   { label: '基础用法', href: '/basic-usage' },
   { label: 'WebChat', href: '/basic-usage/webchat' },
-  { label: 'AI IDE', href: '/basic-usage/editor-agent' },
+  { label: 'AI IDE', href: '/basic-usage/ide-agent' },
   { label: 'Mobile', href: '/basic-usage/mobile-apps' },
   { label: 'Cherry Studio', href: '/basic-usage/cherrystudio' },
   { label: 'Claude Code', href: '/basic-usage/claude-code' },
   { label: 'Codex', href: '/basic-usage/codex' },
-  { label: 'Others', href: '/basic-usage/others' },
+  { label: 'AI 应用', href: '/basic-usage/ai-apps' },
 ]
 
 export const PROMPTS_SIDEBAR: SidebarSection = [
@@ -116,6 +114,11 @@ export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '云平台', href: '/resources/cloud-platforms' },
 ]
 
+export const THEORETICAL_SIDEBAR: SidebarSection = [
+  { label: '理论学习', href: '/theoretical' },
+  { label: 'GRPO', href: '/theoretical/grpo' },
+]
+
 export const SETUP_SIDEBAR: SidebarSection = [
   { label: '配置指南', href: '/setup' },
   { label: 'Terminal', href: '/setup/terminal' },
@@ -127,9 +130,7 @@ export const SETUP_SIDEBAR: SidebarSection = [
   {
     label: 'Claude Code',
     href: '/setup/claude-code',
-    items: [
-      { label: 'CCR', href: '/setup/claude-code/ccr' },
-    ],
+    items: [{ label: 'CCR', href: '/setup/claude-code/ccr' }],
   },
   { label: 'Codex', href: '/setup/codex' },
   { label: 'MCP Router', href: '/setup/mcp-router' },
