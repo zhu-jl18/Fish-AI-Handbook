@@ -4,11 +4,10 @@
 
 ## 项目文档
 
-- 开发协作规范：CONTRIBUTING.md
-- AI Agent 规则：AGENTS.md
-- Warp 专用指南：WARP.md
-- Claude 专用指南：CLAUDE.md
-- Cursor 专用指南：CURSOR.md
+- 开发协作规范（人类和AI通用）：CONTRIBUTING.md
+- AI Agent 通用规则（适用Claude Code，Codex等AI Agent）：AGENTS.md
+- Warp 专用规则：WARP.md
+- Cursor 专用规则：.cursor/*
 - PR 模板：.github/PULL_REQUEST_TEMPLATE.md
 - Issue 模板：.github/ISSUE_TEMPLATE/
 
@@ -53,6 +52,8 @@ dist/                    # 构建输出（由 build 生成）
 - 仅改侧栏未建路由页面，导致 404
 - frontmatter 缺 `description` 导致构建失败
 - 路由与内容路径不一致，`getEntry` 读取失败
+- 三级误用"文件夹+index.md"（应为单页 .md）；Astro 不报错但违反层级约定
+- **使用重定向而非重新构建路由**：进行结构调整时，必须删除旧路径并按新结构重建路由，同时更新侧栏、链接与测试，禁止使用路径重定向，以保证一致性与可维护性
 - 在根提交 `dist/`、`.astro/`、或工具本地数据
 
 ## 变更记录
