@@ -33,9 +33,9 @@ description: 基础用法总览：WebChat、IDE、CLI、APP、Mobile 以及 Cher
 推荐阅读顺序：
 
 - WebChat：/basic-usage/webchat
-- AI IDE：/basic-usage/editor-agent
+- AI IDE：/basic-usage/ide-agent
 - Mobile：/basic-usage/mobile-apps
 - Cherry Studio：/basic-usage/cherrystudio
 - Claude Code：/basic-usage/claude-code
 - Codex：/basic-usage/codex
-- Others：/basic-usage/others
+- AI 应用：/basic-usage/ai-apps
