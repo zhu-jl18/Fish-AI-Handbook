@@ -11,7 +11,6 @@ description: Who is better?
 
 介绍一些榜单 SWE-Bench
 
-
 ## LMArena
 
 <!-- TODO: add LMArena rankings website link-->

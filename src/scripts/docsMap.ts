@@ -5,6 +5,7 @@ export const DOCS_MAP = {
   advanced: '04-advanced-techniques',
   fun: '05-fun',
   resources: '06-resources',
+  theoretical: '07-theoretical',
   setup: '99-setup',
 } as const
 
