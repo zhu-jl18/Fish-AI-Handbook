@@ -1,6 +1,6 @@
 ---
-title: Codex
-description: 拉胯的cli配上超一流的模型。
+title: 'Codex'
+description: '拉胯的cli配上超一流的模型。'
 ---
 
 ## Installation

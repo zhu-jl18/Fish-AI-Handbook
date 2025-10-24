@@ -23,6 +23,7 @@ src/config/
 包含站点的核心元数据，用于 SEO、社交分享、页面标题等。
 
 **配置项：**
+
 - `url` - 站点完整 URL（用于 sitemap、canonical 等）
 - `title` - 站点简称（用于 Astro config）
 - `titleFull` - 站点全称（用于页面标题）
@@ -34,6 +35,7 @@ src/config/
 - `robots` - SEO robots 策略
 
 **示例：**
+
 ```typescript
 import { siteConfig, getRobotsContent } from '@/config'
 
@@ -51,15 +53,17 @@ const robotsContent = getRobotsContent(siteConfig.robots)
 管理顶部导航栏的所有链接与路由映射。
 
 **配置项：**
+
 - `items` - 导航项数组（`{ key, href, label }`）
 - `validKeys` - 所有有效的导航键集合
 
 **示例：**
+
 ```typescript
 import { navigationConfig, getCurrentNavKey } from '@/config'
 
 // 遍历导航项
-navigationConfig.items.map(item => {
+navigationConfig.items.map((item) => {
   console.log(item.key, item.href, item.label)
 })
 
@@ -80,6 +84,7 @@ const currentKey = getCurrentNavKey('/fish-talks/models')
 **配置分类：**
 
 #### 排版参数
+
 - `fontSizeBase` - 正文基础字号
 - `fontSizeLg` - 大屏字号
 - `lineHeightBase` - 正文行高
@@ -87,22 +92,26 @@ const currentKey = getCurrentNavKey('/fish-talks/models')
 - `sectionSpacing` - 章节间距
 
 #### 布局参数
+
 - `layoutMaxWidth` - 整体布局最大宽度
 - `contentMaxWidth` - 正文区域最大宽度
 - `sidebarWidth` - 侧边栏宽度
 - `layoutGap` - 布局元素间距
 
 #### Header 参数
+
 - `headerHeight` - Header 高度
 - `headerTop` - Header 粘性定位的 top 值
 
 #### 响应式断点
+
 - `breakpoints.mobile` - 移动端断点（768px）
 - `breakpoints.tablet` - 平板端断点（1024px）
 - `breakpoints.laptop` - 笔记本断点（1200px）
 - `breakpoints.desktop` - 桌面端断点（1440px）
 
 **示例：**
+
 ```typescript
 import { theme } from '@/config'
 
@@ -125,12 +134,14 @@ const style = `
 配置 Expressive Code 插件的样式与行为。
 
 **配置项：**
+
 - `themes` - 代码块主题数组
 - `defaultProps` - 默认属性（换行、缩进）
 - `styleOverrides` - 样式覆写（字号、内边距、圆角）
 - `frames` - 功能配置（复制按钮、文件名提取）
 
 **示例：**
+
 ```typescript
 import { codeConfig } from '@/config'
 
@@ -152,13 +163,13 @@ astroExpressiveCode({
 推荐从 `index.ts` 统一导入：
 
 ```typescript
-import { 
-  siteConfig, 
-  navigationConfig, 
-  theme, 
+import {
+  siteConfig,
+  navigationConfig,
+  theme,
   codeConfig,
   getCurrentNavKey,
-  getRobotsContent 
+  getRobotsContent,
 } from '@/config'
 ```
 
@@ -201,27 +212,31 @@ function processSiteConfig(config: SiteConfig) {
 ## 🚀 最佳实践
 
 ### 1. 修改配置
+
 - ✅ **直接修改** `src/config/*.ts` 中的配置对象
 - ❌ **不要硬编码** 在组件中直接写死配置值
 
 ### 2. 添加新配置
+
 ```typescript
 // 在对应的配置文件中添加
 export type SiteConfig = {
   // ... 现有配置
-  newField: string  // 新增字段
+  newField: string // 新增字段
 }
 
 const siteConfig: SiteConfig = {
   // ... 现有配置
-  newField: 'value'
+  newField: 'value',
 }
 ```
 
 ### 3. 类型安全
+
 所有配置都有完整的 TypeScript 类型定义，修改时会自动检查类型错误。
 
 ### 4. 与 CSS 变量同步
+
 如果修改了 `theme.ts` 中的布局参数，确保同步更新 `src/styles/global.css` 中的对应 CSS 变量。
 
 ---
@@ -245,7 +260,7 @@ const siteConfig: SiteConfig = {
 可创建 `config.dev.ts`、`config.prod.ts`，并在构建时动态导入：
 
 ```typescript
-const config = import.meta.env.PROD 
+const config = import.meta.env.PROD
   ? await import('./config.prod')
   : await import('./config.dev')
 ```
@@ -269,4 +284,3 @@ const config = import.meta.env.PROD
 - [CONTRIBUTING.md](../../CONTRIBUTING.md) - 贡献指南
 - [README.md](../../README.md) - 项目说明
 - [AGENTS.md](../../AGENTS.md) - AI Agent 行为规则
-

@@ -14,4 +14,3 @@ export type { Theme } from './theme'
 
 export { default as codeConfig } from './code'
 export type { CodeConfig } from './code'
-

@@ -12,27 +12,37 @@ description: 终端工具安装与配置全指南
 ## General Use
 
 首先如果是玩Linux的自然不用我来教了,这里就默认都是Windows系统了,那么只推荐一个就是微软官方的 **Windows Terminal**(配置和集成都十分地方便),安装形式我只推荐命令行安装(因为其他安装方式真的会有bug):
+
 ```powershell
 winget install Microsoft.WindowsTerminal
 ```
+
 接下来安装 **powershell7**(原始的PowerShell实在太老旧了,并且cmd也太古老了,很多命令都不支持):
+
 ```powershell
 winget install Microsoft.PowerShell
 ```
 
 终端美化分为两部分,一部分是对wt的美化,一部分是对集成的pwsh7的美化。对于wt,有可视化的配置选项,也可以直接抄我的json:
+
 ```json
 {}
 ```
+
 对于pwsh7的美化,自然是要接入**oh-my-posh**了,先安装:
+
 ```powershell
 winget install JanDeDobbeleer.OhMyPosh -s winget
 ```
+
 然后让oh-my-posh接管pwsh7:
+
 ```powershell
 notepad $PROFILE
 ```
+
 配置:
+
 ```powershell
 oh-my-posh init pwsh | Invoke-Expression
 ```
@@ -50,8 +60,9 @@ Undoubtedly是这个:**Terminus**,Github Student Pack 免费领取会员,很方�
 ## WSL Specified
 
 这个本质上是个Linux系统,我推荐 `Fish Shell` + `oh-my-posh`的组合,由于Linux环境下配置实在是太简单了,直接参照官方文档复制如下命令即可。
+
 ```bash
-sudo 
+sudo
 ```
 
 ## 其他碎碎念
@@ -59,13 +70,14 @@ sudo
 一些常见地小技巧:
 
 配置代理
+
 ```powershell
 http_proxy: http://127.0.0.1:7890
 https_proxy: https//127.0.0.1:7890
 ```
+
 临时导入环境变量:
+
 ```bash
 set $VAR_NAME = "your-value"
 ```
-
-

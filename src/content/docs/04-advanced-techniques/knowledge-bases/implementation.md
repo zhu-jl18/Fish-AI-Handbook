@@ -80,6 +80,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 splitter = RecursiveCharacterTextSplitter
 ```
+
 ### 5. 元数据设计
 
 为每个文档块添加元数据，方便后续过滤和追溯。
@@ -99,6 +100,7 @@ splitter = RecursiveCharacterTextSplitter
   "chunk_index": "当前块在文档中的序号"
 }
 ```
+
 ---
 
 ## 向量数据库选型
@@ -154,6 +156,7 @@ import chromadb
 client = chromadb.Client()
 collection = client.create_collection
 ```
+
 **生产阶段**：
 
 - 优先考虑 **Qdrant**（开源 + 高性能）或 **Pinecone**（托管服务）
@@ -173,6 +176,7 @@ client = OpenAI()
 
 response = client.embeddings.create
 ```
+
 **方案 2：本地部署开源模型**
 
 ```python
@@ -181,6 +185,7 @@ from sentence_transformers import SentenceTransformer
 model = SentenceTransformer
 embeddings = model.encode
 ```
+
 **选择建议**：
 
 - API：快速、无需 GPU、成本可预测
@@ -198,6 +203,7 @@ for i in range, BATCH_SIZE):
     embeddings = embed_model.encode
     vector_db.add
 ```
+
 **并发加速**：
 
 ```python
@@ -207,6 +213,7 @@ with ThreadPoolExecutor as executor:
     futures = [executor.submit
                for batch in batches]
 ```
+
 ### 版本管理
 
 **数据版本化**：
@@ -221,6 +228,7 @@ with ThreadPoolExecutor as executor:
 collection_v1 = client.get_or_create_collection
 collection_v2 = client.get_or_create_collection
 ```
+
 ---
 
 ## 检索与重排实践
@@ -242,6 +250,7 @@ bm25_retriever = BM25Retriever.from_documents
 # 融合检索器（权重可调）
 ensemble_retriever = EnsembleRetriever
 ```
+
 ### 元数据过滤
 
 **按时间、类别等条件过滤**：
@@ -249,6 +258,7 @@ ensemble_retriever = EnsembleRetriever
 ```python
 results = vectorstore.similarity_search
 ```
+
 ### 重排序集成
 
 **使用 Cohere Rerank**：
@@ -260,6 +270,7 @@ from langchain.retrievers.document_compressors import CohereRerank
 compressor = CohereRerank
 compression_retriever = ContextualCompressionRetriever
 ```
+
 ### 缓存策略
 
 **查询缓存**：
@@ -288,6 +299,7 @@ from ragas.metrics import
 
 results = evaluate
 ```
+
 ### 在线 A/B 测试
 
 **分流策略**：

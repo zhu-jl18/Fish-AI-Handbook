@@ -9,14 +9,61 @@
 
 ### Added
 
+- **基础用法：AI 应用**：新增 "AI 应用" 二级页面（内容、路由、侧栏）
+  - 内容文件：`src/content/docs/02-basic-usage/ai-apps/index.md`
+  - 路由文件：`src/pages/basic-usage/ai-apps.astro`
+  - 侧栏更新：在 `BASIC_USAGE_SIDEBAR` 中添加 AI 应用条目，替代原 Others 页面
+  - 页面涵盖生产力工具、创意工具、专业工具等 AI 应用分类与使用建议
+- **理论学习章节**：新增 07-theoretical 一级章节，专注于 AI 理论知识与学术研究
+  - 内容文件：`src/content/docs/07-theoretical/index.md`（一级页面）
+  - 内容文件：`src/content/docs/07-theoretical/grpo/index.md`（二级页面 GRPO）
+  - 路由文件：`src/pages/theoretical/index.astro` 和 `src/pages/theoretical/grpo/index.astro`
+  - 侧栏更新：在 `src/scripts/sidebars.ts` 新增 `THEORETICAL_SIDEBAR` 常量，并在 `getSidebarForPath` 中注册 `/theoretical` 路径
+  - 访问路径：`/theoretical` 和 `/theoretical/grpo`
 - **配置指南：Claude Code - CCR**：新增 Claude Code 的 CCR 插件三级页面
   - 内容文件：`src/content/docs/99-setup/claude-code/ccr.md`
   - 路由文件：`src/pages/setup/claude-code/ccr.astro`
   - 侧栏更新：将 `SETUP_SIDEBAR` 中的 Claude Code 从单项改为带子项的分组结构
   - 页面内容包含插件简介、安装、基础配置、高级用法、常见问题等章节（占位框架）
+ - **术语扫盲：衍生词**：新增 glossary 下三级页面“衍生词”（derived-terms）与路由
+  - 内容文件：`src/content/docs/01-fish-talks/glossary/derived-terms.md`
+  - 路由文件：`src/pages/fish-talks/glossary/derived-terms.astro`
+  - 侧栏更新：在“术语扫盲”分组下新增子项“衍生词”
 
 ### Changed
 
+- **基础用法：编辑器重命名**：将 AI IDE 从 editor-agent 重命名为 ide-agent，统一命名规范
+  - 内容迁移：`src/content/docs/02-basic-usage/editor-agent/` → `ide-agent/`
+  - 路由重构：`src/pages/basic-usage/editor-agent.astro` → `ide-agent.astro`
+  - 侧栏更新：`BASIC_USAGE_SIDEBAR` 中路径从 `/basic-usage/editor-agent` 改为 `/basic-usage/ide-agent`
+  - 索引页更新：`02-basic-usage/index.md` 中引用链接同步更新
+  - 完全删除旧路径，无重定向
+- **鱼说必看 - 结构重构**：将"模型排行"从二级页面迁移为 Models 下的三级页面
+  - 内容迁移：`llm-rankings/index.md` → `models/llm-rankings.md`（三级单页）
+  - 路由重构：`models.astro` → `models/index.astro`；新增 `models/llm-rankings.astro`
+  - 侧栏更新：Models 改为带子项的分组结构，新增"模型排名"子项
+  - 完全删除旧路径：移除 `01-fish-talks/llm-rankings/` 和 `pages/fish-talks/llm-rankings.astro`
+  - 访问路径：`/fish-talks/models/llm-rankings`
+- **文档规范强化：禁止路径重定向原则**：在 AGENTS.md、CONTRIBUTING.md、README.md 中明确
+  - 内容结构调整时必须完全删除旧路径，重新构建路由，禁止使用重定向
+  - 原则：确保完全一致性、简洁性和可维护性
+- **文档规范强化：三级内容结构陷阱防范**：修正并补充 AGENTS.md、CONTRIBUTING.md、WARP.md、README.md 中关于三级内容结构的表述
+  - **问题根因**：原表述"三级 `*.md`"存在歧义，未排除"文件夹+index.md"结构；Astro 的 `getEntry` 对两种结构都识别（容错性），导致错误结构不报错
+  - **AGENTS.md（4处）**：
+    - 修正"新增二级/三级"表述，明确"三级：单页 `.md` 文件（禁止使用'文件夹+index.md'）"
+    - 新增专节"3.1 三级结构陷阱与强制约束"，包含正误结构对比、Astro 容错性警示、叶子节点性质说明
+    - 质量门禁补充"三级必须单页 .md，不得用文件夹+index.md"约束
+    - 故障排查新增"三级结构错误"诊断条目
+  - **CONTRIBUTING.md（2处）**：补充正确/错误示例对比；新增"结构反模式"章节，明确三种禁止模式及原因
+  - **WARP.md（2处）**：层级限制补充 Astro 容错性陷阱警示；常见陷阱表格新增"三级结构错误"条目
+  - **README.md（1处）**："常见坑与反模式"新增三级结构错误提示
+  - **效果**：统一使用"单页 `.md`"术语，提供可视化对比，强调 Astro 不报错但违反规范的隐蔽错误
+- **鱼说必看 - 术语扫盲三级页面规范化**：修复 `glossary` 下第三级页面文件组织形式
+  - 扁平化：`glossary/ai-concepts/index.md` → `glossary/ai-concepts.md`（三级为单页 .md）
+  - 扁平化：`glossary/model-params/index.md` → `glossary/model-params.md`（三级为单页 .md）
+  - 清理重复路径：删除错误的二级路径 `01-fish-talks/model-params/`（与三级路径重复）
+  - 路由与侧栏保持不变（Astro `getEntry` 对文件/文件夹结构透明）
+  - 符合项目规范：一级/二级为文件夹+index.md，三级为单页 .md（见 CONTRIBUTING.md）
 - **Claude Code 路由结构重构**：将二级页面改为支持三级子页面的目录结构
   - 迁移：`src/pages/setup/claude-code.astro` → `src/pages/setup/claude-code/index.astro`
   - 更新导入路径层级：从 `../../` 提升为 `../../../`（因目录层级增加）
@@ -29,7 +76,16 @@
 
 ### Removed
 
-- 无
+- **基础用法：移除 Others 页面**
+  - 删除内容：`src/content/docs/02-basic-usage/others/` 文件夹及 `index.md`
+  - 删除路由：`src/pages/basic-usage/others.astro`
+  - 侧栏移除：从 `BASIC_USAGE_SIDEBAR` 中移除 Others 条目
+  - 索引页更新：从 `02-basic-usage/index.md` 中移除 Others 引用
+  - 由新的"AI 应用"页面替代
+- **移除"流行词汇（buzz）"模块**
+  - 删除内容：`src/content/docs/01-fish-talks/buzz/` 全部文件
+  - 删除路由：`src/pages/fish-talks/buzz/` 全部页面
+  - 删除测试：`tests/e2e/buzz.spec.ts`
 
 ## [2025-10-23]
 
