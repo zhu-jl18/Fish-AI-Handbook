@@ -30,6 +30,7 @@ const navItems: NavItem[] = [
   { key: 'advanced', href: '/advanced', label: '进阶玩法' },
   { key: 'fun', href: '/fun', label: '好玩的' },
   { key: 'resources', href: '/resources', label: '资源合集' },
+  { key: 'theoretical', href: '/theoretical', label: '理论学习' },
   { key: 'setup', href: '/setup', label: '配置指南' },
 ]
 
