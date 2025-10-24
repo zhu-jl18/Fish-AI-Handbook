@@ -26,8 +26,13 @@ export function getSidebarForPath(path: string): SidebarSection {
 
 export const FISH_TALKS_SIDEBAR: SidebarSection = [
   { label: '鱼说必看', href: '/fish-talks' },
-  { label: 'Models', href: '/fish-talks/models' },
-  { label: '模型排行', href: '/fish-talks/llm-rankings' },
+  {
+    label: 'Models',
+    href: '/fish-talks/models',
+    items: [
+      { label: '模型排名', href: '/fish-talks/models/llm-rankings' },
+    ],
+  },
   {
     label: '术语扫盲',
     href: '/fish-talks/glossary',
