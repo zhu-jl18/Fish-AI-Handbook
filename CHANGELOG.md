@@ -9,6 +9,16 @@
 
 ### Added
 
+- **全局组件：页脚**：新增页脚组件，显示版权信息和相关链接
+  - 组件文件：`src/components/Footer.astro`
+  - 集成位置：`src/layouts/BaseLayout.astro`
+  - 包含内容：版权信息 (© 2025 Fish AI Handbook)、Powered by GitHub & Vercel、Status 占位符、Contact 链接
+  - 布局特点：单行水平居中布局，使用 `·` 分隔符，无边框和特殊背景
+  - 间距优化：顶部 3rem（离正文）、底部 2rem（离底边）
+  - 功能特性：Status 为不可点击占位符（待后端实现），Contact 链接指向 GitHub Issues
+  - E2E 测试：新增 `tests/e2e/footer.spec.ts`，验证渲染、链接和布局
+  - 响应式支持：768px 以下切换为垂直居中布局
+
 - **好玩的：Fast API**：新增 "Fast API" 二级页面（内容、路由、侧栏）
   - 内容文件：`src/content/docs/05-fun/fast-api/index.md`
   - 路由文件：`src/pages/fun/fast-api.astro`
@@ -17,21 +27,31 @@
 
 ### Changed
 
+- **全局布局：页脚固定在底部**：调整全局布局以支持页脚始终固定在页面底部
+  - 修改文件：`src/styles/global.css`、`src/layouts/ContentLayout.astro`、`src/pages/index.astro`
+  - 布局方案：使用 flexbox，body 设置 `display: flex; flex-direction: column; min-height: 100%`
+  - 内容区域设置 `flex: 1` 自动填充剩余空间，页脚设置 `margin-top: auto` 自动推到底部
+  - 确保短页面和长页面均正常显示
+
 - **好玩的：SillyTavern 拼写修正与内容完善**：将 "Silver Trivern" 修正为 "SillyTavern"
   - 文件夹：`silver-trivern/` → `sillytavern/`
   - 路由：`silver-trivern.astro` → `sillytavern.astro`
   - 路径：`/fun/silver-trivern` → `/fun/sillytavern`
   - 侧栏显示：`Silver Trivern` → `SillyTavern`
   - 新增约 300 字详细介绍（核心特性、适用场景等）
-  
- - **好玩的：Fast API 二级结构规范化**：将二级页面从单页 `fast-api.md` 迁移为 `fast-api/index.md`
-   - 内容迁移：`src/content/docs/05-fun/fast-api.md` → `src/content/docs/05-fun/fast-api/index.md`
-   - 路由与侧栏：路径保持 `/fun/fast-api`，与新结构完全一致
-   - 旧路径已删除，不做重定向（遵循结构调整强制规范）
+- **好玩的：Fast API 二级结构规范化**：将二级页面从单页 `fast-api.md` 迁移为 `fast-api/index.md`
+  - 内容迁移：`src/content/docs/05-fun/fast-api.md` → `src/content/docs/05-fun/fast-api/index.md`
+  - 路由与侧栏：路径保持 `/fun/fast-api`，与新结构完全一致
+  - 旧路径已删除，不做重定向（遵循结构调整强制规范）
 
 ### Fixed
 
-- 无
+- **右侧边栏：移除滚动条限制**：移除右侧边栏的 `max-height` 和 `overflow-y` 限制，允许页面结构、贡献者和本文目录完全展开，不再出现滚动条
+- **列表样式：嵌套列表间距修复**：恢复并完善嵌套列表的间距规则，确保层级清晰
+  - 修改文件：`src/styles/global.css`
+  - 添加 `li > ul/ol` 样式：父项到第一个子项间距 0.25rem，嵌套列表整体下边距 0.5rem
+  - 添加 `li li` 样式：嵌套子项间距紧凑（0.4rem）
+  - 确保第一层项目间距（0.65rem）与嵌套子项间距有明显区分
 
 ### Removed
 
