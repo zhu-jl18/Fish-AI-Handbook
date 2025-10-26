@@ -1,0 +1,88 @@
+---
+import { siteConfig } from '../config/index'
+
+const currentYear = new Date().getFullYear()
+const githubRepo = 'https://github.com/zhu-jl18/Fish-AI-Handbook-styles'
+---
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <span class="copyright">© {currentYear} {siteConfig.logoName}</span>
+    <span class="separator">·</span>
+    <span class="powered-by">
+      Powered by
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+        GitHub
+      </a>
+      &
+      <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
+        Vercel
+      </a>
+    </span>
+    <span class="separator">·</span>
+    <span class="status-placeholder" title="Status 功能即将上线">Status</span>
+    <span class="separator">·</span>
+    <a href={`${githubRepo}/issues`} target="_blank" rel="noopener noreferrer">
+      Contact
+    </a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    width: 100%;
+    padding: 3rem 0 2rem 0;
+    margin-top: auto;
+  }
+
+  .footer-container {
+    max-width: var(--layout-max-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+  }
+
+  .copyright {
+    white-space: nowrap;
+  }
+
+  .powered-by {
+    white-space: nowrap;
+  }
+
+  .powered-by a,
+  .footer-container > a {
+    color: var(--link-color);
+    border: none;
+    transition: color var(--motion-duration-sm) var(--motion-ease-standard);
+  }
+
+  .powered-by a:hover,
+  .footer-container > a:hover {
+    color: var(--link-hover-color);
+  }
+
+  .status-placeholder {
+    opacity: 0.4;
+    cursor: not-allowed;
+    user-select: none;
+  }
+
+  .separator {
+    opacity: 0.5;
+  }
+
+  @media (max-width: 768px) {
+    .footer-container {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+</style>
