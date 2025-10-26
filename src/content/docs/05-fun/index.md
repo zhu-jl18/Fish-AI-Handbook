@@ -7,3 +7,4 @@ description: 一些好玩的东西
 - [破限越狱](/fun/llm-unlocking)
 - [酒馆](/fun/sillytavern)
 - [n8n](/fun/n8n)
+- [Ollama](/fun/ollama)
