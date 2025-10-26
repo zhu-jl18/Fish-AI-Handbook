@@ -7,6 +7,38 @@
 
 ## [Unreleased]
 
+### Added
+
+- **好玩的：Fast API**：新增 "Fast API" 二级页面（内容、路由、侧栏）
+  - 内容文件：`src/content/docs/05-fun/fast-api/index.md`
+  - 路由文件：`src/pages/fun/fast-api.astro`
+  - 侧栏更新：在 `FUN_SIDEBAR` 中添加 Fast API 条目
+  - 页面涵盖 Fast API 核心特点、AI 应用场景、快速开始示例和资源链接
+
+### Changed
+
+- **好玩的：SillyTavern 拼写修正与内容完善**：将 "Silver Trivern" 修正为 "SillyTavern"
+  - 文件夹：`silver-trivern/` → `sillytavern/`
+  - 路由：`silver-trivern.astro` → `sillytavern.astro`
+  - 路径：`/fun/silver-trivern` → `/fun/sillytavern`
+  - 侧栏显示：`Silver Trivern` → `SillyTavern`
+  - 新增约 300 字详细介绍（核心特性、适用场景等）
+  
+ - **好玩的：Fast API 二级结构规范化**：将二级页面从单页 `fast-api.md` 迁移为 `fast-api/index.md`
+   - 内容迁移：`src/content/docs/05-fun/fast-api.md` → `src/content/docs/05-fun/fast-api/index.md`
+   - 路由与侧栏：路径保持 `/fun/fast-api`，与新结构完全一致
+   - 旧路径已删除，不做重定向（遵循结构调整强制规范）
+
+### Fixed
+
+- 无
+
+### Removed
+
+- 无
+
+## [2025-10-26]
+
 ### Fixed
 
 - **理论学习章节导航**：修复理论学习（07-theoretical）章节缺失顶部导航入口的问题
