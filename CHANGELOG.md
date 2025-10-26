@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- **样式：h3 标题间距优化**：调整三级标题（h3）的 margin-bottom，改善与下方内容的视觉间距
+  - 修改文件：`src/layouts/ContentLayout.astro`
+  - 样式变更：`.content-inner :global(h3)` 的 `margin-bottom` 从 `0.5rem` 增加到 `1.1rem`
+  - 效果说明：h3 标题与后续段落/列表的间距从约 8px 增加到约 17.6px，提升可读性和视觉层次
+  - 背景说明：全局 CSS 中的 h3 设置被 ContentLayout 中的局部样式覆盖，因此在 ContentLayout 中进行调整
+
 ### Added
 
 - **好玩的：Ollama**：新增 "Ollama" 二级页面（内容、路由、侧栏）
