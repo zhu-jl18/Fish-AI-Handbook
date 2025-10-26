@@ -61,11 +61,13 @@ test.describe('页脚组件', () => {
   test('Contact 链接可点击且指向正确', async ({ page }) => {
     await page.goto('/')
 
-    const contactLink = page.locator('.footer-container > a').filter({ hasText: 'Contact' })
+    const contactLink = page
+      .locator('.footer-container > a')
+      .filter({ hasText: 'Contact' })
     await expect(contactLink).toBeVisible()
     await expect(contactLink).toHaveAttribute(
       'href',
-      'https://github.com/zhu-jl18/Fish-AI-Handbook-styles/issues'
+      'https://github.com/zhu-jl18/Fish-AI-Handbook-styles/issues',
     )
     await expect(contactLink).toHaveAttribute('target', '_blank')
     await expect(contactLink).toHaveAttribute('rel', 'noopener noreferrer')
@@ -77,7 +79,7 @@ test.describe('页脚组件', () => {
     const separators = page.locator('.separator')
     await expect(separators.first()).toBeVisible()
     await expect(separators.first()).toContainText('·')
-    
+
     // 验证有多个分隔符
     const count = await separators.count()
     expect(count).toBeGreaterThan(0)

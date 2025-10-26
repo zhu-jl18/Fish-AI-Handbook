@@ -16,6 +16,7 @@ output: gold💰
 ## Navigation
 
 The content is organized as follows:
+
 - [交互基础](/prompts/interaction-basics)
   - [Necessity](/prompts/interaction-basics/basics)
   - [好与坏](/prompts/interaction-basics/good-vs-bad)
