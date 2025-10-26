@@ -18,9 +18,9 @@
 
 ```
 03-prompts/
-├── index.md              # 一级
+├── index.md              # 一级 ✓
 ├── context/
-│   ├── index.md          # 二级
+│   ├── index.md          # 二级 ✓
 │   ├── dialogue-levels.md  # 三级 ✓
 │   └── request-body.md     # 三级 ✓
 ```
@@ -33,6 +33,13 @@
 │   ├── dialogue-levels/
 │   │   └── index.md      # 三级用文件夹 ✗
 ```
+
+```
+03-prompts/
+└── context.md     # 二级用单文件 ✗
+```
+
+
 
 - 所有内容文件必须包含 frontmatter：
 
@@ -173,6 +180,7 @@ npm run test:e2e:headed
 
 ## 结构反模式（禁止）
 
+- ❌ 二级使用"名字.md"（如 `03-prompts/best-practices.md`）
 - ❌ 三级使用"文件夹+index.md"（如 `glossary/ai-concepts/index.md`）
 - ❌ 超过三级深度（如 `prompts/context/levels/basic/index.md`）
 - ❌ 二级路径与三级路径重复（如同时存在 `01-fish-talks/model-params/` 和 `01-fish-talks/glossary/model-params/`）

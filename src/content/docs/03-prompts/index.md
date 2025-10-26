@@ -1,13 +1,21 @@
 ---
 title: 提示词
-description: 提示词章节导览与结构说明。
+description: 提示词和上下文
 ---
 
-# 提示词
+这个章节最关乎平时的使用体验，here is a vivid example:
 
-本章节聚焦于与大语言模型的高效交互，已按更简洁的二级结构组织：
+```bash
+input: shit💩
+output: shit💩
 
-## 结构导航
+input: gold💰
+output: gold💰
+```
+
+## Navigation
+
+The content is organized as follows:
 
 - 交互基础（Interaction Basics）
   - [Necessity](/prompts/interaction-basics/basics)
@@ -20,4 +28,4 @@ description: 提示词章节导览与结构说明。
 - [Examples](/prompts/examples)
 - [扩展阅读](/prompts/extended-reading)
 
-> 注：原有的“定义/必要性”“系统提示/助手消息/用户提示”“实用技巧子页”等已合并或移除；旧链接已彻底移除，不再保留重定向。
+> 注：此章节结构会大范围重构

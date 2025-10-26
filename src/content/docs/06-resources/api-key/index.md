@@ -1,6 +1,24 @@
 ---
 title: API KEY
-description: 资源合集 - API KEY 页面占位。
+description: 可以白嫖的大模型api
 ---
 
-此页面为“API KEY”占位内容，后续补充具体资料。
+## 官方渠道
+
+唯一真神
+
+- Gemini
+  一点都不吝啬
+- iflow
+- ModelScope
+  速度快
+- Cerebras
+- Nvidia
+- Groq
+  还可以
+- OpenRouter
+
+## 公益站点
+
+- anyrouter
+- zoneapi
