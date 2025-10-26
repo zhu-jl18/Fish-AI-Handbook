@@ -3,8 +3,7 @@ title: 对话层级
 description: 理解大语言模型对话中的System、Assistant和User三个层级角色。
 ---
 
-对话由三个不同层级组成：
-
+一轮对话由三个不同层级组成：
 - 系统提示（system prompts）
 - 助手消息（assistant message）
 - 用户提示（user prompts）

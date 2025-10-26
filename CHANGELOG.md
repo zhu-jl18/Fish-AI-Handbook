@@ -15,6 +15,12 @@
   - 侧栏更新：在 `FUN_SIDEBAR` 中添加 Fast API 条目
   - 页面涵盖 Fast API 核心特点、AI 应用场景、快速开始示例和资源链接
 
+- **好玩的：Ollama**：新增 "Ollama" 二级页面（内容、路由、侧栏）
+  - 内容文件：`src/content/docs/05-fun/ollama/index.md`
+  - 路由文件：`src/pages/fun/ollama.astro`
+  - 侧栏更新：在 `FUN_SIDEBAR` 中添加 Ollama 条目
+  - 内容占位：仅含 title 与 description，后续可补充详细用法
+
 ### Changed
 
 - **好玩的：SillyTavern 拼写修正与内容完善**：将 "Silver Trivern" 修正为 "SillyTavern"
