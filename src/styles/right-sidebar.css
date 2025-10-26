@@ -6,13 +6,10 @@
 }
 
 .sidebar-scroll {
-  max-height: calc(100vh - 96px);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   padding: 0 0 2rem;
-  overflow-y: auto;
-  scrollbar-gutter: stable both-edges;
 }
 
 .panel {
