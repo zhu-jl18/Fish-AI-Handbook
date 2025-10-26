@@ -103,6 +103,7 @@ export const FUN_SIDEBAR: SidebarSection = [
   { label: '模型解锁', href: '/fun/llm-unlocking' },
   { label: 'SillyTavern', href: '/fun/sillytavern' },
   { label: 'n8n', href: '/fun/n8n' },
+  { label: 'Ollama', href: '/fun/ollama' },
   { label: 'Fast API', href: '/fun/fast-api' },
 ]
 
