@@ -101,8 +101,9 @@ export const FUN_SIDEBAR: SidebarSection = [
   { label: '好玩的', href: '/fun' },
   { label: 'AI 绘画', href: '/fun/ai-drawing' },
   { label: '模型解锁', href: '/fun/llm-unlocking' },
-  { label: 'Silver Trivern', href: '/fun/silver-trivern' },
+  { label: 'SillyTavern', href: '/fun/sillytavern' },
   { label: 'n8n', href: '/fun/n8n' },
+  { label: 'Fast API', href: '/fun/fast-api' },
 ]
 
 export const RESOURCES_SIDEBAR: SidebarSection = [
