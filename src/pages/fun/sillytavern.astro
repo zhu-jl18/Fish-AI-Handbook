@@ -2,7 +2,7 @@
 import ContentLayout from '../../layouts/ContentLayout.astro'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '05-fun/silver-trivern')
+const entry = await getEntry('docs', '05-fun/sillytavern')
 let Content: any = null
 let hasContent = false
 try {
@@ -12,7 +12,7 @@ try {
     hasContent = true
   }
 } catch (e) {
-  console.error('Render error: fun/silver-trivern', e)
+  console.error('Render error: fun/sillytavern', e)
 }
 
 import { FUN_SIDEBAR } from '../../scripts/sidebars'
@@ -21,7 +21,7 @@ import { FUN_SIDEBAR } from '../../scripts/sidebars'
 ---
 
 <ContentLayout
-  title="Silver Trivern 使用"
+  title="SillyTavern"
   section="好玩的"
   sidebarItems={FUN_SIDEBAR}
   contributors={entry?.data?.contributors}
