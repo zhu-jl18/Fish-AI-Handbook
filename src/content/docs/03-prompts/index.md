@@ -4,6 +4,7 @@ description: 提示词和上下文
 ---
 
 这个章节最关乎平时的使用体验，here is a vivid example:
+
 ```bash
 input: shit💩
 output: shit💩
@@ -14,7 +15,8 @@ output: gold💰
 
 ## Navigation
 
-The content is organized as follows: 
+The content is organized as follows:
+
 - 交互基础（Interaction Basics）
   - [Necessity](/prompts/interaction-basics/basics)
   - [好与坏](/prompts/interaction-basics/good-vs-bad)
