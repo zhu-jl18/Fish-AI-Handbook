@@ -22,6 +22,15 @@ It turns to be
 
 人人可以借助AI写代码~
 
-## Specflow
+## Spec
 
-Spec意思是规范，Specflow就是用规范来指导AI编程的流程。
+Spec意思是规范
+
+
+## Workflow
+
+借助AI工作流平台，可以实现自动化工作流，从而实现自动化任务。几个平台
+- n8n
+- Dify
+- coze 
+- ComfyUI
