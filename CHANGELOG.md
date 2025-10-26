@@ -39,14 +39,14 @@
   - 路径：`/fun/silver-trivern` → `/fun/sillytavern`
   - 侧栏显示：`Silver Trivern` → `SillyTavern`
   - 新增约 300 字详细介绍（核心特性、适用场景等）
-  
- - **好玩的：Fast API 二级结构规范化**：将二级页面从单页 `fast-api.md` 迁移为 `fast-api/index.md`
-   - 内容迁移：`src/content/docs/05-fun/fast-api.md` → `src/content/docs/05-fun/fast-api/index.md`
-   - 路由与侧栏：路径保持 `/fun/fast-api`，与新结构完全一致
-   - 旧路径已删除，不做重定向（遵循结构调整强制规范）
+- **好玩的：Fast API 二级结构规范化**：将二级页面从单页 `fast-api.md` 迁移为 `fast-api/index.md`
+  - 内容迁移：`src/content/docs/05-fun/fast-api.md` → `src/content/docs/05-fun/fast-api/index.md`
+  - 路由与侧栏：路径保持 `/fun/fast-api`，与新结构完全一致
+  - 旧路径已删除，不做重定向（遵循结构调整强制规范）
 
 ### Fixed
 
+- **右侧边栏：移除滚动条限制**：移除右侧边栏的 `max-height` 和 `overflow-y` 限制，允许页面结构、贡献者和本文目录完全展开，不再出现滚动条
 - **列表样式：嵌套列表间距修复**：恢复并完善嵌套列表的间距规则，确保层级清晰
   - 修改文件：`src/styles/global.css`
   - 添加 `li > ul/ol` 样式：父项到第一个子项间距 0.25rem，嵌套列表整体下边距 0.5rem

@@ -340,14 +340,14 @@ li > p {
 /* 嵌套列表间距修复 */
 li > ul,
 li > ol {
-  margin-top: 0.25rem;        /* 父项到第一个子项的间距 */
-  margin-bottom: 0.5rem;      /* 嵌套列表整体到下一个同级项的间距 */
-  padding-left: 1.5rem;       /* 嵌套缩进 */
+  margin-top: 0.25rem; /* 父项到第一个子项的间距 */
+  margin-bottom: 0.5rem; /* 嵌套列表整体到下一个同级项的间距 */
+  padding-left: 1.5rem; /* 嵌套缩进 */
 }
 
 /* 嵌套列表内的子项间距（紧凑） */
 li li {
-  margin-bottom: 0.4rem;      /* 子项之间的紧凑间距 */
+  margin-bottom: 0.4rem; /* 子项之间的紧凑间距 */
 }
 
 /* 嵌套列表最后一项不需要下边距 */
