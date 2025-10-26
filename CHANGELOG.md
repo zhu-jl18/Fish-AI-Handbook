@@ -9,6 +9,16 @@
 
 ### Added
 
+- **全局组件：页脚**：新增页脚组件，显示版权信息和相关链接
+  - 组件文件：`src/components/Footer.astro`
+  - 集成位置：`src/layouts/BaseLayout.astro`
+  - 包含内容：版权信息 (© 2025 Fish AI Handbook)、Powered by GitHub & Vercel、Status 占位符、Contact 链接
+  - 布局特点：单行水平居中布局，使用 `·` 分隔符，无边框和特殊背景
+  - 间距优化：顶部 3rem（离正文）、底部 2rem（离底边）
+  - 功能特性：Status 为不可点击占位符（待后端实现），Contact 链接指向 GitHub Issues
+  - E2E 测试：新增 `tests/e2e/footer.spec.ts`，验证渲染、链接和布局
+  - 响应式支持：768px 以下切换为垂直居中布局
+
 - **好玩的：Fast API**：新增 "Fast API" 二级页面（内容、路由、侧栏）
   - 内容文件：`src/content/docs/05-fun/fast-api/index.md`
   - 路由文件：`src/pages/fun/fast-api.astro`
@@ -16,6 +26,12 @@
   - 页面涵盖 Fast API 核心特点、AI 应用场景、快速开始示例和资源链接
 
 ### Changed
+
+- **全局布局：页脚固定在底部**：调整全局布局以支持页脚始终固定在页面底部
+  - 修改文件：`src/styles/global.css`、`src/layouts/ContentLayout.astro`、`src/pages/index.astro`
+  - 布局方案：使用 flexbox，body 设置 `display: flex; flex-direction: column; min-height: 100%`
+  - 内容区域设置 `flex: 1` 自动填充剩余空间，页脚设置 `margin-top: auto` 自动推到底部
+  - 确保短页面和长页面均正常显示
 
 - **好玩的：SillyTavern 拼写修正与内容完善**：将 "Silver Trivern" 修正为 "SillyTavern"
   - 文件夹：`silver-trivern/` → `sillytavern/`
