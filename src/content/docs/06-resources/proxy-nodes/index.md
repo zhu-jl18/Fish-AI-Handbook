@@ -1,6 +1,22 @@
 ---
 title: 代理节点
-description: 资源合集 - 代理节点 页面占位。
+description: proxy nodes for llm
 ---
 
-此页面为“代理节点”占位内容，后续补充具体资料。
+## Gemini专用
+
+- cloudflare:anticut
+- cloudfalre
+- vercel
+- deno
+
+## 通用版本
+
+- supabase
+- cloudflare
+- deno
+
+## Claude专用
+
+- claude-proxy
+- claude-code-router
