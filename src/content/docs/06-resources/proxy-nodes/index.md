@@ -8,7 +8,7 @@ description: proxy nodes for llm
 - cloudflare:anticut
 - cloudfalre
 - vercel
-- deno 
+- deno
 
 ## 通用版本
 

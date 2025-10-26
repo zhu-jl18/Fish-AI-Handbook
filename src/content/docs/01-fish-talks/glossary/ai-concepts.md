@@ -30,7 +30,8 @@ First of all I will give an example of hallucination.
 
 ### Search
 
-web_search: 
+web_search:
+
 - 使用搜索引擎进行搜索
 
 没太搞懂这个概念。
