@@ -1,6 +1,6 @@
 ---
 title: Transformer
-description: Transformer 架构 - 现代大语言模型的基础架构
+description: The core of modern LLMs
 ---
 
 ## Transformer
