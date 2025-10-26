@@ -46,9 +46,9 @@ export type SiteConfig = {
  */
 const siteConfig: SiteConfig = {
   url: 'https://aibook.functorfish.dpdns.org',
-  title: 'Fish写给朋友们的AI使用指南',
-  titleFull: 'Fish-Book · AI 使用手册',
-  description: 'Fish-Book - 实用的 AI 使用手册',
+  title: 'Fish Book',
+  titleFull: 'Fish Book',
+  description: '🐱',
   logoMark: 'F',
   logoName: 'Fish AI Handbook',
   logoMeta: 'Docs & Patterns',
