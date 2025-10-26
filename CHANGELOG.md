@@ -9,6 +9,12 @@
 
 ### Added
 
+- **好玩的：Ollama**：新增 "Ollama" 二级页面（内容、路由、侧栏）
+  - 内容文件：`src/content/docs/05-fun/ollama/index.md`
+  - 路由文件：`src/pages/fun/ollama.astro`
+  - 侧栏更新：在 `FUN_SIDEBAR` 中添加 Ollama 条目
+  - 内容占位：仅含 title 与 description，后续可补充详细用法
+
 - **全局组件：页脚**：新增页脚组件，显示版权信息和相关链接
   - 组件文件：`src/components/Footer.astro`
   - 集成位置：`src/layouts/BaseLayout.astro`
@@ -26,6 +32,11 @@
   - 页面涵盖 Fast API 核心特点、AI 应用场景、快速开始示例和资源链接
 
 ### Changed
+
+- **好玩的：Fast API 二级结构规范化**：将二级页面从单页 `fast-api.md` 迁移为 `fast-api/index.md`
+   - 内容迁移：`src/content/docs/05-fun/fast-api.md` → `src/content/docs/05-fun/fast-api/index.md`
+   - 路由与侧栏：路径保持 `/fun/fast-api`，与新结构完全一致
+   - 旧路径已删除，不做重定向（遵循结构调整强制规范）
 
 - **全局布局：页脚固定在底部**：调整全局布局以支持页脚始终固定在页面底部
   - 修改文件：`src/styles/global.css`、`src/layouts/ContentLayout.astro`、`src/pages/index.astro`

@@ -1,0 +1,28 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { getEntry } from 'astro:content'
+
+const entry = await getEntry('docs', '05-fun/ollama')
+let Content: any = null
+let hasContent = false
+try {
+  if (entry) {
+    const rendered = await entry.render()
+    Content = rendered.Content
+    hasContent = true
+  }
+} catch (e) {
+  console.error('Render error: fun/ollama', e)
+}
+
+import { FUN_SIDEBAR } from '../../scripts/sidebars'
+---
+
+<ContentLayout
+  title={entry?.data?.title ?? 'Ollama'}
+  section="好玩的"
+  sidebarItems={FUN_SIDEBAR}
+  contributors={entry?.data?.contributors}
+>
+  {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
+</ContentLayout>
