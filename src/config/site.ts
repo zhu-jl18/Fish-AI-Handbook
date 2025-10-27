@@ -14,12 +14,16 @@ export type SiteConfig = {
   description: string
   /** Logo 标记文本（单字母） */
   logoMark: string
+  /** Logo 图片 URL（可选，支持 GIF；为空则显示 logoMark 文本） */
+  logoImage?: string
   /** Logo 主标题 */
   logoName: string
   /** Logo 副标题 */
   logoMeta: string
   /** 搜索按钮文案 */
   searchLabel: string
+  /** 个人头像图片 URL（可选，支持 GIF；为空则显示 logoMark 文本） */
+  avatarImage?: string
   /** 默认贡献者信息（用于未配置 contributors 的页面） */
   defaultContributor: {
     username: string
@@ -50,9 +54,11 @@ const siteConfig: SiteConfig = {
   titleFull: 'Fish Book',
   description: '🐱',
   logoMark: 'F',
+  logoImage: 'https://media.makomako.dpdns.org/images/2025/10/gemini-sticker',
   logoName: 'Fish AI Handbook',
   logoMeta: 'Docs & Patterns',
   searchLabel: '搜索或跳转',
+  avatarImage: 'https://media.makomako.dpdns.org/images/2025/10/thumb-devil-circle',
   defaultContributor: {
     username: 'zhu-jl18',
     name: 'zhu-jl18',
