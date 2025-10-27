@@ -321,6 +321,21 @@ p {
   margin-bottom: var(--paragraph-spacing);
 }
 
+/* 图片响应式样式（仅作用于正文内容区域，不影响 Header、导航等） */
+.content-inner img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+}
+
+/* 如果图片在段落或列表中，调整间距 */
+.content-inner p img,
+.content-inner li img {
+  margin: 0.75rem 0;
+}
+
 /* 列表样式 */
 ul,
 ol {
