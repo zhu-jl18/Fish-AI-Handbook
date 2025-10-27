@@ -7,15 +7,30 @@
 
 ## [Unreleased]
 
+### Added
+
+- **全局布局：网站 Favicon 配置**：新增可配置的网站图标（favicon）支持
+  - 配置文件：在 `src/config/site.ts` 的 `SiteConfig` 类型中添加 `favicon?: string` 可选字段
+  - 默认值：`'https://media.makomako.dpdns.org/images/2025/09/19/1758245465-codex'`
+  - 布局集成：在 `src/layouts/BaseLayout.astro` 的 `<head>` 中添加 favicon 链接标签
+  - 支持多种尺寸：ico、png (32x32, 16x16)、apple-touch-icon (180x180)
+  - 配置化特性：可在 `src/config/site.ts` 中统一修改图标 URL，无需硬编码
+
 ### Fixed
+
+- **样式：图片响应式约束**：修复 Markdown 中插入的大尺寸外部图片破坏布局的问题
+  - 修改文件：`src/styles/global.css`
+  - 样式变更：为正文区域 `.content-inner img` 添加 `max-width: 100%` 和 `height: auto` 响应式规则
+  - 间距优化：图片上下边距 1.5rem，段落/列表内图片 0.75rem
+  - 视觉增强：添加 4px 圆角，柔和自然且与整体设计协调
+  - 作用范围限定：仅作用于正文内容区域（`.content-inner`），不影响 Header、导航等组件的图片样式
+  - 影响范围：全站所有 Markdown 正文中的图片均受约束，不超出正文容器（820px）
 
 - **样式：h3 标题间距优化**：调整三级标题（h3）的 margin-bottom，改善与下方内容的视觉间距
   - 修改文件：`src/layouts/ContentLayout.astro`
   - 样式变更：`.content-inner :global(h3)` 的 `margin-bottom` 从 `0.5rem` 增加到 `1.1rem`
   - 效果说明：h3 标题与后续段落/列表的间距从约 8px 增加到约 17.6px，提升可读性和视觉层次
   - 背景说明：全局 CSS 中的 h3 设置被 ContentLayout 中的局部样式覆盖，因此在 ContentLayout 中进行调整
-
-### Added
 
 - **好玩的：Ollama**：新增 "Ollama" 二级页面（内容、路由、侧栏）
   - 内容文件：`src/content/docs/05-fun/ollama/index.md`
