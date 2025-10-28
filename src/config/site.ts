@@ -51,7 +51,7 @@ export type SiteConfig = {
  * 修改此处即可全局更新站点信息
  */
 const siteConfig: SiteConfig = {
-  url: 'https://fish-ai-handbook.vercel.app',
+  url: 'https://ai.functorfish.me',
   title: 'Fish Book',
   titleFull: 'Fish Book',
   description: '🐱',
@@ -71,10 +71,10 @@ const siteConfig: SiteConfig = {
     avatar: 'https://github.com/zhu-jl18.png',
   },
   robots: {
-    noindex: false,
-    nofollow: false,
-    noarchive: false,
-    noimageindex: false,
+    noindex: true,
+    nofollow: true,
+    noarchive: true,
+    noimageindex: true,
   },
 }
 
