@@ -419,6 +419,55 @@ hr {
   height: 0;
 }
 
+/* ============================================
+   表格样式（三线表 + 居中对齐）
+   ============================================
+   说明：实现学术风格的三线表样式，确保表格在正文中
+   清晰易读且与其他排版元素保持视觉协调
+   ============================================ */
+
+/* 表格容器：水平居中 + 响应式宽度 + 与段落保持一致的上下间距 */
+.content-inner table {
+  margin: var(--paragraph-spacing) auto;
+  border-collapse: collapse;
+  width: auto;
+  max-width: 100%;
+  border-spacing: 0;
+}
+
+/* 三线表：顶部粗线（2px） */
+.content-inner table thead {
+  border-top: 2px solid var(--text-muted);
+  border-bottom: 1.5px solid var(--text-muted);
+}
+
+/* 三线表：底部粗线（2px） */
+.content-inner table tbody {
+  border-bottom: 2px solid var(--text-muted);
+}
+
+/* 表头单元格：居中对齐 + 适中内边距 + 字重强调 */
+.content-inner table th {
+  text-align: center;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+/* 数据单元格：居中对齐 + 适中内边距 + 柔和文本色 */
+.content-inner table td {
+  text-align: center;
+  padding: 0.65rem 1rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* 行间细分隔线：提升可读性（可选，使用极淡的分隔线） */
+.content-inner table tbody tr:not(:last-child) td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
 /* Spoiler 文本遮罩样式 */
 .spoiler {
   position: relative;
