@@ -109,10 +109,11 @@ export const FUN_SIDEBAR: SidebarSection = [
 
 export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
-  { label: 'API KEY', href: '/resources/api-key' },
+  { label: 'FREE', href: '/resources/free-tier' },
   { label: '代理节点', href: '/resources/proxy-nodes' },
   { label: '2API', href: '/resources/2api' },
   { label: '云平台', href: '/resources/cloud-platforms' },
+  { label: 'PAID', href: '/resources/paid' },
 ]
 
 export const THEORETICAL_SIDEBAR: SidebarSection = [
