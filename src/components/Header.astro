@@ -10,11 +10,13 @@ const { currentPage } = Astro.props
       <div class="nav-top">
         <a href="/" class="logo" aria-label="回到主页">
           <span class="logo-mark">
-            {siteConfig.logoImage ? (
-              <img src={siteConfig.logoImage} alt="Logo" class="logo-image" />
-            ) : (
-              siteConfig.logoMark
-            )}
+            {
+              siteConfig.logoImage ? (
+                <img src={siteConfig.logoImage} alt="Logo" class="logo-image" />
+              ) : (
+                siteConfig.logoMark
+              )
+            }
           </span>
           <span class="logo-copy">
             <span class="logo-name">{siteConfig.logoName}</span>
@@ -78,11 +80,17 @@ const { currentPage } = Astro.props
             </svg>
           </button>
           <button type="button" class="avatar-button" aria-label="个人中心">
-            {siteConfig.avatarImage ? (
-              <img src={siteConfig.avatarImage} alt="Avatar" class="avatar-image" />
-            ) : (
-              <span class="avatar-initial">{siteConfig.logoMark}</span>
-            )}
+            {
+              siteConfig.avatarImage ? (
+                <img
+                  src={siteConfig.avatarImage}
+                  alt="Avatar"
+                  class="avatar-image"
+                />
+              ) : (
+                <span class="avatar-initial">{siteConfig.logoMark}</span>
+              )
+            }
           </button>
         </div>
       </div>

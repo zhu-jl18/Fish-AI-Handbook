@@ -18,17 +18,33 @@ const robotsContent = getRobotsContent(siteConfig.robots)
     <meta name="robots" content={robotsContent} />
     <title>{pageTitle}</title>
     <meta name="description" content={siteConfig.description} />
-    
+
     <!-- Favicon -->
-    {siteConfig.favicon && (
-      <>
-        <link rel="icon" type="image/x-icon" href={siteConfig.favicon} />
-        <link rel="icon" type="image/png" sizes="32x32" href={siteConfig.favicon} />
-        <link rel="icon" type="image/png" sizes="16x16" href={siteConfig.favicon} />
-        <link rel="apple-touch-icon" sizes="180x180" href={siteConfig.favicon} />
-      </>
-    )}
-    
+    {
+      siteConfig.favicon && (
+        <>
+          <link rel="icon" type="image/x-icon" href={siteConfig.favicon} />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href={siteConfig.favicon}
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href={siteConfig.favicon}
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href={siteConfig.favicon}
+          />
+        </>
+      )
+    }
+
     <!-- 自托管中文字体预加载（已使用 woff2 子集） -->
     <link
       rel="preload"
