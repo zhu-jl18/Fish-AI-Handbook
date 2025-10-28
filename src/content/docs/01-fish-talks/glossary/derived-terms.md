@@ -26,11 +26,11 @@ It turns to be
 
 Spec意思是规范
 
-
 ## Workflow
 
 借助AI工作流平台，可以实现自动化工作流，从而实现自动化任务。几个平台
+
 - n8n
 - Dify
-- coze 
+- coze
 - ComfyUI
