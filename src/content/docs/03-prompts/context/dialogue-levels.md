@@ -21,7 +21,6 @@ description: 理解大语言模型对话中的System、Assistant和User三个层
 ## Assistant 消息
 
 **助手消息（Assistant Message）**不是当前的回复生成，而是历史回复的记录，它用于维持对话连贯性。在API调用中，结构如下：
-
 ```json
 [
   { "role": "system", "content": "You are a helpful assistant" },
