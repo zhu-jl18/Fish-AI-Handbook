@@ -51,7 +51,7 @@ export type SiteConfig = {
  * 修改此处即可全局更新站点信息
  */
 const siteConfig: SiteConfig = {
-  url: 'https://aibook.functorfish.dpdns.org',
+  url: 'https://ai.functorfish.me',
   title: 'Fish Book',
   titleFull: 'Fish Book',
   description: '🐱',
