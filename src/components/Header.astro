@@ -9,7 +9,15 @@ const { currentPage } = Astro.props
     <div class="nav-container">
       <div class="nav-top">
         <a href="/" class="logo" aria-label="回到主页">
-          <span class="logo-mark">{siteConfig.logoMark}</span>
+          <span class="logo-mark">
+            {
+              siteConfig.logoImage ? (
+                <img src={siteConfig.logoImage} alt="Logo" class="logo-image" />
+              ) : (
+                siteConfig.logoMark
+              )
+            }
+          </span>
           <span class="logo-copy">
             <span class="logo-name">{siteConfig.logoName}</span>
             <span class="logo-meta">{siteConfig.logoMeta}</span>
@@ -72,7 +80,17 @@ const { currentPage } = Astro.props
             </svg>
           </button>
           <button type="button" class="avatar-button" aria-label="个人中心">
-            <span class="avatar-initial">{siteConfig.logoMark}</span>
+            {
+              siteConfig.avatarImage ? (
+                <img
+                  src={siteConfig.avatarImage}
+                  alt="Avatar"
+                  class="avatar-image"
+                />
+              ) : (
+                <span class="avatar-initial">{siteConfig.logoMark}</span>
+              )
+            }
           </button>
         </div>
       </div>
@@ -226,6 +244,13 @@ const { currentPage } = Astro.props
   }
   .avatar-initial {
     letter-spacing: 0.04em;
+  }
+  .logo-image,
+  .avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
   }
   .search-label {
     display: none;

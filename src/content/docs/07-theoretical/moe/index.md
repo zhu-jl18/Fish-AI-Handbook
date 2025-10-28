@@ -15,7 +15,6 @@ Mixture of Experts (MOE) 是一种模型架构，通过引入多个"专家"网�
 
 显著降低计算成本，同时保持模型能力。
 
-
 ### 经典论文
 
 - [Switch Transformers](https://arxiv.org/abs/2101.03961) - Google 提出的 MOE Transformer
