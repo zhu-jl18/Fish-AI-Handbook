@@ -326,14 +326,14 @@ p {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 1.5rem 0;
+  margin: 1.5rem auto;
   border-radius: 4px;
 }
 
 /* 如果图片在段落或列表中，调整间距 */
 .content-inner p img,
 .content-inner li img {
-  margin: 0.75rem 0;
+  margin: 0.75rem auto;
 }
 
 /* 列表样式 */
@@ -410,6 +410,40 @@ blockquote > :first-child {
 blockquote > :last-child {
   margin-bottom: 0;
 }
+/* 图片查看 Lightbox 覆盖层样式（仅在激活时显示） */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: var(--color-bg-overlay-dark);
+  backdrop-filter: blur(6px);
+  z-index: 9999; /* 高于侧栏与回到顶部按钮 */
+  cursor: zoom-out;
+}
+
+.lightbox-overlay.active {
+  display: flex;
+}
+
+.lightbox-overlay img {
+  max-width: min(96vw, 1200px);
+  max-height: 92vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-overlay);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* 打开 Lightbox 时禁用页面滚动（避免修改 <html> 引发粘性定位/滚动条异常） */
+body.lightbox-open {
+  overflow: hidden;
+}
+
 
 
 /* 优先满足减少动画偏好 */
