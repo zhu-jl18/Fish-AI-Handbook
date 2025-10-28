@@ -10,6 +10,8 @@ description: 自己薅羊毛太费事了不如掏点辛苦费吧
 
 ## MAIN
 
+主流的：
+
 **AUGMENT**： 需要搭配 { [ATM](https://github.com/zhaochengcube/augment-token-mng/releases/tag/v1.2.3) + [防封插件](https://github.com/zhaochengcube/augment-code-auto/releases/) +  干净IP }
 
 **CURSOR**： 只需要任意一个 { 切号软件 + 任意节点 }  即可
@@ -23,20 +25,27 @@ description: 自己薅羊毛太费事了不如掏点辛苦费吧
 **CLAUDE CODE**：高级玩法，{自备节点 + Niger区} 走官方订阅，中级玩法 找人拼车，低级玩法 找中转商买额度。
 
 
-----
+
 
 还有一些其他机制的付费：
+
 **GEMINI PRO**：花钱过认证即可。
+
 **GITHUB STUDENT PACK**：花钱过认证即可。
 
 ## PROVIDER
 
 在这里，我只分享我买过的且体验不错的渠道：
-- [PackeyCode](https://www.packycode.com/?aff=kfycdxsq)，老农的中转站，很稳定，推荐买codex
-- 闲鱼，关键词搜索 cursor、augment、warp，单个账号价格参照下文。
-- GPT Team，一位卖家，[L站链接](https://linux.do/u/bbbboy/summary)，私信加微信即可
-- 一位叫料哥的人，有cursor、warp和augment账号，联系方式!!<866811662>!!
-- 一个cursor和windsurf账号的卖家，联系方式!!<1040147984>!!
+
+[PackeyCode](https://www.packycode.com/?aff=kfycdxsq)，老农的中转站，很稳定，推荐买codex
+
+闲鱼，关键词搜索 cursor、augment、warp，单个账号价格参照下文。
+
+GPT Team，一位卖家，[L站链接](https://linux.do/u/bbbboy/summary)，私信加微信即可
+
+一位叫料哥的人，有cursor、warp和augment账号，联系方式 :spoiler[866811662]
+
+一个cursor和windsurf账号的卖家，联系方式 :spoiler[1040147984]
 
 ## 碎碎念
 
