@@ -1,3 +1,2 @@
 User-agent: *
-Allow: /
-Sitemap: https://fish-ai-handbook.vercel.app/sitemap-index.xml
+Disallow: /
