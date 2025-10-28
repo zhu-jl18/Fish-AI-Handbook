@@ -418,6 +418,80 @@ hr {
   border-top: 1px dashed rgba(255, 255, 255, 0.15);
   height: 0;
 }
+
+/* Spoiler 文本遮罩样式 */
+.spoiler {
+  position: relative;
+  cursor: pointer;
+  transition: all var(--motion-duration-normal) var(--motion-ease-out);
+}
+
+/* 默认状态：模糊遮罩 */
+.spoiler:not(.spoiler-revealed) {
+  color: transparent;
+  background-color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  user-select: none;
+}
+
+.spoiler:not(.spoiler-revealed)::before {
+  content: '点击查看隐藏内容';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* 行内 spoiler 样式 */
+.spoiler-inline:not(.spoiler-revealed) {
+  padding: 0.125rem 0.5rem;
+  display: inline-block;
+  min-width: 4rem;
+}
+
+.spoiler-inline:not(.spoiler-revealed)::before {
+  content: '点击查看';
+  font-size: 0.75rem;
+}
+
+/* 块级 spoiler 样式 */
+.spoiler-block:not(.spoiler-revealed),
+.spoiler-leaf:not(.spoiler-revealed) {
+  padding: 1rem;
+  min-height: 3rem;
+  display: block;
+  margin: 1rem 0;
+}
+
+/* Hover 状态提示 */
+.spoiler:not(.spoiler-revealed):hover {
+  background-color: var(--text-secondary);
+  opacity: 0.9;
+}
+
+/* 已显示状态 */
+.spoiler.spoiler-revealed {
+  color: inherit;
+  background-color: transparent;
+  cursor: default;
+  animation: spoiler-reveal var(--motion-duration-normal) var(--motion-ease-out);
+}
+
+@keyframes spoiler-reveal {
+  from {
+    filter: blur(8px);
+    opacity: 0.5;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
 /* 图片查看 Lightbox 覆盖层样式（仅在激活时显示） */
 .lightbox-overlay {
   position: fixed;

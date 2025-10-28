@@ -9,9 +9,32 @@
 
 ### Added
 
+- **功能：Spoiler 文本遮罩支持**：新增 Markdown 自定义指令，支持隐藏敏感信息或剧透内容
+  - 依赖：安装 `remark-directive` 插件
+  - 插件：新增 `src/plugins/remark-spoiler-directive.js` 处理 spoiler 指令
+  - 配置：在 `astro.config.mjs` 中添加 `remarkDirective` 和 `remarkSpoilerDirective` 插件
+  - 样式：在 `src/styles/global.css` 中添加 `.spoiler` 相关样式（默认遮罩、hover 提示、点击显示动画）
+  - 交互：新增 `public/scripts/spoiler.js` 处理点击事件和键盘访问
+  - 语法支持：
+    - 行内：`:spoiler[隐藏文本]`
+    - 块级容器：`:::spoiler\n内容\n:::`
+    - 块级叶子：`::spoiler[单行内容]`
+  - 文档：在 `CONTRIBUTING.md` 中添加"自定义 Markdown 扩展语法"章节，说明使用方法和适用场景
+  - 验证：构建通过、链接检查通过、预览功能正常
+
 - 新增 `src/pages/sitemap.xml.ts`：生成符合 XML Sitemap 标准的 `sitemap.xml`，覆盖 `src/content/docs/**` 映射生成的所有路由。路径按 `DOCS_MAP` 还原站点结构，移除 `.md/.mdx` 与结尾 `index`，统一以 `/` 结尾。
 
 ### Changed
+
+- **样式：分割线（hr）样式优化**：改善分割线的视觉效果和间距
+  - 修改文件：`src/styles/global.css`
+  - 样式变更：
+    - 上下间距从默认值增加到 `2rem`（约 32px）
+    - 线条样式从实线（solid）改为虚线（dashed）
+    - 线条粗细减小到 `1px`
+    - 颜色透明度降低到 `rgba(255, 255, 255, 0.15)`，更加柔和
+  - 效果说明：分割线与上下内容的间距更协调，视觉上更轻盈、不突兀
+  - 影响范围：全站所有 Markdown 中的分割线（`---` 或 `<hr>`）
 
 - 采用官方 `@astrojs/sitemap` 插件生成站点地图（`sitemap-index.xml` + 分片），删除自定义 `src/pages/sitemap.xml.ts` 实现，减少维护成本并与生态保持一致。
 - **全局布局：网站 Favicon 配置**：新增可配置的网站图标（favicon）支持

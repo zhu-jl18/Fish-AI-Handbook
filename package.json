@@ -23,6 +23,7 @@
     "astro": "^5.13.10",
     "astro-expressive-code": "^0.41.3",
     "fish-ai-book": "file:",
+    "remark-directive": "^4.0.0",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
