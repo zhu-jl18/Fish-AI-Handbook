@@ -79,6 +79,30 @@ const { currentPage } = Astro.props
               ></path>
             </svg>
           </button>
+          <button
+            type="button"
+            class="icon-button"
+            id="sitemap-button"
+            aria-label="复制 Sitemap 链接"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </button>
           <button type="button" class="avatar-button" aria-label="个人中心">
             {
               siteConfig.avatarImage ? (
@@ -111,6 +135,9 @@ const { currentPage } = Astro.props
     </div>
   </nav>
 </header>
+
+<!-- Toast 提示容器 -->
+<div id="toast-container" class="toast-container"></div>
 
 <style>
   .header {
@@ -348,4 +375,125 @@ const { currentPage } = Astro.props
       display: none;
     }
   }
+
+  /* Toast 提示样式 */
+  .toast-container {
+    position: fixed;
+    top: 80px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    pointer-events: none;
+  }
+
+  :global(.toast) {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(34, 197, 94, 0.16);
+    border: 1px solid rgba(56, 255, 135, 0.3);
+    border-radius: 8px;
+    color: rgba(56, 255, 135, 0.95);
+    font-size: 0.875rem;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    pointer-events: auto;
+    animation: toast-slide-in var(--motion-duration-md)
+      var(--motion-ease-standard);
+    min-width: 280px;
+    max-width: 400px;
+  }
+
+  :global(.toast.toast-hide) {
+    animation: toast-slide-out var(--motion-duration-md)
+      var(--motion-ease-standard) forwards;
+  }
+
+  :global(.toast-icon) {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+  }
+
+  @keyframes toast-slide-in {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes toast-slide-out {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .toast-container {
+      top: 70px;
+      right: 16px;
+      left: 16px;
+    }
+
+    :global(.toast) {
+      min-width: auto;
+      max-width: none;
+    }
+  }
 </style>
+
+<script>
+  // Sitemap 复制功能
+  const sitemapButton = document.getElementById('sitemap-button')
+  const toastContainer = document.getElementById('toast-container')
+
+  function showToast(message: string) {
+    if (!toastContainer) return
+
+    const toast = document.createElement('div')
+    toast.className = 'toast'
+    toast.innerHTML = `
+      <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      <span>${message}</span>
+    `
+
+    toastContainer.appendChild(toast)
+
+    // 2 秒后开始淡出动画
+    setTimeout(() => {
+      toast.classList.add('toast-hide')
+      // 动画结束后移除元素
+      setTimeout(() => {
+        toast.remove()
+      }, 200) // 与动画时长一致
+    }, 2000)
+  }
+
+  async function copySitemapUrl() {
+    const sitemapUrl = `${window.location.origin}/sitemap-index.xml`
+
+    try {
+      await navigator.clipboard.writeText(sitemapUrl)
+      showToast('已复制 Sitemap 至剪贴板，可导入知识库')
+    } catch (err) {
+      console.error('复制失败:', err)
+      showToast('复制失败，请重试')
+    }
+  }
+
+  sitemapButton?.addEventListener('click', copySitemapUrl)
+</script>
