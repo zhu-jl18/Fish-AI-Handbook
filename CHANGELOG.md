@@ -9,6 +9,11 @@
 
 ### Added
 
+- 新增 `src/pages/sitemap.xml.ts`：生成符合 XML Sitemap 标准的 `sitemap.xml`，覆盖 `src/content/docs/**` 映射生成的所有路由。路径按 `DOCS_MAP` 还原站点结构，移除 `.md/.mdx` 与结尾 `index`，统一以 `/` 结尾。
+
+### Changed
+
+- 采用官方 `@astrojs/sitemap` 插件生成站点地图（`sitemap-index.xml` + 分片），删除自定义 `src/pages/sitemap.xml.ts` 实现，减少维护成本并与生态保持一致。
 - **全局布局：网站 Favicon 配置**：新增可配置的网站图标（favicon）支持
   - 配置文件：在 `src/config/site.ts` 的 `SiteConfig` 类型中添加 `favicon?: string` 可选字段
   - 默认值：`'https://media.makomako.dpdns.org/images/2025/09/19/1758245465-codex'`
