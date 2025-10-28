@@ -29,9 +29,11 @@ src/config/
 - `titleFull` - 站点全称（用于页面标题）
 - `description` - 站点描述（meta description）
 - `logoMark` - Logo 标记文本（单字母）
+- `logoImage` - Logo 图片 URL（可选，支持 GIF；为空则显示 logoMark 文本）
 - `logoName` - Logo 主标题
 - `logoMeta` - Logo 副标题
 - `searchLabel` - 搜索按钮文案
+- `avatarImage` - 个人头像图片 URL（可选，支持 GIF；为空则显示 logoMark 文本）
 - `robots` - SEO robots 策略
 
 **示例：**

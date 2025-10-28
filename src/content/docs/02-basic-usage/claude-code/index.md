@@ -8,7 +8,6 @@ description: The most powerful code cli.
 ## Quick Start
 
 启动，随便输入点什么吧：
-
 ```bash
 claude
 # 启动claude code后
