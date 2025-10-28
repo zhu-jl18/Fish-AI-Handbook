@@ -5,7 +5,7 @@ description: 2api github url and description
 
 ## Introduction
 
-In short, 2API is reverse engineering.
+In short, 2API is to wrap some services into api interfaces through reverse engineering.
 通过伪造请求头绕过限制，获取到响应后封装成openai等格式方便其他客户端调用，使其表现就像一个api接口一样。
 
 ## 2API List
@@ -42,7 +42,6 @@ Those died：
 - 稳定性较差：服务可能随时变更或失效
 
 Some examples:
-
 - kiro2api: directly banned
 - droid2api: directly banned
 - zai2api: invalid
