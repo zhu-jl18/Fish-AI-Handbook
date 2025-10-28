@@ -410,6 +410,14 @@ blockquote > :first-child {
 blockquote > :last-child {
   margin-bottom: 0;
 }
+
+/* 分割线样式 */
+hr {
+  margin: 2rem 0;
+  border: none;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  height: 0;
+}
 /* 图片查看 Lightbox 覆盖层样式（仅在激活时显示） */
 .lightbox-overlay {
   position: fixed;
