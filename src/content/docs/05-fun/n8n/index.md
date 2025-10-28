@@ -11,12 +11,9 @@ n8n 是一个开源、可私有化部署的低代码自动化工作流平台。
 ## Practice
 
 In this part, I want to implement a workflow that can:
+
 - check out my api-proxy-server health status continuously.
 - if the server is not healthy, send me a notification via email.
-
-
-
-
 
 - [官方网站](https://n8n.io/)
 - [文档中心](https://docs.n8n.io/)
