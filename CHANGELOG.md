@@ -23,6 +23,19 @@
 
 ### Fixed
 
+- **样式：正文图片居中对齐**：为正文区域的图片添加水平居中样式
+  - 修改文件：`src/styles/global.css`
+  - 样式变更：将 `.content-inner img` 的 `margin` 从 `1.5rem 0` 改为 `1.5rem auto`，段落/列表内图片从 `0.75rem 0` 改为 `0.75rem auto`
+  - 效果说明：所有正文中的图片（包括 `<img>` 标签和 Markdown 图片语法）现在默认水平居中显示
+  - 作用范围限定：仅作用于正文内容区域（`.content-inner`），不影响 Header、导航、侧边栏等其他区域的图片样式
+  - 兼容性：保持现有的响应式样式（`max-width: 100%`、`height: auto`）、圆角和间距不变
+
+- **功能：Lightbox 图片预览修复**：修复点击图片后侧边栏与滚动条消失的问题
+  - 修改文件：`public/scripts/lightbox.js`、`src/styles/global.css`
+  - 变更：不再直接修改 `<html>` 的 `overflow`；改为在 `<body>` 上添加/移除 `lightbox-open` 类控制滚动；新增 `.lightbox-overlay` 覆盖层样式（居中显示图片、ESC/点击遮罩关闭）
+  - 恢复逻辑：关闭 Lightbox 后自动恢复滚动状态；不会影响右侧目录/左侧导航的粘性定位
+  - 验证：多页面点击图片→ESC/点击遮罩关闭→页面布局与滚动均恢复正常
+
 - **样式：图片响应式约束**：修复 Markdown 中插入的大尺寸外部图片破坏布局的问题
   - 修改文件：`src/styles/global.css`
   - 样式变更：为正文区域 `.content-inner img` 添加 `max-width: 100%` 和 `height: auto` 响应式规则
