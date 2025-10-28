@@ -496,4 +496,41 @@ const { currentPage } = Astro.props
   }
 
   sitemapButton?.addEventListener('click', copySitemapUrl)
+
+  // 搜索快捷键：按下 '/' 打开搜索页或聚焦搜索框
+  function focusSearchInput() {
+    const input = document.querySelector('#search input')
+    if (input instanceof HTMLInputElement) {
+      input.focus()
+      input.select()
+    }
+  }
+
+  window.addEventListener('keydown', (e) => {
+    // 忽略组合键与已处理事件
+    if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey) return
+
+    // 仅当按下 '/' 且不在可编辑元素内时触发
+    const key = e.key || ''
+    if (key !== '/') return
+
+    const target = e.target as Element | null
+    const isEditable =
+      !!target &&
+      ((target as HTMLElement).isContentEditable ||
+        ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName))
+
+    if (isEditable) return
+
+    // 阻止在页面上输入 '/'
+    e.preventDefault()
+
+    if (window.location.pathname.startsWith('/search')) {
+      // 已在搜索页：直接聚焦
+      focusSearchInput()
+    } else {
+      // 其他页面：跳转到搜索页
+      window.location.href = '/search'
+    }
+  })
 </script>
