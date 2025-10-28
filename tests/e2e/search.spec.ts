@@ -7,8 +7,10 @@ test.describe('搜索功能', () => {
     // 页面标题
     await expect(page).toHaveTitle(/搜索/)
 
-    // h1 标题
-    await expect(page.locator('h1')).toHaveText('搜索')
+    // h1 标题 - 使用更精确的选择器避免被 Dev Toolbar 干扰
+    await expect(
+      page.getByRole('heading', { name: '搜索', level: 1 }),
+    ).toBeVisible()
 
     // 搜索容器存在
     await expect(page.locator('#search')).toBeVisible()
