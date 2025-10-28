@@ -4,13 +4,15 @@ import sitemap from '@astrojs/sitemap'
 import astroExpressiveCode from 'astro-expressive-code'
 import { siteConfig, codeConfig } from './src/config/index.ts'
 import remarkListSpacing from './src/plugins/remark-list-spacing.js'
+import remarkDirective from 'remark-directive'
+import remarkSpoilerDirective from './src/plugins/remark-spoiler-directive.js'
 
 export default defineConfig({
   site: siteConfig.url,
   title: siteConfig.title,
   output: 'static',
   markdown: {
-    remarkPlugins: [remarkListSpacing],
+    remarkPlugins: [remarkListSpacing, remarkDirective, remarkSpoilerDirective],
   },
   integrations: [
     astroExpressiveCode({

@@ -92,6 +92,53 @@ description: 简短描述（必填，未填将导致构建失败）
   - 将“环境准备”拆分为二级直达页（Terminal、VS Code、Node.js、GitHub、VPN）
   - Cherry Studio 合并为单页 `setup/cherrystudio`
 
+## 自定义 Markdown 扩展语法
+
+本项目使用 `remark-directive` 插件扩展了标准 Markdown 语法，支持以下自定义指令：
+
+### Spoiler（文本遮罩）
+
+用于隐藏敏感信息或剧透内容，点击后显示。
+
+**行内语法**：
+
+```markdown
+联系方式 :spoiler[866811662]
+```
+
+**块级语法（容器）**：
+
+```markdown
+:::spoiler
+这是一段被隐藏的内容
+可以包含多行文本
+:::
+```
+
+**块级语法（叶子节点）**：
+
+```markdown
+::spoiler[单行隐藏内容]
+```
+
+**渲染效果**：
+
+- 默认状态：显示为灰色遮罩，提示"点击查看"或"点击查看隐藏内容"
+- 点击后：显示真实内容，带有淡入动画效果
+- 支持键盘访问（Tab + Enter/Space）
+
+**适用场景**：
+
+- 隐藏联系方式、邀请码等敏感信息
+- 隐藏剧透内容或答案
+- 需要用户主动确认才显示的内容
+
+**技术实现**：
+
+- 插件：`remark-directive` + 自定义处理器 `src/plugins/remark-spoiler-directive.js`
+- 样式：`src/styles/global.css` 中的 `.spoiler` 相关类
+- 交互：`public/scripts/spoiler.js` 处理点击事件
+
 ## 命名规范
 
 - 目录与文件：kebab-case（如 `best-practices`）
