@@ -57,9 +57,9 @@
 ### Changed
 
 - **好玩的：Fast API 二级结构规范化**：将二级页面从单页 `fast-api.md` 迁移为 `fast-api/index.md`
-   - 内容迁移：`src/content/docs/05-fun/fast-api.md` → `src/content/docs/05-fun/fast-api/index.md`
-   - 路由与侧栏：路径保持 `/fun/fast-api`，与新结构完全一致
-   - 旧路径已删除，不做重定向（遵循结构调整强制规范）
+  - 内容迁移：`src/content/docs/05-fun/fast-api.md` → `src/content/docs/05-fun/fast-api/index.md`
+  - 路由与侧栏：路径保持 `/fun/fast-api`，与新结构完全一致
+  - 旧路径已删除，不做重定向（遵循结构调整强制规范）
 
 - **全局布局：页脚固定在底部**：调整全局布局以支持页脚始终固定在页面底部
   - 修改文件：`src/styles/global.css`、`src/layouts/ContentLayout.astro`、`src/pages/index.astro`
