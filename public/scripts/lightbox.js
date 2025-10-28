@@ -13,6 +13,8 @@ function ensureOverlay() {
     const img = document.createElement('img')
     overlay.appendChild(img)
     document.body.appendChild(overlay)
+
+    // Close on overlay click or ESC
     overlay.addEventListener('click', () => close())
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') close()
@@ -27,13 +29,14 @@ function open(src, alt) {
   img.src = src
   img.alt = alt || ''
   overlay.classList.add('active')
-  document.documentElement.style.overflow = 'hidden'
+  // Use a class on body instead of mutating <html> to avoid layout bugs
+  document.body.classList.add('lightbox-open')
 }
 
 function close() {
   const overlay = document.querySelector('.lightbox-overlay')
   if (overlay) overlay.classList.remove('active')
-  document.documentElement.style.overflow = ''
+  document.body.classList.remove('lightbox-open')
 }
 
 function mount() {

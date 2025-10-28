@@ -35,6 +35,15 @@ const bundlePath = (base.endsWith('/') ? base : base + '/') + 'pagefind/'
         },
       })
 
+      // 自动聚焦搜索输入框，进入 /search 后即可直接输入
+      setTimeout(() => {
+        const input = document.querySelector('#search input')
+        if (input instanceof HTMLInputElement) {
+          input.focus()
+          input.select()
+        }
+      }, 0)
+
       if (initial) {
         setTimeout(() => {
           const input = document.querySelector('#search input')
