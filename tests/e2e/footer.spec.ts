@@ -67,7 +67,7 @@ test.describe('页脚组件', () => {
     await expect(contactLink).toBeVisible()
     await expect(contactLink).toHaveAttribute(
       'href',
-      'https://github.com/zhu-jl18/Fish-AI-Handbook-styles/issues',
+      'https://github.com/zhu-jl18/Fish-AI-Handbook/issues',
     )
     await expect(contactLink).toHaveAttribute('target', '_blank')
     await expect(contactLink).toHaveAttribute('rel', 'noopener noreferrer')
