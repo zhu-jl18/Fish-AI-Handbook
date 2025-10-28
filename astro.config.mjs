@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config'
 import mdx from '@astrojs/mdx'
+import sitemap from '@astrojs/sitemap'
 import astroExpressiveCode from 'astro-expressive-code'
 import { siteConfig, codeConfig } from './src/config/index.ts'
 import remarkListSpacing from './src/plugins/remark-list-spacing.js'
@@ -19,6 +20,7 @@ export default defineConfig({
       frames: codeConfig.frames,
     }),
     mdx(),
+    sitemap(),
   ],
   devToolbar: {
     enabled: true,
