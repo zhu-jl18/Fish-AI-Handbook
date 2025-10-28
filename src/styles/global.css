@@ -47,7 +47,7 @@
     ui-monospace, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas,
     'Courier New', monospace;
 
-  /* 字号与行高 
+  /* 字号与行高
    * 注意：正文字号配置位于 src/config/theme.ts，此处变量值需与其保持同步
    * 或在 ContentLayout.astro 中通过内联样式覆盖
    */
@@ -395,14 +395,22 @@ ol.md-list--spaced {
 /* 引用样式 */
 blockquote {
   border-left: 3px solid var(--accent-color);
-  padding-left: 1.2rem;
   margin: 1.5rem 0;
+  padding: 1.2rem;
   font-style: italic;
   color: var(--text-muted);
   background-color: var(--bg-elevated);
-  padding: 1rem 1rem 1rem 1.2rem;
-  border-radius: 4px;
+  border-radius: 0;
 }
+
+/* 修复：确保引用块内容上下内边距对称，去除首尾元素的额外外边距 */
+blockquote > :first-child {
+  margin-top: 0;
+}
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
 
 /* 优先满足减少动画偏好 */
 @media (prefers-reduced-motion: reduce) {
