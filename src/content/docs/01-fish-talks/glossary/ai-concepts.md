@@ -3,7 +3,7 @@ title: AI Concepts
 description: Brief introduction to some important concepts
 ---
 
-- Prompt
+
 
 ## Prompt Engineering
 
@@ -31,7 +31,6 @@ First of all I will give an example of hallucination.
 ### Search
 
 web_search:
-
 - 使用搜索引擎进行搜索
 
 没太搞懂这个概念。
@@ -55,5 +54,4 @@ A good video to clarify the difference between MCP and Function Calling: [MCP �
 ## RAG
 
 [RAG 工作机制详解——一个高质量知识库背后的技术全流程](https://www.bilibili.com/video/BV1JLN2z4EZQ/?share_source=copy_web&vd_source=b0665997e327e80accab2d35772a5a00)
-
 - Embedding
