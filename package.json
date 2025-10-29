@@ -14,7 +14,8 @@
     "type-check": "astro check",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
-    "test:links": "npm run build && linkinator ./dist/index.html --recurse --config linkinator.config.json --fail --skip \"^https?://\" --skip \"^mailto:\" --skip \"^tel:\""
+    "test:links": "npm run build && linkinator ./dist/index.html --recurse --config linkinator.config.json --fail --skip \"^https?://\" --skip \"^mailto:\" --skip \"^tel:\"",
+    "check:routes": "node scripts/check-route-structure.js"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
