@@ -11,7 +11,7 @@
     "astro": "astro",
     "format": "prettier --write .",
     "lint:markdown": "node ./scripts/lint-markdown-code-blocks.mjs",
-    "type-check": "tsc --noEmit",
+    "type-check": "astro check",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
     "test:links": "npm run build && linkinator ./dist/index.html --recurse --config linkinator.config.json --fail --skip \"^https?://\" --skip \"^mailto:\" --skip \"^tel:\""
