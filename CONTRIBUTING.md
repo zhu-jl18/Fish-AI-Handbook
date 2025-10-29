@@ -248,6 +248,15 @@ npm run test:e2e:headed
   - 合并方式：一律通过 PR 合入 `main`，禁止直接在 `main` 提交
   - 合并前：确保 `npm run build`、`npm run test:links` 通过
 
+### CI 校验（PR 自动）
+
+- 触发：向 `main` 或 `master` 提交 PR 时，GitHub Actions 会自动运行以下校验：
+  - 路由结构：`node scripts/check-route-structure.js`（等价于 `npm run check:routes`）
+  - 类型检查：`astro check`（等价于 `npm run type-check`）
+- 任一失败将导致 CI 标红，阻止合并；建议在本地先运行 `npm run check:routes` 与 `npm run type-check` 保证通过。
+- 说明：AI/Copilot Review 属“建议性”检查；CI 属“强制性”门禁；人工 Review 在 CI 通过后进行最终把关。
+
+
 ## 变更登记与交叉维护
 
 - 必须更新 CHANGELOG.md（[Unreleased] 下按 Added/Changed/Fixed/Removed 分类）

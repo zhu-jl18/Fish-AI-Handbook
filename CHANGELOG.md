@@ -24,6 +24,8 @@
 
 - 新增 `src/pages/sitemap.xml.ts`：生成符合 XML Sitemap 标准的 `sitemap.xml`，覆盖 `src/content/docs/**` 映射生成的所有路由。路径按 `DOCS_MAP` 还原站点结构，移除 `.md/.mdx` 与结尾 `index`，统一以 `/` 结尾。
 
+- CI：新增 GitHub Actions 工作流 `.github/workflows/check-routes-typecheck.yml`，在 PR → `main`/`master` 时自动运行 `check:routes` 与 `type-check`（基于 `astro check`）；任一失败将阻止合并。
+
 - 新增脚本：`scripts/check-route-structure.js`，用于校验二级页面的路由文件结构是否与内容目录镜像一致；在 `package.json` 中添加 `check:routes` 脚本；提交前建议运行 `npm run check:routes`
 
 ### Changed
