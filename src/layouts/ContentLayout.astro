@@ -15,15 +15,13 @@ const sidebarItems = getSidebarForPath(currentPath)
 
 const {
   title,
-  section,
   headings = [],
   contributors,
-}: {
+} = Astro.props as {
   title: string
-  section: string
   headings?: any[]
   contributors?: any
-} = Astro.props
+}
 
 // 基于 URL 别名推导导航高亮键（不依赖中文文案）
 const currentKey = getCurrentNavKey(currentPath)
