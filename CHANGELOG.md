@@ -28,6 +28,9 @@
 
 ### Changed
 
+- 脚本：升级 `scripts/check-route-structure.js` 覆盖 1/2/3 级镜像校验，并检测孤儿路由/内容；`npm run check:routes` 输出同步更新
+- 文档：更新 AGENTS.md（DoD 必跑：check:routes + type-check）、CONTRIBUTING.md（命令说明）、README.md（提交前自检）以指导执行与验收
+
 - **重构：统一 Astro 路由文件结构，镜像内容文件层级**（2025-01-29）
   - **核心变更**：将所有二级页面路由从平铺式 `.astro` 文件改为 `<名称>/index.astro` 文件夹结构
   - **影响范围**：重构 30 个二级页面路由文件
