@@ -14,6 +14,10 @@
 - [ ] 目录编号符合 01-06、99 规范，未跳号
 - [ ] Markdown 包含必填 frontmatter（title、description）
 - [ ] 路由 .astro 与内容路径一致
+- [ ] 路由文件结构与内容文件结构一致（二级 `<名称>/index.astro`，三级 `<名称>.astro`）
+- [ ] 已运行 `npm run check:routes` 并通过
+- [ ] 已运行 `npm run type-check` 并通过（0 errors）
+
 - [ ] 已更新侧栏配置（src/scripts/sidebars.ts）
 - [ ] 站内链接检查通过：`npm run test:links`
 
