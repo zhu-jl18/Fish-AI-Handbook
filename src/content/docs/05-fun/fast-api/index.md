@@ -1,6 +1,6 @@
 ---
 title: FastAPI
-description: FastAPI - 基于 Python 的现代高性能 Web 框架，专为构建 RESTful API 而设计
+description: 基于 Python 的现代高性能 Web 框架，专为构建 RESTful API 而设计
 ---
 
 # FastAPI

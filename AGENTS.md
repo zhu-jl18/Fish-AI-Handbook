@@ -68,6 +68,37 @@
 
 ## 3. 网站内容变更--工作流与检查清单
 
+### Astro 路由文件结构规范（强制约束）
+
+**核心原则**：路由文件结构必须**镜像** Markdown 内容文件结构，确保一致性、可预测性与可扩展性。
+
+| 层级 | Markdown 内容                      | Astro 路由                       | 说明                           |
+| ---- | ---------------------------------- | -------------------------------- | ------------------------------ |
+| 一级 | `<序号-别名>/index.md`             | `<别名>/index.astro`             | 章节首页                       |
+| 二级 | `<序号-别名>/<子目录>/index.md`    | `<别名>/<子目录>/index.astro`    | **统一使用文件夹+index.astro** |
+| 三级 | `<序号-别名>/<子目录>/<页面名>.md` | `<别名>/<子目录>/<页面名>.astro` | 平铺在父文件夹内               |
+
+**禁止**：
+- ❌ 二级页面使用平铺式 `.astro` 文件（如 `setup/codex.astro`）
+- ❌ 三级页面使用文件夹+index.astro 结构（如 `setup/codex/git/index.astro`）
+
+**原因**：
+- 保持路由与内容结构完全对应，降低认知负担
+- 二级页面未来如需添加三级子页面，无需重构路由文件
+- AI Agent 可根据内容文件路径直接推断路由文件路径，避免误判
+
+**示例**：
+
+```
+内容文件：src/content/docs/99-setup/codex/index.md
+路由文件：src/pages/setup/codex/index.astro  ✓
+
+内容文件：src/content/docs/99-setup/codex/index.md
+路由文件：src/pages/setup/codex.astro  ✗（禁止）
+```
+
+---
+
 新增顶级章节（一级）
 
 1. 内容：`src/content/docs/<序号-别名>/index.md`（含 `title`）
@@ -84,7 +115,9 @@
 1. 内容：
    - 二级：文件夹 + `index.md`（可含子页面）
    - 三级：单页 `.md` 文件（禁止使用"文件夹+index.md"）
-2. 路由：为二/三级各建 `.astro` 并读取对应 docs entry
+2. 路由：
+   - 二级：`<别名>/<子目录>/index.astro`（**必须使用文件夹+index.astro**）
+   - 三级：`<别名>/<子目录>/<页面名>.astro`（平铺在父文件夹内）
 3. 侧栏：二级 `items` 内挂三级链接
 4. 自检：二/三级路由均可达；运行上述"自检命令"
 
@@ -172,7 +205,8 @@
 - 命名/层级/编码（UTF‑8）符合约定（三级必须单页 .md，不得用文件夹+index.md）
 - 新增内容标题、层级、侧栏展示正确
 - 不产生外部未授权链接与新文件（除非授权）
-- 必跑命令完成且通过：`build`、`preview:search`、`test:links`、`type-check`、`test:e2e`（如适用）
+- 必跑命令完成且通过：`build`、`preview:search`、`test:links`、`check:routes`、`type-check`、`test:e2e`（如适用）
+- AI Agent 必须在提交/合并前实际运行并通过：`npm run check:routes` 与 `npm run type-check`
 - CHANGELOG.md 已更新，相关文档引用已同步
 
 示例片段（自检清单）：
