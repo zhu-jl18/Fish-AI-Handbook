@@ -3,14 +3,13 @@ import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { getEntry } from 'astro:content'
 
 const entry = await getEntry('docs', '03-prompts/examples')
-const { Content } = await entry.render()
+const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
   title={entry?.data?.title || 'Examples'}
-  section="提示词"
   headings={[]}
   contributors={entry?.data?.contributors}
 >
-  <Content />
+  {rendered ? <rendered.Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>

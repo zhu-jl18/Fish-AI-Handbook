@@ -24,7 +24,42 @@
 
 - 新增 `src/pages/sitemap.xml.ts`：生成符合 XML Sitemap 标准的 `sitemap.xml`，覆盖 `src/content/docs/**` 映射生成的所有路由。路径按 `DOCS_MAP` 还原站点结构，移除 `.md/.mdx` 与结尾 `index`，统一以 `/` 结尾。
 
+- CI：新增 GitHub Actions 工作流 `.github/workflows/check-routes-typecheck.yml`，在 PR → `main`/`master` 时自动运行 `check:routes` 与 `type-check`（基于 `astro check`）；任一失败将阻止合并。
+
+- 新增脚本：`scripts/check-route-structure.js`，用于校验二级页面的路由文件结构是否与内容目录镜像一致；在 `package.json` 中添加 `check:routes` 脚本；提交前建议运行 `npm run check:routes`
+
 ### Changed
+
+- 脚本：升级 `scripts/check-route-structure.js` 覆盖 1/2/3 级镜像校验，并检测孤儿路由/内容；`npm run check:routes` 输出同步更新
+- 文档：更新 AGENTS.md（DoD 必跑：check:routes + type-check）、CONTRIBUTING.md（命令说明）、README.md（提交前自检）以指导执行与验收
+
+- **重构：统一 Astro 路由文件结构，镜像内容文件层级**（2025-01-29）
+  - **核心变更**：将所有二级页面路由从平铺式 `.astro` 文件改为 `<名称>/index.astro` 文件夹结构
+  - **影响范围**：重构 30 个二级页面路由文件
+    - fish-talks: glossary
+    - basic-usage: ai-apps, cherrystudio, claude-code, codex, ide-agent, mobile-apps, webchat
+    - prompts: advanced-frameworks, context, extended-reading
+    - advanced: agents, knowledge-bases, mcp, workflow
+    - fun: ai-drawing, fast-api, llm-unlocking, n8n, ollama, sillytavern
+    - resources: 2api, cloud-platforms
+    - setup: codex, git, mcp-router, nodejs, terminal, vpn, vs-code
+  - **技术细节**：
+    - 路由文件从 `src/pages/<section>/<page>.astro` 迁移至 `src/pages/<section>/<page>/index.astro`
+    - 调整相对路径引用：`../../` → `../../../`
+    - URL 路径保持不变（如 `/setup/codex` 仍然有效）
+    - `getEntry` 调用路径保持不变
+    - 侧栏配置无需修改
+  - **规范更新**：
+    - 在 `AGENTS.md` 中新增"Astro 路由文件结构规范"章节
+    - 在 `CONTRIBUTING.md` 中新增"Astro 路由文件结构规范"章节
+    - 明确规定：二级页面必须使用文件夹+index.astro 结构，禁止平铺式
+    - 说明原因：保持结构一致性、可预测性、可扩展性、AI 友好
+  - **验证结果**：
+    - ✅ 构建通过：64 个页面全部成功生成
+    - ✅ 链接检查通过：无死链
+    - ✅ 预览正常：所有页面可访问
+    - ⚠️ 类型检查：11 个已存在的类型错误（与本次重构无关）
+  - **原因**：统一路由与内容文件结构，降低维护成本，避免 AI Agent 误判
 
 - **样式：表格样式优化（三线表 + 居中对齐）**：为 Markdown 表格添加学术风格的三线表样式
   - 修改文件：`src/styles/global.css`
@@ -55,6 +90,12 @@
   - 配置化特性：可在 `src/config/site.ts` 中统一修改图标 URL，无需硬编码
 
 ### Fixed
+- **类型检查：脚本修正与错误清零**
+  - 脚本：将 `package.json` 中的 `type-check` 从 `tsc --noEmit` 改为 `astro check`
+  - 修复：移除 `ContentLayout.astro` 中未使用的 `section` 参数，并改为 `Astro.props as { ... }` 的类型断言写法
+  - 修复：`src/pages/prompts/context/dialogue-levels.astro` 中 `'entry' is possibly 'undefined'`，添加空值检查后再调用 `render()`
+  - 验证：`npm run type-check` 与 `npx astro check` 均通过（0 errors）
+
 
 - **样式：正文图片居中对齐**：为正文区域的图片添加水平居中样式
   - 修改文件：`src/styles/global.css`

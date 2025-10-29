@@ -48,6 +48,37 @@ description: 简短描述（必填，未填将导致构建失败）
 ---
 ```
 
+## Astro 路由文件结构规范（强制约束）
+
+**核心原则**：路由文件结构必须**镜像** Markdown 内容文件结构，确保一致性、可预测性与可扩展性。
+
+| 层级 | Markdown 内容                      | Astro 路由                       | 说明                           |
+| ---- | ---------------------------------- | -------------------------------- | ------------------------------ |
+| 一级 | `<序号-别名>/index.md`             | `<别名>/index.astro`             | 章节首页                       |
+| 二级 | `<序号-别名>/<子目录>/index.md`    | `<别名>/<子目录>/index.astro`    | **统一使用文件夹+index.astro** |
+| 三级 | `<序号-别名>/<子目录>/<页面名>.md` | `<别名>/<子目录>/<页面名>.astro` | 平铺在父文件夹内               |
+
+**禁止**：
+- ❌ 二级页面使用平铺式 `.astro` 文件（如 `setup/codex.astro`）
+- ❌ 三级页面使用文件夹+index.astro 结构（如 `setup/codex/git/index.astro`）
+
+**原因**：
+- 保持路由与内容结构完全对应，降低认知负担
+- 二级页面未来如需添加三级子页面，无需重构路由文件
+- AI Agent 可根据内容文件路径直接推断路由文件路径，避免误判
+
+**示例**：
+
+```
+内容文件：src/content/docs/99-setup/codex/index.md
+路由文件：src/pages/setup/codex/index.astro  ✓
+
+内容文件：src/content/docs/99-setup/codex/index.md
+路由文件：src/pages/setup/codex.astro  ✗（禁止）
+```
+
+---
+
 ## 新增内容的标准流程（示例）
 
 1. 新增一级章节（假设 08-playground）
@@ -61,11 +92,11 @@ description: 简短描述（必填，未填将导致构建失败）
 2. 新增二级 + 三级页面（以 prompts 为例）
 
 - 内容：
-  - `src/content/docs/03-prompts/best-practices/index.md`
-  - `src/content/docs/03-prompts/best-practices/tracing.md`
+  - `src/content/docs/03-prompts/best-practices/index.md`（二级）
+  - `src/content/docs/03-prompts/best-practices/tracing.md`（三级）
 - 路由：
-  - `src/pages/prompts/best-practices/index.astro`
-  - `src/pages/prompts/best-practices/tracing.astro`
+  - `src/pages/prompts/best-practices/index.astro`（**二级必须使用文件夹+index.astro**）
+  - `src/pages/prompts/best-practices/tracing.astro`（三级平铺在父文件夹内）
 - 侧栏：向 `PROMPTS_SIDEBAR` 添加二级与三级链接
 
 3. 修改/删除内容
@@ -183,6 +214,14 @@ npm run test:e2e:headed
 - 预览（含搜索索引）：`npm run preview:search`
 - 站内链接：`npm run test:links`
 - 类型检查：`npm run type-check`
+- 路由结构检查：`npm run check:routes`
+
+
+命令说明（关键两项）：
+
+- 路由结构检查（check:routes）：校验一级/二级/三级内容与路由一一镜像，禁止二级平铺 .astro，禁止三级“文件夹+index”；发现不一致将以非 0 退出码失败，并定位缺失/多余/非法路径。
+- 类型检查（type-check）：基于 astro check，覆盖 .astro（前置脚本/模板/props）、相关 TS/JS 以及 Content Collections；要求 0 errors / 0 warnings。提示级 hints（如 is:inline）为信息提示，不阻塞提交。
+
 - 端到端测试：`npm run test:e2e`（如有 E2E 场景变更，需新增/更新用例）
 
 ## 与 AI 协作
@@ -208,6 +247,15 @@ npm run test:e2e:headed
   - 提交与推送：本地小步提交，推送远程同名分支
   - 合并方式：一律通过 PR 合入 `main`，禁止直接在 `main` 提交
   - 合并前：确保 `npm run build`、`npm run test:links` 通过
+
+### CI 校验（PR 自动）
+
+- 触发：向 `main` 或 `master` 提交 PR 时，GitHub Actions 会自动运行以下校验：
+  - 路由结构：`node scripts/check-route-structure.js`（等价于 `npm run check:routes`）
+  - 类型检查：`astro check`（等价于 `npm run type-check`）
+- 任一失败将导致 CI 标红，阻止合并；建议在本地先运行 `npm run check:routes` 与 `npm run type-check` 保证通过。
+- 说明：AI/Copilot Review 属“建议性”检查；CI 属“强制性”门禁；人工 Review 在 CI 通过后进行最终把关。
+
 
 ## 变更登记与交叉维护
 
