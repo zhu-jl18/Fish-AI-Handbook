@@ -216,6 +216,12 @@ npm run test:e2e:headed
 - 类型检查：`npm run type-check`
 - 路由结构检查：`npm run check:routes`
 
+
+命令说明（关键两项）：
+
+- 路由结构检查（check:routes）：校验一级/二级/三级内容与路由一一镜像，禁止二级平铺 .astro，禁止三级“文件夹+index”；发现不一致将以非 0 退出码失败，并定位缺失/多余/非法路径。
+- 类型检查（type-check）：基于 astro check，覆盖 .astro（前置脚本/模板/props）、相关 TS/JS 以及 Content Collections；要求 0 errors / 0 warnings。提示级 hints（如 is:inline）为信息提示，不阻塞提交。
+
 - 端到端测试：`npm run test:e2e`（如有 E2E 场景变更，需新增/更新用例）
 
 ## 与 AI 协作
