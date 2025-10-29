@@ -48,6 +48,37 @@ description: 简短描述（必填，未填将导致构建失败）
 ---
 ```
 
+## Astro 路由文件结构规范（强制约束）
+
+**核心原则**：路由文件结构必须**镜像** Markdown 内容文件结构，确保一致性、可预测性与可扩展性。
+
+| 层级 | Markdown 内容                      | Astro 路由                       | 说明                           |
+| ---- | ---------------------------------- | -------------------------------- | ------------------------------ |
+| 一级 | `<序号-别名>/index.md`             | `<别名>/index.astro`             | 章节首页                       |
+| 二级 | `<序号-别名>/<子目录>/index.md`    | `<别名>/<子目录>/index.astro`    | **统一使用文件夹+index.astro** |
+| 三级 | `<序号-别名>/<子目录>/<页面名>.md` | `<别名>/<子目录>/<页面名>.astro` | 平铺在父文件夹内               |
+
+**禁止**：
+- ❌ 二级页面使用平铺式 `.astro` 文件（如 `setup/codex.astro`）
+- ❌ 三级页面使用文件夹+index.astro 结构（如 `setup/codex/git/index.astro`）
+
+**原因**：
+- 保持路由与内容结构完全对应，降低认知负担
+- 二级页面未来如需添加三级子页面，无需重构路由文件
+- AI Agent 可根据内容文件路径直接推断路由文件路径，避免误判
+
+**示例**：
+
+```
+内容文件：src/content/docs/99-setup/codex/index.md
+路由文件：src/pages/setup/codex/index.astro  ✓
+
+内容文件：src/content/docs/99-setup/codex/index.md
+路由文件：src/pages/setup/codex.astro  ✗（禁止）
+```
+
+---
+
 ## 新增内容的标准流程（示例）
 
 1. 新增一级章节（假设 08-playground）
@@ -61,11 +92,11 @@ description: 简短描述（必填，未填将导致构建失败）
 2. 新增二级 + 三级页面（以 prompts 为例）
 
 - 内容：
-  - `src/content/docs/03-prompts/best-practices/index.md`
-  - `src/content/docs/03-prompts/best-practices/tracing.md`
+  - `src/content/docs/03-prompts/best-practices/index.md`（二级）
+  - `src/content/docs/03-prompts/best-practices/tracing.md`（三级）
 - 路由：
-  - `src/pages/prompts/best-practices/index.astro`
-  - `src/pages/prompts/best-practices/tracing.astro`
+  - `src/pages/prompts/best-practices/index.astro`（**二级必须使用文件夹+index.astro**）
+  - `src/pages/prompts/best-practices/tracing.astro`（三级平铺在父文件夹内）
 - 侧栏：向 `PROMPTS_SIDEBAR` 添加二级与三级链接
 
 3. 修改/删除内容
