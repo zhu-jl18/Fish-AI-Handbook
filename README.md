@@ -23,7 +23,7 @@
 - 增加一个基于LLM和知识库的问答系统
 - 增加一个静态网站CMS
 
-<div align="right"><a href="#top">回到顶部 ↑</a></div>
+
 
 ## 项目文档
 
@@ -34,7 +34,7 @@
 - PR 模板：[.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md)
 - Issue 模板：[.github/ISSUE_TEMPLATE/](.github/ISSUE_TEMPLATE/)
 
-<div align="right"><a href="#top">回到顶部 ↑</a></div>
+
 
 ## 快速开始（速查）
 
@@ -56,7 +56,7 @@ npm run format     # 代码格式化
 
 更多流程与示例请见 [CONTRIBUTING.md](CONTRIBUTING.md)（唯一事实源）。
 
-<div align="right"><a href="#top">回到顶部 ↑</a></div>
+
 
 ## 架构速览
 
@@ -83,7 +83,7 @@ public/                  # 静态资源（robots.txt、字体等）
 dist/                    # 构建输出（由 build 生成）
 ```
 
-<div align="right"><a href="#top">回到顶部 ↑</a></div>
+
 
 ## 常见坑与反模式
 
@@ -94,20 +94,20 @@ dist/                    # 构建输出（由 build 生成）
 - **使用重定向而非重新构建路由**：进行结构调整时，必须删除旧路径并按新结构重建路由，同时更新侧栏、链接与测试，禁止使用路径重定向，以保证一致性与可维护性
 - 在根提交 `dist/`、`.astro/`、或工具本地数据
 
-<div align="right"><a href="#top">回到顶部 ↑</a></div>
+
 
 ## 变更记录
 
-- 见 [CHANGELOG.md](CHANGELOG.md)（遵循 Keep a Changelog）
+- 使用 Git 提交历史与 Pull Request 查看变更
 
-<div align="right"><a href="#top">回到顶部 ↑</a></div>
+
 
 ## 适用范围
 
 - 本 README 仅面向维护者与"未来的我"，作为最小必要信息与导航。
 - AI 的通用行为与边界见 [AGENTS.md](AGENTS.md)；具体流程始终以 [CONTRIBUTING.md](CONTRIBUTING.md) 为准。
 
-<div align="right"><a href="#top">回到顶部 ↑</a></div>
+
 
 ## 运维与应急速查
 
