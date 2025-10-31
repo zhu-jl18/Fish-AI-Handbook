@@ -7,6 +7,16 @@
 
 ## [Unreleased]
 
+### Changed
+
+- **UI：移除右侧边栏标题**：移除右侧边栏中"页面结构"和"本文目录"标题文字，保留导航链接功能
+  - 修改文件：`src/components/RightSidebar.astro`
+  - 删除"页面结构"标题（structure-panel 的 header 元素）
+  - 删除"本文目录"标题（toc-panel 的 header 元素）
+  - 新增 TOC 空状态处理：当页面无标题时自动隐藏整个 toc-panel 容器
+  - 保留所有功能：TOC 导航链接、滚动高亮、贡献者信息、页面结构导航
+  - 验证通过：构建成功、预览正常、布局无异常
+
 ### Added
 
 - **好玩的：Token Killer 三级页面**：新增 Fast API 下的三级页面，记录从 Flask 到 FastAPI 的架构改造过程
