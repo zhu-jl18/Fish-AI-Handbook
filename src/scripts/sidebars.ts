@@ -99,12 +99,23 @@ export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
 
 export const FUN_SIDEBAR: SidebarSection = [
   { label: '好玩的', href: '/fun' },
-  { label: 'AI 绘画', href: '/fun/ai-drawing' },
+  {
+    label: 'AI 绘画',
+    href: '/fun/ai-drawing',
+    items: [
+      { label: '🍌 banana', href: '/fun/ai-drawing/banana' },
+      { label: 'ComfyUI', href: '/fun/ai-drawing/comfyui' },
+    ],
+  },
   { label: '模型解锁', href: '/fun/llm-unlocking' },
   { label: 'SillyTavern', href: '/fun/sillytavern' },
   { label: 'n8n', href: '/fun/n8n' },
   { label: 'Ollama', href: '/fun/ollama' },
-  { label: 'Fast API', href: '/fun/fast-api' },
+  {
+    label: 'Fast API',
+    href: '/fun/fast-api',
+    items: [{ label: 'Token Killer', href: '/fun/fast-api/tokenkiller' }],
+  },
 ]
 
 export const RESOURCES_SIDEBAR: SidebarSection = [
