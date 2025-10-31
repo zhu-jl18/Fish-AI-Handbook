@@ -2,7 +2,7 @@ name: check:routes and type-check
 
 on:
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 
 jobs:
   validate:
@@ -31,4 +31,3 @@ jobs:
 
       - name: type-check (astro check)
         run: npx astro check
-

@@ -4,7 +4,7 @@ import { h } from 'hastscript'
 /**
  * Remark plugin to handle spoiler directives.
  * Converts :spoiler[text] and :::spoiler blocks into HTML with spoiler styling.
- * 
+ *
  * Syntax:
  * - Inline: :spoiler[hidden text]
  * - Container: :::spoiler\nHidden content\n:::
@@ -38,4 +38,3 @@ export default function remarkSpoilerDirective() {
     })
   }
 }
-
