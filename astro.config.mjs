@@ -27,4 +27,14 @@ export default defineConfig({
   devToolbar: {
     enabled: true,
   },
+  vite: {
+    build: {
+      // 启用 CSS 代码分割，减少首屏 CSS 体积
+      cssCodeSplit: true,
+      // 资源内联阈值（4KB），小于此大小的资源将被内联为 base64
+      assetsInlineLimit: 4096,
+      // 启用压缩（默认使用 esbuild，速度快）
+      minify: 'esbuild',
+    },
+  },
 })
