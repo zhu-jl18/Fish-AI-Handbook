@@ -45,6 +45,14 @@ const robotsContent = getRobotsContent(siteConfig.robots)
       )
     }
 
+    <!-- 外部资源域名预连接（减少 DNS 查询和 TLS 握手时间） -->
+    <link rel="dns-prefetch" href="https://media.makomako.dpdns.org" />
+    <link
+      rel="preconnect"
+      href="https://media.makomako.dpdns.org"
+      crossorigin
+    />
+
     <!-- 自托管中文字体预加载（已使用 woff2 子集） -->
     <link
       rel="preload"
