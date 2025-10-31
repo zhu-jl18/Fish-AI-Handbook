@@ -56,14 +56,13 @@ const siteConfig: SiteConfig = {
   titleFull: 'Fish Book',
   description: '🐱',
   logoMark: 'F',
-  logoImage: 'https://media.makomako.dpdns.org/images/2025/10/gemini-sticker',
+  logoImage: 'https://media.makomako.dpdns.org/images/2025/11/wired-lineal--ai',
   logoName: 'Fish AI Handbook',
   logoMeta: 'Docs & Patterns',
   searchLabel: '搜索或跳转',
   avatarImage:
     'https://media.makomako.dpdns.org/images/2025/10/thumb-devil-circle',
-  favicon:
-    'https://media.makomako.dpdns.org/images/2025/09/19/1758245465-codex',
+  favicon: 'https://media.makomako.dpdns.org/images/2025/11/wired-lineal--ai',
   defaultContributor: {
     username: 'zhu-jl18',
     name: 'zhu-jl18',
