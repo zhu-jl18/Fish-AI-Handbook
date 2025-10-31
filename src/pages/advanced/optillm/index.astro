@@ -1,6 +1,6 @@
 ---
-import ContentLayout from '../../layouts/ContentLayout.astro'
-import { ADVANCED_TECHNIQUES_SIDEBAR } from '../../scripts/sidebars'
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { ADVANCED_TECHNIQUES_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
 const entry = await getEntry('docs', '04-advanced/optillm')
@@ -21,3 +21,4 @@ const title = entry?.data?.title ?? 'OptILLM'
 >
   {Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
+
