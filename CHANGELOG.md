@@ -9,6 +9,14 @@
 
 ### Added
 
+- **好玩的：Token Killer 三级页面**：新增 Fast API 下的三级页面，记录从 Flask 到 FastAPI 的架构改造过程
+  - 内容文件：`src/content/docs/05-fun/fast-api/tokenkiller.md`
+  - 路由文件：`src/pages/fun/fast-api/tokenkiller.astro`
+  - 侧栏更新：将 Fast API 从单项改为带子项结构，挂载 Token Killer
+  - 访问路径：`/fun/fast-api/tokenkiller`
+  - 内容重点：lifespan 管理、Pydantic 验证、SSE 流式响应、结构化日志、配置外部化、错误重试等 FastAPI 特性在真实项目中的应用
+  - 风格特点：无 emoji、无煽动词汇、工程化叙述、面向实际问题
+
 - **功能：Spoiler 文本遮罩支持**：新增 Markdown 自定义指令，支持隐藏敏感信息或剧透内容
   - 依赖：安装 `remark-directive` 插件
   - 插件：新增 `src/plugins/remark-spoiler-directive.js` 处理 spoiler 指令
@@ -29,6 +37,27 @@
 - 新增脚本：`scripts/check-route-structure.js`，用于校验二级页面的路由文件结构是否与内容目录镜像一致；在 `package.json` 中添加 `check:routes` 脚本；提交前建议运行 `npm run check:routes`
 
 ### Changed
+- 重构：将内容目录 `04-advanced-techniques` 重命名为 `04-advanced`（内部命名精简）；对外路由 `/advanced` 保持不变，无破坏性变更
+  - 目录重命名：`src/content/docs/04-advanced-techniques` → `src/content/docs/04-advanced`
+  - 映射更新：`src/scripts/docsMap.ts`、`scripts/check-route-structure.js`
+  - 路由数据源引用（getEntry）更新：
+    - `src/pages/advanced/index.astro`
+    - `src/pages/advanced/agents/index.astro`
+    - `src/pages/advanced/agents/agent-build.astro`
+    - `src/pages/advanced/knowledge-bases/index.astro`
+    - `src/pages/advanced/knowledge-bases/implementation.astro`
+    - `src/pages/advanced/knowledge-bases/principles.astro`
+    - `src/pages/advanced/mcp/index.astro`
+    - `src/pages/advanced/workflow/index.astro`
+  - 文档同步：`.cursor/rules/rules.md`、`CONTRIBUTING.md`
+  - 说明：遵循 AGENTS.md 的“禁止路径重定向”与“路由镜像内容结构”规范
+
+
+- **README：链接规范化与导航优化**
+  - 文档引用改为相对链接：CONTRIBUTING.md、AGENTS.md、WARP.md、.cursor/、.github/PULL_REQUEST_TEMPLATE.md、.github/ISSUE_TEMPLATE/ 等均改为可点击链接，支持 GitHub 内跳转
+  - 新增目录：在顶部添加 `## 目录` 区块，列出所有二级章节的锚点链接
+  - 新增回到顶部：在每个二级章节末尾添加 `<div align="right"><a href="#top">回到顶部 ↑</a></div>`，方便长文档导航
+  - 新增顶部锚点：`<a id="top"></a>` 标记文档起点
 
 - 脚本：升级 `scripts/check-route-structure.js` 覆盖 1/2/3 级镜像校验，并检测孤儿路由/内容；`npm run check:routes` 输出同步更新
 - 文档：更新 AGENTS.md（DoD 必跑：check:routes + type-check）、CONTRIBUTING.md（命令说明）、README.md（提交前自检）以指导执行与验收

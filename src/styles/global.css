@@ -575,8 +575,6 @@ body.lightbox-open {
   overflow: hidden;
 }
 
-
-
 /* 优先满足减少动画偏好 */
 @media (prefers-reduced-motion: reduce) {
   :root {

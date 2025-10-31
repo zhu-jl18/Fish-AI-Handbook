@@ -4,7 +4,7 @@
 
 ## 目录与排序规则
 
-- 顶层严格递增：01-fish-talks、02-basic-usage、03-prompts、04-advanced-techniques、05-fun、06-resources、99-setup（置底）
+- 顶层严格递增：01-fish-talks、02-basic-usage、03-prompts、04-advanced、05-fun、06-resources、99-setup（置底）
 - 不允许跳号；新增一级目录按顺序加 1；Setup 固定使用 99-setup
 - 已移除：tech（技术向）、demo（DEMO）。原“技术向”内容已合并到 06-resources 下的两个二级页面（2API、云平台）
 
