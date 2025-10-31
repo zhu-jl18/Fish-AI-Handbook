@@ -9,6 +9,14 @@
 
 ### Added
 
+- **内容：新增 OptILLM 页面**：在进阶玩法章节添加推理时优化代理技术介绍
+  - 内容文件：`src/content/docs/04-advanced/optillm/index.md`
+  - 路由文件：`src/pages/advanced/optillm.astro`
+  - 侧栏更新：在 `ADVANCED_TECHNIQUES_SIDEBAR` 中添加 OptILLM 条目
+  - 访问路径：`/advanced/optillm`
+  - 内容概述：介绍 OptILLM 的核心概念、推理时优化技术（20+ 种）、插件系统和应用场景
+  - 写作风格：Linus 风格 - 直接简洁，减少列表和标题层级，无 emoji
+
 - **好玩的：Token Killer 三级页面**：新增 Fast API 下的三级页面，记录从 Flask 到 FastAPI 的架构改造过程
   - 内容文件：`src/content/docs/05-fun/fast-api/tokenkiller.md`
   - 路由文件：`src/pages/fun/fast-api/tokenkiller.astro`
