@@ -10,7 +10,6 @@
 - [ ] `npm run type-check` - 类型检查通过
 - [ ] `npm run test:links` - 站内链接检查（如涉及内容变更）
 - [ ] `npm run test:e2e` - E2E 测试（如涉及 UI/交互变更）
-- [ ] CHANGELOG.md 已更新
 
 ## 截图（UI 变更时提供）
 
