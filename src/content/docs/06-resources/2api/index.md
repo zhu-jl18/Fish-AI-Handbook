@@ -10,43 +10,29 @@ In short, 2API is to wrap some services into api interfaces through reverse engi
 
 ## 2API List
 
-Good ones：
-
-- [LMArena2api]()
-- [cerebras2api]()
-- [gcli2api]()
-
-Not good ones：
-
-- [pplx2api]()
-- [retool2api]()
-- [highlight2api]()
-- [warp2api]()
-
-Those died：
-
-- [kiro2api]()
-- [droid2api]()
-- [qwen2api]()
-- [deepinfra2api]()
-- [zai2api]()
+| 项目名称      | 状态       | 链接 | 备注                    |
+| ------------- | ---------- | ---- | ----------------------- |
+| LMArena2api   | ✅ Good     |      | 上下文会被截断          |
+| cerebras2api  | ✅ Good     |      | IP 经常失效             |
+| gcli2api      | ✅ Good     |      |                         |
+| pplx2api      | ⚠️ Not Good |      |                         |
+| retool2api    | ⚠️ Not Good |      |                         |
+| highlight2api | ⚠️ Not Good |      | 响应太慢 & 上下文被截断 |
+| warp2api      | ⚠️ Not Good |      | 响应太慢 & 内联系统提示 |
+| kiro2api      | ❌ Died     |      | 直接被封禁              |
+| droid2api     | ❌ Died     |      | 直接被封禁              |
+| qwen2api      | ❌ Died     |      | 已失效                  |
+| deepinfra2api | ❌ Died     |      |                         |
+| zai2api       | ❌ Died     |      | 已失效                  |
 
 ## 温馨提示
 
 2API 常见问题：
 
-- 模型不透明：服务商可能更换或混用模型，真实来源难以验证
-- 不支持工具调用：无法使用函数调用/工具
-- 上下文易被截断：长对话或长输入可能丢失信息
-- 系统提示不可控：常被追加在服务端提示之后，效果受限
-- 稳定性较差：服务可能随时变更或失效
-
-Some examples:
-- kiro2api: directly banned
-- droid2api: directly banned
-- zai2api: invalid
-- qwen2api: invalid
-- LMArena2api: context is cut off
-- highlight2api: response too slow && context is cut off
-- warp2api: response too slow and inline system prompt
-- cerebras2api: frequently invalid with ip
+| 问题类型       | 说明                                       |
+| -------------- | ------------------------------------------ |
+| 模型不透明     | 服务商可能更换或混用模型，真实来源难以验证 |
+| 不支持工具调用 | 无法使用函数调用/工具                      |
+| 上下文易被截断 | 长对话或长输入可能丢失信息                 |
+| 系统提示不可控 | 常被追加在服务端提示之后，效果受限         |
+| 稳定性较差     | 服务可能随时变更或失效                     |
