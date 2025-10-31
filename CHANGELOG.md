@@ -7,7 +7,30 @@
 
 ## [Unreleased]
 
+### Added
+
+- **性能：构建分析工具**：新增依赖分析和可视化工具
+  - 安装 `rollup-plugin-visualizer` (devDependency)
+  - 在 `astro.config.mjs` 中配置生成 `dist/stats.html` 构建分析报告
+  - 新增 `scripts/analyze-build.ps1` 脚本，快速分析构建产物大小和分类占比
+  - 新增 `scripts/list-astro-files.ps1` 脚本，列出 `_astro` 目录中最大的文件
+  - 用途：识别体积瓶颈、优化依赖、监控构建产物变化
+
 ### Changed
+
+- **性能：外部资源预连接优化**：为外部图片域名添加 DNS 预解析和预连接
+  - 修改文件：`src/layouts/BaseLayout.astro`
+  - 新增 `<link rel="dns-prefetch">` 和 `<link rel="preconnect">` 指向 `media.makomako.dpdns.org`
+  - 效果：减少外部资源加载的 DNS 查询和 TLS 握手时间（预计 100-300ms）
+  - 无副作用，可安全回滚
+
+- **性能：Vite 构建优化配置**：启用 CSS 代码分割和资源优化
+  - 修改文件：`astro.config.mjs`
+  - 启用 `cssCodeSplit: true`，减少首屏 CSS 体积
+  - 设置 `assetsInlineLimit: 4096`，小于 4KB 的资源内联为 base64
+  - 使用 `minify: 'esbuild'` 进行快速压缩
+  - 构建产物大小：2.02 MB（155 个文件）
+  - 分类占比：HTML 60.5%、Pagefind 19.1%、字体 17.7%、JS 8.9%、CSS 2.9%
 
 - **UI：移除右侧边栏标题**：移除右侧边栏中"页面结构"和"本文目录"标题文字，保留导航链接功能
   - 修改文件：`src/components/RightSidebar.astro`
