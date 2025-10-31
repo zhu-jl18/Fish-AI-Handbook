@@ -259,7 +259,7 @@ npm run test:e2e:headed
 
 ## 变更登记与交叉维护
 
-- 必须更新 CHANGELOG.md（[Unreleased] 下按 Added/Changed/Fixed/Removed 分类）
+- 使用清晰的提交信息与 PR 描述记录变更（包含 Why/What/How 与验证结果摘要）
 - 自查并同步相关文档引用：README.md、AGENTS.md、CONTRIBUTING.md、WARP/CLAUDE/CURSOR.md
 - 提交信息建议包含 Why/What/How 与验证结果摘要
 
