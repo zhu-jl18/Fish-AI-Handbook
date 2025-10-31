@@ -7,16 +7,22 @@
 
 ## [Unreleased]
 
-### Added
+### Removed
 
-- **性能：构建分析工具**：新增依赖分析和可视化工具
-  - 安装 `rollup-plugin-visualizer` (devDependency)
-  - 在 `astro.config.mjs` 中配置生成 `dist/stats.html` 构建分析报告
-  - 新增 `scripts/analyze-build.ps1` 脚本，快速分析构建产物大小和分类占比
-  - 新增 `scripts/list-astro-files.ps1` 脚本，列出 `_astro` 目录中最大的文件
-  - 用途：识别体积瓶颈、优化依赖、监控构建产物变化
+- **清理：移除临时构建分析工具**：移除用于构建优化测试的临时脚本和依赖
+  - 卸载 `rollup-plugin-visualizer` 依赖
+  - 移除 `astro.config.mjs` 中的 visualizer 配置
+  - 删除 `scripts/analyze-build.ps1` 脚本
+  - 删除 `scripts/list-astro-files.ps1` 脚本
+  - 保留核心构建优化配置（CSS 代码分割、资源内联、压缩等）
 
 ### Changed
+
+- **流程：简化 PR 模板**：优化 `.github/pull_request_template.md`，使其更简洁清晰
+  - 移除冗长的折叠区块和详细说明
+  - 合并所有质量检查项到单一清单
+  - 简化截图区块
+  - 保留所有必需的检查项
 
 - **性能：外部资源预连接优化**：为外部图片域名添加 DNS 预解析和预连接
   - 修改文件：`src/layouts/BaseLayout.astro`
