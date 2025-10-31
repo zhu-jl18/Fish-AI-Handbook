@@ -28,7 +28,7 @@ const DOCS_MAP = {
   'fish-talks': '01-fish-talks',
   'basic-usage': '02-basic-usage',
   prompts: '03-prompts',
-  advanced: '04-advanced-techniques',
+  advanced: '04-advanced',
   fun: '05-fun',
   resources: '06-resources',
   theoretical: '07-theoretical',
@@ -37,16 +37,39 @@ const DOCS_MAP = {
 
 const rel = (p) => path.relative(ROOT, p)
 const exists = (p) => {
-  try { fs.accessSync(p); return true } catch { return false }
+  try {
+    fs.accessSync(p)
+    return true
+  } catch {
+    return false
+  }
 }
 const isDir = (p) => {
-  try { return fs.statSync(p).isDirectory() } catch { return false }
+  try {
+    return fs.statSync(p).isDirectory()
+  } catch {
+    return false
+  }
 }
 const listDirs = (p) => {
-  try { return fs.readdirSync(p).map((n) => path.join(p, n)).filter(isDir) } catch { return [] }
+  try {
+    return fs
+      .readdirSync(p)
+      .map((n) => path.join(p, n))
+      .filter(isDir)
+  } catch {
+    return []
+  }
 }
 const listFiles = (p) => {
-  try { return fs.readdirSync(p).map((n) => path.join(p, n)).filter((x) => !isDir(x)) } catch { return [] }
+  try {
+    return fs
+      .readdirSync(p)
+      .map((n) => path.join(p, n))
+      .filter((x) => !isDir(x))
+  } catch {
+    return []
+  }
 }
 
 let errors = []
@@ -61,13 +84,17 @@ for (const [alias, numbered] of Object.entries(DOCS_MAP)) {
   const routeL1 = path.join(pagesSection, 'index.astro')
   const flatL1 = path.join(PAGES_DIR, `${alias}.astro`)
   if (!exists(contentL1)) {
-    errors.push(`Missing content: ${rel(contentL1)} (top-level index for ${numbered})`)
+    errors.push(
+      `Missing content: ${rel(contentL1)} (top-level index for ${numbered})`,
+    )
   }
   if (!exists(routeL1)) {
     errors.push(`Missing route: ${rel(routeL1)} (top-level route for ${alias})`)
   }
   if (exists(flatL1)) {
-    errors.push(`Forbidden flat root route exists: ${rel(flatL1)} (should be ${rel(routeL1)})`)
+    errors.push(
+      `Forbidden flat root route exists: ${rel(flatL1)} (should be ${rel(routeL1)})`,
+    )
   }
 
   // Level-2 directories under section
@@ -81,10 +108,14 @@ for (const [alias, numbered] of Object.entries(DOCS_MAP)) {
     // If content L2 exists, require matching route; forbid flat L2
     if (exists(mdIndex)) {
       if (!exists(routeL2)) {
-        errors.push(`Missing route: ${rel(routeL2)} (for content ${rel(mdIndex)})`)
+        errors.push(
+          `Missing route: ${rel(routeL2)} (for content ${rel(mdIndex)})`,
+        )
       }
       if (exists(flatL2)) {
-        errors.push(`Forbidden flat route exists: ${rel(flatL2)} (should be ${rel(routeL2)})`)
+        errors.push(
+          `Forbidden flat route exists: ${rel(flatL2)} (should be ${rel(routeL2)})`,
+        )
       }
 
       // Level-3 content files under L2 (file-based only; no folder+index)
@@ -99,7 +130,9 @@ for (const [alias, numbered] of Object.entries(DOCS_MAP)) {
           errors.push(`Missing route: ${rel(routeL3)} (for content ${rel(f)})`)
         }
         if (exists(routeL3Folder)) {
-          errors.push(`Forbidden 3rd-level folder route: ${rel(routeL3Folder)} (should be ${rel(routeL3)})`)
+          errors.push(
+            `Forbidden 3rd-level folder route: ${rel(routeL3Folder)} (should be ${rel(routeL3)})`,
+          )
         }
       }
 
@@ -107,14 +140,18 @@ for (const [alias, numbered] of Object.entries(DOCS_MAP)) {
       for (const leafDir of listDirs(subPath)) {
         const leafIndex = path.join(leafDir, 'index.md')
         if (exists(leafIndex)) {
-          errors.push(`Forbidden 3rd-level content folder: ${rel(leafIndex)} (should be ${rel(path.join(subPath, path.basename(leafDir) + '.md'))})`)
+          errors.push(
+            `Forbidden 3rd-level content folder: ${rel(leafIndex)} (should be ${rel(path.join(subPath, path.basename(leafDir) + '.md'))})`,
+          )
         }
       }
     }
 
     // Orphan route at level-2
     if (exists(routeL2) && !exists(mdIndex)) {
-      errors.push(`Orphan route (level-2): ${rel(routeL2)} has no matching content ${rel(mdIndex)}`)
+      errors.push(
+        `Orphan route (level-2): ${rel(routeL2)} has no matching content ${rel(mdIndex)}`,
+      )
     }
 
     // Orphan/folder checks at level-3 (routes side)
@@ -125,7 +162,9 @@ for (const [alias, numbered] of Object.entries(DOCS_MAP)) {
         const idx = path.join(d, 'index.astro')
         if (exists(idx)) {
           const leaf = path.basename(d)
-          errors.push(`Forbidden 3rd-level folder route: ${rel(idx)} (should be ${rel(path.join(pagesSubDir, leaf + '.astro'))})`)
+          errors.push(
+            `Forbidden 3rd-level folder route: ${rel(idx)} (should be ${rel(path.join(pagesSubDir, leaf + '.astro'))})`,
+          )
         }
       }
       // ensure every *.astro (except index.astro) has matching content *.md
@@ -136,7 +175,9 @@ for (const [alias, numbered] of Object.entries(DOCS_MAP)) {
         const leaf = base.replace(/\.astro$/, '')
         const md = path.join(subPath, `${leaf}.md`)
         if (!exists(md)) {
-          errors.push(`Orphan route (level-3): ${rel(file)} has no matching content ${rel(md)}`)
+          errors.push(
+            `Orphan route (level-3): ${rel(file)} has no matching content ${rel(md)}`,
+          )
         }
       }
     }
@@ -148,5 +189,7 @@ if (errors.length > 0) {
   for (const e of errors) console.error(' - ' + e)
   process.exit(1)
 } else {
-  console.log('[check:routes] OK: route files mirror content structure (level-1/2/3)')
+  console.log(
+    '[check:routes] OK: route files mirror content structure (level-1/2/3)',
+  )
 }

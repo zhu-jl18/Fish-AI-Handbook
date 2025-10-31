@@ -2,7 +2,7 @@ export const DOCS_MAP = {
   'fish-talks': '01-fish-talks',
   'basic-usage': '02-basic-usage',
   prompts: '03-prompts',
-  advanced: '04-advanced-techniques',
+  advanced: '04-advanced',
   fun: '05-fun',
   resources: '06-resources',
   theoretical: '07-theoretical',

@@ -57,4 +57,3 @@ if (document.readyState === 'loading') {
 if (typeof window !== 'undefined') {
   window.addEventListener('astro:page-load', initSpoilers)
 }
-
