@@ -4,7 +4,7 @@ These rules guide Cursor (and similar editor AIs) when editing this repository.
 
 ## Project structure and numbering
 
-- Top-level sections are strictly ordered: 01-fish-talks, 02-basic-usage, 03-prompts, 04-advanced-techniques, 05-fun, 06-resources, 99-setup
+- Top-level sections are strictly ordered: 01-fish-talks, 02-basic-usage, 03-prompts, 04-advanced, 05-fun, 06-resources, 99-setup
 - No new top-level `tech`/`demo` sections. Technical content lives under Resources (2API, 云平台)
 - Setup always remains 99-setup; split prerequisites into direct second-level pages (Terminal, VS Code, Node.js, GitHub, VPN)
 
