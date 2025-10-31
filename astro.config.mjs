@@ -6,7 +6,6 @@ import { siteConfig, codeConfig } from './src/config/index.ts'
 import remarkListSpacing from './src/plugins/remark-list-spacing.js'
 import remarkDirective from 'remark-directive'
 import remarkSpoilerDirective from './src/plugins/remark-spoiler-directive.js'
-import { visualizer } from 'rollup-plugin-visualizer'
 
 export default defineConfig({
   site: siteConfig.url,
@@ -36,17 +35,6 @@ export default defineConfig({
       assetsInlineLimit: 4096,
       // 启用压缩（默认使用 esbuild，速度快）
       minify: 'esbuild',
-      // Rollup 配置
-      rollupOptions: {
-        plugins: [
-          visualizer({
-            filename: './dist/stats.html',
-            open: false,
-            gzipSize: true,
-            brotliSize: true,
-          }),
-        ],
-      },
     },
   },
 })
