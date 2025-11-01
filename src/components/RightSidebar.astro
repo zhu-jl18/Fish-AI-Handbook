@@ -2,28 +2,15 @@
 // 自动化目录（TOC）组件：在客户端扫描正文 h2/h3/h4 构建目录
 // 内容作者无需在各页面传入 headings，完全解耦内容与目录
 import '../styles/right-sidebar.css'
-import siteConfig from '../config/site'
+import siteConfig, {
+  CONTRIBUTORS_MAP,
+  type ContributorInfo,
+} from '../config/site'
 import type {
   SidebarSection,
   SidebarGroup,
   SidebarLink,
 } from '../scripts/sidebars'
-
-type ContributorInput =
-  | string
-  | {
-      username?: string
-      name?: string
-      link?: string
-      avatar?: string
-    }
-
-type Contributor = {
-  username: string
-  name: string
-  link: string
-  avatar: string
-}
 
 const {
   structure = [],
@@ -32,7 +19,7 @@ const {
 }: {
   structure?: SidebarSection
   currentPath?: string
-  contributors?: ContributorInput[] | null
+  contributors?: string[] | null
 } = Astro.props
 
 const normalizePath = (path: string) => {
@@ -47,33 +34,39 @@ const isExactActive = (href?: string) =>
 
 const resolvedStructure = Array.isArray(structure) ? structure : []
 
-const resolveContributor = (entry: ContributorInput): Contributor | null => {
-  if (!entry) return null
-  if (typeof entry === 'string') {
-    const username = entry.trim()
-    if (!username) return null
-    return {
-      username,
-      name: username,
-      link: `https://github.com/${username}`,
-      avatar: `https://github.com/${username}.png`,
-    }
+/**
+ * 解析贡献者字符串为完整的贡献者信息
+ * 优先从 CONTRIBUTORS_MAP 查找，找不到则按 GitHub 用户名处理
+ */
+const resolveContributor = (username: string): ContributorInfo | null => {
+  const trimmed = username.trim()
+  if (!trimmed) return null
+
+  // 优先从配置映射表查找
+  if (CONTRIBUTORS_MAP[trimmed]) {
+    return CONTRIBUTORS_MAP[trimmed]
   }
-  const username = entry.username?.trim() ?? entry.name?.trim()
-  if (!username) return null
-  const finalName = entry.name?.trim() || username
-  const link =
-    entry.link?.trim() || `https://github.com/${entry.username ?? username}`
-  const avatar =
-    entry.avatar?.trim() ||
-    `https://github.com/${entry.username ?? username}.png`
-  return { username, name: finalName, link, avatar }
+
+  // 未找到则按 GitHub 用户名处理
+  return {
+    username: trimmed,
+    name: trimmed,
+    link: `https://github.com/${trimmed}`,
+    avatar: `https://github.com/${trimmed}.png`,
+  }
 }
 
-const contributorList: Contributor[] = []
+const contributorList: ContributorInfo[] = []
 const seen = new Set<string>()
 
-if (Array.isArray(contributors)) {
+// 如果页面配置了 contributors，自动添加默认贡献者到第一位
+if (Array.isArray(contributors) && contributors.length > 0) {
+  // 先添加默认贡献者
+  const defaultContributor = siteConfig.defaultContributor
+  seen.add(defaultContributor.username)
+  contributorList.push(defaultContributor)
+
+  // 再添加配置的贡献者
   for (const item of contributors) {
     const resolved = resolveContributor(item)
     if (!resolved) continue
@@ -81,19 +74,9 @@ if (Array.isArray(contributors)) {
     seen.add(resolved.username)
     contributorList.push(resolved)
   }
-}
-
-if (
-  contributorList.length === 0 &&
-  typeof contributors === 'undefined' &&
-  siteConfig.defaultContributor
-) {
-  contributorList.push({
-    username: siteConfig.defaultContributor.username,
-    name: siteConfig.defaultContributor.name,
-    link: siteConfig.defaultContributor.link,
-    avatar: siteConfig.defaultContributor.avatar,
-  })
+} else if (typeof contributors === 'undefined') {
+  // 未配置 contributors 时，使用默认贡献者
+  contributorList.push(siteConfig.defaultContributor)
 }
 
 const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
@@ -152,20 +135,26 @@ const isGroupActive = (entry: SidebarGroup) => {
         <section class="panel contributors-panel">
           <header class="panel-header">
             <span class="panel-title">Contributors</span>
+            <span class="contributor-count">{contributorList.length}</span>
           </header>
-          <div class="contributors-list">
+          <div
+            class={`contributors-list ${contributorList.length > 2 ? 'grid-layout' : 'list-layout'}`}
+          >
             {contributorList.map((person) => (
               <a
                 class="contributor-card"
                 href={person.link}
                 target="_blank"
                 rel="noreferrer noopener"
+                title={`${person.name} (@${person.username})`}
               >
                 <img src={person.avatar} alt={person.name} loading="lazy" />
-                <div class="contributor-meta">
-                  <span class="contributor-name">{person.name}</span>
-                  <span class="contributor-handle">@{person.username}</span>
-                </div>
+                {contributorList.length <= 2 ? (
+                  <div class="contributor-meta">
+                    <span class="contributor-name">{person.name}</span>
+                    <span class="contributor-handle">@{person.username}</span>
+                  </div>
+                ) : null}
               </a>
             ))}
           </div>
