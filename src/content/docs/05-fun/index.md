@@ -3,6 +3,8 @@ title: 好玩的
 description: 一些好玩的东西
 ---
 
+- [500 AI Agents Projects](https://github.com/ashishpatel26/500-AI-Agents-Projects)
+
 - [AI 绘画](/fun/ai-drawing)
 - [破限越狱](/fun/llm-unlocking)
 - [酒馆](/fun/sillytavern)
