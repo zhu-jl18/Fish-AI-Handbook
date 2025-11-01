@@ -1,6 +1,12 @@
 ---
 title: the Origin
 description: Hello World
+contributors:
+  - T-Auto
+  - claude
+  - codex
+  - gemini
+  - glm
 ---
 
 ## Hi there!
