@@ -141,7 +141,11 @@ export const SETUP_SIDEBAR: SidebarSection = [
   { label: 'Vs Code', href: '/setup/vs-code' },
   { label: 'Node.js', href: '/setup/nodejs' },
   { label: 'Git', href: '/setup/git' },
-  { label: 'VPN', href: '/setup/vpn' },
+  {
+    label: 'VPN',
+    href: '/setup/vpn',
+    items: [{ label: '云服务器', href: '/setup/vpn/cloud-server' }],
+  },
   { label: 'Cherry Studio', href: '/setup/cherrystudio' },
   {
     label: 'Claude Code',
