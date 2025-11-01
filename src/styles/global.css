@@ -378,12 +378,12 @@ li > ol:first-child {
 }
 
 /* 段落与后续列表的间距：根据是否有空行进行区分
-   - 无空行（紧凑）：在 remark 插件标记 .md-list--tight 时，使用负 margin-top 抵消段落的下边距，使总间距约为 0.35rem
+   - 无空行（紧凑）：在 remark 插件标记 .md-list--tight 时，使用负 margin-top 抵消段落的下边距，使总间距约为 0.75rem
    - 有空行（宽松）：保持默认段落间距（无需额外规则）
 */
 p + ul.md-list--tight,
 p + ol.md-list--tight {
-  margin-top: calc(-1 * (var(--paragraph-spacing) - 0.35rem));
+  margin-top: calc(-1 * (var(--paragraph-spacing) - 0.75rem));
 }
 
 /* 预留：如需对“有空行”场景增加更大间距，可在下方添加 padding-top 等；当前保持默认效果 */
