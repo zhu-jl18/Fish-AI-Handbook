@@ -94,6 +94,7 @@ export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
     href: '/advanced/agents',
     items: [{ label: '构建指南', href: '/advanced/agents/agent-build' }],
   },
+  { label: 'OptILLM', href: '/advanced/optillm' },
   { label: 'Workflow', href: '/advanced/workflow' },
 ]
 
