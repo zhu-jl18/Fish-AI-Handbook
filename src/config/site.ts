@@ -80,6 +80,47 @@ const siteConfig: SiteConfig = {
 export default siteConfig
 
 /**
+ * 贡献者信息类型
+ */
+export type ContributorInfo = {
+  username: string
+  name: string
+  link: string
+  avatar: string
+}
+
+/**
+ * 预定义的 AI 模型贡献者映射表
+ * 用于在 frontmatter 中通过简短别名引用完整的贡献者信息
+ */
+export const CONTRIBUTORS_MAP: Record<string, ContributorInfo> = {
+  claude: {
+    username: 'claude',
+    name: 'claude',
+    link: 'https://github.com/anthropics',
+    avatar: 'https://avatars.githubusercontent.com/u/81847?v=4',
+  },
+  codex: {
+    username: 'codex',
+    name: 'codex',
+    link: 'https://github.com/openai',
+    avatar: 'https://avatars.githubusercontent.com/u/14957082?s=48&v=4',
+  },
+  gemini: {
+    username: 'gemini',
+    name: 'gemini',
+    link: 'https://github.com/google-gemini',
+    avatar: 'https://avatars.githubusercontent.com/u/161781182?s=48&v=4',
+  },
+  glm: {
+    username: 'glm',
+    name: 'glm',
+    link: 'https://bigmodel.cn/',
+    avatar: 'https://z-cdn.chatglm.cn/z-ai/static/logo.svg',
+  },
+}
+
+/**
  * 辅助函数：生成 robots meta 标签内容
  */
 export function getRobotsContent(config: SiteConfig['robots']): string {
