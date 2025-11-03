@@ -49,7 +49,15 @@ export const BASIC_USAGE_SIDEBAR: SidebarSection = [
   { label: 'AI IDE', href: '/basic-usage/ide-agent' },
   { label: 'Mobile', href: '/basic-usage/mobile-apps' },
   { label: 'Cherry Studio', href: '/basic-usage/cherrystudio' },
-  { label: 'Claude Code', href: '/basic-usage/claude-code' },
+  {
+    label: 'Claude Code',
+    href: '/basic-usage/claude-code',
+    items: [
+      { label: 'Subagents', href: '/basic-usage/claude-code/subagents' },
+      { label: 'Hooks', href: '/basic-usage/claude-code/hooks' },
+      { label: 'Skills', href: '/basic-usage/claude-code/skills' },
+    ],
+  },
   { label: 'Codex', href: '/basic-usage/codex' },
   { label: 'AI 应用', href: '/basic-usage/ai-apps' },
 ]
