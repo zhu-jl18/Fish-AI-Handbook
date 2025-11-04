@@ -1,6 +1,6 @@
 ---
-title: Skills
-description: Claude Code 中 Skills 功能的使用教程
+title: Skill
+description: Claude Code 中 Skill 功能的使用教程
 ---
 
 Skills 是 Claude Code 的核心能力之一，它允许你通过预定义的技能模板快速完成常见任务。这不是什么花哨的功能，就是把一些常用的提示词和工作流打包起来，让你不用每次都重复输入相同的指令。

@@ -30,7 +30,12 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
   {
     label: 'Models',
     href: '/fish-talks/models',
-    items: [{ label: '模型排名', href: '/fish-talks/models/llm-rankings' }],
+    items: [
+      { label: 'Big Three', href: '/fish-talks/models/big-three' },
+      { label: 'CN Six', href: '/fish-talks/models/cn-6' },
+      { label: 'Others', href: '/fish-talks/models/others' },
+      { label: '模型排名', href: '/fish-talks/models/llm-rankings' },
+    ],
   },
   {
     label: '术语扫盲',
@@ -53,9 +58,9 @@ export const BASIC_USAGE_SIDEBAR: SidebarSection = [
     label: 'Claude Code',
     href: '/basic-usage/claude-code',
     items: [
-      { label: 'Subagents', href: '/basic-usage/claude-code/subagents' },
-      { label: 'Hooks', href: '/basic-usage/claude-code/hooks' },
-      { label: 'Skills', href: '/basic-usage/claude-code/skills' },
+      { label: 'Subagent', href: '/basic-usage/claude-code/subagent' },
+      { label: 'Hook', href: '/basic-usage/claude-code/hook' },
+      { label: 'Skill', href: '/basic-usage/claude-code/skill' },
     ],
   },
   { label: 'Codex', href: '/basic-usage/codex' },
@@ -130,7 +135,7 @@ export const FUN_SIDEBAR: SidebarSection = [
 export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
   { label: 'FREE', href: '/resources/free-tier' },
-  { label: '代理节点', href: '/resources/proxy-nodes' },
+  { label: '代理节点', href: '/resources/api-proxy' },
   { label: '2API', href: '/resources/2api' },
   { label: '云平台', href: '/resources/cloud-platforms' },
   { label: 'PAID', href: '/resources/paid' },
