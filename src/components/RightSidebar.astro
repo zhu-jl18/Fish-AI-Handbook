@@ -93,7 +93,8 @@ const isGroupActive = (entry: SidebarGroup) => {
   <div class="sidebar-scroll">
     {
       resolvedStructure.length > 0 ? (
-        <section class="panel structure-panel">
+        <section class="panel structure-panel panel-with-legend">
+          <span class="panel-legend">CHAPTER</span>
           <nav class="structure-nav">
             {resolvedStructure.map((entry) =>
               isGroup(entry) ? (
@@ -132,11 +133,11 @@ const isGroupActive = (entry: SidebarGroup) => {
     }
     {
       contributorList.length > 0 ? (
-        <section class="panel contributors-panel">
-          <header class="panel-header">
-            <span class="panel-title">Contributors</span>
+        <section class="panel contributors-panel panel-with-legend">
+          <span class="panel-legend">
+            CONTRIBUTORS
             <span class="contributor-count">{contributorList.length}</span>
-          </header>
+          </span>
           <div
             class={`contributors-list ${contributorList.length > 2 ? 'grid-layout' : 'list-layout'}`}
           >
@@ -161,7 +162,8 @@ const isGroupActive = (entry: SidebarGroup) => {
         </section>
       ) : null
     }
-    <section class="panel toc-panel">
+    <section class="panel toc-panel panel-with-legend">
+      <span class="panel-legend">TOC</span>
       <div class="toc-content">
         <nav class="toc-nav"></nav>
       </div>
