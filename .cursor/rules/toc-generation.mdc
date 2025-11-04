@@ -1,37 +1,40 @@
 ---
-description: Core specification for generating documentation table of contents with CJK character handling and heading hierarchy rules
+description: Technical specification for generating table of contents with CJK support and scroll synchronization
 ---
 
 
 # toc-generation
 
-The table of contents generation system implements domain-specific rules for technical documentation structure and navigation.
+The table of contents generation system implements specialized heading collection and hierarchy management with focus on mixed Chinese/English content support.
 
-## Core Components
+Key Components:
 
-### Heading Collection (Importance Score: 85)
+1. Slug Generation Service
 Path: src/scripts/toc.ts
-- Enforces strict heading hierarchy (h2-h4 only)
-- Custom handling of mixed Chinese/English headings 
-- Maps numeric prefixed content folders to clean URLs
-- Maintains hierarchical documentation structure
+- Specialized handling for CJK character normalization in heading text
+- Mixed language content slug creation
+- Maintains unique identifiers for bilingual headings
+Importance Score: 85/100
 
-### Navigation Rules (Importance Score: 75)
-- Strict 3-level documentation hierarchy
-- Level-specific validation:
-  - Level 1: Requires index files
-  - Level 2: Enforces subfolder structure
-  - Level 3: Prohibits deeper nesting
+2. Hierarchy Management
+Path: src/scripts/toc.ts
+- Custom heading collection and nesting logic
+- Implements heading level constraints (max 3 levels)
+- Enforces bidirectional heading relationships
+Importance Score: 75/100
 
-### Content Organization (Importance Score: 70)
-- Specialized handling for AI/ML documentation sections
-- Section-specific sidebar navigation patterns
-- Domain-specific content mapping with numeric prefixes
+3. Scroll Synchronization 
+Path: src/scripts/toc.ts
+- Implements scroll-spy functionality for documentation navigation
+- Maps scroll position to heading hierarchy
+- Handles active state management for TOC items
+Importance Score: 65/100
 
-### Scroll Synchronization (Importance Score: 65)
-- Maps headings to unique identifiers for navigation
-- Maintains scroll position state
-- Updates active section based on viewport
+Core Business Rules:
+- Headings must maintain proper hierarchical relationships
+- Slugs must handle mixed CJK/Latin character content
+- Navigation state must sync with document scroll position
+- Heading levels cannot exceed 3-level depth
 
 $END$
 

@@ -1,43 +1,46 @@
 ---
-description: Documentation of hierarchical navigation system, routing logic, and section organization for AI/ML content
+description: Defines rules and implementation for hierarchical documentation navigation, route mapping, and section organization
 ---
 
 
 # navigation-structure
 
-The navigation system implements a strictly enforced three-level hierarchy designed specifically for AI/ML documentation organization:
+The navigation system implements a strict three-level hierarchical documentation structure with specialized routing and mapping rules:
 
-## Core Navigation Rules (Score: 85)
-- Enforces exactly 3 levels of documentation depth
-- Maps numeric prefixed content folders to clean URLs
-  Example: `01-fish-talks/` → `/fish-talks`
-- Requires index.md/index.astro pattern at Level 1
-- Enforces subfolder structure at Level 2
-- Prohibits nesting beyond Level 3
+## Core Navigation Components
 
-## Route Validation (Score: 75)
-Located in `scripts/check-route-structure.js`:
-- Validates content/route pairs based on AI documentation patterns
-- Maps AI documentation sections using numeric prefixes for ordered presentation
-- Enforces section-specific sidebar navigation rules
+### Documentation Section Mapping
+Path: src/scripts/sidebars.ts
+- Enforces three distinct navigation levels for all documentation content
+- Maps numeric prefixed content folders (01-getting-started) to clean URLs (/getting-started)
+- Handles section aliases and redirects for legacy paths
+Importance Score: 75/100
 
-## Section Organization (Score: 70)
-Located in `src/scripts/sidebars.ts`:
-- Implements domain-specific section aliases
-- Defines AI/ML content organization patterns
-- Handles mapping between internal section IDs and public routes
-- Maintains strict hierarchical relationships between documentation sections
+### Route Structure Validation
+Path: scripts/check-route-structure.js
+- Validates bidirectional mapping between content files and route definitions
+- Enforces constraints between parent/child sections in the hierarchy
+- Ensures consistent route naming across all navigation levels
+Importance Score: 70/100
 
-## Navigation Components
-Path Structure:
-```
-docs/
-  ├── section-1/        # Level 1 (requires index)
-  │   ├── topic-a/      # Level 2 (enforced subfolder)
-  │   │   └── page.md   # Level 3 (content only)
-  │   └── topic-b/
-  └── section-2/
-```
+## Navigation Hierarchy Rules
+
+1. Level 1: Main Categories
+   - Top-level documentation sections
+   - Must contain at least one child section
+   - Cannot contain direct content
+
+2. Level 2: Sub-sections
+   - Groups related documentation topics
+   - Can contain both content and child sections
+   - Must have a valid parent section
+
+3. Level 3: Content Pages
+   - Individual documentation pages
+   - Must belong to a Level 2 section
+   - Cannot have child sections
+
+The navigation structure maps folder-based content organization to URL-friendly routes while maintaining strict hierarchical relationships between sections.
 
 $END$
 

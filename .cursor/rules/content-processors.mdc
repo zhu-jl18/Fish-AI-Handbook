@@ -1,55 +1,35 @@
 ---
-description: Specification for implementing and extending content processing systems, particularly focused on spoiler and custom directive handling
+description: Documentation for content processing systems including spoiler directives and custom syntax handling
 ---
 
 
 # content-processors
 
-## Primary Components
+The content processing system implements specialized directives and syntax handlers for documentation content, with a focus on spoiler functionality:
 
-### Spoiler System (Importance Score: 85)
-Implements domain-specific content hiding mechanisms with three distinct types:
+## Spoiler Processing
+Path: src/content-processors/spoilers
+- Handles transformation of custom spoiler directives in documentation content
+- Implements three distinct spoiler types:
+  1. Inline spoilers for single-line hidden content
+  2. Block spoilers for multi-line collapsible sections  
+  3. Leaf spoilers for terminal nodes
+- Processes nested spoiler hierarchies while maintaining context
+- Importance Score: 85/100
 
-1. Inline Spoilers
-- Handles single-line text concealment
-- Processes custom syntax markers for hidden content
-- Maps to specialized rendering components
+## Custom Syntax Management
+Path: src/content-processors/syntax
+- Processes documentation-specific syntax extensions
+- Handles directive parsing and validation
+- Maps syntax tokens to renderable components
+- Importance Score: 75/100
 
-2. Block Spoilers 
-- Manages multi-line content blocks
-- Preserves nested markdown structures
-- Enforces content organization rules
-
-3. Leaf Spoilers
-- Handles terminal content nodes
-- Prevents further nesting within spoiler blocks
-- Maintains strict hierarchy constraints
-
-### Custom Syntax Processing (Importance Score: 80)
-Domain-specific content transformations:
-
-1. Directive Handling
-- Custom spoiler syntax interpretation
-- Content block boundary detection
-- Type-specific processing rules
-
-2. Content Structure
-- Three-level processing hierarchy
-- Strict enforcement of nesting rules
-- Specialized handling for technical documentation
-
-### Content Organization (Importance Score: 75)
-Enforces documentation-specific processing rules:
-
-1. Hierarchy Management
-- Validates processing depth levels
-- Enforces content boundary rules
-- Maps processing directives to rendering components
-
-2. Content Validation
-- Verifies directive syntax compliance
-- Ensures proper nesting structure
-- Maintains processing chain integrity
+## Content Pipeline Integration
+Path: src/plugins/content/processors
+- Orchestrates content processing workflow
+- Manages processing order and dependencies
+- Handles processor registration and execution
+- Importance Score: 70/100
 
 $END$
 
