@@ -65,7 +65,7 @@ const siteConfig: SiteConfig = {
   favicon: 'https://media.makomako.dpdns.org/images/2025/11/wired-lineal--ai',
   defaultContributor: {
     username: 'zhu-jl18',
-    name: 'zhu-jl18',
+    name: 'Fish',
     link: 'https://github.com/zhu-jl18',
     avatar: 'https://github.com/zhu-jl18.png',
   },
@@ -96,27 +96,27 @@ export type ContributorInfo = {
 export const CONTRIBUTORS_MAP: Record<string, ContributorInfo> = {
   claude: {
     username: 'claude',
-    name: 'claude',
+    name: 'Claude',
     link: 'https://github.com/anthropics',
     avatar: 'https://avatars.githubusercontent.com/u/81847?v=4',
   },
   codex: {
     username: 'codex',
-    name: 'codex',
+    name: 'Codex',
     link: 'https://github.com/openai',
     avatar: 'https://avatars.githubusercontent.com/u/14957082?s=48&v=4',
   },
   gemini: {
     username: 'gemini',
-    name: 'gemini',
+    name: 'Gemini',
     link: 'https://github.com/google-gemini',
     avatar: 'https://avatars.githubusercontent.com/u/161781182?s=48&v=4',
   },
   glm: {
     username: 'glm',
-    name: 'glm',
-    link: 'https://bigmodel.cn/',
-    avatar: 'https://z-cdn.chatglm.cn/z-ai/static/logo.svg',
+    name: 'GLM',
+    link: 'https://github.com/zai-org',
+    avatar: 'https://media.makomako.dpdns.org/images/2025/11/zhipu',
   },
 }
 
