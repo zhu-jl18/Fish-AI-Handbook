@@ -6,87 +6,67 @@ contributors:
 ---
 
 
-刷榜没有意义，用户占比说明一切。但是如果你连榜都打不上去，那直接就是垃圾了。
+能打榜不代表能干活，但连榜都上不去，别谈生产。
 
-Benchmark 本质是标准化测试，给所有模型做同一套题看谁分高。厂商喜欢刷 SOTA 的原因：市场要数字，投资人看 PPT，媒体要标题。"某 benchmark 全球第一"比"实际场景更稳定"好传播得多。同时尽管打榜分数不能说明一切，但是已经是最好的评价标准了。
+Benchmark 是统一试卷，分数只是信号，不是能力。厂商爱报 SOTA 因为数字好卖，但别被标题带着走。
 
-需要注意：针对 benchmark 优化和解决真实问题是两码事。譬如最新的 Qwen3-Max-Thinking 在 AIME/HMMT 数学测试拿满分，SWE-Bench 69.6 分第一梯队，看起来很强。实际用下来？推理慢、context 不稳定、简单任务 overthinking，拉完了！
-
-来看Sonnet-4.5:
-
-![Sonnet-4.5](https://p.sda1.dev/28/c1d9c269057bcefe2309d25481abfed4/image.png)
-
-
-## 核心 Benchmarks
-
-Benchmark 不是没用，而是提醒你：分数只是参考，不能迷信。模型是用来干活的，不是用来拿奖的。业界公认的标准测试集：
-
-| Benchmark                                            | 测试内容                   | 权威度 | 说明                                                                    |
-| ---------------------------------------------------- | -------------------------- | ------ | ----------------------------------------------------------------------- |
-| [MMLU](https://github.com/hendrycks/test)            | 57 个学科选择题，15,908 道 | 极高   | 知识广度测试。GPT-5 约 90%，Claude Sonnet 4.5 约 89%。低于 70% 基本没用 |
-| [GPQA Diamond](https://github.com/idavidrein/gpqa)   | 研究生级别科学问题         | 极高   | 专家级知识测试。GPT-5 87.3%，Claude Sonnet 4.5 83.3%。比 MMLU 难得多    |
-| [HumanEval](https://github.com/openai/human-eval)    | 164 道 Python 编程题       | 极高   | 代码生成基准。样本量小但是厂商必测。GPT-5 约 93%                        |
-| [MATH](https://github.com/hendrycks/math)            | 12,500 道竞赛级数学题      | 极高   | 数学推理能力。o1 能到 90%+，GPT-4 只有 50%。区分度很高                  |
-| [SWE-Bench Verified](https://www.swebench.com)       | 真实 GitHub issues         | 极高   | 真实软件工程能力。Claude Sonnet 4.5 77.2%，GPT-5 72.8%。这个最接近实战  |
-| [GSM8K](https://github.com/openai/grade-school-math) | 8,500 道小学数学题         | 高     | 基础推理能力。现在的模型基本都 90%+，主要看有没有明显短板               |
-
-
-我要额外鞭尸一下这类榜单：
-
-[Humanity's Last Exam](https://agi.safe.ai/) (HLE) 是 2025 年最重要的新 benchmark，2,500 道跨学科专家级问题，号称"人类的最后一次考试"。
-
-截至 2025.11，最新成绩：
-
-| 模型              | 准确率 | Calibration Error |
-| ----------------- | ------ | ----------------- |
-| Grok 4            | 25.4%  | -                 |
-| GPT-5             | 25.3%  | 50.0%             |
-| Gemini 2.5 Pro    | 21.6%  | 72.0%             |
-| GPT-5-mini        | 19.4%  | 65.0%             |
-| DeepSeek-R1-0528  | 14.0%  | 78.0%             |
-| Claude 4.5 Sonnet | 13.7%  | 65.0%             |
-| Claude 4.1 Opus   | 11.5%  | 71.0%             |
-| o1                | 8.0%   | 83.0%             |
-| GPT-4o            | 2.7%   | 89.0%             |
-
-这个榜单有两点很有意思：
-
-第一，所有模型的准确率都很低，最好的也就 25% 左右。说明这个测试确实难，没被训练集污染。
-
-第二，注意 Calibration Error 这一列。这是测试模型"知不知道自己不知道"的能力。GPT-4o 准确率最低（2.7%）但 Calibration Error 最高（89%），意思是它不会但还很自信，典型的一本正经胡说八道。GPT-5 准确率高（25.3%）且 Calibration Error 低（50%），说明它答不出来的时候至少知道自己答不出来。
-
-那么问题来了，它的题目长什么样呢？
-[Humanity's Last Exam](https://agi.safe.ai/)、
+优化 benchmark ≠ 解决用户问题。高分模型也可能慢、上下文不稳、动不动过度推理。
 
 
 
-一些针对特定能力的测试，如Agent 和代码专项，厂商也会选择性地报告：
+## 主流 Benchmarks
 
-| Benchmark                                        | 测试内容                 | 说明                                                |
-| ------------------------------------------------ | ------------------------ | --------------------------------------------------- |
-| [GAIA](https://huggingface.co/gaia-benchmark)    | 466 道需要工具协作的问题 | Agent 能力测试。人类 92%，GPT-4 只有 15%，差距明显  |
-| [WebArena](https://webarena.dev)                 | 真实网站操作任务         | 最接近实际 agent 场景，通过率普遍个位数             |
-| [LiveCodeBench](https://livecodebench.github.io) | 最新竞赛题（持续更新）   | 防训练集污染的代码测试，比 HumanEval 更能测真实水平 |
+分数只是信号，不是能力。模型是用来干活的，不是用来拿奖的。
 
-使用 benchmark 需要注意：训练集污染（HumanEval 可能被"记住"了）、样本量小（164 道题统计方差大）、不代表实际能力（SWE-Bench 30% 不等于实际写代码 30% 成功率）。
+| Benchmark | 测试内容 | 典型分数 / 说明 |
+| --- | --- | --- |
+| [MMLU](https://github.com/hendrycks/test) / [MMLU‑Pro](https://huggingface.co/spaces/TIGER-Lab/MMLU-Pro) | 57 个学科选择题；MMLU‑Pro 更难 | 顶级闭源 ≈ 85–90%（2025.11）；低于 70% 基本没用 |
+| [GPQA Diamond](https://github.com/idavidrein/gpqa) | 研究生级别科学问题 | GPT‑5 87.3%；Claude 4.5 Sonnet 83.3%（2025.11）；比 MMLU 难得多 |
+| [MATH](https://github.com/hendrycks/math) | 12,500 道竞赛级数学题 | 顶级模型 90%+（2025.11）；GPT‑4 ≈ 50%；区分度很高 |
+| [GSM8K](https://github.com/openai/grade-school-math) | 8,500 道小学数学题 | 多数模型 90%+（2025.11）；主要看是否存在明显短板 |
+| [HumanEval](https://github.com/openai/human-eval) | 164 道 Python 编程题 | 顶级闭源 90%+（2025.11）；样本量小，可能被训练集污染 |
+| [LiveCodeBench](https://livecodebench.github.io) | 最新竞赛题（持续更新） | 防训练集污染，比 HumanEval 更能测真实水平（2025.11） |
+| [SWE‑bench Verified](https://www.swebench.com) | 真实 GitHub issues | Claude 4.5 Sonnet 70.6%（2025‑09‑29）；GPT‑5 65.0%（2025‑08‑07）；最接近实战 |
+| [IFEval](https://github.com/google-research/google-research/tree/master/instruction_following_eval) | 指令遵循 | 衡量"按要求做事"，厂商常作补充（2025.11） |
+| [GAIA](https://huggingface.co/gaia-benchmark) | 466 道需要工具协作的问题 | Agent 能力测试；人类 92%，GPT‑4 只有 15%（2025.11） |
+| [WebArena](https://webarena.dev) | 真实网站操作任务 | 最接近实际 agent 场景，通过率普遍个位数（2025.11） |
+| [Humanity's Last Exam](https://agi.safe.ai/) | 2,500 题跨 100+ 学科 | 最严苛通用考试；最好约 25%（Grok 4 25.4%，GPT‑5 25.3%，2025.11） |
+
+SWE‑bench Verified 是目前最接近真实软件工程场景的测试，500 个人工筛选的 GitHub issues，Claude 4.5 Sonnet 在 2025 年 9 月拿到 70.6%，是当前最高分。但这不等于实际写代码 70% 成功率，benchmark 分数和生产力是两码事。
+
+LiveCodeBench 持续从最新编程竞赛收集题目（2024‑08 到 2025‑05 窗口），避免训练集污染。HumanEval 只有 164 题，样本量小且可能被"记住"，LiveCodeBench 更能测真实水平。
+
+GPQA Diamond 是 198 道最难的研究生级科学问题，PhD 专家平均只有 65% 正确率。顶级模型能到 80%+ 说明在专业知识上已经接近或超过人类专家水平。
+
+[LMArena](https://lmarena.ai)（原 LMSYS Chatbot Arena）用真人投票对战排名，Elo rating 机制。优点是真人评测、bias 少；缺点是用户可能偏好"好听的废话"，对话任务评测准确但 coding/reasoning 不太行。Elo 分差 50 分基本感觉不出来。
+
+使用 benchmark 需要注意：训练集污染、样本量小导致统计方差大、分数不代表实际能力。
 
 
 
-LMArena：真人投票对战，用 Elo rating 排名。优点是真人评测、bias 少；缺点是用户可能偏好"好听的废话"，对话任务评测准确但 coding/reasoning 不太行。Elo 分差 50 分基本感觉不出来。
+## 当前主流模型（2025.11）
+
+截至 2025 年 11 月：SWE‑bench Verified 上 Claude 4.5 Sonnet 70.6% 领先；HLE 最高 Grok 4 25.4%，GPT‑5 25.3%，Gemini 2.5 Pro 21.6%。
+
+编码实操个人推荐：Claude Sonnet 4.5 > GPT‑5 > DeepSeek‑R1。
+
+<!-- 预留：个人模型排名与实际使用体验 -->
+<!-- 可在此处补充：
+- 不同场景下的模型选择建议（对话、编码、推理、长文本等）
+- 实际使用中的稳定性、速度、成本对比
+- 特定任务的最佳实践
+-->
 
 
 
+## 推荐资源
 
-
-
-截至 2025 年 11 月，主流模型：
-
-- **GPT-5** (OpenAI, 2025.08)：MMLU 90.1%，GPQA 87.3%，SWE-Bench 72.8%，HLE 25.3%
-- **Claude 4.5 Sonnet** (Anthropic, 2025.09)：SWE-Bench 77.2% 最强，GPQA 83.3%，HLE 13.7%
-- **Gemini 2.5 Pro** (Google)：HLE 21.6%，整体均衡
-- **Grok 4** (xAI)：HLE 25.4% 目前最高
-
-Coding 场景个人排序：Claude Sonnet 4.5 > GPT-5 > DeepSeek-R1。
+<!-- 预留：测评博主与数据集推荐 -->
+<!-- 可在此处补充：
+- 值得关注的 LLM 测评博主/频道
+- 高质量的开源测评数据集
+- 实用的模型对比工具
+-->
 
 
 
