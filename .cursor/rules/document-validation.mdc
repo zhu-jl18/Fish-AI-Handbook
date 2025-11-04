@@ -1,51 +1,47 @@
 ---
-description: Specification for document structure validation rules, content organization, and hierarchy enforcement in technical documentation
+description: Rules and validation mechanisms for maintaining documentation structure integrity and content organization
 ---
 
 
 # document-validation
 
-## Structure Validation Rules
+## Core Validation Components
 
-### Hierarchy Requirements
-- Strictly enforces 3-level documentation structure
-- Level 1: Requires index.md/index.astro files as entry points
-- Level 2: Mandates specific subfolder organization
-- Level 3: Prohibits further nested content
-
-Importance Score: 85
+### Structure Validation
+- Three-level hierarchical documentation structure enforcement
+- Strict content organization rules specific to documentation layout
+- Bidirectional validation between content files and route files
+- Numeric prefix mapping for content folders to URL-friendly routes
+Path: scripts/check-route-structure.js
+Importance Score: 85/100
 
 ### Content Organization
-- Maps numeric-prefixed folders to clean URLs (e.g., 01-fish-talks → fish-talks)
-- Enforces section-specific navigation patterns
-- Validates content/route symmetry across documentation tree
+- Documentation section mapping with level-specific constraints
+- Specialized hierarchy validation for three distinct content levels
+- Route symmetry verification between content and navigation paths
+Path: src/scripts/sidebars.ts  
+Importance Score: 75/100
 
-Importance Score: 75
+### Documentation Standards
+- Custom markdown validation rules for documentation compliance
+- Code block validation specific to documentation requirements
+- Multi-language content structure validation
+Path: scripts/lint-markdown-code-blocks.mjs
+Importance Score: 65/100
 
-### Technical Documentation Rules
-- Domain-specific heading depth constraints (h2-h4)
-- Specialized handling for bilingual content (Chinese/English)
-- Maintains strict hierarchical relationships between sections
+## Validation Rules
 
-Importance Score: 70
+### Hierarchy Requirements
+1. Three-level depth constraint enforcement
+2. Parent-child relationship validation
+3. Content folder naming convention verification
+4. Route mapping consistency checks
 
-## Enforcement Mechanisms
-
-### Route Validation
-Path: scripts/check-route-structure.js
-- Validates content/route pairing compliance
-- Enforces documentation organization patterns
-- Verifies structural integrity across hierarchy levels
-
-Importance Score: 75
-
-### Navigation Structure
-Path: src/scripts/sidebars.ts
-- Implements hierarchical navigation rules
-- Validates section relationships
-- Enforces content organization patterns
-
-Importance Score: 70
+### Content Organization Rules
+1. Numeric prefix requirements for content folders
+2. URL-friendly route mapping validation
+3. Section hierarchy maintenance
+4. Documentation structure symmetry verification
 
 $END$
 
