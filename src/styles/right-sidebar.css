@@ -23,34 +23,46 @@
   backdrop-filter: blur(6px);
 }
 
-.panel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
+/* 浮动图例式标签容器 */
+.panel-with-legend {
+  position: relative;
+  padding-top: 1.35rem;
 }
 
-.panel-title {
+/* 浮动图例标签 - 复用 panel-title 的样式变量 */
+.panel-legend {
+  position: absolute;
+  top: -0.45rem;
+  left: 0.75rem;
+  padding: 0 0.45rem;
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.6);
+  background: rgba(12, 14, 18, 0.85);
+  z-index: 1;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-.contributor-count {
+/* 浮动标签内的徽章样式 - 更紧凑 */
+.panel-legend .contributor-count {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 6px;
-  font-size: 0.7rem;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  font-size: 0.6rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.85);
   background: rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.15);
+  letter-spacing: normal;
 }
 
 .structure-nav {
