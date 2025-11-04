@@ -1,6 +1,8 @@
 ---
 title: MCP Router 配置指南
 description: MCP Router 的安装、多应用管理与常见问题解决
+contributors:
+  - claude
 ---
 
 ## MCP Router 是什么

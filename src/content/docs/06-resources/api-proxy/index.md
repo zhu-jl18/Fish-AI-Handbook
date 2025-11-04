@@ -1,22 +1,22 @@
 ---
 title: 代理节点
-description: proxy nodes for llm
+description: api-proxy for llm api
 ---
 
-## Gemini专用
+## Gemini-specific
 
-- cloudflare:anticut
+- cloudflare:anticut 
 - cloudfalre
 - vercel
 - deno
 
-## 通用版本
+## Multi-use
 
 - supabase
 - cloudflare
 - deno
 
-## Claude专用
+## Claude-specific
 
 - claude-proxy
 - claude-code-router

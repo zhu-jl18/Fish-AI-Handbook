@@ -1,0 +1,22 @@
+[
+  {
+    "fileName": "main-overview.mdc",
+    "description": "Complete system overview detailing the documentation system architecture, key components, and their interactions. Includes high-level diagrams showing component relationships and data flow."
+  },
+  {
+    "fileName": "navigation-structure.mdc",
+    "description": "Detailed documentation of the hierarchical navigation system, including the three-level structure rules, route mapping algorithms, and section alias handling. Contains flow diagrams of the routing logic."
+  },
+  {
+    "fileName": "document-validation.mdc",
+    "description": "Comprehensive documentation of the document structure validation rules, including level-specific requirements, content/route symmetry validation algorithms, and enforcement mechanisms."
+  },
+  {
+    "fileName": "toc-generation.mdc",
+    "description": "Technical specification of the Table of Contents generation system, including CJK character handling algorithms, slug generation logic, and heading hierarchy rules. Includes data flow diagrams for scroll synchronization."
+  },
+  {
+    "fileName": "content-processors.mdc",
+    "description": "Documentation of content processing systems, focusing on the spoiler directive implementation, custom syntax handling, and the three spoiler type implementations (inline, block, leaf)."
+  }
+]
