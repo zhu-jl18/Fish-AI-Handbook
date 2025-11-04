@@ -1,6 +1,6 @@
 ---
-title: Hooks
-description: Claude Code 中 Hooks 功能的实战配置与最佳实践
+title: Hook
+description: Claude Code 中 Hook 功能的实战配置与最佳实践
 ---
 
 Hook 是 Claude Code 的生命周期拦截机制。别把它想得多高级，就是在执行前后插入自定义逻辑的钩子。如果你连这个都不会用,那你基本上是在手动做机器该做的事。

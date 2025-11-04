@@ -3,12 +3,12 @@ import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { BASIC_USAGE_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '02-basic-usage/claude-code/skills')
+const entry = await getEntry('docs', '02-basic-usage/claude-code/skill')
 const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
-  title={entry?.data?.title ?? 'Skills · Claude Code'}
+  title={entry?.data?.title ?? 'Skill · Claude Code'}
   sidebarItems={BASIC_USAGE_SIDEBAR}
   contributors={entry?.data?.contributors}
 >

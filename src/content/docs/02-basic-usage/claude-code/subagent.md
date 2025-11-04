@@ -1,6 +1,6 @@
 ---
-title: Subagents
-description: Claude Code 中 Subagents 功能的技术原理与使用指南
+title: Subagent
+description: Claude Code 中 Subagent 功能的技术原理与使用指南
 ---
 
 Subagent 是 Claude Code 的并行执行机制，允许主 Agent 派生出多个子 Agent 同时处理不同的任务。这不是什么新鲜概念，就是把一个大任务拆成多个小任务并行跑，但实现细节决定了它能不能真正提升效率。
