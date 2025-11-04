@@ -1,6 +1,8 @@
 ---
 title: 云服务器
 description: 在云服务器 Linux 环境部署 clash/mihomo 代理软件
+contributors:
+  - claude
 ---
 
 ## clash-for-linux-install
