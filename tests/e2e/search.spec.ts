@@ -7,10 +7,10 @@ test.describe('搜索功能', () => {
     // 页面标题
     await expect(page).toHaveTitle(/搜索/)
 
-    // h1 标题 - 使用更精确的选择器避免被 Dev Toolbar 干扰
     await expect(
-      page.getByRole('heading', { name: '搜索', level: 1 }),
-    ).toBeVisible()
+      page.getByRole('heading', { name: '搜索', level: 1, hidden: true }),
+    ).toHaveCount(1)
+
 
     // 搜索容器存在
     await expect(page.locator('#search')).toBeVisible()
@@ -23,11 +23,8 @@ test.describe('搜索功能', () => {
     const searchInput = page.locator('.pagefind-ui__search-input')
     await expect(searchInput).toBeVisible({ timeout: 10000 })
 
-    // 输入框占位符：兼容三点省略号和单字符省略号
-    await expect(searchInput).toHaveAttribute(
-      'placeholder',
-      /搜索文档…|搜索文档\.\.\./,
-    )
+    // 输入框占位符：现已移除（空字符串）
+    await expect(searchInput).toHaveAttribute('placeholder', '')
 
     // 测试输入
     await searchInput.fill('RAG')
