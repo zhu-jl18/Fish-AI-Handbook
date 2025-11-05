@@ -10,6 +10,7 @@ const bundlePath = (base.endsWith('/') ? base : base + '/') + 'pagefind/'
   <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
 
   <div data-pagefind-ignore="true">
+    <h1 class="visually-hidden">搜索</h1>
     <div id="search" data-bundle-path={bundlePath} data-initial={q}></div>
   </div>
 
@@ -31,6 +32,8 @@ const bundlePath = (base.endsWith('/') ? base : base + '/') + 'pagefind/'
           zero_results: '没有找到与"{term}"相关的内容',
           clear_search: '清除',
           load_more: '加载更多',
+          search_label: '搜索文档',
+          filters_label: '筛选结果',
         },
       })
 
@@ -75,6 +78,18 @@ const bundlePath = (base.endsWith('/') ? base : base + '/') + 'pagefind/'
   </script>
 
   <style>
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     /* 搜索页面专用样式 - 仅作用于 /search 路由 */
 
     /* 减小搜索框上方间距：覆盖 ContentLayout 的 .content-wrapper margin-top */
