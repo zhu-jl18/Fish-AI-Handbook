@@ -69,6 +69,9 @@
   --color-text-white: #ffffff;
   --color-text-secondary: #999;
   --color-accent-gray: #666666;
+  --caret-color: rgba(255, 255, 255, 0.75);
+  --search-highlight-bg: rgba(255, 255, 255, 0.18);
+  --search-highlight-fg: var(--color-text-white);
 
   /* 按钮与深色背景 */
   --color-bg-button: #0f0f0f;
@@ -143,6 +146,14 @@
   /* Code colors (extended) */
   --code-border: #30363d;
   --code-fg: #c9d1d9;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --caret-color: rgba(0, 0, 0, 0.7);
+    --search-highlight-bg: rgba(0, 0, 0, 0.18);
+    --search-highlight-fg: rgba(0, 0, 0, 0.85);
+  }
 }
 
 @font-face {
