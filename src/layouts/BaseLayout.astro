@@ -3,7 +3,10 @@ import '../styles/global.css'
 import { siteConfig, getRobotsContent } from '../config/index'
 import Footer from '../components/Footer.astro'
 
-const { title } = Astro.props
+const { title, bodyClass } = Astro.props as {
+  title?: string
+  bodyClass?: string
+}
 const pageTitle = title
   ? `${title} - ${siteConfig.titleFull}`
   : siteConfig.titleFull
@@ -71,7 +74,7 @@ const robotsContent = getRobotsContent(siteConfig.robots)
 
     <!-- 已移除外部 Google Fonts 引用，使用系统英文栈与本地中文字体 -->
   </head>
-  <body>
+  <body class={bodyClass}>
     <a href="#main-content" class="skip-link">跳到正文</a>
     <slot />
     <Footer />
