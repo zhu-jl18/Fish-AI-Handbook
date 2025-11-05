@@ -17,17 +17,19 @@ const {
   title,
   headings = [],
   contributors,
+  bodyClass,
 } = Astro.props as {
   title: string
   headings?: any[]
   contributors?: any
+  bodyClass?: string
 }
 
 // 基于 URL 别名推导导航高亮键（不依赖中文文案）
 const currentKey = getCurrentNavKey(currentPath)
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={title} bodyClass={bodyClass}>
   <Header currentPage={currentKey} />
 
   <div class="content-wrapper">
