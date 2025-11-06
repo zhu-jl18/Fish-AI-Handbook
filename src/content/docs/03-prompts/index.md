@@ -1,6 +1,8 @@
 ---
 title: 提示词
 description: 提示词与上下文（重构版）
+contributors:
+  - codex
 ---
 
 这个章节最关乎平时的使用体验，here is a vivid example:

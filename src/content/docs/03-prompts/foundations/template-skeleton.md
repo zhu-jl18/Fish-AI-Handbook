@@ -1,6 +1,8 @@
 ---
 title: 模板骨架
 description: 推荐顺序与字段约束，覆盖工具契约与错误处理
+contributors:
+  - codex
 ---
 
 ## 推荐顺序（McKinsey金字塔）
@@ -52,4 +54,3 @@ Guardrails:
 - 无答案：status=empty，data=[]
 - 需引用：必须填充 source 并给出 cred（信度）
 ```
-

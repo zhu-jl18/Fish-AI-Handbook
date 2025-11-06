@@ -1,6 +1,8 @@
 ---
 title: Context
 description: 理解如何通过上下文引导模型学习。
+contributors:
+  - codex
 ---
 
 # Context
