@@ -3,7 +3,7 @@ import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { PROMPTS_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '03-prompts/interaction-basics/basics')
+const entry = await getEntry('docs', '03-prompts/examples/data-extraction')
 let Content: any = null
 let hasContent = false
 try {
@@ -13,14 +13,15 @@ try {
     hasContent = true
   }
 } catch (e) {
-  console.error('Render error: prompts/interaction-basics/basics', e)
+  console.error('Render error: prompts/examples/data-extraction', e)
 }
 ---
 
 <ContentLayout
-  title={entry?.data?.title ?? '基础概念与必要性'}
+  title={entry?.data?.title ?? '结构化抽取'}
   sidebarItems={PROMPTS_SIDEBAR}
   contributors={entry?.data?.contributors}
 >
   {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
+
