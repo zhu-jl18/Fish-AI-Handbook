@@ -95,7 +95,6 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
       { label: '坑与反常规', href: '/prompts/context/pitfalls' },
     ],
   },
-  { label: '高级框架', href: '/prompts/advanced-frameworks' },
   {
     label: '实例与模板',
     href: '/prompts/examples',

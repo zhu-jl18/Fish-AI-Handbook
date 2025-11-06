@@ -34,7 +34,6 @@ output: gold💰
   - [编码与评审](/prompts/examples/coding)
   - [研究与引用](/prompts/examples/research)
   - [图像理解](/prompts/examples/image)
-- [高级框架](/prompts/advanced-frameworks)
 - [扩展阅读](/prompts/extended-reading)
 
 > 注：交互基础与实用技巧的内容已纳入“理论与框架”。
