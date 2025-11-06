@@ -53,7 +53,14 @@ export const BASIC_USAGE_SIDEBAR: SidebarSection = [
   { label: 'WebChat', href: '/basic-usage/webchat' },
   { label: 'AI IDE', href: '/basic-usage/ide-agent' },
   { label: 'Mobile', href: '/basic-usage/mobile-apps' },
-  { label: 'Cherry Studio', href: '/basic-usage/cherrystudio' },
+  {
+    label: 'Cherry Studio',
+    href: '/basic-usage/cherrystudio',
+    items: [
+      { label: '基础', href: '/basic-usage/cherrystudio/basics' },
+      { label: '进阶', href: '/basic-usage/cherrystudio/advanced' },
+    ],
+  },
   {
     label: 'Claude Code',
     href: '/basic-usage/claude-code',
@@ -125,17 +132,21 @@ export const FUN_SIDEBAR: SidebarSection = [
   { label: 'SillyTavern', href: '/fun/sillytavern' },
   { label: 'n8n', href: '/fun/n8n' },
   { label: 'Ollama', href: '/fun/ollama' },
-  {
-    label: 'Fast API',
-    href: '/fun/fast-api',
-    items: [{ label: 'Token Killer', href: '/fun/fast-api/tokenkiller' }],
-  },
+  { label: 'Fast API', href: '/fun/fast-api' },
 ]
 
 export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
   { label: 'FREE', href: '/resources/free-tier' },
-  { label: '代理节点', href: '/resources/api-proxy' },
+  {
+    label: 'API',
+    href: '/resources/api',
+    items: [
+      { label: '代理转发', href: '/resources/api/forwarding' },
+      { label: '聚合管理', href: '/resources/api/aggregation' },
+      { label: '格式转换', href: '/resources/api/conversion' },
+    ],
+  },
   { label: '2API', href: '/resources/2api' },
   { label: '云平台', href: '/resources/cloud-platforms' },
   { label: 'PAID', href: '/resources/paid' },
