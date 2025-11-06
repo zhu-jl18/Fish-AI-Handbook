@@ -107,7 +107,7 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
       { label: '图像理解', href: '/prompts/examples/image' },
     ],
   },
-  { label: '扩展阅读', href: '/prompts/extended-reading' },
+  { label: '深入拓展', href: '/prompts/deepen' },
 ]
 
 export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [

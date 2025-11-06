@@ -3,7 +3,7 @@ import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { PROMPTS_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '03-prompts/extended-reading')
+const entry = await getEntry('docs', '03-prompts/deepen')
 let Content: any = null
 let hasContent = false
 try {
@@ -13,14 +13,15 @@ try {
     hasContent = true
   }
 } catch (e) {
-  console.error('Render error: prompts/extended-reading', e)
+  console.error('Render error: prompts/deepen', e)
 }
 ---
 
 <ContentLayout
-  title={entry?.data?.title ?? '扩展阅读'}
+  title={entry?.data?.title ?? '深入拓展'}
   sidebarItems={PROMPTS_SIDEBAR}
   contributors={entry?.data?.contributors}
 >
   {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
+
