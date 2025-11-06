@@ -1,6 +1,8 @@
 ---
 title: 结构化抽取
 description: 以 JSON Schema 约束信息抽取
+contributors:
+  - codex
 ---
 
 ## 模板（含 Schema）
@@ -31,4 +33,3 @@ Schema:
 Output: 严格 JSON
 Guardrails: 无匹配返回 {"entities": []}
 ```
-

@@ -1,6 +1,8 @@
 ---
 title: 对话层级
 description: 理解大语言模型对话中的System、Assistant和User三个层级角色。
+contributors:
+  - codex
 ---
 
 一轮对话由三个不同层级组成：
