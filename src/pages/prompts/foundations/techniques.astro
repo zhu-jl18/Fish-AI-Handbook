@@ -3,25 +3,25 @@ import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { PROMPTS_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '03-prompts/interaction-basics')
+const entry = await getEntry('docs', '03-prompts/foundations/techniques')
 let Content: any = null
 let hasContent = false
-if (entry) {
-  try {
+try {
+  if (entry) {
     const rendered = await entry.render()
     Content = rendered.Content
     hasContent = true
-  } catch (error) {
-    console.error('Error rendering content:', error)
-    hasContent = false
   }
+} catch (e) {
+  console.error('Render error: prompts/foundations/techniques', e)
 }
 ---
 
 <ContentLayout
-  title={entry?.data?.title ?? '交互基础'}
+  title={entry?.data?.title ?? '常用技巧'}
   sidebarItems={PROMPTS_SIDEBAR}
   contributors={entry?.data?.contributors}
 >
   {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
+

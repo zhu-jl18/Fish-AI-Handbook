@@ -1,6 +1,6 @@
 ---
 title: 提示词
-description: 提示词和上下文
+description: 提示词与上下文（重构版）
 ---
 
 这个章节最关乎平时的使用体验，here is a vivid example:
@@ -16,17 +16,25 @@ output: gold💰
 
 ## Navigation
 
-The content is organized as follows:
+重构后的结构：
 
-- [交互基础](/prompts/interaction-basics)
-  - [Necessity](/prompts/interaction-basics/basics)
-  - [好与坏](/prompts/interaction-basics/good-vs-bad)
-- [Context](/prompts/context)
+- [理论与框架](/prompts/foundations)
+  - [核心原则](/prompts/foundations/principles)
+  - [模板骨架](/prompts/foundations/template-skeleton)
+  - [常用技巧](/prompts/foundations/techniques)
+  - [反模式清单](/prompts/foundations/anti-patterns)
+- [上下文](/prompts/context)
   - [对话层级](/prompts/context/dialogue-levels)
   - [请求体](/prompts/context/request-body)
-- [实用技巧](/prompts/practical-tips)
+  - [坑与反常规](/prompts/context/pitfalls)
+- [实例与模板](/prompts/examples)
+  - [通用模板集](/prompts/examples/templates)
+  - [协作范式](/prompts/examples/collab-patterns)
+  - [结构化抽取](/prompts/examples/data-extraction)
+  - [编码与评审](/prompts/examples/coding)
+  - [研究与引用](/prompts/examples/research)
+  - [图像理解](/prompts/examples/image)
 - [高级框架](/prompts/advanced-frameworks)
-- [Examples](/prompts/examples)
 - [扩展阅读](/prompts/extended-reading)
 
-> 注：此章节结构会大范围重构
+> 注：交互基础与实用技巧的内容已纳入“理论与框架”。
