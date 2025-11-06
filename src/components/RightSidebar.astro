@@ -189,7 +189,7 @@ const isGroupActive = (entry: SidebarGroup) => {
   <span class="visually-hidden">返回顶部</span>
 </button>
 
-<script type="module">
+<script is:inline type="module">
   import { setupRightSidebar } from '/scripts/toc.js'
   // 构建目录并启用滚动高亮
   const stop = setupRightSidebar('.content-inner', '.toc-nav')
