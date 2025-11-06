@@ -1,6 +1,8 @@
 ---
 title: 核心原则
 description: 单一目标、角色分离、结构优先、可验证与上下文最小充分
+contributors:
+  - codex
 ---
 
 ## 关键信条（必须遵守）
@@ -29,4 +31,3 @@ UML（顺序图）：
   LLM  -> User: Plan
   LLM  -> User: Execute
   LLM  -> User: Self-Check
-

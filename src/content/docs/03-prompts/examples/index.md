@@ -1,6 +1,8 @@
 ---
 title: Examples
 description: Good Practice
+contributors:
+  - codex
 ---
 
 ## Good Practice
