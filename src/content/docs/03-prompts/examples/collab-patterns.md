@@ -1,6 +1,8 @@
 ---
 title: 协作范式（PER）
 description: 分阶段对话脚本，减少漂移与返工
+contributors:
+  - codex
 ---
 
 ## 对话脚本（可复用）
@@ -14,4 +16,3 @@ description: 分阶段对话脚本，减少漂移与返工
 - 对照准则自检
 - 列出偏差与修正动作
 ```
-

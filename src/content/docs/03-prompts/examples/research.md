@@ -1,6 +1,8 @@
 ---
 title: 研究与引用
 description: 可验证输出与来源标注
+contributors:
+  - codex
 ---
 
 ## 研究模板
@@ -17,4 +19,3 @@ Output Schema:
 }
 Guardrails: status=empty 时 answer="" source=[]
 ```
-

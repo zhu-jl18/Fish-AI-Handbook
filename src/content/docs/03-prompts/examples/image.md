@@ -1,6 +1,8 @@
 ---
 title: 图像理解
 description: 多模态提示——框选/要素/不确定性处理
+contributors:
+  - codex
 ---
 
 ## 截图/界面理解模板
@@ -23,4 +25,3 @@ Instruction: 从图片中抽取表格数据。
 Constraints: 指明列含义/单位/异常处理策略；空缺填 null。
 Output: CSV（含表头）
 ```
-

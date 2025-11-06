@@ -1,6 +1,8 @@
 ---
 title: 深入拓展
 description: 深入强化提示词思路的高级框架与外部资源
+contributors:
+  - codex
 ---
 
 ## 高级框架速览
