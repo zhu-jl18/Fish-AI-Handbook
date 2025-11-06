@@ -53,7 +53,14 @@ export const BASIC_USAGE_SIDEBAR: SidebarSection = [
   { label: 'WebChat', href: '/basic-usage/webchat' },
   { label: 'AI IDE', href: '/basic-usage/ide-agent' },
   { label: 'Mobile', href: '/basic-usage/mobile-apps' },
-  { label: 'Cherry Studio', href: '/basic-usage/cherrystudio' },
+  {
+    label: 'Cherry Studio',
+    href: '/basic-usage/cherrystudio',
+    items: [
+      { label: '基础', href: '/basic-usage/cherrystudio/basics' },
+      { label: '进阶', href: '/basic-usage/cherrystudio/advanced' },
+    ],
+  },
   {
     label: 'Claude Code',
     href: '/basic-usage/claude-code',
@@ -70,11 +77,13 @@ export const BASIC_USAGE_SIDEBAR: SidebarSection = [
 export const PROMPTS_SIDEBAR: SidebarSection = [
   { label: '提示词', href: '/prompts' },
   {
-    label: '交互基础',
-    href: '/prompts/interaction-basics',
+    label: '理论与框架',
+    href: '/prompts/foundations',
     items: [
-      { label: 'Necessity', href: '/prompts/interaction-basics/basics' },
-      { label: '好与坏', href: '/prompts/interaction-basics/good-vs-bad' },
+      { label: '核心原则', href: '/prompts/foundations/principles' },
+      { label: '模板骨架', href: '/prompts/foundations/template-skeleton' },
+      { label: '常用技巧', href: '/prompts/foundations/techniques' },
+      { label: '反模式清单', href: '/prompts/foundations/anti-patterns' },
     ],
   },
   {
@@ -83,12 +92,22 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
     items: [
       { label: '对话层级', href: '/prompts/context/dialogue-levels' },
       { label: '请求体', href: '/prompts/context/request-body' },
+      { label: '坑与反常规', href: '/prompts/context/pitfalls' },
     ],
   },
-  { label: '实用技巧', href: '/prompts/practical-tips' },
-  { label: '高级框架', href: '/prompts/advanced-frameworks' },
-  { label: 'Examples', href: '/prompts/examples' },
-  { label: '扩展阅读', href: '/prompts/extended-reading' },
+  {
+    label: '实例与模板',
+    href: '/prompts/examples',
+    items: [
+      { label: '通用模板集', href: '/prompts/examples/templates' },
+      { label: '协作范式', href: '/prompts/examples/collab-patterns' },
+      { label: '结构化抽取', href: '/prompts/examples/data-extraction' },
+      { label: '编码与评审', href: '/prompts/examples/coding' },
+      { label: '研究与引用', href: '/prompts/examples/research' },
+      { label: '图像理解', href: '/prompts/examples/image' },
+    ],
+  },
+  { label: '深入拓展', href: '/prompts/deepen' },
 ]
 
 export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
@@ -125,17 +144,21 @@ export const FUN_SIDEBAR: SidebarSection = [
   { label: 'SillyTavern', href: '/fun/sillytavern' },
   { label: 'n8n', href: '/fun/n8n' },
   { label: 'Ollama', href: '/fun/ollama' },
-  {
-    label: 'Fast API',
-    href: '/fun/fast-api',
-    items: [{ label: 'Token Killer', href: '/fun/fast-api/tokenkiller' }],
-  },
+  { label: 'Fast API', href: '/fun/fast-api' },
 ]
 
 export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
   { label: 'FREE', href: '/resources/free-tier' },
-  { label: '代理节点', href: '/resources/api-proxy' },
+  {
+    label: 'API',
+    href: '/resources/api',
+    items: [
+      { label: '代理转发', href: '/resources/api/forwarding' },
+      { label: '聚合管理', href: '/resources/api/aggregation' },
+      { label: '格式转换', href: '/resources/api/conversion' },
+    ],
+  },
   { label: '2API', href: '/resources/2api' },
   { label: '云平台', href: '/resources/cloud-platforms' },
   { label: 'PAID', href: '/resources/paid' },
