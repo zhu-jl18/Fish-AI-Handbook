@@ -3,8 +3,11 @@ title: 衍生词
 description: some derived terms
 ---
 
+大概介绍一下这些词汇，省的见到了一头雾水
+
 ## Fine-tuning
 
+中文微调，意思就是利用你手头的数据，对大模型就行
 - LoRA
 - Full-finetuning
 - Adapter-finetuning
@@ -26,11 +29,11 @@ It turns to be
 
 Spec意思是规范
 
+
 ## Workflow
 
-借助AI工作流平台，可以实现自动化工作流，从而实现自动化任务。几个平台
-
+借助AI工作流平台，可以实现自动化工作流，从而实现自动化任务。几个平台：
 - n8n
 - Dify
-- coze
+- coze空间
 - ComfyUI
