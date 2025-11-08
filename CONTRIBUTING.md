@@ -443,7 +443,7 @@ npm run test:e2e:headed
 
 **规则**：
 
-- 使用英文编写所有 commit message
+- 使用英文或中文编写所有 commit message
 - 主题行不应超过 72 个字符
 - 正文应在 72 个字符处换行
 - 在主题行中使用祈使句和现在时（如 "add" 而非 "added"）
