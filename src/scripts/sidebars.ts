@@ -46,6 +46,7 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
       { label: '衍生词', href: '/fish-talks/glossary/derived-terms' },
     ],
   },
+  { label: '开发者', href: '/fish-talks/developer' },
 ]
 
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
