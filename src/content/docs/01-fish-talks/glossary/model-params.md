@@ -7,11 +7,11 @@ description: Which params affects the outputs of the model.
 
 ```python
 response = openai.chat.completions.create(
-    model="gpt-5-pro",
+    model="gpt-5",
     messages=[{"role": "user", "content": "Hello, how are you?"}],
     temperature=0.1,
     thinking_enabled=True,
-    top_k=0,   
+    top_k=0,
     top_p=0.9,
     frequency_penalty=1.0,
     presence_penalty=0.9,
@@ -20,7 +20,7 @@ response = openai.chat.completions.create(
 )
 ```
 
-这些 params 是干嘛的？别 TM 乱调。
+这些 params 是干嘛的？
 
 ## Token
 
@@ -116,7 +116,7 @@ stream=True
 
 生成的最大 token 数。**不是输入，是输出**。
 
-设太小：回答被截断，用户骂街。  
+设太小：回答被截断，用户骂街。
 设太大：浪费钱，而且某些模型会开始胡说八道。
 
 一般：
