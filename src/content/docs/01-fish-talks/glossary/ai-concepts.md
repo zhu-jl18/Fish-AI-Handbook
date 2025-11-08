@@ -1,9 +1,9 @@
 ---
 title: AI Concepts
-description: Brief introduction to some important concepts
+description: brief introduction to some important concepts
 ---
 
-
+简单的过一遍基础概念而已
 
 ## Prompt Engineering
 
