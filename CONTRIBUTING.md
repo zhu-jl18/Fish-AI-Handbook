@@ -232,15 +232,114 @@ npm run test:e2e:headed
 
 ## 提交信息与分支
 
-- 提交前缀建议：
-  - `content:` 内容新增/修改
-  - `nav:` 侧栏/导航改动
-  - `layout:` 布局与样式
-  - `fix:` 修复（含死链）
-  - `build:` 构建与配置
-  - `docs:` 文档说明
-  - `refactor:` 结构性重构
-- 分支与工作流：
+### Commit Message 规范
+
+本项目遵循 **Conventional Commits** 规范，使用英文编写提交信息。
+
+#### 提交类型（Type）
+
+常见的提交类型包括：
+
+- **init**: 初始化
+- **release**: 发布新版本（在用户指定这是网站的某个新版本时）
+- **style**: 代码风格修改（不影响代码运行的变动）
+- **feat**: 添加新功能（如增加一个评论系统）
+- **ui/ux**: 涉及到网站 UI 和 UX 的改动
+- **fix**: 修复 bug
+- **docs**: 对文档进行修改（专门指开发维护文档）
+- **refactor**: 代码重构或者网站内容结构调整（既不是新增功能，也不是修改 bug 的代码变动）
+- **perf**: 提高性能的代码修改
+- **dx**: 优化开发体验
+- **workflow**: 工作流变动（如增添新的 actions 或者 ci 配置文件，或者定义新的工作流规范）
+- **types**: 类型声明修改
+- **wip**: 工作正在进行中（由用户指明）
+- **test**: 测试用例添加及修改
+- **build**: 影响构建系统或外部依赖关系的更改
+- **chore**: 其它不涉及源码以及测试的修改
+- **deps**: 依赖项修改
+
+#### 格式要求
+
+```
+[type][optional scope]: [description in English]
+
+[optional body]
+
+[optional footer]
+```
+
+**规则**：
+
+- 使用英文编写所有 commit message
+- 主题行不应超过 72 个字符
+- 正文应在 72 个字符处换行
+- 在主题行中使用祈使句和现在时（如 "add" 而非 "added"）
+- 主题行结尾不要加句号
+- 用空白行将主题与正文分开
+- 使用正文解释做了什么和为什么，而不是如何做
+- 如果提交引入了破坏性更改，在类型/范围后面加上感叹号（如 `feat!:`）
+- 破坏性更改须在提交正文的末尾描述，以 "BREAKING CHANGE:" 开头
+
+#### Scope（范围）使用规范
+
+Scope 是可选的括号内容，用于说明改动影响的具体模块或领域。
+
+**使用规则**：
+
+- **单模块改动**：必须加 scope
+  - 示例：`feat(search): add keyboard shortcuts`
+  - 示例：`fix(sidebar): resolve collapse animation`
+  - 示例：`docs(prompts): add advanced examples`
+
+- **跨模块/全局改动**：不加 scope
+  - 示例：`refactor: restructure entire content hierarchy`
+  - 示例：`docs: establish commit conventions`
+
+- **Merge commits**：不加 scope
+  - 示例：`chore: merge PR #54 - content improvements`
+
+**常见 scope 示例**：
+
+- 功能模块：`search`, `sidebar`, `header`, `footer`, `toc`
+- 内容章节：`prompts`, `setup`, `resources`, `glossary`
+- 技术领域：`routing`, `navigation`, `ui`, `style`, `seo`
+- 基础设施：`deps`, `build`, `ci`, `config`
+
+#### 多类型提交
+
+**特别注意**：如果主题符合多个提交类型，请用 `+` 连接，如 `docs+fix:`。一般不同时超过 3 个类型，尽量以一个主要类型为准。
+
+**示例**：同时修复 bug 并增加开发维护文档时使用 `docs+fix:`。注意：如果是单纯 fix 后顺带更新文档，则不属于此类范围。
+
+#### 提交信息示例
+
+```
+feat(sidebar): add sidebar collapse functionality
+
+Enhance user experience by adding sidebar collapse/expand
+interaction with state persistence.
+
+Implementation details:
+- Use localStorage to persist collapse state
+- Add smooth expand/collapse animation
+```
+
+```
+fix: resolve mobile navigation menu click issue
+
+Navigation menu items fail to redirect correctly on small
+screen devices. The issue was caused by prevented event
+bubbling and has been fixed.
+```
+
+```
+docs+dx: improve contribution guide and dev scripts
+
+- Add commit message conventions to CONTRIBUTING.md
+- Optimize npm scripts with new check:routes command
+```
+
+### 分支与工作流
   - 保护分支：`main`（禁止直接提交，默认仅超级管理员可 push）
   - 创建分支：从远程 `main` 新建并切换
     - 示例：`git fetch origin && git checkout -b feature/<短描述> origin/main`
