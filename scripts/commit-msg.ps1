@@ -38,7 +38,7 @@ if (-not $m.Success) {
 
 # Enforce lowercase type tokens
 $typePart = $m.Groups['type'].Value
-$fixedType = ($typePart -split '\+') | ForEach-Object { $_.ToLowerInvariant() } | ForEach-Object { $_ } -join '+'
+$fixedType = ((($typePart -split '\+') | ForEach-Object { $_.ToLowerInvariant() } | ForEach-Object { $_ }) -join '+')
 
 # Enforce subject first ASCII letter lowercase
 $subj = $m.Groups['subj'].Value
