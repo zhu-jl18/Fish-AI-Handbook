@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro'
 import Header from '../components/Header.astro'
 import RightSidebar from '../components/RightSidebar.astro'
+import ContentActions from '../components/ContentActions.astro'
 import { getSidebarForPath } from '../scripts/sidebars'
 import { theme, getCurrentNavKey } from '../config/index'
 
@@ -18,15 +19,20 @@ const {
   headings = [],
   contributors,
   bodyClass,
+  entry,
 } = Astro.props as {
   title: string
   headings?: any[]
   contributors?: any
   bodyClass?: string
+  entry?: any
 }
 
 // 基于 URL 别名推导导航高亮键（不依赖中文文案）
 const currentKey = getCurrentNavKey(currentPath)
+
+// 从 entry 对象获取 entryId（用于 ContentActions 组件）
+const entryId = entry?.id
 ---
 
 <BaseLayout title={title} bodyClass={bodyClass}>
@@ -34,12 +40,13 @@ const currentKey = getCurrentNavKey(currentPath)
 
   <div class="content-wrapper">
     <div class="layout-container">
-      <main id="main-content" class="content">
+      <main id="main-content" class={`content ${entryId ? 'has-actions' : ''}`}>
         <div
           class="content-inner"
           data-pagefind-body
           style={`--font-size-base: ${theme.fontSizeBase}; --font-size-lg: ${theme.fontSizeLg}; --line-height-base: ${theme.lineHeightBase};`}
         >
+          {entryId && <ContentActions entryId={entryId} />}
           <slot />
         </div>
       </main>
@@ -85,6 +92,11 @@ const currentKey = getCurrentNavKey(currentPath)
     max-width: var(--content-max-width);
   }
 
+  /* 当顶部存在操作按钮时，大幅缩小内容区域的上边距 */
+  .content.has-actions {
+    padding-top: 0.25rem;
+  }
+
   .content-inner {
     width: 100%;
     font-size: var(--font-size-base);
@@ -94,6 +106,11 @@ const currentKey = getCurrentNavKey(currentPath)
   /* 移除第一个标题的顶部外边距，确保与侧边栏对齐 */
   .content-inner > :global(:is(h1, h2, h3, h4, h5, h6):first-child) {
     margin-top: 0;
+  }
+  
+  /* 当存在操作按钮时，按钮后第一个元素保留轻微间距，增强可读性 */
+  .content-inner > :global(.content-actions + *) {
+    margin-top: 0.2rem !important;
   }
 
   /* 内容区域标题更紧凑（仅作用于正文，不影响侧边栏） */
@@ -148,11 +165,18 @@ const currentKey = getCurrentNavKey(currentPath)
     .content {
       padding: 1.5rem 1.85rem 2.25rem 1.85rem;
     }
+
+    .content.has-actions {
+      padding-top: 0.25rem;
+    }
   }
 
   @media (max-width: 1200px) {
     .content {
       padding: 1.5rem 1.75rem 2rem 1.75rem;
+    }
+    .content.has-actions {
+      padding-top: 0.25rem;
     }
   }
 
@@ -169,11 +193,18 @@ const currentKey = getCurrentNavKey(currentPath)
       max-width: 100%;
       padding: 1.5rem 1.5rem 2rem 1.5rem;
     }
+
+    .content.has-actions {
+      padding-top: 0.25rem;
+    }
   }
 
   @media (max-width: 768px) {
     .content {
       padding: 1.5rem 1rem 1.5rem 1rem;
+    }
+    .content.has-actions {
+      padding-top: 0.25rem;
     }
   }
 </style>
