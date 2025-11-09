@@ -53,7 +53,7 @@ for ($i=0; $i -lt $chars.Length; $i++) {
 }
 $fixedSubj = -join $chars
 
-$recomposed = "$fixedType: $fixedSubj"
+$recomposed = "${fixedType}: $fixedSubj"
 if ($recomposed -ne $first) {
   # Auto-fix first line while preserving body
   $lines = @($raw -split "`n")
@@ -62,4 +62,3 @@ if ($recomposed -ne $first) {
 }
 
 exit 0
-
