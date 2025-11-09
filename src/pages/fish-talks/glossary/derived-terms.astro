@@ -8,7 +8,7 @@ const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
-  title={entry?.data?.title ?? '衍生词'}
+  entry={entry} title={entry?.data?.title ?? '衍生词'}
   sidebarItems={FISH_TALKS_SIDEBAR}
   contributors={entry?.data?.contributors}
 >
