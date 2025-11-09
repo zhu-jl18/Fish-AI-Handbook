@@ -7,7 +7,7 @@ const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
-  title={entry?.data?.title || 'Examples'}
+  entry={entry} title={entry?.data?.title || 'Examples'}
   headings={[]}
   contributors={entry?.data?.contributors}
 >
