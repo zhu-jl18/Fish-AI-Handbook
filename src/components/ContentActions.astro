@@ -77,19 +77,20 @@ if (entryId) {
       stroke-linecap="round"
       stroke-linejoin="round"
     >
+      <path d="M12 20h8"></path>
       <path
-        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+        d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"
       ></path>
     </svg>
   </a>
 
-  <!-- 按钮3: 分享（禁用） -->
+  <!-- 按钮3: 分享 -->
   <button
     type="button"
     class="action-btn"
-    disabled
-    aria-label="分享（即将推出）"
-    title="分享（即将推出）"
+    id="share-link-btn"
+    aria-label="分享当前页面"
+    title="分享当前页面"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -181,9 +182,9 @@ if (entryId) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
     background: transparent;
     border: 1px solid transparent;
     color: var(--header-text);
@@ -193,13 +194,17 @@ if (entryId) {
     transition:
       color var(--motion-duration-sm) var(--motion-ease-standard),
       border-color var(--motion-duration-sm) var(--motion-ease-standard),
-      background-color var(--motion-duration-sm) var(--motion-ease-standard);
+      background-color var(--motion-duration-sm) var(--motion-ease-standard),
+      border-radius var(--motion-duration-sm) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-sm) var(--motion-ease-standard);
   }
 
   .action-btn:not(:disabled):hover {
-    background: var(--header-icon-bg-hover);
-    border-color: var(--header-icon-border-hover);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.12);
     color: var(--header-text-strong);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
   }
 
   .action-btn:disabled {
@@ -261,10 +266,8 @@ if (entryId) {
     }, 2000)
   }
 
-  /**
-   * 复制Markdown源码功能
-   * 使用 import.meta.glob 预加载所有 Markdown 文件内容
-   */
+  const SHARE_BASES = ['https://ai.011070.xyz', 'https://ai.functorfish.me']
+
   async function copyMarkdownSource(entryId: string | null | undefined) {
     if (!entryId) {
       showToast('未找到文档标识', 'error')
@@ -333,6 +336,46 @@ if (entryId) {
     }
   }
 
+  function resolveShareOrigin() {
+    const currentOrigin = window.location.origin
+    const currentHost = window.location.host
+    const matchesKnownHost = SHARE_BASES.some((base) => {
+      try {
+        return new URL(base).host === currentHost
+      } catch {
+        return false
+      }
+    })
+    if (matchesKnownHost) return currentOrigin
+    return SHARE_BASES[0]
+  }
+
+  function buildShareUrl() {
+    const origin = resolveShareOrigin().replace(/\/$/, '')
+    const path = `${window.location.pathname}${window.location.search}${window.location.hash}`
+    return `${origin}${path}`
+  }
+
+  async function copyShareLink(link: string) {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(link)
+      return true
+    }
+    window.prompt('请复制以下分享链接', link)
+    return false
+  }
+
+  async function shareCurrentPage() {
+    const shareUrl = buildShareUrl()
+    try {
+      const copied = await copyShareLink(shareUrl)
+      showToast(copied ? '分享链接已复制' : '请手动复制分享链接')
+    } catch (error) {
+      console.error('分享失败:', error)
+      showToast('无法复制分享链接', 'error')
+    }
+  }
+
   /**
    * 绑定复制按钮点击事件
    */
@@ -341,6 +384,13 @@ if (entryId) {
     copyBtn.addEventListener('click', () => {
       const entryId = copyBtn.getAttribute('data-entry-id')
       copyMarkdownSource(entryId)
+    })
+  }
+
+  const shareBtn = document.getElementById('share-link-btn')
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      shareCurrentPage()
     })
   }
 </script>
