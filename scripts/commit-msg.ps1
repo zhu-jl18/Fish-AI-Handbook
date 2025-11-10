@@ -38,7 +38,8 @@ if (-not $m.Success) {
 
 # Enforce lowercase type tokens
 $typePart = $m.Groups['type'].Value
-$fixedType = ($typePart -split '\+') | ForEach-Object { $_.ToLowerInvariant() } | ForEach-Object { $_ } -join '+'
+$typeTokens = ($typePart -split '\+') | ForEach-Object { $_.ToLowerInvariant() }
+$fixedType = $typeTokens -join '+'
 
 # Enforce subject first ASCII letter lowercase
 $subj = $m.Groups['subj'].Value
@@ -53,7 +54,7 @@ for ($i=0; $i -lt $chars.Length; $i++) {
 }
 $fixedSubj = -join $chars
 
-$recomposed = "$fixedType: $fixedSubj"
+$recomposed = "${fixedType}: $fixedSubj"
 if ($recomposed -ne $first) {
   # Auto-fix first line while preserving body
   $lines = @($raw -split "`n")
@@ -62,4 +63,3 @@ if ($recomposed -ne $first) {
 }
 
 exit 0
-

@@ -6,6 +6,7 @@ contributors:
   - codex
   - gemini
   - glm
+  - minimax
 ---
 
 ## Hi there!
