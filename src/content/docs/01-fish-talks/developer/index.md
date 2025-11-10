@@ -33,21 +33,15 @@ API 就是应用程序接口。说白了就是程序之间对话的协议，发�
 **OpenAI 格式**用的 endpoint 是 `/v1/chat/completions`，认证用 `Authorization: Bearer YOUR_API_KEY`。请求体里最重要的是 `messages` 数组，每条消息有 `role`（system/user/assistant）和 `content`（消息内容）。这是最常见的格式，Google Gemini、国内的通义千问、Kimi 这些都支持 OpenAI 兼容格式。厂商们也不傻，知道开发者不想为每个模型学一套 API。
 
 
-openai-compatible 格式规范，根据用途会自动补全后边的
+openai-compatible 格式是一种事实标准，它为几种核心 API 用途规范了端点格式：
 
-get model 就 xxxx/models
-聊天补全 就 xxxx/chat/completions
-嵌入就 xxxx/embeddings
-v1不是必须的，可能会有不同的前缀，不过大家都抄 v1罢了，比如 典型的智谱接口
+*   **获取模型列表**: `.../models`
+*   **聊天补全**: `.../chat/completions`
+*   **文本嵌入**: `.../embeddings`
 
-https://open.bigmodel.cn/api/coding/paas/v4/
-它的完整聊天补全是 https://open.bigmodel.cn/api/coding/paas/v4/chat/completions
-oai接口本身没问题，问题是一些软件喜欢瞎补全 成 v1/chat/completions 这种，最为规范的是软件只会自动补全
+路径中的 `v1` 前缀并非强制，但已被广泛采用。例如，智谱 AI 的 PaaS v4 接口 `https://open.bigmodel.cn/api/paas/v4/`，其完整的聊天补全端点就是 `https://open.bigmodel.cn/api/paas/v4/chat/completions`。
 
-get model 就 xxxx/models
-聊天补全 就 xxxx/chat/completions
-嵌入就 xxxx/embeddings
-鉴于刚才说的 很多喜欢把v1 也抄来了，就导致 有时候 你得填到v1 有时候又不需要填v1
+需要注意的是，一些客户端软件会自动拼接路径（例如，在基地址后加上 `v1/chat/completions`），而另一些则不会。这导致在配置 API 基地址时，有时需要包含 `v1`，有时则不需要，需要根据具体软件的要求来定。
 
 
 
