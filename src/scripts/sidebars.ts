@@ -141,7 +141,14 @@ export const FUN_SIDEBAR: SidebarSection = [
       { label: 'ComfyUI', href: '/fun/ai-drawing/comfyui' },
     ],
   },
-  { label: '模型解锁', href: '/fun/llm-unlocking' },
+  {
+    label: '模型解锁',
+    href: '/fun/llm-unlocking',
+    items: [
+      { label: '越狱 Prompt', href: '/fun/llm-unlocking/jailbreak' },
+      { label: '高级技巧', href: '/fun/llm-unlocking/advanced' },
+    ],
+  },
   { label: 'SillyTavern', href: '/fun/sillytavern' },
   { label: 'n8n', href: '/fun/n8n' },
   { label: 'Ollama', href: '/fun/ollama' },

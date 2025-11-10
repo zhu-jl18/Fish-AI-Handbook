@@ -1,11 +1,13 @@
 ---
 title: 开发者
 description: API 调用和代理配置，从零开始
+contributors:
+  - claude
 ---
 
 ## API 是什么
 
-API 就是应用程序接口。说白了就是程序之间对话的协议，没什么神秘的。你想让你的程序跟 OpenAI 的 GPT-5 或者 Claude 聊天？得按人家定的规矩发请求、收响应。这规矩就是 API。不按规矩来？服务器直接给你返回 400 Bad Request，连门都不让你进。
+API 就是应用程序接口。说白了就是程序之间对话的协议，发请求、收响应。
 
 大模型的 API 本质上就是个 HTTP 接口。你的程序发个 POST 请求到指定的 endpoint，请求体里塞上你的问题和参数，服务器处理完了把回答塞进 JSON 返回给你。HTTP 协议跑了几十年了，稳定可靠，没理由重新发明轮子。
 
@@ -30,6 +32,27 @@ API 就是应用程序接口。说白了就是程序之间对话的协议，没�
 
 **OpenAI 格式**用的 endpoint 是 `/v1/chat/completions`，认证用 `Authorization: Bearer YOUR_API_KEY`。请求体里最重要的是 `messages` 数组，每条消息有 `role`（system/user/assistant）和 `content`（消息内容）。这是最常见的格式，Google Gemini、国内的通义千问、Kimi 这些都支持 OpenAI 兼容格式。厂商们也不傻，知道开发者不想为每个模型学一套 API。
 
+
+openai-compatible 格式规范，根据用途会自动补全后边的
+
+get model 就 xxxx/models
+聊天补全 就 xxxx/chat/completions
+嵌入就 xxxx/embeddings
+v1不是必须的，可能会有不同的前缀，不过大家都抄 v1罢了，比如 典型的智谱接口
+
+https://open.bigmodel.cn/api/coding/paas/v4/
+它的完整聊天补全是 https://open.bigmodel.cn/api/coding/paas/v4/chat/completions
+oai接口本身没问题，问题是一些软件喜欢瞎补全 成 v1/chat/completions 这种，最为规范的是软件只会自动补全
+
+get model 就 xxxx/models
+聊天补全 就 xxxx/chat/completions
+嵌入就 xxxx/embeddings
+鉴于刚才说的 很多喜欢把v1 也抄来了，就导致 有时候 你得填到v1 有时候又不需要填v1
+
+
+
+
+
 ```
 OpenAI 消息结构:
 ┌────────────────────────────────────────┐
@@ -51,16 +74,26 @@ OpenAI 消息结构:
 ```
 
 
-```bash
-curl https://api.openai.com/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer sk-your-api-key" \
-  -d '{
-    "model": "gpt-5",
-    "messages": [
-      {"role": "user", "content": "解释一下量子计算"}
-    ]
-  }'
+```python
+from openai import OpenAI
+
+client = OpenAI(
+  base_url = "https://integrate.api.nvidia.com/v1",
+  api_key = "$API_KEY_REQUIRED_IF_EXECUTING_OUTSIDE_NGC"
+)
+
+completion = client.chat.completions.create(
+  model="minimaxai/minimax-m2",
+  messages=[{"role":"system","content":""},{"role":"user","content":"Which number is larger, 9.11 or 9.8?"}],
+  temperature=1,
+  top_p=0.7,
+  max_tokens=4096,
+  stream=True
+)
+
+for chunk in completion:
+  if chunk.choices[0].delta.content is not None:
+    print(chunk.choices[0].delta.content, end="")
 ```
 
 这会发个请求问 GPT-5 什么是量子计算，服务器返回一个 JSON，里面 `choices[0].message.content` 就是回答。报 401 错误？检查你的 API Key 对不对，有没有多余空格。报 429？说明你请求太频繁或者配额用完了，别一秒钟发一百个请求，人家服务器也要喘口气。
