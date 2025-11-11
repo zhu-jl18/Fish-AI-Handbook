@@ -164,11 +164,12 @@ if (entryId) {
 <style>
   .content-actions {
     /* 本组件仅用于正文顶部的操作栏：
-       通过负外边距把工具栏整体上提，以缩小“导航条下缘 → 工具栏”间距；
+       通过负外边距把工具栏整体上提，以缩小"导航条下缘 → 工具栏"间距；
        右侧栏位于独立列，不受此局部上提影响。 */
     --actions-offset-top: clamp(20px, 6vw, 42px);
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 0.5rem;
     margin-top: calc(-1 * var(--actions-offset-top));
     margin-bottom: 1rem;
