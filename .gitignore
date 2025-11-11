@@ -1,6 +1,10 @@
 # dependencies
 node_modules/
 
+# screenshots
+screenshots/
+
+
 # astro build output
 dist/
 .astro/
