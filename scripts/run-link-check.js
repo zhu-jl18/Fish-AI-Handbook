@@ -73,7 +73,7 @@ const shouldSkipLink = async (url) => {
       const { hostname } = new URL(url)
       if (hostname !== 'localhost' && hostname !== '127.0.0.1') return true
     } catch {
-      return true
+      return false
     }
   }
   return skipRegexes.some((regex) => regex.test(url))

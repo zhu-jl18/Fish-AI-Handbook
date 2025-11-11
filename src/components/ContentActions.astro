@@ -8,24 +8,15 @@ const { entryId } = Astro.props as { entryId?: string }
 // GitHub 仓库基础 URL
 const GITHUB_REPO_BASE = 'https://github.com/zhu-jl18/Fish-AI-Handbook'
 
-// 规范化 entryId，并根据实际存在的文件形态（叶子.md 或 目录/index.md）生成正确的 GitHub 编辑链接
+// 规范化 entryId，并根据实际存在的文件形态（叶子.md/mdx 或 目录/index.mdx）生成正确的 GitHub 编辑链接
 let githubEditUrl = '#'
 if (entryId) {
-  const normalize = (raw: string) => {
-    let s = String(raw || '').trim()
-    s = s.replace(/\.(md|mdx)$/i, '') // 去扩展名
-    s = s.replace(/\/index$/i, '') // 去尾部 index
-    s = s.replace(/^\/+/, '') // 去前导斜杠
-    return s
-  }
-  const id = normalize(entryId)
+  const { normalizeEntryId, buildDocCandidates } = await import('../utils/docsPath')
+  const id = normalizeEntryId(entryId)
 
   // 利用 Vite 的 glob 仅判断路径是否存在（无需读取内容）
-  const modules = import.meta.glob('/src/content/docs/**/*.md')
-  const candidates = [
-    `/src/content/docs/${id}.md`,
-    `/src/content/docs/${id}/index.md`,
-  ]
+  const modules = import.meta.glob('/src/content/docs/**/*.{md,mdx}')
+  const candidates = buildDocCandidates(id)
   const chosen = candidates.find((p) => p in modules) ?? candidates[0]
   githubEditUrl = `${GITHUB_REPO_BASE}/edit/main${chosen}`
 }
@@ -360,6 +351,8 @@ if (entryId) {
 
   const SHARE_BASES = ['https://ai.011070.xyz', 'https://ai.functorfish.me']
 
+  import { normalizeEntryId, buildDocCandidates } from '../utils/docsPath'
+
   async function copyMarkdownSource(entryId: string | null | undefined) {
     if (!entryId) {
       showToast('未找到文档标识', 'error')
@@ -368,31 +361,18 @@ if (entryId) {
 
     try {
       // 规范化 entryId，消除 .md/.mdx 扩展与尾部 /index
-      const normalize = (raw: string) => {
-        let s = String(raw || '').trim()
-        // 去扩展名（.md / .mdx）
-        s = s.replace(/\.(md|mdx)$/i, '')
-        // 去掉尾部的 /index
-        s = s.replace(/\/index$/i, '')
-        // 去掉开头的斜杠
-        s = s.replace(/^\/+/, '')
-        return s
-      }
-      const cleanId = normalize(entryId)
+      const cleanId = normalizeEntryId(entryId ?? '')
 
-      // 使用 Vite 的 import.meta.glob 预加载所有 Markdown 文件为原始文本
-      const modules = import.meta.glob('/src/content/docs/**/*.md', {
+      // 使用 Vite 的 import.meta.glob 预加载所有 Markdown/MDX 文件为原始文本
+      const modules = import.meta.glob('/src/content/docs/**/*.{md,mdx}', {
         query: '?raw',
         import: 'default',
       })
 
-      // 支持两种物理结构：
-      // 1) 目录 + index.md       -> /src/content/docs/${cleanId}/index.md
-      // 2) 叶子单页（三级）      -> /src/content/docs/${cleanId}.md
-      const candidates = [
-        `/src/content/docs/${cleanId}.md`,
-        `/src/content/docs/${cleanId}/index.md`,
-      ]
+      // 支持两种物理结构（含 md/mdx）：
+      // 1) 目录 + index.{md,mdx}
+      // 2) 叶子单页（三级） {md,mdx}
+      const candidates = buildDocCandidates(cleanId)
 
       let loaded = false
       for (const p of candidates) {
