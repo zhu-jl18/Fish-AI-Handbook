@@ -1,6 +1,6 @@
 ---
-title: AI IDEA
-description: vscode is all u need
+title: IDE
+description: 常用 AI IDE 与效率工具
 ---
 市场生态图：
 

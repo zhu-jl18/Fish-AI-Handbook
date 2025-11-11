@@ -1,41 +1,23 @@
 ---
 title: 基础使用
-description: 基础用法总览：WebChat、IDE、CLI、APP、Mobile 以及 Cherry Studio、Claude Code、Codex 的使用向导航与导读。
+description: AI 工具使用场景概览
 ---
 
-本页聚焦"使用"而非"配置"。对应工具的安装与环境配置请前往"配置指南（/setup/\*）"。
 
-## AI 工具使用场景概览
 
-### AI 使用场景分类
+Chat
 
-**1. 网页端**
+- 网页端入口
+- Cherry Studio 应用
+- 移动端 AI 应用
 
-- WebChat - ChatGPT/Claude等在线对话平台
-
-**2. 桌面端**
-
-- Cherry Studio - 多模型聚合管理工具
-- Claude Code - AI编程助手
-- Codex - 本地大模型运行环境
-
-**3. 移动端**
-
-- 官方App - 各AI服务商的官方移动应用
-- 第三方客户端 - 功能增强的移动客户端
-
-**4. 开发工具**
+Code
 
 - VS Code插件 - 编辑器内集成AI能力
 - Cursor - AI原生代码编辑器
 - 命令行工具 - CLI方式调用AI服务
 
-推荐阅读顺序：
+Other 
 
-- WebChat：/basic-usage/webchat
-- AI IDE：/basic-usage/ide-agent
-- Mobile：/basic-usage/mobile-apps
-- Cherry Studio：/basic-usage/cherrystudio
-- Claude Code：/basic-usage/claude-code
-- Codex：/basic-usage/codex
-- AI 应用：/basic-usage/ai-apps
+- IMA 知识库应用
+-  

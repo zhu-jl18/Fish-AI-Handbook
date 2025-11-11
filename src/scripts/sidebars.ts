@@ -51,9 +51,8 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
 
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
   { label: '基础用法', href: '/basic-usage' },
-  { label: 'WebChat', href: '/basic-usage/webchat' },
-  { label: 'AI IDE', href: '/basic-usage/ide-agent' },
-  { label: 'Mobile', href: '/basic-usage/mobile-apps' },
+  { label: 'Chat', href: '/basic-usage/chat' },
+  { label: 'IDE', href: '/basic-usage/idea' },
   {
     label: 'Cherry Studio',
     href: '/basic-usage/cherrystudio',

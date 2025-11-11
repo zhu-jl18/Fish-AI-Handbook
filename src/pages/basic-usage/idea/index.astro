@@ -3,12 +3,12 @@ import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { BASIC_USAGE_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '02-basic-usage/mobile-apps')
+const entry = await getEntry('docs', '02-basic-usage/idea')
 const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
-  entry={entry} title={entry?.data?.title ?? '移动端 AI 应用 - 随时随地的智能体验'}
+  entry={entry} title={entry?.data?.title ?? 'IDE'}
   sidebarItems={BASIC_USAGE_SIDEBAR}
   contributors={entry?.data?.contributors}
 >
