@@ -34,16 +34,16 @@
   - 三级：**单页 `.md`**，禁止“文件夹 + index.md”。
 - 示范：
 
-```
+```text
 03-prompts/
 ├── index.md
 ├── context/
-│   ├── index.md
-│   ├── dialogue-levels.md
-│   └── request-body.md
+│   ├── index.md           # ✓ 二级：文件夹 + index.md
+│   ├── dialogue-levels.md # ✓ 三级：单页 .md
+│   └── request-body.md    # ✓ 三级：单页 .md
 ```
 
-```
+```text
 03-prompts/
 ├── context/
 │   ├── dialogue-levels/
@@ -62,15 +62,15 @@ description: 简短描述（必填，缺失会导致构建失败）
 
 ### 2.3 Astro 路由镜像（强制）
 
-| 层级 | Markdown 内容                      | Astro 路由                       | 说明                           |
-| ---- | ---------------------------------- | -------------------------------- | ------------------------------ |
-| 一级 | `<序号-别名>/index.md`             | `<别名>/index.astro`             | 章节首页                       |
-| 二级 | `<序号-别名>/<子目录>/index.md`    | `<别名>/<子目录>/index.astro`    | 必须使用文件夹 + index.astro   |
-| 三级 | `<序号-别名>/<子目录>/<页面>.md`   | `<别名>/<子目录>/<页面>.astro`   | 平铺在父文件夹内               |
+| 层级 | Markdown 内容                    | Astro 路由                     | 说明                         |
+| ---- | -------------------------------- | ------------------------------ | ---------------------------- |
+| 一级 | `<序号-别名>/index.md`           | `<别名>/index.astro`           | 章节首页                     |
+| 二级 | `<序号-别名>/<子目录>/index.md`  | `<别名>/<子目录>/index.astro`  | 必须使用文件夹 + index.astro |
+| 三级 | `<序号-别名>/<子目录>/<页面>.md` | `<别名>/<子目录>/<页面>.astro` | 平铺在父文件夹内             |
 
 示例：
 
-```
+```text
 内容：src/content/docs/99-setup/codex/index.md
 路由：src/pages/setup/codex/index.astro  ✓
 
@@ -180,7 +180,7 @@ npm run lint:markdown       # 校验 Markdown 代码块
 
 `npm run test:links` 调用 `node scripts/run-link-check.js`，自动覆盖全部路由：
 
-```
+```plantuml
 @startuml
 actor Dev
 participant "RouteScanner\n(src/pages)" as RS
