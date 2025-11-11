@@ -19,7 +19,7 @@ if (entry) {
 ---
 
 <ContentLayout
-  title={entry?.data?.title ?? '提示词'}
+  entry={entry} title={entry?.data?.title ?? '提示词'}
   sidebarItems={PROMPTS_SIDEBAR}
   contributors={entry?.data?.contributors}
 >
