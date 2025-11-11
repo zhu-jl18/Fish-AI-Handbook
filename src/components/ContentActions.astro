@@ -8,30 +8,77 @@ const { entryId } = Astro.props as { entryId?: string }
 // GitHub 仓库基础 URL
 const GITHUB_REPO_BASE = 'https://github.com/zhu-jl18/Fish-AI-Handbook'
 
-// 规范化 entryId，并根据实际存在的文件形态（叶子.md 或 目录/index.md）生成正确的 GitHub 编辑链接
+// 规范化 entryId，并根据实际存在的文件形态（叶子.md/mdx 或 目录/index.mdx）生成正确的 GitHub 编辑链接
 let githubEditUrl = '#'
 if (entryId) {
-  const normalize = (raw: string) => {
-    let s = String(raw || '').trim()
-    s = s.replace(/\.(md|mdx)$/i, '') // 去扩展名
-    s = s.replace(/\/index$/i, '') // 去尾部 index
-    s = s.replace(/^\/+/, '') // 去前导斜杠
-    return s
-  }
-  const id = normalize(entryId)
+  const { normalizeEntryId, buildDocCandidates } = await import('../utils/docsPath')
+  const id = normalizeEntryId(entryId)
 
   // 利用 Vite 的 glob 仅判断路径是否存在（无需读取内容）
-  const modules = import.meta.glob('/src/content/docs/**/*.md')
-  const candidates = [
-    `/src/content/docs/${id}.md`,
-    `/src/content/docs/${id}/index.md`,
-  ]
+  const modules = import.meta.glob('/src/content/docs/**/*.{md,mdx}')
+  const candidates = buildDocCandidates(id)
   const chosen = candidates.find((p) => p in modules) ?? candidates[0]
   githubEditUrl = `${GITHUB_REPO_BASE}/edit/main${chosen}`
 }
 ---
 
 <div class="content-actions">
+  <!-- 左侧按钮: 分支选择器 -->
+  <button
+    type="button"
+    class="branch-selector"
+    id="branch-selector-btn"
+    aria-label="切换分支"
+    title="切换分支"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="currentColor"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M11.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zm-2.25.75a2.25 2.25 0 1 1 3 2.122V6A2.5 2.5 0 0 1 10 8.5H6a1 1 0 0 0-1 1v1.128a2.251 2.251 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.5 0v1.836A2.492 2.492 0 0 1 6 7h4a1 1 0 0 0 1-1v-.628A2.25 2.25 0 0 1 9.5 3.25zM4.25 12a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zM3.5 3.25a.75.75 0 1 1 1.5 0 .75.75 0 0 1-1.5 0z"
+      ></path>
+    </svg>
+    <span class="branch-name">main</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      viewBox="0 0 16 16"
+      fill="currentColor"
+      class="dropdown-icon"
+    >
+      <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z"></path>
+    </svg>
+  </button>
+
+  <!-- 左侧按钮: 书签 -->
+  <button
+    type="button"
+    class="action-btn"
+    id="bookmark-btn"
+    aria-label="添加书签"
+    title="添加书签"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </button>
+
   <!-- 按钮1: 复制Markdown源码 -->
   <button
     type="button"
@@ -77,19 +124,20 @@ if (entryId) {
       stroke-linecap="round"
       stroke-linejoin="round"
     >
+      <path d="M12 20h8"></path>
       <path
-        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+        d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"
       ></path>
     </svg>
   </a>
 
-  <!-- 按钮3: 分享（禁用） -->
+  <!-- 按钮3: 分享 -->
   <button
     type="button"
     class="action-btn"
-    disabled
-    aria-label="分享（即将推出）"
-    title="分享（即将推出）"
+    id="share-link-btn"
+    aria-label="分享当前页面"
+    title="分享当前页面"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -163,11 +211,12 @@ if (entryId) {
 <style>
   .content-actions {
     /* 本组件仅用于正文顶部的操作栏：
-       通过负外边距把工具栏整体上提，以缩小“导航条下缘 → 工具栏”间距；
+       通过负外边距把工具栏整体上提，以缩小"导航条下缘 → 工具栏"间距；
        右侧栏位于独立列，不受此局部上提影响。 */
     --actions-offset-top: clamp(20px, 6vw, 42px);
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 0.5rem;
     margin-top: calc(-1 * var(--actions-offset-top));
     margin-bottom: 1rem;
@@ -181,9 +230,9 @@ if (entryId) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
     background: transparent;
     border: 1px solid transparent;
     color: var(--header-text);
@@ -193,13 +242,52 @@ if (entryId) {
     transition:
       color var(--motion-duration-sm) var(--motion-ease-standard),
       border-color var(--motion-duration-sm) var(--motion-ease-standard),
-      background-color var(--motion-duration-sm) var(--motion-ease-standard);
+      background-color var(--motion-duration-sm) var(--motion-ease-standard),
+      border-radius var(--motion-duration-sm) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-sm) var(--motion-ease-standard);
+  }
+
+  .branch-selector {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    height: 34px;
+    padding: 0 0.625rem;
+    border-radius: 6px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--header-text);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition:
+      background-color var(--motion-duration-sm) var(--motion-ease-standard),
+      border-color var(--motion-duration-sm) var(--motion-ease-standard);
+  }
+
+  .branch-selector:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .branch-name {
+    line-height: 1;
+  }
+
+  .dropdown-icon {
+    opacity: 0.7;
+  }
+
+  #bookmark-btn {
+    margin-right: auto;
   }
 
   .action-btn:not(:disabled):hover {
-    background: var(--header-icon-bg-hover);
-    border-color: var(--header-icon-border-hover);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.12);
     color: var(--header-text-strong);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
   }
 
   .action-btn:disabled {
@@ -261,10 +349,10 @@ if (entryId) {
     }, 2000)
   }
 
-  /**
-   * 复制Markdown源码功能
-   * 使用 import.meta.glob 预加载所有 Markdown 文件内容
-   */
+  const SHARE_BASES = ['https://ai.011070.xyz', 'https://ai.functorfish.me']
+
+  import { normalizeEntryId, buildDocCandidates } from '../utils/docsPath'
+
   async function copyMarkdownSource(entryId: string | null | undefined) {
     if (!entryId) {
       showToast('未找到文档标识', 'error')
@@ -273,31 +361,18 @@ if (entryId) {
 
     try {
       // 规范化 entryId，消除 .md/.mdx 扩展与尾部 /index
-      const normalize = (raw: string) => {
-        let s = String(raw || '').trim()
-        // 去扩展名（.md / .mdx）
-        s = s.replace(/\.(md|mdx)$/i, '')
-        // 去掉尾部的 /index
-        s = s.replace(/\/index$/i, '')
-        // 去掉开头的斜杠
-        s = s.replace(/^\/+/, '')
-        return s
-      }
-      const cleanId = normalize(entryId)
+      const cleanId = normalizeEntryId(entryId ?? '')
 
-      // 使用 Vite 的 import.meta.glob 预加载所有 Markdown 文件为原始文本
-      const modules = import.meta.glob('/src/content/docs/**/*.md', {
+      // 使用 Vite 的 import.meta.glob 预加载所有 Markdown/MDX 文件为原始文本
+      const modules = import.meta.glob('/src/content/docs/**/*.{md,mdx}', {
         query: '?raw',
         import: 'default',
       })
 
-      // 支持两种物理结构：
-      // 1) 目录 + index.md       -> /src/content/docs/${cleanId}/index.md
-      // 2) 叶子单页（三级）      -> /src/content/docs/${cleanId}.md
-      const candidates = [
-        `/src/content/docs/${cleanId}.md`,
-        `/src/content/docs/${cleanId}/index.md`,
-      ]
+      // 支持两种物理结构（含 md/mdx）：
+      // 1) 目录 + index.{md,mdx}
+      // 2) 叶子单页（三级） {md,mdx}
+      const candidates = buildDocCandidates(cleanId)
 
       let loaded = false
       for (const p of candidates) {
@@ -333,6 +408,46 @@ if (entryId) {
     }
   }
 
+  function resolveShareOrigin() {
+    const currentOrigin = window.location.origin
+    const currentHost = window.location.host
+    const matchesKnownHost = SHARE_BASES.some((base) => {
+      try {
+        return new URL(base).host === currentHost
+      } catch {
+        return false
+      }
+    })
+    if (matchesKnownHost) return currentOrigin
+    return SHARE_BASES[0]
+  }
+
+  function buildShareUrl() {
+    const origin = resolveShareOrigin().replace(/\/$/, '')
+    const path = `${window.location.pathname}${window.location.search}${window.location.hash}`
+    return `${origin}${path}`
+  }
+
+  async function copyShareLink(link: string) {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(link)
+      return true
+    }
+    window.prompt('请复制以下分享链接', link)
+    return false
+  }
+
+  async function shareCurrentPage() {
+    const shareUrl = buildShareUrl()
+    try {
+      const copied = await copyShareLink(shareUrl)
+      showToast(copied ? '分享链接已复制' : '请手动复制分享链接')
+    } catch (error) {
+      console.error('分享失败:', error)
+      showToast('无法复制分享链接', 'error')
+    }
+  }
+
   /**
    * 绑定复制按钮点击事件
    */
@@ -341,6 +456,13 @@ if (entryId) {
     copyBtn.addEventListener('click', () => {
       const entryId = copyBtn.getAttribute('data-entry-id')
       copyMarkdownSource(entryId)
+    })
+  }
+
+  const shareBtn = document.getElementById('share-link-btn')
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      shareCurrentPage()
     })
   }
 </script>
