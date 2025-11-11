@@ -118,6 +118,12 @@ export const CONTRIBUTORS_MAP: Record<string, ContributorInfo> = {
     link: 'https://github.com/zai-org',
     avatar: 'https://media.makomako.dpdns.org/images/2025/11/zhipu',
   },
+  minimax: {
+    username: 'minimax',
+    name: 'MiniMax',
+    link: 'https://github.com/MiniMax-AI',
+    avatar: 'https://github.com/MiniMax-AI-Dev.png',
+  },
 }
 
 /**
