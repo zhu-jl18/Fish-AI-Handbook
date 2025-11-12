@@ -210,20 +210,21 @@ if (entryId) {
 
 <style>
   .content-actions {
-    /* 本组件仅用于正文顶部的操作栏：
-       通过负外边距把工具栏整体上提，以缩小"导航条下缘 → 工具栏"间距；
-       右侧栏位于独立列，不受此局部上提影响。 */
-    --actions-offset-top: clamp(20px, 6vw, 42px);
+    /* 桌面：整条工具栏上浮 1.2rem，对齐顶栏红线 */
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 0.5rem;
-    margin-top: calc(-1 * var(--actions-offset-top));
-    margin-bottom: 1rem;
+    gap: 0;
+    margin-top: -1.4rem;
+    margin-bottom: 1.75rem;
     background: transparent;
     border: none;
     position: relative;
     z-index: 0;
+  }
+
+  .content-actions .branch-selector {
+    margin-right: 0.5rem;
   }
 
   .action-btn {
@@ -305,10 +306,13 @@ if (entryId) {
   /* 移动端保持相同尺寸 */
   @media (max-width: 768px) {
     .content-actions {
-      /* 移动端头部更紧凑：减少上提量，避免与导航重叠 */
-      --actions-offset-top: clamp(12px, 4vw, 28px);
       gap: 0.5rem;
+      margin-top: 0;
       margin-bottom: 1rem;
+    }
+
+    .content-actions .branch-selector {
+      margin-right: 0;
     }
   }
 </style>
