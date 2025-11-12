@@ -1,5 +1,6 @@
 ---
 description: Validation rules and enforcement mechanisms for document structure, hierarchy, and content organization
+trigger: model_decision
 ---
 
 

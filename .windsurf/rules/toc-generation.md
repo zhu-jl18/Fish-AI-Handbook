@@ -1,5 +1,6 @@
 ---
 description: Handles generation and synchronization of table of contents, including specialized handling for CJK characters and heading hierarchies
+trigger: model_decision
 ---
 
 
