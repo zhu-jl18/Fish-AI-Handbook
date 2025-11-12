@@ -8,7 +8,7 @@
 
 ### 1.1 与 AI 协作
 
-- 仓库由多类 AI Agent 共建，行为边界以 `AGENTS.md` 为唯一事实源。
+- 仓库由多类 AI Agent 共建，行为边界以本文档即`CONTRIBUTING.md`为唯一事实源。
 - 与 AI 协作时需在对话开头要求其严格遵循 `AGENTS.md`，并指明本文件提供流程细节。
 - 决策冲突时以本文件为准，禁止绕过流程或引入额外“习惯做法”。
 
@@ -211,7 +211,7 @@ LC --> Dev: 输出统计与断链
 - `npm run format`
 - `npm run build`
 - `npm run lint:markdown`
-- `npm run preview:search`（含搜索索引的非阻塞预览）
+- `npm run preview:search`（含搜索索引的预览，调用时必须以非阻塞形式运行）
 - `npm run test:links`
 - `npm run type-check`
 - `npm run check:routes`
@@ -282,28 +282,37 @@ LC --> Dev: 输出统计与断链
 
 ### 6.4 提交示例
 
-```
-feat(sidebar): add sidebar collapse functionality
+heading + body：
 
-enhance user experience by adding sidebar collapse/expand
+```
+feat(sidebar): add sidebar collapse functionality   
+
+enhance user experience by adding sidebar collapse/expand   
 interaction with state persistence.
 - use localStorage to persist collapse state
 - add smooth expand/collapse animation
 ```
 
-```
-fix: resolve mobile navigation menu click issue
+heading + footer：
 
-navigation menu items fail to redirect correctly on small
+```
+fix: resolve mobile navigation menu click issue      
+ 
+navigation menu items fail to redirect correctly on small   
 screen devices. The issue was caused by prevented event
 bubbling and has been fixed.
 ```
+
+heading + body + footer ：
 
 ```
 docs+dx: improve contribution guide and dev scripts
 
 - add commit message conventions to CONTRIBUTING.md
 - optimize npm scripts with new check:routes command
+
+remarks: old docs and workflow are out of date badly, the user
+manually rewrites the docs.
 ```
 
 ### 6.5 分支与工作流

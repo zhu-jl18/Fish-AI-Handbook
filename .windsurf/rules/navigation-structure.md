@@ -1,5 +1,6 @@
 ---
 description: Documentation for hierarchical navigation system implementation including routing logic, section mapping and alias handling
+trigger: model_decision
 ---
 
 
