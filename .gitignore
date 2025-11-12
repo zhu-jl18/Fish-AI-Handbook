@@ -35,15 +35,22 @@ pnpm-debug.log*
 .bmad/
 !.bmad-core/
 
+
+
 # local AI assistants & docs
 .claude/
+.giga/
 CLAUDE.md
 claude.md
 WARP.md
-
-# codebuddy & bmad core (ignore)
+.windsurf/
+.cursor/
+.cursorrules
+.windsurfrules
 .codebuddy/
-.bmad-core/
+
+# serena mcp
+.serena/
 
 # misc temporaries
 temp_*
