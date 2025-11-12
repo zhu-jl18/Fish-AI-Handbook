@@ -263,6 +263,7 @@ LC --> Dev: 输出统计与断链
 - 主题可用英文或中文，长度不超过 72 字符，使用祈使句（`add` 而非 `added`），末尾不加句号。
 - 主题与正文之间空一行；正文描述 What/Why 而非 How。
 - 若提交存在破坏性变更，在 type 后追加 `!`，并在正文末尾使用 `BREAKING CHANGE:` 说明。
+- 每行首字母必须是小写
 
 ### 6.2 Scope 使用
 
@@ -284,16 +285,16 @@ LC --> Dev: 输出统计与断链
 ```
 feat(sidebar): add sidebar collapse functionality
 
-Enhance user experience by adding sidebar collapse/expand
+enhance user experience by adding sidebar collapse/expand
 interaction with state persistence.
-- Use localStorage to persist collapse state
-- Add smooth expand/collapse animation
+- use localStorage to persist collapse state
+- add smooth expand/collapse animation
 ```
 
 ```
 fix: resolve mobile navigation menu click issue
 
-Navigation menu items fail to redirect correctly on small
+navigation menu items fail to redirect correctly on small
 screen devices. The issue was caused by prevented event
 bubbling and has been fixed.
 ```
@@ -301,8 +302,8 @@ bubbling and has been fixed.
 ```
 docs+dx: improve contribution guide and dev scripts
 
-- Add commit message conventions to CONTRIBUTING.md
-- Optimize npm scripts with new check:routes command
+- add commit message conventions to CONTRIBUTING.md
+- optimize npm scripts with new check:routes command
 ```
 
 ### 6.5 分支与工作流
