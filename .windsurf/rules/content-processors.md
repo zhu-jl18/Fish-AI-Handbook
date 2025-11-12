@@ -1,5 +1,6 @@
 ---
 description: Documentation of content processing systems with focus on spoiler handling and custom syntax implementation
+trigger: model_decision
 ---
 
 
