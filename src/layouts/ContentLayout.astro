@@ -93,8 +93,10 @@ const entryId = entry?.id
   }
 
   /* 当顶部存在操作按钮时，大幅缩小内容区域的上边距 */
+  /* 当顶部存在操作按钮时，正文内容整体下移以匹配右侧sidebar的对齐 */
   .content.has-actions {
-    padding-top: 0.25rem;
+    /* 桌面默认：让工具栏图标中心线与右侧 CHAPTER 顶线对齐 */
+    padding-top: 6px;
   }
 
   .content-inner {
@@ -108,9 +110,9 @@ const entryId = entry?.id
     margin-top: 0;
   }
   
-  /* 当存在操作按钮时，按钮后第一个元素保留轻微间距，增强可读性 */
+  /* 当存在操作按钮时，按钮后第一个元素保留合适的间距 */
   .content-inner > :global(.content-actions + *) {
-    margin-top: 0.2rem !important;
+    margin-top: 1rem !important;
   }
 
   /* 内容区域标题更紧凑（仅作用于正文，不影响侧边栏） */
@@ -167,7 +169,8 @@ const entryId = entry?.id
     }
 
     .content.has-actions {
-      padding-top: 0.25rem;
+      /* 桌面<=1440：保持与右侧对齐 */
+      padding-top: 6px;
     }
   }
 
@@ -176,7 +179,8 @@ const entryId = entry?.id
       padding: 1.5rem 1.75rem 2rem 1.75rem;
     }
     .content.has-actions {
-      padding-top: 0.25rem;
+      /* 桌面<=1200：保持与右侧对齐 */
+      padding-top: 6px;
     }
   }
 
@@ -207,4 +211,5 @@ const entryId = entry?.id
       padding-top: 0.25rem;
     }
   }
+  /* 针对桌面端已在基础规则固定为 6px；下面断点仅调整小屏表现 */
 </style>
