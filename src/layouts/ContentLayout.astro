@@ -103,6 +103,34 @@ const entryId = entry?.id
     width: 100%;
     font-size: var(--font-size-base);
     line-height: var(--line-height-base);
+
+    /* Doc 级标题尺度通过 CSS 变量覆写，避免与全局样式重复 */
+    --heading-h1-size: clamp(1.6rem, 1.6vw + 0.5rem, 1.9rem);
+    --heading-h1-margin-top: calc(var(--section-spacing) * 0.75);
+    --heading-h1-margin-bottom: 1rem;
+
+    --heading-h2-size: clamp(1.3rem, 1.1vw + 0.8rem, 1.6rem);
+    --heading-h2-margin-top: calc(var(--section-spacing) * 0.6);
+    --heading-h2-margin-bottom: 0.75rem;
+    --heading-h2-border: 1px solid var(--heading-divider-color);
+    --heading-h2-padding-bottom: 0.45rem;
+
+    --heading-h3-size: clamp(1.1rem, 0.8vw + 0.75rem, 1.3rem);
+    --heading-h3-margin-top: 1.4rem;
+    --heading-h3-margin-bottom: 1.1rem;
+
+    --heading-h4-size: 1rem;
+    --heading-h4-margin-top: 1.3rem;
+    --heading-h4-margin-bottom: 0.45rem;
+
+    --heading-h5-size: 0.95rem;
+    --heading-h5-margin-top: 1.15rem;
+    --heading-h5-margin-bottom: 0.4rem;
+
+    --heading-h6-size: 0.9rem;
+    --heading-h6-margin-top: 1rem;
+    --heading-h6-margin-bottom: 0.35rem;
+    --heading-h6-letter-spacing: -0.005em;
   }
 
   /* 移除第一个标题的顶部外边距，确保与侧边栏对齐 */
@@ -115,49 +143,7 @@ const entryId = entry?.id
     margin-top: 1rem !important;
   }
 
-  /* 内容区域标题更紧凑（仅作用于正文，不影响侧边栏） */
-  .content-inner :global(h1) {
-    font-size: clamp(1.6rem, 1.6vw + 0.5rem, 1.9rem);
-    margin-top: calc(var(--section-spacing) * 0.75);
-    margin-bottom: 1rem;
-  }
-
-  .content-inner :global(h2) {
-    font-size: clamp(1.3rem, 1.1vw + 0.8rem, 1.6rem);
-    margin-top: calc(var(--section-spacing) * 0.75);
-    margin-bottom: 0.75rem;
-    border-bottom: 1px solid var(--heading-divider-color);
-    padding-bottom: 0.45rem;
-  }
-
-  .content-inner :global(h3) {
-    font-size: clamp(1.1rem, 0.8vw + 0.75rem, 1.3rem);
-    margin-top: 1.4rem;
-    margin-bottom: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .content-inner :global(h4) {
-    font-size: 1rem;
-    margin-top: 1.3rem;
-    margin-bottom: 0.45rem;
-    color: rgba(255, 255, 255, 0.85);
-  }
-
-  .content-inner :global(h5) {
-    font-size: 0.95rem;
-    margin-top: 1.15rem;
-    margin-bottom: 0.4rem;
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  .content-inner :global(h6) {
-    font-size: 0.9rem;
-    margin-top: 1rem;
-    margin-bottom: 0.35rem;
-    color: rgba(255, 255, 255, 0.75);
-    letter-spacing: -0.005em;
-  }
+  /* 标题颜色由全局控制；此处仅通过变量覆写尺寸/间距 */
 
   @media (max-width: 1440px) {
     .layout-container {
