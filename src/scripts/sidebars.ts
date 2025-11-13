@@ -51,9 +51,8 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
 
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
   { label: '基础用法', href: '/basic-usage' },
-  { label: 'WebChat', href: '/basic-usage/webchat' },
-  { label: 'AI IDE', href: '/basic-usage/ide-agent' },
-  { label: 'Mobile', href: '/basic-usage/mobile-apps' },
+  { label: 'Chat', href: '/basic-usage/chat' },
+  { label: 'Coding', href: '/basic-usage/coding' },
   {
     label: 'Cherry Studio',
     href: '/basic-usage/cherrystudio',
@@ -157,9 +156,10 @@ export const FUN_SIDEBAR: SidebarSection = [
 
 export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
-  { label: 'FREE', href: '/resources/free-tier' },
+  { label: 'Free Tier', href: '/resources/free-tier' },
+  { label: 'Little Cost', href: '/resources/paid' },
   {
-    label: 'API',
+    label: 'API Key',
     href: '/resources/api',
     items: [
       { label: '代理转发', href: '/resources/api/forwarding' },
@@ -169,7 +169,6 @@ export const RESOURCES_SIDEBAR: SidebarSection = [
   },
   { label: '2API', href: '/resources/2api' },
   { label: '云平台', href: '/resources/cloud-platforms' },
-  { label: 'PAID', href: '/resources/paid' },
 ]
 
 export const THEORETICAL_SIDEBAR: SidebarSection = [

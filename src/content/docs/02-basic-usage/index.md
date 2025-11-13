@@ -1,41 +1,21 @@
 ---
 title: 基础使用
-description: 基础用法总览：WebChat、IDE、CLI、APP、Mobile 以及 Cherry Studio、Claude Code、Codex 的使用向导航与导读。
+description: 姐姐的基础用法速记，先分清场景再挑工具。
+contributors:
+  - codex
 ---
 
-本页聚焦"使用"而非"配置"。对应工具的安装与环境配置请前往"配置指南（/setup/\*）"。
+本节只谈“怎么用”，安装和环境通通去 [here](/setup) 自己补课。
 
-## AI 工具使用场景概览
+## Overview
 
-### AI 使用场景分类
-
-**1. 网页端**
-
-- WebChat - ChatGPT/Claude等在线对话平台
-
-**2. 桌面端**
-
-- Cherry Studio - 多模型聚合管理工具
-- Claude Code - AI编程助手
-- Codex - 本地大模型运行环境
-
-**3. 移动端**
-
-- 官方App - 各AI服务商的官方移动应用
-- 第三方客户端 - 功能增强的移动客户端
-
-**4. 开发工具**
-
-- VS Code插件 - 编辑器内集成AI能力
-- Cursor - AI原生代码编辑器
-- 命令行工具 - CLI方式调用AI服务
-
-推荐阅读顺序：
-
-- WebChat：/basic-usage/webchat
-- AI IDE：/basic-usage/ide-agent
-- Mobile：/basic-usage/mobile-apps
-- Cherry Studio：/basic-usage/cherrystudio
-- Claude Code：/basic-usage/claude-code
-- Codex：/basic-usage/codex
-- AI 应用：/basic-usage/ai-apps
+| 类别 | 使用场景 | 代表工具 |
+| --- | --- | --- |
+| Web Chat | 浏览器里随时使用 | Grok / ChatGPT / Gemini |
+| IDE | 方便查看改动和手动修改 | Cursor / Windsurf |
+| Plugins| 同上 | Copilot /  Augment |
+| CODE CLI |vibe coding，随时随地 | Claude Code / Codex CLI |
+| 桌面聚合软件 | 自定义程度高 | Cherry Studio/ Lobe Chat|
+| 网页 Agent | 隔离环境，适合无代码 | Kimi OK Computer / Manus / v0 |
+|App Chat | 方便快捷，all in one | RikkaHub + 各家官方 App |
+| 专业应用 | powerful | NotebookLM / WisprFlow |

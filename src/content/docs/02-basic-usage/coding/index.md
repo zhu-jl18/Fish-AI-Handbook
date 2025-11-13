@@ -1,8 +1,9 @@
 ---
-title: AI IDEA
+title: Coding
 description: vscode is all u need
 ---
-市场生态图：
+
+LLMs can provide end-to-end services from requirement clarification to code implementation and deployment.
 
 ![ai-coding](https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/10/250918-Trillion-Dollar-AI-ILG-5-r8.png)
 

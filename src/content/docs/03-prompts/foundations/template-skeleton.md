@@ -35,12 +35,12 @@ Few-shot:
 - 边界：{x2}
 
 Tools Spec:
-```json
+---```json
 { "name": "search", "schema": {"q": "string", "topk": "integer"} }
-```
+---```
 
 Output Schema:
-```json
+---```json
 {
   "status": "ok|empty|error",
   "summary": "string",
@@ -48,7 +48,7 @@ Output Schema:
   "source": [{"title": "string", "cred": "A|B|C"}],
   "error": {"code": "string", "message": "string"}
 }
-```
+---```
 
 Guardrails:
 - 无答案：status=empty，data=[]
