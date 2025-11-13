@@ -17,11 +17,7 @@ Repository Guidelines
 
 ## Build, Test, and Development
 
-- `npm install` — install all dependencies.
-- `npm run dev` — start local dev server.
-- `npm run build` — build the production bundle to `dist/`.
-- `npm test` — run unit/integration tests.
-- `npx playwright test` — run browser e2e tests.
+- Follow related rules in CONTRIBUTING.md 
 
 ## Coding Style & Naming
 
@@ -30,17 +26,14 @@ Repository Guidelines
 - Use 2-space indentation; prefer descriptive names (`getUserConfig`, `HandbookSection`).
 - Place shared helpers in `src/lib/` or the closest feature module.
 
-## Testing Guidelines
+## Testing Guidelines && Commit & Pull Requests
 
+- Follow related rules in CONTRIBUTING.md 
 - Add or update tests for any behavioral change.
-- Mirror source structure in `tests/` (e.g., `src/foo/bar.ts` → `tests/foo/bar.test.ts`).
-- Keep tests deterministic and fast; avoid real network calls.
 
-## Commit & Pull Requests
 
-- Write clear, imperative commit messages (e.g., "Add handbook TOC sidebar").
-- Keep PRs focused and small; describe motivation and key changes.
-- Link related issues, add screenshots for UI changes, and note any breaking changes.
+
+
 
 ## Agent-Specific Notes
 

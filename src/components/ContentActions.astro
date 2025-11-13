@@ -11,7 +11,9 @@ const GITHUB_REPO_BASE = 'https://github.com/zhu-jl18/Fish-AI-Handbook'
 // 规范化 entryId，并根据实际存在的文件形态（叶子.md/mdx 或 目录/index.mdx）生成正确的 GitHub 编辑链接
 let githubEditUrl = '#'
 if (entryId) {
-  const { normalizeEntryId, buildDocCandidates } = await import('../utils/docsPath')
+  const { normalizeEntryId, buildDocCandidates } = await import(
+    '../utils/docsPath'
+  )
   const id = normalizeEntryId(entryId)
 
   // 利用 Vite 的 glob 仅判断路径是否存在（无需读取内容）
@@ -52,7 +54,9 @@ if (entryId) {
       fill="currentColor"
       class="dropdown-icon"
     >
-      <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z"></path>
+      <path
+        d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z"
+      ></path>
     </svg>
   </button>
 
@@ -125,9 +129,7 @@ if (entryId) {
       stroke-linejoin="round"
     >
       <path d="M12 20h8"></path>
-      <path
-        d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"
-      ></path>
+      <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
     </svg>
   </a>
 
@@ -177,8 +179,7 @@ if (entryId) {
       stroke-linecap="round"
       stroke-linejoin="round"
     >
-      <path
-        d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
       ></path>
     </svg>
   </button>

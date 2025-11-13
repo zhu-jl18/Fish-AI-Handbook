@@ -18,10 +18,10 @@ try {
 ---
 
 <ContentLayout
-  entry={entry} title={entry?.data?.title ?? '核心原则'}
+  entry={entry}
+  title={entry?.data?.title ?? '核心原则'}
   sidebarItems={PROMPTS_SIDEBAR}
   contributors={entry?.data?.contributors}
 >
   {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
-

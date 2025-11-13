@@ -17,83 +17,83 @@ const bundlePath = (base.endsWith('/') ? base : base + '/') + 'pagefind/'
   <div data-pagefind-ignore="true">
     <h1 class="visually-hidden">搜索</h1>
     <div id="search" data-bundle-path={bundlePath} data-initial={q}></div>
-    </div>
+  </div>
 
-    <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
 
-    <script is:inline>
-      window.addEventListener('DOMContentLoaded', () => {
-        const container = document.getElementById('search')
-        const bundlePath = container?.dataset.bundlePath || '/pagefind/'
-        const initial = container?.dataset.initial || ''
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('search')
+      const bundlePath = container?.dataset.bundlePath || '/pagefind/'
+      const initial = container?.dataset.initial || ''
 
-        const ui = new PagefindUI({
-          element: '#search',
-          showSubResults: false,
-          showImages: false,
-          bundlePath,
-          translations: {
-            placeholder: '', // 移除占位符文本
-            zero_results: '没有找到与"{term}"相关的内容',
-            clear_search: '清除',
-            load_more: '加载更多',
-            search_label: '搜索文档',
-            filters_label: '筛选结果',
-          },
-        })
+      const ui = new PagefindUI({
+        element: '#search',
+        showSubResults: false,
+        showImages: false,
+        bundlePath,
+        translations: {
+          placeholder: '', // 移除占位符文本
+          zero_results: '没有找到与"{term}"相关的内容',
+          clear_search: '清除',
+          load_more: '加载更多',
+          search_label: '搜索文档',
+          filters_label: '筛选结果',
+        },
+      })
 
-        // 自动聚焦搜索输入框，进入 /search 后即可直接输入
+      // 自动聚焦搜索输入框，进入 /search 后即可直接输入
+      setTimeout(() => {
+        const input = document.querySelector('#search input')
+        if (input instanceof HTMLInputElement) {
+          input.focus()
+          input.select()
+        }
+      }, 0)
+
+      if (initial) {
         setTimeout(() => {
           const input = document.querySelector('#search input')
-          if (input instanceof HTMLInputElement) {
-            input.focus()
-            input.select()
+          if (input) input.value = initial
+          if (typeof ui.triggerSearch === 'function') {
+            ui.triggerSearch(initial)
           }
-        }, 0)
-
-        if (initial) {
-          setTimeout(() => {
-            const input = document.querySelector('#search input')
-            if (input) input.value = initial
-            if (typeof ui.triggerSearch === 'function') {
-              ui.triggerSearch(initial)
-            }
-          }, 100)
-        }
-
-        if (
-          window.location.hostname === 'localhost' ||
-          window.location.hostname === '127.0.0.1'
-        ) {
-          fetch('/pagefind/pagefind.js', { method: 'HEAD' }).catch(() => {
-            const note = document.createElement('div')
-            note.textContent =
-              '提示：开发模式仅展示搜索框。要体验完整搜索，请运行：npm run preview:search'
-            note.style.fontSize = '12px'
-            note.style.opacity = '0.7'
-            note.style.marginBottom = '8px'
-            note.style.padding = '8px'
-            note.style.backgroundColor = '#fffbea'
-            note.style.border = '1px solid #ffc107'
-            note.style.borderRadius = '4px'
-            container?.prepend(note)
-          })
-        }
-      })
-    </script>
-
-    <style>
-      .visually-hidden {
-        position: absolute !important;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0 0 0 0);
-        white-space: nowrap;
-        border: 0;
+        }, 100)
       }
+
+      if (
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1'
+      ) {
+        fetch('/pagefind/pagefind.js', { method: 'HEAD' }).catch(() => {
+          const note = document.createElement('div')
+          note.textContent =
+            '提示：开发模式仅展示搜索框。要体验完整搜索，请运行：npm run preview:search'
+          note.style.fontSize = '12px'
+          note.style.opacity = '0.7'
+          note.style.marginBottom = '8px'
+          note.style.padding = '8px'
+          note.style.backgroundColor = '#fffbea'
+          note.style.border = '1px solid #ffc107'
+          note.style.borderRadius = '4px'
+          container?.prepend(note)
+        })
+      }
+    })
+  </script>
+
+  <style>
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
 
     /* 搜索页面专用样式 - 仅作用于 /search 路由 */
 
@@ -109,66 +109,63 @@ const bundlePath = (base.endsWith('/') ? base : base + '/') + 'pagefind/'
       margin-top: 20px;
     }
 
-      #search {
-        margin-top: 0;
-      }
+    #search {
+      margin-top: 0;
+    }
 
-      /* 优化搜索输入框样式：字体粗细、尺寸、光标颜色和左侧内边距 */
-      #search :global(.pagefind-ui__search-input),
-      #search :global(input[type='text']) {
-        font-weight: 400 !important;
-        font-size: 0.9rem !important; /* 缩小字号到约 90% */
-        padding: 0.65rem 1rem 0.65rem 2.5rem !important; /* 左侧内边距增加到 2.5rem，为放大镜图标留出空间 */
-        width: 100% !important; /* 确保输入框在容器内占满宽度，避免缩到左侧 */
-        box-sizing: border-box !important; /* 计算尺寸包含内边距 */
-        caret-color: var(--caret-color, rgba(0, 0, 0, 0.7)) !important;
-      }
+    /* 优化搜索输入框样式：字体粗细、尺寸、光标颜色和左侧内边距 */
+    #search :global(.pagefind-ui__search-input),
+    #search :global(input[type='text']) {
+      font-weight: 400 !important;
+      font-size: 0.9rem !important; /* 缩小字号到约 90% */
+      padding: 0.65rem 1rem 0.65rem 2.5rem !important; /* 左侧内边距增加到 2.5rem，为放大镜图标留出空间 */
+      width: 100% !important; /* 确保输入框在容器内占满宽度，避免缩到左侧 */
+      box-sizing: border-box !important; /* 计算尺寸包含内边距 */
+      caret-color: var(--caret-color, rgba(0, 0, 0, 0.7)) !important;
+    }
 
-      /* 保持 Pagefind UI 默认布局，避免宽度异常；只隐藏占位符作为兜底 */
-      #search :global(.pagefind-ui__search-input::placeholder) {
-        opacity: 0 !important;
-      }
+    /* 保持 Pagefind UI 默认布局，避免宽度异常；只隐藏占位符作为兜底 */
+    #search :global(.pagefind-ui__search-input::placeholder) {
+      opacity: 0 !important;
+    }
 
-      /* 优化搜索结果文本颜色，复用全局文本令牌以提升对比度和可读性 */
-      #search :global(.pagefind-ui__result-title),
-      #search :global(.pagefind-ui__result-excerpt) {
-        color: var(--text-color) !important;
-      }
+    /* 优化搜索结果文本颜色，复用全局文本令牌以提升对比度和可读性 */
+    #search :global(.pagefind-ui__result-title),
+    #search :global(.pagefind-ui__result-excerpt) {
+      color: var(--text-color) !important;
+    }
 
-      /* 搜索结果标题链接样式 */
-      #search :global(.pagefind-ui__result-link) {
-        color: var(--text-color) !important;
-      }
+    /* 搜索结果标题链接样式 */
+    #search :global(.pagefind-ui__result-link) {
+      color: var(--text-color) !important;
+    }
 
-      #search :global(.pagefind-ui__result-link:hover) {
-        color: var(--link-hover-color) !important;
-      }
+    #search :global(.pagefind-ui__result-link:hover) {
+      color: var(--link-hover-color) !important;
+    }
 
-      /* 搜索结果摘要文本 */
-      #search :global(.pagefind-ui__result-excerpt mark) {
-        background-color: var(
-          --search-highlight-bg,
-          rgba(255, 255, 255, 0.15)
-        );
-        color: var(--search-highlight-fg, var(--color-text-white));
-      }
+    /* 搜索结果摘要文本 */
+    #search :global(.pagefind-ui__result-excerpt mark) {
+      background-color: var(--search-highlight-bg, rgba(255, 255, 255, 0.15));
+      color: var(--search-highlight-fg, var(--color-text-white));
+    }
 
-      /* 加载更多：仅显示文字，无边框/背景，悬浮高亮文字 */
-      #search :global(.pagefind-ui__button) {
-        font-size: 0.875rem !important;
-        font-weight: 400 !important;
-        color: var(--text-muted) !important;
-        background: none !important;
-        border: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        border-radius: 0 !important;
-        cursor: pointer !important;
-        display: block !important;
-        width: max-content !important;
-        margin: 1.5rem auto 0 !important; /* 居中，仅占文字宽度 */
-        transition: color 0.2s ease !important;
-      }
+    /* 加载更多：仅显示文字，无边框/背景，悬浮高亮文字 */
+    #search :global(.pagefind-ui__button) {
+      font-size: 0.875rem !important;
+      font-weight: 400 !important;
+      color: var(--text-muted) !important;
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      cursor: pointer !important;
+      display: block !important;
+      width: max-content !important;
+      margin: 1.5rem auto 0 !important; /* 居中，仅占文字宽度 */
+      transition: color 0.2s ease !important;
+    }
 
     #search :global(.pagefind-ui__button:hover),
     #search :global(.pagefind-ui__button:focus-visible) {
