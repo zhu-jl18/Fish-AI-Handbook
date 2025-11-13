@@ -1,5 +1,5 @@
 ---
-title: PAID
+title: Little Cost
 description: 自己薅羊毛太费事了不如掏点辛苦费吧
 ---
 

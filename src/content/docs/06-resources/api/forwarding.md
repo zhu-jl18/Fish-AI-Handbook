@@ -3,71 +3,69 @@ title: 代理转发
 contributors:
   - claude
   - codex
-description: 面向跨区域访问的 API 代理转发方案与选型
+description: 面向 Gemini 与多家 AI 服务的中转代理与参考实现
 ---
 
-## 核心要点
-- 先明确要跨过的地域与被转发的上游 API，再决定代理落地区域与带宽冗余。
-- 就近选择支持自定义域名、可控出站 IP 的边缘平台，后续排查与合规会轻松得多。
-- 把鉴权、速率限制、日志收集放在代理层处理，才能支撑后续的聚合、计费与告警。
+## 使用场景与原理
 
-## 使用前判断
-1. **合规性**：确认目标服务允许通过第三方代理访问；对 Gemini、Claude 等服务需遵守各自 ToS 的地域条款。
-2. **网络要求**：明确调用方所在地、上游 API 所在地以及必须遵守的出口 IP 白名单。
-3. **运行特性**：评估调用量、请求峰值及时延预算，提前决定是否需要多 Region 热备。
-4. **运维能力**：团队是否能持续维护日志、证书、密钥轮换；若没有，把关键功能委托给托管平台。
-
-## Gemini 专用通道（2024 Q4 状态）
-
-| 方案 | 适用场景 | 最新观察 | 注意事项 |
-| :--- | :------- | :------- | :-------- |
-| Cloudflare Workers + AI Gateway | 面向大陆调用 Gemini Pro/Text，主打快速部署 | 2024 Q4 仍可稳定出境，Workers Paid 版提供固定出口 IP 槽位 | 建议搭配 Durable Objects 做配额统计，免费套餐可能触发速率限制 |
-| Supabase Edge Functions | 需要数据库和 KV，一体化维护 | 北京、上海地区访问稳定，内置 Secrets Manager 便于轮换凭据 | 默认 60 秒超时，Gemini 长回答需拆分或走任务轮询 |
-| Vercel Edge Functions | 仅做轻量转发，兼顾多环境 | 自 2024 Q3 起默认开启数据驻留；可在 dashboard 固定 Region 到美国东部 | 出站 IP 每次部署可能变化，若需白名单请购买自定义出站 |
-| Deno Deploy | 低延迟、观测简单 | 2024 Q4 支持自动 HTTPS 与 KV，部署一步完成 | 中国大陆链路时延略高，建议配合 CDN 或落地多实例 |
-| OpenRouter BYOK | 想直接复用现成 Gemini 接入 | 平台在 2024 Q4 新增 BYOK（自带 Key）模式，可做权宜方案 | 需遵守 OpenRouter 限流策略，适合中小流量 |
-
-## 通用转发架构
+在中国大陆调用 Gemini 以及各种 LLM / API 服务时，常见问题是：官方端点无法直连、单节点被打满、同一个出口 IP 或上游 Key 很快触发限额。通用的解决思路是：在海外放一层中转代理，再通过多节点与多上游把流量打散。
 
 ```
-+---------+      HTTPS      +--------------+      HTTPS      +--------------+
-| Client  | --------------> | Edge Proxy    | --------------> | Upstream LLM |
-+---------+                 +--------------+                 +--------------+
-      |                           |   ^                              |
-      |                           v   |                              |
-      |                    +----------------+                +--------------+
-      |                    | Metrics / Logs |<---------------| Alerting Hub |
-      |                    +----------------+                +--------------+
++--------+      +-----------------+      +-------------+
+| Client | ---> | Overseas Proxy  | ---> | Upstream AI |
+|  China |      | (Gemini / 多家) |      | Gemini 等   |
++--------+      +-----------------+      +-------------+
 ```
 
-- **Edge Proxy**：统一鉴权、限流、重试，并为后续聚合预留中间层能力。
-- **Metrics / Logs**：使用平台自带日志（如 Workers Logpush、Supabase Logs）或接入 Grafana Loki，便于溯源。
-- **Alerting Hub**：最简单可以是 Slack / 飞书 Webhook，先保证限额、错误率有人看。
+| 问题 | 处理思路 |
+| :--- | :------- |
+| 无法直连 Gemini | 在境外部署中转代理节点，由节点向 Google 官方接口发起请求，入口只暴露自有域名与路径 |
+| 单节点易过载 | 同一路径后挂多台代理实例，结合健康检查与负载均衡，把流量摊到多个节点 |
+| 同 IP / Key 限额 | 为不同代理实例配置不同出口 IP 与上游 Key，按策略轮询或分组转发，降低单 IP / Key 被打满或封禁的风险 |
 
-## 推荐实现
+在这个架构下，文档将代理拆成两类：一类是只服务 Gemini 的跨境入口通道；另一类是支持 Gemini 和多家服务商（OpenAI 兼容协议、Groq、Cerebras、OpenRouter 等）的通用多上游代理。
 
-### Cloudflare Workers（最通用）
-- 支持 TypeScript/JavaScript，结合 AI Gateway 可以按模型类型拆配额。
-- `fetch` 原生支持 H3/HTTP2，上游 Gemini、OpenAI、Groq 均可无痛转发。
-- 可通过 `CF-Connecting-IP` 获取真实调用者 IP，方便做灰度或黑名单。
+## Gemini 专用通道（跨境入口）
 
-### Supabase Edge Functions（数据库原生）
-- 与 Supabase Postgres、Auth、Storage 集成，适合需要记录调用明细、做账单的团队。
-- 2024 Q4 起默认支持 Deno KV，可做轻量缓存、签名校验。
-- 需要自行处理 60 秒执行限制：长文本建议拆成 SSE 流或回调。
+这里的「Gemini 专用通道」就是一条只处理 Gemini 流量的出站通道：本机（运行你的前端 / 后端 / 聚合服务的那台机器）把请求发给部署在境外的 Gemini 转发代理，由该代理再与 Google Gemini 官方 API 通信。
 
-### Vercel Edge + KV（前后端同源）
-- Node/Edge Runtime 双模，前端页面与代理共享一套部署流水线。
-- KV / Edge Config 可以保存上游密钥，不落盘，提升安全性。
-- 注意固定 Region，避免 Vercel 自动多 Region 触发上游风控。
+```
++--------+      +-----------------------+      +--------------------+
+| 本机   | ---> | Gemini 转发代理 (海外) | ---> | Google Generative  |
+| 应用   |      |                       |      | Language / Vertex  |
++--------+      +-----------------------+      +--------------------+
+```
 
-### Deno Deploy（运维门槛低）
-- 单文件即可部署，版本回滚方便，内置 Observability。
-- 若对 IP 稳定性有强要求，可搭配 Deno Subhosting 获取固定 IP。
+本节只关注这条最简单的链路：如何把本机发出的 Gemini 请求安全地送到境外代理。多节点、多 IP、多上游的部署与调度会在后续的「聚合管理平台」章节中单独说明。
 
-## 运营建议
-- **密钥管理**：统一把上游 Key 放入 Secrets Manager，并自动轮换。Workers 使用 `wrangler secret`, Supabase 使用 `supabase secrets`。
-- **超时治理**：给所有外部请求设定 10~15 秒超时，避免代理实例占满连接池。
-- **重试策略**：短暂性 429/5xx 可指数退避重试，5 次仍失败则记录告警。
-- **健康检查**：搭配 Cron 触发的自检流程，每 5 分钟模拟调用一次，提前发现证书、DNS 问题。
-- **日志保留**：至少保留 14 天原始日志以供审计，敏感字段在写入前做掩码。
+### Gemini 代理类型示例
+
+| 类型 | 说明 | 参考实现 |
+| :--- | :--- | :------- |
+| 直连转发（解锁地区限制） | 将国内请求转发到海外的 Gemini 官方接口 | 待补充（任意支持 Gemini 的 HTTP 代理） |
+| 反截断转发 | 在转发链路上增加抗截断处理，提升长连接稳定性 | [gemini-anticut](https://github.com/lovingfish/gemini-anti-cut) |
+
+## 通用多上游代理（支持 Gemini / OpenAI 等）
+
+通用多上游代理本身不区分地域，职责是：把 `/openai`、`/gemini` 等路径映射到不同的上游服务商，并在代理层做 Header 清洗、错误包装与简单的限流统计。它既可以直接给客户端用，也可以作为「Gemini 专用通道」里的海外代理节点使用。
+
+### 可选实现一览
+
+| 项目 | 能力 / 入口示例 | 推荐场景 |
+| :--- | :--------------- | :------- |
+| [proxy-interface](https://github.com/lovingfish/proxy-interface) | 提供 OpenAI 风格 AI 代理接口，例如 `/openai` 统一转发到上游模型 API | 需要统一管理多家 AI API，但已有一套自有前端或网关，希望加一层轻量 AI 代理 |
+| [ClewdR](https://github.com/Xerxes-2/clewdr) | Claude / Gemini 等模型代理，暴露 `v1/chat/completions` 等 OpenAI 兼容端点 | 自托管高性能 AI 代理，复用现有 OpenAI SDK / 前端，并集中管理模型配置与密钥 |
+| [api-proxy](https://github.com/OrzMiku/api-proxy) | 通过环境变量配置 OpenAI / Gemini / Anthropic 等，统一暴露 `/openai/**`、`/gemini/**` 等路径 | 在 Vercel 或 Cloudflare 上用一组环境变量挂多家 AI API，前端只对接统一路径 |
+| [supabase-api-proxy](https://github.com/lovingfish/supabase-api-proxy) | 在 Supabase Edge 中将 OpenAI、Claude、Gemini 等集中到 `/api/{service}/{path}` 路径下 | 已有 Supabase 项目，希望在 Edge Functions 内统一代理 LLM / HTTP 服务并复用日志与鉴权 |
+
+这些实现都可以作为「海外中转代理」部署在不同 Region：你可以根据现有基础设施选一个或组合几个，在它们前面再叠一层自己的入口网关，就得到了完整的跨境与多上游代理链路。
+
+## 实现要点（结合参考仓库）
+
+| 维度 | 推荐做法 | 参考实现 |
+| :--- | :------- | :------- |
+| 路由设计 | 用统一前缀 + 服务别名映射到不同上游，例如 `/api/openai/...`、`/api/gemini/...` | api-proxy、supabase-api-proxy |
+| Header 处理 | 转发前清理 IP / CDN 相关头，避免把真实来源和平台细节暴露给上游 | supabase-api-proxy |
+| 错误处理 | 在代理层统一把错误包装成 JSON 返回，并附带类型与状态码 | supabase-api-proxy |
+| 配置方式 | 上游地址和 Key 统一放在环境变量或配置文件里集中管理 | api-proxy、ClewdR |
+| 管理与观测 | 使用部署平台日志或简单 Dashboard 查看当前路由与状态 | ClewdR Dashboard、api-proxy 仪表盘、Supabase Logs |
