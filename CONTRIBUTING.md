@@ -171,7 +171,7 @@ description: 简短描述（必填，缺失会导致构建失败）
 ```bash
 npm run build               # Astro 构建 + Pagefind 索引
 npm run preview             # 构建后预览
-npm run preview:search      # 先构建再以非阻塞模式预览（含搜索索引）
+npm run preview:search      # 先构建再以非阻塞模式运行命令（含搜索索引）
 npm run test:links          # 基于 dist 的站内死链扫描
 npm run lint:markdown       # 校验 Markdown 代码块
 ```
@@ -237,6 +237,7 @@ LC --> Dev: 输出统计与断链
 - `ui/ux` 视觉或交互调整
 - `fix` bug 修复
 - `docs` 维护开发文档
+- `content` 更改网站正文内容
 - `refactor` 结构重构
 - `perf` 性能优化
 - `dx` 开发体验改进
@@ -270,7 +271,7 @@ LC --> Dev: 输出统计与断链
 - **单模块改动**必须指定 scope，例如：
   - `feat(search): add keyboard shortcuts`
   - `fix(sidebar): resolve collapse animation`
-  - `docs(prompts): add advanced examples`
+  - `content(prompts): add advanced examples`
 - **跨模块/全局改动**不加 scope，如 `refactor: restructure entire content hierarchy`。
 - **Merge commits** 统一用 `chore:`，不带 scope。
 - 常见 scope：`search`、`sidebar`、`header`、`footer`、`toc`、`prompts`、`setup`、`resources`、`glossary`、`routing`、`navigation`、`ui`、`style`、`seo`、`deps`、`build`、`ci`、`config`。
@@ -285,9 +286,9 @@ LC --> Dev: 输出统计与断链
 heading + body：
 
 ```
-feat(sidebar): add sidebar collapse functionality   
+feat(sidebar): add sidebar collapse functionality
 
-enhance user experience by adding sidebar collapse/expand   
+enhance user experience by adding sidebar collapse/expand
 interaction with state persistence.
 - use localStorage to persist collapse state
 - add smooth expand/collapse animation
@@ -296,9 +297,9 @@ interaction with state persistence.
 heading + footer：
 
 ```
-fix: resolve mobile navigation menu click issue      
- 
-navigation menu items fail to redirect correctly on small   
+fix: resolve mobile navigation menu click issue
+
+navigation menu items fail to redirect correctly on small
 screen devices. The issue was caused by prevented event
 bubbling and has been fixed.
 ```

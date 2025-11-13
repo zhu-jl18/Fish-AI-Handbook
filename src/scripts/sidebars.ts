@@ -187,7 +187,6 @@ export const SETUP_SIDEBAR: SidebarSection = [
   {
     label: 'VPN',
     href: '/setup/vpn',
-    items: [{ label: '云服务器', href: '/setup/vpn/cloud-server' }],
   },
   { label: 'Cherry Studio', href: '/setup/cherrystudio' },
   {

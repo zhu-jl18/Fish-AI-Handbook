@@ -68,7 +68,10 @@ const skipRegexes = skipPatterns
   .map((pattern) => new RegExp(pattern))
 
 const shouldSkipLink = async (url) => {
-  if (wantsHttpSkip && (url.startsWith('http://') || url.startsWith('https://'))) {
+  if (
+    wantsHttpSkip &&
+    (url.startsWith('http://') || url.startsWith('https://'))
+  ) {
     try {
       const { hostname } = new URL(url)
       if (hostname !== 'localhost' && hostname !== '127.0.0.1') return true
@@ -122,7 +125,9 @@ const main = async () => {
     linksToSkip: shouldSkipLink,
   })
 
-  const scanned = result.links.filter((link) => link.state !== LinkState.SKIPPED)
+  const scanned = result.links.filter(
+    (link) => link.state !== LinkState.SKIPPED,
+  )
   const broken = result.links.filter((link) => link.state === LinkState.BROKEN)
 
   if (broken.length > 0) {
