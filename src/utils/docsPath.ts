@@ -15,4 +15,3 @@ export function buildDocCandidates(normalizedId: string): string[] {
     `/src/content/docs/${id}/index.mdx`,
   ]
 }
-

@@ -10,4 +10,3 @@ test('RSS 订阅源可访问且为 XML', async ({ page }) => {
   const content = await page.content()
   expect(content).toMatch(/<rss/i)
 })
-

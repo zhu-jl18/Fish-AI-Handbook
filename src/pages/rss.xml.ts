@@ -9,7 +9,9 @@ function resolvePathFromSlug(slug: string): string | null {
   if (segments.length === 0) return null
 
   const [prefix, ...rest] = segments
-  const sectionEntry = SECTION_PREFIX_ENTRIES.find(([, value]) => value === prefix)
+  const sectionEntry = SECTION_PREFIX_ENTRIES.find(
+    ([, value]) => value === prefix,
+  )
   if (!sectionEntry) return null
 
   const [section] = sectionEntry
@@ -37,7 +39,10 @@ export async function GET(context: { site: URL }) {
         link,
       }
     })
-    .filter((item): item is { title: string; description: string; link: string } => !!item)
+    .filter(
+      (item): item is { title: string; description: string; link: string } =>
+        !!item,
+    )
 
   return rss({
     title: 'Fish AI Handbook',
@@ -46,4 +51,3 @@ export async function GET(context: { site: URL }) {
     items,
   })
 }
-

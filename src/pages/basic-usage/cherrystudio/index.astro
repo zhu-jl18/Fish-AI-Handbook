@@ -8,7 +8,8 @@ const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
-  entry={entry} title={entry?.data?.title ?? 'Cherry Studio · 基础用法与技巧'}
+  entry={entry}
+  title={entry?.data?.title ?? 'Cherry Studio · 基础用法与技巧'}
   sidebarItems={BASIC_USAGE_SIDEBAR}
   contributors={entry?.data?.contributors}
 >
