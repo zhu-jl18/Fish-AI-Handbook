@@ -1,60 +1,86 @@
 ---
 title: '知识库'
-description: '理解知识库、RAG 与向量存储技术，掌握构建 AI 长期记忆的核心方法。'
+description: '面向RAG系统的整体作战图：先搞清楚原理，再落地低代码与开源方案，最后补齐理论弹药'
+contributors:
+  - codex
+  - kimi
 ---
 
-## 什么是知识库？
 
-在 AI 应用的上下文中，**知识库 (Knowledge Base)** 是指一个结构化或非结构化的、可供机器读取和检索的信息集合。它扮演着 AI 系统的“外部大脑”或“长期记忆”的角色，为其提供特定领域、私有或实时更新的知识，从而弥补预训练大语言模型（LLM）自身知识的不足。
+## Breif Intro
 
-知识库的实现依赖于 **RAG** 技术和 **向量数据库** 等底层基础设施。本模块将帮助你理解这些技术的原理与实践。
+虽然大模型有着丰富的world knowledge，但是：
+- 任何对话式AI如果需要回答最新或私有信息，必须外挂知识库；不要指望基座模型自己长脑子。
 
-## 为什么知识库如此重要？
+那如何链接到知识库呢，知识库是数据源，RAG是使用数据的方法，向量数据库是让数据可被检索的工具。
 
-1.  **克服知识时效性问题**：LLM 的知识是静态的，停留在其训练截止日期。知识库可以随时更新，为 AI 提供最新的信息。
-2.  **实现领域专业化**：您可以构建一个包含特定行业（如法律、医疗、金融）或企业内部（如产品文档、规章制度）知识的知识库，让 AI 成为该领域的专家。
-3.  **提高事实准确性，减少幻觉**：通过 RAG 等技术，AI 的回答被“锚定”在知识库提供的具体内容上，而不是凭空捏造，这大大提高了回答的可靠性。
-4.  **保障数据隐私**：敏感的私有数据可以存储在本地或私有云的知识库中，无需用其对 LLM 本身进行微调，从而降低了数据泄露的风险。
+```text
+用户问题 → 检索重排序 → 获取相关chunk → 
+↓
+LLM提示构建（系统prompt + 检索到的文档 + 用户问题） → 
+↓
+LLM生成答案（基于检索内容返回带引用的最终答案）
+```
 
-## 知识库的类型
+具体关系：
+1. **知识库（KB）** = 存储层：文档、PDF、FAQ、数据库等静态数据
+2. **RAG（检索增强生成）** = 架构层：检索+生成的完整流程，让LLM基于知识库回答问题  
+3. **向量数据库** = 索引层：让知识库支持语义搜索的技术手段
 
-知识库可以有多种形式，常见的包括：
+RAG链路只做三件事：可靠的语义索引、可控的检索策略、稳定的提示注入；其余都是噪音。实际RAG中LLM的prompt长这样：
+```text
+系统：基于以下上下文回答问题，如果信息不足就说不知道
+上下文：[从知识库检索到的3-5个相关片段]
+用户问题：xxx
+```
 
-- **文档集合 (Document Collections)**：
-  这是最常见的形式，由一系列文档（如 PDF, Word, HTML, Markdown 文件）组成。通常需要与向量数据库结合使用，以实现高效的语义检索。
-- **结构化数据库 (Structured Databases)**：
-  传统的 SQL 或 NoSQL 数据库也可以作为知识库。AI Agent 可以通过生成查询语句（如 SQL 查询）来从中获取精确信息。
-- **知识图谱 (Knowledge Graphs)**：
-  一种更高级的形式，它以“实体-关系-实体”的图结构来存储信息。知识图谱能让 AI 更好地理解实体间的复杂关系，进行更深度的推理。
+**补全后的完整交互流程表格：**
 
-## 模块导航
+| 流程类型 | 步骤 | 说明 |
+|---------|------|------|
+| **数据准备流程**<br>(左→右) | 文档源 → Chunk/Embed | 原始文档被切分成chunk并生成向量嵌入 |
+| | Chunk/Embed → 向量数据库 | 向量存储到数据库中 |
+| | 向量数据库 → 检索重排序 | 根据查询向量做相似度检索和重排序 |
+| **查询处理流程**<br>(下→上) | 用户 → Prompt Builder | 用户输入问题 |
+| | Prompt Builder → Query Embeder | 问题被编码成查询向量 |
+| | Query Embeder → 检索重排序 | 用查询向量在向量库中检索相关chunk |
+| | Filter/Policy → 检索重排序 | 应用过滤策略（权限、时间等） |
+| **LLM交互流程**<br>(缺失环节) | 检索重排序 → Prompt Builder | 将检索到的文档片段注入prompt |
+| | Prompt Builder → LLM | 构建完整提示（系统指令+检索内容+用户问题） |
+| | LLM → 答案生成 | LLM基于检索内容生成 grounded answer |
+| | LLM → 用户 | 返回带引用的最终答案 |
 
-本知识库模块分为两部分：
 
-### [原理概述](/advanced/knowledge-bases/principles)
 
-深入理解 RAG 工作流程、向量嵌入技术、近似检索算法、文档分块策略等核心原理。
+## 适用场景
 
-**你将学到**：
+- 内部制度、合规、财报、工单知识密集且常更新的组织。
+- 需要引用出处、可解释回答、并保留审计日志的客服与运营场景。
+- 多语种或跨格式文档（PDF、HTML、SQL、音频转写）混合的内容团队。
 
-- RAG 完整工作流程（索引、检索、重排、生成）
-- 向量嵌入模型选择与性能权衡
-- HNSW、IVF、PQ 等 ANN 算法原理
-- Hybrid 混合检索与 Reranking 技术
-- 分块策略与 Chunk 大小选择
-- 防止幻觉与 RAG 评估方法
 
-### [实践指南](/advanced/knowledge-bases/implementation)
 
-从数据准备到系统上线，掌握知识库构建的完整流程、工具选型与常见问题解决方案。
 
-**你将学到**：
+## Learn More
 
-- 数据采集、清洗、去重、切分实践
-- ChromaDB、Qdrant、Pinecone 等向量数据库选型
-- 嵌入模型部署与批量导入优化
-- Hybrid 检索、重排序、缓存策略实现
-- 离线评测、A/B 测试、指标监控
-- 中文分词、增量更新、成本控制等常见问题
+ 博客（概念与思路）
 
----
+1. [Pinecone — Anatomy of a RAG System](https://www.pinecone.io/learn/rag/)：从向量视角拆RAG，图示清楚。
+2. [Qdrant — Hybrid Search Best Practices](https://qdrant.tech/articles/hybrid-search-best-practices/)：讲透alpha/K调参，别再瞎试。
+3. [Weaviate — Rerank Strategies](https://weaviate.io/blog/hybrid-search-reranking)：“向量+BM25+rerank”组合拳的实测数据。
+4. [LlamaIndex — Data Agents](https://docs.llamaindex.ai/en/stable/examples/agent/agent_rag/)：从数据视角扩展RAG，适合复杂系统。
+
+技术文档（实现细节）
+
+- [LangChain Retrieval Cookbook](https://python.langchain.com/docs/use_cases/question_answering/)：官方多检索策略样例。
+- [LlamaIndex Observability](https://docs.llamaindex.ai/en/stable/module_guides/observability/)：如何打Tracing与评估。
+- [OpenAI Text-Embedding-3 Spec](https://platform.openai.com/docs/guides/embeddings)：参数、速率限制、批量策略。
+- [Milvus Index Reference](https://milvus.io/docs/index.md) 与 [Qdrant Collections](https://qdrant.tech/documentation/collections/)：索引类型和过滤模型。
+- [Azure AI Search Vector Workloads](https://learn.microsoft.com/azure/search/vector-search-overview)：托管方案细节，含ACL示例。
+
+学习视频（上手实验）
+
+1. [Pinecone RAG Masterclass (YouTube)](https://www.youtube.com/watch?v=Sus6kACWYbk)：1小时涵盖整条链路。
+2. [Microsoft Build: Vector Search Deep Dive](https://www.youtube.com/watch?v=5H39G-2u2bU)：重点在混合检索和权限。
+3. [Deeplearning.ai Short Course: Building RAG Agents](https://learn.deeplearning.ai/courses/building-rag-agents)（含视频+notebook）。
+4. [Qdrant Live Workshop](https://www.youtube.com/watch?v=O4s-lHoPazs)：演示ef_search调参。

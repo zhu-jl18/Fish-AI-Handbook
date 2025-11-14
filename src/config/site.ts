@@ -124,6 +124,12 @@ export const CONTRIBUTORS_MAP: Record<string, ContributorInfo> = {
     link: 'https://github.com/MiniMax-AI',
     avatar: 'https://github.com/MiniMax-AI-Dev.png',
   },
+  kimi: {
+    username: 'kimi',
+    name: 'Kimi',
+    link: 'https://github.com/MoonshotAI',
+    avatar: 'https://media.makomako.dpdns.org/images/2025/11/moonshot-dark',
+  },
 }
 
 /**

@@ -170,8 +170,7 @@ description: 简短描述（必填，缺失会导致构建失败）
 
 ```bash
 npm run build               # Astro 构建 + Pagefind 索引
-npm run preview             # 构建后预览
-npm run preview:search      # 先构建再以非阻塞模式运行命令（含搜索索引）
+npm run preview:search      # 构建后预览（含搜索索引），必须以非阻塞模式运行此命令
 npm run test:links          # 基于 dist 的站内死链扫描
 npm run lint:markdown       # 校验 Markdown 代码块
 ```
@@ -208,6 +207,8 @@ LC --> Dev: 输出统计与断链
 
 ### 5.3 必跑校验
 
+在进行单markdown文件之外的变动和修改后，**必须按照如下流程进行check**：
+
 - `npm run format`
 - `npm run build`
 - `npm run lint:markdown`
@@ -219,8 +220,8 @@ LC --> Dev: 输出统计与断链
 
 ### 5.4 命令说明（关键两项）
 
-- **`npm run check:routes`**：验证一级/二级/三级内容与路由的镜像关系；禁止二级平铺 `.astro`、禁止三级“文件夹 + index”。若不一致将返回非 0 并定位到缺失/多余/非法路径。
-- **`npm run type-check`**：基于 `astro check`，覆盖 `.astro` + TS/JS + Content Collections，要求 `0 errors / 0 warnings`。Hints（如 `is:inline`）为信息提示，可忽略。
+- `npm run check:routes`：验证一级/二级/三级内容与路由的镜像关系；禁止二级平铺 `.astro`、禁止三级“文件夹 + index”。若不一致将返回非 0 并定位到缺失/多余/非法路径。
+- `npm run type-check`：基于 `astro check`，覆盖 `.astro` + TS/JS + Content Collections，要求 `0 errors / 0 warnings`。Hints（如 `is:inline`）为信息提示，可忽略。
 
 ---
 

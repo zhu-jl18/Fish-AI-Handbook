@@ -13,3 +13,8 @@ claude
 # 启动claude code后
 > 请帮我分析一下这个代码库
 ```
+
+## Good Choice
+
+- [Claude Beginner's Guide All in One](https://mp.weixin.qq.com/s/WaoQmfCvL0SVeIabIHRd5w)
+- [Claude Offical Docs](https://claude.ai/docs)
