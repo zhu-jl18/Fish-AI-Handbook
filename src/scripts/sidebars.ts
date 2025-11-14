@@ -116,15 +116,19 @@ export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
     label: '知识库',
     href: '/advanced/knowledge-bases',
     items: [
-      { label: '原理概述', href: '/advanced/knowledge-bases/principles' },
-      { label: '实践指南', href: '/advanced/knowledge-bases/implementation' },
+      { label: 'Principles', href: '/advanced/knowledge-bases/principles' },
+      {
+        label: 'Practice',
+        href: '/advanced/knowledge-bases/practice',
+      },
     ],
   },
+  { label: 'Spec Coding', href: '/advanced/spec-coding' },
   { label: 'MCP', href: '/advanced/mcp' },
   {
     label: 'Agents',
     href: '/advanced/agents',
-    items: [{ label: '构建指南', href: '/advanced/agents/agent-build' }],
+    items: [],
   },
   { label: 'OptILLM', href: '/advanced/optillm' },
   { label: 'Workflow', href: '/advanced/workflow' },
@@ -157,7 +161,7 @@ export const FUN_SIDEBAR: SidebarSection = [
 export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
   { label: 'Free Tier', href: '/resources/free-tier' },
-  { label: 'Little Cost', href: '/resources/paid' },
+  { label: 'Little Cost', href: '/resources/little-cost' },
   {
     label: 'API Key',
     href: '/resources/api',
