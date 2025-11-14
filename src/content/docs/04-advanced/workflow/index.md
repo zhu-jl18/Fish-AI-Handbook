@@ -1,6 +1,8 @@
 ---
 title: 'Workflow'
 description: '探索 AI 工作流的设计规范与可视化编排工具，掌握复杂 AI 应用的组合与自动化方法。'
+contributors:
+  - claude
 ---
 
 ## 什么是 AI 工作流？
