@@ -233,7 +233,7 @@ LC --> Dev: 输出统计与断链
 
 - `init` 初始化
 - `release` 发布新版本
-- `style` 纯样式/格式
+- `style` 代码格式更改
 - `feat` 新功能
 - `ui/ux` 视觉或交互调整
 - `fix` bug 修复
