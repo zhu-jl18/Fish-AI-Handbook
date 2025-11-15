@@ -3,7 +3,10 @@
  * ContentActions - 文档操作按钮组
  * 放置在文档内容顶部，提供复制源码、提交改进等功能
  */
-const { entryId } = Astro.props as { entryId?: string }
+const { entryId, lastModified } = Astro.props as {
+  entryId?: string
+  lastModified?: string
+}
 
 // GitHub 仓库基础 URL
 const GITHUB_REPO_BASE = 'https://github.com/zhu-jl18/Fish-AI-Handbook'
@@ -82,6 +85,33 @@ if (entryId) {
       <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
     </svg>
   </button>
+
+  <!-- 最后更新时间显示 (位于复制按钮左侧) -->
+  {
+    lastModified && (
+      <div class="last-updated" title={lastModified}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="clock-icon"
+        >
+          <path d="M3 3v6h6" />
+          <path d="M3.05 13A9 9 0 1 0 9 3.95" />
+          <path d="M12 7v5l3 2" />
+        </svg>
+        <time datetime={lastModified} data-timestamp={lastModified}>
+          {lastModified}
+        </time>
+      </div>
+    )
+  }
 
   <!-- 按钮1: 复制Markdown源码 -->
   <button
@@ -284,6 +314,36 @@ if (entryId) {
     margin-right: auto;
   }
 
+  .last-updated {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-right: 1rem;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: var(--header-text);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: default;
+    line-height: 1.2;
+    align-self: center;
+  }
+
+  .last-updated .clock-icon {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    opacity: 0.75;
+  }
+
+  .last-updated time {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
   .action-btn:not(:disabled):hover {
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.07);
@@ -314,6 +374,17 @@ if (entryId) {
 
     .content-actions .branch-selector {
       margin-right: 0;
+    }
+
+    .last-updated {
+      font-size: 0.75rem;
+      margin-right: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .last-updated .clock-icon {
+      width: 1em;
+      height: 1em;
     }
   }
 </style>

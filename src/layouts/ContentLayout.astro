@@ -5,6 +5,7 @@ import RightSidebar from '../components/RightSidebar.astro'
 import ContentActions from '../components/ContentActions.astro'
 import { getSidebarForPath } from '../scripts/sidebars'
 import { theme, getCurrentNavKey } from '../config/index'
+import { getGitLastModifiedIso } from '../utils/git'
 
 /**
  * 正文字体等排版尺寸由 src/config/theme.ts 控制
@@ -28,6 +29,9 @@ const {
   entry?: any
 }
 
+const lastModified =
+  entry?.data?.lastModified ?? getGitLastModifiedIso(entry?.filePath)
+
 // 基于 URL 别名推导导航高亮键（不依赖中文文案）
 const currentKey = getCurrentNavKey(currentPath)
 
@@ -46,7 +50,11 @@ const entryId = entry?.id
           data-pagefind-body
           style={`--font-size-base: ${theme.fontSizeBase}; --font-size-lg: ${theme.fontSizeLg}; --line-height-base: ${theme.lineHeightBase};`}
         >
-          {entryId && <ContentActions entryId={entryId} />}
+          {
+            entryId && (
+              <ContentActions entryId={entryId} lastModified={lastModified} />
+            )
+          }
           <slot />
         </div>
       </main>
