@@ -80,10 +80,25 @@ MCP 会话由一次握手和多次工具调用组成；事件流用 SSE 推送�
   }
   ```
 - **使用要点**：
-  - 默认工具 `search_context`，参数为 `project_path` 和自然语言问题。
+  - 默认工具 `search_context`，参数为 `project_root_path`（绝对路径，Windows 也要用 `/` 分隔符）和自然语言问题。citeturn0search1
+  - search_context 会在每次查询前自动做增量索引，无需手动执行“init”。citeturn0search1
   - 首次访问会写 `~/.acemcp/settings.toml`，在里面配置 `EXCLUDE_PATTERNS`、`TEXT_EXTENSIONS`、`BASE_URL` 等。
   - `--web-port 8888` 打开管理面板，可手动触发索引与查看日志。
   - 日志输出到 `~/.acemcp/log/acemcp.log`，不要放到 stdout，否则会破坏 MCP 协议。
+
+#### AceMCP 快速初始化（以本项目为例）
+1. 启动服务器（无需安装到全局也可用 uvx 即时运行）：
+   ```bash
+   uvx acemcp
+   ```
+2. 在 MCP 客户端调用 `search_context` 即会自动完成索引与检索，例如：
+   ```
+   tool: search_context
+   params:
+     project_root_path: "X:/WorkSapce/Fish-AI-Handbook-staging"
+     query: "prompts 章节的学习路径"
+   ```
+3. 如需后台面板，改用 `uvx acemcp --web-port 8888`，浏览器打开 `http://localhost:8888` 查看索引状态与日志。citeturn0search1
 
 ### Playwright MCP —— 浏览器自动化
 - **定位**：调用 Playwright 的可访问性树完成导航、交互、断言，比截图式方案稳定。
