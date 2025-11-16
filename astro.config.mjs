@@ -6,13 +6,19 @@ import { siteConfig, codeConfig } from './src/config/index.ts'
 import remarkListSpacing from './src/plugins/remark-list-spacing.js'
 import remarkDirective from 'remark-directive'
 import remarkSpoilerDirective from './src/plugins/remark-spoiler-directive.js'
+import { remarkModifiedTime } from './remark-modified-time.mjs'
 
 export default defineConfig({
   site: siteConfig.url,
   title: siteConfig.title,
   output: 'static',
   markdown: {
-    remarkPlugins: [remarkListSpacing, remarkDirective, remarkSpoilerDirective],
+    remarkPlugins: [
+      remarkListSpacing,
+      remarkDirective,
+      remarkSpoilerDirective,
+      remarkModifiedTime,
+    ],
   },
   integrations: [
     astroExpressiveCode({

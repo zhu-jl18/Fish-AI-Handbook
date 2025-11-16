@@ -80,9 +80,7 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
     label: '理论与框架',
     href: '/prompts/foundations',
     items: [
-      { label: '核心原则', href: '/prompts/foundations/principles' },
-      { label: '模板骨架', href: '/prompts/foundations/template-skeleton' },
-      { label: '常用技巧', href: '/prompts/foundations/techniques' },
+      { label: '核心原则与骨架', href: '/prompts/foundations/principles' },
       { label: '反模式清单', href: '/prompts/foundations/anti-patterns' },
     ],
   },
@@ -90,9 +88,7 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
     label: 'Context',
     href: '/prompts/context',
     items: [
-      { label: '对话层级', href: '/prompts/context/dialogue-levels' },
-      { label: '请求体', href: '/prompts/context/request-body' },
-      { label: '坑与反常规', href: '/prompts/context/pitfalls' },
+      { label: '对话层级与请求体', href: '/prompts/context/dialogue-levels' },
     ],
   },
   {
@@ -100,11 +96,7 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
     href: '/prompts/examples',
     items: [
       { label: '通用模板集', href: '/prompts/examples/templates' },
-      { label: '协作范式', href: '/prompts/examples/collab-patterns' },
-      { label: '结构化抽取', href: '/prompts/examples/data-extraction' },
-      { label: '编码与评审', href: '/prompts/examples/coding' },
-      { label: '研究与引用', href: '/prompts/examples/research' },
-      { label: '图像理解', href: '/prompts/examples/image' },
+      { label: '场景模板', href: '/prompts/examples/verticals' },
     ],
   },
   { label: '深入拓展', href: '/prompts/deepen' },

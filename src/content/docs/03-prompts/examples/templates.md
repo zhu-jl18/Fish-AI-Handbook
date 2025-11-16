@@ -1,6 +1,6 @@
 ---
 title: 通用模板集
-description: 可直接复制的高频任务模板
+description: 一页囊括通用助理、协作、抽取、研究、图像模板
 contributors:
   - codex
 ---
@@ -8,30 +8,37 @@ contributors:
 ## 通用助理（结构化输出）
 ```md
 Instruction: 解决{任务}，面向{受众}。
-Constraints: 中文输出；长度<= {limit}；风格={tone}；禁止编造；无法回答则空结果。
+Constraints: 中文；长度<= {limit}；风格={tone}；禁止编造；无答案=空值。
 Inputs: {vars_json}
-Few-shot: {好例} / {边界例}
-Output Schema:
-{
-  "summary": "string",
-  "steps": ["string"],
-  "risks": ["string"],
-  "next": ["string"]
-}
-Guardrails: 空结果=summary="" 且 steps=[]
+Output Schema: {summary, steps[], risks[], next[]}
+Guardrails: summary="" 且 steps=[] 视为无答案。
 ```
 
-## 计划-执行-复核（PER）
+## 计划-执行-复核（PER / 协作）
 ```md
-Phase=Plan: 列3-5步计划与验收准则。
-Phase=Execute: 逐步产出并标注证据。
-Phase=Review: 对照准则列差异与补偿措施。
+Plan: 列3-5步与验收准则。
+Execute: 按步骤输出并标记证据。
+Review: 对照准则列偏差与补救。
 ```
 
-## 风格卡（示例）
+## 结构化抽取
 ```md
-术语：统一使用“结构化输出”“自检清单”。
-语气：简洁、专业、无夸饰。
-禁用词：显而易见、极其、非常。
-格式：标题层级<=3，列表优先。
+Instruction: 从文本抽取实体。
+Schema: { "entities":[{"name":"","type":"Person|Org|Product|Other","attrs":{}}] }
+Guardrails: 无匹配则 entities=[]。
+```
+
+## 研究与引用
+```md
+Instruction: 回答 {问题} 并列来源。
+Tools: search(q, topk)
+Output Schema: {status, answer, source[{title,url,cred}], error}
+Guardrails: 无可靠来源 -> status=empty。
+```
+
+## 图像理解
+```md
+Instruction: 解读截图中区域 {ROI} 并回答{问题}。
+Output: findings[{label,value|null,confidence}], notes[]
+约束：不确定写null并说明原因。
 ```

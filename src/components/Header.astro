@@ -108,7 +108,13 @@ const { currentPage } = Astro.props
               <rect x="3" y="14" width="7" height="7"></rect>
             </svg>
           </button>
-          <button type="button" class="avatar-button" aria-label="个人中心">
+          <a
+            href={siteConfig.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="avatar-button"
+            aria-label="访问 GitHub 主页"
+          >
             {
               siteConfig.avatarImage ? (
                 <img
@@ -120,7 +126,7 @@ const { currentPage } = Astro.props
                 <span class="avatar-initial">{siteConfig.logoMark}</span>
               )
             }
-          </button>
+          </a>
         </div>
       </div>
       <div class="nav-bottom">
