@@ -14,9 +14,9 @@ contributors:
 2API 的核心链路只有一条：劫持客户端发往上游的请求，把认证、格式、速率都调成标准 API，然后把响应再翻译回 OpenAI 结构。
 
 ```text
-+---------+    +-----------------+    +--------------------+    +---------+
-| Client  | -> | 2API Adapter    | -> | Target Service     | -> | Client  |
-+---------+    +-----------------+    +--------------------+    +---------+
++---------+    +-----------------+    +--------------------+    
+| Client  | <-> | 2API Adapter    | <-> | Target Service     | 
++---------+    +-----------------+    +--------------------+    
                 | auth pool / token refresh
                 | header & signature forge
                 | prompt/message rewriter

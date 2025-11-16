@@ -70,3 +70,10 @@ test-results/
 
 # compressed build artifacts
 dist.zip
+
+# openspec
+.github/prompts/openspec-apply.prompt.md
+.github/prompts/openspec-archive.prompt.md
+.github/prompts/openspec-proposal.prompt.md
+openspec/
+AGENTS.md

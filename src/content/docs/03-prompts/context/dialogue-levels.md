@@ -1,33 +1,69 @@
 ---
-title: 对话层级
-description: 理解大语言模型对话中的System、Assistant和User三个层级角色。
+title: 对话层级与请求体
+description: System/User/Assistant 职责、API 请求示例与避坑合辑
 contributors:
   - codex
 ---
 
-一轮对话由三个不同层级组成：
-- 系统提示（system prompts）
-- 助手消息（assistant message）
-- 用户提示（user prompts）
+## 层级速览
+- System：全局规则与禁止事项，覆盖语气、输出格式、工具限制。
+- User：当前任务与必要上下文，问题越具体越好。
+- Assistant（历史）：先前回复的记录，主要用于连续性或滚动摘要。
 
-## System
-
-**系统提示词 (System Prompts)** 是一种高层次的指令，用于在整个会话或任务期间，为 AI 模型设定一个持久的上下文、角色、行为准则和约束。与用户提示词驱动单次交互不同，系统提示词像是为 LLM注入的"底层逻辑"，持续影响着模型的每一次响应。
-如"You are a helpful assistant"。
-
-## User
-
-**用户提示词 (User Prompts)** 是用户向 AI 模型发出的指令、问题或输入，是整个 AI 交互的起点。它定义了任务的边界、目标和约束，是决定模型输出质量最关键的变量。
-如“请帮我解释一下这个概念，要求50字以内”
-
-## Assistant 消息
-
-**助手消息（Assistant Message）**不是当前的回复生成，而是历史回复的记录，它用于维持对话连贯性。在API调用中，结构如下：
+## 写法示例
 ```json
 [
-  { "role": "system", "content": "You are a helpful assistant" },
-  { "role": "user", "content": "Hello" },
-  { "role": "assistant", "content": "Hi! How can I help you?" },
-  { "role": "user", "content": "What's the weather?" }
+  { "role": "system", "content": "你是安全审计助手，只输出JSON，未知写null。" },
+  { "role": "user", "content": "审查以下代码，列出安全风险。" },
+  { "role": "assistant", "content": "上一轮的审计摘要..." },
+  { "role": "user", "content": "继续审查新文件 X" }
 ]
 ```
+
+## 请求体示例（最小充分）
+```json
+{
+  "model": "gpt-4.1",
+  "messages": [
+    { "role": "system", "content": "你是严谨的中文技术写作者，只输出JSON，无答案写空值。" },
+    { "role": "user", "content": "总结附件要点，限200字。" }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search",
+        "description": "检索可信来源",
+        "parameters": { "type": "object", "properties": { "q": { "type": "string" } }, "required": ["q"] }
+      }
+    }
+  ],
+  "response_format": {
+    "type": "json_schema",
+    "json_schema": {
+      "name": "summary",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "summary": { "type": "string" },
+          "sources": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["summary", "sources"]
+      }
+    }
+  },
+  "temperature": 0.2,
+  "max_tokens": 400
+}
+```
+
+## 避坑与收束
+- 窗口有限：长对话用滚动摘要；重要准则置顶，而非埋在历史里。
+- 近因偏置：先复述硬约束和验收标准再执行。
+- 噪声放大：避免口语化串修；大改动“新话题重启”。
+- 工具签名：参数声明要可执行；禁用项写在 system。
+
+## 最小充分清单
+- messages 按 system→user→assistant 排序。
+- 只放当前任务必需事实；可放链接，内容用工具拉取。
+- response_format/Schema 优先；温度低于 0.3 处理抽取/测试。
