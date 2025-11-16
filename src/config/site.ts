@@ -24,6 +24,8 @@ export type SiteConfig = {
   searchLabel: string
   /** 个人头像图片 URL（可选，支持 GIF；为空则显示 logoMark 文本） */
   avatarImage?: string
+  /** GitHub 主页链接（可选，用于头像点击跳转） */
+  githubUrl?: string
   /** 网站 favicon 图标 URL（可选） */
   favicon?: string
   /** 默认贡献者信息（用于未配置 contributors 的页面） */
@@ -62,6 +64,7 @@ const siteConfig: SiteConfig = {
   searchLabel: '搜索或跳转',
   avatarImage:
     'https://media.makomako.dpdns.org/images/2025/10/thumb-devil-circle',
+  githubUrl: 'https://github.com/zhu-jl18',
   favicon: 'https://media.makomako.dpdns.org/images/2025/11/wired-lineal--ai',
   defaultContributor: {
     username: 'zhu-jl18',
