@@ -3,7 +3,7 @@ import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { PROMPTS_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '03-prompts/examples/collab-patterns')
+const entry = await getEntry('docs', '03-prompts/examples/verticals')
 let Content: any = null
 let hasContent = false
 try {
@@ -13,15 +13,16 @@ try {
     hasContent = true
   }
 } catch (e) {
-  console.error('Render error: prompts/examples/collab-patterns', e)
+  console.error('Render error: prompts/examples/verticals', e)
 }
 ---
 
 <ContentLayout
   entry={entry}
-  title={entry?.data?.title ?? '协作范式（PER）'}
+  title={entry?.data?.title ?? '场景模板'}
   sidebarItems={PROMPTS_SIDEBAR}
   contributors={entry?.data?.contributors}
 >
   {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
 </ContentLayout>
+
