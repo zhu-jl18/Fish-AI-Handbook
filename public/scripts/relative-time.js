@@ -7,63 +7,53 @@
  */
 
 /**
- * Calculate relative time from an ISO timestamp
+ * Calculate relative time from an ISO timestamp using Intl.RelativeTimeFormat
+ * Falls back to English strings when Intl API is unavailable.
  * @param {string} isoTimestamp - ISO 8601 timestamp string
- * @returns {string} - Relative time string (e.g., "3 hours ago")
+ * @returns {string}
  */
 function getRelativeTime(isoTimestamp) {
   if (!isoTimestamp) return ''
-
   try {
-    const timestamp = new Date(isoTimestamp)
     const now = new Date()
-    const diffMs = now - timestamp
+    const then = new Date(isoTimestamp)
+    const diffSeconds = Math.round((then.getTime() - now.getTime()) / 1000)
 
-    // Handle future dates
-    if (diffMs < 0) {
-      return 'just now'
+    // Just now
+    if (Math.abs(diffSeconds) < 60) return 'just now'
+
+    // Use Intl.RelativeTimeFormat when available
+    if (typeof Intl !== 'undefined' && Intl.RelativeTimeFormat) {
+      const lang =
+        document.documentElement.getAttribute('lang') ||
+        (typeof navigator !== 'undefined' ? navigator.language : 'en') ||
+        'en'
+      const rtf = new Intl.RelativeTimeFormat(lang, { numeric: 'auto' })
+      const table = [
+        ['year', 31536000],
+        ['month', 2592000],
+        ['week', 604800],
+        ['day', 86400],
+        ['hour', 3600],
+        ['minute', 60],
+      ]
+      for (const [unit, seconds] of table) {
+        const value = Math.round(diffSeconds / seconds)
+        if (Math.abs(value) >= 1) return rtf.format(value, unit)
+      }
+      return rtf.format(diffSeconds, 'second')
     }
 
-    const diffSeconds = Math.floor(diffMs / 1000)
-    const diffMinutes = Math.floor(diffSeconds / 60)
-    const diffHours = Math.floor(diffMinutes / 60)
-    const diffDays = Math.floor(diffHours / 24)
-    const diffWeeks = Math.floor(diffDays / 7)
-    const diffMonths = Math.floor(diffDays / 30)
-    const diffYears = Math.floor(diffDays / 365)
-
-    // Less than a minute
-    if (diffSeconds < 60) {
-      return 'just now'
-    }
-
-    // Less than an hour
-    if (diffMinutes < 60) {
-      return diffMinutes === 1 ? '1 minute ago' : `${diffMinutes} minutes ago`
-    }
-
-    // Less than a day
-    if (diffHours < 24) {
-      return diffHours === 1 ? '1 hour ago' : `${diffHours} hours ago`
-    }
-
-    // Less than a week
-    if (diffDays < 7) {
-      return diffDays === 1 ? '1 day ago' : `${diffDays} days ago`
-    }
-
-    // Less than a month
-    if (diffDays < 30) {
-      return diffWeeks === 1 ? '1 week ago' : `${diffWeeks} weeks ago`
-    }
-
-    // Less than a year
-    if (diffDays < 365) {
-      return diffMonths === 1 ? '1 month ago' : `${diffMonths} months ago`
-    }
-
-    // Years ago
-    return diffYears === 1 ? '1 year ago' : `${diffYears} years ago`
+    // Fallback: simple English strings
+    const abs = Math.abs(diffSeconds)
+    const sign = diffSeconds < 0 ? 'ago' : 'from now'
+    const choose = (n, s) => `${n} ${s}${n === 1 ? '' : 's'} ${sign}`
+    if (abs < 3600) return choose(Math.round(abs / 60), 'minute')
+    if (abs < 86400) return choose(Math.round(abs / 3600), 'hour')
+    if (abs < 604800) return choose(Math.round(abs / 86400), 'day')
+    if (abs < 2592000) return choose(Math.round(abs / 604800), 'week')
+    if (abs < 31536000) return choose(Math.round(abs / 2592000), 'month')
+    return choose(Math.round(abs / 31536000), 'year')
   } catch (error) {
     console.error('Error parsing timestamp:', error)
     return ''
