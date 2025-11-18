@@ -16,3 +16,4 @@ contributors:
 - [上下文](/prompts/context)：对话层级、请求体拼装、常见坑位。
 - [实例与模板](/prompts/examples)：高频场景的即用模板。
 - [深入拓展](/prompts/deepen)：CRISPE、RAIL、PER 等框架速查。
+- [Advanced Prompt Engineering Techniques: Examples & Best Practices](https://www.patronus.ai/llm-testing/advanced-prompt-engineering-techniques)
