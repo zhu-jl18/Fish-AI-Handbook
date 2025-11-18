@@ -6,7 +6,7 @@ import { siteConfig, codeConfig } from './src/config/index.ts'
 import remarkListSpacing from './src/plugins/remark-list-spacing.js'
 import remarkDirective from 'remark-directive'
 import remarkSpoilerDirective from './src/plugins/remark-spoiler-directive.js'
-import { remarkModifiedTime } from './remark-modified-time.mjs'
+import { remarkModifiedTime } from './src/plugins/remark-frontmatter-last-modified.mjs'
 
 export default defineConfig({
   site: siteConfig.url,

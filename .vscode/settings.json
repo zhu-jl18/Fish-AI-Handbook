@@ -3,13 +3,10 @@
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
   "editor.formatOnType": false,
-
   "prettier.prettierPath": "node_modules/prettier/index.cjs",
   "prettier.useEditorConfig": false,
-
   "javascript.format.enable": false,
   "typescript.format.enable": false,
-
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -24,5 +21,7 @@
   },
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode"
-  }
+  },
+  "chatgpt.commentCodeLensEnabled": false,
+  "chatgpt.openOnStartup": true
 }
