@@ -241,7 +241,7 @@ const { currentPage } = Astro.props
     color: var(--header-text);
     background: var(--header-search-bg);
     border: 1px solid var(--header-accent-border);
-    border-radius: 999px;
+    border-radius: var(--border-radius-sm);
     text-decoration: none;
     padding: 0.35rem 0.85rem 0.35rem 0.75rem;
     transition:
@@ -260,9 +260,9 @@ const { currentPage } = Astro.props
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--border-radius-sm);
     border: 1px solid var(--header-icon-border);
     background: var(--header-icon-bg);
     color: var(--header-text);
@@ -273,8 +273,7 @@ const { currentPage } = Astro.props
       border-color var(--motion-duration-sm) var(--motion-ease-standard),
       background-color var(--motion-duration-sm) var(--motion-ease-standard);
   }
-  .icon-button:hover,
-  .avatar-button:hover {
+  .icon-button:hover {
     color: var(--header-text-strong);
     border-color: var(--header-icon-border-hover);
     background: var(--header-icon-bg-hover);
@@ -286,6 +285,11 @@ const { currentPage } = Astro.props
   .avatar-button {
     font-size: 0.95rem;
     font-weight: 600;
+    border: none;
+    background: transparent;
+  }
+  .avatar-button:hover {
+    opacity: 0.8;
   }
   .avatar-initial {
     letter-spacing: 0.04em;
@@ -299,7 +303,7 @@ const { currentPage } = Astro.props
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: var(--border-radius-sm);
   }
   .search-label {
     display: none;
@@ -418,7 +422,7 @@ const { currentPage } = Astro.props
     padding: 0.6rem 0.9rem;
     background: var(--header-search-bg);
     border: 1px solid var(--header-accent-border);
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     color: var(--header-text-strong);
     font-size: 0.85rem;
     font-weight: 500;
