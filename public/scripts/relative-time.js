@@ -24,10 +24,7 @@ function getRelativeTime(isoTimestamp) {
 
     // Use Intl.RelativeTimeFormat when available
     if (typeof Intl !== 'undefined' && Intl.RelativeTimeFormat) {
-      const lang =
-        document.documentElement.getAttribute('lang') ||
-        (typeof navigator !== 'undefined' ? navigator.language : 'en') ||
-        'en'
+      const lang = 'en'
       const rtf = new Intl.RelativeTimeFormat(lang, { numeric: 'auto' })
       const table = [
         ['year', 31536000],
