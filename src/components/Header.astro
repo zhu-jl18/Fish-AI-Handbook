@@ -219,6 +219,7 @@ const { currentPage } = Astro.props
     display: flex;
     align-items: center;
     gap: 0.6rem;
+    --nav-control-size: 34px;
   }
   .nav-bottom {
     display: flex;
@@ -284,23 +285,27 @@ const { currentPage } = Astro.props
     border: 1px solid var(--header-accent-border);
     border-radius: 6px;
     text-decoration: none;
-    padding: 0.25rem 0.6rem;
+    padding: 0 0.75rem;
     transition: all 0.2s ease;
-    font-size: 0.8rem;
-    height: 32px;
+    font-size: 0.85rem;
+    height: var(--nav-control-size);
+    min-height: var(--nav-control-size);
+    box-sizing: border-box;
   }
   .search-button:hover {
     color: var(--header-text-strong);
     border-color: var(--header-accent-border-strong);
     background: var(--header-search-bg-hover);
   }
+  .search-button svg {
+    width: 18px;
+    height: 18px;
+  }
   .icon-button,
   .avatar-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
     border-radius: 6px;
     border: 1px solid transparent; /* GitHub style: transparent border by default */
     background: transparent; /* GitHub style: transparent bg by default */
@@ -309,15 +314,21 @@ const { currentPage } = Astro.props
     cursor: pointer;
     transition: all 0.2s ease;
   }
+  .icon-button {
+    width: var(--nav-control-size);
+    height: var(--nav-control-size);
+  }
   .icon-button:hover {
     color: var(--header-text-strong);
     background: var(--header-icon-bg-hover); /* Usually a light gray */
   }
   .icon-button svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
   .avatar-button {
+    width: 28px;
+    height: 28px;
     font-size: 0.95rem;
     font-weight: 600;
     border: none;
@@ -443,7 +454,7 @@ const { currentPage } = Astro.props
     }
     .search-button {
       gap: 0.5rem;
-      padding: 0.3rem 0.7rem;
+      padding: 0 0.7rem;
     }
     .search-shortcut {
       display: none;
