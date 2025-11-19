@@ -1,54 +1,67 @@
 ---
 title: 模型排行
 description: Who is better?
-contributors:
     - claude
+    - codex
+    - gemini
 ---
+
+
+## My Ranking
+
+综合模型能力以及日常使用体验
+
+<img src="https://p.sda1.dev/28/3ef33475959f6e0d989edeecc3c97211/image.png" >
+
+
+
 
 
 能打榜不代表能干活，但连榜都上不去，别谈生产。
 
 Benchmark 是统一试卷，分数只是信号，不是能力。厂商爱报 SOTA 因为数字好卖，但别被标题带着走。
 
-优化 benchmark ≠ 解决用户问题。高分模型也可能慢、上下文不稳、动不动过度推理。
+优化 benchmark ≠ 解决用户问题。高分模型可能只是对数据集过拟合了，点名 Grok 和 Qwen 。
 
 
 
-## 主流 Benchmarks
+## 主流 Benchmarks (Core)
 
-分数只是信号，不是能力。模型是用来干活的，不是用来拿奖的。
+分数只是信号，不是能力。但如果是 Humanity's Last Exam 这种级别的信号，那确实代表能力。
 
 | Benchmark | 测试内容 | 典型分数 / 说明 |
 | --- | --- | --- |
-| [MMLU](https://github.com/hendrycks/test) / [MMLU‑Pro](https://huggingface.co/spaces/TIGER-Lab/MMLU-Pro) | 57 个学科选择题；MMLU‑Pro 更难 | 顶级闭源 ≈ 85–90%（2025.11）；低于 70% 基本没用 |
-| [GPQA Diamond](https://github.com/idavidrein/gpqa) | 研究生级别科学问题 | GPT‑5 87.3%；Claude 4.5 Sonnet 83.3%（2025.11）；比 MMLU 难得多 |
-| [MATH](https://github.com/hendrycks/math) | 12,500 道竞赛级数学题 | 顶级模型 90%+（2025.11）；GPT‑4 ≈ 50%；区分度很高 |
-| [GSM8K](https://github.com/openai/grade-school-math) | 8,500 道小学数学题 | 多数模型 90%+（2025.11）；主要看是否存在明显短板 |
-| [HumanEval](https://github.com/openai/human-eval) | 164 道 Python 编程题 | 顶级闭源 90%+（2025.11）；样本量小，可能被训练集污染 |
-| [LiveCodeBench](https://livecodebench.github.io) | 最新竞赛题（持续更新） | 防训练集污染，比 HumanEval 更能测真实水平（2025.11） |
-| [SWE‑bench Verified](https://www.swebench.com) | 真实 GitHub issues | Claude 4.5 Sonnet 70.6%（2025‑09‑29）；GPT‑5 65.0%（2025‑08‑07）；最接近实战 |
-| [IFEval](https://github.com/google-research/google-research/tree/master/instruction_following_eval) | 指令遵循 | 衡量"按要求做事"，厂商常作补充（2025.11） |
-| [GAIA](https://huggingface.co/gaia-benchmark) | 466 道需要工具协作的问题 | Agent 能力测试；人类 92%，GPT‑4 只有 15%（2025.11） |
-| [WebArena](https://webarena.dev) | 真实网站操作任务 | 最接近实际 agent 场景，通过率普遍个位数（2025.11） |
-| [Humanity's Last Exam](https://agi.safe.ai/) | 2,500 题跨 100+ 学科 | 最严苛通用考试；最好约 25%（Grok 4 25.4%，GPT‑5 25.3%，2025.11） |
+| [Humanity's Last Exam](https://agi.safe.ai/) | 2,500 题跨 100+ 学科 | **Gemini 3.0 Pro 37.5%**；GPT-5 25.3%（2025.11）；目前最难通用考试 |
+| [GPQA Diamond](https://github.com/idavidrein/gpqa) | 研究生级别科学问题 | **Gemini 3.0 Pro 91.9%**；GPT-5 87.3%（2025.11）；已超越人类专家 |
+| [SWE-bench Verified](https://www.swebench.com) | 真实 GitHub issues | **Gemini 3.0 Pro 76.2%**；Claude 4.5 Sonnet 70.6%（2025.11）；最接近实战 |
+| [LiveCodeBench](https://livecodebench.github.io) | 最新竞赛题（持续更新） | **Gemini 3.0 Pro Elo 2439**；防污染，测真实编程水平 |
+| [MMLU-Pro](https://huggingface.co/spaces/TIGER-Lab/MMLU-Pro) | 复杂推理选择题 | **Gemini 3.0 Pro 90%+**；比旧版 MMLU 更具区分度 |
 
-SWE‑bench Verified 是目前最接近真实软件工程场景的测试，500 个人工筛选的 GitHub issues，Claude 4.5 Sonnet 在 2025 年 9 月拿到 70.6%，是当前最高分。但这不等于实际写代码 70% 成功率，benchmark 分数和生产力是两码事。
+## 参考 Benchmarks (Additionals)
 
-LiveCodeBench 持续从最新编程竞赛收集题目（2024‑08 到 2025‑05 窗口），避免训练集污染。HumanEval 只有 164 题，样本量小且可能被"记住"，LiveCodeBench 更能测真实水平。
+这些测试要么已经饱和（大家分都太高），要么针对特定领域，仅作参考。
 
-GPQA Diamond 是 198 道最难的研究生级科学问题，PhD 专家平均只有 65% 正确率。顶级模型能到 80%+ 说明在专业知识上已经接近或超过人类专家水平。
+| Benchmark | 测试内容 | 典型分数 / 说明 |
+| --- | --- | --- |
+| [MATH](https://github.com/hendrycks/math) | 竞赛级数学题 | 顶级模型普遍 95%+；Gemini 3.0 Pro 甚至拿了满分（AIME 100% w/ code） |
+| [GSM8K](https://github.com/openai/grade-school-math) | 小学数学题 | 分数已饱和，仅用于检测模型是否存在明显短板 |
+| [HumanEval](https://github.com/openai/human-eval) | Python 基础编程 | 样本量小且污染严重，建议看 LiveCodeBench |
+| [IFEval](https://github.com/google-research/google-research/tree/master/instruction_following_eval) | 指令遵循 | 衡量"听话程度"，Gemini 3.0 Pro 表现优异 |
+| [GAIA](https://huggingface.co/gaia-benchmark) | Agent 工具协作 | Gemini 3.0 Pro 85.4% (τ2-bench)；Agent 能力大幅提升 |
+| [WebArena](https://webarena.dev) | 网页操作 Agent | Gemini 3.0 Pro 登顶 WebDev Arena (Score 1487) |
 
-[LMArena](https://lmarena.ai)（原 LMSYS Chatbot Arena）用真人投票对战排名，Elo rating 机制。优点是真人评测、bias 少；缺点是用户可能偏好"好听的废话"，对话任务评测准确但 coding/reasoning 不太行。Elo 分差 50 分基本感觉不出来。
+SWE-bench Verified 是目前最接近真实软件工程场景的测试，Gemini 3.0 Pro 刷新了记录达到 76.2%，意味着它能独立解决四分之三的真实 GitHub issues。
 
-使用 benchmark 需要注意：训练集污染、样本量小导致统计方差大、分数不代表实际能力。
+Humanity's Last Exam 是目前最严苛的通用考试，Gemini 3.0 Pro 的 37.5% 看起来不高，但相比 GPT-5 的 25.3% 已经是断层领先。
+
+LiveCodeBench 持续从最新编程竞赛收集题目，避免了 HumanEval 的"背题"现象。Gemini 3.0 Pro 的 Elo 2439 说明它在未见过的难题上依然从容。
+
+[LMArena](https://lmarena.ai)（原 LMSYS Chatbot Arena）用真人投票对战排名。Gemini 3.0 Pro 是首个突破 Elo 1500 大关的模型，在盲测中击败了所有对手。
+
+使用 benchmark 需要注意：分数高不代表好用，但分数低一定不好用。关注那些难到让模型"汗流浃背"的新测试，忽略那些大家都能考满分的旧试卷。
 
 
 
-## 当前主流模型（2025.11）
-
-截至 2025 年 11 月：SWE‑bench Verified 上 Claude 4.5 Sonnet 70.6% 领先；HLE 最高 Grok 4 25.4%，GPT‑5 25.3%，Gemini 2.5 Pro 21.6%。
-
-编码实操个人推荐：Claude Sonnet 4.5 > GPT‑5 > DeepSeek‑R1。
 
 <!-- 预留：个人模型排名与实际使用体验 -->
 <!-- 可在此处补充：
