@@ -31,8 +31,7 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
     label: 'Models',
     href: '/fish-talks/models',
     items: [
-      { label: 'Big Three', href: '/fish-talks/models/big-three' },
-      { label: 'CN Six', href: '/fish-talks/models/cn-6' },
+      { label: 'Top Models', href: '/fish-talks/models/top-models' },
       { label: 'Others', href: '/fish-talks/models/others' },
       { label: '模型排名', href: '/fish-talks/models/llm-rankings' },
     ],
