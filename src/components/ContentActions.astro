@@ -90,22 +90,6 @@ if (entryId) {
   {
     lastModified && (
       <div class="last-updated" title={lastModified}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="clock-icon"
-        >
-          <path d="M3 3v6h6" />
-          <path d="M3.05 13A9 9 0 1 0 9 3.95" />
-          <path d="M12 7v5l3 2" />
-        </svg>
         <time datetime={lastModified} data-timestamp={lastModified}>
           {lastModified}
         </time>
@@ -328,13 +312,6 @@ if (entryId) {
     cursor: default;
     line-height: 1.2;
     align-self: center;
-  }
-
-  .last-updated .clock-icon {
-    width: 1em;
-    height: 1em;
-    flex-shrink: 0;
-    opacity: 0.75;
   }
 
   .last-updated time {
