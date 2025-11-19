@@ -13,6 +13,7 @@ export default defineConfig({
   title: siteConfig.title,
   output: 'static',
   markdown: {
+    smartypants: false,
     remarkPlugins: [
       remarkListSpacing,
       remarkDirective,
