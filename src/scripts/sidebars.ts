@@ -51,7 +51,7 @@ export const FISH_TALKS_SIDEBAR: SidebarSection = [
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
   { label: '基础用法', href: '/basic-usage' },
   { label: 'Chat', href: '/basic-usage/chat' },
-  { label: 'Coding', href: '/basic-usage/coding' },
+  { label: 'Cursor', href: '/basic-usage/cursor' },
   {
     label: 'Cherry Studio',
     href: '/basic-usage/cherrystudio',
@@ -64,12 +64,11 @@ export const BASIC_USAGE_SIDEBAR: SidebarSection = [
     label: 'Claude Code',
     href: '/basic-usage/claude-code',
     items: [
-      { label: 'Subagent', href: '/basic-usage/claude-code/subagent' },
-      { label: 'Hook', href: '/basic-usage/claude-code/hook' },
-      { label: 'Skill', href: '/basic-usage/claude-code/skill' },
+      { label: 'Basics', href: '/basic-usage/claude-code/basics' },
+      { label: 'Advance', href: '/basic-usage/claude-code/advance' },
+      { label: 'Practice', href: '/basic-usage/claude-code/practice' },
     ],
   },
-  { label: 'Codex', href: '/basic-usage/codex' },
   { label: 'AI 应用', href: '/basic-usage/ai-apps' },
 ]
 
