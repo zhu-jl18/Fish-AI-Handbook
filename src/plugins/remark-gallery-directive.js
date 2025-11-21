@@ -5,7 +5,8 @@ export default function remarkGalleryDirective() {
   return (tree) => {
     visit(tree, (node) => {
       if (node.type !== 'containerDirective' || node.name !== 'gallery') return
-      const data = node.data || (node.data = {})
+      node.data ??= {}
+      const data = node.data
       const attrs = node.attributes || {}
       const cols = Number(attrs.cols) || 2
       const gapRaw = attrs.gap
