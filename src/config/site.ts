@@ -22,6 +22,8 @@ export type SiteConfig = {
   logoMeta: string
   /** 搜索按钮文案 */
   searchLabel: string
+  /** Chat Bot 外链 */
+  chatBotUrl?: string
   /** 个人头像图片 URL（可选，支持 GIF；为空则显示 logoMark 文本） */
   avatarImage?: string
   /** GitHub 主页链接（可选，用于头像点击跳转） */
@@ -62,6 +64,7 @@ const siteConfig: SiteConfig = {
   logoName: 'Fish AI Handbook',
   logoMeta: 'Docs & Patterns',
   searchLabel: '搜索或跳转',
+  chatBotUrl: 'https://chat.011070.xyz',
   avatarImage:
     'https://media.makomako.dpdns.org/images/2025/10/thumb-devil-circle',
   githubUrl: 'https://github.com/zhu-jl18',
