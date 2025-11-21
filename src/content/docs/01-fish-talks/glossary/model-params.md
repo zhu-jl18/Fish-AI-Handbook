@@ -56,7 +56,7 @@ Token 是 LLM 的基本处理单位，不是字符也不是单词。在输入进
 
 粗略估算：1 token ≈ 0.75 英文单词 ≈ 1.5-2 个中文字。具体数字看 tokenizer 实现（GPT 用 tiktoken，Claude 用定制版 SentencePiece）。
 
-## Input/Output 和那个该死的 Context
+## Input/Output && Context
 
 **模型没有记忆**。每次调用都要把整个历史塞进去。你以为它"记住"了上文？bullshit，只是你的 client 帮你拼了个超长的 messages array 而已。
 
