@@ -1,20 +1,23 @@
 ---
 title: Claude Code
-description: The most powerful code cli.
+description: 面向代码库的 CLI 编排器，强调上下文、分工与可复用模板。
 ---
 
-以claude code 为代表的 功能很完善的cli工具，还有iflow等。
+Claude Code = “命令行 + 多智能体”的工作台，适合在本地仓库里快速分析、改写、生成与验证代码。先熟悉三个版块，再按需深入：
 
-## Quick Start
+- Basics：最小心智模型 + 常用命令，5 分钟跑通。
+- Advance：Hooks / Skills / Subagent 的组合打法。
+- Practice：按场景打包的流水线示例，照抄即可落地。
 
-启动，随便输入点什么吧：
+快捷起步：
+
 ```bash
-claude
-# 启动claude code后
-> 请帮我分析一下这个代码库
+claude init        # 生成 .claude/ 基础配置
+claude             # 启动交互；从当前仓库抓上下文
+> 先枚举依赖，再给我一个 3 步修复计划
 ```
 
-## Good Choice
+参考：
 
-- [Claude Beginner's Guide All in One](https://mp.weixin.qq.com/s/WaoQmfCvL0SVeIabIHRd5w)
-- [Claude Offical Docs](https://claude.ai/docs)
+- [Claude 官方文档](https://claude.ai/docs)
+- [社区入门合集](https://mp.weixin.qq.com/s/WaoQmfCvL0SVeIabIHRd5w)
