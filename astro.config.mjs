@@ -13,16 +13,16 @@ export default defineConfig({
   site: siteConfig.url,
   title: siteConfig.title,
   output: 'static',
-    markdown: {
-      smartypants: false,
-      remarkPlugins: [
-        remarkListSpacing,
-        remarkDirective,
-        remarkGalleryDirective,
-        remarkSpoilerDirective,
-        remarkModifiedTime,
-      ],
-    },
+  markdown: {
+    smartypants: false,
+    remarkPlugins: [
+      remarkListSpacing,
+      remarkDirective,
+      remarkGalleryDirective,
+      remarkSpoilerDirective,
+      remarkModifiedTime,
+    ],
+  },
   integrations: [
     astroExpressiveCode({
       themes: codeConfig.themes,

@@ -10,8 +10,7 @@ export default function remarkGalleryDirective() {
       const attrs = node.attributes || {}
       const cols = Number(attrs.cols) || 2
       const gapRaw = attrs.gap
-      let gap =
-        gapRaw === undefined ? '12px' : String(gapRaw).trim()
+      let gap = gapRaw === undefined ? '12px' : String(gapRaw).trim()
       // 如果作者没写单位，强制补 px
       if (!/[a-z%]+$/i.test(gap)) {
         gap = `${gap}px`
@@ -46,8 +45,8 @@ export default function remarkGalleryDirective() {
               alt: img.alt || '',
               title: img.title || undefined,
               loading: 'lazy',
-            })
-          )
+            }),
+          ),
         )
         // 防止 remark-rehype 再次包裹段落：直接把 HAST children 写回 node
         data.hChildren = hastChildren
@@ -59,13 +58,10 @@ export default function remarkGalleryDirective() {
         return
       }
 
-      const hast = h(
-        'div',
-        {
-          class: 'image-gallery',
-          style: styleParts.join('; '),
-        }
-      )
+      const hast = h('div', {
+        class: 'image-gallery',
+        style: styleParts.join('; '),
+      })
       data.hName = hast.tagName
       data.hProperties = hast.properties
       data.hChildren = hastChildren
