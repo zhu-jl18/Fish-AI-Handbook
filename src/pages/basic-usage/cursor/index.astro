@@ -3,13 +3,13 @@ import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { BASIC_USAGE_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '02-basic-usage/codex')
+const entry = await getEntry('docs', '02-basic-usage/cursor')
 const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
   entry={entry}
-  title={entry?.data?.title ?? 'Codex · 基础用法与技巧'}
+  title={entry?.data?.title ?? 'Cursor'}
   sidebarItems={BASIC_USAGE_SIDEBAR}
   contributors={entry?.data?.contributors}
 >
