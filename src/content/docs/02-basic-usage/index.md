@@ -1,6 +1,6 @@
 ---
 title: 基础使用
-description: 姐姐的基础用法速记，先分清场景再挑工具。
+description: 只讲必要的，太基础的自己看其他教程
 contributors:
   - claude
 ---
