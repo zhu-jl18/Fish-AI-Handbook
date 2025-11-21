@@ -1,0 +1,23 @@
+---
+import ContentLayout from '../../../layouts/ContentLayout.astro'
+import { MANUAL_SIDEBAR } from '../../../scripts/sidebars'
+import { getEntry } from 'astro:content'
+
+const entry = await getEntry('docs', '99-manual/git')
+let Content: any
+if (entry) {
+  const rendered = await entry.render()
+  Content = rendered.Content
+} else {
+  Content = () => null
+}
+---
+
+<ContentLayout
+  entry={entry}
+  title={entry?.data?.title ?? 'Git'}
+  sidebarItems={MANUAL_SIDEBAR}
+  contributors={entry?.data?.contributors}
+>
+  <Content />
+</ContentLayout>

@@ -5,7 +5,7 @@ contributors:
   - claude
 ---
 
-本节只谈“怎么用”，安装和环境通通去 [here](/setup) 自己补课。
+本节只谈“怎么用”，安装和环境通通去 [here](/manual) 自己补课。
 
 ## Overview
 

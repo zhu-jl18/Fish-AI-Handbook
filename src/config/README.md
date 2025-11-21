@@ -70,8 +70,8 @@ navigationConfig.items.map((item) => {
 })
 
 // 根据路径获取当前导航键
-const currentKey = getCurrentNavKey('/fish-talks/models')
-// => 'fish-talks'
+const currentKey = getCurrentNavKey('/concepts/models')
+// => 'concepts'
 ```
 
 **修改导航：**
