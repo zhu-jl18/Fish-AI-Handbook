@@ -404,22 +404,6 @@ p {
   margin: 0;
 }
 
-.image-gallery {
-  display: grid;
-  grid-template-columns: repeat(var(--gallery-cols, 2), minmax(0, 1fr));
-  gap: var(--gallery-gap, 12px);
-  align-items: start;
-  margin: 1rem 0;
-}
-
-.image-gallery img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 4px;
-  aspect-ratio: var(--gallery-ratio, auto);
-}
-
 /* 列表样式 */
 ul,
 ol {

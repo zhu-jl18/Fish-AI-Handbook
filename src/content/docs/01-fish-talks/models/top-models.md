@@ -15,7 +15,7 @@ But wait... why are there four?
 | OpenAI | GPT-5.1<br>Sora-2.0 | 性能最强的模型，擅长推理、代码以及搜索，低幻觉 |
 | Anthropic | Sonnet-4.5<br>Opus-4.1 | 编码专精，幻觉率高，文档写作和编排出色 |
 | Gemini | Gemini-3.0<br>nano banana + | 无敌的多模态能力，大就是好，每个方面都顶尖 |
-|Grok| Grok-4.1 <br>  Grok-4-Fast| 除了搜索全都拉，不过 日常使用倒是好用的| 
+| Grok | Grok-4.1 <br> Grok-4-Fast | 除了搜索全都拉，不过日常使用倒是好用的 |
 
 The first three are the global "Big Three," while the last one is Grok, a joker that always ranks high in benchmarks but performs poorly in reality.
 
