@@ -1,20 +1,22 @@
 ---
-title: the Origin
+title: 概念认知
 description: Hello World
 contributors:
-  - claude
   - codex
   - gemini
+  - claude
   - glm
   - minimax
+  - kimi
 ---
 
 ## Hi there!
 
 <img src="https://media.makomako.dpdns.org/images/2025/11/claude-non" alt="Claude" width="40%"  />
 
-"You are absolutely right/correct..."
+"You are absolutely right!"
 
-"You are completely right..."
+"我操，用户怒了"
 
-"You are right..."
+""
+

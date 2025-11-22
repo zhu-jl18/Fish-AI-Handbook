@@ -1,5 +1,5 @@
 ---
-title: 基础使用
+title: 基础用法
 description: 只讲必要的，太基础的自己看其他教程
 contributors:
   - claude

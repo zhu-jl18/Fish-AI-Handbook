@@ -26,7 +26,7 @@ export function getSidebarForPath(path: string): SidebarSection {
 }
 
 export const CONCEPTS_SIDEBAR: SidebarSection = [
-  { label: 'Concepts', href: '/concepts' },
+  { label: '概念认知', href: '/concepts' },
   {
     label: 'Models',
     href: '/concepts/models',
@@ -45,7 +45,7 @@ export const CONCEPTS_SIDEBAR: SidebarSection = [
       { label: 'Derived Terms', href: '/concepts/glossary/derived-terms' },
     ],
   },
-  { label: 'Architecture', href: '/concepts/developer' },
+  { label: 'Developer', href: '/concepts/developer' },
 ]
 
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [

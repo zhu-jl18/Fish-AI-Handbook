@@ -1,5 +1,5 @@
 ---
-title: 开发者
+title: Developer
 description: API、SDK 和代理转发。
 contributors:
   - claude
