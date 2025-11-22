@@ -170,6 +170,7 @@ export const THEORETICAL_SIDEBAR: SidebarSection = [
   { label: 'Transformer', href: '/theoretical/transformer' },
   { label: 'MOE', href: '/theoretical/moe' },
   { label: 'GRPO', href: '/theoretical/grpo' },
+  { label: 'TR & TL', href: '/theoretical/tr-and-tl' },
 ]
 
 export const MANUAL_SIDEBAR: SidebarSection = [
