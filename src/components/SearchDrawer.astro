@@ -2,8 +2,7 @@
 import { siteConfig } from '../config/index'
 
 const base = import.meta.env.BASE_URL ?? '/'
-const pagefindBundle =
-  (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
+const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
 ---
 
 <div
@@ -20,94 +19,67 @@ const pagefindBundle =
     aria-modal="true"
     aria-label="站内搜索"
   >
-    <div class="search-panel-header">
-      <div class="search-input-wrap">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
+    <div class="search-header">
+      <svg
+        class="search-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+      <input
+        id="search-drawer-input"
+        type="search"
+        name="search"
+        autocomplete="off"
+        enterkeyhint="search"
+        aria-label="搜索站内内容"
+        aria-controls="search-results"
+      />
+    </div>
+    <div class="search-scopes" id="search-scopes">
+      <a class="scope-item" data-scope="chapter" role="option">
+        <svg class="scope-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="11" cy="11" r="8"></circle>
           <path d="m21 21-4.35-4.35"></path>
         </svg>
-        <input
-          id="search-drawer-input"
-          type="search"
-          name="search"
-          placeholder={`${siteConfig.searchLabel}…`}
-          autocomplete="off"
-          enterkeyhint="search"
-          aria-label="搜索站内内容"
-          aria-controls="search-results"
-        />
-      </div>
-      <button
-        type="button"
-        class="panel-close"
-        data-close
-        aria-label="关闭搜索抽屉"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
+        <span class="scope-syntax" data-chapter-syntax></span>
+        <span class="scope-hint">Search in this chapter</span>
+      </a>
+      <a class="scope-item" data-scope="author" role="option">
+        <svg class="scope-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
         </svg>
-      </button>
+        <span class="scope-syntax" data-author-syntax></span>
+        <span class="scope-hint">Search in this author</span>
+      </a>
     </div>
-    <div class="search-body">
-      <div class="search-meta">
-        <div class="meta-title">实时搜索</div>
-        <div class="meta-hint">打开后自动加载索引</div>
+    <div
+      class="search-results"
+      id="search-results"
+      role="listbox"
+      aria-label="搜索结果"
+      data-state="idle"
+    >
+      <div class="results-loading" data-view="loading" aria-live="polite">
+        <span class="loader" aria-hidden="true"></span>
+        <span class="loading-copy" data-loading-text>加载中...</span>
       </div>
-      <div
-        class="search-results"
-        id="search-results"
-        role="listbox"
-        aria-label="搜索结果"
-        data-state="idle"
-      >
-        <div class="results-loading" data-view="loading" aria-live="polite">
-          <span class="loader" aria-hidden="true"></span>
-          <span class="loading-copy" data-loading-text>正在加载搜索索引…</span>
-        </div>
-        <div class="placeholder-list" data-view="placeholder">
-          <span class="placeholder-bar w-80"></span>
-          <span class="placeholder-bar w-65"></span>
-          <span class="placeholder-bar w-90"></span>
-          <span class="placeholder-bar w-70"></span>
-          <span class="placeholder-bar w-60"></span>
-        </div>
-        <div class="results-empty" data-view="empty" aria-live="polite">
-          <span class="empty-title">等待输入</span>
-          <span class="empty-hint">输入后自动搜索</span>
-        </div>
-        <div class="results-error" data-view="error" aria-live="assertive">
-          <div class="error-title">搜索不可用</div>
-          <div class="error-desc">本地未找到索引，请运行 npm run preview:search</div>
-        </div>
-        <div
-          class="results-list"
-          data-view="results"
-          role="presentation"
-        ></div>
+      <div class="results-empty" data-view="empty" aria-live="polite"></div>
+      <div class="results-error" data-view="error" aria-live="assertive">
+        搜索不可用，请运行 npm run preview:search
       </div>
+      <div class="results-list" data-view="results" role="presentation"></div>
     </div>
   </div>
 </div>
@@ -118,11 +90,10 @@ const pagefindBundle =
     inset: 0;
     display: none;
     align-items: flex-start;
-    justify-content: center;
-    padding: 10vh 16px 4vh;
+    justify-content: flex-start;
+    padding: 0;
     z-index: 320;
     box-sizing: border-box;
-    overflow-y: auto;
   }
 
   .search-drawer.open {
@@ -132,10 +103,9 @@ const pagefindBundle =
   .search-backdrop {
     position: absolute;
     inset: 0;
-    background: var(--color-bg-overlay-dark);
-    backdrop-filter: blur(6px);
+    background: rgba(6, 8, 10, 0.12);
     opacity: 0;
-    transition: opacity var(--motion-duration-md) var(--motion-ease-standard);
+    transition: opacity 0.12s ease;
   }
 
   .search-drawer.open .search-backdrop {
@@ -143,268 +113,188 @@ const pagefindBundle =
   }
 
   .search-panel {
-    position: relative;
-    width: min(860px, 100%);
-    max-height: min(760px, calc(100vh - 16vh));
+    position: fixed;
+    top: var(--search-top, 0);
+    left: var(--search-left, 50%);
+    width: var(--search-width, calc(100vw - 48px));
+    max-height: min(70vh, 520px);
     display: flex;
     flex-direction: column;
     background: var(--bg-elevated);
-    border: 1px solid var(--header-accent-border);
-    border-radius: 12px;
-    box-shadow: 0 22px 72px var(--shadow-color);
-    padding: 1rem 1rem 1.1rem;
+    border: none;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     opacity: 0;
-    transform: translateY(-8px) scale(0.99);
+    transform: translateY(-6px);
     transition:
-      opacity var(--motion-duration-md) var(--motion-ease-standard),
-      transform var(--motion-duration-md) var(--motion-ease-standard);
+      opacity 0.14s ease,
+      transform 0.14s ease;
     overflow: hidden;
   }
 
   .search-drawer.open .search-panel {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 
-  .search-panel-header {
+  .search-header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 10px;
+    padding: 10px 14px;
+    background: transparent;
+    border-bottom: none;
   }
 
-  .search-input-wrap {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    background: var(--header-search-bg);
-    border: 1px solid var(--header-accent-border);
-    border-radius: 10px;
-    padding: 0.65rem 0.85rem;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  }
-
-  .search-input-wrap svg {
+  .search-icon {
+    flex-shrink: 0;
     color: var(--header-text-muted);
   }
 
-  .search-input-wrap input {
+  .search-header input {
     flex: 1;
     background: transparent;
     border: none;
     color: var(--header-text-strong);
-    font-size: 0.95rem;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 8px 0;
     outline: none;
     caret-color: var(--caret-color);
   }
 
-  .search-input-wrap input::placeholder {
+  .search-header input::placeholder {
     color: var(--header-text-muted);
   }
 
-  .panel-close {
-    width: 36px;
-    height: 36px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    border: 1px solid var(--header-accent-border);
-    background: var(--header-icon-bg);
-    color: var(--header-text);
-    cursor: pointer;
-    transition: all var(--motion-duration-sm) var(--motion-ease-standard);
-  }
-
-  .panel-close:hover {
-    background: var(--header-icon-bg-hover);
-    color: var(--header-text-strong);
-    border-color: var(--header-accent-border-strong);
-  }
-
-  .search-body {
-    margin-top: 0.85rem;
+  .search-scopes {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    flex: 1;
-    min-height: 0;
+    border-bottom: 1px solid var(--header-icon-border);
   }
 
-  .search-meta {
+  .scope-item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    color: var(--header-text-muted);
-    font-size: 0.85rem;
+    gap: 10px;
+    padding: 8px 14px;
+    text-decoration: none;
+    color: var(--header-text);
+    cursor: pointer;
+    transition: background 0.12s ease;
   }
 
-  .meta-title {
-    color: var(--header-text-strong);
-    font-weight: 600;
-    letter-spacing: 0.01em;
+  .scope-item:hover {
+    background: var(--header-icon-bg-hover);
+  }
+
+  .scope-icon {
+    flex-shrink: 0;
+    color: var(--header-text-muted);
+  }
+
+  .scope-syntax {
+    flex: 1;
+    font-size: 13px;
+    color: #58a6ff;
+  }
+
+  .scope-hint {
+    font-size: 12px;
+    color: var(--header-text-muted);
   }
 
   .search-results {
-    border: 1px dashed var(--header-accent-border);
-    border-radius: 10px;
-    background: var(--header-search-bg);
-    padding: 1rem;
-    min-height: 240px;
-    display: flex;
-    align-items: stretch;
-    justify-content: flex-start;
     flex: 1;
     min-height: 0;
+    overflow-y: auto;
+    background: var(--bg-elevated);
   }
 
   .search-results [data-view] {
     display: none;
-    width: 100%;
   }
 
-  .search-results[data-state='idle'] [data-view='placeholder'] {
-    display: grid;
+  .search-results[data-state='idle'] {
+    display: none;
   }
 
   .search-results[data-state='engine-loading'] [data-view='loading'],
-  .search-results[data-state='searching'] [data-view='loading'],
-  .search-results[data-state='empty'] [data-view='empty'],
+  .search-results[data-state='searching'] [data-view='loading'] {
+    display: flex;
+  }
+
+  .search-results[data-state='empty'] [data-view='empty'] {
+    display: flex;
+  }
+
   .search-results[data-state='error'] [data-view='error'] {
     display: flex;
   }
 
   .search-results[data-state='results'] [data-view='results'] {
-    display: grid;
+    display: block;
   }
 
   .results-loading {
     align-items: center;
     justify-content: center;
-    gap: 0.65rem;
+    gap: 8px;
+    padding: 18px 14px;
     color: var(--header-text-muted);
-    font-size: 0.9rem;
+    font-size: 13px;
   }
 
   .loader {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    border: 2px solid var(--header-accent-border);
+    border: 2px solid var(--header-icon-border);
     border-top-color: var(--header-text-strong);
-    animation: spin 0.9s linear infinite;
-  }
-
-  .placeholder-list {
-    width: 100%;
-    display: grid;
-    gap: 0.55rem;
-  }
-
-  .placeholder-bar {
-    display: block;
-    height: 12px;
-    border-radius: 999px;
-    background: var(--surface-tint-06);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .placeholder-bar::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    transform: translateX(-100%);
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.12),
-      transparent
-    );
-    animation: shimmer 1.4s infinite;
-  }
-
-  .placeholder-bar.w-90 {
-    width: 90%;
-  }
-
-  .placeholder-bar.w-80 {
-    width: 80%;
-  }
-
-  .placeholder-bar.w-70 {
-    width: 70%;
-  }
-
-  .placeholder-bar.w-65 {
-    width: 65%;
-  }
-
-  .placeholder-bar.w-60 {
-    width: 60%;
+    animation: spin 0.8s linear infinite;
   }
 
   .results-empty,
   .results-error {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.35rem;
+    padding: 18px 14px;
     color: var(--header-text-muted);
+    font-size: 13px;
     text-align: center;
   }
 
-  .error-title {
-    color: var(--header-text-strong);
-    font-weight: 600;
-  }
-
   .results-list {
-    display: grid;
-    gap: 0.75rem;
-    width: 100%;
-    max-height: none;
-    overflow: auto;
-    flex: 1;
-    min-height: 0;
-    padding-right: 0.25rem;
+    padding: 4px 0;
+    display: flex;
+    flex-direction: column;
   }
 
   .result-item {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
-    padding: 10px 12px;
-    border-radius: 6px;
-    border: 1px solid transparent;
-    background: transparent;
+    padding: 8px 14px;
     text-decoration: none;
     color: var(--header-text);
-    transition: all var(--motion-duration-sm) var(--motion-ease-standard);
-    min-height: 48px;
+    transition:
+      background 0.12s ease,
+      color 0.12s ease;
+    cursor: pointer;
   }
 
-  .result-item:hover {
+  .result-item:hover,
+  .result-item.active {
     background: var(--header-icon-bg-hover);
     color: var(--header-text-strong);
   }
 
-  .result-item.active {
-    background: var(--header-search-bg-hover);
-    color: var(--header-text-strong);
-    border-color: var(--header-accent-border);
-  }
-
   .result-icon {
     flex-shrink: 0;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--header-text-muted);
-    margin-top: 2px;
   }
 
   .result-icon svg {
@@ -419,60 +309,33 @@ const pagefindBundle =
   }
 
   .result-title {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
     color: var(--header-text-strong);
-    margin-bottom: 2px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .result-excerpt {
+  .result-path {
     font-size: 12px;
     color: var(--header-text-muted);
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    white-space: nowrap;
     overflow: hidden;
-  }
-
-  .result-excerpt mark {
-    background: rgba(255, 208, 71, 0.35);
-    color: inherit;
-    padding: 0 2px;
-    border-radius: 2px;
-    font-weight: 500;
+    text-overflow: ellipsis;
   }
 
   .result-action {
     flex-shrink: 0;
-    font-size: 12px;
+    font-size: 11px;
     color: var(--header-text-muted);
     opacity: 0;
-    transition: opacity var(--motion-duration-sm) var(--motion-ease-standard);
-    padding: 4px 8px;
-    border-radius: 4px;
-    background: var(--header-shortcut-bg);
-    border: 1px solid var(--header-shortcut-border);
+    transition: opacity 0.12s ease;
   }
 
   .result-item:hover .result-action,
   .result-item.active .result-action {
     opacity: 1;
-  }
-
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    50% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
   }
 
   @keyframes spin {
@@ -485,43 +348,43 @@ const pagefindBundle =
     overflow: hidden;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     .search-drawer {
-      padding: max(52px, 8vh) 12px 16px;
-      align-items: flex-start;
+      padding-top: 0;
     }
 
     .search-panel {
-      border-radius: 10px;
-      max-height: calc(100vh - 10vh);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-height: 80vh;
+      border-radius: 0 0 10px 10px;
     }
 
-    .search-input-wrap {
-      padding: 0.6rem 0.8rem;
+    .search-header {
+      padding: 10px 12px;
     }
 
-    .search-body {
-      gap: 0.65rem;
+    .scope-item {
+      padding: 8px 12px;
     }
 
-    .search-results {
-      min-height: 200px;
+    .result-item {
+      padding: 8px 12px;
     }
   }
 </style>
 
 <script type="module" is:inline>
   const drawer = document.getElementById('search-drawer')
-  const backdrop = drawer?.querySelector('.search-backdrop')
   const closeControls = drawer?.querySelectorAll('[data-close]')
   const input = drawer?.querySelector('#search-drawer-input')
-  const metaTitle = drawer?.querySelector('.meta-title')
-  const metaHint = drawer?.querySelector('.meta-hint')
   const resultsBox = drawer?.querySelector('.search-results')
   const loadingText = drawer?.querySelector('[data-loading-text]')
   const resultsList = drawer?.querySelector('.results-list')
-  const emptyTitle = drawer?.querySelector('.results-empty .empty-title')
-  const emptyHint = drawer?.querySelector('.results-empty .empty-hint')
+  const emptyView = drawer?.querySelector('.results-empty')
+  const panel = drawer?.querySelector('.search-panel')
 
   const bundlePathRaw = drawer?.dataset.bundlePath || '/pagefind/'
   const basePath = drawer?.dataset.basePath || '/'
@@ -535,7 +398,6 @@ const pagefindBundle =
   let enginePromise
   let engineReady = false
   let searchTicket = 0
-  let currentResults = []
   let activeIndex = -1
 
   const debounce = (fn, delay) => {
@@ -546,18 +408,8 @@ const pagefindBundle =
     }
   }
 
-  const setMeta = (title, hint) => {
-    if (metaTitle) metaTitle.textContent = title
-    if (metaHint) metaHint.textContent = hint
-  }
-
   const setState = (state) => {
     resultsBox?.setAttribute('data-state', state)
-  }
-
-  const setEmptyView = (title, hint) => {
-    if (emptyTitle) emptyTitle.textContent = title
-    if (emptyHint) emptyHint.textContent = hint
   }
 
   const normalizeUrl = (url) => {
@@ -612,6 +464,65 @@ const pagefindBundle =
     setActive(activeIndex + delta)
   }
 
+  const positionPanel = () => {
+    if (!panel) return
+    const navContainer = document.querySelector('.nav-container')
+    if (navContainer) {
+      const navRect = navContainer.getBoundingClientRect()
+      panel.style.setProperty('--search-width', `${navRect.width}px`)
+      panel.style.setProperty('--search-left', `${navRect.left}px`)
+    } else {
+      const margin = 24
+      const viewportWidth =
+        window.innerWidth || document.documentElement.clientWidth
+      panel.style.setProperty('--search-width', `${viewportWidth - margin * 2}px`)
+      panel.style.setProperty('--search-left', `${margin}px`)
+    }
+    panel.style.setProperty('--search-top', '0px')
+  }
+
+  const CHAPTER_LABELS = {
+    concepts: 'Concepts',
+    'basic-usage': 'Basics',
+    prompts: 'Prompts',
+    advanced: 'Advanced',
+    fun: 'Fun',
+    resources: 'Resources',
+    theoretical: 'Theoretical',
+    manual: 'Manual',
+  }
+
+  const getCurrentChapter = () => {
+    const path = window.location.pathname
+    const match = path.match(/^\/?([^/]+)/)
+    if (match && CHAPTER_LABELS[match[1]]) {
+      return { key: match[1], label: CHAPTER_LABELS[match[1]] }
+    }
+    return null
+  }
+
+  const getCurrentAuthor = () => {
+    const meta = document.querySelector('meta[name="contributors"]')
+    if (!meta) return 'Fish'
+    const contributors = meta.content.split(',').map((c) => c.trim())
+    const nonFish = contributors.find(
+      (c) => c.toLowerCase() !== 'fish' && c !== ''
+    )
+    return nonFish || 'Fish'
+  }
+
+  const updateScopes = () => {
+    const chapterSyntax = drawer?.querySelector('[data-chapter-syntax]')
+    const authorSyntax = drawer?.querySelector('[data-author-syntax]')
+    const chapter = getCurrentChapter()
+    if (chapterSyntax) {
+      chapterSyntax.textContent = chapter ? `chapter:${chapter.key}` : 'chapter:all'
+    }
+    if (authorSyntax) {
+      authorSyntax.textContent = `author:${getCurrentAuthor()}`
+    }
+  }
+
   const activateResult = () => {
     const items = getResultItems()
     if (!items.length) return false
@@ -624,19 +535,9 @@ const pagefindBundle =
   }
 
   const handleEmpty = () => {
-    currentResults = []
     if (resultsList) resultsList.innerHTML = ''
     clearActive()
-    const nextState = engineReady ? 'empty' : 'idle'
-    setEmptyView(
-      '等待输入',
-      engineReady ? '输入后自动搜索' : '索引加载后可搜索'
-    )
-    setState(nextState)
-    setMeta(
-      '实时搜索',
-      engineReady ? '输入后自动搜索' : '首次打开会自动加载索引'
-    )
+    setState('idle')
   }
 
   const renderResults = (items) => {
@@ -652,12 +553,10 @@ const pagefindBundle =
       link.id = `search-result-${index}`
       link.setAttribute('role', 'option')
 
-      // 左侧图标
       const icon = document.createElement('span')
       icon.className = 'result-icon'
-      icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`
+      icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>`
 
-      // 内容区
       const content = document.createElement('div')
       content.className = 'result-content'
 
@@ -665,14 +564,13 @@ const pagefindBundle =
       title.className = 'result-title'
       title.textContent = item.title || item.url
 
-      const excerpt = document.createElement('div')
-      excerpt.className = 'result-excerpt'
-      excerpt.innerHTML = item.excerpt || ''  // 使用 innerHTML 渲染 <mark> 标签
+      const path = document.createElement('div')
+      path.className = 'result-path'
+      path.textContent = item.url
 
       content.appendChild(title)
-      content.appendChild(excerpt)
+      content.appendChild(path)
 
-      // 右侧 Jump to 按钮
       const action = document.createElement('span')
       action.className = 'result-action'
       action.textContent = 'Jump to'
@@ -689,8 +587,7 @@ const pagefindBundle =
     if (engineReady) return pagefind
     if (enginePromise) return enginePromise
     setState('engine-loading')
-    if (loadingText) loadingText.textContent = '正在加载搜索索引…'
-    setMeta('加载搜索索引', '首次打开会自动加载 Pagefind')
+    if (loadingText) loadingText.textContent = '加载中...'
     enginePromise = import(pagefindEntry)
       .then((mod) => {
         pagefind = mod
@@ -701,10 +598,25 @@ const pagefindBundle =
       .catch((error) => {
         console.error('Pagefind 加载失败', error)
         setState('error')
-        setMeta('搜索不可用', '本地未找到索引，请运行 npm run preview:search')
         return null
       })
     return enginePromise
+  }
+
+  const parseSearchQuery = (query) => {
+    const filters = {}
+    let searchText = query
+    const chapterMatch = searchText.match(/\bchapter:(\S+)/i)
+    if (chapterMatch) {
+      filters.chapter = chapterMatch[1]
+      searchText = searchText.replace(chapterMatch[0], '').trim()
+    }
+    const authorMatch = searchText.match(/\bauthor:(\S+)/i)
+    if (authorMatch) {
+      filters.author = authorMatch[1]
+      searchText = searchText.replace(authorMatch[0], '').trim()
+    }
+    return { searchText, filters }
   }
 
   const runSearch = async (query) => {
@@ -712,10 +624,15 @@ const pagefindBundle =
     if (!mod) return
     const ticket = ++searchTicket
     setState('searching')
-    if (loadingText) loadingText.textContent = '搜索中…'
-    setMeta('正在搜索', `“${query}”`)
+    if (loadingText) loadingText.textContent = '搜索中...'
     try {
-      const result = await mod.search(query)
+      const { searchText, filters } = parseSearchQuery(query)
+      const searchOptions = {}
+      if (Object.keys(filters).length > 0) {
+        searchOptions.filters = filters
+      }
+      const searchQuery = searchText || null
+      const result = await mod.search(searchQuery, searchOptions)
       if (ticket !== searchTicket) return
       const entries = await Promise.all(
         result.results.slice(0, 20).map(async (item) => {
@@ -723,26 +640,21 @@ const pagefindBundle =
           return {
             url: data.url,
             title: (data.meta && data.meta.title) || data.url,
-            excerpt: data.excerpt || '',
           }
         })
       )
       if (ticket !== searchTicket) return
-      currentResults = entries
       renderResults(entries)
       if (entries.length === 0) {
-        setEmptyView('没有找到结果', '换个关键词或检查拼写')
+        if (emptyView) emptyView.textContent = '没有找到结果'
         setState('empty')
-        setMeta('没有找到结果', '换个关键词试试')
       } else {
         setState('results')
-        setMeta(`找到 ${entries.length} 条结果`, '方向键选择，Enter 打开结果')
       }
     } catch (error) {
       if (ticket !== searchTicket) return
       console.error('Pagefind 搜索失败', error)
       setState('error')
-      setMeta('搜索失败', '请稍后重试')
     }
   }
 
@@ -763,13 +675,13 @@ const pagefindBundle =
 
   const openDrawer = () => {
     if (isOpen || !drawer) return
+    positionPanel()
+    updateScopes()
     isOpen = true
     drawer.classList.add('open')
     drawer.setAttribute('aria-hidden', 'false')
-    document.body.classList.add('search-drawer-open')
     window.requestAnimationFrame(() => {
       input?.focus()
-      input?.select()
     })
     loadPagefind()
     emitState()
@@ -780,7 +692,6 @@ const pagefindBundle =
     isOpen = false
     drawer.classList.remove('open')
     drawer.setAttribute('aria-hidden', 'true')
-    document.body.classList.remove('search-drawer-open')
     input?.blur()
     emitState()
   }
@@ -812,8 +723,11 @@ const pagefindBundle =
     }
   })
 
-  backdrop?.addEventListener('click', closeDrawer)
   closeControls?.forEach((el) => el.addEventListener('click', closeDrawer))
+
+  window.addEventListener('resize', () => {
+    if (isOpen) positionPanel()
+  })
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && isOpen) {
@@ -824,6 +738,27 @@ const pagefindBundle =
   document.addEventListener('open-search-drawer', openDrawer)
   document.addEventListener('close-search-drawer', closeDrawer)
   document.addEventListener('toggle-search-drawer', toggleDrawer)
+
+  const scopeItems = drawer?.querySelectorAll('.scope-item')
+  scopeItems?.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault()
+      const scope = item.dataset.scope
+      if (scope === 'chapter') {
+        const chapter = getCurrentChapter()
+        if (input) {
+          input.value = chapter ? `chapter:${chapter.key} ` : 'chapter:all '
+          input.focus()
+        }
+      } else if (scope === 'author') {
+        const author = getCurrentAuthor()
+        if (input) {
+          input.value = `author:${author} `
+          input.focus()
+        }
+      }
+    })
+  })
 
   emitState()
 </script>
