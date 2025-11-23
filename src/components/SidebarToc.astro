@@ -1,0 +1,10 @@
+---
+const { tocNavClass = 'toc-nav' }: { tocNavClass?: string } = Astro.props
+---
+
+<section class="panel toc-panel panel-with-legend">
+  <span class="panel-legend">TOC</span>
+  <div class="toc-content">
+    <nav class={tocNavClass}></nav>
+  </div>
+</section>
