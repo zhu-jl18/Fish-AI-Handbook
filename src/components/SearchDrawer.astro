@@ -268,56 +268,46 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
     flex-direction: column;
   }
 
-  .result-item {
+  /* 动态创建的元素需要用 :global() 才能应用样式 */
+  .results-list :global(.result-item) {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     padding: 8px 14px;
     text-decoration: none;
     color: var(--header-text);
-    transition:
-      background 0.12s ease,
-      color 0.12s ease;
+    transition: background 0.12s ease;
     cursor: pointer;
   }
 
-  .result-item:hover,
-  .result-item.active {
+  .results-list :global(.result-item:hover),
+  .results-list :global(.result-item.active) {
     background: var(--header-icon-bg-hover);
-    color: var(--header-text-strong);
   }
 
-  .result-icon {
+  .results-list :global(.result-icon) {
     flex-shrink: 0;
-    width: 16px;
-    height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: var(--header-text-muted);
   }
 
-  .result-icon svg {
+  .results-list :global(.result-icon svg) {
     width: 16px;
     height: 16px;
   }
 
-  .result-content {
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  .result-title {
+  .results-list :global(.result-title) {
+    flex-shrink: 0;
+    max-width: 50%;
     font-size: 13px;
-    font-weight: 600;
-    color: var(--header-text-strong);
+    color: #58a6ff;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .result-path {
+  .results-list :global(.result-path) {
+    flex: 1;
+    min-width: 0;
     font-size: 12px;
     color: var(--header-text-muted);
     white-space: nowrap;
@@ -325,17 +315,10 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
     text-overflow: ellipsis;
   }
 
-  .result-action {
+  .results-list :global(.result-action) {
     flex-shrink: 0;
-    font-size: 11px;
+    font-size: 12px;
     color: var(--header-text-muted);
-    opacity: 0;
-    transition: opacity 0.12s ease;
-  }
-
-  .result-item:hover .result-action,
-  .result-item.active .result-action {
-    opacity: 1;
   }
 
   @keyframes spin {
@@ -557,26 +540,21 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
       icon.className = 'result-icon'
       icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>`
 
-      const content = document.createElement('div')
-      content.className = 'result-content'
-
-      const title = document.createElement('div')
+      const title = document.createElement('span')
       title.className = 'result-title'
       title.textContent = item.title || item.url
 
-      const path = document.createElement('div')
+      const path = document.createElement('span')
       path.className = 'result-path'
       path.textContent = item.url
-
-      content.appendChild(title)
-      content.appendChild(path)
 
       const action = document.createElement('span')
       action.className = 'result-action'
       action.textContent = 'Jump to'
 
       link.appendChild(icon)
-      link.appendChild(content)
+      link.appendChild(title)
+      link.appendChild(path)
       link.appendChild(action)
       fragment.appendChild(link)
     })
