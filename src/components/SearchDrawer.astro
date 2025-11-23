@@ -372,39 +372,95 @@ const pagefindBundle =
   }
 
   .result-item {
-    display: block;
-    padding: 0.65rem 0.75rem;
-    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 6px;
     border: 1px solid transparent;
-    background: rgba(255, 255, 255, 0.02);
+    background: transparent;
     text-decoration: none;
     color: var(--header-text);
     transition: all var(--motion-duration-sm) var(--motion-ease-standard);
+    min-height: 48px;
   }
 
   .result-item:hover {
-    border-color: var(--header-accent-border);
-    background: var(--header-search-bg-hover);
+    background: var(--header-icon-bg-hover);
     color: var(--header-text-strong);
   }
 
   .result-item.active {
-    border-color: var(--header-accent-border-strong);
     background: var(--header-search-bg-hover);
     color: var(--header-text-strong);
-    box-shadow: 0 0 0 1px var(--header-accent-border-strong);
+    border-color: var(--header-accent-border);
+  }
+
+  .result-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--header-text-muted);
+    margin-top: 2px;
+  }
+
+  .result-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .result-content {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .result-title {
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     color: var(--header-text-strong);
-    margin-bottom: 0.2rem;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .result-excerpt {
-    font-size: 0.9rem;
+    font-size: 12px;
     color: var(--header-text-muted);
-    line-height: 1.5;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .result-excerpt mark {
+    background: rgba(255, 208, 71, 0.35);
+    color: inherit;
+    padding: 0 2px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .result-action {
+    flex-shrink: 0;
+    font-size: 12px;
+    color: var(--header-text-muted);
+    opacity: 0;
+    transition: opacity var(--motion-duration-sm) var(--motion-ease-standard);
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: var(--header-shortcut-bg);
+    border: 1px solid var(--header-shortcut-border);
+  }
+
+  .result-item:hover .result-action,
+  .result-item.active .result-action {
+    opacity: 1;
   }
 
   @keyframes shimmer {
@@ -595,14 +651,35 @@ const pagefindBundle =
       link.dataset.index = String(index)
       link.id = `search-result-${index}`
       link.setAttribute('role', 'option')
+
+      // 左侧图标
+      const icon = document.createElement('span')
+      icon.className = 'result-icon'
+      icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`
+
+      // 内容区
+      const content = document.createElement('div')
+      content.className = 'result-content'
+
       const title = document.createElement('div')
       title.className = 'result-title'
       title.textContent = item.title || item.url
+
       const excerpt = document.createElement('div')
       excerpt.className = 'result-excerpt'
-      excerpt.textContent = item.excerpt || ''
-      link.appendChild(title)
-      link.appendChild(excerpt)
+      excerpt.innerHTML = item.excerpt || ''  // 使用 innerHTML 渲染 <mark> 标签
+
+      content.appendChild(title)
+      content.appendChild(excerpt)
+
+      // 右侧 Jump to 按钮
+      const action = document.createElement('span')
+      action.className = 'result-action'
+      action.textContent = 'Jump to'
+
+      link.appendChild(icon)
+      link.appendChild(content)
+      link.appendChild(action)
       fragment.appendChild(link)
     })
     resultsList.appendChild(fragment)
