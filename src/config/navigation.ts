@@ -88,8 +88,8 @@ export default navigationConfig
 
 /**
  * 辅助函数：根据 URL 路径推导当前导航键
- * @param pathname - 当前页面路径（如 /fish-talks/models）
- * @returns 导航键（如 'fish-talks'），若不匹配则返回 'home'
+ * @param pathname - 当前页面路径（如 /concepts/models）
+ * @returns 导航键（如 'concepts'），若不匹配则返回 'home'
  */
 export function getCurrentNavKey(pathname: string): string {
   const firstSegment = pathname.split('/').filter(Boolean)[0] ?? 'home'
