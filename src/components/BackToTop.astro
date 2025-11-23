@@ -1,0 +1,124 @@
+---
+
+---
+
+<button
+  class="back-to-top"
+  aria-label="返回顶部"
+  title="返回顶部"
+  aria-hidden="true"
+>
+  <svg
+    aria-hidden="true"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M5 15l7-7 7 7"></path>
+    <path d="M12 19V8"></path>
+  </svg>
+  <span class="visually-hidden">返回顶部</span>
+</button>
+
+<style>
+  .back-to-top {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-overlay-dark);
+    border: 1px solid var(--color-border-overlay);
+    color: var(--color-text-overlay);
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition:
+      background-color var(--motion-duration-md) var(--motion-ease-standard),
+      color var(--motion-duration-md) var(--motion-ease-standard),
+      border-color var(--motion-duration-md) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-md) var(--motion-ease-standard),
+      transform var(--motion-duration-md) var(--motion-ease-standard),
+      opacity var(--motion-duration-md) var(--motion-ease-standard);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(6px);
+  }
+  .back-to-top:hover {
+    background: var(--color-bg-overlay-hover);
+    color: var(--color-text-white);
+    border-color: var(--color-border-overlay-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+  .back-to-top:active {
+    transform: translateY(0);
+  }
+  .back-to-top svg {
+    width: 20px;
+    height: 20px;
+  }
+  /* 无障碍隐藏文本 */
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* 小屏隐藏悬浮按钮（避免遮挡内容） */
+  @media (max-width: 768px) {
+    .back-to-top {
+      right: 1rem;
+      bottom: 1rem;
+      width: 40px;
+      height: 40px;
+    }
+    .back-to-top svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const btn = document.querySelector('.back-to-top')
+  if (btn) {
+    const toggle = () => {
+      const visible = window.scrollY > 32
+      btn.classList.toggle('visible', visible)
+      btn.setAttribute('aria-hidden', visible ? 'false' : 'true')
+    }
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    })
+    window.addEventListener('scroll', toggle, { passive: true })
+    document.addEventListener('open-mobile-menu', () => {
+      btn.classList.remove('visible')
+      btn.setAttribute('aria-hidden', 'true')
+    })
+    document.addEventListener('close-mobile-menu', toggle)
+    toggle()
+  }
+</script>

@@ -1,16 +1,7 @@
 ---
-// 自动化目录（TOC）组件：在客户端扫描正文 h2/h3/h4 构建目录
-// 内容作者无需在各页面传入 headings，完全解耦内容与目录
 import '../styles/right-sidebar.css'
-import siteConfig, {
-  CONTRIBUTORS_MAP,
-  type ContributorInfo,
-} from '../config/site'
-import type {
-  SidebarSection,
-  SidebarGroup,
-  SidebarLink,
-} from '../scripts/sidebars'
+import SidebarPanels from './SidebarPanels.astro'
+import type { SidebarSection } from '../scripts/sidebars'
 
 const {
   structure = [],
@@ -21,173 +12,18 @@ const {
   currentPath?: string
   contributors?: string[] | null
 } = Astro.props
-
-const normalizePath = (path: string) => {
-  if (!path || path === '/') return '/'
-  return path.endsWith('/') ? path.slice(0, -1) : path
-}
-
-const normalizedCurrentPath = normalizePath(currentPath)
-
-const isExactActive = (href?: string) =>
-  !!href && normalizedCurrentPath === normalizePath(href)
-
-const resolvedStructure = Array.isArray(structure) ? structure : []
-
-/**
- * 解析贡献者字符串为完整的贡献者信息
- * 优先从 CONTRIBUTORS_MAP 查找，找不到则按 GitHub 用户名处理
- */
-const resolveContributor = (username: string): ContributorInfo | null => {
-  const trimmed = username.trim()
-  if (!trimmed) return null
-
-  // 优先从配置映射表查找
-  if (CONTRIBUTORS_MAP[trimmed]) {
-    return CONTRIBUTORS_MAP[trimmed]
-  }
-
-  // 未找到则按 GitHub 用户名处理
-  return {
-    username: trimmed,
-    name: trimmed,
-    link: `https://github.com/${trimmed}`,
-    avatar: `https://github.com/${trimmed}.png`,
-  }
-}
-
-const contributorList: ContributorInfo[] = []
-const seen = new Set<string>()
-
-// 如果页面配置了 contributors，自动添加默认贡献者到第一位
-if (Array.isArray(contributors) && contributors.length > 0) {
-  // 先添加默认贡献者
-  const defaultContributor = siteConfig.defaultContributor
-  seen.add(defaultContributor.username)
-  contributorList.push(defaultContributor)
-
-  // 再添加配置的贡献者
-  for (const item of contributors) {
-    const resolved = resolveContributor(item)
-    if (!resolved) continue
-    if (seen.has(resolved.username)) continue
-    seen.add(resolved.username)
-    contributorList.push(resolved)
-  }
-} else if (typeof contributors === 'undefined') {
-  // 未配置 contributors 时，使用默认贡献者
-  contributorList.push(siteConfig.defaultContributor)
-}
-
-const isGroup = (entry: SidebarLink | SidebarGroup): entry is SidebarGroup =>
-  'items' in entry
-
-const isGroupActive = (entry: SidebarGroup) => {
-  if (entry.href && isExactActive(entry.href)) return true
-  if (!entry.items) return false
-  return entry.items.some((item) => isExactActive(item.href))
-}
 ---
 
 <div class="right-sidebar">
   <div class="sidebar-scroll">
-    {
-      resolvedStructure.length > 0 ? (
-        <section class="panel structure-panel panel-with-legend">
-          <span class="panel-legend">CHAPTER</span>
-          <nav class="structure-nav">
-            {resolvedStructure.map((entry) =>
-              isGroup(entry) ? (
-                <div class="structure-group">
-                  <a
-                    href={entry.href ?? entry.items?.[0]?.href ?? '#'}
-                    class={`structure-link ${isGroupActive(entry) ? 'active' : ''}`}
-                  >
-                    {entry.label}
-                  </a>
-                  {entry.items && entry.items.length > 0 ? (
-                    <div class="structure-subnav">
-                      {entry.items.map((link) => (
-                        <a
-                          href={link.href}
-                          class={`structure-sublink ${isExactActive(link.href) ? 'active' : ''}`}
-                        >
-                          {link.label}
-                        </a>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-              ) : (
-                <a
-                  href={entry.href}
-                  class={`structure-link ${isExactActive(entry.href) ? 'active' : ''}`}
-                >
-                  {entry.label}
-                </a>
-              ),
-            )}
-          </nav>
-        </section>
-      ) : null
-    }
-    {
-      contributorList.length > 0 ? (
-        <section class="panel contributors-panel panel-with-legend">
-          <span class="panel-legend">
-            CONTRIBUTORS
-            <span class="contributor-count">{contributorList.length}</span>
-          </span>
-          <div
-            class={`contributors-list ${contributorList.length > 2 ? 'grid-layout' : 'list-layout'}`}
-          >
-            {contributorList.map((person) => (
-              <a
-                class="contributor-card"
-                href={person.link}
-                target="_blank"
-                rel="noreferrer noopener"
-                title={`${person.name} (@${person.username})`}
-              >
-                <img src={person.avatar} alt={person.name} loading="lazy" />
-                {contributorList.length <= 2 ? (
-                  <div class="contributor-meta">
-                    <span class="contributor-name">{person.name}</span>
-                    <span class="contributor-handle">@{person.username}</span>
-                  </div>
-                ) : null}
-              </a>
-            ))}
-          </div>
-        </section>
-      ) : null
-    }
-    <section class="panel toc-panel panel-with-legend">
-      <span class="panel-legend">TOC</span>
-      <div class="toc-content">
-        <nav class="toc-nav"></nav>
-      </div>
-    </section>
+    <SidebarPanels
+      structure={structure}
+      currentPath={currentPath}
+      contributors={contributors}
+      tocNavClass="toc-nav"
+    />
   </div>
 </div>
-
-<button class="back-to-top" aria-label="返回顶部" title="返回顶部">
-  <svg
-    aria-hidden="true"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2.5"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M5 15l7-7 7 7"></path>
-    <path d="M12 19V8"></path>
-  </svg>
-  <span class="visually-hidden">返回顶部</span>
-</button>
 
 <script is:inline type="module">
   import { setupRightSidebar } from '/scripts/toc.js'
@@ -208,11 +44,6 @@ const isGroupActive = (entry: SidebarGroup) => {
     }
   })
 
-  const btn = document.querySelector('.back-to-top')
-  if (btn)
-    btn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    })
   if (import.meta?.hot) {
     import.meta.hot.on('vite:beforeUpdate', () => stop && stop())
   }

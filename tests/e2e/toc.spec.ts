@@ -1,7 +1,11 @@
 import { test, expect } from '@playwright/test'
 
 test('右侧目录自动生成且可点击跳转与滚动高亮', async ({ page }) => {
-  await page.goto('/setup/git')
+  await page.setViewportSize({ width: 1440, height: 900 })
+  await page.goto('/basic-usage')
+  await page.addStyleTag({
+    content: 'astro-dev-toolbar{pointer-events:none !important;opacity:0;}',
+  })
 
   // 等待右侧目录渲染
   const tocLinks = page.locator('.toc-nav a.toc-link')
@@ -15,16 +19,16 @@ test('右侧目录自动生成且可点击跳转与滚动高亮', async ({ page 
   const indexToClick = count > 1 ? 1 : 0
   const target = tocLinks.nth(indexToClick)
   const targetId = await target.getAttribute('data-id')
-  await page.evaluate(() => {
-    const sidebar = document.querySelector('.right-sidebar')
-    if (sidebar) sidebar.scrollTop = sidebar.scrollHeight
-  })
-  await target.scrollIntoViewIfNeeded()
   await page.evaluate((id) => {
     const el = document.querySelector(`.toc-nav a[data-id="${id}"]`)
-    if (el instanceof HTMLElement) {
-      el.scrollIntoView({ block: 'center' })
-      el.click()
+    if (el instanceof HTMLElement) el.scrollIntoView({ block: 'center' })
+  }, targetId)
+  await page.evaluate((id) => {
+    const link = document.querySelector(`.toc-nav a[data-id="${id}"]`)
+    if (link instanceof HTMLElement) {
+      link.dispatchEvent(
+        new MouseEvent('click', { bubbles: true, cancelable: true }),
+      )
     }
   }, targetId)
 

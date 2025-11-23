@@ -2,6 +2,8 @@
 import BaseLayout from './BaseLayout.astro'
 import Header from '../components/Header.astro'
 import RightSidebar from '../components/RightSidebar.astro'
+import MobileMenu from '../components/MobileMenu.astro'
+import BackToTop from '../components/BackToTop.astro'
 import ContentActions from '../components/ContentActions.astro'
 import { getSidebarForPath } from '../scripts/sidebars'
 import { theme, getCurrentNavKey } from '../config/index'
@@ -67,6 +69,38 @@ const entryId = entry?.id
       />
     </div>
   </div>
+
+  <MobileMenu
+    structure={sidebarItems}
+    currentPath={currentPath}
+    contributors={contributors}
+  />
+
+  <button
+    class="mobile-menu-trigger"
+    aria-label="Open menu"
+    title="目录与章节"
+    aria-controls="mobile-menu-overlay"
+    aria-expanded="false"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </button>
+
+  <BackToTop />
 </BaseLayout>
 
 <style>
@@ -206,4 +240,53 @@ const entryId = entry?.id
     }
   }
   /* 针对桌面端已在基础规则固定为 6px；下面断点仅调整小屏表现 */
+
+  .mobile-menu-trigger {
+    position: fixed;
+    right: 4rem; /* Right of BackToTop: 2rem (32px) gap at desktop */
+    bottom: 1rem;
+    width: 40px;
+    height: 40px;
+    display: none; /* Hidden on desktop */
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-overlay-dark);
+    border: 1px solid var(--color-border-overlay);
+    color: var(--color-text-overlay);
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-menu-trigger:hover {
+    background: var(--color-bg-overlay-hover);
+    color: var(--color-text-white);
+    border-color: var(--color-border-overlay-hover);
+    transform: translateY(-2px);
+  }
+
+  .mobile-menu-trigger:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 1024px) {
+    .mobile-menu-trigger {
+      display: inline-flex;
+    }
+  }
+  @media (max-width: 768px) {
+    .mobile-menu-trigger {
+      right: 1rem; /* Match BackToTop on mobile for consistent gap */
+    }
+  }
 </style>
+
+<script>
+  const trigger = document.querySelector('.mobile-menu-trigger')
+  trigger?.addEventListener('click', () => {
+    document.dispatchEvent(new CustomEvent('open-mobile-menu'))
+  })
+</script>

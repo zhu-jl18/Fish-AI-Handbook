@@ -1,0 +1,85 @@
+---
+import siteConfig, { CONTRIBUTORS_MAP, type ContributorInfo } from '../config/site'
+import type { SidebarSection, SidebarGroup } from '../scripts/sidebars'
+import SidebarStructure from './SidebarStructure.astro'
+import SidebarContributors from './SidebarContributors.astro'
+import SidebarToc from './SidebarToc.astro'
+
+const {
+  structure = [],
+  currentPath = '/',
+  contributors,
+  tocNavClass = 'toc-nav',
+}: {
+  structure?: SidebarSection
+  currentPath?: string
+  contributors?: string[] | null
+  tocNavClass?: string
+} = Astro.props
+
+const normalizePath = (path: string) => {
+  if (!path || path === '/') return '/'
+  return path.endsWith('/') ? path.slice(0, -1) : path
+}
+
+const normalizedCurrentPath = normalizePath(currentPath)
+
+const isExactActive = (href?: string) =>
+  !!href && normalizedCurrentPath === normalizePath(href)
+
+const resolvedStructure = Array.isArray(structure) ? structure : []
+
+const resolveContributor = (username: string): ContributorInfo | null => {
+  const trimmed = username.trim()
+  if (!trimmed) return null
+  if (CONTRIBUTORS_MAP[trimmed]) {
+    return CONTRIBUTORS_MAP[trimmed]
+  }
+  return {
+    username: trimmed,
+    name: trimmed,
+    link: `https://github.com/${trimmed}`,
+    avatar: `https://github.com/${trimmed}.png`,
+  }
+}
+
+const contributorList: ContributorInfo[] = []
+const seen = new Set<string>()
+
+if (Array.isArray(contributors) && contributors.length > 0) {
+  const defaultContributor = siteConfig.defaultContributor
+  seen.add(defaultContributor.username)
+  contributorList.push(defaultContributor)
+  for (const item of contributors) {
+    const resolved = resolveContributor(item)
+    if (!resolved) continue
+    if (seen.has(resolved.username)) continue
+    seen.add(resolved.username)
+    contributorList.push(resolved)
+  }
+} else if (typeof contributors === 'undefined') {
+  contributorList.push(siteConfig.defaultContributor)
+}
+
+const isGroupActive = (entry: SidebarGroup) => {
+  if (entry.href && isExactActive(entry.href)) return true
+  if (!entry.items) return false
+  return entry.items.some((item) => isExactActive(item.href))
+}
+---
+
+{
+  resolvedStructure.length > 0 ? (
+    <SidebarStructure
+      structure={resolvedStructure}
+      isGroupActive={isGroupActive}
+      isExactActive={isExactActive}
+    />
+  ) : null
+}
+{
+  contributorList.length > 0 ? (
+    <SidebarContributors contributorList={contributorList} />
+  ) : null
+}
+<SidebarToc tocNavClass={tocNavClass} />
