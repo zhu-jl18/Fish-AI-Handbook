@@ -25,14 +25,14 @@ const PAGES_DIR = path.join(ROOT, 'src', 'pages')
 
 // Keep in sync with src/scripts/docsMap.ts
 const DOCS_MAP = {
-  'fish-talks': '01-fish-talks',
+  concepts: '01-concepts',
   'basic-usage': '02-basic-usage',
   prompts: '03-prompts',
   advanced: '04-advanced',
   fun: '05-fun',
   resources: '06-resources',
   theoretical: '07-theoretical',
-  setup: '99-setup',
+  manual: '99-manual',
 }
 
 const rel = (p) => path.relative(ROOT, p)
