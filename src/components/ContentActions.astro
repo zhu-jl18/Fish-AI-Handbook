@@ -174,13 +174,14 @@ if (entryId) {
     </svg>
   </button>
 
-  <!-- 按钮4: 评论（禁用） -->
-  <button
-    type="button"
+  <!-- 按钮4: 评论/反馈 -->
+  <a
+    href={`https://github.com/zhu-jl18/Fish-AI-Handbook/discussions/new?category=general&title=${encodeURIComponent(`Feedback: ${entryId || 'General'}`)}&body=${encodeURIComponent(`\n\n\n---\nContext: ${Astro.url.href}`)}`}
+    target="_blank"
+    rel="noopener noreferrer"
     class="action-btn"
-    disabled
-    aria-label="评论（即将推出）"
-    title="评论（即将推出）"
+    aria-label="在 GitHub 上参与讨论"
+    title="在 GitHub 上参与讨论"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -196,7 +197,7 @@ if (entryId) {
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
       ></path>
     </svg>
-  </button>
+  </a>
 
   <!-- 按钮5: 代码块（禁用） -->
   <button

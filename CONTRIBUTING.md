@@ -23,8 +23,8 @@
 
 ### 2.1 目录排序
 
-- 顶层目录严格递增：`01-fish-talks`、`02-basic-usage`、`03-prompts`、`04-advanced`、`05-fun`、`06-resources`、`99-setup`（置底）。
-- 不允许跳号；新增一级目录必须在末尾递增，`99-setup` 保留为固定置底。
+- 顶层目录严格递增：`01-concepts`、`02-basic-usage`、`03-prompts`、`04-advanced`、`05-fun`、`06-resources`、`99-manual`（置底）。
+- 不允许跳号；新增一级目录必须在末尾递增，`99-manual` 保留为固定置底。
 - 历史目录 `tech`、`demo` 已废弃，其内容已并入 `06-resources`（`2API`、`云平台`）；禁止复活。
 
 ### 2.2 内容层级与 Frontmatter
@@ -71,11 +71,11 @@ description: 简短描述（必填，缺失会导致构建失败）
 示例：
 
 ```text
-内容：src/content/docs/99-setup/codex/index.md
-路由：src/pages/setup/codex/index.astro  ✓
+内容：src/content/docs/99-manual/codex/index.md
+路由：src/pages/manual/codex/index.astro  ✓
 
-内容：src/content/docs/99-setup/codex/index.md
-路由：src/pages/setup/codex.astro        ✗
+内容：src/content/docs/99-manual/codex/index.md
+路由：src/pages/manual/codex.astro        ✗
 ```
 
 ### 2.4 命名规范
@@ -89,7 +89,7 @@ description: 简短描述（必填，缺失会导致构建失败）
 - ❌ 二级直接使用 `*.md`（如 `03-prompts/best-practices.md`）。
 - ❌ 三级使用“文件夹 + index.md”（如 `glossary/ai-concepts/index.md`）。
 - ❌ 超过三级深度（如 `prompts/context/levels/basic/index.md`）。
-- ❌ 二级路径与三级路径混用（如同时存在 `01-fish-talks/model-params/` 与 `01-fish-talks/glossary/model-params/`）。
+- ❌ 二级路径与三级路径混用（如同时存在 `01-concepts/model-params/` 与 `01-concepts/glossary/model-params/`）。
 
 原因：Astro `getEntry` 会容忍上述写法但会造成路径歧义、路由难以镜像，维护成本迅速失控。
 
@@ -163,6 +163,23 @@ description: 简短描述（必填，缺失会导致构建失败）
 - 交互：`public/scripts/spoiler.js` 负责点击与键盘事件。
 
 ---
+
+### 4.2 Gallery (行列图片)
+
+#### 用法
+
+```markdown
+:::gallery{cols=2 gap=18 ratio=1/1}
+![图1](https://p.sda1.dev/28/dec249690ccfb5c4195ad3516e66e736/unnamed.jpg)
+![图2](https://p.sda1.dev/28/9d7cc503eb7fbfbff67a406f8a4b5389/juya.jpg)
+:::
+```
+#### 渲染行为与场景
+
+- 由参数影响 行列式，间距以及图片比例等布局样式
+
+
+
 
 ## 5. 开发与验证流程
 
@@ -275,7 +292,7 @@ LC --> Dev: 输出统计与断链
   - `content(prompts): add advanced examples`
 - **跨模块/全局改动**不加 scope，如 `refactor: restructure entire content hierarchy`。
 - **Merge commits** 统一用 `chore:`，不带 scope。
-- 常见 scope：`search`、`sidebar`、`header`、`footer`、`toc`、`prompts`、`setup`、`resources`、`glossary`、`routing`、`navigation`、`ui`、`style`、`seo`、`deps`、`build`、`ci`、`config`。
+- 常见 scope：`search`、`sidebar`、`header`、`footer`、`toc`、`prompts`、`manual`、`resources`、`glossary`、`routing`、`navigation`、`ui`、`style`、`seo`、`deps`、`build`、`ci`、`config`。
 
 ### 6.3 多类型提交
 
