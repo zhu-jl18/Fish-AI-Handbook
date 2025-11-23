@@ -666,7 +666,7 @@ const { currentPage } = Astro.props
     searchTrigger?.setAttribute('aria-expanded', isOpen ? 'true' : 'false')
   })
 
-  // 搜索快捷键：按下 '/' 打开搜索页或聚焦搜索框
+  // 搜索快捷键：按下 '/' 打开搜索抽屉并聚焦输入
   function focusSearchInput() {
     const drawerInput = document.querySelector('#search-drawer-input')
     if (drawerInput instanceof HTMLInputElement) {
@@ -674,14 +674,6 @@ const { currentPage } = Astro.props
       drawerInput.select()
       return true
     }
-
-    const input = document.querySelector('#search input')
-    if (input instanceof HTMLInputElement) {
-      input.focus()
-      input.select()
-      return true
-    }
-
     return false
   }
 
@@ -705,15 +697,8 @@ const { currentPage } = Astro.props
     // 阻止在页面上输入 '/'
     e.preventDefault()
 
-    if (window.location.pathname.startsWith('/search')) {
-      if (!focusSearchInput()) {
-        tryOpenDrawer()
-      }
-      return
+    if (tryOpenDrawer()) {
+      focusSearchInput()
     }
-
-    if (tryOpenDrawer()) return
-
-    window.location.href = '/search'
   })
 </script>
