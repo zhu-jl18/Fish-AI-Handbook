@@ -370,10 +370,60 @@ manually rewrites the docs.
 
 ---
 
-## 8. 常见问题
+## 8. 搜索功能维护
+
+项目使用 Pagefind 实现站内搜索，支持 `chapter:` 和 `author:` 过滤语法。
+
+### 8.1 搜索过滤器工作原理
+
+- **chapter 过滤器**：基于 URL 路径的第一段（如 `/prompts/xxx` → `chapter:prompts`）
+- **author 过滤器**：基于页面 contributors，优先取非 Fish 的第一个贡献者
+- **索引位置**：`src/layouts/ContentLayout.astro` 中通过 `data-pagefind-filter` 属性输出
+
+### 8.2 章节重命名同步清单
+
+当新增、删除或重命名一级章节（如 `03-prompts` → `03-techniques`）时，**必须同步以下位置**：
+
+1. **SearchDrawer 章节映射**（`src/components/SearchDrawer.astro`）：
+   ```javascript
+   const CHAPTER_LABELS = {
+     concepts: 'Concepts',
+     'basic-usage': 'Basics',
+     prompts: 'Prompts',      // ← 修改此处的 key
+     advanced: 'Advanced',
+     fun: 'Fun',
+     resources: 'Resources',
+     theoretical: 'Theoretical',
+     manual: 'Manual',
+   }
+   ```
+
+2. **docsMap 映射**（`src/scripts/docsMap.ts`）：确保别名与内容目录对应
+
+3. **navigation 导航**（`src/config/navigation.ts`）：更新导航链接
+
+4. **sidebars 侧栏**（`src/scripts/sidebars.ts`）：更新侧栏条目
+
+### 8.3 重建搜索索引
+
+任何内容结构变更后，必须重新构建以更新 Pagefind 索引：
+
+```bash
+npm run build  # 重新构建，会自动生成新的 Pagefind 索引
+```
+
+### 8.4 特殊值说明
+
+- `chapter:all`：等同于不加 chapter 过滤，搜索全部章节
+- 首页等非章节页面会显示 `chapter:all` 提示
+
+---
+
+## 9. 常见问题
 
 - 构建报错缺少 description：补充该文档的 frontmatter `description`。
 - 页面 404：确认内容文件、路由文件、侧栏条目是否一一对应。
-- Header 高亮错位：依据“别名”匹配，与中文标题无关，检查路由前缀。
+- Header 高亮错位：依据"别名"匹配，与中文标题无关，检查路由前缀。
+- 搜索无结果：确认已运行 `npm run build` 生成 Pagefind 索引；检查 `CHAPTER_LABELS` 映射是否与实际路径一致。
 
 ---
