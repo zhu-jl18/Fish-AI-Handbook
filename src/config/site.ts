@@ -67,7 +67,7 @@ const siteConfig: SiteConfig = {
   chatBotUrl: 'https://chat.011070.xyz',
   avatarImage:
     'https://media.makomako.dpdns.org/images/2025/10/thumb-devil-circle',
-  githubUrl: 'https://github.com/zhu-jl18',
+  githubUrl: 'https://github.com/zhu-jl18/Fish-AI-Handbook',
   favicon: 'https://media.makomako.dpdns.org/images/2025/11/wired-lineal--ai',
   defaultContributor: {
     username: 'zhu-jl18',
