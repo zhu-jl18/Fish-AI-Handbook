@@ -1,0 +1,739 @@
+---
+import { CHAPTER_LABELS as SHARED_CHAPTER_LABELS } from '../config'
+export const SHARED_CHAPTER_LABELS_MAP = SHARED_CHAPTER_LABELS
+
+const base = import.meta.env.BASE_URL ?? '/'
+const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
+---
+
+<div
+  id="search-drawer"
+  class="search-drawer"
+  aria-hidden="true"
+  data-bundle-path={pagefindBundle}
+  data-base-path={base}
+>
+  <div class="search-backdrop" data-close></div>
+  <div
+    class="search-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-label="站内搜索"
+  >
+    <div class="search-header">
+      <svg
+        class="search-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+      <input
+        id="search-drawer-input"
+        type="search"
+        name="search"
+        autocomplete="off"
+        enterkeyhint="search"
+        aria-label="搜索站内内容"
+        aria-controls="search-results"
+      />
+    </div>
+    <div class="search-scopes" id="search-scopes">
+      <a class="scope-item" data-scope="chapter" role="option">
+        <svg class="scope-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <span class="scope-syntax" data-chapter-syntax></span>
+        <span class="scope-hint">Search in this chapter</span>
+      </a>
+      <a class="scope-item" data-scope="author" role="option">
+        <svg class="scope-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <span class="scope-syntax" data-author-syntax></span>
+        <span class="scope-hint">Search in this author</span>
+      </a>
+    </div>
+    <div
+      class="search-results"
+      id="search-results"
+      role="listbox"
+      aria-label="搜索结果"
+      data-state="idle"
+    >
+      <div class="results-loading" data-view="loading" aria-live="polite">
+        <span class="loader" aria-hidden="true"></span>
+        <span class="loading-copy" data-loading-text>加载中...</span>
+      </div>
+      <div class="results-empty" data-view="empty" aria-live="polite"></div>
+      <div class="results-error" data-view="error" aria-live="assertive">
+        搜索不可用，请运行 npm run preview:search
+      </div>
+      <div class="results-list" data-view="results" role="presentation"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .search-drawer {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0;
+    z-index: 320;
+    box-sizing: border-box;
+  }
+
+  .search-drawer.open {
+    display: flex;
+  }
+
+  .search-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(6, 8, 10, 0.12);
+    opacity: 0;
+    transition: opacity 0.12s ease;
+  }
+
+  .search-drawer.open .search-backdrop {
+    opacity: 1;
+  }
+
+  .search-panel {
+    position: fixed;
+    top: var(--search-top, 0);
+    left: var(--search-left, 50%);
+    width: var(--search-width, calc(100vw - 48px));
+    max-height: min(70vh, 520px);
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-elevated);
+    border: none;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+      opacity 0.14s ease,
+      transform 0.14s ease;
+    overflow: hidden;
+  }
+
+  .search-drawer.open .search-panel {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .search-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: transparent;
+    border-bottom: none;
+  }
+
+  .search-icon {
+    flex-shrink: 0;
+    color: var(--header-text-muted);
+  }
+
+  .search-header input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--header-text-strong);
+    font-size: 14px;
+    line-height: 20px;
+    padding: 8px 0;
+    outline: none;
+    caret-color: var(--caret-color);
+  }
+
+  .search-header input::placeholder {
+    color: var(--header-text-muted);
+  }
+
+  .search-scopes {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--header-icon-border);
+  }
+
+  .scope-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    text-decoration: none;
+    color: var(--header-text);
+    cursor: pointer;
+    transition: background 0.12s ease;
+  }
+
+  .scope-item:hover {
+    background: var(--header-icon-bg-hover);
+  }
+
+  .scope-icon {
+    flex-shrink: 0;
+    color: var(--header-text-muted);
+  }
+
+  .scope-syntax {
+    flex: 1;
+    font-size: 13px;
+    color: #58a6ff;
+  }
+
+  .scope-hint {
+    font-size: 12px;
+    color: var(--header-text-muted);
+  }
+
+  .search-results {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    background: var(--bg-elevated);
+  }
+
+  .search-results [data-view] {
+    display: none;
+  }
+
+  .search-results[data-state='idle'] {
+    display: none;
+  }
+
+  .search-results[data-state='engine-loading'] [data-view='loading'],
+  .search-results[data-state='searching'] [data-view='loading'] {
+    display: flex;
+  }
+
+  .search-results[data-state='empty'] [data-view='empty'] {
+    display: flex;
+  }
+
+  .search-results[data-state='error'] [data-view='error'] {
+    display: flex;
+  }
+
+  .search-results[data-state='results'] [data-view='results'] {
+    display: block;
+  }
+
+  .results-loading {
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 18px 14px;
+    color: var(--header-text-muted);
+    font-size: 13px;
+  }
+
+  .loader {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--header-icon-border);
+    border-top-color: var(--header-text-strong);
+    animation: spin 0.8s linear infinite;
+  }
+
+  .results-empty,
+  .results-error {
+    padding: 18px 14px;
+    color: var(--header-text-muted);
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .results-list {
+    padding: 4px 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 动态创建的元素需要用 :global() 才能应用样式 */
+  .results-list :global(.result-item) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    text-decoration: none;
+    color: var(--header-text);
+    transition: background 0.12s ease;
+    cursor: pointer;
+  }
+
+  .results-list :global(.result-item:hover),
+  .results-list :global(.result-item.active) {
+    background: var(--header-icon-bg-hover);
+  }
+
+  .results-list :global(.result-icon) {
+    flex-shrink: 0;
+    color: var(--header-text-muted);
+  }
+
+  .results-list :global(.result-icon svg) {
+    width: 16px;
+    height: 16px;
+  }
+
+  .results-list :global(.result-title) {
+    flex-shrink: 0;
+    max-width: 50%;
+    font-size: 13px;
+    color: #58a6ff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .results-list :global(.result-path) {
+    flex: 1;
+    min-width: 0;
+    font-size: 12px;
+    color: var(--header-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .results-list :global(.result-action) {
+    flex-shrink: 0;
+    font-size: 12px;
+    color: var(--header-text-muted);
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  :global(body.search-drawer-open) {
+    overflow: hidden;
+  }
+
+  @media (max-width: 640px) {
+    .search-drawer {
+      padding-top: 0;
+    }
+
+    .search-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-height: 80vh;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .search-header {
+      padding: 10px 12px;
+    }
+
+    .scope-item {
+      padding: 8px 12px;
+    }
+
+    .results-list :global(.result-item) {
+      padding: 8px 12px;
+    }
+  }
+</style>
+
+<script type="module" is:inline>
+  const drawer = document.getElementById('search-drawer')
+  const closeControls = drawer?.querySelectorAll('[data-close]')
+  const input = drawer?.querySelector('#search-drawer-input')
+  const resultsBox = drawer?.querySelector('.search-results')
+  const loadingText = drawer?.querySelector('[data-loading-text]')
+  const resultsList = drawer?.querySelector('.results-list')
+  const emptyView = drawer?.querySelector('.results-empty')
+  const panel = drawer?.querySelector('.search-panel')
+
+  const bundlePathRaw = drawer?.dataset.bundlePath || '/pagefind/'
+  const basePath = drawer?.dataset.basePath || '/'
+  const bundlePath = bundlePathRaw.endsWith('/')
+    ? bundlePathRaw
+    : `${bundlePathRaw}/`
+  const pagefindEntry = `${bundlePath}pagefind.js`
+
+  let isOpen = false
+  let pagefind
+  let enginePromise
+  let engineReady = false
+  let searchTicket = 0
+  let activeIndex = -1
+
+  const debounce = (fn, delay) => {
+    let timer
+    return (...args) => {
+      clearTimeout(timer)
+      timer = window.setTimeout(() => fn(...args), delay)
+    }
+  }
+
+  const setState = (state) => {
+    resultsBox?.setAttribute('data-state', state)
+  }
+
+  const normalizeUrl = (url) => {
+    if (!url) return '#'
+    if (/^https?:\/\//.test(url) || url.startsWith('/')) return url
+    const prefix = basePath.endsWith('/') ? basePath : `${basePath}/`
+    return `${prefix}${url}`
+  }
+
+  const getResultItems = () =>
+    Array.from(resultsList?.querySelectorAll('.result-item') ?? [])
+
+  const clearActive = () => {
+    activeIndex = -1
+    input?.removeAttribute('aria-activedescendant')
+    getResultItems().forEach((item) => {
+      item.classList.remove('active')
+      item.removeAttribute('aria-selected')
+    })
+  }
+
+  const setActive = (nextIndex) => {
+    const items = getResultItems()
+    if (!items.length) {
+      clearActive()
+      return
+    }
+    const normalized =
+      ((nextIndex % items.length) + items.length) % items.length
+    activeIndex = normalized
+    items.forEach((item, idx) => {
+      const isActive = idx === normalized
+      item.classList.toggle('active', isActive)
+      if (isActive) {
+        item.setAttribute('aria-selected', 'true')
+        if (!item.id) item.id = `search-result-${idx}`
+        input?.setAttribute('aria-activedescendant', item.id)
+        item.scrollIntoView({ block: 'nearest' })
+      } else {
+        item.removeAttribute('aria-selected')
+      }
+    })
+  }
+
+  const moveActive = (delta) => {
+    const items = getResultItems()
+    if (!items.length) return
+    if (activeIndex === -1) {
+      setActive(delta > 0 ? 0 : items.length - 1)
+      return
+    }
+    setActive(activeIndex + delta)
+  }
+
+  const positionPanel = () => {
+    if (!panel) return
+    const navContainer = document.querySelector('.nav-container')
+    if (navContainer) {
+      const navRect = navContainer.getBoundingClientRect()
+      panel.style.setProperty('--search-width', `${navRect.width}px`)
+      panel.style.setProperty('--search-left', `${navRect.left}px`)
+    } else {
+      const margin = 24
+      const viewportWidth =
+        window.innerWidth || document.documentElement.clientWidth
+      panel.style.setProperty('--search-width', `${viewportWidth - margin * 2}px`)
+      panel.style.setProperty('--search-left', `${margin}px`)
+    }
+    panel.style.setProperty('--search-top', '0px')
+  }
+
+  const CHAPTER_LABELS = JSON.parse('{JSON.stringify(SHARED_CHAPTER_LABELS_MAP)}')
+
+  const getCurrentChapter = () => {
+    const path = window.location.pathname
+    const match = path.match(/^\/?([^/]+)/)
+    if (match && CHAPTER_LABELS[match[1]]) {
+      return { key: match[1], label: CHAPTER_LABELS[match[1]] }
+    }
+    return null
+  }
+
+  const getCurrentAuthor = () => {
+    const meta = document.querySelector('meta[name="contributors"]')
+    if (!meta) return 'Fish'
+    const contributors = meta.content.split(',').map((c) => c.trim())
+    const nonFish = contributors.find(
+      (c) => c.toLowerCase() !== 'fish' && c !== ''
+    )
+    return nonFish || 'Fish'
+  }
+
+  const buildScopeValue = (scope) => {
+    if (scope === 'chapter') {
+      const chapter = getCurrentChapter()
+      return chapter ? `chapter:${chapter.key}` : 'chapter:all'
+    }
+    if (scope === 'author') {
+      return `author:${getCurrentAuthor()}`
+    }
+    return ''
+  }
+
+  const updateScopes = () => {
+    const chapterSyntax = drawer?.querySelector('[data-chapter-syntax]')
+    const authorSyntax = drawer?.querySelector('[data-author-syntax]')
+    if (chapterSyntax) {
+      chapterSyntax.textContent = buildScopeValue('chapter')
+    }
+    if (authorSyntax) {
+      authorSyntax.textContent = buildScopeValue('author')
+    }
+  }
+
+  const activateResult = () => {
+    const items = getResultItems()
+    if (!items.length) return false
+    const target =
+      activeIndex === -1
+        ? items[0]
+        : items[((activeIndex % items.length) + items.length) % items.length]
+    target.click()
+    return true
+  }
+
+  const handleEmpty = () => {
+    if (resultsList) resultsList.innerHTML = ''
+    clearActive()
+    setState('idle')
+  }
+
+  const renderResults = (items) => {
+    if (!resultsList) return
+    resultsList.innerHTML = ''
+    clearActive()
+    const fragment = document.createDocumentFragment()
+    items.forEach((item, index) => {
+      const link = document.createElement('a')
+      link.className = 'result-item'
+      link.href = normalizeUrl(item.url)
+      link.dataset.index = String(index)
+      link.id = `search-result-${index}`
+      link.setAttribute('role', 'option')
+
+      const icon = document.createElement('span')
+      icon.className = 'result-icon'
+      icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>`
+
+      const title = document.createElement('span')
+      title.className = 'result-title'
+      title.textContent = item.title || item.url
+
+      const path = document.createElement('span')
+      path.className = 'result-path'
+      path.textContent = item.url
+
+      const action = document.createElement('span')
+      action.className = 'result-action'
+      action.textContent = 'Jump to'
+
+      link.appendChild(icon)
+      link.appendChild(title)
+      link.appendChild(path)
+      link.appendChild(action)
+      fragment.appendChild(link)
+    })
+    resultsList.appendChild(fragment)
+  }
+
+  const loadPagefind = async () => {
+    if (engineReady) return pagefind
+    if (enginePromise) return enginePromise
+    setState('engine-loading')
+    if (loadingText) loadingText.textContent = '加载中...'
+    enginePromise = import(pagefindEntry)
+      .then((mod) => {
+        pagefind = mod
+        engineReady = true
+        handleEmpty()
+        return pagefind
+      })
+      .catch((error) => {
+        console.error('Pagefind 加载失败', error)
+        setState('error')
+        return null
+      })
+    return enginePromise
+  }
+
+  const parseSearchQuery = (query) => {
+    const filters = {}
+    let searchText = query
+    const chapterMatch = searchText.match(/\bchapter:(\S+)/i)
+    if (chapterMatch) {
+      // "all" means no filter, equivalent to searching all chapters
+      if (chapterMatch[1].toLowerCase() !== 'all') {
+        filters.chapter = chapterMatch[1]
+      }
+      searchText = searchText.replace(chapterMatch[0], '').trim()
+    }
+    const authorMatch = searchText.match(/\bauthor:(\S+)/i)
+    if (authorMatch) {
+      filters.author = authorMatch[1]
+      searchText = searchText.replace(authorMatch[0], '').trim()
+    }
+    return { searchText, filters }
+  }
+
+  const runSearch = async (query) => {
+    const mod = await loadPagefind()
+    if (!mod) return
+    const ticket = ++searchTicket
+    setState('searching')
+    if (loadingText) loadingText.textContent = '搜索中...'
+    try {
+      const { searchText, filters } = parseSearchQuery(query)
+      const searchOptions = {}
+      if (Object.keys(filters).length > 0) {
+        searchOptions.filters = filters
+      }
+      const searchQuery = searchText || null
+      const result = await mod.search(searchQuery, searchOptions)
+      if (ticket !== searchTicket) return
+      const entries = await Promise.all(
+        result.results.slice(0, 20).map(async (item) => {
+          const data = await item.data()
+          return {
+            url: data.url,
+            title: (data.meta && data.meta.title) || data.url,
+          }
+        })
+      )
+      if (ticket !== searchTicket) return
+      renderResults(entries)
+      if (entries.length === 0) {
+        if (emptyView) emptyView.textContent = '没有找到结果'
+        setState('empty')
+      } else {
+        setState('results')
+      }
+    } catch (error) {
+      if (ticket !== searchTicket) return
+      console.error('Pagefind 搜索失败', error)
+      setState('error')
+    }
+  }
+
+  const debouncedSearch = debounce((value) => {
+    const query = value.trim()
+    if (!query) {
+      handleEmpty()
+      return
+    }
+    runSearch(query)
+  }, 300)
+
+  const emitState = () => {
+    document.dispatchEvent(
+      new CustomEvent('search-drawer:state', { detail: { open: isOpen } })
+    )
+  }
+
+  const openDrawer = () => {
+    if (isOpen || !drawer) return
+    positionPanel()
+    updateScopes()
+    isOpen = true
+    drawer.classList.add('open')
+    drawer.setAttribute('aria-hidden', 'false')
+    window.requestAnimationFrame(() => {
+      input?.focus()
+    })
+    loadPagefind()
+    emitState()
+  }
+
+  const closeDrawer = () => {
+    if (!isOpen || !drawer) return
+    isOpen = false
+    drawer.classList.remove('open')
+    drawer.setAttribute('aria-hidden', 'true')
+    input?.blur()
+    emitState()
+  }
+
+  const toggleDrawer = () => {
+    if (isOpen) {
+      closeDrawer()
+    } else {
+      openDrawer()
+    }
+  }
+
+  input?.addEventListener('input', (event) => {
+    const value = (event.target && event.target.value) || ''
+    debouncedSearch(value)
+  })
+
+  input?.addEventListener('keydown', (event) => {
+    if (!isOpen) return
+    if (event.key === 'ArrowDown') {
+      event.preventDefault()
+      moveActive(1)
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault()
+      moveActive(-1)
+    } else if (event.key === 'Enter') {
+      const opened = activateResult()
+      if (opened) event.preventDefault()
+    }
+  })
+
+  closeControls?.forEach((el) => el.addEventListener('click', closeDrawer))
+
+  window.addEventListener('resize', () => {
+    if (isOpen) positionPanel()
+  })
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && isOpen) {
+      closeDrawer()
+    }
+  })
+
+  document.addEventListener('open-search-drawer', openDrawer)
+  document.addEventListener('close-search-drawer', closeDrawer)
+  document.addEventListener('toggle-search-drawer', toggleDrawer)
+
+  const scopeItems = drawer?.querySelectorAll('.scope-item')
+  scopeItems?.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault()
+      const scope = item.dataset.scope
+      const value = scope ? buildScopeValue(scope) : ''
+      if (value && input) {
+        input.value = `${value} `
+        input.focus()
+      }
+    })
+  })
+
+  emitState()
+</script>

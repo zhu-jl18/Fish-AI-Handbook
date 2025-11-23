@@ -3,14 +3,16 @@ import '../styles/global.css'
 import { siteConfig, getRobotsContent } from '../config/index'
 import Footer from '../components/Footer.astro'
 
-const { title, bodyClass } = Astro.props as {
+const { title, bodyClass, contributors } = Astro.props as {
   title?: string
   bodyClass?: string
+  contributors?: string[]
 }
 const pageTitle = title
   ? `${title} - ${siteConfig.titleFull}`
   : siteConfig.titleFull
 const robotsContent = getRobotsContent(siteConfig.robots)
+const contributorsContent = contributors?.length ? contributors.join(',') : ''
 ---
 
 <!doctype html>
@@ -21,6 +23,7 @@ const robotsContent = getRobotsContent(siteConfig.robots)
     <meta name="robots" content={robotsContent} />
     <title>{pageTitle}</title>
     <meta name="description" content={siteConfig.description} />
+    {contributorsContent && <meta name="contributors" content={contributorsContent} />}
 
     <!-- Favicon -->
     {
