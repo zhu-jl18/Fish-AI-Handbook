@@ -1,4 +1,7 @@
 ---
+import { CHAPTER_LABELS as SHARED_CHAPTER_LABELS } from '../config'
+export const SHARED_CHAPTER_LABELS_MAP = SHARED_CHAPTER_LABELS
+
 const base = import.meta.env.BASE_URL ?? '/'
 const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
 ---
@@ -462,16 +465,7 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
     panel.style.setProperty('--search-top', '0px')
   }
 
-  const CHAPTER_LABELS = {
-    concepts: 'Concepts',
-    'basic-usage': 'Basics',
-    prompts: 'Prompts',
-    advanced: 'Advanced',
-    fun: 'Fun',
-    resources: 'Resources',
-    theoretical: 'Theoretical',
-    manual: 'Manual',
-  }
+  const CHAPTER_LABELS = JSON.parse('{JSON.stringify(SHARED_CHAPTER_LABELS_MAP)}')
 
   const getCurrentChapter = () => {
     const path = window.location.pathname
