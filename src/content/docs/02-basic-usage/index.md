@@ -1,11 +1,11 @@
 ---
-title: 基础使用
+title: 基础用法
 description: 只讲必要的，太基础的自己看其他教程
 contributors:
   - claude
 ---
 
-本节只谈“怎么用”，安装和环境通通去 [here](/setup) 自己补课。
+本节只谈“怎么用”，安装和环境通通去 [here](/manual) 自己补课。
 
 ## Overview
 

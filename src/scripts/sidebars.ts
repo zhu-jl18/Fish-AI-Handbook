@@ -14,38 +14,38 @@ export type SidebarGroup = {
 export type SidebarSection = Array<SidebarLink | SidebarGroup>
 
 export function getSidebarForPath(path: string): SidebarSection {
-  if (path.startsWith('/fish-talks')) return FISH_TALKS_SIDEBAR
+  if (path.startsWith('/concepts')) return CONCEPTS_SIDEBAR
   if (path.startsWith('/basic-usage')) return BASIC_USAGE_SIDEBAR
   if (path.startsWith('/prompts')) return PROMPTS_SIDEBAR
   if (path.startsWith('/advanced')) return ADVANCED_TECHNIQUES_SIDEBAR
   if (path.startsWith('/fun')) return FUN_SIDEBAR
   if (path.startsWith('/resources')) return RESOURCES_SIDEBAR
   if (path.startsWith('/theoretical')) return THEORETICAL_SIDEBAR
-  if (path.startsWith('/setup')) return SETUP_SIDEBAR
+  if (path.startsWith('/manual')) return MANUAL_SIDEBAR
   return []
 }
 
-export const FISH_TALKS_SIDEBAR: SidebarSection = [
-  { label: '鱼说必看', href: '/fish-talks' },
+export const CONCEPTS_SIDEBAR: SidebarSection = [
+  { label: '概念认知', href: '/concepts' },
   {
     label: 'Models',
-    href: '/fish-talks/models',
+    href: '/concepts/models',
     items: [
-      { label: 'Top Models', href: '/fish-talks/models/top-models' },
-      { label: 'Others', href: '/fish-talks/models/others' },
-      { label: '模型排名', href: '/fish-talks/models/llm-rankings' },
+      { label: 'Top Models', href: '/concepts/models/top-models' },
+
+      { label: 'Rankings', href: '/concepts/models/llm-rankings' },
     ],
   },
   {
-    label: '术语扫盲',
-    href: '/fish-talks/glossary',
+    label: 'Definitions',
+    href: '/concepts/glossary',
     items: [
-      { label: '模型参数', href: '/fish-talks/glossary/model-params' },
-      { label: 'AI概念', href: '/fish-talks/glossary/ai-concepts' },
-      { label: '衍生词', href: '/fish-talks/glossary/derived-terms' },
+      { label: 'Model Params', href: '/concepts/glossary/model-params' },
+      { label: 'AI Concepts', href: '/concepts/glossary/ai-concepts' },
+      { label: 'Derived Terms', href: '/concepts/glossary/derived-terms' },
     ],
   },
-  { label: '开发者', href: '/fish-talks/developer' },
+  { label: 'Developer', href: '/concepts/developer' },
 ]
 
 export const BASIC_USAGE_SIDEBAR: SidebarSection = [
@@ -170,24 +170,25 @@ export const THEORETICAL_SIDEBAR: SidebarSection = [
   { label: 'Transformer', href: '/theoretical/transformer' },
   { label: 'MOE', href: '/theoretical/moe' },
   { label: 'GRPO', href: '/theoretical/grpo' },
+  { label: 'TR & TL', href: '/theoretical/tr-and-tl' },
 ]
 
-export const SETUP_SIDEBAR: SidebarSection = [
-  { label: '配置指南', href: '/setup' },
-  { label: 'Terminal', href: '/setup/terminal' },
-  { label: 'Vs Code', href: '/setup/vs-code' },
-  { label: 'Node.js', href: '/setup/nodejs' },
-  { label: 'Git', href: '/setup/git' },
+export const MANUAL_SIDEBAR: SidebarSection = [
+  { label: '配置指南', href: '/manual' },
+  { label: 'Terminal', href: '/manual/terminal' },
+  { label: 'Vs Code', href: '/manual/vs-code' },
+  { label: 'Node.js', href: '/manual/nodejs' },
+  { label: 'Git', href: '/manual/git' },
   {
     label: 'VPN',
-    href: '/setup/vpn',
+    href: '/manual/vpn',
   },
-  { label: 'Cherry Studio', href: '/setup/cherrystudio' },
+  { label: 'Cherry Studio', href: '/manual/cherrystudio' },
   {
     label: 'Claude Code',
-    href: '/setup/claude-code',
-    items: [{ label: 'CCR', href: '/setup/claude-code/ccr' }],
+    href: '/manual/claude-code',
+    items: [{ label: 'CCR', href: '/manual/claude-code/ccr' }],
   },
-  { label: 'Codex', href: '/setup/codex' },
-  { label: 'MCP Router', href: '/setup/mcp-router' },
+  { label: 'Codex', href: '/manual/codex' },
+  { label: 'MCP Router', href: '/manual/mcp-router' },
 ]

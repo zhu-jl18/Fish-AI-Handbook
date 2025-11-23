@@ -19,8 +19,15 @@ Secondly，这里我会讲三部分：完全免费的、学生免费的和付费
 
 At Last，想起来再补充。
 
+:::gallery{cols=6 gap=5 ratio=1/1}
+![1](https://p.sda1.dev/28/b0717ba4dcf1cc61b7d682722b3d688b/薅羊毛.gif)
+![1](https://p.sda1.dev/28/b0717ba4dcf1cc61b7d682722b3d688b/薅羊毛.gif)
+![1](https://p.sda1.dev/28/b0717ba4dcf1cc61b7d682722b3d688b/薅羊毛.gif)
+![1](https://p.sda1.dev/28/b0717ba4dcf1cc61b7d682722b3d688b/薅羊毛.gif)
+![1](https://p.sda1.dev/28/b0717ba4dcf1cc61b7d682722b3d688b/薅羊毛.gif)
+![1](https://p.sda1.dev/28/b0717ba4dcf1cc61b7d682722b3d688b/薅羊毛.gif)
+:::
 
-<img src="https://p.sda1.dev/28/b0717ba4dcf1cc61b7d682722b3d688b/薅羊毛.gif" width="12%">
 
 ---
 
