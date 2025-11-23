@@ -1,5 +1,6 @@
 ---
 import { siteConfig, navigationConfig } from '../config/index'
+import SearchDrawer from './SearchDrawer.astro'
 
 const { currentPage } = Astro.props
 ---
@@ -24,7 +25,14 @@ const { currentPage } = Astro.props
           </span>
         </a>
         <div class="nav-utilities">
-          <a href="/search" class="search-button" aria-label="Search">
+          <button
+            type="button"
+            class="search-button"
+            id="search-trigger"
+            aria-label="Search"
+            aria-controls="search-drawer"
+            aria-expanded="false"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -42,7 +50,7 @@ const { currentPage } = Astro.props
             </svg>
             <span class="search-label">{siteConfig.searchLabel}</span>
             <kbd class="search-shortcut">/</kbd>
-          </a>
+          </button>
           <a
             href={siteConfig.chatBotUrl}
             target="_blank"
@@ -219,6 +227,8 @@ const { currentPage } = Astro.props
 <!-- Toast 提示容器 -->
 <div id="toast-container" class="toast-container"></div>
 
+<SearchDrawer />
+
 <style>
   .header {
     position: static;
@@ -319,6 +329,9 @@ const { currentPage } = Astro.props
     height: var(--nav-control-size);
     min-height: var(--nav-control-size);
     box-sizing: border-box;
+    cursor: pointer;
+    appearance: none;
+    font: inherit;
   }
   .search-button:hover {
     color: var(--header-text-strong);
@@ -578,6 +591,7 @@ const { currentPage } = Astro.props
   const rssButton = document.getElementById('rss-button')
   const sitemapButton = document.getElementById('sitemap-button')
   const toastContainer = document.getElementById('toast-container')
+  const searchTrigger = document.getElementById('search-trigger')
 
   function showToast(message: string) {
     if (!toastContainer) return
@@ -631,13 +645,36 @@ const { currentPage } = Astro.props
 
   sitemapButton?.addEventListener('click', copySitemapUrl)
 
-  // 搜索快捷键：按下 '/' 打开搜索页或聚焦搜索框
+  const dispatchDrawerEvent = (type: string) => {
+    const eventName =
+      type === 'open' ? 'open-search-drawer' : 'toggle-search-drawer'
+    document.dispatchEvent(new CustomEvent(eventName))
+  }
+
+  const tryOpenDrawer = () => {
+    const drawer = document.getElementById('search-drawer')
+    if (!drawer) return false
+    dispatchDrawerEvent('open')
+    return true
+  }
+
+  searchTrigger?.addEventListener('click', () => dispatchDrawerEvent('toggle'))
+
+  document.addEventListener('search-drawer:state', (event) => {
+    const detail = (event as CustomEvent)?.detail || {}
+    const isOpen = Boolean(detail.open)
+    searchTrigger?.setAttribute('aria-expanded', isOpen ? 'true' : 'false')
+  })
+
+  // 搜索快捷键：按下 '/' 打开搜索抽屉并聚焦输入
   function focusSearchInput() {
-    const input = document.querySelector('#search input')
-    if (input instanceof HTMLInputElement) {
-      input.focus()
-      input.select()
+    const drawerInput = document.querySelector('#search-drawer-input')
+    if (drawerInput instanceof HTMLInputElement) {
+      drawerInput.focus()
+      drawerInput.select()
+      return true
     }
+    return false
   }
 
   window.addEventListener('keydown', (e) => {
@@ -648,23 +685,20 @@ const { currentPage } = Astro.props
     const key = e.key || ''
     if (key !== '/') return
 
-    const target = e.target as Element | null
+    const target = e.target as HTMLElement | null
+    const tagName = target?.tagName
     const isEditable =
-      !!target &&
-      ((target as HTMLElement).isContentEditable ||
-        ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName))
+      target instanceof HTMLElement &&
+      (target.isContentEditable ||
+        ['INPUT', 'TEXTAREA', 'SELECT'].includes(tagName || ''))
 
     if (isEditable) return
 
     // 阻止在页面上输入 '/'
     e.preventDefault()
 
-    if (window.location.pathname.startsWith('/search')) {
-      // 已在搜索页：直接聚焦
+    if (tryOpenDrawer()) {
       focusSearchInput()
-    } else {
-      // 其他页面：跳转到搜索页
-      window.location.href = '/search'
     }
   })
 </script>

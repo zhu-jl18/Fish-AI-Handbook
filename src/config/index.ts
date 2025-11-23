@@ -14,3 +14,5 @@ export type { Theme } from './theme'
 
 export { default as codeConfig } from './code'
 export type { CodeConfig } from './code'
+
+export { CHAPTER_LABELS } from './search'
