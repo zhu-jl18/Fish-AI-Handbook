@@ -386,17 +386,12 @@ manually rewrites the docs.
 
 1. **SearchDrawer 章节映射**（`src/components/SearchDrawer.astro`）：
    ```javascript
-   const CHAPTER_LABELS = {
-     concepts: 'Concepts',
-     'basic-usage': 'Basics',
-     prompts: 'Prompts',      // ← 修改此处的 key
-     advanced: 'Advanced',
-     fun: 'Fun',
-     resources: 'Resources',
-     theoretical: 'Theoretical',
-     manual: 'Manual',
-   }
+   import { CHAPTER_LABELS } from '../config'
+
+   const CHAPTER_LABELS = JSON.parse('{JSON.stringify(CHAPTER_LABELS)}')
    ```
+   - 数据源在 `src/config/search.ts`，由 `navigationConfig.items` 动态生成，**不要在组件内手写映射**。
+   - 如需新增/重命名章节，优先修改 `src/config/navigation.ts`，映射会自动同步。
 
 2. **docsMap 映射**（`src/scripts/docsMap.ts`）：确保别名与内容目录对应
 
