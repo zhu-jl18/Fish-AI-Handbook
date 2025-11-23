@@ -608,7 +608,10 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
     let searchText = query
     const chapterMatch = searchText.match(/\bchapter:(\S+)/i)
     if (chapterMatch) {
-      filters.chapter = chapterMatch[1]
+      // "all" means no filter, equivalent to searching all chapters
+      if (chapterMatch[1].toLowerCase() !== 'all') {
+        filters.chapter = chapterMatch[1]
+      }
       searchText = searchText.replace(chapterMatch[0], '').trim()
     }
     const authorMatch = searchText.match(/\bauthor:(\S+)/i)
