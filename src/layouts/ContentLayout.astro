@@ -39,9 +39,17 @@ const currentKey = getCurrentNavKey(currentPath)
 
 // 从 entry 对象获取 entryId（用于 ContentActions 组件）
 const entryId = entry?.id
+
+// 提取 chapter（从 URL 路径的第一段）
+const pathSegments = currentPath.split('/').filter(Boolean)
+const chapter = pathSegments[0] || 'all'
+
+// 提取 author（优先取非 Fish 的第一个 contributor）
+const contributorsList = Array.isArray(contributors) ? contributors : []
+const author = contributorsList.find((c: string) => c.toLowerCase() !== 'fish') || contributorsList[0] || 'Fish'
 ---
 
-<BaseLayout title={title} bodyClass={bodyClass}>
+<BaseLayout title={title} bodyClass={bodyClass} contributors={contributors}>
   <Header currentPage={currentKey} />
 
   <div class="content-wrapper">
@@ -52,6 +60,8 @@ const entryId = entry?.id
           data-pagefind-body
           style={`--font-size-base: ${theme.fontSizeBase}; --font-size-lg: ${theme.fontSizeLg}; --line-height-base: ${theme.lineHeightBase};`}
         >
+          <span data-pagefind-filter="chapter" class="visually-hidden">{chapter}</span>
+          <span data-pagefind-filter="author" class="visually-hidden">{author}</span>
           {
             entryId && (
               <ContentActions entryId={entryId} lastModified={lastModified} />
@@ -104,6 +114,18 @@ const entryId = entry?.id
 </BaseLayout>
 
 <style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .content-wrapper {
     display: flex;
     justify-content: center;
