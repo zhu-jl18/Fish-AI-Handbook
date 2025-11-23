@@ -1,6 +1,4 @@
 ---
-import { siteConfig } from '../config/index'
-
 const base = import.meta.env.BASE_URL ?? '/'
 const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
 ---
@@ -494,15 +492,25 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
     return nonFish || 'Fish'
   }
 
+  const buildScopeValue = (scope) => {
+    if (scope === 'chapter') {
+      const chapter = getCurrentChapter()
+      return chapter ? `chapter:${chapter.key}` : 'chapter:all'
+    }
+    if (scope === 'author') {
+      return `author:${getCurrentAuthor()}`
+    }
+    return ''
+  }
+
   const updateScopes = () => {
     const chapterSyntax = drawer?.querySelector('[data-chapter-syntax]')
     const authorSyntax = drawer?.querySelector('[data-author-syntax]')
-    const chapter = getCurrentChapter()
     if (chapterSyntax) {
-      chapterSyntax.textContent = chapter ? `chapter:${chapter.key}` : 'chapter:all'
+      chapterSyntax.textContent = buildScopeValue('chapter')
     }
     if (authorSyntax) {
-      authorSyntax.textContent = `author:${getCurrentAuthor()}`
+      authorSyntax.textContent = buildScopeValue('author')
     }
   }
 
@@ -725,18 +733,10 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
     item.addEventListener('click', (e) => {
       e.preventDefault()
       const scope = item.dataset.scope
-      if (scope === 'chapter') {
-        const chapter = getCurrentChapter()
-        if (input) {
-          input.value = chapter ? `chapter:${chapter.key} ` : 'chapter:all '
-          input.focus()
-        }
-      } else if (scope === 'author') {
-        const author = getCurrentAuthor()
-        if (input) {
-          input.value = `author:${author} `
-          input.focus()
-        }
+      const value = scope ? buildScopeValue(scope) : ''
+      if (value && input) {
+        input.value = `${value} `
+        input.focus()
       }
     })
   })
