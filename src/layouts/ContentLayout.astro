@@ -243,7 +243,7 @@ const entryId = entry?.id
 
   .mobile-menu-trigger {
     position: fixed;
-    right: 4rem; /* Left of BackToTop (1rem + 40px + gap) */
+    right: 4rem; /* Right of BackToTop: 2rem (32px) gap at desktop */
     bottom: 1rem;
     width: 40px;
     height: 40px;
@@ -275,6 +275,11 @@ const entryId = entry?.id
   @media (max-width: 1024px) {
     .mobile-menu-trigger {
       display: inline-flex;
+    }
+  }
+  @media (max-width: 768px) {
+    .mobile-menu-trigger {
+      right: 1rem; /* Match BackToTop on mobile for consistent gap */
     }
   }
 </style>
