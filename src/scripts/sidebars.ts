@@ -75,11 +75,11 @@ export const BASIC_USAGE_SIDEBAR: SidebarSection = [
 export const PROMPTS_SIDEBAR: SidebarSection = [
   { label: '提示词', href: '/prompts' },
   {
-    label: '理论与框架',
+    label: 'Foundations',
     href: '/prompts/foundations',
     items: [
-      { label: '核心原则与骨架', href: '/prompts/foundations/principles' },
-      { label: '反模式清单', href: '/prompts/foundations/anti-patterns' },
+      { label: 'Principles', href: '/prompts/foundations/principles' },
+      { label: 'Anti-Patterns', href: '/prompts/foundations/anti-patterns' },
     ],
   },
   {
@@ -102,17 +102,7 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
 
 export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
   { label: '进阶玩法', href: '/advanced' },
-  {
-    label: '知识库',
-    href: '/advanced/knowledge-bases',
-    items: [
-      { label: 'Principles', href: '/advanced/knowledge-bases/principles' },
-      {
-        label: 'Practice',
-        href: '/advanced/knowledge-bases/practice',
-      },
-    ],
-  },
+  { label: 'RAG', href: '/advanced/rag' },
   { label: 'Spec Coding', href: '/advanced/spec-coding' },
   { label: 'MCP', href: '/advanced/mcp' },
   {
