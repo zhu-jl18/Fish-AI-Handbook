@@ -433,13 +433,18 @@ manually rewrites the docs.
 
 1. **SearchDrawer 章节映射**（`src/components/SearchDrawer.astro`）：
    ```javascript
-   // 服务端脚本（frontmatter）
+   // 服务端脚本（frontmatter）- 序列化为 JSON 字符串
    import { CHAPTER_LABELS as SHARED_CHAPTER_LABELS } from '../config'
-   export const SHARED_CHAPTER_LABELS_MAP = SHARED_CHAPTER_LABELS
+   const chapterLabelsJson = JSON.stringify(SHARED_CHAPTER_LABELS)
 
-   // 客户端脚本（<script> 块内）
-   const CHAPTER_LABELS = JSON.parse('{JSON.stringify(SHARED_CHAPTER_LABELS_MAP)}')
+   // HTML 模板 - 通过 data 属性传递
+   <div id="search-drawer" data-chapter-labels={chapterLabelsJson}>
+
+   // 客户端脚本（<script is:inline> 块内）- 从 data 属性读取
+   const drawer = document.getElementById('search-drawer')
+   const CHAPTER_LABELS = JSON.parse(drawer?.dataset.chapterLabels || '{}')
    ```
+   - **重要**：Astro 的 `<script is:inline>` 不会插值 frontmatter 变量，必须通过 `data-*` 属性传递数据到客户端。
    - 数据源在 `src/config/search.ts`，由 `navigationConfig.items` 动态生成，**不要在组件内手写映射**。
    - 如需新增/重命名章节，优先修改 `src/config/navigation.ts`，映射会自动同步。
 

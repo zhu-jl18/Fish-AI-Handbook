@@ -1,9 +1,9 @@
 ---
 import { CHAPTER_LABELS as SHARED_CHAPTER_LABELS } from '../config'
-export const SHARED_CHAPTER_LABELS_MAP = SHARED_CHAPTER_LABELS
 
 const base = import.meta.env.BASE_URL ?? '/'
 const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
+const chapterLabelsJson = JSON.stringify(SHARED_CHAPTER_LABELS)
 ---
 
 <div
@@ -12,6 +12,7 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
   aria-hidden="true"
   data-bundle-path={pagefindBundle}
   data-base-path={base}
+  data-chapter-labels={chapterLabelsJson}
 >
   <div class="search-backdrop" data-close></div>
   <div
@@ -49,7 +50,19 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
     </div>
     <div class="search-scopes" id="search-scopes">
       <a class="scope-item" data-scope="chapter" role="option">
-        <svg class="scope-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg
+          class="scope-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
           <circle cx="11" cy="11" r="8"></circle>
           <path d="m21 21-4.35-4.35"></path>
         </svg>
@@ -57,7 +70,19 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
         <span class="scope-hint">Search in this chapter</span>
       </a>
       <a class="scope-item" data-scope="author" role="option">
-        <svg class="scope-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg
+          class="scope-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
           <circle cx="11" cy="11" r="8"></circle>
           <path d="m21 21-4.35-4.35"></path>
         </svg>
@@ -459,13 +484,16 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
       const margin = 24
       const viewportWidth =
         window.innerWidth || document.documentElement.clientWidth
-      panel.style.setProperty('--search-width', `${viewportWidth - margin * 2}px`)
+      panel.style.setProperty(
+        '--search-width',
+        `${viewportWidth - margin * 2}px`,
+      )
       panel.style.setProperty('--search-left', `${margin}px`)
     }
     panel.style.setProperty('--search-top', '0px')
   }
 
-  const CHAPTER_LABELS = JSON.parse('{JSON.stringify(SHARED_CHAPTER_LABELS_MAP)}')
+  const CHAPTER_LABELS = JSON.parse(drawer?.dataset.chapterLabels || '{}')
 
   const getCurrentChapter = () => {
     const path = window.location.pathname
@@ -481,7 +509,7 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
     if (!meta) return 'Fish'
     const contributors = meta.content.split(',').map((c) => c.trim())
     const nonFish = contributors.find(
-      (c) => c.toLowerCase() !== 'fish' && c !== ''
+      (c) => c.toLowerCase() !== 'fish' && c !== '',
     )
     return nonFish || 'Fish'
   }
@@ -624,7 +652,7 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
             url: data.url,
             title: (data.meta && data.meta.title) || data.url,
           }
-        })
+        }),
       )
       if (ticket !== searchTicket) return
       renderResults(entries)
@@ -652,7 +680,7 @@ const pagefindBundle = (base.endsWith('/') ? base : `${base}/`) + 'pagefind/'
 
   const emitState = () => {
     document.dispatchEvent(
-      new CustomEvent('search-drawer:state', { detail: { open: isOpen } })
+      new CustomEvent('search-drawer:state', { detail: { open: isOpen } }),
     )
   }
 
