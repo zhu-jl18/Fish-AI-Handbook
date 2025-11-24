@@ -23,7 +23,7 @@
 
 ### 2.1 目录排序
 
-- 顶层目录严格递增：`01-concepts`、`02-basic-usage`、`03-prompts`、`04-advanced`、`05-fun`、`06-resources`、`99-manual`（置底）。
+- 顶层目录严格递增：`01-concepts`、`02-basic-usage`、`03-prompts`、`04-advanced`、`05-fun`、`06-resources`、`07-theoretical`、`99-manual`（置底）。
 - 不允许跳号；新增一级目录必须在末尾递增，`99-manual` 保留为固定置底。
 - 历史目录 `tech`、`demo` 已废弃，其内容已并入 `06-resources`（`2API`、`云平台`）；禁止复活。
 
@@ -168,18 +168,65 @@ description: 简短描述（必填，缺失会导致构建失败）
 
 #### 用法
 
+基础语法：`:::gallery{参数}` + 图片列表 + `:::`
+
 ```markdown
 :::gallery{cols=2 gap=18 ratio=1/1}
-![图1](https://p.sda1.dev/28/dec249690ccfb5c4195ad3516e66e736/unnamed.jpg)
-![图2](https://p.sda1.dev/28/9d7cc503eb7fbfbff67a406f8a4b5389/juya.jpg)
+![图1](https://example.com/image1.jpg)
+![图2](https://example.com/image2.jpg)
 :::
 ```
+
+#### 参数说明
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `cols` | number | `2` | 列数，图片按此列数自动换行 |
+| `gap` | number/string | `12px` | 图片间距，纯数字自动补 `px`，支持 `rem`、`%` 等单位 |
+| `ratio` | string | `auto` | 图片宽高比，如 `1/1`（正方形）、`16/9`（横屏）、`4/3` |
+
+#### 示例
+
+- **2 列正方形网格**（常用于头像/图标展示）：
+
+```markdown
+:::gallery{cols=2 gap=18 ratio=1/1}
+![图1](https://example.com/a.jpg)
+![图2](https://example.com/b.jpg)
+:::
+```
+
+- **6 列紧凑网格**（适合小图标/表情包）：
+
+```markdown
+:::gallery{cols=6 gap=5 ratio=1/1}
+![1](https://example.com/icon1.gif)
+![2](https://example.com/icon2.gif)
+![3](https://example.com/icon3.gif)
+:::
+```
+
+- **3 列自适应高度**（保持原图比例）：
+
+```markdown
+:::gallery{cols=3 gap=1rem}
+![风景1](https://example.com/landscape1.jpg)
+![风景2](https://example.com/landscape2.jpg)
+:::
+```
+
 #### 渲染行为与场景
 
-- 由参数影响 行列式，间距以及图片比例等布局样式
+- 自动提取容器内所有图片，每张图片独立占一格（避免多图被 `<p>` 包裹导致只占一格）。
+- 图片自动添加 `loading="lazy"` 懒加载属性。
+- 图片使用 `object-fit: cover` 填充，配合 `ratio` 可实现统一裁切效果。
+- 适用场景：作品展示、表情包集合、对比图、截图集锦等。
 
+#### 技术实现
 
-
+- 语法解析：`remark-directive` + `src/plugins/remark-gallery-directive.js`。
+- 样式：`src/styles/global.css` 中 `.image-gallery` 与 `.image-gallery__item` 系列。
+- CSS Grid 布局，通过 CSS 变量 `--gallery-cols`、`--gallery-gap`、`--gallery-ratio` 控制。
 
 ## 5. 开发与验证流程
 
@@ -386,9 +433,12 @@ manually rewrites the docs.
 
 1. **SearchDrawer 章节映射**（`src/components/SearchDrawer.astro`）：
    ```javascript
-   import { CHAPTER_LABELS } from '../config'
+   // 服务端脚本（frontmatter）
+   import { CHAPTER_LABELS as SHARED_CHAPTER_LABELS } from '../config'
+   export const SHARED_CHAPTER_LABELS_MAP = SHARED_CHAPTER_LABELS
 
-   const CHAPTER_LABELS = JSON.parse('{JSON.stringify(CHAPTER_LABELS)}')
+   // 客户端脚本（<script> 块内）
+   const CHAPTER_LABELS = JSON.parse('{JSON.stringify(SHARED_CHAPTER_LABELS_MAP)}')
    ```
    - 数据源在 `src/config/search.ts`，由 `navigationConfig.items` 动态生成，**不要在组件内手写映射**。
    - 如需新增/重命名章节，优先修改 `src/config/navigation.ts`，映射会自动同步。

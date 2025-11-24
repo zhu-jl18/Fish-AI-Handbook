@@ -29,8 +29,6 @@
 
 - 开发协作规范（人类和AI通用）：[CONTRIBUTING.md](CONTRIBUTING.md)
 - AI Agent 通用规则（适用Claude Code，Codex等AI Agent）：[AGENTS.md](AGENTS.md)
-- Warp 专用规则：[WARP.md](WARP.md)
-- Cursor 专用规则：[.cursor/](.cursor/)
 - PR 模板：[.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md)
 - Issue 模板：[.github/ISSUE_TEMPLATE/](.github/ISSUE_TEMPLATE/)
 
@@ -63,7 +61,7 @@ npm run format     # 代码格式化
 - 框架：Astro（静态导出）+ MDX；代码高亮：Shiki
 - 目录：内容 `src/content/docs/`；路由 `src/pages/`；布局 `src/layouts/`；组件 `src/components/`；侧栏逻辑 `src/scripts/sidebars.ts`
 - 内容层级：最多三级（一级/二级=文件夹+index.md；三级=单页 md）
-- 顶层目录命名：`NN-alias`（01..06、99-manual 置底）
+- 顶层目录命名：`NN-alias`（01..07、99-manual 置底）
 
 <div align="right"><a href="#top">回到顶部 ↑</a></div>
 
