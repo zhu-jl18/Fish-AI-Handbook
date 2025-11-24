@@ -15,36 +15,38 @@ const {
 <section class="panel structure-panel panel-with-legend">
   <span class="panel-legend">CHAPTER</span>
   <nav class="structure-nav">
-    {structure.map((entry) =>
-      'items' in entry ? (
-        <div class="structure-group">
+    {
+      structure.map((entry) =>
+        'items' in entry ? (
+          <div class="structure-group">
+            <a
+              href={entry.href ?? entry.items?.[0]?.href ?? '#'}
+              class={`structure-link ${isGroupActive(entry) ? 'active' : ''}`}
+            >
+              {entry.label}
+            </a>
+            {entry.items && entry.items.length > 0 ? (
+              <div class="structure-subnav">
+                {entry.items.map((link) => (
+                  <a
+                    href={link.href}
+                    class={`structure-sublink ${isExactActive(link.href) ? 'active' : ''}`}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        ) : (
           <a
-            href={entry.href ?? entry.items?.[0]?.href ?? '#'}
-            class={`structure-link ${isGroupActive(entry) ? 'active' : ''}`}
+            href={entry.href}
+            class={`structure-link ${isExactActive(entry.href) ? 'active' : ''}`}
           >
             {entry.label}
           </a>
-          {entry.items && entry.items.length > 0 ? (
-            <div class="structure-subnav">
-              {entry.items.map((link) => (
-                <a
-                  href={link.href}
-                  class={`structure-sublink ${isExactActive(link.href) ? 'active' : ''}`}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          ) : null}
-        </div>
-      ) : (
-        <a
-          href={entry.href}
-          class={`structure-link ${isExactActive(entry.href) ? 'active' : ''}`}
-        >
-          {entry.label}
-        </a>
-      ),
-    )}
+        ),
+      )
+    }
   </nav>
 </section>

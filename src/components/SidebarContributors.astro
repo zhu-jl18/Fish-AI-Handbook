@@ -1,7 +1,8 @@
 ---
 import type { ContributorInfo } from '../config/site'
 
-const { contributorList = [] }: { contributorList?: ContributorInfo[] } = Astro.props
+const { contributorList = [] }: { contributorList?: ContributorInfo[] } =
+  Astro.props
 ---
 
 <section class="panel contributors-panel panel-with-legend">
@@ -12,22 +13,24 @@ const { contributorList = [] }: { contributorList?: ContributorInfo[] } = Astro.
   <div
     class={`contributors-list ${contributorList.length > 2 ? 'grid-layout' : 'list-layout'}`}
   >
-    {contributorList.map((person) => (
-      <a
-        class="contributor-card"
-        href={person.link}
-        target="_blank"
-        rel="noreferrer noopener"
-        title={`${person.name} (@${person.username})`}
-      >
-        <img src={person.avatar} alt={person.name} loading="lazy" />
-        {contributorList.length <= 2 ? (
-          <div class="contributor-meta">
-            <span class="contributor-name">{person.name}</span>
-            <span class="contributor-handle">@{person.username}</span>
-          </div>
-        ) : null}
-      </a>
-    ))}
+    {
+      contributorList.map((person) => (
+        <a
+          class="contributor-card"
+          href={person.link}
+          target="_blank"
+          rel="noreferrer noopener"
+          title={`${person.name} (@${person.username})`}
+        >
+          <img src={person.avatar} alt={person.name} loading="lazy" />
+          {contributorList.length <= 2 ? (
+            <div class="contributor-meta">
+              <span class="contributor-name">{person.name}</span>
+              <span class="contributor-handle">@{person.username}</span>
+            </div>
+          ) : null}
+        </a>
+      ))
+    }
   </div>
 </section>
