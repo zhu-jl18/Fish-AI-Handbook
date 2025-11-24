@@ -23,7 +23,11 @@ const contributorsContent = contributors?.length ? contributors.join(',') : ''
     <meta name="robots" content={robotsContent} />
     <title>{pageTitle}</title>
     <meta name="description" content={siteConfig.description} />
-    {contributorsContent && <meta name="contributors" content={contributorsContent} />}
+    {
+      contributorsContent && (
+        <meta name="contributors" content={contributorsContent} />
+      )
+    }
 
     <!-- Favicon -->
     {
