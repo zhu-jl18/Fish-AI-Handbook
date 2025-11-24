@@ -46,7 +46,10 @@ const chapter = pathSegments[0] || 'all'
 
 // 提取 author（优先取非 Fish 的第一个 contributor）
 const contributorsList = Array.isArray(contributors) ? contributors : []
-const author = contributorsList.find((c: string) => c.toLowerCase() !== 'fish') || contributorsList[0] || 'Fish'
+const author =
+  contributorsList.find((c: string) => c.toLowerCase() !== 'fish') ||
+  contributorsList[0] ||
+  'Fish'
 ---
 
 <BaseLayout title={title} bodyClass={bodyClass} contributors={contributors}>
@@ -60,8 +63,12 @@ const author = contributorsList.find((c: string) => c.toLowerCase() !== 'fish') 
           data-pagefind-body
           style={`--font-size-base: ${theme.fontSizeBase}; --font-size-lg: ${theme.fontSizeLg}; --line-height-base: ${theme.lineHeightBase};`}
         >
-          <span data-pagefind-filter="chapter" class="visually-hidden">{chapter}</span>
-          <span data-pagefind-filter="author" class="visually-hidden">{author}</span>
+          <span data-pagefind-filter="chapter" class="visually-hidden"
+            >{chapter}</span
+          >
+          <span data-pagefind-filter="author" class="visually-hidden"
+            >{author}</span
+          >
           {
             entryId && (
               <ContentActions entryId={entryId} lastModified={lastModified} />
