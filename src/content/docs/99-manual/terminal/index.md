@@ -8,7 +8,7 @@ description: 终端工具安装与配置全指南
 ## Brief Intro
 
 终端有三个组成部分：
-[终端外壳] + [内核shell] + [shell插件]，以最常见默认的cmd终端来说，它就是默认的外壳+cmd shell且无插件，这样非常地 ugly 而且也 inconvenient，那么自然要对这三个 分别配置以进行优化和美化了。
+[终端外壳] + [内核Shell] + [Shell插件]，以最常见默认的CMD终端来说，它就是默认的外壳+CMD Shell且无插件，这样非常地 ugly 而且也 inconvenient，那么自然要对这三个 分别配置以进行优化和美化了。
 
 这里介绍一下其他的终端软件，我基本都试过了，被我排除了：WezTerm、Rio、Alacritty、Kitty 等等。
 
@@ -18,7 +18,7 @@ description: 终端工具安装与配置全指南
 ```bash
 winget install Microsoft.WindowsTerminal
 ```
-接下来安装 **powershell7**(原始的PowerShell实在太老旧了，并且cmd也太古老了，很多命令都不支持)：
+接下来安装 **PowerShell 7**(原始的PowerShell实在太老旧了，并且CMD也太古老了，很多命令都不支持)：
 ```bash
 winget install Microsoft.PowerShell
 ```
@@ -26,7 +26,7 @@ winget install Microsoft.PowerShell
 <img src="https://static.woshipm.com/views/woshipm_api_def_20251028173629_3603.png" alt="Windows Terminal" width="80%" >
 
 
-终端美化分为两部分，一部分是对wt的美化，一部分是对集成的pwsh7的美化。对于wt，有可视化的配置选项，也可以直接抄我的json：
+终端美化分为两部分，一部分是对Windows Terminal的美化，一部分是对集成的PowerShell 7的美化。对于Windows Terminal，有可视化的配置选项，也可以直接抄我的JSON：
 ```json
 {}
 ```
@@ -36,7 +36,7 @@ winget install Microsoft.PowerShell
 winget install JanDeDobbeleer.OhMyPosh -s winget
 ```
 
-然后让oh-my-posh接管pwsh7:
+然后让oh-my-posh接管PowerShell 7:
 ```bash
 notepad $PROFILE
 ```

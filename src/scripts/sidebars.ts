@@ -153,6 +153,8 @@ export const THEORETICAL_SIDEBAR: SidebarSection = [
   { label: '理论学习', href: '/theoretical' },
   { label: 'Transformer', href: '/theoretical/transformer' },
   { label: 'MOE', href: '/theoretical/moe' },
+  { label: 'Scaling Laws', href: '/theoretical/scaling-laws' },
+  { label: 'Alignment', href: '/theoretical/alignment' },
   { label: 'GRPO', href: '/theoretical/grpo' },
   { label: 'TR & TL', href: '/theoretical/tr-and-tl' },
 ]

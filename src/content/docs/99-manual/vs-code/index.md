@@ -1,5 +1,5 @@
 ---
-title: VsCode配置
+title: VS Code配置
 description: VsCode的基础配置与使用。
 ---
 
@@ -13,7 +13,7 @@ description: VsCode的基础配置与使用。
 {}
 ```
 
-VsCode和有一个叫作工作区的概念。
+VS Code 有一个叫作工作区的概念。
 
 ## Useful Plugins
 

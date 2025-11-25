@@ -3,14 +3,14 @@ title: CCR
 description: Claude Code Router 插件的安装与配置全指南。
 ---
 
-ccr是用来管理和接入不同渠道模型的一个good choice，尽管有很多这样的轮子，我还是会推荐它，它的优势在于：
+CCR是用来管理和接入不同渠道模型的一个good choice，尽管有很多这样的轮子，我还是会推荐它，它的优势在于：
 
 - 支持热切换
 - 细分的子路由
-- 不同openai接口的支持
+- 不同OpenAI接口的支持
 - 作为代理可以接入其他管理工具
 
-作者是[musistudio](https://github.com/musistudio)，ccr的github仓库是[claude-code-router](https://github.com/musistudio/claude-code-router)。
+作者是[musistudio](https://github.com/musistudio)，CCR的GitHub仓库是[Claude Code Router](https://github.com/musistudio/claude-code-router)。
 
 ## Quick Start
 
@@ -30,7 +30,7 @@ ccr ui   # 打开ccr ui 界面
 打开UI界面之后 配置即可，如果已有配置，那么
 
 ```bash
-ccr code # 启动claude code
+ccr code # 启动Claude Code
 ```
 
 ## Settings Ref

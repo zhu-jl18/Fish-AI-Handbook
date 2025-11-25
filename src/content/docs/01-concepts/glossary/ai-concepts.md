@@ -51,12 +51,7 @@ Prompt engineering is for script kiddies. Context engineering is for system arch
        例子：让它写论文综述，它会凭空捏造出作者、标题甚至页码都对得上的参考文献。
        本质：它学到了学术引用的格式（Syntax），却完全不在乎引用的内容（Semantics）是否存在。
 
-
-
 记住： 在你核实之前，默认它在撒谎。
-
-
-
 
 ### Search
 

@@ -14,12 +14,11 @@ description: some derived terms
 
 ## Agent
 
-拓展能力边界：
-from only-chat to interactive with extra-information.
+拓展能力边界： from only-chat to interactive with extra-information.
 
 ## Vibe Coding
 
-It turns to be
+It turns to be: 
 
 > code is cheap, show me your prompts.
 
@@ -27,7 +26,7 @@ It turns to be
 
 ## Spec
 
-Spec意思是规范
+Spec 意思是规范 。
 
 
 ## Workflow
