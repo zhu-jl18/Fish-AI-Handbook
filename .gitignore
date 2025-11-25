@@ -42,8 +42,6 @@ pnpm-debug.log*
 # local AI assistants & docs
 .claude/
 .giga/
-CLAUDE.md
-claude.md
 WARP.md
 .windsurf/
 .cursor/
