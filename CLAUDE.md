@@ -1,0 +1,267 @@
+# Fish AI Handbook - AI 上下文索引
+
+> 生成时间: 2025-11-25 00:20:45
+> 本文件由 `/init-project` 命令自动生成，用于为 AI Agent 提供项目上下文。
+
+---
+
+## 项目概览
+
+**Fish AI Handbook** 是一个基于 Astro 构建的静态文档站点，用于记录和分享 AI 使用模式与技术实践。项目采用 MDX 内容管理、Pagefind 站内搜索，支持 Playwright E2E 测试。
+
+### 技术栈
+
+| 分类 | 技术 |
+|------|------|
+| 框架 | Astro 5 (静态导出) |
+| 内容 | MDX + Markdown |
+| 语言 | TypeScript |
+| 代码高亮 | Shiki (astro-expressive-code) |
+| 搜索 | Pagefind |
+| 测试 | Playwright |
+| 部署 | Vercel |
+
+### 核心文档
+
+| 文档 | 用途 |
+|------|------|
+| `README.md` | 架构速览与快速开始 |
+| `CONTRIBUTING.md` | **唯一事实源** - 开发规范、流程、提交约定 |
+| `AGENTS.md` | AI Agent 行为边界与通用规则 |
+
+---
+
+## 架构结构图
+
+```mermaid
+graph TB
+    subgraph "用户界面层"
+        Pages[src/pages/*.astro<br/>路由页面]
+        Layouts[src/layouts/*.astro<br/>布局模板]
+        Components[src/components/*.astro<br/>UI 组件]
+    end
+
+    subgraph "内容层"
+        Content[src/content/docs/**<br/>MDX/Markdown 文档]
+        ContentConfig[src/content/config.ts<br/>Content Collections]
+    end
+
+    subgraph "配置层"
+        Config[src/config/<br/>站点/导航/主题/搜索配置]
+        Scripts[src/scripts/<br/>侧栏/目录/文档映射]
+    end
+
+    subgraph "扩展层"
+        Plugins[src/plugins/<br/>Remark 插件]
+        Utils[src/utils/<br/>工具函数]
+        Styles[src/styles/<br/>全局样式]
+    end
+
+    subgraph "构建输出"
+        Dist[dist/<br/>静态文件]
+        Pagefind[dist/pagefind/<br/>搜索索引]
+    end
+
+    Pages --> Layouts
+    Layouts --> Components
+    Pages --> Content
+    Content --> ContentConfig
+    Pages --> Config
+    Pages --> Scripts
+    Layouts --> Styles
+    Content --> Plugins
+    Pages --> Utils
+    Pages --> Dist
+    Dist --> Pagefind
+```
+
+---
+
+## 目录结构
+
+```
+Fish-AI-Handbook-dev/
+├── src/
+│   ├── components/      # UI 组件 (12 个 Astro 组件)
+│   ├── config/          # 配置模块 (站点/导航/搜索/代码/主题)
+│   ├── content/         # 文档内容 (MDX/Markdown)
+│   │   └── docs/        # 8 个一级章节
+│   ├── layouts/         # 布局模板 (BaseLayout, ContentLayout)
+│   ├── pages/           # 路由页面 (与 content 镜像)
+│   ├── plugins/         # Remark 插件 (spoiler, gallery, etc.)
+│   ├── scripts/         # 脚本工具 (sidebars, docsMap, toc)
+│   ├── styles/          # 全局样式
+│   └── utils/           # 工具函数 (docsPath, git)
+├── scripts/             # Node 构建脚本
+├── tests/e2e/           # Playwright E2E 测试
+├── public/              # 静态资源
+├── astro.config.mjs     # Astro 配置入口
+├── package.json         # 项目依赖与脚本
+└── CONTRIBUTING.md      # 开发规范 (唯一事实源)
+```
+
+---
+
+## 模块索引
+
+### 📦 src/components
+UI 组件集合，包含页面头部、侧栏、搜索、目录等核心组件。
+
+| 组件 | 功能 |
+|------|------|
+| `Header.astro` | 页面头部导航 |
+| `LeftSidebar.astro` | 左侧章节导航 |
+| `RightSidebar.astro` | 右侧目录 (TOC) |
+| `SearchDrawer.astro` | 搜索抽屉 (Pagefind) |
+| `MobileMenu.astro` | 移动端菜单 |
+| `ContentActions.astro` | 内容操作栏 |
+| `SidebarPanels.astro` | 侧栏面板切换 |
+| `SidebarStructure.astro` | 文档结构视图 |
+| `SidebarToc.astro` | 目录视图 |
+| `SidebarContributors.astro` | 贡献者视图 |
+| `Footer.astro` | 页脚 |
+| `BackToTop.astro` | 返回顶部 |
+
+→ 详见: [src/components/CLAUDE.md](src/components/CLAUDE.md)
+
+### ⚙️ src/config
+站点配置中心，管理站点信息、导航、主题、搜索和代码高亮。
+
+| 文件 | 导出符号 | 功能 |
+|------|----------|------|
+| `site.ts` | `siteConfig`, `CONTRIBUTORS_MAP` | 站点元数据、贡献者映射 |
+| `navigation.ts` | `navigationConfig`, `getCurrentNavKey` | 顶部导航配置 |
+| `search.ts` | `CHAPTER_LABELS` | 搜索章节映射 |
+| `code.ts` | `codeConfig` | 代码高亮配置 |
+| `theme.ts` | `theme` | 主题配置 |
+| `index.ts` | 统一导出 | 配置聚合入口 |
+
+→ 详见: [src/config/CLAUDE.md](src/config/CLAUDE.md)
+
+### 📝 src/content
+MDX/Markdown 文档内容，采用 Content Collections 管理。
+
+**章节结构** (8 个一级章节):
+| 序号 | 目录 | 别名 | 路由 |
+|------|------|------|------|
+| 01 | `01-concepts` | concepts | `/concepts` |
+| 02 | `02-basic-usage` | basic-usage | `/basic-usage` |
+| 03 | `03-prompts` | prompts | `/prompts` |
+| 04 | `04-advanced` | advanced | `/advanced` |
+| 05 | `05-fun` | fun | `/fun` |
+| 06 | `06-resources` | resources | `/resources` |
+| 07 | `07-theoretical` | theoretical | `/theoretical` |
+| 99 | `99-manual` | manual | `/manual` (置底) |
+
+→ 详见: [src/content/CLAUDE.md](src/content/CLAUDE.md)
+
+### 🎨 src/layouts
+页面布局模板。
+
+| 文件 | 功能 |
+|------|------|
+| `BaseLayout.astro` | 基础 HTML 结构、SEO meta |
+| `ContentLayout.astro` | 文档页布局 (三栏结构) |
+
+→ 详见: [src/layouts/CLAUDE.md](src/layouts/CLAUDE.md)
+
+### 📄 src/pages
+Astro 路由页面，与 `src/content/docs` 一一镜像。
+
+**路由规则**:
+- 一级: `<别名>/index.astro`
+- 二级: `<别名>/<子目录>/index.astro`
+- 三级: `<别名>/<子目录>/<页面>.astro`
+
+→ 详见: [src/pages/CLAUDE.md](src/pages/CLAUDE.md)
+
+### 🔧 src/scripts
+脚本工具集，处理侧栏、文档映射、目录生成。
+
+| 文件 | 导出符号 | 功能 |
+|------|----------|------|
+| `sidebars.ts` | `getSidebarForPath`, `*_SIDEBAR` | 侧栏配置与路径匹配 |
+| `docsMap.ts` | `DOCS_MAP` | 别名到内容目录映射 |
+| `toc.ts` | `setupRightSidebar`, `collectHeadings` | 目录生成与交互 |
+
+→ 详见: [src/scripts/CLAUDE.md](src/scripts/CLAUDE.md)
+
+### 🔌 src/plugins
+Remark 插件，扩展 Markdown 语法。
+
+| 文件 | 功能 |
+|------|------|
+| `remark-spoiler-directive.js` | Spoiler 遮罩语法 |
+| `remark-gallery-directive.js` | 图片画廊语法 |
+| `remark-list-spacing.js` | 列表间距处理 |
+| `remark-frontmatter-last-modified.mjs` | 最后修改时间注入 |
+
+→ 详见: [src/plugins/CLAUDE.md](src/plugins/CLAUDE.md)
+
+### 🛠️ src/utils
+工具函数。
+
+| 文件 | 导出符号 | 功能 |
+|------|----------|------|
+| `docsPath.ts` | `buildDocCandidates`, `normalizeEntryId` | 文档路径处理 |
+| `git.ts` | `getGitLastModifiedIso` | Git 最后修改时间 |
+
+→ 详见: [src/utils/CLAUDE.md](src/utils/CLAUDE.md)
+
+### 🎨 src/styles
+全局样式。
+
+| 文件 | 功能 |
+|------|------|
+| `global.css` | 全局样式、组件样式 |
+| `right-sidebar.css` | 右侧栏样式 |
+
+---
+
+## 常用命令
+
+```bash
+npm run dev          # 本地开发 (端口 4321)
+npm run build        # 构建 + Pagefind 索引
+npm run preview      # 预览构建结果
+npm run format       # Prettier 格式化
+npm run type-check   # TypeScript 类型检查
+npm run check:routes # 路由结构校验
+npm run test:links   # 站内链接检测
+npm run test:e2e     # Playwright E2E 测试
+```
+
+---
+
+## 开发规范要点
+
+### 内容层级 (最多 3 级)
+- **一级/二级**: 目录 + `index.md`
+- **三级**: 单页 `.md` (禁止目录)
+
+### 路由镜像 (强制)
+内容路径与路由必须一一对应：
+- 内容: `src/content/docs/03-prompts/context/index.md`
+- 路由: `src/pages/prompts/context/index.astro`
+
+### 提交规范
+遵循 Conventional Commits，格式: `type(scope): description`
+
+### 质量门禁
+提交前必跑: `format` → `build` → `type-check` → `check:routes` → `test:links`
+
+---
+
+## 覆盖率与缺口
+
+| 指标 | 数值 |
+|------|------|
+| 已扫描文件数 | ~50+ |
+| 估算总文件数 | ~80 |
+| 已覆盖模块 | 9/9 (100%) |
+| 模块级 CLAUDE.md | 待生成 |
+
+### 建议下一步
+1. 生成各模块级 `CLAUDE.md` 文件
+2. 深入扫描 `src/content/docs` 各章节内容
+3. 补充 `scripts/` 目录的构建脚本文档
