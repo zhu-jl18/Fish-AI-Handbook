@@ -117,7 +117,6 @@ const { notifications } = Astro.props
     position: fixed;
     top: 60px;
     left: 50%;
-    transform: translateX(-50%);
     width: 900px;
     max-width: calc(100vw - 64px);
     max-height: calc(100vh - 140px);
@@ -133,9 +132,9 @@ const { notifications } = Astro.props
     visibility: hidden;
     transform: translateX(-50%) scale(0.95) translateY(-8px);
     transition:
-      opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-      transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-      visibility 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity 0.25s var(--motion-ease-standard),
+      transform 0.25s var(--motion-ease-standard),
+      visibility 0.25s var(--motion-ease-standard);
     z-index: 1000;
     display: flex;
     flex-direction: column;
@@ -279,26 +278,23 @@ const { notifications } = Astro.props
     height: 8px;
     border-radius: 50%;
     margin-top: 5px;
+    background: currentColor;
     box-shadow: 0 0 8px currentColor;
   }
 
   .notification-icon-announcement {
-    background: #3b82f6;
     color: #3b82f6;
   }
 
   .notification-icon-info {
-    background: #06b6d4;
     color: #06b6d4;
   }
 
   .notification-icon-warning {
-    background: #f59e0b;
     color: #f59e0b;
   }
 
   .notification-icon-success {
-    background: #10b981;
     color: #10b981;
   }
 
