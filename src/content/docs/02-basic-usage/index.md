@@ -19,3 +19,21 @@ contributors:
 | 网页 Agent | 隔离环境，适合无代码 | Kimi OK Computer / Manus / v0 |
 |App Chat | 方便快捷，all in one | RikkaHub + 各家官方 App |
 | 专业应用 | powerful | NotebookLM / WisprFlow |
+
+## 数学公式示例
+
+行内：爱因斯坦质能关系 $E = mc^2$。
+
+块级（牛顿引力方程）：
+
+$$
+F = G \frac{m_1 m_2}{r^2}
+$$
+
+带对齐的多行（偏导数的链式法则示例）：
+
+$$
+\frac{\partial f}{\partial x}
+= \frac{\partial f}{\partial u} \cdot \frac{\partial u}{\partial x}
+\frac{\partial f}{\partial v} \cdot \frac{\partial v}{\partial x}
+$$

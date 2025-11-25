@@ -25,7 +25,10 @@
     "astro": "^5.13.10",
     "astro-expressive-code": "^0.41.3",
     "fish-ai-book": "file:",
+    "katex": "^0.16.25",
+    "rehype-katex": "^7.0.1",
     "remark-directive": "^4.0.0",
+    "remark-math": "^6.0.0",
     "typescript": "^5.9.3"
   },
   "devDependencies": {

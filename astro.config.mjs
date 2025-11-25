@@ -4,10 +4,12 @@ import sitemap from '@astrojs/sitemap'
 import astroExpressiveCode from 'astro-expressive-code'
 import { siteConfig, codeConfig } from './src/config/index.ts'
 import remarkListSpacing from './src/plugins/remark-list-spacing.js'
+import remarkMath from 'remark-math'
 import remarkDirective from 'remark-directive'
 import remarkGalleryDirective from './src/plugins/remark-gallery-directive.js'
 import remarkSpoilerDirective from './src/plugins/remark-spoiler-directive.js'
 import { remarkModifiedTime } from './src/plugins/remark-frontmatter-last-modified.mjs'
+import rehypeKatex from 'rehype-katex'
 
 export default defineConfig({
   site: siteConfig.url,
@@ -17,11 +19,13 @@ export default defineConfig({
     smartypants: false,
     remarkPlugins: [
       remarkListSpacing,
+       remarkMath,
       remarkDirective,
       remarkGalleryDirective,
       remarkSpoilerDirective,
       remarkModifiedTime,
     ],
+    rehypePlugins: [rehypeKatex],
   },
   integrations: [
     astroExpressiveCode({
