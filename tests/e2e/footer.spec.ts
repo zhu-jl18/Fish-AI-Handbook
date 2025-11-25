@@ -67,10 +67,8 @@ test.describe('页脚组件', () => {
     await expect(contactLink).toBeVisible()
     await expect(contactLink).toHaveAttribute(
       'href',
-      'https://github.com/zhu-jl18/Fish-AI-Handbook/issues',
+      'mailto:functorfish@gmail.com',
     )
-    await expect(contactLink).toHaveAttribute('target', '_blank')
-    await expect(contactLink).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
   test('分隔符正确显示', async ({ page }) => {
@@ -86,7 +84,7 @@ test.describe('页脚组件', () => {
   })
 
   test('页脚在不同页面均显示', async ({ page }) => {
-    const pages = ['/', '/setup', '/prompts']
+    const pages = ['/', '/manual', '/prompts']
 
     for (const pagePath of pages) {
       await page.goto(pagePath)

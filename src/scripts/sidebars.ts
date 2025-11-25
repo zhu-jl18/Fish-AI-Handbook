@@ -82,13 +82,7 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
       { label: 'Anti-Patterns', href: '/prompts/foundations/anti-patterns' },
     ],
   },
-  {
-    label: 'Context',
-    href: '/prompts/context',
-    items: [
-      { label: '对话层级与请求体', href: '/prompts/context/dialogue-levels' },
-    ],
-  },
+  { label: 'Context', href: '/prompts/context' },
   {
     label: '实例与模板',
     href: '/prompts/examples',
