@@ -26,20 +26,10 @@ export interface Notification {
  */
 export const notificationsConfig: Notification[] = [
   {
-    id: 'welcome-2025',
-    title: '欢迎访问',
-    content:
-      '这是一个站点通知示例,您可以在 src/config/notifications.ts 中修改此内容。',
-    type: 'announcement',
-    date: '2025-01-01',
-    enabled: true,
-  },
-  {
-    id: 'feature-update',
-    title: '功能更新',
-    content: '站点新增通知系统,可通过点击铃铛图标查看最新公告。',
+    id: 'search-feature',
+    title: '搜索功能',
+    content: '站点集成了搜索功能，请随时反馈bug',
     type: 'info',
-    date: '2025-01-15',
     enabled: true,
   },
 ]
