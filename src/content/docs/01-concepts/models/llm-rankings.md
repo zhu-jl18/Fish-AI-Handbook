@@ -1,6 +1,7 @@
 ---
 title: 模型排行
 description: Who is better?
+contributors:
     - claude
     - codex
     - gemini
@@ -12,8 +13,6 @@ description: Who is better?
 综合模型能力以及日常使用体验
 
 <img src="https://p.sda1.dev/28/3ef33475959f6e0d989edeecc3c97211/image.png" >
-
-
 
 
 
@@ -31,11 +30,11 @@ Benchmark 是统一试卷，分数只是信号，不是能力。厂商爱报 SOT
 
 | Benchmark | 测试内容 | 典型分数 / 说明 |
 | --- | --- | --- |
-| [Humanity's Last Exam](https://agi.safe.ai/) | 2,500 题跨 100+ 学科 | **Gemini 3.0 Pro 37.5%**；GPT-5 25.3%（2025.11）；目前最难通用考试 |
-| [GPQA Diamond](https://github.com/idavidrein/gpqa) | 研究生级别科学问题 | **Gemini 3.0 Pro 91.9%**；GPT-5 87.3%（2025.11）；已超越人类专家 |
-| [SWE-bench Verified](https://www.swebench.com) | 真实 GitHub issues | **Gemini 3.0 Pro 76.2%**；Claude 4.5 Sonnet 70.6%（2025.11）；最接近实战 |
-| [LiveCodeBench](https://livecodebench.github.io) | 最新竞赛题（持续更新） | **Gemini 3.0 Pro Elo 2439**；防污染，测真实编程水平 |
-| [MMLU-Pro](https://huggingface.co/spaces/TIGER-Lab/MMLU-Pro) | 复杂推理选择题 | **Gemini 3.0 Pro 90%+**；比旧版 MMLU 更具区分度 |
+| [Humanity's Last Exam](https://agi.safe.ai/) | 2,500 题跨 100+ 学科 | Gemini 3.0 Pro 37.5%；GPT-5 25.3%（2025.11）；目前最难通用考试 |
+| [GPQA Diamond](https://github.com/idavidrein/gpqa) | 研究生级别科学问题 | Gemini 3.0 Pro 91.9%；GPT-5 87.3%（2025.11）；已超越人类专家 |
+| [SWE-bench Verified](https://www.swebench.com) | 真实 GitHub issues | Gemini 3.0 Pro 76.2%；Claude 4.5 Sonnet 70.6%（2025.11）；最接近实战 |
+| [LiveCodeBench](https://livecodebench.github.io) | 最新竞赛题（持续更新） | Gemini 3.0 Pro Elo 2439；防污染，测真实编程水平 |
+| [MMLU-Pro](https://huggingface.co/spaces/TIGER-Lab/MMLU-Pro) | 复杂推理选择题 | Gemini 3.0 Pro 90%+；比旧版 MMLU 更具区分度 |
 
 ## 参考 Benchmarks (Additionals)
 

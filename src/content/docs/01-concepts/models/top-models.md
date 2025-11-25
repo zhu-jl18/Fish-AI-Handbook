@@ -20,7 +20,7 @@ But wait... why are there four?
 The first three are the global "Big Three," while the last one is Grok, a joker that always ranks high in benchmarks but performs poorly in reality.
 
 
-OpenAI 仍然遥遥领先，谷歌奋起直追，A畜我祝他好运，Grok 只能涩涩。
+OpenAI 仍然遥遥领先，谷歌奋起直追，Anthropic 我祝他好运，Grok 只能涩涩。
 
 
 ## China Six Majors

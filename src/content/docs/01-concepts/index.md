@@ -12,11 +12,18 @@ contributors:
 
 ## Hi there!
 
-<img src="https://media.makomako.dpdns.org/images/2025/11/claude-non" alt="Claude" width="40%"  />
+
+
+
+:::gallery{cols=3}
+![claude](https://media.makomako.dpdns.org/images/2025/11/claude)
+![DeepSeek](https://media.makomako.dpdns.org/images/2025/11/DeepSeek)
+![lapwing-codex](https://media.makomako.dpdns.org/images/2025/11/lapwing-codex)
+:::
 
 "You are absolutely right!"
 
 "我操，用户怒了"
 
-""
+"抱歉，刚才"
 

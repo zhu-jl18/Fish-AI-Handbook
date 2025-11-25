@@ -9,6 +9,10 @@ contributors:
 
 ## Overview
 
+<!-- 图片占位：AI工具全景分类图，展示8类工具的代表性Logo或图标 -->
+<img src="" width="100%">
+<!-- 图说：Web Chat/IDE/CLI/聚合工具/Agent/专业应用的分类概览 -->
+
 | 类别 | 使用场景 | 代表工具 |
 | --- | --- | --- |
 | Web Chat | 浏览器里随时使用 | Grok / ChatGPT / Gemini |

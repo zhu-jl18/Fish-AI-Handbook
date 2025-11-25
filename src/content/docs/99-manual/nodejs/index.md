@@ -1,9 +1,9 @@
 ---
 title: Node.js 环境配置
-description: Nodejs安装配置与使用指南。
+description: Node.js安装配置与使用指南。
 ---
 
-## Why node.js and npm
+## Why Node.js and npm
 
 **Node.js**是一个runtime,它让 JavaScript 脱离浏览器,从而用于后端服务与命令行等场景。
 
@@ -21,7 +21,7 @@ description: Nodejs安装配置与使用指南。
 
 ## Install
 
-安装我建议全量安装,不要只安装便携版,更进一步地如果你有开发需要我建议直接安装**nvm**进行版本管理,这里以只安装nodejs为例子:
+安装我建议全量安装,不要只安装便携版,更进一步地如果你有开发需要我建议直接安装**NVM**进行版本管理,这里以只安装Node.js为例子:
 
 从[Node.js 官网](https://nodejs.org/)下载安装包,运行 `.msi` 安装程序,确保勾选以下关键选项:
 
@@ -43,7 +43,7 @@ npm -v
 
 ## Quick Ref
 
-For `npm`,管理包:
+For npm管理包:
 
 ```bash
 npm -g list
