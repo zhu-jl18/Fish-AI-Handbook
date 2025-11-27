@@ -8,6 +8,7 @@ import remarkMath from 'remark-math'
 import remarkDirective from 'remark-directive'
 import remarkGalleryDirective from './src/plugins/remark-gallery-directive.js'
 import remarkSpoilerDirective from './src/plugins/remark-spoiler-directive.js'
+import remarkMarkDirective from './src/plugins/remark-mark-directive.js'
 import { remarkModifiedTime } from './src/plugins/remark-frontmatter-last-modified.mjs'
 import rehypeKatex from 'rehype-katex'
 
@@ -23,6 +24,7 @@ export default defineConfig({
       remarkDirective,
       remarkGalleryDirective,
       remarkSpoilerDirective,
+      remarkMarkDirective,
       remarkModifiedTime,
     ],
     rehypePlugins: [rehypeKatex],
