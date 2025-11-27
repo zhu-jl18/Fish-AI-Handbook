@@ -611,6 +611,70 @@ hr {
   }
 }
 
+/* ============================================
+   Mark 颜色标记样式
+   ============================================
+   语法：:mark[文字]{c=颜色名}
+   设计原则：纯文字颜色，无背景，与段落行为一致
+   ============================================ */
+
+/* 默认样式 - 继承原有样式 */
+.mark[data-color='default'] {
+  color: inherit;
+}
+
+/* 自定义颜色（通过 CSS 变量传递） */
+.mark[data-color='custom'] {
+  color: var(--mark-color);
+}
+
+/* 预定义颜色 - 仅改变文字颜色 */
+.mark[data-color='red'] {
+  color: #fca5a5;
+}
+
+.mark[data-color='orange'] {
+  color: #fdba74;
+}
+
+.mark[data-color='yellow'] {
+  color: #fde047;
+}
+
+.mark[data-color='green'] {
+  color: #86efac;
+}
+
+.mark[data-color='cyan'] {
+  color: #67e8f9;
+}
+
+.mark[data-color='blue'] {
+  color: rgba(150, 210, 255, 0.95);
+}
+
+.mark[data-color='purple'] {
+  color: #d8b4fe;
+}
+
+.mark[data-color='pink'] {
+  color: #f9a8d4;
+}
+
+.mark[data-color='gray'] {
+  color: #9ca3af;
+}
+
+.mark[data-color='white'] {
+  color: #ffffff;
+}
+
+/* 块级标记样式 - 保持段落行为，仅改变颜色 */
+.mark-block,
+.mark-leaf {
+  display: block;
+}
+
 /* 图片查看 Lightbox 覆盖层样式（仅在激活时显示） */
 .lightbox-overlay {
   position: fixed;

@@ -228,6 +228,87 @@ description: 简短描述（必填，缺失会导致构建失败）
 - 样式：`src/styles/global.css` 中 `.image-gallery` 与 `.image-gallery__item` 系列。
 - CSS Grid 布局，通过 CSS 变量 `--gallery-cols`、`--gallery-gap`、`--gallery-ratio` 控制。
 
+---
+
+### 4.3 Mark（颜色标记）
+
+#### 用法
+
+- 行内：`:mark[要标记的文字]{c=颜色名}`
+- 块级容器：
+
+```markdown
+:::mark{c=blue}
+这是一段带颜色的内容
+可以包含多行文本
+:::
+```
+
+- 块级叶子：`::mark[单行标记内容]{c=green}`
+
+#### 参数说明
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `c` / `color` | string | `default` | 颜色名称或 CSS 颜色值 |
+
+#### 预定义颜色
+
+设计原则：纯文字颜色变化，无背景，与段落行为一致。
+
+| 颜色名 | 效果说明 |
+|--------|----------|
+| `red` | 珊瑚红，适用于警告、错误、重要提示 |
+| `orange` | 琥珀色，适用于注意事项 |
+| `yellow` | 金色，适用于高亮、提醒 |
+| `green` | 薄荷绿，适用于成功、正确、推荐 |
+| `cyan` | 青蓝色，适用于技术术语、代码相关 |
+| `blue` | 科技蓝（与主题协调），适用于信息、链接、引用 |
+| `purple` | 薰衣草紫，适用于特殊、高级功能 |
+| `pink` | 玫瑰粉，适用于装饰、趣味内容 |
+| `gray` | 中性灰，适用于次要信息、注释 |
+| `white` | 纯白色，适用于强调关键词 |
+
+#### 示例
+
+- **行内标记**：
+
+```markdown
+这是一段包含 :mark[重要内容]{c=red} 的文字。
+你也可以使用 :mark[提示信息]{c=yellow} 来高亮。
+```
+
+- **自定义颜色**（支持 CSS 颜色值）：
+
+```markdown
+:mark[自定义颜色]{c=#ff6b6b}
+:mark[RGB 颜色]{c=rgb(100,200,150)}
+```
+
+- **块级标记**：
+
+```markdown
+:::mark{c=blue}
+这是一段需要特别注意的内容块。
+支持多行文本和其他 Markdown 语法。
+:::
+```
+
+#### 渲染行为与场景
+
+- 行内标记渲染为 `<span class="mark">` 元素，仅改变文字颜色。
+- 块级标记渲染为 `<div class="mark mark-block">` 元素。
+- 标记文字与段落中普通文字行为完全一致，无额外背景或边距。
+- 预定义颜色使用 `data-color` 属性匹配样式。
+- 自定义颜色通过 CSS 变量 `--mark-color` 传递。
+- 适用：强调关键词、标注状态、分类标签等。
+
+#### 技术实现
+
+- 语法解析：`remark-directive` + `src/plugins/remark-mark-directive.js`。
+- 样式：`src/styles/global.css` 中 `.mark[data-color]` 系列。
+- 颜色通过 `data-color` 属性或 CSS 变量控制。
+
 ## 5. 开发与验证流程
 
 ### 5.1 常用命令
