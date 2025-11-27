@@ -284,7 +284,7 @@ Thought -> Action (Tool Call) -> Observation -> Next Thought -> ...
 
 > 2025 年的对齐，不再只是「训一个不会说坏话的模型」，而是 **在训练时和推理时两层，同时教模型「怎么想」和「守什么规则」**。
 
-```
+
 
 ---
 
@@ -325,5 +325,3 @@ Thought -> Action (Tool Call) -> Observation -> Next Thought -> ...
 11. **Zhipu AI – GLM‑4.5 / GLM‑4.6 技术白皮书与博客**（2024–2025）  
     公开了 GLM‑4.5/4.6 的多阶段训练策略、RLHF / 偏好优化框架，以及 200K 上下文和 Agent 能力增强的相关细节。  
 
-
-```

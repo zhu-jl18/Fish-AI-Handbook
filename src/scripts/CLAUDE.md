@@ -25,7 +25,7 @@ TypeScript 脚本工具集，处理侧栏导航、文档映射和目录生成。
 ```typescript
 // 各章节侧栏配置
 const CONCEPTS_SIDEBAR: SidebarSection[]
-const BASIC_USAGE_SIDEBAR: SidebarSection[]
+const DAILY_SIDEBAR: SidebarSection[]
 const PROMPTS_SIDEBAR: SidebarSection[]
 const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection[]
 const FUN_SIDEBAR: SidebarSection[]
@@ -59,9 +59,9 @@ type SidebarSection = SidebarLink | SidebarGroup
 
 ```typescript
 const DOCS_MAP: Record<string, string> = {
-  'concepts': '01-concepts',
-  'basic-usage': '02-basic-usage',
-  'prompts': '03-prompts',
+  concepts: '01-concepts',
+  daily: '02-daily',
+  prompts: '03-prompts',
   // ...
 }
 ```

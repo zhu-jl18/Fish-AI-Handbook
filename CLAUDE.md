@@ -145,7 +145,7 @@ MDX/Markdown 文档内容，采用 Content Collections 管理。
 | 序号 | 目录 | 别名 | 路由 |
 |------|------|------|------|
 | 01 | `01-concepts` | concepts | `/concepts` |
-| 02 | `02-basic-usage` | basic-usage | `/basic-usage` |
+| 02 | `02-daily` | daily | `/daily` |
 | 03 | `03-prompts` | prompts | `/prompts` |
 | 04 | `04-advanced` | advanced | `/advanced` |
 | 05 | `05-fun` | fun | `/fun` |

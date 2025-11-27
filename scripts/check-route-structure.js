@@ -26,7 +26,7 @@ const PAGES_DIR = path.join(ROOT, 'src', 'pages')
 // Keep in sync with src/scripts/docsMap.ts
 const DOCS_MAP = {
   concepts: '01-concepts',
-  'basic-usage': '02-basic-usage',
+  daily: '02-daily',
   prompts: '03-prompts',
   advanced: '04-advanced',
   fun: '05-fun',
