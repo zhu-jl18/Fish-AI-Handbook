@@ -15,7 +15,7 @@ export type SidebarSection = Array<SidebarLink | SidebarGroup>
 
 export function getSidebarForPath(path: string): SidebarSection {
   if (path.startsWith('/concepts')) return CONCEPTS_SIDEBAR
-  if (path.startsWith('/basic-usage')) return BASIC_USAGE_SIDEBAR
+  if (path.startsWith('/daily')) return DAILY_SIDEBAR
   if (path.startsWith('/prompts')) return PROMPTS_SIDEBAR
   if (path.startsWith('/advanced')) return ADVANCED_TECHNIQUES_SIDEBAR
   if (path.startsWith('/fun')) return FUN_SIDEBAR
@@ -48,28 +48,28 @@ export const CONCEPTS_SIDEBAR: SidebarSection = [
   { label: 'Developer', href: '/concepts/developer' },
 ]
 
-export const BASIC_USAGE_SIDEBAR: SidebarSection = [
-  { label: '基础用法', href: '/basic-usage' },
-  { label: 'Chat', href: '/basic-usage/chat' },
-  { label: 'Cursor', href: '/basic-usage/cursor' },
+export const DAILY_SIDEBAR: SidebarSection = [
+  { label: '日常使用', href: '/daily' },
+  { label: 'Chat', href: '/daily/chat' },
+  { label: 'Cursor', href: '/daily/cursor' },
   {
     label: 'Cherry Studio',
-    href: '/basic-usage/cherrystudio',
+    href: '/daily/cherrystudio',
     items: [
-      { label: '基础', href: '/basic-usage/cherrystudio/basics' },
-      { label: '进阶', href: '/basic-usage/cherrystudio/advanced' },
+      { label: '基础', href: '/daily/cherrystudio/basics' },
+      { label: '进阶', href: '/daily/cherrystudio/advanced' },
     ],
   },
   {
     label: 'Claude Code',
-    href: '/basic-usage/claude-code',
+    href: '/daily/claude-code',
     items: [
-      { label: 'Basics', href: '/basic-usage/claude-code/basics' },
-      { label: 'Advance', href: '/basic-usage/claude-code/advance' },
-      { label: 'Practice', href: '/basic-usage/claude-code/practice' },
+      { label: 'Basics', href: '/daily/claude-code/basics' },
+      { label: 'Advance', href: '/daily/claude-code/advance' },
+      { label: 'Practice', href: '/daily/claude-code/practice' },
     ],
   },
-  { label: 'AI 应用', href: '/basic-usage/ai-apps' },
+  { label: 'AI 应用', href: '/daily/ai-apps' },
 ]
 
 export const PROMPTS_SIDEBAR: SidebarSection = [
@@ -91,6 +91,7 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
       { label: '场景模板', href: '/prompts/examples/verticals' },
     ],
   },
+  { label: 'AGENTS.MD', href: '/prompts/agents-md' },
   { label: '深入拓展', href: '/prompts/deepen' },
 ]
 
@@ -157,6 +158,7 @@ export const THEORETICAL_SIDEBAR: SidebarSection = [
   { label: 'Alignment', href: '/theoretical/alignment' },
   { label: 'GRPO', href: '/theoretical/grpo' },
   { label: 'TR & TL', href: '/theoretical/tr-and-tl' },
+  { label: 'Agents & Training', href: '/theoretical/agents' },
 ]
 
 export const MANUAL_SIDEBAR: SidebarSection = [

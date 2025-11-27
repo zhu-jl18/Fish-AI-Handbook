@@ -1,6 +1,6 @@
 export const DOCS_MAP = {
   concepts: '01-concepts',
-  'basic-usage': '02-basic-usage',
+  daily: '02-daily',
   prompts: '03-prompts',
   advanced: '04-advanced',
   fun: '05-fun',

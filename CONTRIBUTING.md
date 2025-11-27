@@ -23,7 +23,7 @@
 
 ### 2.1 目录排序
 
-- 顶层目录严格递增：`01-concepts`、`02-basic-usage`、`03-prompts`、`04-advanced`、`05-fun`、`06-resources`、`07-theoretical`、`99-manual`（置底）。
+- 顶层目录严格递增：`01-concepts`、`02-daily`、`03-prompts`、`04-advanced`、`05-fun`、`06-resources`、`07-theoretical`、`99-manual`（置底）。
 - 不允许跳号；新增一级目录必须在末尾递增，`99-manual` 保留为固定置底。
 - 历史目录 `tech`、`demo` 已废弃，其内容已并入 `06-resources`（`2API`、`云平台`）；禁止复活。
 

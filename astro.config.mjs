@@ -19,7 +19,7 @@ export default defineConfig({
     smartypants: false,
     remarkPlugins: [
       remarkListSpacing,
-       remarkMath,
+      remarkMath,
       remarkDirective,
       remarkGalleryDirective,
       remarkSpoilerDirective,

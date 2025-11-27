@@ -1,11 +1,11 @@
 ---
-title: 基础用法
-description: 只讲必要的，太基础的自己看其他教程
+title: Daily
+description: 日常 AI 应用使用分享与组合打法，聚焦真实工作流
 contributors:
   - claude
 ---
 
-本节只谈“怎么用”，安装和环境通通去 [here](/manual) 自己补课。
+本节聚焦日常 AI 应用的实际用法与组合分享，安装和环境通通去 [here](/manual) 自己补课。
 
 ## Overview
 

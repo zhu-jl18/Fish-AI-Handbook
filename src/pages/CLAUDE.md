@@ -15,7 +15,7 @@ pages/
 ├── index.astro           # 首页
 ├── rss.xml.ts            # RSS 订阅
 ├── advanced/             # /advanced/*
-├── basic-usage/          # /basic-usage/*
+├── daily/                # /daily/*
 ├── concepts/             # /concepts/*
 ├── fun/                  # /fun/*
 ├── manual/               # /manual/*

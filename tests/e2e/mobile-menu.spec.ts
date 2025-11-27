@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 test('移动端目录抽屉可打开并跳转 TOC', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
-  await page.goto('/basic-usage')
+  await page.goto('/daily')
   await page.addStyleTag({
     content: 'astro-dev-toolbar{pointer-events:none !important;opacity:0;}',
   })

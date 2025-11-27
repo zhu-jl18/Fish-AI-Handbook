@@ -15,7 +15,7 @@ content/
 ├── config.ts          # Content Collections 配置
 └── docs/              # 文档目录 (8 个一级章节)
     ├── 01-concepts/       # 核心概念
-    ├── 02-basic-usage/    # 基础用法
+    ├── 02-daily/          # Daily（日常应用）
     ├── 03-prompts/        # 提示词技巧
     ├── 04-advanced/       # 进阶技术
     ├── 05-fun/            # 趣味内容
@@ -29,7 +29,7 @@ content/
 | 内容目录 | 路由别名 | 路由路径 |
 |----------|----------|----------|
 | `01-concepts` | concepts | `/concepts` |
-| `02-basic-usage` | basic-usage | `/basic-usage` |
+| `02-daily` | daily | `/daily` |
 | `03-prompts` | prompts | `/prompts` |
 | `04-advanced` | advanced | `/advanced` |
 | `05-fun` | fun | `/fun` |
