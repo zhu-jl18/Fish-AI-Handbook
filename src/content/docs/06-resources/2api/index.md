@@ -13,15 +13,7 @@ contributors:
 
 2API 的核心链路只有一条：劫持客户端发往上游的请求，把认证、格式、速率都调成标准 API，然后把响应再翻译回 OpenAI 结构。
 
-```text
-+---------+    +-----------------+    +--------------------+    
-| Client  | <-> | 2API Adapter    | <-> | Target Service     | 
-+---------+    +-----------------+    +--------------------+    
-                | auth pool / token refresh
-                | header & signature forge
-                | prompt/message rewriter
-                | stream & media normalizer
-```
+<img src="https://p.sda1.dev/29/f744c7fd34318727888ca6a46249225d/图片编辑 _1_.png" >
 
 直接封装官方 API：像 `amq2api`、`droid2api`、`k2Think2Api` 通过官方 OAuth 或固定 API Key 调用真实 API，只做请求/响应格式转换，优点是稳定，可控的刷新流程，缺点是必须持有合法刷新凭证。
 

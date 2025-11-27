@@ -3,6 +3,10 @@ title: Claude Code
 description: 面向代码库的 CLI 编排器，强调上下文、分工与可复用模板。
 ---
 
+Just learn Claude Code. Master it, and you'll handle all the others with ease.
+
+<img src="https://media.makomako.dpdns.org/images/2025/11/code-cli" width="70%">
+
 Claude Code = “命令行 + 多智能体”的工作台，适合在本地仓库里快速分析、改写、生成与验证代码。先熟悉三个版块，再按需深入：
 
 - Basics：最小心智模型 + 常用命令，5 分钟跑通。

@@ -5,39 +5,38 @@ contributors:
   - claude
 ---
 
-本节聚焦日常 AI 应用的实际用法与组合分享，安装和环境通通去 [here](/manual) 自己补课。
+这里不教你怎么安装，怎么配环境。官方文档写得很清楚，去 [Manual](/manual) 或者官网自己看。
+如果你连文档都懒得读，这章对你没用。
 
-## Overview
+我只说我怎么用，以及为什么这么用，以及怎么用起来好用。
 
-<!-- 图片占位：AI工具全景分类图，展示8类工具的代表性Logo或图标 -->
-<img src="" width="100%">
-<!-- 图说：Web Chat/IDE/CLI/聚合工具/Agent/专业应用的分类概览 -->
+## Toolset
 
-| 类别 | 使用场景 | 代表工具 |
-| --- | --- | --- |
-| Web Chat | 浏览器里随时使用 | Grok / ChatGPT / Gemini |
-| IDE | 方便查看改动和手动修改 | Cursor / Windsurf |
-| Plugins| 同上 | Copilot /  Augment |
-| CODE CLI | vibe coding，随时随地 | Claude Code |
-| 桌面聚合软件 | 自定义程度高 | Cherry Studio/ Lobe Chat|
-| 网页 Agent | 隔离环境，适合无代码 | Kimi OK Computer / Manus / v0 |
-|App Chat | 方便快捷，all in one | RikkaHub + 各家官方 App |
-| 专业应用 | powerful | NotebookLM / WisprFlow |
+别指望一个工具解决所有问题。这是我目前的组合：
 
-## 数学公式示例
+| 场景 | 核心工具 | 暴论 |
+| :--- | :--- | :--- |
+| **瞎聊 / 搜索** | [Gemini & Grok](./gemini-grok) | 别在终端里搞这些，网页版就是最快的。 |
+| **写代码** | [Claude Code](./claude-code) | 既然能用 CLI 解决，为什么要离开键盘？ |
+| **本地工作台** | [Cherry Studio](./cherrystudio) | 把模型和数据握在自己手里，心里才踏实。 |
+| **不仅是聊天** | [AI Apps](./ai-apps) | 腾讯 IMA，NotebookLM... 术业有专攻。 |
+| **写代码*2** | [Anti-Gravity](./anti-gravity) | 一些不讲武德的用法。 |
+| **国产首选** | [豆包](./doubao) | 字节出品，中文理解能力强。 |
 
-行内：爱因斯坦质能关系 $E = mc^2$。
+## 夯夯夯 
 
-块级（牛顿引力方程）：
+:::gallery{cols=4 ratio="1"}
+![Grok](https://play-lh.googleusercontent.com/dQRKhi30KpzG3gww3TdVLzyIAVuOAWylnAcgnEUxqfpm2A8dEt2sgApVvtKAy-DO8aI)
+![Gemini](https://play-lh.googleusercontent.com/bTpNtZ6rYYX2SeI-wC4cnr7MJnOh2hjtgYu3UIrSxE09lM3GPl_Uhf9_Ih2Smje2bc0V)
+![GPT](https://play-lh.googleusercontent.com/lmG9HlI0awHie0cyBieWXeNjpyXvHPwDBb8MNOVIyp0P8VEh95AiBHtUZSDVR3HLe3A)
+![豆包](https://play-lh.googleusercontent.com/mxcGv2TAb_xQAuYh1Tv7LEekznFDfszFEPNS5StFfEg9yezXJLyqd7MNOY1NHyhH-nV0=w240-h480-rw)
+![NotebookLM](https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/notebooklm.png)
+![IMA](https://play-lh.googleusercontent.com/_sUxXNCAQtNpEbEr58Cju3WIJuZVj50S0XvaEvHXoA94bjEQy9JroJ1DSnhx1xa6bAKk=w240-h480-rw)
+![WisprFlow](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSqBBMxrgEPiN9bM6BUjqg0RjOcby0_A71ow&s)
+![WARP](https://media.licdn.com/dms/image/v2/D4E0BAQED1pjiTaXRFw/company-logo_200_200/company-logo_200_200/0/1729172001472/warpdotdev_logo?e=2147483647&v=beta&t=eSBN5AbmN1AwJuPN40UD4QXg1OGpF6m0IYBsA1ADqZs)
+:::
 
-$$
-F = G \frac{m_1 m_2}{r^2}
-$$
-
-带对齐的多行（偏导数的链式法则示例）：
-
-$$
-\frac{\partial f}{\partial x}
-= \frac{\partial f}{\partial u} \cdot \frac{\partial u}{\partial x}
-\frac{\partial f}{\partial v} \cdot \frac{\partial v}{\partial x}
-$$
+:::gallery{cols=2 ratio="16/10"}
+![Anti-Gravity](https://cloud.starkinsider.com/wp-content/uploads/2025/11/google-antigravity-ai-ide-cursor-competition-681x427.webp)
+![Claude Code](https://miro.medium.com/1*tMzWUShkvyuEBhuXAOnhGg.avif)
+:::
