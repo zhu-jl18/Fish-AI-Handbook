@@ -50,7 +50,7 @@ export const CONCEPTS_SIDEBAR: SidebarSection = [
 
 export const DAILY_SIDEBAR: SidebarSection = [
   { label: '日常使用', href: '/daily' },
-  { label: 'Chat', href: '/daily/chat' },
+  { label: 'Gemini & Grok', href: '/daily/gemini-grok' },
   {
     label: 'Cherry Studio',
     href: '/daily/cherrystudio',
@@ -69,6 +69,7 @@ export const DAILY_SIDEBAR: SidebarSection = [
     ],
   },
   { label: 'Anti Gravity', href: '/daily/anti-gravity' },
+  { label: '豆包', href: '/daily/doubao' },
   { label: 'AI 应用', href: '/daily/ai-apps' },
 ]
 
@@ -136,6 +137,7 @@ export const FUN_SIDEBAR: SidebarSection = [
 
 export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
+  { label: '2API', href: '/resources/2api' },
   { label: 'Free Tier', href: '/resources/free-tier' },
   { label: 'Little Cost', href: '/resources/little-cost' },
   {
@@ -147,7 +149,6 @@ export const RESOURCES_SIDEBAR: SidebarSection = [
       { label: '格式转换', href: '/resources/api/conversion' },
     ],
   },
-  { label: '2API', href: '/resources/2api' },
   { label: '云平台', href: '/resources/cloud-platforms' },
 ]
 

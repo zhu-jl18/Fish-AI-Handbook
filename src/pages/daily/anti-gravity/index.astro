@@ -3,13 +3,13 @@ import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { DAILY_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '02-daily/cursor')
+const entry = await getEntry('docs', '02-daily/anti-gravity')
 const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
   entry={entry}
-  title={entry?.data?.title ?? 'Cursor'}
+  title={entry?.data?.title ?? 'Anti Gravity'}
   sidebarItems={DAILY_SIDEBAR}
   contributors={entry?.data?.contributors}
 >
