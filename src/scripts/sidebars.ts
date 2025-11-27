@@ -51,7 +51,6 @@ export const CONCEPTS_SIDEBAR: SidebarSection = [
 export const DAILY_SIDEBAR: SidebarSection = [
   { label: '日常使用', href: '/daily' },
   { label: 'Chat', href: '/daily/chat' },
-  { label: 'Cursor', href: '/daily/cursor' },
   {
     label: 'Cherry Studio',
     href: '/daily/cherrystudio',
@@ -69,6 +68,7 @@ export const DAILY_SIDEBAR: SidebarSection = [
       { label: 'Practice', href: '/daily/claude-code/practice' },
     ],
   },
+  { label: 'Anti Gravity', href: '/daily/anti-gravity' },
   { label: 'AI 应用', href: '/daily/ai-apps' },
 ]
 
@@ -130,6 +130,7 @@ export const FUN_SIDEBAR: SidebarSection = [
   { label: 'SillyTavern', href: '/fun/sillytavern' },
   { label: 'n8n', href: '/fun/n8n' },
   { label: 'Ollama', href: '/fun/ollama' },
+  { label: '小模型', href: '/fun/small-models' },
   { label: 'Fast API', href: '/fun/fast-api' },
 ]
 
