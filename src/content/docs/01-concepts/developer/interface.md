@@ -1,173 +1,142 @@
 ---
 title: Interface
-description: 底层 HTTP 接口与 SDK 封装库。
+description: API 协议与 SDK 封装。
 contributors:
   - claude
-  - gemini
 ---
 
-## 底层接口 (API)
+## API 是什么
 
-把话说明白点：**这就是 HTTP**。
+HTTP。就这么简单。
 
-别整那些虚头巴脑的。大模型 API 就是个服务器，收一个 JSON，吐一个 JSON。只要你会发 POST 请求，你就能写 AI 应用。别把事情搞复杂了。
-
-业界现在基本都用 OpenAI 的格式。为啥？因为这玩意儿能用，而且没人想为每个模型都学一套新标准。
+大模型 API 就是个服务器。你发 JSON，它回 JSON。会发 POST 请求就能写 AI 应用。
 
 ```text
-+-------------+                                +-------------+
-| 你的代码     |  HTTP POST /v1/chat/completions|  API 服务器  |
-|             |------------------------------->|             |
-|             |  Headers:                      |             |
-|             |   Authorization: Bearer sk-... |             |
-|             |                                |             |
-|             |  Body:                         |             |
-|             |   { "messages": [...] }        |             |
-|             |<-------------------------------|             |
-|             |  200 OK                        |             |
-|             |  { "choices": [...] }          |             |
-+-------------+                                +-------------+
+你的代码 --POST JSON--> API 服务器 --JSON--> 你的代码
 ```
 
-### 标准之争
+## 为什么要理解这些
 
-真正值得关注的格式就两种。其他的都是垃圾。
+真实案例：
 
-| 格式 | 端点 (Endpoint) | 认证头 | 评价 |
-| :--- | :--- | :--- | :--- |
-| **OpenAI 兼容** | `/v1/chat/completions` | `Authorization: Bearer <key>` | **事实标准**。就用这个。哪怕不是 OpenAI 的模型，只要支持这个格式就优先用。 |
-| **Anthropic** | `/v1/messages` | `x-api-key: <key>` | 挺好，但不一样。除非你需要 Claude 的特有功能，否则别折腾。 |
-| **私有垃圾格式** | `/*` | `看心情` | **躲远点**。如果一个厂商连 OpenAI 兼容接口都不提供，那是在浪费你的生命。 |
+> 用户在第三方服务 `api.011070.xyz` 创建了 Key，然后填到 Chatbox 里，但 API 地址填的是 `api.openai.com`。
+>
+> 结果：连接失败。
+>
+> 师傅的回复：**"你这相当于拿着你家钥匙开邻居的门了"**。
 
-### 请求与响应格式
+这就是为什么你需要理解 API 的基本概念：
 
-**请求格式**
+| 概念 | 类比 | 说明 |
+|:---|:---|:---|
+| **Base URL** | 哪扇门 | 服务地址，请求发到哪 |
+| **API Key** | 钥匙 | 身份凭证，证明你有权限 |
+| **协议格式** | 锁的型号 | OpenAI 格式、Anthropic 格式等 |
+
+钥匙和门必须配套。A 服务的 Key 用不了 B 服务的接口。
+
+## 协议标准
+
+业界事实标准：OpenAI 格式。为什么？因为能用，而且没人想为每个模型学一套新协议。
+
+| 格式 | 端点 | 认证 |
+|:---|:---|:---|
+| **OpenAI** | `/v1/chat/completions` | `Authorization: Bearer <key>` |
+| **Anthropic** | `/v1/messages` | `x-api-key: <key>` |
+
+OpenAI 格式是首选。哪怕用的不是 OpenAI 的模型，只要支持这个格式就优先用。
+
+## 请求格式
 
 ```json
 {
   "model": "gpt-4",
   "messages": [
-    {"role": "system", "content": "你是个有用的助手。"},
-    {"role": "user", "content": "解释量子纠缠"}
+    {"role": "system", "content": "你是助手"},
+    {"role": "user", "content": "你好"}
   ],
   "temperature": 0.7,
   "max_tokens": 500
 }
 ```
 
-**响应格式**
+核心字段：
+
+| 字段 | 说明 |
+|:---|:---|
+| `model` | 模型名（必填） |
+| `messages` | 对话历史（必填） |
+| `temperature` | 随机性，0-2 |
+| `max_tokens` | 最大输出长度 |
+| `stream` | 是否流式返回 |
+
+## 响应格式
 
 ```json
 {
-  "id": "chatcmpl-123",
-  "object": "chat.completion",
-  "created": 1677652288,
-  "model": "gpt-4",
   "choices": [{
-    "index": 0,
     "message": {
       "role": "assistant",
-      "content": "量子纠缠是..."
+      "content": "你好！"
     },
     "finish_reason": "stop"
   }],
   "usage": {
-    "prompt_tokens": 20,
-    "completion_tokens": 100,
-    "total_tokens": 120
+    "prompt_tokens": 10,
+    "completion_tokens": 5,
+    "total_tokens": 15
   }
 }
 ```
 
-### 常见参数
+关键信息在 `choices[0].message.content`。`usage` 告诉你花了多少 token。
 
-| 参数 | 类型 | 说明 |
-| :--- | :--- | :--- |
-| `model` | string | 模型名称 (必填) |
-| `messages` | array | 对话历史 (必填) |
-| `temperature` | float | 随机性，0-2，默认 1 |
-| `max_tokens` | int | 最大生成长度 |
-| `stream` | bool | 是否流式返回 |
-| `top_p` | float | 核采样阈值 |
+## 流式响应
 
-### 流式响应 (SSE)
-
-启用 `stream: true` 后，服务器使用 Server-Sent Events 逐块返回：
+`stream: true` 时，服务器用 SSE 逐块返回：
 
 ```text
-data: {"choices":[{"delta":{"content":"量子"}}]}
-
-data: {"choices":[{"delta":{"content":"纠缠"}}]}
-
+data: {"choices":[{"delta":{"content":"你"}}]}
+data: {"choices":[{"delta":{"content":"好"}}]}
 data: [DONE]
 ```
 
-每个 `data:` 行是一个独立的 JSON 块，需要逐行解析。
+每行一个 JSON，逐行解析。适合实时显示生成过程。
 
 ---
 
-## 封装库 (SDK)
+## SDK
 
-你*当然*可以手写原始 HTTP 请求。你还可以写汇编呢。但这不代表你应该这么做。
+你可以手写 HTTP 请求。你也可以写汇编。但没必要。
 
-手动处理 HTTP 连接、重试、超时和类型检查纯属浪费脑细胞。用 SDK。官方的 Python 和 Node.js 库就够了。让它们去处理那些无聊的脏活，你专心写逻辑。
+SDK 封装了 HTTP 细节：连接管理、重试、超时、类型检查。用它。
 
-| 功能 | 裸写 HTTP | 使用 SDK |
-| :--- | :--- | :--- |
-| **代码量** | 巨大。满屏的样板代码。 | 极少。一行函数调用。 |
-| **重试机制** | 你自己写循环。 | 内置 (通常)。 |
-| **类型检查** | `Dict[str, Any]` 地狱。 | 自动补全爽歪歪。 |
-| **流式响应** | 祝你解析 SSE 玩得开心。 | `for chunk in stream:` |
+| 对比 | 裸写 HTTP | 用 SDK |
+|:---|:---|:---|
+| 代码量 | 多 | 少 |
+| 重试 | 自己写 | 内置 |
+| 类型 | `Dict[str, Any]` | 自动补全 |
+| 流式 | 手动解析 SSE | `for chunk in stream` |
 
-### Python 示例
-
-别整花活。直接用标准库。
+## Python
 
 ```python
 from openai import OpenAI
 
-# 这玩意儿能连任何兼容的提供商，不光是 OpenAI。
-# 只要改个 base_url 就行。
 client = OpenAI(
-    base_url="https://api.deepseek.com",
+    base_url="https://api.deepseek.com",  # 换成任何兼容的服务
     api_key="sk-..."
 )
 
 response = client.chat.completions.create(
     model="deepseek-chat",
-    messages=[
-        {"role": "system", "content": "你是个有用的助手。"},
-        {"role": "user", "content": "用一句话解释量子物理。"}
-    ]
+    messages=[{"role": "user", "content": "你好"}]
 )
 
 print(response.choices[0].message.content)
 ```
 
-### Node.js 示例
-
-```javascript
-import OpenAI from 'openai';
-
-const client = new OpenAI({
-  baseURL: 'https://api.deepseek.com',
-  apiKey: 'sk-...'
-});
-
-const response = await client.chat.completions.create({
-  model: 'deepseek-chat',
-  messages: [
-    { role: 'system', content: '你是个有用的助手。' },
-    { role: 'user', content: '用一句话解释量子物理。' }
-  ]
-});
-
-console.log(response.choices[0].message.content);
-```
-
-### 流式响应
-
-**Python**
+流式：
 
 ```python
 stream = client.chat.completions.create(
@@ -181,7 +150,25 @@ for chunk in stream:
         print(chunk.choices[0].delta.content, end="")
 ```
 
-**Node.js**
+## Node.js
+
+```javascript
+import OpenAI from 'openai';
+
+const client = new OpenAI({
+  baseURL: 'https://api.deepseek.com',
+  apiKey: 'sk-...'
+});
+
+const response = await client.chat.completions.create({
+  model: 'deepseek-chat',
+  messages: [{ role: 'user', content: '你好' }]
+});
+
+console.log(response.choices[0].message.content);
+```
+
+流式：
 
 ```javascript
 const stream = await client.chat.completions.create({
@@ -195,9 +182,9 @@ for await (const chunk of stream) {
 }
 ```
 
-### 环境变量配置
+## 环境变量
 
-别硬编码 API Key。用环境变量。
+别硬编码 Key。
 
 ```bash
 # .env
@@ -205,30 +192,29 @@ OPENAI_API_KEY=sk-...
 OPENAI_BASE_URL=https://api.your-proxy.com
 ```
 
-**Python**
+SDK 自动读取这些变量：
 
 ```python
-from openai import OpenAI
-import os
-
-# 自动从环境变量读取 OPENAI_API_KEY 和 OPENAI_BASE_URL
-client = OpenAI()
+client = OpenAI()  # 自动从环境变量读取
 ```
-
-**Node.js**
 
 ```javascript
-import OpenAI from 'openai';
-
-// 自动从 process.env.OPENAI_API_KEY 和 OPENAI_BASE_URL 读取
-const client = new OpenAI();
+const client = new OpenAI();  // 同上
 ```
 
-### 官方库链接
+## 官方 SDK
 
-| 语言 | 库名 | 链接 |
-| :--- | :--- | :--- |
-| Python | `openai` | [GitHub](https://github.com/openai/openai-python) |
-| Node.js | `openai` | [GitHub](https://github.com/openai/openai-node) |
-| Python | `anthropic` | [GitHub](https://github.com/anthropics/anthropic-sdk-python) |
-| Node.js | `@anthropic-ai/sdk` | [GitHub](https://github.com/anthropics/anthropic-sdk-typescript) |
+| 语言 | 库 |
+|:---|:---|
+| Python | [openai](https://github.com/openai/openai-python) |
+| Node.js | [openai](https://github.com/openai/openai-node) |
+| Python | [anthropic](https://github.com/anthropics/anthropic-sdk-python) |
+| Node.js | [@anthropic-ai/sdk](https://github.com/anthropics/anthropic-sdk-typescript) |
+
+## 总结
+
+- **API**：HTTP + JSON，OpenAI 格式是标准
+- **SDK**：封装 HTTP，省心省力
+- **环境变量**：别硬编码 Key
+
+会用 SDK 调 API 就够了。协议转换、代理转发这些，看 [Gateway](/concepts/developer/gateway)。

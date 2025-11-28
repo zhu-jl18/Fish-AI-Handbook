@@ -3,8 +3,10 @@
 <a id="top"></a>
 
 > ⚠️ **注意：网站内容结构正在进行大规模重构，提交 PR 前请先与我沟通。**
+>
+> 🚫 **警告：大部分内容为 AI 生成预填充，人工编写内容正在路上。**
 
-本项目由我借助 AI 建立与维护，README 仅面向"未来的我"。目标：能在数分钟内回忆技术栈和原理，并按步骤完成新增/修改/删除与部署。
+本项目由我借助 AI 建立与维护，README 仅面向"未来的我"。目标：能在数分钟内回忆技术栈和原理，并按步骤完成新增/修改/删除与部署或快速交接进行后续新功能开发。
 
 ## 目录
 
@@ -22,8 +24,9 @@
 
 ## 长远计划
 
-- 增加一个基于LLM和知识库的问答系统
-- 增加一个静态网站CMS
+- [ ] 增加一个基于LLM和知识库的问答系统，当前进度已经选型 n8n
+- [ ] 增加一个静态网站CMS，尚未构思
+
 
 
 
@@ -31,6 +34,8 @@
 
 - 开发协作规范（人类和AI通用）：[CONTRIBUTING.md](CONTRIBUTING.md)
 - AI Agent 通用规则（适用Claude Code，Codex等AI Agent）：[AGENTS.md](AGENTS.md)
+  - [Claude Customized](CLAUDE.md) & 各模块下的 CLAUDE.md; 定期更新
+  - [Gemini Specified](GEMINI.md) 
 - PR 模板：[.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md)
 - Issue 模板：[.github/ISSUE_TEMPLATE/](.github/ISSUE_TEMPLATE/)
 
