@@ -3,13 +3,13 @@ import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { CONCEPTS_SIDEBAR } from '../../../scripts/sidebars'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '01-concepts/glossary/ai-concepts')
+const entry = await getEntry('docs', '01-concepts/model-params')
 const rendered = entry && (await entry.render())
 ---
 
 <ContentLayout
   entry={entry}
-  title={entry?.data?.title ?? 'AI核心概念速查'}
+  title={entry?.data?.title ?? '模型参数'}
   sidebarItems={CONCEPTS_SIDEBAR}
   contributors={entry?.data?.contributors}
 >

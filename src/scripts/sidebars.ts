@@ -27,25 +27,20 @@ export function getSidebarForPath(path: string): SidebarSection {
 
 export const CONCEPTS_SIDEBAR: SidebarSection = [
   { label: '概念认知', href: '/concepts' },
+  { label: 'Top Models', href: '/concepts/top-models' },
+  { label: 'Model Params', href: '/concepts/model-params' },
+  { label: 'Benchmark', href: '/concepts/benchmark' },
+  { label: '核心概念', href: '/concepts/core-concepts' },
+  { label: '术语速查', href: '/concepts/glossary' },
   {
-    label: 'Models',
-    href: '/concepts/models',
+    label: 'Developer',
+    href: '/concepts/developer',
     items: [
-      { label: 'Top Models', href: '/concepts/models/top-models' },
-
-      { label: 'Rankings', href: '/concepts/models/llm-rankings' },
+      { label: 'Interface', href: '/concepts/developer/interface' },
+      { label: 'Gateway', href: '/concepts/developer/gateway' },
+      { label: 'Automation', href: '/concepts/developer/automation' },
     ],
   },
-  {
-    label: 'Definitions',
-    href: '/concepts/glossary',
-    items: [
-      { label: 'Model Params', href: '/concepts/glossary/model-params' },
-      { label: 'AI Concepts', href: '/concepts/glossary/ai-concepts' },
-      { label: 'Derived Terms', href: '/concepts/glossary/derived-terms' },
-    ],
-  },
-  { label: 'Developer', href: '/concepts/developer' },
 ]
 
 export const DAILY_SIDEBAR: SidebarSection = [
@@ -84,14 +79,7 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
     ],
   },
   { label: 'Context', href: '/prompts/context' },
-  {
-    label: '实例与模板',
-    href: '/prompts/examples',
-    items: [
-      { label: '通用模板集', href: '/prompts/examples/templates' },
-      { label: '场景模板', href: '/prompts/examples/verticals' },
-    ],
-  },
+  { label: 'Assistants', href: '/prompts/assistants' },
   { label: 'AGENTS.MD', href: '/prompts/agents-md' },
   { label: '深入拓展', href: '/prompts/deepen' },
 ]
@@ -99,7 +87,7 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
 export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
   { label: '进阶玩法', href: '/advanced' },
   { label: 'RAG', href: '/advanced/rag' },
-  { label: 'Spec Coding', href: '/advanced/spec-coding' },
+  { label: 'SDD', href: '/advanced/sdd' },
   { label: 'MCP', href: '/advanced/mcp' },
   {
     label: 'Agents',
@@ -140,15 +128,7 @@ export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '2API', href: '/resources/2api' },
   { label: 'Free Tier', href: '/resources/free-tier' },
   { label: 'Little Cost', href: '/resources/little-cost' },
-  {
-    label: 'API Key',
-    href: '/resources/api',
-    items: [
-      { label: '代理转发', href: '/resources/api/forwarding' },
-      { label: '聚合管理', href: '/resources/api/aggregation' },
-      { label: '格式转换', href: '/resources/api/conversion' },
-    ],
-  },
+  { label: 'API Key', href: '/resources/api' },
   { label: '云平台', href: '/resources/cloud-platforms' },
 ]
 

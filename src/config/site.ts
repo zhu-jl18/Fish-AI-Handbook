@@ -136,6 +136,12 @@ export const CONTRIBUTORS_MAP: Record<string, ContributorInfo> = {
     link: 'https://github.com/MoonshotAI',
     avatar: 'https://media.makomako.dpdns.org/images/2025/11/moonshot-dark',
   },
+  doubao: {
+    username: 'doubao',
+    name: '豆包',
+    link: 'https://github.com/ByteDance-Seed',
+    avatar: 'https://media.makomako.dpdns.org/images/2025/11/豆包',
+  },
 }
 
 /**

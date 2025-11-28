@@ -6,6 +6,10 @@ contributors: [gemini]
 
 [How to write a great agents.md: Lessons from over 2,500 repositories](https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/)
 
+[ClaudeForge](https://mp.weixin.qq.com/s?__biz=MzkzODk3MTIwMQ==&mid=2247487986&idx=1&sn=441afe854fad2e3836bac6e4f4d26350&chksm=c335e88b20daaf356c189797b54160812ac412c7e931fee5696c034d67ebe8d0da228885e241&mpshare=1&scene=1&srcid=11278dZjhijJJC6g5bXlsKZw&sharer_shareinfo=483d5fe98bc52c04495274db07c3a42b&sharer_shareinfo_first=483d5fe98bc52c04495274db07c3a42b#rd)
+
+[Giga AI](https://gigamind.dev/)
+
 
 # AGENTS.MD
 

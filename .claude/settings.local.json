@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Serena__activate_project",
+      "mcp__Serena__initial_instructions",
+      "mcp__Serena__list_dir",
+      "mcp__Serena__search_for_pattern",
+      "mcp__Serena__read_memory",
+      "mcp__Serena__think_about_collected_information"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
