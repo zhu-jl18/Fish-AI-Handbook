@@ -8,6 +8,7 @@ contributors:
   - glm
   - minimax
   - kimi
+  - doubao
 ---
 
 ## Hi there!
