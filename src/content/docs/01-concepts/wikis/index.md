@@ -1,7 +1,7 @@
 ---
-title: AI Concepts
+title: Wikis
 description: brief introduction to some important concepts
-contributors: [codex,gemini] 
+contributors: [codex,gemini]
 ---
 
 简单的过一遍基础概念而已
