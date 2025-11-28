@@ -30,13 +30,15 @@ export const CONCEPTS_SIDEBAR: SidebarSection = [
   { label: 'Top Models', href: '/concepts/top-models' },
   { label: 'Model Params', href: '/concepts/model-params' },
   { label: 'Benchmark', href: '/concepts/benchmark' },
-  { label: 'Wikis', href: '/concepts/wikis' },
+  { label: '核心概念', href: '/concepts/core-concepts' },
+  { label: '术语速查', href: '/concepts/glossary' },
   {
     label: 'Developer',
     href: '/concepts/developer',
     items: [
       { label: 'Interface', href: '/concepts/developer/interface' },
       { label: 'Gateway', href: '/concepts/developer/gateway' },
+      { label: 'Automation', href: '/concepts/developer/automation' },
     ],
   },
 ]
