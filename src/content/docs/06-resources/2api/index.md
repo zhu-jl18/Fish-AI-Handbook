@@ -13,7 +13,7 @@ More Detailed: 对 Web、App、CLI 这些「只给前端、不给 API」的接�
 
 ## 原理
 
-<img src="https://p.sda1.dev/29/f744c7fd34318727888ca6a46249225d/图片编辑 _1_.png" width="70%" >
+<img src="https://p.sda1.dev/29/f744c7fd34318727888ca6a46249225d/图片编辑 _1_.png" alt="2api 原理示意图：三条路线（官方凭证转译、Cookie/Session 池、指纹伪造）" width="70%" >
 
 三条路：
 
