@@ -146,18 +146,19 @@
   padding: 0.45rem 0.5rem;
   border-radius: var(--border-radius);
   text-decoration: none;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition:
-    border-color var(--motion-duration-sm) var(--motion-ease-standard),
-    background-color var(--motion-duration-sm) var(--motion-ease-standard),
-    transform var(--motion-duration-sm) var(--motion-ease-standard);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: transform var(--motion-duration-sm) var(--motion-ease-standard);
 }
 
 .contributors-list.list-layout .contributor-card:hover {
-  border-color: rgba(150, 210, 255, 0.35);
-  background: rgba(150, 210, 255, 0.08);
   transform: translateY(-1px);
+}
+
+.contributors-list.list-layout .contributor-card:hover .contributor-name,
+.contributors-list.list-layout .contributor-card:hover .contributor-handle {
+  color: var(--color-toc-active-border);
+  transition: color var(--motion-duration-sm) var(--motion-ease-standard);
 }
 
 .contributors-list.list-layout .contributor-card img {
@@ -193,9 +194,7 @@
 }
 
 .contributors-list.grid-layout .contributor-card:hover {
-  border-color: rgba(150, 210, 255, 0.5);
   transform: scale(1.1);
-  box-shadow: 0 0 0 2px rgba(150, 210, 255, 0.15);
 }
 
 .contributors-list.grid-layout .contributor-card img {
