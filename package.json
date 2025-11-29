@@ -15,7 +15,9 @@
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
     "test:links": "npm run build && node scripts/run-link-check.js",
-    "check:routes": "node scripts/check-route-structure.js"
+    "check:routes": "node scripts/check-route-structure.js",
+    "check:page-structure": "node scripts/check-runner.mjs page-structure",
+    "check:all": "node scripts/check-runner.mjs all"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

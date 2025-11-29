@@ -52,11 +52,17 @@ npm run test:links # 基于 dist/ 的站内断链检测
 npm run format     # 代码格式化
 ```
 
-提交前自检：
+提交前自检（推荐使用封装命令）：
 
-- `npm run check:routes` — 校验 1/2/3 级内容与路由镜像一致，禁止二级平铺 .astro 与三级“文件夹+index”。
-- `npm run type-check` — 运行 Astro 的 `astro check`，覆盖 .astro + 相关 TS/JS + Content Collections；要求 0 errors / 0 warnings（hints 如 is:inline 可忽略）。
-- `npm run test:links` — 基于 dist/ 的站内断链检测（需先 build）。
+```bash
+npm run check:page-structure  # 页面结构检查：build → check:routes → test:links
+npm run check:all             # 全量检查：format → build → type-check → check:routes → test:links
+```
+
+单项命令：
+- `npm run check:routes` — 校验 1/2/3 级内容与路由镜像一致
+- `npm run type-check` — TypeScript 类型检查
+- `npm run test:links` — 站内断链检测（需先 build）
 
 
 更多流程与示例请见 [CONTRIBUTING.md](CONTRIBUTING.md)（唯一事实源）。

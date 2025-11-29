@@ -6,22 +6,22 @@ description: Essential tools and prerequisites for maximizing free tier usage (v
 ## Overview
 Essential tools and prerequisites for maximizing free tier usage.
 
-### Virtual Cards
+## Virtual Cards
 - [Placeholder for Virtual Cards info]
 
-### SMS Activation
+## SMS Activation
 - [Placeholder for SMS activation services]
 
-### Temporary Emails
+## Temporary Emails
 - [Placeholder for Temp email services]
 
-### Education Emails
+## Education Emails
 - Github Student Developer Pack
 - JetBrains student license
 
-### Accounts
+## Accounts
 - GitHub Accounts
 - Google Accounts
 
-### Fingerprint Browsers
+## Fingerprint Browsers
 - [Placeholder for Fingerprint Browser info]
