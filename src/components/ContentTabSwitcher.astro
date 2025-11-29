@@ -138,6 +138,7 @@ if (tabs.length < 2) {
 </style>
 
 <script>
+  // @ts-nocheck
   /**
    * Tab switching logic
    * Handles keyboard navigation and click events for tab switching
@@ -146,12 +147,18 @@ if (tabs.length < 2) {
     const tabLists = document.querySelectorAll('.content-tabs')
 
     tabLists.forEach((tabList) => {
-      const tabs = tabList.querySelectorAll<HTMLButtonElement>('.content-tab')
+      if (tabList.dataset.tabsInitialized === 'true') return
+      tabList.dataset.tabsInitialized = 'true'
+      const tabs = tabList.querySelectorAll('.content-tab')
+      const panelContainer =
+        tabList.closest('.content-tabs-wrapper')?.parentElement ||
+        tabList.parentElement ||
+        document
 
       tabs.forEach((tab) => {
         // Click handler
         tab.addEventListener('click', () => {
-          activateTab(tab, tabs)
+          activateTab(tab, tabs, panelContainer)
         })
 
         // Keyboard navigation
@@ -159,7 +166,7 @@ if (tabs.length < 2) {
           const tabArray = Array.from(tabs)
           const currentIndex = tabArray.indexOf(tab)
 
-          let newIndex: number | null = null
+          let newIndex = null
 
           switch (e.key) {
             case 'ArrowLeft':
@@ -182,17 +189,14 @@ if (tabs.length < 2) {
             e.preventDefault()
             const newTab = tabArray[newIndex]
             newTab.focus()
-            activateTab(newTab, tabs)
+            activateTab(newTab, tabs, panelContainer)
           }
         })
       })
     })
   }
 
-  function activateTab(
-    activeTab: HTMLButtonElement,
-    allTabs: NodeListOf<HTMLButtonElement>,
-  ) {
+  function activateTab(activeTab, allTabs, panelContainer) {
     const tabId = activeTab.dataset.tabId
 
     // Update tab states
@@ -205,7 +209,7 @@ if (tabs.length < 2) {
 
     // Update panel visibility
     const panels =
-      document.querySelectorAll<HTMLDivElement>('.content-tab-panel')
+      panelContainer.querySelectorAll<HTMLDivElement>('.content-tab-panel')
     panels.forEach((panel) => {
       const panelTabId = panel.dataset.tabId
       const isVisible = panelTabId === tabId

@@ -61,7 +61,7 @@ tab:
 ### 高级方案
 
 使用 Gmail 的 `+` 别名功能：
-```
+```text
 yourmail+service1@gmail.com
 yourmail+service2@gmail.com
 ```
