@@ -247,7 +247,7 @@
   top: 0;
   bottom: 0;
   left: 0;
-  width: 2px;
+  width: 1px;
   background: var(--color-toc-border);
   border-radius: 999px;
 }
@@ -259,6 +259,7 @@
 }
 
 .toc-link {
+  position: relative;
   color: var(--color-toc-text);
   text-decoration: none;
   font-size: 0.75rem;
@@ -279,6 +280,19 @@
 .toc-link.active {
   color: var(--color-toc-active);
   font-weight: 600;
+}
+
+.toc-link.active::before {
+  content: '';
+  position: absolute;
+  left: -1.125rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 2px;
+  background-color: var(--color-toc-active-border);
+  box-shadow: 0 0 8px var(--color-toc-active-glow);
+  border-radius: 99px;
 }
 
 .toc-2 {
