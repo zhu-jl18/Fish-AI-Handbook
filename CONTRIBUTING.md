@@ -25,7 +25,6 @@
 
 - 顶层目录严格递增：`01-concepts`、`02-daily`、`03-prompts`、`04-advanced`、`05-fun`、`06-resources`、`07-theoretical`、`99-manual`（置底）。
 - 不允许跳号；新增一级目录必须在末尾递增，`99-manual` 保留为固定置底。
-- 历史目录 `tech`、`demo` 已废弃，其内容已并入 `06-resources`（`2API`、`云平台`）；禁止复活。
 
 ### 2.2 内容层级与 Frontmatter
 
@@ -33,7 +32,7 @@
   - 一级：`docs/<NN-alias>/index.md`（文件夹 + index.md，章节首页）
   - 二级：`docs/<NN-alias>/<sub>/index.md`（文件夹 + index.md，子章节首页）
   - 三级：`docs/<NN-alias>/<sub>/<page>/index.md`（文件夹 + index.md，叶子页面）
-    - 同一 3 级目录下额外的 `*.md`（如 `details.md`、`glm.md`）作为**标签文件**，由多标签系统渲染
+    - 同一 2/3 级目录下额外的 `*.md`（如 `details.md`、`glm.md`）作为**标签文件**，由多标签系统渲染
 - 示范：
 
 ```text
@@ -41,6 +40,7 @@
 ├── index.md                        # 一级
 ├── context/
 │   ├── index.md                    # 二级
+│   ├── details.md                    # 二级对应的tab
 │   └── glossary/
 │       └── index.md                # 三级
 ```
@@ -64,11 +64,11 @@ description: 简短描述（必填，缺失会导致构建失败）
 
 ### 2.3 Astro 路由镜像（强制）
 
-|| 层级 | Markdown 内容                             | Astro 路由                            | 说明                         |
-|| ---- | ----------------------------------------- | ------------------------------------- | ---------------------------- |
-|| 一级 | `<序号-别名>/index.md`                    | `<别名>/index.astro`                  | 章节首页                     |
-|| 二级 | `<序号-别名>/<子目录>/index.md`           | `<别名>/<子目录>/index.astro`         | 必须使用文件夹 + index.astro |
-|| 三级 | `<序号-别名>/<子目录>/<页面>/index.md`    | `<别名>/<子目录>/<页面>/index.astro`  | 叶子页面（目录 + index.md） |
+| 层级 | Markdown 内容                             | Astro 路由                            | 说明                         |
+| ---- | ----------------------------------------- | ------------------------------------- | ---------------------------- |
+| 一级 | `<序号-别名>/index.md`                    | `<别名>/index.astro`                  | 章节首页                     |
+| 二级 | `<序号-别名>/<子目录>/index.md`           | `<别名>/<子目录>/index.astro`         | 必须使用文件夹 + index.astro |
+| 三级 | `<序号-别名>/<子目录>/<页面>/index.md`    | `<别名>/<子目录>/<页面>/index.astro`  | 叶子页面（目录 + index.md） |
 
 示例：
 
