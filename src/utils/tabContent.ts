@@ -1,12 +1,14 @@
 /**
  * Multi-Tab Content Utilities
  *
- * Provides functions for detecting and organizing tab content in the resources chapter.
+ * Provides functions for detecting and organizing tab content across all chapters.
  * This system allows multiple .md files in a directory to be rendered as switchable tabs
  * at the same URL, similar to GitHub's README/CONTRIBUTING switcher.
  *
- * Currently piloted in: /resources chapter
- * Extensibility: Can be applied to other chapters by creating chapter-specific layouts
+ * Features:
+ * - Multi-tab support: Multiple .md files in same directory become tabs
+ * - Auto-fallback: Single file directories render as normal pages (no tabs)
+ * - Works with TabContentLayout for any chapter/level
  */
 
 import type { CollectionEntry } from 'astro:content'
@@ -110,17 +112,22 @@ export function isTabVariantEntry(entryId: string): boolean {
 
 /**
  * Get the base path for finding sibling tabs
- * e.g., '06-resources/api/details' -> '06-resources/api'
+ *
+ * Normalizes different content ID formats used by Astro Content Collections:
+ * - Single file in folder: '.../automation.md'       → '.../automation'
+ * - Multiple files in folder: '.../api/index'        → '.../api'
+ *                                '.../api/details'   → '.../api'
  */
 export function getTabBasePath(entryId: string): string {
+  // Case 1: Simplified single-file ID with extension
+  if (/\.(md|mdx)$/.test(entryId)) {
+    return entryId.replace(/\.(md|mdx)$/, '')
+  }
+
+  // Case 2: Full path without extension (index, details, etc.)
   const parts = entryId.split('/')
-  // Remove the filename part
   if (parts.length > 1) {
-    // Check if last part looks like a filename (not 'index')
-    const last = parts[parts.length - 1]
-    if (last !== 'index' && !last.includes('/')) {
-      parts.pop()
-    }
+    parts.pop() // drop filename so directory becomes base path
   }
   return parts.join('/')
 }
@@ -132,13 +139,19 @@ export function organizeTabEntries(
   entries: CollectionEntry<'docs'>[],
   basePath: string,
 ): TabInfo[] {
-  // Filter entries that belong to the same directory
+  // Filter entries that logically belong to the same "page" identified by basePath.
+  // Accepted ID patterns:
+  // - basePath                   (legacy single-file)
+  // - basePath.md                (single file in folder)
+  // - basePath/index             (index file in folder)
+  // - basePath/<tab-name>        (other tab files in folder)
   const tabEntries = entries.filter((entry) => {
-    const entryBase = getTabBasePath(entry.id)
+    const id = entry.id
     return (
-      entryBase === basePath ||
-      entry.id === basePath ||
-      entry.id === `${basePath}/index`
+      id === basePath ||
+      id === `${basePath}.md` ||
+      id === `${basePath}/index` ||
+      id.startsWith(`${basePath}/`)
     )
   })
 

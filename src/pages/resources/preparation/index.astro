@@ -1,13 +1,13 @@
 ---
 /**
  * Resources - Preparation page
- * Uses ResourcesContentLayout for multi-tab support
+ * Uses TabContentLayout for multi-tab support
  */
-import ResourcesContentLayout from '../../../layouts/ResourcesContentLayout.astro'
+import TabContentLayout from '../../../layouts/TabContentLayout.astro'
 import { RESOURCES_SIDEBAR } from '../../../scripts/sidebars'
 ---
 
-<ResourcesContentLayout
+<TabContentLayout
   basePath="06-resources/preparation"
   title="Preparation"
   sidebarItems={RESOURCES_SIDEBAR}

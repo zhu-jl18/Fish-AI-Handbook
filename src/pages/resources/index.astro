@@ -1,13 +1,13 @@
 ---
 /**
  * Resources Chapter Index
- * Uses ResourcesContentLayout for multi-tab support
+ * Uses TabContentLayout for multi-tab support
  */
-import ResourcesContentLayout from '../../layouts/ResourcesContentLayout.astro'
+import TabContentLayout from '../../layouts/TabContentLayout.astro'
 import { RESOURCES_SIDEBAR } from '../../scripts/sidebars'
 ---
 
-<ResourcesContentLayout
+<TabContentLayout
   basePath="06-resources"
   title="资源合集"
   sidebarItems={RESOURCES_SIDEBAR}

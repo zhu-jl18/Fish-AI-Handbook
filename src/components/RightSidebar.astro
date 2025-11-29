@@ -7,10 +7,12 @@ const {
   structure = [],
   currentPath = '/',
   contributors,
+  manualToc = false,
 }: {
   structure?: SidebarSection
   currentPath?: string
   contributors?: string[] | null
+  manualToc?: boolean
 } = Astro.props
 ---
 
@@ -25,22 +27,21 @@ const {
   </div>
 </div>
 
-<script is:inline type="module">
+<script is:inline type="module" define:vars={{ manualToc }}>
   import { setupRightSidebar } from '/scripts/toc.js'
-  // 构建目录并启用滚动高亮
+  if (manualToc) {
+    // 由外层布局手动控制 TOC
+    return
+  }
+
   const stop = setupRightSidebar('.content-inner', '.toc-nav')
 
   // 检查 TOC 是否为空，如果为空则隐藏整个 toc-panel
-  // 注意：setupRightSidebar 是同步函数，执行完毕后 TOC 已填充完成
-  // 使用 requestAnimationFrame 确保 DOM 更新已完成，避免潜在的时序问题
   requestAnimationFrame(() => {
     const tocNav = document.querySelector('.toc-nav')
     const tocPanel = document.querySelector('.toc-panel')
-    if (tocNav && tocPanel) {
-      // 检查 TOC 是否有内容（是否有子元素）
-      if (tocNav.children.length === 0) {
-        tocPanel.style.display = 'none'
-      }
+    if (tocNav && tocPanel && tocNav.children.length === 0) {
+      tocPanel.style.display = 'none'
     }
   })
 

@@ -83,7 +83,7 @@ response = client.chat.completions.create(
 
 ### 免费资源组合策略
 
-```
+```text
 日常对话 → Gemini 1.5 Flash (Google AI Studio)
 代码辅助 → DeepSeek V3 (心流 iFlow)
 长文本 → Gemini 1.5 Pro (限额用完切换)

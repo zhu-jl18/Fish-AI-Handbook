@@ -187,10 +187,7 @@
   text-decoration: none;
   background: transparent;
   border: 2px solid rgba(255, 255, 255, 0.1);
-  transition:
-    border-color var(--motion-duration-sm) var(--motion-ease-standard),
-    transform var(--motion-duration-sm) var(--motion-ease-standard),
-    box-shadow var(--motion-duration-sm) var(--motion-ease-standard);
+  transition: transform var(--motion-duration-sm) var(--motion-ease-standard);
 }
 
 .contributors-list.grid-layout .contributor-card:hover {

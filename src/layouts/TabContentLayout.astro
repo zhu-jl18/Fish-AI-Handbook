@@ -1,20 +1,22 @@
 ---
 /**
- * ResourcesContentLayout - Extended layout with multi-tab content support
+ * TabContentLayout - Universal layout with multi-tab content support
  *
- * This layout wraps ContentLayout and adds GitHub-style tab switching functionality.
+ * This layout adds GitHub-style tab switching functionality to any content page.
  * It automatically detects sibling content files in the same directory and renders
  * them as switchable tabs at the same URL.
  *
- * Currently piloted in: /resources chapter
- * Extensibility: This pattern can be adapted for other chapters by creating similar layouts
+ * Features:
+ * - Multi-tab support: Multiple .md files in same directory become tabs
+ * - Auto-fallback: Single file directories render as normal pages (no tabs)
+ * - Sidebar sync: TOC and contributors update on tab switch
  *
  * Usage in page templates:
  * ```astro
- * <ResourcesContentLayout
- *   basePath="06-resources/api"
- *   title="API Key"
- *   sidebarItems={RESOURCES_SIDEBAR}
+ * <TabContentLayout
+ *   basePath="01-concepts/developer/automation"
+ *   title="Automation"
+ *   sidebarItems={CONCEPTS_SIDEBAR}
  * />
  * ```
  */
@@ -28,6 +30,7 @@ import ContentActions from '../components/ContentActions.astro'
 import ContentTabSwitcher from '../components/ContentTabSwitcher.astro'
 import { getSidebarForPath } from '../scripts/sidebars'
 import { theme, getCurrentNavKey } from '../config/index'
+import siteConfig, { CONTRIBUTORS_MAP } from '../config/site'
 import { getGitLastModifiedIso } from '../utils/git'
 import { getCollection } from 'astro:content'
 import { organizeTabEntries, type TabInfo } from '../utils/tabContent'
@@ -48,15 +51,8 @@ const { basePath, title: propTitle, sidebarItems, bodyClass } = Astro.props
 // Get all docs entries to find tabs
 const allDocs = await getCollection('docs')
 
-// Filter entries in the resources chapter that match our base path
-const resourcesEntries = allDocs.filter((entry) => {
-  // Match entries that start with our base path
-  // e.g., basePath='06-resources/api' matches '06-resources/api', '06-resources/api/details'
-  return entry.id.startsWith(basePath) || entry.id === `${basePath}/index`
-})
-
-// Organize into tabs
-const tabs = organizeTabEntries(resourcesEntries, basePath)
+// Organize into tabs（内部会基于 basePath 过滤）
+const tabs = organizeTabEntries(allDocs, basePath)
 
 // Render all tab contents
 const renderedTabs: TabInfo[] = await Promise.all(
@@ -70,6 +66,12 @@ const renderedTabs: TabInfo[] = await Promise.all(
   }),
 )
 
+if (renderedTabs.length === 0) {
+  throw new Error(
+    `[TabContentLayout] No docs entries found for basePath="${basePath}"`,
+  )
+}
+
 // Get the default (index) entry for metadata
 const defaultTab = renderedTabs.find((t) => t.isDefault) || renderedTabs[0]
 const entry = defaultTab?.entry
@@ -77,7 +79,7 @@ const entry = defaultTab?.entry
 const currentPath = Astro.url.pathname
 const resolvedSidebarItems = sidebarItems || getSidebarForPath(currentPath)
 
-const title = propTitle || entry?.data?.title || 'Resources'
+const title = propTitle || entry?.data?.title || 'Untitled'
 const contributors = entry?.data?.contributors
 
 const lastModified = getGitLastModifiedIso(entry?.filePath)
@@ -104,11 +106,14 @@ const tabsForSwitcher = renderedTabs.map((tab) => ({
   isDefault: tab.isDefault,
 }))
 
-// Prepare tab metadata for client-side sidebar sync (Resources-specific)
+// Prepare tab metadata for client-side sidebar sync
 const tabsMetadata = renderedTabs.map((tab) => ({
   id: tab.id,
   contributors: tab.entry.data.contributors || [],
 }))
+
+const contributorsMap = CONTRIBUTORS_MAP
+const defaultContributor = siteConfig.defaultContributor
 ---
 
 <BaseLayout title={title} bodyClass={bodyClass} contributors={contributors}>
@@ -161,6 +166,7 @@ const tabsMetadata = renderedTabs.map((tab) => ({
         structure={resolvedSidebarItems}
         currentPath={currentPath}
         contributors={contributors}
+        manualToc={hasMultipleTabs}
       />
     </div>
   </div>
@@ -406,98 +412,128 @@ const tabsMetadata = renderedTabs.map((tab) => ({
 </script>
 
 {/* Resources-specific: Tab metadata for sidebar sync */}
-{hasMultipleTabs && (
-  <script is:inline define:vars={{ tabsMetadata, defaultContributor: { username: 'zhu-jl18', name: 'Fish', link: 'https://github.com/zhu-jl18', avatar: 'https://github.com/zhu-jl18.png' } }}>
-    // Resources-only: Sidebar sync on tab change
-    (function() {
-      const CONTRIBUTORS_MAP = {
-        'claude': { username: 'claude', name: 'Claude', link: 'https://github.com/anthropics', avatar: 'https://avatars.githubusercontent.com/u/81847?v=4' },
-        'codex': { username: 'codex', name: 'Codex', link: 'https://github.com/openai', avatar: 'https://avatars.githubusercontent.com/u/14957082?s=48&v=4' },
-        'gemini': { username: 'gemini', name: 'Gemini', link: 'https://github.com/google-gemini', avatar: 'https://avatars.githubusercontent.com/u/161781182?s=48&v=4' },
-        'glm': { username: 'glm', name: 'GLM', link: 'https://github.com/zai-org', avatar: 'https://media.makomako.dpdns.org/images/2025/11/zhipu' },
-        'minimax': { username: 'minimax', name: 'MiniMax', link: 'https://github.com/MiniMax-AI', avatar: 'https://github.com/MiniMax-AI-Dev.png' },
-        'kimi': { username: 'kimi', name: 'Kimi', link: 'https://github.com/MoonshotAI', avatar: 'https://media.makomako.dpdns.org/images/2025/11/moonshot-dark' },
-        'doubao': { username: 'doubao', name: '豆包', link: 'https://github.com/ByteDance-Seed', avatar: 'https://media.makomako.dpdns.org/images/2025/11/豆包' },
-      };
+<script
+  is:inline
+  define:vars={{ tabsMetadata, defaultContributor, contributorsMap }}
+>
+  // Resources-only: Sidebar sync on tab change
+  ;(function () {
+    if (!Array.isArray(tabsMetadata) || tabsMetadata.length < 2) {
+      return
+    }
 
-      function resolveContributor(username) {
-        const trimmed = (username || '').trim();
-        if (!trimmed) return null;
-        if (CONTRIBUTORS_MAP[trimmed]) return CONTRIBUTORS_MAP[trimmed];
-        return {
-          username: trimmed,
-          name: trimmed,
-          link: 'https://github.com/' + trimmed,
-          avatar: 'https://github.com/' + trimmed + '.png',
-        };
+    function resolveContributor(username) {
+      const trimmed = (username || '').trim()
+      if (!trimmed) return null
+      if (contributorsMap && contributorsMap[trimmed]) {
+        return contributorsMap[trimmed]
+      }
+      return {
+        username: trimmed,
+        name: trimmed,
+        link: 'https://github.com/' + trimmed,
+        avatar: 'https://github.com/' + trimmed + '.png',
+      }
+    }
+
+    let cleanupToc = null
+
+    function updateContributors(contributorNames) {
+      const listEl = document.querySelector('.contributors-list')
+      const countEl = document.querySelector('.contributor-count')
+      if (!listEl || !countEl) return
+
+      const contributorList = []
+      const seen = new Set()
+
+      // Always add default contributor first
+      seen.add(defaultContributor.username)
+      contributorList.push(defaultContributor)
+
+      // Add other contributors
+      if (Array.isArray(contributorNames)) {
+        for (const name of contributorNames) {
+          const resolved = resolveContributor(name)
+          if (!resolved || seen.has(resolved.username)) continue
+          seen.add(resolved.username)
+          contributorList.push(resolved)
+        }
       }
 
-      function updateContributors(contributorNames) {
-        const listEl = document.querySelector('.contributors-list');
-        const countEl = document.querySelector('.contributor-count');
-        if (!listEl || !countEl) return;
+      // Update count
+      countEl.textContent = contributorList.length
 
-        const contributorList = [];
-        const seen = new Set();
+      // Rebuild list
+      const isGrid = contributorList.length > 2
+      listEl.className =
+        'contributors-list ' + (isGrid ? 'grid-layout' : 'list-layout')
 
-        // Always add default contributor first
-        seen.add(defaultContributor.username);
-        contributorList.push(defaultContributor);
+      listEl.innerHTML = contributorList
+        .map(function (person) {
+          const meta = isGrid
+            ? ''
+            : '<div class="contributor-meta"><span class="contributor-name">' +
+              person.name +
+              '</span><span class="contributor-handle">@' +
+              person.username +
+              '</span></div>'
+          return (
+            '<a class="contributor-card" href="' +
+            person.link +
+            '" target="_blank" rel="noreferrer noopener" title="' +
+            person.name +
+            ' (@' +
+            person.username +
+            ')"><img src="' +
+            person.avatar +
+            '" alt="' +
+            person.name +
+            '" loading="lazy" />' +
+            meta +
+            '</a>'
+          )
+        })
+        .join('')
+    }
 
-        // Add other contributors
-        if (Array.isArray(contributorNames)) {
-          for (const name of contributorNames) {
-            const resolved = resolveContributor(name);
-            if (!resolved || seen.has(resolved.username)) continue;
-            seen.add(resolved.username);
-            contributorList.push(resolved);
+    function rebuildToc() {
+      // Dynamically import to avoid SSR issues
+      import('/scripts/toc.js').then(function (mod) {
+        const activePanel = document.querySelector(
+          '.content-tab-panel:not([hidden])',
+        )
+        const selector = activePanel
+          ? '.content-tab-panel:not([hidden])'
+          : '.content-inner'
+        if (typeof cleanupToc === 'function') {
+          cleanupToc()
+        }
+        cleanupToc = mod.setupRightSidebar(selector, '.toc-nav')
+
+        // Check if TOC is empty
+        requestAnimationFrame(function () {
+          const tocNav = document.querySelector('.toc-nav')
+          const tocPanel = document.querySelector('.toc-panel')
+          if (tocNav && tocPanel) {
+            tocPanel.style.display = tocNav.children.length === 0 ? 'none' : ''
           }
-        }
+        })
+      })
+    }
 
-        // Update count
-        countEl.textContent = contributorList.length;
+    // Initial TOC build - default sidebar已关闭自动构建，这里直接构建
+    rebuildToc()
 
-        // Rebuild list
-        const isGrid = contributorList.length > 2;
-        listEl.className = 'contributors-list ' + (isGrid ? 'grid-layout' : 'list-layout');
-
-        listEl.innerHTML = contributorList.map(function(person) {
-          const meta = isGrid ? '' : '<div class="contributor-meta"><span class="contributor-name">' + person.name + '</span><span class="contributor-handle">@' + person.username + '</span></div>';
-          return '<a class="contributor-card" href="' + person.link + '" target="_blank" rel="noreferrer noopener" title="' + person.name + ' (@' + person.username + ')"><img src="' + person.avatar + '" alt="' + person.name + '" loading="lazy" />' + meta + '</a>';
-        }).join('');
+    document.addEventListener('tab-changed', function (e) {
+      const tabId = e.detail.tabId
+      const tabMeta = tabsMetadata.find(function (t) {
+        return t.id === tabId
+      })
+      if (tabMeta) {
+        updateContributors(tabMeta.contributors)
       }
-
-      function rebuildToc() {
-        // Dynamically import to avoid SSR issues
-        import('/scripts/toc.js').then(function(mod) {
-          const activePanel = document.querySelector('.content-tab-panel:not([hidden])');
-          const selector = activePanel ? '.content-tab-panel:not([hidden])' : '.content-inner';
-          mod.setupRightSidebar(selector, '.toc-nav');
-
-          // Check if TOC is empty
-          requestAnimationFrame(function() {
-            const tocNav = document.querySelector('.toc-nav');
-            const tocPanel = document.querySelector('.toc-panel');
-            if (tocNav && tocPanel) {
-              tocPanel.style.display = tocNav.children.length === 0 ? 'none' : '';
-            }
-          });
-        });
-      }
-
-      // Initial TOC build - must run AFTER RightSidebar's default build
-      // Use setTimeout to ensure we override the default TOC with active-panel-only version
-      setTimeout(rebuildToc, 100);
-
-      document.addEventListener('tab-changed', function(e) {
-        const tabId = e.detail.tabId;
-        const tabMeta = tabsMetadata.find(function(t) { return t.id === tabId; });
-        if (tabMeta) {
-          updateContributors(tabMeta.contributors);
-        }
-        // Rebuild TOC for active panel
-        setTimeout(rebuildToc, 50);
-      });
-    })();
-  </script>
-)}
+      // Rebuild TOC for active panel（下一帧保证 active panel 已切换）
+      requestAnimationFrame(rebuildToc)
+    })
+  })()
+</script>
