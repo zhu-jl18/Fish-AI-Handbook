@@ -10,6 +10,8 @@
  *   • Forbid: third-level folder structure for content (<NN-alias>/<sub>/<page>/index.md)
  *   • Forbid: third-level folder structure for route (<alias>/<sub>/<page>/index.astro)
  * - Orphans: report any route without content, or content without route (for the above pairs)
+ * - Multi-Tab Content (resources chapter pilot): Non-index .md files with `tab:` frontmatter
+ *   are rendered via the same index.astro and do NOT require separate routes.
  * Exits non-zero on any mismatch.
  */
 import fs from 'fs'
@@ -72,6 +74,28 @@ const listFiles = (p) => {
   }
 }
 
+/**
+ * Check if a markdown file is a multi-tab content file (has `tab:` in frontmatter).
+ * These files are rendered via the parent index.astro and don't need separate routes.
+ * Currently piloted in resources chapter.
+ */
+const isTabContentFile = (filePath) => {
+  try {
+    const content = fs.readFileSync(filePath, 'utf-8')
+    // Check for tab: in frontmatter (between --- markers)
+    // Handle both Unix (\n) and Windows (\r\n) line endings
+    const frontmatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+    if (frontmatterMatch) {
+      const frontmatter = frontmatterMatch[1]
+      // Look for tab: field (with or without nested properties)
+      return /^tab:/m.test(frontmatter)
+    }
+    return false
+  } catch {
+    return false
+  }
+}
+
 let errors = []
 
 for (const [alias, numbered] of Object.entries(DOCS_MAP)) {
@@ -124,6 +148,12 @@ for (const [alias, numbered] of Object.entries(DOCS_MAP)) {
         if (!f.endsWith('.md')) continue
         const base = path.basename(f, '.md')
         if (base === 'index') continue
+
+        // Skip multi-tab content files (they render via parent index.astro)
+        if (isTabContentFile(f)) {
+          continue
+        }
+
         const routeL3 = path.join(pagesSection, sub, `${base}.astro`)
         const routeL3Folder = path.join(pagesSection, sub, base, 'index.astro')
         if (!exists(routeL3)) {

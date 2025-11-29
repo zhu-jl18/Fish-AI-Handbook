@@ -88,8 +88,45 @@ description: 简短描述 (必填，缺失会导致构建失败)
 :::
 ```
 
+## Multi-Tab Content (多标签内容)
+
+> **试点章节：** `06-resources`
+> **扩展性：** 可推广至其他章节
+
+允许同一 URL 下切换多个内容变体，类似 GitHub 的 README/CONTRIBUTING 切换。
+
+### 目录结构
+```text
+06-resources/api/
+├── index.md        # 默认标签 (必须)
+├── details.md      # 详情标签 (可选, 需 tab: frontmatter)
+└── examples.md     # 示例标签 (可选)
+```
+
+### Frontmatter
+```yaml
+---
+title: API Key - Details
+description: 详细配置指南
+tab:
+  label: Details    # 可选
+  order: 10         # 可选 (index=0, details=10, others=20+)
+---
+```
+
+### 关键文件
+- Schema: `src/content/config.ts` (`tabSchema`)
+- Utils: `src/utils/tabContent.ts`
+- Component: `src/components/ContentTabSwitcher.astro`
+- Layout: `src/layouts/ResourcesContentLayout.astro`
+
+### 注意事项
+- 标签文件不需要单独的 `.astro` 路由
+- 单文件目录自动退化为普通页面
+
 ## 修改指南
 
 1. 新增内容必须在 `src/pages/` 创建对应路由
 2. 新增章节需更新 `src/config/navigation.ts` 和 `src/scripts/docsMap.ts`
 3. 修改/删除内容需同步更新侧栏配置 `src/scripts/sidebars.ts`
+4. 多标签内容只需添加 `.md` 文件并配置 `tab:` frontmatter

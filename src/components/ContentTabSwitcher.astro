@@ -1,0 +1,227 @@
+---
+/**
+ * ContentTabSwitcher - GitHub-style tab bar for multi-content pages
+ *
+ * Renders a horizontal tab bar similar to GitHub's README/CONTRIBUTING switcher.
+ * Only renders when there are 2+ tabs. Handles client-side tab switching without URL changes.
+ *
+ * Currently piloted in: /resources chapter
+ * Extensibility: Can be reused in other chapters via their specific layouts
+ */
+
+export interface Tab {
+  id: string
+  label: string
+  isDefault: boolean
+}
+
+interface Props {
+  tabs: Tab[]
+  /** Optional: ID prefix for DOM elements */
+  prefix?: string
+}
+
+const { tabs, prefix = 'content-tab' } = Astro.props
+
+// Don't render if only one tab
+if (tabs.length < 2) {
+  return null
+}
+---
+
+<div class="content-tabs-wrapper" data-tab-count={tabs.length}>
+  <nav class="content-tabs" role="tablist" aria-label="Content sections">
+    {
+      tabs.map((tab) => (
+        <button
+          type="button"
+          role="tab"
+          class={`content-tab ${tab.isDefault ? 'active' : ''}`}
+          id={`${prefix}-${tab.id}`}
+          aria-selected={tab.isDefault ? 'true' : 'false'}
+          aria-controls={`${prefix}-panel-${tab.id}`}
+          tabindex={tab.isDefault ? 0 : -1}
+          data-tab-id={tab.id}
+        >
+          <span class="content-tab-label">{tab.label}</span>
+        </button>
+      ))
+    }
+    <div class="content-tabs-indicator" aria-hidden="true"></div>
+  </nav>
+</div>
+
+<style>
+  .content-tabs-wrapper {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .content-tabs {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  .content-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition:
+      color var(--motion-duration-sm) var(--motion-ease-standard),
+      border-color var(--motion-duration-sm) var(--motion-ease-standard),
+      background-color var(--motion-duration-sm) var(--motion-ease-standard);
+    white-space: nowrap;
+    margin-bottom: -1px;
+  }
+
+  .content-tab:hover {
+    color: var(--text-color);
+    background: var(--surface-tint-03);
+  }
+
+  .content-tab:focus-visible {
+    outline: 2px solid var(--header-accent);
+    outline-offset: -2px;
+    border-radius: var(--border-radius-sm);
+  }
+
+  .content-tab.active {
+    color: var(--color-text-white);
+    border-bottom-color: var(--header-accent);
+  }
+
+  .content-tab.active:hover {
+    background: transparent;
+  }
+
+  .content-tab-label {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  /* Animated indicator (optional enhancement) */
+  .content-tabs-indicator {
+    display: none; /* Can be enabled for sliding indicator effect */
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .content-tabs-wrapper {
+      margin-bottom: 1rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .content-tabs {
+      min-width: max-content;
+    }
+
+    .content-tab {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8125rem;
+    }
+  }
+</style>
+
+<script>
+  /**
+   * Tab switching logic
+   * Handles keyboard navigation and click events for tab switching
+   */
+  function initTabSwitcher() {
+    const tabLists = document.querySelectorAll('.content-tabs')
+
+    tabLists.forEach((tabList) => {
+      const tabs = tabList.querySelectorAll<HTMLButtonElement>('.content-tab')
+
+      tabs.forEach((tab) => {
+        // Click handler
+        tab.addEventListener('click', () => {
+          activateTab(tab, tabs)
+        })
+
+        // Keyboard navigation
+        tab.addEventListener('keydown', (e) => {
+          const tabArray = Array.from(tabs)
+          const currentIndex = tabArray.indexOf(tab)
+
+          let newIndex: number | null = null
+
+          switch (e.key) {
+            case 'ArrowLeft':
+              newIndex =
+                currentIndex > 0 ? currentIndex - 1 : tabArray.length - 1
+              break
+            case 'ArrowRight':
+              newIndex =
+                currentIndex < tabArray.length - 1 ? currentIndex + 1 : 0
+              break
+            case 'Home':
+              newIndex = 0
+              break
+            case 'End':
+              newIndex = tabArray.length - 1
+              break
+          }
+
+          if (newIndex !== null) {
+            e.preventDefault()
+            const newTab = tabArray[newIndex]
+            newTab.focus()
+            activateTab(newTab, tabs)
+          }
+        })
+      })
+    })
+  }
+
+  function activateTab(
+    activeTab: HTMLButtonElement,
+    allTabs: NodeListOf<HTMLButtonElement>,
+  ) {
+    const tabId = activeTab.dataset.tabId
+
+    // Update tab states
+    allTabs.forEach((tab) => {
+      const isActive = tab === activeTab
+      tab.classList.toggle('active', isActive)
+      tab.setAttribute('aria-selected', isActive ? 'true' : 'false')
+      tab.setAttribute('tabindex', isActive ? '0' : '-1')
+    })
+
+    // Update panel visibility
+    const panels =
+      document.querySelectorAll<HTMLDivElement>('.content-tab-panel')
+    panels.forEach((panel) => {
+      const panelTabId = panel.dataset.tabId
+      const isVisible = panelTabId === tabId
+      panel.hidden = !isVisible
+      panel.setAttribute('aria-hidden', isVisible ? 'false' : 'true')
+    })
+
+    // Dispatch custom event for other components to react
+    document.dispatchEvent(
+      new CustomEvent('tab-changed', {
+        detail: { tabId, activeTab },
+      }),
+    )
+  }
+
+  // Initialize on DOM ready and after Astro page transitions
+  document.addEventListener('DOMContentLoaded', initTabSwitcher)
+  document.addEventListener('astro:page-load', initTabSwitcher)
+</script>

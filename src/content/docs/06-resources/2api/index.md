@@ -6,7 +6,6 @@ contributors:
   - codex
 ---
 
-## 什么是 2API
 
 把没有公开 API 的服务（Web、App、CLI）逆向成通用 API 格式，让你的客户端能直接调用。
 
