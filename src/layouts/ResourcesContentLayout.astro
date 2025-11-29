@@ -103,6 +103,12 @@ const tabsForSwitcher = renderedTabs.map((tab) => ({
   label: tab.label,
   isDefault: tab.isDefault,
 }))
+
+// Prepare tab metadata for client-side sidebar sync (Resources-specific)
+const tabsMetadata = renderedTabs.map((tab) => ({
+  id: tab.id,
+  contributors: tab.entry.data.contributors || [],
+}))
 ---
 
 <BaseLayout title={title} bodyClass={bodyClass} contributors={contributors}>
@@ -397,21 +403,101 @@ const tabsForSwitcher = renderedTabs.map((tab) => ({
   trigger?.addEventListener('click', () => {
     document.dispatchEvent(new CustomEvent('open-mobile-menu'))
   })
-
-  // Update TOC when tab changes
-  document.addEventListener('tab-changed', ((e: CustomEvent) => {
-    const { tabId } = e.detail
-    // Find the active panel's headings and update TOC if needed
-    const activePanel = document.querySelector(
-      `.content-tab-panel[data-tab-id="${tabId}"]`,
-    )
-    if (activePanel) {
-      // Dispatch event for TOC to potentially update
-      document.dispatchEvent(
-        new CustomEvent('content-changed', {
-          detail: { panel: activePanel },
-        }),
-      )
-    }
-  }) as EventListener)
 </script>
+
+{/* Resources-specific: Tab metadata for sidebar sync */}
+{hasMultipleTabs && (
+  <script is:inline define:vars={{ tabsMetadata, defaultContributor: { username: 'zhu-jl18', name: 'Fish', link: 'https://github.com/zhu-jl18', avatar: 'https://github.com/zhu-jl18.png' } }}>
+    // Resources-only: Sidebar sync on tab change
+    (function() {
+      const CONTRIBUTORS_MAP = {
+        'claude': { username: 'claude', name: 'Claude', link: 'https://github.com/anthropics', avatar: 'https://avatars.githubusercontent.com/u/81847?v=4' },
+        'codex': { username: 'codex', name: 'Codex', link: 'https://github.com/openai', avatar: 'https://avatars.githubusercontent.com/u/14957082?s=48&v=4' },
+        'gemini': { username: 'gemini', name: 'Gemini', link: 'https://github.com/google-gemini', avatar: 'https://avatars.githubusercontent.com/u/161781182?s=48&v=4' },
+        'glm': { username: 'glm', name: 'GLM', link: 'https://github.com/zai-org', avatar: 'https://media.makomako.dpdns.org/images/2025/11/zhipu' },
+        'minimax': { username: 'minimax', name: 'MiniMax', link: 'https://github.com/MiniMax-AI', avatar: 'https://github.com/MiniMax-AI-Dev.png' },
+        'kimi': { username: 'kimi', name: 'Kimi', link: 'https://github.com/MoonshotAI', avatar: 'https://media.makomako.dpdns.org/images/2025/11/moonshot-dark' },
+        'doubao': { username: 'doubao', name: '豆包', link: 'https://github.com/ByteDance-Seed', avatar: 'https://media.makomako.dpdns.org/images/2025/11/豆包' },
+      };
+
+      function resolveContributor(username) {
+        const trimmed = (username || '').trim();
+        if (!trimmed) return null;
+        if (CONTRIBUTORS_MAP[trimmed]) return CONTRIBUTORS_MAP[trimmed];
+        return {
+          username: trimmed,
+          name: trimmed,
+          link: 'https://github.com/' + trimmed,
+          avatar: 'https://github.com/' + trimmed + '.png',
+        };
+      }
+
+      function updateContributors(contributorNames) {
+        const listEl = document.querySelector('.contributors-list');
+        const countEl = document.querySelector('.contributor-count');
+        if (!listEl || !countEl) return;
+
+        const contributorList = [];
+        const seen = new Set();
+
+        // Always add default contributor first
+        seen.add(defaultContributor.username);
+        contributorList.push(defaultContributor);
+
+        // Add other contributors
+        if (Array.isArray(contributorNames)) {
+          for (const name of contributorNames) {
+            const resolved = resolveContributor(name);
+            if (!resolved || seen.has(resolved.username)) continue;
+            seen.add(resolved.username);
+            contributorList.push(resolved);
+          }
+        }
+
+        // Update count
+        countEl.textContent = contributorList.length;
+
+        // Rebuild list
+        const isGrid = contributorList.length > 2;
+        listEl.className = 'contributors-list ' + (isGrid ? 'grid-layout' : 'list-layout');
+
+        listEl.innerHTML = contributorList.map(function(person) {
+          const meta = isGrid ? '' : '<div class="contributor-meta"><span class="contributor-name">' + person.name + '</span><span class="contributor-handle">@' + person.username + '</span></div>';
+          return '<a class="contributor-card" href="' + person.link + '" target="_blank" rel="noreferrer noopener" title="' + person.name + ' (@' + person.username + ')"><img src="' + person.avatar + '" alt="' + person.name + '" loading="lazy" />' + meta + '</a>';
+        }).join('');
+      }
+
+      function rebuildToc() {
+        // Dynamically import to avoid SSR issues
+        import('/scripts/toc.js').then(function(mod) {
+          const activePanel = document.querySelector('.content-tab-panel:not([hidden])');
+          const selector = activePanel ? '.content-tab-panel:not([hidden])' : '.content-inner';
+          mod.setupRightSidebar(selector, '.toc-nav');
+
+          // Check if TOC is empty
+          requestAnimationFrame(function() {
+            const tocNav = document.querySelector('.toc-nav');
+            const tocPanel = document.querySelector('.toc-panel');
+            if (tocNav && tocPanel) {
+              tocPanel.style.display = tocNav.children.length === 0 ? 'none' : '';
+            }
+          });
+        });
+      }
+
+      // Initial TOC build - must run AFTER RightSidebar's default build
+      // Use setTimeout to ensure we override the default TOC with active-panel-only version
+      setTimeout(rebuildToc, 100);
+
+      document.addEventListener('tab-changed', function(e) {
+        const tabId = e.detail.tabId;
+        const tabMeta = tabsMetadata.find(function(t) { return t.id === tabId; });
+        if (tabMeta) {
+          updateContributors(tabMeta.contributors);
+        }
+        // Rebuild TOC for active panel
+        setTimeout(rebuildToc, 50);
+      });
+    })();
+  </script>
+)}
