@@ -216,7 +216,7 @@ MiniMax 的路线比较独特：从一开始就把**软件工程 / Agent 场景*
 
 ```text
 Thought -> Action (Tool Call) -> Observation -> Next Thought -> ...
-````
+```
 
 这是我们可以称为 **Interleaved Thinking（交错式思维）** 的范式：模型不是先一次性想完所有步骤，而是在执行过程中边做边想、边观察边修正。
 
