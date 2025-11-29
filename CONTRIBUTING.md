@@ -30,25 +30,27 @@
 ### 2.2 内容层级与 Frontmatter
 
 - 深度最多 3 级：
-  - 一级/二级：**目录 + index.md**（可继续嵌套）。
-  - 三级：**单页 `.md`**，禁止“文件夹 + index.md”。
+  - 一级：`docs/<NN-alias>/index.md`（文件夹 + index.md，章节首页）
+  - 二级：`docs/<NN-alias>/<sub>/index.md`（文件夹 + index.md，子章节首页）
+  - 三级：`docs/<NN-alias>/<sub>/<page>/index.md`（文件夹 + index.md，叶子页面）
+    - 同一 3 级目录下额外的 `*.md`（如 `details.md`、`glm.md`）作为**标签文件**，由多标签系统渲染
 - 示范：
 
 ```text
 03-prompts/
-├── index.md
+├── index.md                        # 一级
 ├── context/
-│   ├── index.md           # ✓ 二级：文件夹 + index.md
-│   ├── dialogue-levels.md # ✓ 三级：单页 .md
-│   └── request-body.md    # ✓ 三级：单页 .md
+│   ├── index.md                    # 二级
+│   └── glossary/
+│       └── index.md                # 三级
 ```
 
 ```text
 03-prompts/
 ├── context/
-│   ├── dialogue-levels/
-│   │   └── index.md   # ✗ 禁止三级目录
-└── context.md         # ✗ 二级不得单文件
+│   ├── index.md
+│   └── dialogue-levels.md          # ✗ 三级不得单文件，应为 dialogue-levels/index.md
+└── context.md                      # ✗ 二级不得单文件，应为 context/index.md
 ```
 
 - 所有内容文件必须包含 frontmatter：
@@ -62,11 +64,11 @@ description: 简短描述（必填，缺失会导致构建失败）
 
 ### 2.3 Astro 路由镜像（强制）
 
-| 层级 | Markdown 内容                    | Astro 路由                     | 说明                         |
-| ---- | -------------------------------- | ------------------------------ | ---------------------------- |
-| 一级 | `<序号-别名>/index.md`           | `<别名>/index.astro`           | 章节首页                     |
-| 二级 | `<序号-别名>/<子目录>/index.md`  | `<别名>/<子目录>/index.astro`  | 必须使用文件夹 + index.astro |
-| 三级 | `<序号-别名>/<子目录>/<页面>.md` | `<别名>/<子目录>/<页面>.astro` | 平铺在父文件夹内             |
+|| 层级 | Markdown 内容                             | Astro 路由                            | 说明                         |
+|| ---- | ----------------------------------------- | ------------------------------------- | ---------------------------- |
+|| 一级 | `<序号-别名>/index.md`                    | `<别名>/index.astro`                  | 章节首页                     |
+|| 二级 | `<序号-别名>/<子目录>/index.md`           | `<别名>/<子目录>/index.astro`         | 必须使用文件夹 + index.astro |
+|| 三级 | `<序号-别名>/<子目录>/<页面>/index.md`    | `<别名>/<子目录>/<页面>/index.astro`  | 叶子页面（目录 + index.md） |
 
 示例：
 
@@ -87,7 +89,7 @@ description: 简短描述（必填，缺失会导致构建失败）
 ### 2.5 结构反模式（禁止）
 
 - ❌ 二级直接使用 `*.md`（如 `03-prompts/best-practices.md`）。
-- ❌ 三级使用“文件夹 + index.md”（如 `glossary/ai-concepts/index.md`）。
+- ❌ 三级直接使用单文件 `.md`（如 `glossary/ai-concepts.md`，应为 `glossary/ai-concepts/index.md`）。
 - ❌ 超过三级深度（如 `prompts/context/levels/basic/index.md`）。
 - ❌ 二级路径与三级路径混用（如同时存在 `01-concepts/model-params/` 与 `01-concepts/glossary/model-params/`）。
 
@@ -109,10 +111,10 @@ description: 简短描述（必填，缺失会导致构建失败）
 
 - 内容：
   - `src/content/docs/03-prompts/best-practices/index.md`（二级）。
-  - `src/content/docs/03-prompts/best-practices/tracing.md`（三级）。
+  - `src/content/docs/03-prompts/best-practices/tracing/index.md`（三级，目录 + index.md）。
 - 路由：
   - `src/pages/prompts/best-practices/index.astro`（二级 **必须** 文件夹 + index.astro）。
-  - `src/pages/prompts/best-practices/tracing.astro`（三级平铺）。
+  - `src/pages/prompts/best-practices/tracing/index.astro`（三级 **必须** 文件夹 + index.astro）。
 - 侧栏：在 `PROMPTS_SIDEBAR` 中新增对应的二级与三级链接。
 
 ### 3.3 修改或删除页面
@@ -124,7 +126,7 @@ description: 简短描述（必填，缺失会导致构建失败）
 
 - 禁止任何形式的重定向（`vercel.json`、`astro.config.mjs` 等不得添加 301/302/307）。
 - 完全删除旧路径：同步移除 `src/content/docs/**` 与 `src/pages/**` 中的旧目录。
-- 依新结构重建内容与路由，确保符合三级叶子为单页 `.md` 的硬性要求。
+- 依新结构重建内容与路由，确保符合三级叶子为“目录 + index.md”的硬性要求。
 - 更新所有引用：侧栏、站内链接、脚本、E2E 测试等不得指向旧路径。
 - 质量保证：迁移后必须手动验证路由、侧栏、测试均无 404/死链。
 
@@ -309,11 +311,83 @@ description: 简短描述（必填，缺失会导致构建失败）
 - 样式：`src/styles/global.css` 中 `.mark[data-color]` 系列。
 - 颜色通过 `data-color` 属性或 CSS 变量控制。
 
+---
+
+### 4.4 Multi-Tab Content（多标签内容切换）
+
+> **适用范围：** 所有章节（concepts / daily / prompts / fun / resources / manual 等）
+
+本系统允许在同一 URL 下切换显示多个内容变体，类似 GitHub 的 README/CONTRIBUTING 切换器。
+
+#### 与传统三级页面的区别
+
+| 特性 | 传统三级页面（URL 跳转） | 多标签内容（同 URL 切换） |
+|------|------------------------|------------------------|
+| URL | 每个子页面独立 URL | 同一 URL，内容切换 |
+| 侧边栏 | 展开显示子项 | 不展开，标签在内容区 |
+| TOC/贡献者 | 固定为当前页 | 随标签切换动态更新 |
+| 适用场景 | 内容独立，需单独索引/分享 | 内容紧密相关，快速对比切换 |
+
+#### 目录结构
+
+```text
+02-daily/claude-code/basics/
+├── index.md        # [Overview] 默认标签（必须）
+├── details.md      # [Details] 详情标签（可选）
+├── glm.md          # [GLM] 额外标签（可选）
+└── ...             # 可任意扩展更多标签
+```
+
+- **单文件目录**（仅有 `index.md`）：自动退化为普通页面，无标签栏
+- **多文件目录**：自动显示标签切换栏
+
+#### Frontmatter 配置
+
+非 `index.md` 的标签文件必须包含 `tab` 字段：
+
+```yaml
+---
+title: API Key - Details
+description: 详细配置指南
+tab:
+  label: Details      # 标签显示名（可选，默认用文件名首字母大写）
+  order: 10           # 排序权重（可选，index=0, details=10, 其他=20+）
+---
+```
+
+#### 默认标签排序
+
+| 文件名 | 默认 order | 默认 label |
+|---------|-------------|-------------|
+| `index.md` | 0 | Overview |
+| `details.md` | 10 | Details |
+| `examples.md` | 20 | Examples |
+| `changelog.md` | 30 | Changelog |
+| 其他 | 100+ | 文件名首字母大写 |
+
+#### 路由规则
+
+- 标签内容文件（带 `tab:` frontmatter）**不需要**单独的 `.astro` 路由文件
+- 它们通过父级 `index.astro` 渲染，`check:routes` 脚本会自动跳过这些文件
+- 这是对「2.3 Astro 路由镜像」的一处特例：带 `tab:` 的标签文件由父级路由统一承载，无需为每个标签创建单独路由
+
+#### 技术实现
+
+- Schema 扩展：`src/content/config.ts` 中的 `tabSchema`
+- 工具函数：`src/utils/tabContent.ts`
+- 标签组件：`src/components/ContentTabSwitcher.astro`
+- 布局组件：`src/layouts/TabContentLayout.astro`
+
 ## 5. 开发与验证流程
 
 ### 5.1 常用命令
 
 ```bash
+# 封装命令（推荐，输出简洁）
+npm run check:page-structure  # 页面结构检查：build → check:routes → test:links
+npm run check:all             # 全量检查：format → build → type-check → check:routes → test:links
+
+# 单项命令
 npm run build               # Astro 构建 + Pagefind 索引
 npm run preview:search      # 构建后预览（含搜索索引），必须以非阻塞模式运行此命令
 npm run test:links          # 基于 dist 的站内死链扫描
@@ -352,20 +426,35 @@ LC --> Dev: 输出统计与断链
 
 ### 5.3 必跑校验
 
-在进行单markdown文件之外的变动和修改后，**必须按照如下流程进行check**：
+在进行单markdown文件之外的变动和修改后，**推荐使用封装命令**：
 
-- `npm run format`
-- `npm run build`
-- `npm run lint:markdown`
-- `npm run preview:search`（含搜索索引的预览，调用时必须以非阻塞形式运行）
-- `npm run test:links`
-- `npm run type-check`
-- `npm run check:routes`
-- `npm run test:e2e`（如涉及 E2E 场景变更必须新增/更新用例）
+| 场景 | 推荐命令 | 说明 |
+|------|----------|------|
+| 页面结构变更（增删改页面） | `npm run check:page-structure` | build → check:routes → test:links |
+| 提交前全量检查 | `npm run check:all` | format → build → type-check → check:routes → test:links |
+| E2E 场景变更 | `npm run test:e2e` | 需单独运行 |
+
+封装命令特点：
+- 成功时只显示 `✓ 任务名`，失败时只显示错误信息
+- 任一步骤失败立即停止，便于快速定位问题
+
+<details>
+<summary>单项命令（按执行顺序）</summary>
+
+1. `npm run format`
+2. `npm run build`
+3. `npm run type-check`
+4. `npm run check:routes`
+5. `npm run test:links`
+6. `npm run lint:markdown`
+7. `npm run preview:search`（含搜索索引的预览，调用时必须以非阻塞形式运行）
+8. `npm run test:e2e`（如涉及 E2E 场景变更必须新增/更新用例）
+
+</details>
 
 ### 5.4 命令说明（关键两项）
 
-- `npm run check:routes`：验证一级/二级/三级内容与路由的镜像关系；禁止二级平铺 `.astro`、禁止三级“文件夹 + index”。若不一致将返回非 0 并定位到缺失/多余/非法路径。
+- `npm run check:routes`：验证一级/二级/三级内容与路由的镜像关系；禁止二级平铺 `.astro`、禁止三级单文件 `.md`（要求“目录 + index.md”），并自动忽略带 `tab:` 的标签文件。若不一致将返回非 0 并定位到缺失/多余/非法路径。
 - `npm run type-check`：基于 `astro check`，覆盖 `.astro` + TS/JS + Content Collections，要求 `0 errors / 0 warnings`。Hints（如 `is:inline`）为信息提示，可忽略。
 
 ---

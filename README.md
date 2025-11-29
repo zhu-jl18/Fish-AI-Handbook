@@ -21,11 +21,10 @@
   - [变更记录](#变更记录)
   - [适用范围](#适用范围)
   - [运维与应急速查](#运维与应急速查)
-
 ## 长远计划
 
--[] 增加一个基于LLM和知识库的问答系统，当前进度已经选型 n8n
--[] 增加一个静态网站CMS，尚未构思
+- [ ] 增加一个基于LLM和知识库的问答系统，当前进度已经选型 n8n
+- [ ] 增加一个静态网站CMS，尚未构思
 
 
 
@@ -52,11 +51,17 @@ npm run test:links # 基于 dist/ 的站内断链检测
 npm run format     # 代码格式化
 ```
 
-提交前自检：
+提交前自检（推荐使用封装命令）：
 
-- `npm run check:routes` — 校验 1/2/3 级内容与路由镜像一致，禁止二级平铺 .astro 与三级“文件夹+index”。
-- `npm run type-check` — 运行 Astro 的 `astro check`，覆盖 .astro + 相关 TS/JS + Content Collections；要求 0 errors / 0 warnings（hints 如 is:inline 可忽略）。
-- `npm run test:links` — 基于 dist/ 的站内断链检测（需先 build）。
+```bash
+npm run check:page-structure  # 页面结构检查：build → check:routes → test:links
+npm run check:all             # 全量检查：format → build → type-check → check:routes → test:links
+```
+
+单项命令：
+- `npm run check:routes` — 校验 1/2/3 级内容与路由镜像一致
+- `npm run type-check` — TypeScript 类型检查
+- `npm run test:links` — 站内断链检测（需先 build）
 
 
 更多流程与示例请见 [CONTRIBUTING.md](CONTRIBUTING.md)（唯一事实源）。
@@ -67,7 +72,7 @@ npm run format     # 代码格式化
 
 - 框架：Astro（静态导出）+ MDX；代码高亮：Shiki
 - 目录：内容 `src/content/docs/`；路由 `src/pages/`；布局 `src/layouts/`；组件 `src/components/`；侧栏逻辑 `src/scripts/sidebars.ts`
-- 内容层级：最多三级（一级/二级=文件夹+index.md；三级=单页 md）
+- 内容层级：最多三级（一级/二级/三级均为"文件夹 + index.md"，同目录下额外 md 作为标签文件）
 - 顶层目录命名：`NN-alias`（01..07、99-manual 置底）
 
 <div align="right"><a href="#top">回到顶部 ↑</a></div>
@@ -95,7 +100,7 @@ dist/                    # 构建输出（由 build 生成）
 - 仅改侧栏未建路由页面，导致 404
 - frontmatter 缺 `description` 导致构建失败
 - 路由与内容路径不一致，`getEntry` 读取失败
-- 三级误用"文件夹+index.md"（应为单页 .md）；Astro 不报错但违反层级约定
+- 三级误用单文件 `.md`（应为"目录 + index.md"）；Astro 不报错但违反层级约定
 - **使用重定向而非重新构建路由**：进行结构调整时，必须删除旧路径并按新结构重建路由，同时更新侧栏、链接与测试，禁止使用路径重定向，以保证一致性与可维护性
 - 在根提交 `dist/`、`.astro/`、或工具本地数据
 

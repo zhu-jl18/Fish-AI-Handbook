@@ -6,12 +6,11 @@ contributors:
 ---
 
 
-to do 
-- https://www.coderabbit.ai/blog/gpt-51-for-code-related-tasks-higher-signal-at-lower-volume
-- https://www.coderabbit.ai/blog/the-rise-of-slow-ai-why-devs-should-stop-speedrunning-stupid
-- https://www.coderabbit.ai/blog/the-end-of-one-sized-fits-all-prompts-why-llm-models-are-no-longer-interchangeable
-
-- https://github.com/coderabbitai/git-worktree-runner
+to do
+- [GPT-5.1 for Code-Related Tasks](https://www.coderabbit.ai/blog/gpt-51-for-code-related-tasks-higher-signal-at-lower-volume)
+- [The Rise of Slow AI](https://www.coderabbit.ai/blog/the-rise-of-slow-ai-why-devs-should-stop-speedrunning-stupid)
+- [The End of One-Sized-Fits-All Prompts](https://www.coderabbit.ai/blog/the-end-of-one-sized-fits-all-prompts-why-llm-models-are-no-longer-interchangeable)
+- [git-worktree-runner](https://github.com/coderabbitai/git-worktree-runner)
 
 
 这里不教你怎么安装，怎么配环境。官方文档写得很清楚，去 [Manual](/manual) 或者官网自己看。
