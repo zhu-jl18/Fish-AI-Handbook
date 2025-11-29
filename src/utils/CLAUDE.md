@@ -14,7 +14,7 @@
 |------|----------|------|
 | `docsPath.ts` | `buildDocCandidates`, `normalizeEntryId` | 文档路径处理 |
 | `git.ts` | `getGitLastModifiedIso` | Git 最后修改时间 |
-| `tabContent.ts` | `organizeTabEntries`, `getTabLabel`, `getTabOrder` | 多标签内容检测 |
+| `tabContent.ts` | `organizeTabEntries`, `getTabLabel`, `getTabOrder`, `getTabBasePath`, `isTabVariantEntry`, `hasMultipleTabs` | 多标签内容检测 |
 
 ## docsPath.ts
 
@@ -57,19 +57,30 @@ function resolvePath(relativePath: string): string
 
 ## tabContent.ts
 
-多标签内容检测与组织工具 (试点于 resources 章节)。
+多标签内容检测与组织工具，供所有章节的 TabContentLayout 使用。
 
 ### 导出符号
 
 ```typescript
-// 检测并组织同目录下的标签文件
-function organizeTabEntries(entries: CollectionEntry[], basePath: string): TabInfo[]
+// 检测并组织同目录下的标签文件（docs 集合）
+function organizeTabEntries(
+  entries: CollectionEntry<'docs'>[],
+  basePath: string,
+): TabInfo[]
 
 // 获取标签显示名称
 function getTabLabel(filename: string, tabConfig?: TabConfig): string
 
 // 获取标签排序权重
 function getTabOrder(filename: string, tabConfig?: TabConfig): number
+
+// 获取同目录基路径、检测多标签
+function getTabBasePath(entryId: string): string
+function isTabVariantEntry(entryId: string): boolean
+function hasMultipleTabs(
+  entries: CollectionEntry<'docs'>[],
+  basePath: string,
+): boolean
 ```
 
 ### 默认排序
@@ -78,8 +89,8 @@ function getTabOrder(filename: string, tabConfig?: TabConfig): number
 - 其他 → order: 100+, label: 文件名首字母大写
 
 ### 使用场景
-- `ResourcesContentLayout.astro` 布局调用
-- 自动检测同目录下的标签文件
+- `TabContentLayout.astro` 布局调用（适用于所有章节）
+- 自动检测同目录下的标签文件并组织为标签页
 
 ## 修改指南
 

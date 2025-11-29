@@ -71,11 +71,11 @@ graph TD
 3. 贡献者 - 页面贡献者信息
 
 ### ContentTabSwitcher.astro
-GitHub 风格的多标签内容切换组件（试点于 resources 章节）。
+GitHub 风格的多标签内容切换组件（全章节通用）。
 - 当目录下存在 2+ 个 .md 文件时自动显示标签栏
 - 支持键盘导航 (ArrowLeft/Right, Home/End)
 - 通过 `tab:` frontmatter 配置标签名称和排序
-- 配合 `ResourcesContentLayout.astro` 使用
+- 由 `TabContentLayout.astro` 在任意章节调用
 
 ## 修改指南
 

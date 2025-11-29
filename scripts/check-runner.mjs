@@ -26,23 +26,19 @@ function run(cmd, args) {
     let out = ''
     proc.stdout.on('data', (d) => (out += d))
     proc.stderr.on('data', (d) => (out += d))
+    proc.on('error', (err) => {
+      out += String(err) + '\n'
+      resolve({ code: 1, out })
+    })
     proc.on('close', (code) => resolve({ code, out }))
   })
-}
-
-function extractErrors(output) {
-  const lines = output.split('\n')
-  const errorLines = lines.filter((l) =>
-    /error|ERR!|failed|FAIL|✗|×|exception/i.test(l),
-  )
-  return errorLines.length ? errorLines.join('\n') : output.slice(-2000)
 }
 
 async function main() {
   const group = process.argv[2]
   if (!GROUPS[group]) {
     console.log(
-      `Usage: node check-runner.mjs <${Object.keys(GROUPS).join('|')}>`,
+      `Usage: node scripts/check-runner.mjs <${Object.keys(GROUPS).join('|')}>`,
     )
     process.exit(1)
   }
@@ -52,7 +48,7 @@ async function main() {
     const { code, out } = await run(task.cmd, task.args)
     if (code !== 0) {
       console.log(`✗ ${task.name}`)
-      console.log(extractErrors(out))
+      console.log(out)
       process.exit(1)
     }
     console.log(`✓ ${task.name}`)
