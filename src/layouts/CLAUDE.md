@@ -14,6 +14,7 @@
 |------|------|
 | `BaseLayout.astro` | 基础 HTML 结构、SEO meta、全局样式引入 |
 | `ContentLayout.astro` | 文档页三栏布局 (左侧栏 + 内容 + 右侧栏) |
+| `ResourcesContentLayout.astro` | 资源页布局 (支持多标签内容切换) |
 
 ## 布局层级
 
@@ -59,8 +60,31 @@ graph TD
 - `entry`: Content Collection entry
 - `headings`: 标题列表 (用于 TOC)
 
+## ResourcesContentLayout.astro
+
+资源章节专用布局，支持 GitHub 风格多标签内容切换。
+
+**功能**:
+- 自动检测同目录下的多个 .md 文件
+- 渲染标签切换栏 (2+ 文件时显示)
+- 单文件目录自动退化为普通页面
+- **侧栏同步**: 标签切换时自动更新 TOC 和贡献者列表
+
+**Props**:
+- `basePath`: 内容路径 (e.g., `06-resources/api`)
+- `title`: 页面标题
+- `sidebarItems`: 侧栏配置
+
+**客户端同步逻辑** (仅多标签时激活):
+- 监听 `tab-changed` 事件
+- 重建 TOC: 从当前可见 panel 提取标题
+- 更新贡献者: 根据标签元数据动态渲染
+
+**试点**: resources 章节，可扩展到其他章节
+
 ## 修改指南
 
 1. 修改全局结构 → 编辑 `BaseLayout.astro`
 2. 修改文档页结构 → 编辑 `ContentLayout.astro`
-3. 添加新布局 → 创建新 `.astro` 文件并继承 `BaseLayout`
+3. 修改多标签功能 → 编辑 `ResourcesContentLayout.astro`
+4. 添加新布局 → 创建新 `.astro` 文件并继承 `BaseLayout`
