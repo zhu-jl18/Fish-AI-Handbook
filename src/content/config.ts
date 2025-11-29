@@ -2,19 +2,17 @@ import { defineCollection, z } from 'astro:content'
 
 /**
  * Tab configuration schema for multi-tab content pages.
- * Currently piloted in the resources chapter.
+ * Used across all chapters to support GitHub-style tab switching.
  * See CONTRIBUTING.md for usage guidelines.
  */
-const tabSchema = z
-  .object({
-    /** Display label for the tab (defaults to capitalized filename) */
-    label: z.string().optional(),
-    /** Sort order - lower values appear first (index=0, details=10, others=20+) */
-    order: z.number().optional(),
-    /** Whether this is the default active tab (index.md is always default) */
-    default: z.boolean().optional(),
-  })
-  .optional()
+const tabSchema = z.object({
+  /** Display label for the tab (defaults to capitalized filename) */
+  label: z.string().optional(),
+  /** Sort order - lower values appear first (index=0, details=10, others=20+) */
+  order: z.number().optional(),
+  /** Whether this is the default active tab (index.md is always default) */
+  default: z.boolean().optional(),
+})
 
 const docs = defineCollection({
   type: 'content',
@@ -22,8 +20,8 @@ const docs = defineCollection({
     title: z.string(),
     description: z.string(),
     contributors: z.array(z.string()).optional(),
-    /** Optional tab configuration for multi-tab pages (resources chapter pilot) */
-    tab: tabSchema,
+    /** Optional tab configuration for multi-tab pages (all chapters) */
+    tab: tabSchema.optional(),
     /** Internal field set during build - identifies content as non-index tab file */
     _isTabVariant: z.boolean().optional(),
   }),

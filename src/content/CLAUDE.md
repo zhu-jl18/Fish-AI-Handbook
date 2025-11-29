@@ -43,11 +43,13 @@ content/
 ```
 docs/
 ├── 03-prompts/
-│   ├── index.md              # 一级: 目录 + index.md
-│   └── context/
-│       ├── index.md          # 二级: 目录 + index.md
-│       ├── dialogue-levels.md # 三级: 单页 .md
-│       └── request-body.md    # 三级: 单页 .md
+│   ├── index.md                 # 一级: 目录 + index.md
+│   └── foundations/
+│       ├── index.md             # 二级: 目录 + index.md
+│       └── principles/
+│           ├── index.md         # 三级: 目录 + index.md（页面本体）
+│           ├── details.md       # 三级标签: Details（可选）
+│           └── examples.md      # 三级标签: Examples（可选）
 ```
 
 ### Frontmatter (必填)
@@ -59,8 +61,8 @@ description: 简短描述 (必填，缺失会导致构建失败)
 ```
 
 ### 禁止模式
-- 二级直接使用单文件 `*.md`
-- 三级使用目录 + `index.md`
+- 二级直接使用单文件 `*.md`（必须是目录 + `index.md`）
+- 三级直接使用单文件 `*.md`（必须是目录 + `index.md`，额外标签使用同目录其他 `.md`）
 - 超过三级深度
 
 ## Content Collections 配置
@@ -90,17 +92,16 @@ description: 简短描述 (必填，缺失会导致构建失败)
 
 ## Multi-Tab Content (多标签内容)
 
-> **试点章节：** `06-resources`
-> **扩展性：** 可推广至其他章节
+> **适用范围：** 所有章节（concepts / daily / prompts / fun / resources / manual 等）
 
 允许同一 URL 下切换多个内容变体，类似 GitHub 的 README/CONTRIBUTING 切换。
 
-### 目录结构
+### 目录结构示例
 ```text
-06-resources/api/
+02-daily/claude-code/basics/
 ├── index.md        # 默认标签 (必须)
 ├── details.md      # 详情标签 (可选, 需 tab: frontmatter)
-└── examples.md     # 示例标签 (可选)
+└── glm.md          # 额外标签 (可选)
 ```
 
 ### Frontmatter
@@ -118,10 +119,10 @@ tab:
 - Schema: `src/content/config.ts` (`tabSchema`)
 - Utils: `src/utils/tabContent.ts`
 - Component: `src/components/ContentTabSwitcher.astro`
-- Layout: `src/layouts/ResourcesContentLayout.astro`
+- Layout: `src/layouts/TabContentLayout.astro`
 
 ### 注意事项
-- 标签文件不需要单独的 `.astro` 路由
+- 标签文件不需要单独的 `.astro` 路由（由父级使用 TabContentLayout 的路由承载）
 - 单文件目录自动退化为普通页面
 
 ## 修改指南

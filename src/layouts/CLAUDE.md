@@ -10,11 +10,11 @@
 
 ## 文件清单
 
-| 文件 | 功能 |
-|------|------|
-| `BaseLayout.astro` | 基础 HTML 结构、SEO meta、全局样式引入 |
-| `ContentLayout.astro` | 文档页三栏布局 (左侧栏 + 内容 + 右侧栏) |
-| `ResourcesContentLayout.astro` | 资源页布局 (支持多标签内容切换) |
+|| 文件 | 功能 |
+||------|------|
+|| `BaseLayout.astro` | 基础 HTML 结构、SEO meta、全局样式引入 |
+|| `ContentLayout.astro` | 文档页三栏布局 (左侧栏 + 内容 + 右侧栏) |
+|| `TabContentLayout.astro` | 多标签文档布局（任意章节，支持 tab + 侧栏同步） |
 
 ## 布局层级
 
@@ -60,31 +60,33 @@ graph TD
 - `entry`: Content Collection entry
 - `headings`: 标题列表 (用于 TOC)
 
-## ResourcesContentLayout.astro
+## TabContentLayout.astro
 
-资源章节专用布局，支持 GitHub 风格多标签内容切换。
+通用多标签文档布局，支持 GitHub 风格的标签切换，适用于所有章节（concepts / daily / prompts / fun / resources / manual 等）。
 
 **功能**:
-- 自动检测同目录下的多个 .md 文件
-- 渲染标签切换栏 (2+ 文件时显示)
-- 单文件目录自动退化为普通页面
-- **侧栏同步**: 标签切换时自动更新 TOC 和贡献者列表
+- 自动检测同目录下的多个 .md 文件，并组织为标签页
+- 渲染标签切换栏 (2+ 文件时显示)，单文件目录自动退化为普通页面
+- **侧栏同步**: 标签切换时自动更新 TOC（右侧目录）和贡献者列表
 
 **Props**:
-- `basePath`: 内容路径 (e.g., `06-resources/api`)
-- `title`: 页面标题
-- `sidebarItems`: 侧栏配置
+- `basePath`: 内容路径基准 (例如 `01-concepts/developer/automation`、`06-resources/preparation`)
+- `title`: 页面标题（可选，默认为内容 frontmatter 中的 title）
+- `sidebarItems`: 侧栏配置（通常使用对应章节的 `*_SIDEBAR`）
 
 **客户端同步逻辑** (仅多标签时激活):
 - 监听 `tab-changed` 事件
-- 重建 TOC: 从当前可见 panel 提取标题
-- 更新贡献者: 根据标签元数据动态渲染
+- 重建 TOC: 仅基于当前可见 tab panel 的标题生成目录
+- 更新贡献者: 根据标签元数据动态渲染贡献者列表
 
-**试点**: resources 章节，可扩展到其他章节
+**推荐用法**:
+- 二级页面：`docs/NN-*/sub/index.md` → `/alias/sub`
+- 三级页面：`docs/NN-*/sub/page/index.md` → `/alias/sub/page`
+- 在同一目录下添加 `details.md`、`glm.md` 等文件并配置 `tab:` frontmatter 以启用多标签
 
 ## 修改指南
 
 1. 修改全局结构 → 编辑 `BaseLayout.astro`
 2. 修改文档页结构 → 编辑 `ContentLayout.astro`
-3. 修改多标签功能 → 编辑 `ResourcesContentLayout.astro`
+3. 修改多标签功能 → 编辑 `TabContentLayout.astro`
 4. 添加新布局 → 创建新 `.astro` 文件并继承 `BaseLayout`

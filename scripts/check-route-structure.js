@@ -6,12 +6,12 @@
  *   • Forbid: flat root route src/pages/<alias>.astro
  * - Level-2: content <NN-alias>/<sub>/index.md ↔ route <alias>/<sub>/index.astro
  *   • Forbid: flat second-level route <alias>/<sub>.astro
- * - Level-3: content <NN-alias>/<sub>/<page>.md ↔ route <alias>/<sub>/<page>.astro
- *   • Forbid: third-level folder structure for content (<NN-alias>/<sub>/<page>/index.md)
- *   • Forbid: third-level folder structure for route (<alias>/<sub>/<page>/index.astro)
+ * - Level-3: content <NN-alias>/<sub>/<page>/index.md ↔ route <alias>/<sub>/<page>/index.astro
+ *   • Forbid: legacy 3rd-level flat content <NN-alias>/<sub>/<page>.md
+ *   • Forbid: legacy 3rd-level flat route <alias>/<sub>/<page>.astro
  * - Orphans: report any route without content, or content without route (for the above pairs)
- * - Multi-Tab Content (resources chapter pilot): Non-index .md files with `tab:` frontmatter
- *   are rendered via the same index.astro and do NOT require separate routes.
+ * - Multi-Tab Content: non-index .md files with `tab:` frontmatter are rendered via the same
+ *   index.astro and do NOT require separate routes（适用于所有章节）.
  * Exits non-zero on any mismatch.
  */
 import fs from 'fs'
@@ -77,7 +77,7 @@ const listFiles = (p) => {
 /**
  * Check if a markdown file is a multi-tab content file (has `tab:` in frontmatter).
  * These files are rendered via the parent index.astro and don't need separate routes.
- * Currently piloted in resources chapter.
+ * Applies to all chapters (resources, daily, concepts, fun, manual, etc.).
  */
 const isTabContentFile = (filePath) => {
   try {
@@ -142,7 +142,9 @@ for (const [alias, numbered] of Object.entries(DOCS_MAP)) {
         )
       }
 
-      // Level-3 content files under L2 (file-based only; no folder+index)
+      // Level-3 content under this section (NEW RULE: folder + index.md)
+
+      // 3.1 legacy 3rd-level single-file content under subPath (should be migrated)
       const files = listFiles(subPath)
       for (const f of files) {
         if (!f.endsWith('.md')) continue
@@ -154,24 +156,46 @@ for (const [alias, numbered] of Object.entries(DOCS_MAP)) {
           continue
         }
 
-        const routeL3 = path.join(pagesSection, sub, `${base}.astro`)
-        const routeL3Folder = path.join(pagesSection, sub, base, 'index.astro')
-        if (!exists(routeL3)) {
-          errors.push(`Missing route: ${rel(routeL3)} (for content ${rel(f)})`)
-        }
-        if (exists(routeL3Folder)) {
-          errors.push(
-            `Forbidden 3rd-level folder route: ${rel(routeL3Folder)} (should be ${rel(routeL3)})`,
-          )
-        }
+        const expected = path.join(subPath, base, 'index.md')
+        errors.push(
+          `Forbidden legacy 3rd-level content file: ${rel(f)} (should be ${rel(
+            expected,
+          )})`,
+        )
       }
 
-      // Forbid 3rd-level content folder structure
+      // 3.2 canonical 3rd-level folders: <NN>/<sub>/<page>/index.md
       for (const leafDir of listDirs(subPath)) {
+        const leaf = path.basename(leafDir)
         const leafIndex = path.join(leafDir, 'index.md')
-        if (exists(leafIndex)) {
+        if (!exists(leafIndex)) {
           errors.push(
-            `Forbidden 3rd-level content folder: ${rel(leafIndex)} (should be ${rel(path.join(subPath, path.basename(leafDir) + '.md'))})`,
+            `Missing 3rd-level index.md: ${rel(leafIndex)} (directory exists without index.md)`,
+          )
+          continue
+        }
+
+        const routeL3 = path.join(pagesSection, sub, leaf, 'index.astro')
+        if (!exists(routeL3)) {
+          errors.push(
+            `Missing route: ${rel(routeL3)} (for 3rd-level content ${rel(
+              leafIndex,
+            )})`,
+          )
+        }
+
+        // Extra markdown files inside 3rd-level folder must either:
+        // - be index.md, or
+        // - be tab files with `tab:` frontmatter
+        for (const lf of listFiles(leafDir)) {
+          if (!lf.endsWith('.md')) continue
+          const base = path.basename(lf, '.md')
+          if (base === 'index') continue
+          if (isTabContentFile(lf)) continue
+          errors.push(
+            `Forbidden non-tab content file under 3rd-level folder: ${rel(
+              lf,
+            )} (expected to be a tab.md with tab: frontmatter or moved to its own folder)`,
           )
         }
       }
@@ -180,33 +204,40 @@ for (const [alias, numbered] of Object.entries(DOCS_MAP)) {
     // Orphan route at level-2
     if (exists(routeL2) && !exists(mdIndex)) {
       errors.push(
-        `Orphan route (level-2): ${rel(routeL2)} has no matching content ${rel(mdIndex)}`,
+        `Orphan route (level-2): ${rel(routeL2)} has no matching content ${rel(
+          mdIndex,
+        )}`,
       )
     }
 
-    // Orphan/folder checks at level-3 (routes side)
+    // Routes-side checks at level-3
     const pagesSubDir = path.join(pagesSection, sub)
     if (isDir(pagesSubDir)) {
-      // forbid folder/index.astro under 3rd-level
-      for (const d of listDirs(pagesSubDir)) {
-        const idx = path.join(d, 'index.astro')
-        if (exists(idx)) {
-          const leaf = path.basename(d)
-          errors.push(
-            `Forbidden 3rd-level folder route: ${rel(idx)} (should be ${rel(path.join(pagesSubDir, leaf + '.astro'))})`,
-          )
-        }
-      }
-      // ensure every *.astro (except index.astro) has matching content *.md
+      // 3.3 forbid flat 3rd-level routes <alias>/<sub>/<page>.astro
       for (const file of listFiles(pagesSubDir)) {
         if (!file.endsWith('.astro')) continue
         const base = path.basename(file)
         if (base === 'index.astro') continue
         const leaf = base.replace(/\.astro$/, '')
-        const md = path.join(subPath, `${leaf}.md`)
+        const expected = path.join(pagesSubDir, leaf, 'index.astro')
+        errors.push(
+          `Forbidden flat 3rd-level route: ${rel(file)} (should be ${rel(
+            expected,
+          )})`,
+        )
+      }
+
+      // 3.4 ensure every 3rd-level folder route has matching content folder
+      for (const d of listDirs(pagesSubDir)) {
+        const idx = path.join(d, 'index.astro')
+        if (!exists(idx)) continue
+        const leaf = path.basename(d)
+        const md = path.join(subPath, leaf, 'index.md')
         if (!exists(md)) {
           errors.push(
-            `Orphan route (level-3): ${rel(file)} has no matching content ${rel(md)}`,
+            `Orphan route (level-3): ${rel(idx)} has no matching content ${rel(
+              md,
+            )}`,
           )
         }
       }
