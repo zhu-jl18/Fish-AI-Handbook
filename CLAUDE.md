@@ -116,7 +116,7 @@ UI 组件集合，包含页面头部、侧栏、搜索、目录等核心组件�
 | `SearchDrawer.astro` | 搜索抽屉 (Pagefind) |
 | `MobileMenu.astro` | 移动端菜单 |
 | `ContentActions.astro` | 内容操作栏 |
-|| `ContentTabSwitcher.astro` | 多标签内容切换（全章节通用） |
+| `ContentTabSwitcher.astro` | 多标签内容切换（全章节通用） |
 | `SidebarPanels.astro` | 侧栏面板切换 |
 | `SidebarStructure.astro` | 文档结构视图 |
 | `SidebarToc.astro` | 目录视图 |
@@ -160,11 +160,11 @@ MDX/Markdown 文档内容，采用 Content Collections 管理。
 ### 🎨 src/layouts
 页面布局模板。
 
-|| 文件 | 功能 |
-||------|------|
-|| `BaseLayout.astro` | 基础 HTML 结构、SEO meta |
-|| `ContentLayout.astro` | 文档页布局 (三栏结构) |
-|| `TabContentLayout.astro` | 多标签文档布局（任意章节，支持 tab + 侧栏同步） |
+| 文件 | 功能 |
+|------|------|
+| `BaseLayout.astro` | 基础 HTML 结构、SEO meta |
+| `ContentLayout.astro` | 文档页布局 (三栏结构) |
+| `TabContentLayout.astro` | 多标签文档布局（任意章节，支持 tab + 侧栏同步） |
 
 → 详见: [src/layouts/CLAUDE.md](src/layouts/CLAUDE.md)
 
@@ -204,11 +204,11 @@ Remark 插件，扩展 Markdown 语法。
 ### 🛠️ src/utils
 工具函数。
 
-|| 文件 | 导出符号 | 功能 |
-||------|----------|------|
-|| `docsPath.ts` | `buildDocCandidates`, `normalizeEntryId` | 文档路径处理 |
-|| `git.ts` | `getGitLastModifiedIso` | Git 最后修改时间 |
-|| `tabContent.ts` | `organizeTabEntries`, `getTabLabel`, `getTabOrder`, `getTabBasePath`, `hasMultipleTabs` | 多标签内容检测与组织 |
+| 文件 | 导出符号 | 功能 |
+|------|----------|------|
+| `docsPath.ts` | `buildDocCandidates`, `normalizeEntryId` | 文档路径处理 |
+| `git.ts` | `getGitLastModifiedIso` | Git 最后修改时间 |
+| `tabContent.ts` | `organizeTabEntries`, `getTabLabel`, `getTabOrder`, `getTabBasePath`, `hasMultipleTabs` | 多标签内容检测与组织 |
 
 → 详见: [src/utils/CLAUDE.md](src/utils/CLAUDE.md)
 
