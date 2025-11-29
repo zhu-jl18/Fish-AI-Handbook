@@ -20,6 +20,7 @@
 | `NotificationPopover.astro` | 通知 Popover | `notifications.ts` |
 | `MobileMenu.astro` | 移动端菜单 | - |
 | `ContentActions.astro` | 内容操作栏 (编辑/分享) | - |
+| `ContentTabSwitcher.astro` | 多标签内容切换栏 | `tabContent.ts` |
 | `SidebarPanels.astro` | 侧栏面板切换容器 | - |
 | `SidebarStructure.astro` | 文档结构视图 | - |
 | `SidebarToc.astro` | 目录视图 | - |
@@ -68,6 +69,13 @@ graph TD
 1. 目录 (TOC) - 当前页面标题导航
 2. 结构 - 文档结构树
 3. 贡献者 - 页面贡献者信息
+
+### ContentTabSwitcher.astro
+GitHub 风格的多标签内容切换组件（试点于 resources 章节）。
+- 当目录下存在 2+ 个 .md 文件时自动显示标签栏
+- 支持键盘导航 (ArrowLeft/Right, Home/End)
+- 通过 `tab:` frontmatter 配置标签名称和排序
+- 配合 `ResourcesContentLayout.astro` 使用
 
 ## 修改指南
 

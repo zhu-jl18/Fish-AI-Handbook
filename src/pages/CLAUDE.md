@@ -68,12 +68,36 @@ const { Content, headings } = await entry.render()
 | `index.astro` | 站点首页 |
 | `rss.xml.ts` | RSS 订阅端点 |
 
+## Resources 章节特殊处理
+
+resources 章节使用 `ResourcesContentLayout.astro`，支持多标签切换：
+
+```astro
+---
+import ResourcesContentLayout from '../../layouts/ResourcesContentLayout.astro'
+import { RESOURCES_SIDEBAR } from '../../scripts/sidebars'
+---
+
+<ResourcesContentLayout
+  basePath="06-resources/api"
+  title="API Key"
+  sidebarItems={RESOURCES_SIDEBAR}
+/>
+```
+
+标签内容文件 (带 `tab:` frontmatter) 不需要单独的 `.astro` 路由文件。
+
 ## 修改指南
 
 ### 新增页面
 1. 在 `src/content/docs/` 创建内容文件
 2. 在 `src/pages/` 创建对应路由文件
 3. 更新 `src/scripts/sidebars.ts` 侧栏配置
+
+### 新增多标签内容 (resources)
+1. 在目录下添加新的 `.md` 文件
+2. 配置 `tab:` frontmatter
+3. 无需创建路由文件
 
 ### 删除页面
 1. 删除内容文件和路由文件

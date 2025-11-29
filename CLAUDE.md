@@ -116,6 +116,7 @@ UI 组件集合，包含页面头部、侧栏、搜索、目录等核心组件�
 | `SearchDrawer.astro` | 搜索抽屉 (Pagefind) |
 | `MobileMenu.astro` | 移动端菜单 |
 | `ContentActions.astro` | 内容操作栏 |
+| `ContentTabSwitcher.astro` | 多标签内容切换 (resources试点) |
 | `SidebarPanels.astro` | 侧栏面板切换 |
 | `SidebarStructure.astro` | 文档结构视图 |
 | `SidebarToc.astro` | 目录视图 |
@@ -163,6 +164,7 @@ MDX/Markdown 文档内容，采用 Content Collections 管理。
 |------|------|
 | `BaseLayout.astro` | 基础 HTML 结构、SEO meta |
 | `ContentLayout.astro` | 文档页布局 (三栏结构) |
+|| `ResourcesContentLayout.astro` | 资源页布局 (多标签切换+侧栏同步) |
 
 → 详见: [src/layouts/CLAUDE.md](src/layouts/CLAUDE.md)
 
@@ -206,6 +208,7 @@ Remark 插件，扩展 Markdown 语法。
 |------|----------|------|
 | `docsPath.ts` | `buildDocCandidates`, `normalizeEntryId` | 文档路径处理 |
 | `git.ts` | `getGitLastModifiedIso` | Git 最后修改时间 |
+| `tabContent.ts` | `organizeTabEntries`, `getTabLabel` | 多标签内容检测 |
 
 → 详见: [src/utils/CLAUDE.md](src/utils/CLAUDE.md)
 

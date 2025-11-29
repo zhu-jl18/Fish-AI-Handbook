@@ -324,6 +324,7 @@ description: 简短描述（必填，缺失会导致构建失败）
 |------|------------------------|------------------------|
 | URL | 每个子页面独立 URL | 同一 URL，内容切换 |
 | 侧边栏 | 展开显示子项 | 不展开，标签在内容区 |
+| TOC/贡献者 | 固定为当前页 | 随标签切换动态更新 |
 | 适用场景 | 内容独立，需单独索引/分享 | 内容紧密相关，快速对比切换 |
 
 #### 目录结构
@@ -388,6 +389,11 @@ tab:
 ### 5.1 常用命令
 
 ```bash
+# 封装命令（推荐，输出简洁）
+npm run check:page-structure  # 页面结构检查：build → check:routes → test:links
+npm run check:all             # 全量检查：format → build → type-check → check:routes → test:links
+
+# 单项命令
 npm run build               # Astro 构建 + Pagefind 索引
 npm run preview:search      # 构建后预览（含搜索索引），必须以非阻塞模式运行此命令
 npm run test:links          # 基于 dist 的站内死链扫描
@@ -426,16 +432,31 @@ LC --> Dev: 输出统计与断链
 
 ### 5.3 必跑校验
 
-在进行单markdown文件之外的变动和修改后，**必须按照如下流程进行check**：
+在进行单markdown文件之外的变动和修改后，**推荐使用封装命令**：
 
-- `npm run format`
-- `npm run build`
-- `npm run lint:markdown`
-- `npm run preview:search`（含搜索索引的预览，调用时必须以非阻塞形式运行）
-- `npm run test:links`
-- `npm run type-check`
-- `npm run check:routes`
-- `npm run test:e2e`（如涉及 E2E 场景变更必须新增/更新用例）
+| 场景 | 推荐命令 | 说明 |
+|------|----------|------|
+| 页面结构变更（增删改页面） | `npm run check:page-structure` | build → check:routes → test:links |
+| 提交前全量检查 | `npm run check:all` | format → build → type-check → check:routes → test:links |
+| E2E 场景变更 | `npm run test:e2e` | 需单独运行 |
+
+封装命令特点：
+- 成功时只显示 `✓ 任务名`，失败时只显示错误信息
+- 任一步骤失败立即停止，便于快速定位问题
+
+<details>
+<summary>单项命令（按执行顺序）</summary>
+
+1. `npm run format`
+2. `npm run build`
+3. `npm run type-check`
+4. `npm run check:routes`
+5. `npm run test:links`
+6. `npm run lint:markdown`
+7. `npm run preview:search`（含搜索索引的预览，调用时必须以非阻塞形式运行）
+8. `npm run test:e2e`（如涉及 E2E 场景变更必须新增/更新用例）
+
+</details>
 
 ### 5.4 命令说明（关键两项）
 
