@@ -146,18 +146,19 @@
   padding: 0.45rem 0.5rem;
   border-radius: var(--border-radius);
   text-decoration: none;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition:
-    border-color var(--motion-duration-sm) var(--motion-ease-standard),
-    background-color var(--motion-duration-sm) var(--motion-ease-standard),
-    transform var(--motion-duration-sm) var(--motion-ease-standard);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: transform var(--motion-duration-sm) var(--motion-ease-standard);
 }
 
 .contributors-list.list-layout .contributor-card:hover {
-  border-color: rgba(150, 210, 255, 0.35);
-  background: rgba(150, 210, 255, 0.08);
   transform: translateY(-1px);
+}
+
+.contributors-list.list-layout .contributor-card:hover .contributor-name,
+.contributors-list.list-layout .contributor-card:hover .contributor-handle {
+  color: var(--color-toc-active-border);
+  transition: color var(--motion-duration-sm) var(--motion-ease-standard);
 }
 
 .contributors-list.list-layout .contributor-card img {
@@ -186,16 +187,11 @@
   text-decoration: none;
   background: transparent;
   border: 2px solid rgba(255, 255, 255, 0.1);
-  transition:
-    border-color var(--motion-duration-sm) var(--motion-ease-standard),
-    transform var(--motion-duration-sm) var(--motion-ease-standard),
-    box-shadow var(--motion-duration-sm) var(--motion-ease-standard);
+  transition: transform var(--motion-duration-sm) var(--motion-ease-standard);
 }
 
 .contributors-list.grid-layout .contributor-card:hover {
-  border-color: rgba(150, 210, 255, 0.5);
   transform: scale(1.1);
-  box-shadow: 0 0 0 2px rgba(150, 210, 255, 0.15);
 }
 
 .contributors-list.grid-layout .contributor-card img {
@@ -247,7 +243,7 @@
   top: 0;
   bottom: 0;
   left: 0;
-  width: 2px;
+  width: 1px;
   background: var(--color-toc-border);
   border-radius: 999px;
 }
@@ -259,6 +255,7 @@
 }
 
 .toc-link {
+  position: relative;
   color: var(--color-toc-text);
   text-decoration: none;
   font-size: 0.75rem;
@@ -279,6 +276,19 @@
 .toc-link.active {
   color: var(--color-toc-active);
   font-weight: 600;
+}
+
+.toc-link.active::before {
+  content: '';
+  position: absolute;
+  left: -1.125rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 2px;
+  background-color: var(--color-toc-active-border);
+  box-shadow: 0 0 8px var(--color-toc-active-glow);
+  border-radius: 99px;
 }
 
 .toc-2 {

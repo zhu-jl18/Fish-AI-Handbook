@@ -116,6 +116,7 @@ UI 组件集合，包含页面头部、侧栏、搜索、目录等核心组件�
 | `SearchDrawer.astro` | 搜索抽屉 (Pagefind) |
 | `MobileMenu.astro` | 移动端菜单 |
 | `ContentActions.astro` | 内容操作栏 |
+| `ContentTabSwitcher.astro` | 多标签内容切换（全章节通用） |
 | `SidebarPanels.astro` | 侧栏面板切换 |
 | `SidebarStructure.astro` | 文档结构视图 |
 | `SidebarToc.astro` | 目录视图 |
@@ -163,6 +164,7 @@ MDX/Markdown 文档内容，采用 Content Collections 管理。
 |------|------|
 | `BaseLayout.astro` | 基础 HTML 结构、SEO meta |
 | `ContentLayout.astro` | 文档页布局 (三栏结构) |
+| `TabContentLayout.astro` | 多标签文档布局（任意章节，支持 tab + 侧栏同步） |
 
 → 详见: [src/layouts/CLAUDE.md](src/layouts/CLAUDE.md)
 
@@ -206,6 +208,7 @@ Remark 插件，扩展 Markdown 语法。
 |------|----------|------|
 | `docsPath.ts` | `buildDocCandidates`, `normalizeEntryId` | 文档路径处理 |
 | `git.ts` | `getGitLastModifiedIso` | Git 最后修改时间 |
+| `tabContent.ts` | `organizeTabEntries`, `getTabLabel`, `getTabOrder`, `getTabBasePath`, `hasMultipleTabs` | 多标签内容检测与组织 |
 
 → 详见: [src/utils/CLAUDE.md](src/utils/CLAUDE.md)
 
@@ -237,13 +240,17 @@ npm run test:e2e     # Playwright E2E 测试
 ## 开发规范要点
 
 ### 内容层级 (最多 3 级)
-- **一级/二级**: 目录 + `index.md`
-- **三级**: 单页 `.md` (禁止目录)
+- **一级**: `docs/<NN-alias>/index.md`（文件夹 + index.md）
+- **二级**: `docs/<NN-alias>/<sub>/index.md`（文件夹 + index.md）
+- **三级**: `docs/<NN-alias>/<sub>/<page>/index.md`（文件夹 + index.md，可在同目录下放置多个标签文件）
+  - 同目录下额外的 `*.md`（如 `details.md`、`glm.md`）作为标签文件，由 TabContentLayout 渲染为标签
 
 ### 路由镜像 (强制)
 内容路径与路由必须一一对应：
 - 内容: `src/content/docs/03-prompts/context/index.md`
 - 路由: `src/pages/prompts/context/index.astro`
+- 内容: `src/content/docs/02-daily/claude-code/basics/index.md`
+- 路由: `src/pages/daily/claude-code/basics/index.astro`
 
 ### 提交规范
 遵循 Conventional Commits，格式: `type(scope): description`

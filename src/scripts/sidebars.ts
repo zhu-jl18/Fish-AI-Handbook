@@ -125,9 +125,11 @@ export const FUN_SIDEBAR: SidebarSection = [
 
 export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
+  { label: 'Preparation', href: '/resources/preparation' },
   { label: '2API', href: '/resources/2api' },
   { label: 'Free Tier', href: '/resources/free-tier' },
   { label: 'Little Cost', href: '/resources/little-cost' },
+  { label: '小羊毛', href: '/resources/little-wool' },
   { label: 'API Key', href: '/resources/api' },
   { label: '云平台', href: '/resources/cloud-platforms' },
 ]

@@ -1,0 +1,539 @@
+---
+/**
+ * TabContentLayout - Universal layout with multi-tab content support
+ *
+ * This layout adds GitHub-style tab switching functionality to any content page.
+ * It automatically detects sibling content files in the same directory and renders
+ * them as switchable tabs at the same URL.
+ *
+ * Features:
+ * - Multi-tab support: Multiple .md files in same directory become tabs
+ * - Auto-fallback: Single file directories render as normal pages (no tabs)
+ * - Sidebar sync: TOC and contributors update on tab switch
+ *
+ * Usage in page templates:
+ * ```astro
+ * <TabContentLayout
+ *   basePath="01-concepts/developer/automation"
+ *   title="Automation"
+ *   sidebarItems={CONCEPTS_SIDEBAR}
+ * />
+ * ```
+ */
+
+import BaseLayout from './BaseLayout.astro'
+import Header from '../components/Header.astro'
+import RightSidebar from '../components/RightSidebar.astro'
+import MobileMenu from '../components/MobileMenu.astro'
+import BackToTop from '../components/BackToTop.astro'
+import ContentActions from '../components/ContentActions.astro'
+import ContentTabSwitcher from '../components/ContentTabSwitcher.astro'
+import { getSidebarForPath } from '../scripts/sidebars'
+import { theme, getCurrentNavKey } from '../config/index'
+import siteConfig, { CONTRIBUTORS_MAP } from '../config/site'
+import { getGitLastModifiedIso } from '../utils/git'
+import { getCollection } from 'astro:content'
+import { organizeTabEntries, type TabInfo } from '../utils/tabContent'
+
+interface Props {
+  /** Base path in content collection (e.g., '06-resources/api') */
+  basePath: string
+  /** Page title (fallback if not from entry) */
+  title?: string
+  /** Optional sidebar items override */
+  sidebarItems?: any[]
+  /** Optional body class */
+  bodyClass?: string
+}
+
+const { basePath, title: propTitle, sidebarItems, bodyClass } = Astro.props
+
+// Get all docs entries to find tabs
+const allDocs = await getCollection('docs')
+
+// Organize into tabs（内部会基于 basePath 过滤）
+const tabs = organizeTabEntries(allDocs, basePath)
+
+// Render all tab contents
+const renderedTabs: TabInfo[] = await Promise.all(
+  tabs.map(async (tab) => {
+    const rendered = await tab.entry.render()
+    return {
+      ...tab,
+      Content: rendered.Content,
+      headings: rendered.headings,
+    }
+  }),
+)
+
+if (renderedTabs.length === 0) {
+  throw new Error(
+    `[TabContentLayout] No docs entries found for basePath="${basePath}"`,
+  )
+}
+
+// Get the default (index) entry for metadata
+const defaultTab = renderedTabs.find((t) => t.isDefault) || renderedTabs[0]
+const entry = defaultTab?.entry
+
+const currentPath = Astro.url.pathname
+const resolvedSidebarItems = sidebarItems || getSidebarForPath(currentPath)
+
+const title = propTitle || entry?.data?.title || 'Untitled'
+const contributors = entry?.data?.contributors
+
+const lastModified = getGitLastModifiedIso(entry?.filePath)
+
+const currentKey = getCurrentNavKey(currentPath)
+const entryId = entry?.id
+
+const pathSegments = currentPath.split('/').filter(Boolean)
+const chapter = pathSegments[0] || 'all'
+
+const contributorsList = Array.isArray(contributors) ? contributors : []
+const author =
+  contributorsList.find((c: string) => c.toLowerCase() !== 'fish') ||
+  contributorsList[0] ||
+  'Fish'
+
+// Check if we have multiple tabs
+const hasMultipleTabs = renderedTabs.length > 1
+
+// Prepare tab data for the switcher component
+const tabsForSwitcher = renderedTabs.map((tab) => ({
+  id: tab.id,
+  label: tab.label,
+  isDefault: tab.isDefault,
+}))
+
+// Prepare tab metadata for client-side sidebar sync
+const tabsMetadata = renderedTabs.map((tab) => ({
+  id: tab.id,
+  contributors: tab.entry.data.contributors || [],
+}))
+
+const contributorsMap = CONTRIBUTORS_MAP
+const defaultContributor = siteConfig.defaultContributor
+---
+
+<BaseLayout title={title} bodyClass={bodyClass} contributors={contributors}>
+  <Header currentPage={currentKey} />
+
+  <div class="content-wrapper">
+    <div class="layout-container">
+      <main id="main-content" class={`content ${entryId ? 'has-actions' : ''}`}>
+        <div
+          class="content-inner"
+          data-pagefind-body
+          style={`--font-size-base: ${theme.fontSizeBase}; --font-size-lg: ${theme.fontSizeLg}; --line-height-base: ${theme.lineHeightBase};`}
+        >
+          <span data-pagefind-filter="chapter" class="visually-hidden"
+            >{chapter}</span
+          >
+          <span data-pagefind-filter="author" class="visually-hidden"
+            >{author}</span
+          >
+          {
+            entryId && (
+              <ContentActions entryId={entryId} lastModified={lastModified} />
+            )
+          }
+
+          {/* Tab switcher - only shown when multiple tabs exist */}
+          {hasMultipleTabs && <ContentTabSwitcher tabs={tabsForSwitcher} />}
+
+          {/* Tab panels - render all content, hide non-default with CSS/JS */}
+          {
+            renderedTabs.map((tab) => (
+              <div
+                class="content-tab-panel"
+                id={`content-tab-panel-${tab.id}`}
+                data-tab-id={tab.id}
+                role="tabpanel"
+                aria-labelledby={`content-tab-${tab.id}`}
+                aria-hidden={tab.isDefault ? 'false' : 'true'}
+                hidden={!tab.isDefault}
+              >
+                {tab.Content && <tab.Content />}
+              </div>
+            ))
+          }
+        </div>
+      </main>
+
+      <RightSidebar
+        headings={defaultTab?.headings || []}
+        structure={resolvedSidebarItems}
+        currentPath={currentPath}
+        contributors={contributors}
+        manualToc={hasMultipleTabs}
+      />
+    </div>
+  </div>
+
+  <MobileMenu
+    structure={resolvedSidebarItems}
+    currentPath={currentPath}
+    contributors={contributors}
+  />
+
+  <button
+    class="mobile-menu-trigger"
+    aria-label="Open menu"
+    title="目录与章节"
+    aria-controls="mobile-menu-overlay"
+    aria-expanded="false"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </button>
+
+  <BackToTop />
+</BaseLayout>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .content-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    flex: 1;
+    width: 100%;
+    background-color: var(--bg-color);
+  }
+
+  .layout-container {
+    display: flex;
+    gap: var(--layout-gap);
+    max-width: var(--layout-max-width);
+    width: 100%;
+    padding: 0 calc(var(--layout-gap) + 1rem);
+    position: relative;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 auto;
+  }
+
+  .content {
+    flex: 0 1 var(--content-max-width);
+    width: min(100%, var(--content-max-width));
+    padding: 1.5rem 2rem 2.5rem 2rem;
+    background-color: transparent;
+    border-radius: 0;
+    max-width: var(--content-max-width);
+  }
+
+  .content.has-actions {
+    padding-top: 6px;
+  }
+
+  .content-inner {
+    width: 100%;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+
+    --heading-h1-size: clamp(1.6rem, 1.6vw + 0.5rem, 1.9rem);
+    --heading-h1-margin-top: calc(var(--section-spacing) * 0.75);
+    --heading-h1-margin-bottom: 1rem;
+
+    --heading-h2-size: clamp(1.15rem, 1vw + 0.65rem, 1.35rem);
+    --heading-h2-margin-top: calc(var(--section-spacing) * 0.6);
+    --heading-h2-margin-bottom: 0.75rem;
+    --heading-h2-border: 1px solid var(--heading-divider-color);
+    --heading-h2-padding-bottom: 0.3em;
+
+    --heading-h3-size: clamp(1.1rem, 0.8vw + 0.75rem, 1.3rem);
+    --heading-h3-margin-top: 1.4rem;
+    --heading-h3-margin-bottom: 1.1rem;
+
+    --heading-h4-size: 1rem;
+    --heading-h4-margin-top: 1.3rem;
+    --heading-h4-margin-bottom: 0.45rem;
+
+    --heading-h5-size: 0.95rem;
+    --heading-h5-margin-top: 1.15rem;
+    --heading-h5-margin-bottom: 0.4rem;
+
+    --heading-h6-size: 0.9rem;
+    --heading-h6-margin-top: 1rem;
+    --heading-h6-margin-bottom: 0.35rem;
+    --heading-h6-letter-spacing: -0.005em;
+  }
+
+  .content-inner > :global(:is(h1, h2, h3, h4, h5, h6):first-child) {
+    margin-top: 0;
+  }
+
+  .content-inner > :global(.content-actions + *) {
+    margin-top: 1rem !important;
+  }
+
+  /* Tab panel styles */
+  .content-tab-panel {
+    width: 100%;
+  }
+
+  .content-tab-panel[hidden] {
+    display: none;
+  }
+
+  /* When tabs are present, adjust spacing */
+  .content-inner > :global(.content-tabs-wrapper + .content-tab-panel) {
+    margin-top: 0;
+  }
+
+  .content-tab-panel > :global(:first-child) {
+    margin-top: 0;
+  }
+
+  @media (max-width: 1440px) {
+    .layout-container {
+      padding: 0 calc(var(--layout-gap) * 0.75);
+    }
+
+    .content {
+      padding: 1.5rem 1.85rem 2.25rem 1.85rem;
+    }
+
+    .content.has-actions {
+      padding-top: 6px;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .content {
+      padding: 1.5rem 1.75rem 2rem 1.75rem;
+    }
+    .content.has-actions {
+      padding-top: 6px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .layout-container {
+      gap: 0;
+      padding: 0;
+    }
+
+    .content {
+      flex: 1;
+      width: 100%;
+      border-radius: 0;
+      max-width: 100%;
+      padding: 1.5rem 1.5rem 2rem 1.5rem;
+    }
+
+    .content.has-actions {
+      padding-top: 0.25rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .content {
+      padding: 1.5rem 1rem 1.5rem 1rem;
+    }
+    .content.has-actions {
+      padding-top: 0.25rem;
+    }
+  }
+
+  .mobile-menu-trigger {
+    position: fixed;
+    right: 4rem;
+    bottom: 1rem;
+    width: 40px;
+    height: 40px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-overlay-dark);
+    border: 1px solid var(--color-border-overlay);
+    color: var(--color-text-overlay);
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-menu-trigger:hover {
+    background: var(--color-bg-overlay-hover);
+    color: var(--color-text-white);
+    border-color: var(--color-border-overlay-hover);
+    transform: translateY(-2px);
+  }
+
+  .mobile-menu-trigger:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 1024px) {
+    .mobile-menu-trigger {
+      display: inline-flex;
+    }
+  }
+  @media (max-width: 768px) {
+    .mobile-menu-trigger {
+      right: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const trigger = document.querySelector('.mobile-menu-trigger')
+  trigger?.addEventListener('click', () => {
+    document.dispatchEvent(new CustomEvent('open-mobile-menu'))
+  })
+</script>
+
+{/* Resources-specific: Tab metadata for sidebar sync */}
+<script
+  is:inline
+  define:vars={{ tabsMetadata, defaultContributor, contributorsMap }}
+>
+  // Resources-only: Sidebar sync on tab change
+  ;(function () {
+    if (!Array.isArray(tabsMetadata) || tabsMetadata.length < 2) {
+      return
+    }
+
+    function resolveContributor(username) {
+      const trimmed = (username || '').trim()
+      if (!trimmed) return null
+      if (contributorsMap && contributorsMap[trimmed]) {
+        return contributorsMap[trimmed]
+      }
+      return {
+        username: trimmed,
+        name: trimmed,
+        link: 'https://github.com/' + trimmed,
+        avatar: 'https://github.com/' + trimmed + '.png',
+      }
+    }
+
+    let cleanupToc = null
+
+    function updateContributors(contributorNames) {
+      const listEl = document.querySelector('.contributors-list')
+      const countEl = document.querySelector('.contributor-count')
+      if (!listEl || !countEl) return
+
+      const contributorList = []
+      const seen = new Set()
+
+      // Always add default contributor first
+      seen.add(defaultContributor.username)
+      contributorList.push(defaultContributor)
+
+      // Add other contributors
+      if (Array.isArray(contributorNames)) {
+        for (const name of contributorNames) {
+          const resolved = resolveContributor(name)
+          if (!resolved || seen.has(resolved.username)) continue
+          seen.add(resolved.username)
+          contributorList.push(resolved)
+        }
+      }
+
+      // Update count
+      countEl.textContent = contributorList.length
+
+      // Rebuild list
+      const isGrid = contributorList.length > 2
+      listEl.className =
+        'contributors-list ' + (isGrid ? 'grid-layout' : 'list-layout')
+
+      listEl.innerHTML = contributorList
+        .map(function (person) {
+          const meta = isGrid
+            ? ''
+            : '<div class="contributor-meta"><span class="contributor-name">' +
+              person.name +
+              '</span><span class="contributor-handle">@' +
+              person.username +
+              '</span></div>'
+          return (
+            '<a class="contributor-card" href="' +
+            person.link +
+            '" target="_blank" rel="noreferrer noopener" title="' +
+            person.name +
+            ' (@' +
+            person.username +
+            ')"><img src="' +
+            person.avatar +
+            '" alt="' +
+            person.name +
+            '" loading="lazy" />' +
+            meta +
+            '</a>'
+          )
+        })
+        .join('')
+    }
+
+    function rebuildToc() {
+      // Dynamically import to avoid SSR issues
+      import('/scripts/toc.js').then(function (mod) {
+        const activePanel = document.querySelector(
+          '.content-tab-panel:not([hidden])',
+        )
+        const selector = activePanel
+          ? '.content-tab-panel:not([hidden])'
+          : '.content-inner'
+        if (typeof cleanupToc === 'function') {
+          cleanupToc()
+        }
+        cleanupToc = mod.setupRightSidebar(selector, '.toc-nav')
+
+        // Check if TOC is empty
+        requestAnimationFrame(function () {
+          const tocNav = document.querySelector('.toc-nav')
+          const tocPanel = document.querySelector('.toc-panel')
+          if (tocNav && tocPanel) {
+            tocPanel.style.display = tocNav.children.length === 0 ? 'none' : ''
+          }
+        })
+      })
+    }
+
+    // Initial TOC build - default sidebar已关闭自动构建，这里直接构建
+    rebuildToc()
+
+    document.addEventListener('tab-changed', function (e) {
+      const tabId = e.detail.tabId
+      const tabMeta = tabsMetadata.find(function (t) {
+        return t.id === tabId
+      })
+      if (tabMeta) {
+        updateContributors(tabMeta.contributors)
+      }
+      // Rebuild TOC for active panel（下一帧保证 active panel 已切换）
+      requestAnimationFrame(rebuildToc)
+    })
+  })()
+</script>

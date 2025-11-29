@@ -12,7 +12,7 @@ contributors:
 
 综合模型能力以及日常使用体验
 
-<img src="https://p.sda1.dev/28/3ef33475959f6e0d989edeecc3c97211/image.png" >
+<img src="https://p.sda1.dev/28/3ef33475959f6e0d989edeecc3c97211/image.png" alt="Model ranking comparison chart" />
 
 
 
