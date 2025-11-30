@@ -29,6 +29,8 @@ export async function GET(context: { site: URL }) {
   const entries = await getCollection('docs')
 
   const items = entries
+    // Skip tab content files (they render on parent URL, not their own route)
+    .filter((entry) => !entry.data.tab)
     .map((entry) => {
       const link = resolvePathFromSlug(entry.slug)
       if (!link) return null

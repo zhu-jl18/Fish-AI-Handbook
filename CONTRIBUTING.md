@@ -378,6 +378,13 @@ tab:
 - 标签组件：`src/components/ContentTabSwitcher.astro`
 - 布局组件：`src/layouts/TabContentLayout.astro`
 
+#### SEO 与 RSS 设计哲学
+
+- **Sitemap**：由 `@astrojs/sitemap` 基于实际路由生成，标签文件没有单独路由，因此不会出现在 sitemap 中，这是正确的行为
+- **RSS**：`src/pages/rss.xml.ts` 生成时会过滤带 `tab:` frontmatter 的文件，避免生成 404 链接
+- **爬虫索引**：所有标签内容均已在 HTML 中渲染（通过 `hidden` 属性隐藏非默认标签），爬虫可索引全部内容
+- **设计原理**：标签内容是同一页面的另一个视图，而非独立页面；用户通过客户端 Tab 切换浏览，而非 URL 跳转
+
 ## 5. 开发与验证流程
 
 ### 5.1 常用命令
