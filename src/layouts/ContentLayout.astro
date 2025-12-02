@@ -44,6 +44,9 @@ const entryId = entry?.id
 const pathSegments = currentPath.split('/').filter(Boolean)
 const chapter = pathSegments[0] || 'all'
 
+// 顶层章节入口页（/daily, /resources 等）不展示 TOC 面板
+const isChapterIndex = pathSegments.length === 1
+
 // 提取 author（优先取非 Fish 的第一个 contributor）
 const contributorsList = Array.isArray(contributors) ? contributors : []
 const author =
@@ -83,6 +86,7 @@ const author =
         structure={sidebarItems}
         currentPath={currentPath}
         contributors={contributors}
+        showTocPanel={!isChapterIndex}
       />
     </div>
   </div>
@@ -91,6 +95,7 @@ const author =
     structure={sidebarItems}
     currentPath={currentPath}
     contributors={contributors}
+    showTocPanel={!isChapterIndex}
   />
 
   <button
@@ -272,10 +277,10 @@ const author =
 
   .mobile-menu-trigger {
     position: fixed;
-    right: 4rem; /* Right of BackToTop: 2rem (32px) gap at desktop */
-    bottom: 1rem;
-    width: 40px;
-    height: 40px;
+    right: 5.5rem; /* 平板端：BackToTop 右 2rem + 宽 44px + 间距 0.5rem */
+    bottom: 2rem; /* 与 BackToTop 对齐 */
+    width: 44px; /* 与 BackToTop 一致 */
+    height: 44px;
     display: none; /* Hidden on desktop */
     align-items: center;
     justify-content: center;
@@ -308,7 +313,11 @@ const author =
   }
   @media (max-width: 768px) {
     .mobile-menu-trigger {
-      right: 1rem; /* Match BackToTop on mobile for consistent gap */
+      right: 1rem;
+      width: 40px; /* 移动端缩小与 BackToTop 一致 */
+      height: 40px;
+      /* 垂直堆叠：BackToTop 底部 1rem + 高 40px + 间距 12px */
+      bottom: calc(1rem + 40px + 12px);
     }
   }
 </style>

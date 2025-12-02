@@ -90,6 +90,9 @@ const entryId = entry?.id
 const pathSegments = currentPath.split('/').filter(Boolean)
 const chapter = pathSegments[0] || 'all'
 
+// 顶层章节入口页（/resources 等）不展示 TOC 面板
+const isChapterIndex = pathSegments.length === 1
+
 const contributorsList = Array.isArray(contributors) ? contributors : []
 const author =
   contributorsList.find((c: string) => c.toLowerCase() !== 'fish') ||
@@ -167,6 +170,7 @@ const defaultContributor = siteConfig.defaultContributor
         currentPath={currentPath}
         contributors={contributors}
         manualToc={hasMultipleTabs}
+        showTocPanel={!isChapterIndex}
       />
     </div>
   </div>
@@ -175,6 +179,7 @@ const defaultContributor = siteConfig.defaultContributor
     structure={resolvedSidebarItems}
     currentPath={currentPath}
     contributors={contributors}
+    showTocPanel={!isChapterIndex}
   />
 
   <button
@@ -363,10 +368,10 @@ const defaultContributor = siteConfig.defaultContributor
 
   .mobile-menu-trigger {
     position: fixed;
-    right: 4rem;
-    bottom: 1rem;
-    width: 40px;
-    height: 40px;
+    right: 5.5rem; /* 平板端：BackToTop 右 2rem + 宽 44px + 间距 0.5rem */
+    bottom: 2rem; /* 与 BackToTop 对齐 */
+    width: 44px; /* 与 BackToTop 一致 */
+    height: 44px;
     display: none;
     align-items: center;
     justify-content: center;
@@ -400,6 +405,10 @@ const defaultContributor = siteConfig.defaultContributor
   @media (max-width: 768px) {
     .mobile-menu-trigger {
       right: 1rem;
+      width: 40px; /* 移动端缩小与 BackToTop 一致 */
+      height: 40px;
+      /* 垂直堆叠：BackToTop 底部 1rem + 高 40px + 间距 12px */
+      bottom: calc(1rem + 40px + 12px);
     }
   }
 </style>
@@ -437,6 +446,7 @@ const defaultContributor = siteConfig.defaultContributor
     }
 
     let cleanupToc = null
+    let cleanupMobileToc = null
 
     function updateContributors(contributorNames) {
       const listEl = document.querySelector('.contributors-list')
@@ -496,29 +506,105 @@ const defaultContributor = siteConfig.defaultContributor
         .join('')
     }
 
-    function rebuildToc() {
-      // Dynamically import to avoid SSR issues
-      import('/scripts/toc.js').then(function (mod) {
-        const activePanel = document.querySelector(
-          '.content-tab-panel:not([hidden])',
-        )
-        const selector = activePanel
-          ? '.content-tab-panel:not([hidden])'
-          : '.content-inner'
-        if (typeof cleanupToc === 'function') {
-          cleanupToc()
-        }
-        cleanupToc = mod.setupRightSidebar(selector, '.toc-nav')
-
-        // Check if TOC is empty
-        requestAnimationFrame(function () {
-          const tocNav = document.querySelector('.toc-nav')
-          const tocPanel = document.querySelector('.toc-panel')
-          if (tocNav && tocPanel) {
-            tocPanel.style.display = tocNav.children.length === 0 ? 'none' : ''
+    function setupRightSidebarFallback(rootSelector, navSelector) {
+      var root = document.querySelector(rootSelector)
+      var nav = document.querySelector(navSelector)
+      if (!root || !nav) return function () {}
+      var headings = Array.from(root.querySelectorAll('h2'))
+      nav.innerHTML = ''
+      headings.forEach(function (h2) {
+        var baseId =
+          h2.id ||
+          (h2.textContent || '')
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, '-') || 'section'
+        if (!h2.id) h2.id = baseId
+        var link = document.createElement('a')
+        link.href = '#' + encodeURIComponent(baseId)
+        link.textContent = h2.textContent || baseId
+        link.title = h2.textContent || baseId
+        link.className = 'toc-link toc-2'
+        link.setAttribute('data-id', baseId)
+        link.addEventListener('click', function (e) {
+          e.preventDefault()
+          var target = document.getElementById(baseId)
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            history.replaceState(null, '', '#' + encodeURIComponent(baseId))
           }
         })
+        nav.appendChild(link)
       })
+      return function () {}
+    }
+
+    function rebuildToc() {
+      // Dynamically import to avoid SSR issues; fallback to inline implementation on failure
+      import('/scripts/toc.js')
+        .then(function (mod) {
+          var activePanel = document.querySelector(
+            '.content-tab-panel:not([hidden])',
+          )
+          var selector = activePanel
+            ? '.content-tab-panel:not([hidden])'
+            : '.content-inner'
+
+          var setup = mod && mod.setupRightSidebar
+          if (!setup) {
+            setup = setupRightSidebarFallback
+          }
+
+          // Rebuild desktop TOC
+          if (typeof cleanupToc === 'function') {
+            cleanupToc()
+          }
+          cleanupToc = setup(selector, '.toc-nav')
+
+          // Rebuild mobile TOC (same content, different container)
+          if (typeof cleanupMobileToc === 'function') {
+            cleanupMobileToc()
+          }
+          cleanupMobileToc = setup(selector, '.mobile-toc-nav')
+
+          // Check if TOC is empty
+          requestAnimationFrame(function () {
+            var tocNav = document.querySelector('.toc-nav')
+            var tocPanel = document.querySelector('.toc-panel')
+            if (tocNav && tocPanel) {
+              tocPanel.style.display =
+                tocNav.children.length === 0 ? 'none' : ''
+            }
+            // Also hide mobile TOC panel if empty
+            var mobileTocNav = document.querySelector('.mobile-toc-nav')
+            var mobileTocPanel =
+              mobileTocNav && mobileTocNav.closest('.toc-panel')
+            if (mobileTocNav && mobileTocPanel) {
+              mobileTocPanel.style.display =
+                mobileTocNav.children.length === 0 ? 'none' : ''
+            }
+          })
+        })
+        .catch(function (error) {
+          console.error('[TOC] Failed to load /scripts/toc.js (tabs), using fallback:', error)
+          var activePanel = document.querySelector(
+            '.content-tab-panel:not([hidden])',
+          )
+          var selector = activePanel
+            ? '.content-tab-panel:not([hidden])'
+            : '.content-inner'
+          if (typeof cleanupToc === 'function') {
+            cleanupToc()
+          }
+          cleanupToc = setupRightSidebarFallback(selector, '.toc-nav')
+          if (typeof cleanupMobileToc === 'function') {
+            cleanupMobileToc()
+          }
+          cleanupMobileToc = setupRightSidebarFallback(
+            selector,
+            '.mobile-toc-nav',
+          )
+        })
     }
 
     // Initial TOC build - default sidebar已关闭自动构建，这里直接构建
