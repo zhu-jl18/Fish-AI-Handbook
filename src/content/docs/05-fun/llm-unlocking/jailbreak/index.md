@@ -3,7 +3,12 @@ title: 越狱 Prompt 大全
 description: DAN 变体、角色扮演、多轮诱导
 contributors:
     - claude
+    - codex
 ---
+
+- [EasyJailbreak](https://github.com/EasyJailbreak/EasyJailbreak)
+
+
 
 ## DAN 系列
 
