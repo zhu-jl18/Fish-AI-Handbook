@@ -13,11 +13,13 @@ const {
   currentPath = '/',
   contributors,
   tocNavClass = 'toc-nav',
+  showTocPanel = true,
 }: {
   structure?: SidebarSection
   currentPath?: string
   contributors?: string[] | null
   tocNavClass?: string
+  showTocPanel?: boolean
 } = Astro.props
 
 const normalizePath = (path: string) => {
@@ -85,4 +87,4 @@ const isGroupActive = (entry: SidebarGroup) => {
     <SidebarContributors contributorList={contributorList} />
   ) : null
 }
-<SidebarToc tocNavClass={tocNavClass} />
+{showTocPanel && <SidebarToc tocNavClass={tocNavClass} />}
