@@ -7,10 +7,12 @@ const {
   structure = [],
   currentPath = '/',
   contributors,
+  showTocPanel = true,
 }: {
   structure?: SidebarSection
   currentPath?: string
   contributors?: string[] | null
+  showTocPanel?: boolean
 } = Astro.props
 ---
 
@@ -46,6 +48,7 @@ const {
         currentPath={currentPath}
         contributors={contributors}
         tocNavClass="mobile-toc-nav toc-nav"
+        showTocPanel={showTocPanel}
       />
     </div>
   </div>
@@ -143,49 +146,90 @@ const {
   }
 </style>
 
-<script type="module" is:inline>
-  import { setupRightSidebar } from '/scripts/toc.js'
+<script is:inline>
+  // Mobile menu + TOC - 不依赖外部模块
+  (function() {
+    var overlay = document.getElementById('mobile-menu-overlay')
+    var closeBtn = document.getElementById('close-mobile-menu')
+    var drawer = overlay ? overlay.querySelector('.mobile-menu-drawer') : null
+    var trigger = document.querySelector('.mobile-menu-trigger')
 
-  const overlay = document.getElementById('mobile-menu-overlay')
-  const closeBtn = document.getElementById('close-mobile-menu')
-  const drawer = overlay?.querySelector('.mobile-menu-drawer')
-  const trigger = document.querySelector('.mobile-menu-trigger')
+    function syncTrigger(open) {
+      if (trigger) trigger.setAttribute('aria-expanded', open ? 'true' : 'false')
+    }
 
-  const syncTrigger = (open) => {
-    if (trigger) trigger.setAttribute('aria-expanded', open ? 'true' : 'false')
-  }
+    function closeMenu() {
+      if (overlay) {
+        overlay.classList.remove('open')
+        overlay.setAttribute('aria-hidden', 'true')
+      }
+      document.body.style.overflow = ''
+      syncTrigger(false)
+      document.dispatchEvent(new CustomEvent('close-mobile-menu'))
+    }
 
-  function closeMenu() {
-    overlay?.classList.remove('open')
-    overlay?.setAttribute('aria-hidden', 'true')
-    document.body.style.overflow = ''
-    syncTrigger(false)
-    document.dispatchEvent(new CustomEvent('close-mobile-menu'))
-  }
+    function openMenu() {
+      if (overlay) {
+        overlay.classList.add('open')
+        overlay.setAttribute('aria-hidden', 'false')
+      }
+      document.body.style.overflow = 'hidden'
+      syncTrigger(true)
+    }
 
-  function openMenu() {
-    overlay?.classList.add('open')
-    overlay?.setAttribute('aria-hidden', 'false')
-    document.body.style.overflow = 'hidden'
-    syncTrigger(true)
-  }
-
-  closeBtn?.addEventListener('click', closeMenu)
-  overlay?.addEventListener('click', (e) => {
-    if (e.target === overlay) closeMenu()
-  })
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu()
-  })
-
-  document.addEventListener('open-mobile-menu', openMenu)
-
-  setupRightSidebar('.content-inner', '.mobile-toc-nav')
-
-  const links = drawer?.querySelectorAll('a')
-  links?.forEach((link) => {
-    link.addEventListener('click', () => {
-      setTimeout(closeMenu, 120)
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu)
+    if (overlay) {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeMenu()
+      })
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeMenu()
     })
-  })
+
+    document.addEventListener('open-mobile-menu', openMenu)
+
+    // Build mobile TOC (skip if TabContentLayout handles it)
+    var hasTabContent = document.querySelector('.content-tab-panel') !== null
+    if (!hasTabContent) {
+      var root = document.querySelector('.content-inner')
+      var nav = document.querySelector('.mobile-toc-nav')
+      if (root && nav) {
+        var headings = root.querySelectorAll('h2')
+        nav.innerHTML = ''
+        for (var i = 0; i < headings.length; i++) {
+          var h2 = headings[i]
+          var id = h2.id || (h2.textContent || '').trim().toLowerCase().replace(/\s+/g, '-') || 'section-' + i
+          if (!h2.id) h2.id = id
+          var link = document.createElement('a')
+          link.href = '#' + encodeURIComponent(id)
+          link.textContent = h2.textContent || id
+          link.title = h2.textContent || id
+          link.className = 'toc-link toc-2'
+          link.setAttribute('data-id', id)
+          ;(function(targetId) {
+            link.addEventListener('click', function(e) {
+              e.preventDefault()
+              var target = document.getElementById(targetId)
+              if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                history.replaceState(null, '', '#' + encodeURIComponent(targetId))
+              }
+            })
+          })(id)
+          nav.appendChild(link)
+        }
+      }
+    }
+
+    // Close menu on link click
+    if (drawer) {
+      var links = drawer.querySelectorAll('a')
+      for (var j = 0; j < links.length; j++) {
+        links[j].addEventListener('click', function() {
+          setTimeout(closeMenu, 120)
+        })
+      }
+    }
+  })()
 </script>
