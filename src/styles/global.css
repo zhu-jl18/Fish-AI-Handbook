@@ -459,10 +459,9 @@ p + ol.md-list--tight {
 }
 
 /* 预留：如需对“有空行”场景增加更大间距，可在下方添加 padding-top 等；当前保持默认效果 */
-ul.md-list--spaced,
+/* ul.md-list--spaced,
 ol.md-list--spaced {
-  /* no-op */
-}
+} */
 
 /* 引用样式 */
 blockquote {
