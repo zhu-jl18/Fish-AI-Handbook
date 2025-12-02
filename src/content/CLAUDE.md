@@ -117,13 +117,19 @@ tab:
 
 ### 关键文件
 - Schema: `src/content/config.ts` (`tabSchema`)
-- Utils: `src/utils/tabContent.ts`
+- Utils: `src/utils/tabContent.ts`（`organizeTabEntries` 仅匹配直接子文件）
 - Component: `src/components/ContentTabSwitcher.astro`
 - Layout: `src/layouts/TabContentLayout.astro`
+- TOC: `public/scripts/toc.js`
 
 ### 注意事项
 - 标签文件不需要单独的 `.astro` 路由（由父级使用 TabContentLayout 的路由承载）
 - 单文件目录自动退化为普通页面
+- **章节根目录**（如 `06-resources/index.md`）不会误显示子目录的标签
+
+### 响应式行为
+- **桌面/移动端 TOC**：均由 `TabContentLayout` 管理，标签切换时同步更新
+- **MobileMenu**：检测到 `.content-tab-panel` 时跳过自动初始化，由 `TabContentLayout` 统一管理
 
 ### SEO 与 RSS
 - **Sitemap**：标签文件无单独路由，不会出现在 sitemap 中（正确行为）

@@ -374,9 +374,17 @@ tab:
 #### 技术实现
 
 - Schema 扩展：`src/content/config.ts` 中的 `tabSchema`
-- 工具函数：`src/utils/tabContent.ts`
+- 工具函数：`src/utils/tabContent.ts`（`organizeTabEntries` 仅匹配直接子文件，避免章节根目录误匹配所有子目录）
 - 标签组件：`src/components/ContentTabSwitcher.astro`
 - 布局组件：`src/layouts/TabContentLayout.astro`
+- TOC 脚本：`public/scripts/toc.js`（桌面/移动端共用）
+
+#### 响应式行为
+
+- **桌面端 TOC**（`.toc-nav`）：由 `TabContentLayout` 在页面加载和标签切换时动态重建
+- **移动端 TOC**（`.mobile-toc-nav`）：同样由 `TabContentLayout` 管理，与桌面端保持同步
+- **关键逻辑**：`MobileMenu.astro` 检测到页面有 `.content-tab-panel` 时，跳过自动初始化 TOC，交由 `TabContentLayout` 统一管理
+- **切换时更新**：标签切换触发 `tab-changed` 事件，`TabContentLayout` 监听后重建两端 TOC，仅显示当前激活标签的标题
 
 #### SEO 与 RSS 设计哲学
 
