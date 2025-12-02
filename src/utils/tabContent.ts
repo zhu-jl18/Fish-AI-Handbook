@@ -144,15 +144,25 @@ export function organizeTabEntries(
   // - basePath                   (legacy single-file)
   // - basePath.md                (single file in folder)
   // - basePath/index             (index file in folder)
-  // - basePath/<tab-name>        (other tab files in folder)
+  // - basePath/<tab-name>        (other tab files in folder, direct children only)
   const tabEntries = entries.filter((entry) => {
     const id = entry.id
-    return (
+    // Exact matches for legacy/single-file patterns
+    if (
       id === basePath ||
       id === `${basePath}.md` ||
-      id === `${basePath}/index` ||
-      id.startsWith(`${basePath}/`)
-    )
+      id === `${basePath}/index`
+    ) {
+      return true
+    }
+    // For basePath/<tab-name>, ensure it's a direct child (no further slashes)
+    // e.g., basePath="06-resources/api" should match "06-resources/api/details"
+    // but basePath="06-resources" should NOT match "06-resources/api/index"
+    if (id.startsWith(`${basePath}/`)) {
+      const remainder = id.slice(basePath.length + 1) // part after basePath/
+      return !remainder.includes('/') // direct child only
+    }
+    return false
   })
 
   // Transform to TabInfo objects
