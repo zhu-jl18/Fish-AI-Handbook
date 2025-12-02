@@ -109,9 +109,10 @@ const tabsForSwitcher = renderedTabs.map((tab) => ({
   isDefault: tab.isDefault,
 }))
 
-// Prepare tab metadata for client-side sidebar sync
+// Prepare tab metadata for client-side sidebar sync (including entryId for copy button)
 const tabsMetadata = renderedTabs.map((tab) => ({
   id: tab.id,
+  entryId: tab.entry.id,
   contributors: tab.entry.data.contributors || [],
 }))
 
@@ -152,6 +153,7 @@ const defaultContributor = siteConfig.defaultContributor
                 class="content-tab-panel"
                 id={`content-tab-panel-${tab.id}`}
                 data-tab-id={tab.id}
+                data-entry-id={tab.entry.id}
                 role="tabpanel"
                 aria-labelledby={`content-tab-${tab.id}`}
                 aria-hidden={tab.isDefault ? 'false' : 'true'}
@@ -617,6 +619,11 @@ const defaultContributor = siteConfig.defaultContributor
       })
       if (tabMeta) {
         updateContributors(tabMeta.contributors)
+        // Update copy button's data-entry-id to match active tab
+        const copyBtn = document.getElementById('copy-markdown-btn')
+        if (copyBtn && tabMeta.entryId) {
+          copyBtn.setAttribute('data-entry-id', tabMeta.entryId)
+        }
       }
       // Rebuild TOC for active panel（下一帧保证 active panel 已切换）
       requestAnimationFrame(rebuildToc)
