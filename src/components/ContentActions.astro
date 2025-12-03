@@ -504,11 +504,17 @@ if (entryId) {
 
   /**
    * 绑定复制按钮点击事件
+   * 对于多标签页面（TabContentLayout），优先使用当前可见 tab panel 的 data-entry-id；
+   * 否则回退到按钮自身的 data-entry-id（普通单页场景）。
    */
   const copyBtn = document.getElementById('copy-markdown-btn')
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
-      const entryId = copyBtn.getAttribute('data-entry-id')
+      const activePanel = document.querySelector(
+        '.content-tab-panel:not([hidden])',
+      ) as HTMLElement | null
+      const panelEntryId = activePanel?.getAttribute('data-entry-id')
+      const entryId = panelEntryId || copyBtn.getAttribute('data-entry-id')
       copyMarkdownSource(entryId)
     })
   }
