@@ -13,6 +13,9 @@ dist/
 .env
 .env.*
 
+# changelog cache (generated at build time)
+.changelog-cache.json
+
 # OS junk
 .DS_Store
 Thumbs.db
