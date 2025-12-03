@@ -488,18 +488,25 @@ const {
 
     .home-layout {
       grid-template-columns: 1fr;
+      gap: 1.25rem;
+      justify-content: stretch;
     }
 
+    /* 窄屏直接隐藏右侧推荐链接，避免单列堆叠/撑宽 */
     .home-column-aside {
-      order: -1;
+      display: none;
     }
 
-    /* 小屏幕保持全宽，避免过窄 */
+    /* 小屏保持全宽且取消额外缩进/负距，避免遮挡 */
     .greeting,
     .ask-box,
     .card {
       width: 100%;
-      margin-left: 0;
+      margin: 0 0 1rem;
+    }
+
+    .greeting {
+      margin-bottom: 0.25rem;
     }
   }
 </style>
