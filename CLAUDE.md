@@ -106,23 +106,24 @@ Fish-AI-Handbook-dev/
 ## 模块索引
 
 ### 📦 src/components
-UI 组件集合，包含页面头部、侧栏、搜索、目录等核心组件。
+UI 组件集合，包含页面头部、侧栏、搜索、目录以及首页模块等核心组件。
 
-| 组件 | 功能 |
-|------|------|
-| `Header.astro` | 页面头部导航 |
-| `LeftSidebar.astro` | 左侧章节导航 |
-| `RightSidebar.astro` | 右侧目录 (TOC) |
-| `SearchDrawer.astro` | 搜索抽屉 (Pagefind) |
-| `MobileMenu.astro` | 移动端菜单 |
-| `ContentActions.astro` | 内容操作栏 |
-| `ContentTabSwitcher.astro` | 多标签内容切换（全章节通用） |
-| `SidebarPanels.astro` | 侧栏面板切换 |
-| `SidebarStructure.astro` | 文档结构视图 |
-| `SidebarToc.astro` | 目录视图 |
-| `SidebarContributors.astro` | 贡献者视图 |
-| `Footer.astro` | 页脚 |
-| `BackToTop.astro` | 返回顶部 |
+|| 组件 | 功能 |
+||------|------|
+|| `Header.astro` | 页面头部导航 |
+|| `LeftSidebar.astro` | 左侧章节导航 |
+|| `RightSidebar.astro` | 右侧目录 (TOC) |
+|| `SearchDrawer.astro` | 搜索抽屉 (Pagefind) |
+|| `MobileMenu.astro` | 移动端菜单 |
+|| `ContentActions.astro` | 内容操作栏 |
+|| `ContentTabSwitcher.astro` | 多标签内容切换（全章节通用） |
+|| `SidebarPanels.astro` | 侧栏面板切换 |
+|| `SidebarStructure.astro` | 文档结构视图 |
+|| `SidebarToc.astro` | 目录视图 |
+|| `SidebarContributors.astro` | 贡献者视图 |
+|| `Footer.astro` | 页脚 |
+|| `BackToTop.astro` | 返回顶部 |
+|| `home/*` | 首页卡片与变更记录挂件 |
 
 → 详见: [src/components/CLAUDE.md](src/components/CLAUDE.md)
 
@@ -141,7 +142,7 @@ UI 组件集合，包含页面头部、侧栏、搜索、目录等核心组件�
 → 详见: [src/config/CLAUDE.md](src/config/CLAUDE.md)
 
 ### 📝 src/content
-MDX/Markdown 文档内容，采用 Content Collections 管理。
+MDX/Markdown 文档内容，采用 Content Collections 管理。首页内容单独存放于 `src/content/home/`，用于首页 Todo / Reading 列表与欢迎语配置。
 
 **章节结构** (8 个一级章节):
 | 序号 | 目录 | 别名 | 路由 |
@@ -204,11 +205,12 @@ Remark 插件，扩展 Markdown 语法。
 ### 🛠️ src/utils
 工具函数。
 
-| 文件 | 导出符号 | 功能 |
-|------|----------|------|
-| `docsPath.ts` | `buildDocCandidates`, `normalizeEntryId` | 文档路径处理 |
-| `git.ts` | `getGitLastModifiedIso` | Git 最后修改时间 |
-| `tabContent.ts` | `organizeTabEntries`, `getTabLabel`, `getTabOrder`, `getTabBasePath`, `hasMultipleTabs` | 多标签内容检测与组织 |
+|| 文件 | 导出符号 | 功能 |
+||------|----------|------|
+|| `docsPath.ts` | `buildDocCandidates`, `normalizeEntryId` | 文档路径处理 |
+|| `git.ts` | `getGitLastModifiedIso` | Git 最后修改时间 |
+|| `tabContent.ts` | `organizeTabEntries`, `getTabLabel`, `getTabOrder`, `getTabBasePath`, `hasMultipleTabs` | 多标签内容检测与组织 |
+|| `changelog.ts` | `getChangelog`, `type CommitInfo` | 读取 Git 提交记录并为首页生成变更记录数据 |
 
 → 详见: [src/utils/CLAUDE.md](src/utils/CLAUDE.md)
 

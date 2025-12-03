@@ -72,6 +72,7 @@ npm run check:all             # 全量检查：format → build → type-check �
 
 - 框架：Astro（静态导出）+ MDX；代码高亮：Shiki
 - 目录：内容 `src/content/docs/`；路由 `src/pages/`；布局 `src/layouts/`；组件 `src/components/`；侧栏逻辑 `src/scripts/sidebars.ts`
+- 首页模块：内容源 `src/content/home/`，布局 `src/pages/index.astro`，配套组件 `src/components/home/**`，变更数据 `src/utils/changelog.ts`，样式 `src/styles/home-widgets.css`
 - 内容层级：最多三级（一级/二级/三级均为"文件夹 + index.md"，同目录下额外 md 作为标签文件）
 - 顶层目录命名：`NN-alias`（01..07、99-manual 置底）
 
