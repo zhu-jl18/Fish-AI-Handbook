@@ -148,14 +148,15 @@ const {
 
 <script is:inline>
   // Mobile menu + TOC - 不依赖外部模块
-  (function() {
+  ;(function () {
     var overlay = document.getElementById('mobile-menu-overlay')
     var closeBtn = document.getElementById('close-mobile-menu')
     var drawer = overlay ? overlay.querySelector('.mobile-menu-drawer') : null
     var trigger = document.querySelector('.mobile-menu-trigger')
 
     function syncTrigger(open) {
-      if (trigger) trigger.setAttribute('aria-expanded', open ? 'true' : 'false')
+      if (trigger)
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false')
     }
 
     function closeMenu() {
@@ -179,11 +180,11 @@ const {
 
     if (closeBtn) closeBtn.addEventListener('click', closeMenu)
     if (overlay) {
-      overlay.addEventListener('click', function(e) {
+      overlay.addEventListener('click', function (e) {
         if (e.target === overlay) closeMenu()
       })
     }
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeMenu()
     })
 
@@ -199,7 +200,10 @@ const {
         nav.innerHTML = ''
         for (var i = 0; i < headings.length; i++) {
           var h2 = headings[i]
-          var id = h2.id || (h2.textContent || '').trim().toLowerCase().replace(/\s+/g, '-') || 'section-' + i
+          var id =
+            h2.id ||
+            (h2.textContent || '').trim().toLowerCase().replace(/\s+/g, '-') ||
+            'section-' + i
           if (!h2.id) h2.id = id
           var link = document.createElement('a')
           link.href = '#' + encodeURIComponent(id)
@@ -207,13 +211,17 @@ const {
           link.title = h2.textContent || id
           link.className = 'toc-link toc-2'
           link.setAttribute('data-id', id)
-          ;(function(targetId) {
-            link.addEventListener('click', function(e) {
+          ;(function (targetId) {
+            link.addEventListener('click', function (e) {
               e.preventDefault()
               var target = document.getElementById(targetId)
               if (target) {
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                history.replaceState(null, '', '#' + encodeURIComponent(targetId))
+                history.replaceState(
+                  null,
+                  '',
+                  '#' + encodeURIComponent(targetId),
+                )
               }
             })
           })(id)
@@ -226,7 +234,7 @@ const {
     if (drawer) {
       var links = drawer.querySelectorAll('a')
       for (var j = 0; j < links.length; j++) {
-        links[j].addEventListener('click', function() {
+        links[j].addEventListener('click', function () {
           setTimeout(closeMenu, 120)
         })
       }
