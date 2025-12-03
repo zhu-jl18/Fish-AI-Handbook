@@ -18,8 +18,8 @@
   gap: 0.9rem;
   padding: 1.1rem 1rem 1.2rem;
   border-radius: var(--border-radius);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(12, 14, 18, 0.85);
+  border: 1px solid var(--border-color);
+  background: var(--bg-sidebar);
   backdrop-filter: blur(6px);
 }
 
@@ -39,8 +39,8 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-  background: rgba(12, 14, 18, 0.85);
+  color: var(--text-muted);
+  background: var(--bg-sidebar);
   z-index: 1;
   line-height: 1;
   display: inline-flex;
@@ -58,10 +58,10 @@
   padding: 0 4px;
   font-size: 0.6rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
-  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-color);
+  background: var(--surface-tint-08);
   border-radius: var(--border-radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--border-color);
   letter-spacing: normal;
 }
 
@@ -83,7 +83,7 @@
   gap: 0.4rem;
   padding: 0.35rem 0.6rem;
   border-radius: var(--border-radius);
-  color: rgba(226, 232, 240, 0.68);
+  color: var(--header-text);
   font-size: 0.82rem;
   text-decoration: none;
   transition:
@@ -92,13 +92,13 @@
 }
 
 .structure-link:hover {
-  color: rgba(226, 232, 240, 0.9);
-  background: rgba(255, 255, 255, 0.05);
+  color: var(--header-text-strong);
+  background: var(--surface-tint-06);
 }
 
 .structure-link.active {
-  color: #ffffff;
-  background: rgba(150, 210, 255, 0.12);
+  color: var(--header-accent);
+  background: var(--header-pill-active);
 }
 
 .structure-subnav {
@@ -106,7 +106,7 @@
   flex-direction: column;
   gap: 0.35rem;
   padding-left: 0.75rem;
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid var(--border-color);
   margin-left: 0.25rem;
 }
 
@@ -114,7 +114,7 @@
   display: block;
   padding: 0.3rem 0.5rem;
   border-radius: var(--border-radius-sm);
-  color: rgba(226, 232, 240, 0.55);
+  color: var(--color-toc-text);
   font-size: 0.78rem;
   text-decoration: none;
   transition:
@@ -123,13 +123,13 @@
 }
 
 .structure-sublink:hover {
-  color: rgba(226, 232, 240, 0.85);
-  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-toc-hover);
+  background: var(--surface-tint-03);
 }
 
 .structure-sublink.active {
-  color: #ffffff;
-  background: rgba(150, 210, 255, 0.15);
+  color: var(--header-accent);
+  background: var(--header-pill-active);
 }
 
 /* 列表布局：人少时（≤2人）纵向排布，显示头像+名称 */
@@ -157,7 +157,7 @@
 
 .contributors-list.list-layout .contributor-card:hover .contributor-name,
 .contributors-list.list-layout .contributor-card:hover .contributor-handle {
-  color: var(--color-toc-active-border);
+  color: var(--header-accent);
   transition: color var(--motion-duration-sm) var(--motion-ease-standard);
 }
 
@@ -165,7 +165,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   object-fit: cover;
   flex-shrink: 0;
 }
@@ -186,7 +186,7 @@
   border-radius: 50%;
   text-decoration: none;
   background: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--border-color);
   transition: transform var(--motion-duration-sm) var(--motion-ease-standard);
 }
 
@@ -213,7 +213,7 @@
 .contributor-name {
   font-size: 0.85rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--text-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -221,7 +221,7 @@
 
 .contributor-handle {
   font-size: 0.75rem;
-  color: rgba(226, 232, 240, 0.55);
+  color: var(--text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
