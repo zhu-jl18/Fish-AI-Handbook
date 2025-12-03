@@ -33,37 +33,7 @@ ccr ui   # 打开ccr ui 界面
 ccr code # 启动Claude Code
 ```
 
-## Settings Ref
 
-这里我只教如何接入qwencode，从而免费使用qwen3-coder-plus
-
-首先打开ccr的ui管理界面，导入自定义路由路径，他在你的json文件里长这样：
-
-```json
- "transformers": [
-    {
-      "name": "qwen-cli",
-      "path": "C:\\Users\\Travis\\.claude-code-router\\plugins\\qwen-cli.js",
-      "options": {}
-    }
-  ],
-```
-
-这里我们要导入[`qwen-cli.js`](https://gist.github.com/musistudio/f5a67841ced39912fd99e42200d5ca8b)
-然后你要做什么呢？确保你下载安装了qwen code，在终端里输入qwen进行登录，它会自动生成一个认证文件
-`oauth_creds.json`这个插件会自动寻找这个认证文件，完成它的工作，你只需要添加供应商，然后在Transformer里选择`qwen-cli`，再填写模型名字和api_base_url即可，参考配置：
-
-```json
-{
-  "name": "✅qwen-cli",
-  "api_base_url": "https://portal.qwen.ai/v1/chat/completions",
-  "api_key": "sk-xxx",
-  "models": ["qwen3-coder-plus"],
-  "transformer": {
-    "use": ["qwen-cli"]
-  }
-}
-```
 
 ## 碎碎念
 

@@ -6,7 +6,10 @@ contributors:
     - codex
 ---
 
-看这段 code：
+想要像我一样熟练调教大模型，那么你需要 懂 ： 用户层调用模型时可设置的生成参数。
+
+
+先看这段 code：
 
 ```python
 from openai import OpenAI
@@ -26,9 +29,13 @@ response = client.responses.create(
 )
 ```
 
-这些 params 是干嘛的？
+这些 params 都是干嘛的？
 
 ## Token
+
+开始之前，先了解下一个最基础的概念：Tokenization。模型眼里没有单词，只有 Token。无论是经典的 BPE（Byte-Pair Encoding）1、BERT 用的 WordPiece 2，还是 Google 的 SentencePiece 3，它们的核心目标都是把文本切分成一种既能高效表示、又能处理未登录词（OOV, Out-of-Vocabulary）的中间单元。
+
+说白了，LLM 的生成过程，就是在每个时间步，根据已经生成的 Token 序列，预测下一个最可能的 Token。这是一个概率游戏，而我们接下来要讲的所有参数，都是用来控制这个概率游戏的规则的。
 
 Token 是 LLM 的基本处理单位，不是字符也不是单词。在输入进模型前，所有文本都会被 **tokenizer**（分词器）切分成 token 序列。常见的 tokenizer 有 BPE（Byte Pair Encoding）、WordPiece、SentencePiece 等，它们基于统计频率将文本拆分成子词单元。
 
