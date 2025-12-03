@@ -1,13 +1,19 @@
 ---
+import { getEntry } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Header from '../components/Header.astro'
 import ChangelogSection from '../components/home/ChangelogSection.astro'
-import { frontmatter as homeFrontmatter } from '../content/home/index.md'
 
 type HomeItem = { text: string; href?: string; meta?: string }
 
-const todos = (homeFrontmatter.todos ?? []) as HomeItem[]
-const readings = (homeFrontmatter.readings ?? []) as HomeItem[]
+const homeEntry = await getEntry('home', 'index')
+
+if (!homeEntry) {
+  throw new Error('Home content entry "index" not found')
+}
+
+const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
+  homeEntry.data
 
 // 根据时间生成问候语
 function getGreeting(): string {
