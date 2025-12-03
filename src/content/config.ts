@@ -27,7 +27,43 @@ const docs = defineCollection({
   }),
 })
 
-export const collections = { docs }
+const home = defineCollection({
+  type: 'content',
+  schema: z.object({
+    todos: z
+      .array(
+        z.object({
+          text: z.string(),
+          href: z
+            .string()
+            .regex(
+              /^(\/|https?:\/\/)/,
+              'href must start with "/" or "http(s)://"',
+            )
+            .optional(),
+          meta: z.string().optional(),
+        }),
+      )
+      .default([]),
+    readings: z
+      .array(
+        z.object({
+          text: z.string(),
+          href: z
+            .string()
+            .regex(
+              /^(\/|https?:\/\/)/,
+              'href must start with "/" or "http(s)://"',
+            )
+            .optional(),
+          meta: z.string().optional(),
+        }),
+      )
+      .default([]),
+  }),
+})
+
+export const collections = { docs, home }
 
 /** Re-export tab schema type for use in utilities */
 export type TabConfig = z.infer<typeof tabSchema>
