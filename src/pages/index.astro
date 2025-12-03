@@ -2,7 +2,7 @@
 import { getEntry } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Header from '../components/Header.astro'
-import ChangelogSection from '../components/home/ChangelogSection.astro'
+import LinksSection from '../components/home/LinksSection.astro'
 
 type HomeItem = { text: string; href?: string; meta?: string }
 
@@ -12,7 +12,11 @@ if (!homeEntry) {
   throw new Error('Home content entry "index" not found')
 }
 
-const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
+const {
+  todos,
+  readings,
+  links,
+}: { todos: HomeItem[]; readings: HomeItem[]; links: HomeItem[] } =
   homeEntry.data
 ---
 
@@ -191,7 +195,7 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
 
       <!-- 右侧边栏 -->
       <aside class="home-column-aside">
-        <ChangelogSection />
+        <LinksSection links={links} />
       </aside>
     </section>
   </main>
@@ -354,6 +358,7 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
     position: sticky; /* 滚动时固定在顶部 */
     top: 1rem;
     align-self: start;
+    margin-left: -3.05rem; /* 向左收紧，使其与顶部搜索框左侧对齐 */
   }
 
   /* ========== GitHub 风格大卡片 ========== */
