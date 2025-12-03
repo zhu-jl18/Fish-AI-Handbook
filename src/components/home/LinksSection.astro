@@ -1,0 +1,154 @@
+---
+/**
+ * 友情链接 / 推荐链接模块
+ * 从首页配置 (home/index.md) 读取 links 列表。
+ */
+export interface LinkItem {
+  text: string
+  href?: string
+  meta?: string
+}
+
+const { links = [] } = Astro.props as { links: LinkItem[] }
+const display = Array.isArray(links) ? links : []
+---
+
+<section class="links">
+  <header class="links-header">
+    <h2 class="links-title">Recommended links</h2>
+  </header>
+
+  <div class="links-content">
+    {
+      display.length === 0 ? (
+        <p class="links-empty">暂无推荐链接</p>
+      ) : (
+        <ul class="links-list">
+          {display.map((item) => (
+            <li class="links-item">
+              <span class="links-dot" />
+              <div class="links-detail">
+                <span class="links-name">
+                  {item.href ? <a href={item.href}>{item.text}</a> : item.text}
+                </span>
+                {item.meta && <span class="links-meta">{item.meta}</span>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .links {
+    --link-brand: #4493f8;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .links-header {
+    padding: 0 0 0.4rem;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .links-title {
+    border: none;
+    box-shadow: none;
+    padding-bottom: 0;
+    margin: 0;
+  }
+
+  .links-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-white);
+    margin: 0;
+  }
+
+  .links-content {
+    padding: 0.1rem 0;
+  }
+
+  .links-empty {
+    color: var(--color-text-secondary);
+    font-size: 0.8rem;
+    margin: 0;
+    padding: 0.5rem 0;
+  }
+
+  .links-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .links-list::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0.4rem;
+    bottom: 0.4rem;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.12); /* 提升竖线可视度 */
+  }
+
+  .links-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    padding: 0.55rem 0;
+  }
+
+  .links-dot {
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    margin-top: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35); /* 更小更淡 */
+  }
+
+  .links-detail {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .links-name a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .links-name a:hover {
+    color: var(--link-brand);
+    text-decoration: none;
+  }
+
+  .links-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-white);
+  }
+
+  .links-meta {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 768px) {
+    .links-item {
+      gap: 0.5rem;
+    }
+  }
+</style>

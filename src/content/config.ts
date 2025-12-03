@@ -60,6 +60,18 @@ const home = defineCollection({
         }),
       )
       .default([]),
+    links: z
+      .array(
+        z.object({
+          text: z.string(),
+          href: z
+            .string()
+            .regex(/^(\/|https?:\/\/)/, 'href must start with "/" or "http(s)://"')
+            .optional(),
+          meta: z.string().optional(),
+        }),
+      )
+      .default([]),
   }),
 })
 

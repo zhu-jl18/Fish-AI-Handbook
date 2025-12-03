@@ -1,0 +1,112 @@
+---
+/**
+ * 主题切换按钮组件
+ * 用于在暗色和浅色主题之间切换
+ */
+---
+
+<button
+  type="button"
+  class="theme-toggle"
+  id="theme-toggle"
+  aria-label="切换主题"
+  title="切换主题"
+>
+  <!-- 太阳图标 -->
+  <svg
+    class="icon-sun"
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2"></path>
+    <path d="M12 20v2"></path>
+    <path d="m4.93 4.93 1.41 1.41"></path>
+    <path d="m17.66 17.66 1.41 1.41"></path>
+    <path d="M2 12h2"></path>
+    <path d="M20 12h2"></path>
+    <path d="m6.34 17.66-1.41 1.41"></path>
+    <path d="m19.07 4.93-1.41 1.41"></path>
+  </svg>
+  <!-- 月亮图标 -->
+  <svg
+    class="icon-moon hidden"
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+  </svg>
+</button>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: var(--header-text);
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: var(--nav-control-size, 34px);
+    height: var(--nav-control-size, 34px);
+    position: relative;
+    outline: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .theme-toggle:hover {
+    color: var(--header-text-strong);
+    background: var(--header-icon-bg-hover);
+  }
+
+  .theme-toggle:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 1px solid var(--header-accent-border);
+    outline-offset: 2px;
+  }
+
+  .theme-toggle svg {
+    width: 18px;
+    height: 18px;
+    transition:
+      transform var(--motion-duration-sm) var(--motion-ease-standard),
+      opacity var(--motion-duration-sm) var(--motion-ease-standard);
+  }
+
+  .theme-toggle:hover svg {
+    transform: scale(1.1);
+  }
+
+  .theme-toggle:active svg {
+    transform: scale(0.95);
+  }
+
+  .hidden {
+    display: none !important;
+  }
+</style>

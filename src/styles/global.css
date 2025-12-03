@@ -180,12 +180,110 @@
   --code-fg: #c9d1d9;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --caret-color: rgba(0, 0, 0, 0.7);
-    --search-highlight-bg: rgba(0, 0, 0, 0.18);
-    --search-highlight-fg: rgba(0, 0, 0, 0.85);
-  }
+/* ============================================
+   GitHub 风格浅色主题
+   ============================================
+   通过 data-theme="light" 属性激活
+   颜色参考：GitHub Primer Design System Light Theme
+   ============================================ */
+[data-theme='light'] {
+  color-scheme: light;
+
+  /* 背景与表面 */
+  --bg-color: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-sidebar: #f6f8fa;
+  --bg-content: #ffffff;
+
+  /* 文本 */
+  --text-color: #1f2328;
+  --text-muted: rgba(31, 35, 40, 0.65);
+
+  /* 边框与分隔 */
+  --border-color: rgba(31, 35, 40, 0.15);
+  --heading-divider-color: #d8dee4;
+
+  /* 强调与交互 */
+  --accent-color: #0969da;
+  --link-color: #0969da;
+  --link-hover-color: #0550ae;
+
+  /* 代码块 */
+  --code-bg: #f6f8fa;
+  --inline-code-bg: rgba(175, 184, 193, 0.2);
+  --code-border: rgba(31, 35, 40, 0.15);
+  --code-fg: #1f2328;
+
+  /* 阴影 */
+  --shadow-color: rgba(31, 35, 40, 0.12);
+
+  /* 基础与边框 */
+  --color-pure-black: #000;
+  --color-bg-deep: #f6f8fa;
+  --color-border-dark: #d0d7de;
+  --color-border-hover: #8c959f;
+
+  /* 文本与语义灰 */
+  --color-text-white: #1f2328;
+  --color-text-secondary: #656d76;
+  --color-accent-gray: #656d76;
+  --caret-color: rgba(0, 0, 0, 0.7);
+  --search-highlight-bg: rgba(255, 212, 0, 0.4);
+  --search-highlight-fg: #1f2328;
+
+  /* 按钮与深色背景（浅色主题下反转） */
+  --color-bg-button: #f6f8fa;
+  --color-bg-button-hover: #f3f4f6;
+
+  /* 滚动条 */
+  --color-scrollbar: #8c959f;
+  --color-scrollbar-hover: #6e7781;
+
+  /* 右侧目录/浮层相关 */
+  --color-bg-overlay-dark: rgba(255, 255, 255, 0.85);
+  --color-border-overlay: rgba(31, 35, 40, 0.15);
+  --color-bg-overlay-hover: rgba(246, 248, 250, 0.95);
+  --color-border-overlay-hover: rgba(31, 35, 40, 0.25);
+  --color-text-overlay: rgba(31, 35, 40, 0.9);
+
+  /* 通用浅色覆写（浅色主题下使用深色 tint） */
+  --surface-tint-02: rgba(31, 35, 40, 0.02);
+  --surface-tint-03: rgba(31, 35, 40, 0.03);
+  --surface-tint-06: rgba(31, 35, 40, 0.06);
+  --surface-tint-08: rgba(31, 35, 40, 0.08);
+
+  /* 右侧 TOC 专用 */
+  --color-toc-border: rgba(31, 35, 40, 0.1);
+  --color-toc-active-border: #0969da;
+  --color-toc-active-glow: rgba(9, 105, 218, 0.35);
+  --color-toc-text: rgba(31, 35, 40, 0.55);
+  --color-toc-hover: rgba(31, 35, 40, 0.85);
+  --color-toc-active: #0969da;
+
+  /* Header 专用 */
+  --header-bg: #f6f8fa;
+  --header-text: rgba(31, 35, 40, 0.68);
+  --header-text-muted: rgba(31, 35, 40, 0.52);
+  --header-text-strong: #1f2328;
+  --header-accent: #0969da;
+  --header-accent-border: rgba(9, 105, 218, 0.4);
+  --header-accent-border-strong: rgba(9, 105, 218, 0.6);
+  --header-mark-bg: rgba(9, 105, 218, 0.08);
+  --header-divider: #d8dee4;
+  --header-pill-hover: rgba(9, 105, 218, 0.08);
+  --header-pill-active: rgba(9, 105, 218, 0.15);
+  --header-search-bg: #f6f8fa;
+  --header-search-bg-hover: #ffffff;
+  --header-shortcut-bg: rgba(31, 35, 40, 0.05);
+  --header-shortcut-border: rgba(31, 35, 40, 0.15);
+  --header-icon-bg: rgba(31, 35, 40, 0.04);
+  --header-icon-bg-hover: rgba(31, 35, 40, 0.08);
+  --header-icon-border: rgba(31, 35, 40, 0.12);
+  --header-icon-border-hover: rgba(31, 35, 40, 0.2);
+
+  /* 右侧边栏面板 */
+  --color-border-subtle: rgba(31, 35, 40, 0.12);
+  --color-text-primary: #1f2328;
 }
 
 @font-face {
@@ -328,6 +426,10 @@ h2 {
   font-size: var(--heading-h2-size);
   margin-top: var(--heading-h2-margin-top);
   margin-bottom: var(--heading-h2-margin-bottom);
+}
+
+/* h2 分隔线仅在正文内容区显示 */
+.content-inner h2 {
   border-bottom: var(--heading-h2-border);
   padding-bottom: var(--heading-h2-padding-bottom);
 }
@@ -336,28 +438,32 @@ h3 {
   font-size: var(--heading-h3-size);
   margin-top: var(--heading-h3-margin-top);
   margin-bottom: var(--heading-h3-margin-bottom);
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
+  opacity: 0.9;
 }
 
 h4 {
   font-size: var(--heading-h4-size);
   margin-top: var(--heading-h4-margin-top);
   margin-bottom: var(--heading-h4-margin-bottom);
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--text-color);
+  opacity: 0.85;
 }
 
 h5 {
   font-size: var(--heading-h5-size);
   margin-top: var(--heading-h5-margin-top);
   margin-bottom: var(--heading-h5-margin-bottom);
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color);
+  opacity: 0.8;
 }
 
 h6 {
   font-size: var(--heading-h6-size);
   margin-top: var(--heading-h6-margin-top);
   margin-bottom: var(--heading-h6-margin-bottom);
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--text-color);
+  opacity: 0.75;
   letter-spacing: var(--heading-h6-letter-spacing);
 }
 
@@ -486,7 +592,7 @@ blockquote > :last-child {
 hr {
   margin: 2rem 0;
   border: none;
-  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  border-top: 1px dashed var(--border-color);
   height: 0;
 }
 
@@ -536,7 +642,7 @@ hr {
 
 /* 行间细分隔线：提升可读性（可选，使用极淡的分隔线） */
 .content-inner table tbody tr:not(:last-child) td {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--surface-tint-06);
 }
 
 /* Spoiler 文本遮罩样式 */

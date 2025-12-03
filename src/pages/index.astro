@@ -2,7 +2,7 @@
 import { getEntry } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Header from '../components/Header.astro'
-import ChangelogSection from '../components/home/ChangelogSection.astro'
+import LinksSection from '../components/home/LinksSection.astro'
 
 type HomeItem = { text: string; href?: string; meta?: string }
 
@@ -12,7 +12,11 @@ if (!homeEntry) {
   throw new Error('Home content entry "index" not found')
 }
 
-const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
+const {
+  todos,
+  readings,
+  links,
+}: { todos: HomeItem[]; readings: HomeItem[]; links: HomeItem[] } =
   homeEntry.data
 ---
 
@@ -124,13 +128,7 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
                         </svg>
                       </span>
                       <div class="item-main">
-                        {item.href ? (
-                          <a href={item.href} class="item-title">
-                            {item.text}
-                          </a>
-                        ) : (
-                          <span class="item-title">{item.text}</span>
-                        )}
+                        <span class="item-title">{item.text}</span>
                         {item.meta && <p class="item-meta">{item.meta}</p>}
                       </div>
                     </li>
@@ -142,7 +140,7 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
         </section>
 
         <!-- 阅读清单卡片 -->
-        <section class="card">
+        <section class="card card-reading">
           <header class="card-header">
             <h2 class="card-title">Reading list</h2>
             <div class="card-actions">
@@ -191,7 +189,7 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
 
       <!-- 右侧边栏 -->
       <aside class="home-column-aside">
-        <ChangelogSection />
+        <LinksSection links={links} />
       </aside>
     </section>
   </main>
@@ -207,6 +205,7 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
     padding: 1.5rem calc(var(--layout-gap) + 1rem) 3rem;
     padding-left: calc(var(--layout-gap) + 0.35rem);
     flex: 1;
+    --link-brand: #4493f8;
   }
 
   /* ========== 问候区域（GitHub 风格） ========== */
@@ -214,8 +213,8 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
     display: flex;
     align-items: center;
     gap: 0; /* 图标与文字更贴近 */
-    width: 85%;
-    margin: 0 0 -0.6rem; /* 更大的负 margin，让 greeting 与 chatbox 更紧凑 */
+    width: min(100%, var(--content-max-width));
+    margin: 0 auto -0.6rem; /* 居中且更紧凑 */
   }
 
   .greeting-icon {
@@ -240,8 +239,8 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
     border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 12px; /* 更接近 GitHub 卡片造型 */
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
-    width: 85%; /* 真正占据列宽的 85% */
-    margin: 0 0 2rem; /* 左对齐，与 greeting 一致 */
+    width: min(100%, var(--content-max-width));
+    margin: 0 auto 2rem; /* 居中，与 greeting 一致 */
   }
 
   .ask-input-area {
@@ -336,9 +335,12 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
   .home-layout {
     display: grid;
     /* 左列尽可能宽，右列固定窄栏（更接近 GitHub Dashboard） */
-    grid-template-columns: 1fr 280px;
-    gap: 3rem; /* 左右列之间更宽的间距 */
+    grid-template-columns: minmax(0, var(--content-max-width)) var(--sidebar-width);
+    gap: clamp(2rem, 4vw, 3.5rem); /* 左右列之间更宽的间距，随视口微调 */
     align-items: start;
+    max-width: calc(var(--content-max-width) + var(--sidebar-width) + clamp(2rem, 4vw, 3.5rem)); /* 以两列总宽为基准整体居中 */
+    margin: 0 auto;
+    justify-content: center; /* 将整体网格居中，主列视觉居中 */
   }
 
   .home-column-main {
@@ -346,14 +348,19 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
     flex-direction: column;
     gap: 1.25rem; /* 模块之间略微拉开 */
     min-width: 0; /* 防止内容溢出 */
-    max-width: 980px; /* 仅收窄左侧主内容宽度，右侧 changelog 位置不变 */
-    margin: 0 0 0 6.5rem; /*greeting chatbox todolist and readinglist 左右布局位置*/
+    max-width: var(--content-max-width); /* 使用全局内容宽度令牌 */
+    width: 100%;
+    justify-self: center; /* 让主列在网格内居中 */
+    align-items: center; /* 子项以自身宽度居中，不再贴边 */
   }
 
   .home-column-aside {
     position: sticky; /* 滚动时固定在顶部 */
     top: 1rem;
     align-self: start;
+    width: 100%;
+    max-width: var(--sidebar-width);
+    justify-self: start; /* 与网格起始线对齐，避免硬编码负边距 */
   }
 
   /* ========== GitHub 风格大卡片 ========== */
@@ -363,8 +370,8 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
     border: none;
     border-radius: 0;
     overflow: visible;
-    width: 85%; /* 与 chatbox 一致缩放 */
-    margin: 0 0 0.25rem; /* 左对齐，列表之间保留少量间距 */
+    width: min(100%, var(--content-max-width));
+    margin: 0 auto 0.25rem; /* 居中，列表之间保留少量间距 */
   }
 
   .card-header {
@@ -458,7 +465,12 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
 
   a.item-title:hover {
     color: var(--link-color);
-    text-decoration: underline;
+    text-decoration: none;
+  }
+
+  .card-reading .item-title:hover {
+    color: var(--link-brand);
+    text-decoration: none;
   }
 
   .item-meta {
@@ -476,18 +488,25 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
 
     .home-layout {
       grid-template-columns: 1fr;
+      gap: 1.25rem;
+      justify-content: stretch;
     }
 
+    /* 窄屏直接隐藏右侧推荐链接，避免单列堆叠/撑宽 */
     .home-column-aside {
-      order: -1;
+      display: none;
     }
 
-    /* 小屏幕保持全宽，避免过窄 */
+    /* 小屏保持全宽且取消额外缩进/负距，避免遮挡 */
     .greeting,
     .ask-box,
     .card {
       width: 100%;
-      margin-left: 0;
+      margin: 0 0 1rem;
+    }
+
+    .greeting {
+      margin-bottom: 0.25rem;
     }
   }
 </style>
