@@ -32,7 +32,7 @@ const {
 
 <script is:inline define:vars={{ manualToc }}>
   // 内联 TOC 实现 - 不依赖外部模块，直接执行
-  (function() {
+  ;(function () {
     if (manualToc) {
       // 由外层布局手动控制 TOC
       return
@@ -50,7 +50,10 @@ const {
 
     for (var i = 0; i < headings.length; i++) {
       var h2 = headings[i]
-      var id = h2.id || (h2.textContent || '').trim().toLowerCase().replace(/\s+/g, '-') || 'section-' + i
+      var id =
+        h2.id ||
+        (h2.textContent || '').trim().toLowerCase().replace(/\s+/g, '-') ||
+        'section-' + i
       if (!h2.id) h2.id = id
 
       var link = document.createElement('a')
@@ -59,8 +62,8 @@ const {
       link.title = h2.textContent || id
       link.className = 'toc-link toc-2'
       link.setAttribute('data-id', id)
-      ;(function(targetId) {
-        link.addEventListener('click', function(e) {
+      ;(function (targetId) {
+        link.addEventListener('click', function (e) {
           e.preventDefault()
           var target = document.getElementById(targetId)
           if (target) {
@@ -92,22 +95,25 @@ const {
     }
 
     if (headingEls.length > 0 && typeof IntersectionObserver !== 'undefined') {
-      var observer = new IntersectionObserver(function(entries) {
-        if (Date.now() < clickLockUntil) return
-        var best = null
-        for (var k = 0; k < entries.length; k++) {
-          var en = entries[k]
-          if (!best || en.intersectionRatio > best.intersectionRatio) {
-            best = en
+      var observer = new IntersectionObserver(
+        function (entries) {
+          if (Date.now() < clickLockUntil) return
+          var best = null
+          for (var k = 0; k < entries.length; k++) {
+            var en = entries[k]
+            if (!best || en.intersectionRatio > best.intersectionRatio) {
+              best = en
+            }
           }
-        }
-        if (best && best.target && best.target.id) {
-          setActive(best.target.id)
-        }
-      }, {
-        rootMargin: '-40% 0px -55% 0px',
-        threshold: [0, 0.25, 0.5, 0.75, 1]
-      })
+          if (best && best.target && best.target.id) {
+            setActive(best.target.id)
+          }
+        },
+        {
+          rootMargin: '-40% 0px -55% 0px',
+          threshold: [0, 0.25, 0.5, 0.75, 1],
+        },
+      )
 
       for (var m = 0; m < headingEls.length; m++) {
         observer.observe(headingEls[m].el)
@@ -121,7 +127,7 @@ const {
     }
 
     // 检查 TOC 是否为空，如果为空则隐藏整个 toc-panel
-    requestAnimationFrame(function() {
+    requestAnimationFrame(function () {
       var tocNav = document.querySelector('.toc-nav')
       var tocPanel = document.querySelector('.toc-panel')
       if (tocNav && tocPanel && tocNav.children.length === 0) {

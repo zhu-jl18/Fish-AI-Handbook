@@ -4,7 +4,6 @@
  */
 import { execSync } from 'node:child_process'
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
-import { join } from 'node:path'
 
 // ============ Types ============
 
@@ -34,7 +33,7 @@ export function getRecentCommits(count: number = MAX_COMMITS): CommitInfo[] {
     // 格式: hash|date|message
     const output = execSync(
       `git log -${count} --pretty=format:"%H|%ad|%s" --date=short`,
-      { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'pipe'] }
+      { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'pipe'] },
     )
 
     return output
@@ -107,7 +106,9 @@ ${messages.map((m, i) => `${i + 1}. ${m}`).join('\n')}
   try {
     // 确保 URL 格式正确
     const baseUrl = apiUrl.endsWith('/') ? apiUrl.slice(0, -1) : apiUrl
-    const endpoint = baseUrl.includes('/v1') ? `${baseUrl}/chat/completions` : `${baseUrl}/v1/chat/completions`
+    const endpoint = baseUrl.includes('/v1')
+      ? `${baseUrl}/chat/completions`
+      : `${baseUrl}/v1/chat/completions`
 
     const response = await fetch(endpoint, {
       method: 'POST',
@@ -176,4 +177,3 @@ export async function getChangelog(): Promise<CommitInfo[]> {
     summary: cache[commit.hash] || commit.message,
   }))
 }
-

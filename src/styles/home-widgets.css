@@ -95,7 +95,8 @@
   gap: 0.6rem;
   padding: 0.5rem;
   border-radius: 6px;
-  transition: background-color var(--motion-duration-xs) var(--motion-ease-standard);
+  transition: background-color var(--motion-duration-xs)
+    var(--motion-ease-standard);
 }
 
 .todo-item:hover,
@@ -292,4 +293,3 @@
     transform: rotate(360deg);
   }
 }
-

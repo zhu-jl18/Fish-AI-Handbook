@@ -517,10 +517,8 @@ const defaultContributor = siteConfig.defaultContributor
       headings.forEach(function (h2) {
         var baseId =
           h2.id ||
-          (h2.textContent || '')
-            .trim()
-            .toLowerCase()
-            .replace(/\s+/g, '-') || 'section'
+          (h2.textContent || '').trim().toLowerCase().replace(/\s+/g, '-') ||
+          'section'
         if (!h2.id) h2.id = baseId
         var link = document.createElement('a')
         link.href = '#' + encodeURIComponent(baseId)
@@ -588,7 +586,10 @@ const defaultContributor = siteConfig.defaultContributor
           })
         })
         .catch(function (error) {
-          console.error('[TOC] Failed to load /scripts/toc.js (tabs), using fallback:', error)
+          console.error(
+            '[TOC] Failed to load /scripts/toc.js (tabs), using fallback:',
+            error,
+          )
           var activePanel = document.querySelector(
             '.content-tab-panel:not([hidden])',
           )
