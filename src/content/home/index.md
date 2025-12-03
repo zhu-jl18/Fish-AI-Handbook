@@ -3,10 +3,8 @@
 # 你只需要修改这个 frontmatter，就能控制首页展示的内容
 
 todos:
-  - text:  add QA Bot
-    href: '/concepts/core-concepts'
-  - text:  Write Augment Low-price Guide
-    href: '/prompts/foundations'
+  - text: add QA Bot
+  - text: Write Augment Low-price Guide
 
 readings:
   - text: 'Prompt foundations：基础原则'
