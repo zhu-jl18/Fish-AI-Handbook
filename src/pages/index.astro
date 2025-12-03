@@ -125,14 +125,14 @@ const {
                         >
                           <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
                           <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z" />
-                    </svg>
-                  </span>
-                  <div class="item-main">
-                    <span class="item-title">{item.text}</span>
-                    {item.meta && <p class="item-meta">{item.meta}</p>}
-                  </div>
-                </li>
-              ))}
+                        </svg>
+                      </span>
+                      <div class="item-main">
+                        <span class="item-title">{item.text}</span>
+                        {item.meta && <p class="item-meta">{item.meta}</p>}
+                      </div>
+                    </li>
+                  ))}
                 </ul>
               )
             }
@@ -213,8 +213,8 @@ const {
     display: flex;
     align-items: center;
     gap: 0; /* 图标与文字更贴近 */
-    width: 85%;
-    margin: 0 0 -0.6rem; /* 更大的负 margin，让 greeting 与 chatbox 更紧凑 */
+    width: min(100%, var(--content-max-width));
+    margin: 0 auto -0.6rem; /* 居中且更紧凑 */
   }
 
   .greeting-icon {
@@ -239,8 +239,8 @@ const {
     border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 12px; /* 更接近 GitHub 卡片造型 */
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
-    width: 85%; /* 真正占据列宽的 85% */
-    margin: 0 0 2rem; /* 左对齐，与 greeting 一致 */
+    width: min(100%, var(--content-max-width));
+    margin: 0 auto 2rem; /* 居中，与 greeting 一致 */
   }
 
   .ask-input-area {
@@ -335,9 +335,12 @@ const {
   .home-layout {
     display: grid;
     /* 左列尽可能宽，右列固定窄栏（更接近 GitHub Dashboard） */
-    grid-template-columns: 1fr 280px;
-    gap: 3rem; /* 左右列之间更宽的间距 */
+    grid-template-columns: minmax(0, var(--content-max-width)) var(--sidebar-width);
+    gap: clamp(2rem, 4vw, 3.5rem); /* 左右列之间更宽的间距，随视口微调 */
     align-items: start;
+    max-width: calc(var(--content-max-width) + var(--sidebar-width) + clamp(2rem, 4vw, 3.5rem)); /* 以两列总宽为基准整体居中 */
+    margin: 0 auto;
+    justify-content: center; /* 将整体网格居中，主列视觉居中 */
   }
 
   .home-column-main {
@@ -345,15 +348,19 @@ const {
     flex-direction: column;
     gap: 1.25rem; /* 模块之间略微拉开 */
     min-width: 0; /* 防止内容溢出 */
-    max-width: 980px; /* 仅收窄左侧主内容宽度，右侧 changelog 位置不变 */
-    margin: 0 0 0 6.5rem; /*greeting chatbox todolist and readinglist 左右布局位置*/
+    max-width: var(--content-max-width); /* 使用全局内容宽度令牌 */
+    width: 100%;
+    justify-self: center; /* 让主列在网格内居中 */
+    align-items: center; /* 子项以自身宽度居中，不再贴边 */
   }
 
   .home-column-aside {
     position: sticky; /* 滚动时固定在顶部 */
     top: 1rem;
     align-self: start;
-    margin-left: -3.05rem; /* 向左收紧，使其与顶部搜索框左侧对齐 */
+    width: 100%;
+    max-width: var(--sidebar-width);
+    justify-self: start; /* 与网格起始线对齐，避免硬编码负边距 */
   }
 
   /* ========== GitHub 风格大卡片 ========== */
@@ -363,8 +370,8 @@ const {
     border: none;
     border-radius: 0;
     overflow: visible;
-    width: 85%; /* 与 chatbox 一致缩放 */
-    margin: 0 0 0.25rem; /* 左对齐，列表之间保留少量间距 */
+    width: min(100%, var(--content-max-width));
+    margin: 0 auto 0.25rem; /* 居中，列表之间保留少量间距 */
   }
 
   .card-header {
