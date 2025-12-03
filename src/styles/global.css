@@ -426,6 +426,10 @@ h2 {
   font-size: var(--heading-h2-size);
   margin-top: var(--heading-h2-margin-top);
   margin-bottom: var(--heading-h2-margin-bottom);
+}
+
+/* h2 分隔线仅在正文内容区显示 */
+.content-inner h2 {
   border-bottom: var(--heading-h2-border);
   padding-bottom: var(--heading-h2-padding-bottom);
 }

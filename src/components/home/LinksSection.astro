@@ -52,22 +52,15 @@ const display = Array.isArray(links) ? links : []
 
   .links-header {
     padding: 0 0 0.4rem;
-    border-bottom: none !important; /* 强制去除横线 */
     background: transparent;
     box-shadow: none;
   }
 
   .links-title {
-    border: none !important;
-    box-shadow: none !important;
+    border: none;
+    box-shadow: none;
     padding-bottom: 0;
-  }
-
-  .links-title::after,
-  .links-title::before,
-  .links-header::after,
-  .links-header::before {
-    content: none !important;
+    margin: 0;
   }
 
   .links-title {
