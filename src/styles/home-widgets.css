@@ -261,7 +261,7 @@
   background: var(--header-accent);
   border: none;
   border-radius: 6px;
-  color: #0a0b0d;
+  color: var(--bg-color);
   cursor: pointer;
   transition: opacity var(--motion-duration-xs) var(--motion-ease-standard);
 }

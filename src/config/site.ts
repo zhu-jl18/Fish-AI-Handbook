@@ -116,13 +116,13 @@ export const CONTRIBUTORS_MAP: Record<string, ContributorInfo> = {
     username: 'gemini',
     name: 'Gemini',
     link: 'https://github.com/google-gemini',
-    avatar: 'https://avatars.githubusercontent.com/u/161781182?s=48&v=4',
+    avatar: 'https://media.makomako.dpdns.org/images/2025/12/gemini-color',
   },
   glm: {
     username: 'glm',
     name: 'GLM',
     link: 'https://github.com/zai-org',
-    avatar: 'https://media.makomako.dpdns.org/images/2025/11/zhipu',
+    avatar: 'https://media.makomako.dpdns.org/images/2025/12/zhipu-color',
   },
   minimax: {
     username: 'minimax',
@@ -134,7 +134,7 @@ export const CONTRIBUTORS_MAP: Record<string, ContributorInfo> = {
     username: 'kimi',
     name: 'Kimi',
     link: 'https://github.com/MoonshotAI',
-    avatar: 'https://media.makomako.dpdns.org/images/2025/11/moonshot-dark',
+    avatar: 'https://media.makomako.dpdns.org/images/2025/12/moonshot',
   },
   doubao: {
     username: 'doubao',
