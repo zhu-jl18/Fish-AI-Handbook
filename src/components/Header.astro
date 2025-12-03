@@ -6,6 +6,7 @@ import {
 } from '../config/index'
 import SearchDrawer from './SearchDrawer.astro'
 import NotificationPopover from './NotificationPopover.astro'
+import ThemeToggle from './ThemeToggle.astro'
 
 const { currentPage } = Astro.props
 const notifications = getEnabledNotifications()
@@ -57,6 +58,7 @@ const notifications = getEnabledNotifications()
             <span class="search-label">{siteConfig.searchLabel}</span>
             <kbd class="search-shortcut">/</kbd>
           </button>
+          <ThemeToggle />
           <a
             href={siteConfig.chatBotUrl}
             target="_blank"
@@ -241,7 +243,7 @@ const notifications = getEnabledNotifications()
 <style>
   .header {
     position: static;
-    background: transparent;
+    background: var(--header-bg, transparent);
     border-bottom: 1px solid var(--header-divider);
   }
   .nav {
