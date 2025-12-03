@@ -14,16 +14,6 @@ if (!homeEntry) {
 
 const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
   homeEntry.data
-
-// 根据时间生成问候语
-function getGreeting(): string {
-  const hour = new Date().getHours()
-  if (hour < 6) return 'Good night'
-  if (hour < 12) return 'Good morning'
-  if (hour < 18) return 'Good afternoon'
-  return 'Good evening'
-}
-const greeting = getGreeting()
 ---
 
 <BaseLayout title="Home">
@@ -56,7 +46,7 @@ const greeting = getGreeting()
               <path d="M9 13v2"></path>
             </svg>
           </span>
-          <span class="greeting-text">{greeting}!</span>
+          <span id="greeting-text" class="greeting-text">Hello!</span>
         </div>
 
         <!-- Ask Box（GitHub Copilot 风格） -->
@@ -501,3 +491,19 @@ const greeting = getGreeting()
     }
   }
 </style>
+
+<script is:inline>
+  const el = document.getElementById('greeting-text')
+  if (el) {
+    const hour = new Date().getHours()
+    const greeting =
+      hour < 6
+        ? 'Good night'
+        : hour < 12
+          ? 'Good morning'
+          : hour < 18
+            ? 'Good afternoon'
+            : 'Good evening'
+    el.textContent = `${greeting}!`
+  }
+</script>
