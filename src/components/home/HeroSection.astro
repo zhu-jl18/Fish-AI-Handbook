@@ -1,0 +1,129 @@
+---
+/**
+ * 首页 Hero 区域
+ * 展示站点标题和简介
+ */
+import { siteConfig } from '../../config/index'
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">
+      <span class="hero-icon">🐟</span>
+      {siteConfig.title}
+    </h1>
+    <p class="hero-description">
+      探索 AI 使用模式的快速参考指南，涵盖提示词工程、AI 工具实践与前沿技术。
+    </p>
+    <div class="hero-links">
+      <a href="/concepts" class="hero-link primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+        </svg>
+        开始阅读
+      </a>
+      <a href="/prompts" class="hero-link secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+        </svg>
+        提示词技巧
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 3rem 0 2rem;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text-white);
+    margin: 0 0 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .hero-icon {
+    font-size: 1.75rem;
+  }
+
+  .hero-description {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all var(--motion-duration-sm) var(--motion-ease-standard);
+  }
+
+  .hero-link.primary {
+    background: var(--header-accent);
+    color: #0a0b0d;
+    border: 1px solid transparent;
+  }
+
+  .hero-link.primary:hover {
+    opacity: 0.9;
+  }
+
+  .hero-link.secondary {
+    background: transparent;
+    color: var(--header-text);
+    border: 1px solid var(--header-accent-border);
+  }
+
+  .hero-link.secondary:hover {
+    color: var(--header-text-strong);
+    border-color: var(--header-accent-border-strong);
+    background: var(--header-pill-hover);
+  }
+
+  .hero-link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 2rem 0 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 1.5rem;
+    }
+
+    .hero-description {
+      font-size: 0.95rem;
+    }
+  }
+</style>
+

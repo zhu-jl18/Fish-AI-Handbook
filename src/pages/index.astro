@@ -1,26 +1,497 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Header from '../components/Header.astro'
+import ChangelogSection from '../components/home/ChangelogSection.astro'
+import { frontmatter as homeFrontmatter } from '../content/home/index.md'
+
+type HomeItem = { text: string; href?: string; meta?: string }
+
+const todos = (homeFrontmatter.todos ?? []) as HomeItem[]
+const readings = (homeFrontmatter.readings ?? []) as HomeItem[]
+
+// 根据时间生成问候语
+function getGreeting(): string {
+  const hour = new Date().getHours()
+  if (hour < 6) return 'Good night'
+  if (hour < 12) return 'Good morning'
+  if (hour < 18) return 'Good afternoon'
+  return 'Good evening'
+}
+const greeting = getGreeting()
 ---
 
-<BaseLayout title="首页">
+<BaseLayout title="Home">
   <Header currentPage="home" />
 
-  <main id="main-content" class="main-content"></main>
+  <main id="main-content" class="home-main">
+    <section class="home-layout">
+      <!-- 左侧主内容区 -->
+      <div class="home-column-main">
+        <!-- 问候区域（GitHub 风格） -->
+        <div class="greeting">
+          <span class="greeting-icon">
+            <!-- 复用 Header 中的 Chat Bot 机器人图标 -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 8V4H8"></path>
+              <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+              <path d="M2 14h2"></path>
+              <path d="M20 14h2"></path>
+              <path d="M15 13v2"></path>
+              <path d="M9 13v2"></path>
+            </svg>
+          </span>
+          <span class="greeting-text">{greeting}!</span>
+        </div>
+
+        <!-- Ask Box（GitHub Copilot 风格） -->
+        <div class="ask-box">
+          <div class="ask-input-area">
+            <input
+              type="text"
+              id="ask-input"
+              class="ask-input"
+              placeholder="Ask anything"
+            />
+          </div>
+          <div class="ask-toolbar">
+            <button class="ask-context-btn" type="button">
+              <span class="ask-plus">+</span>
+              <span>Add repositories, files, and spaces</span>
+            </button>
+            <div class="ask-right">
+              <button class="ask-model-btn" type="button">
+                <span>DeepSeek</span>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M4.427 7.427l3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 7H4.604a.25.25 0 0 0-.177.427Z"
+                  ></path>
+                </svg>
+              </button>
+              <button class="ask-send-btn" type="button" aria-label="Send">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M.989 8 .064 2.68a1.342 1.342 0 0 1 1.85-1.462l13.402 5.744a1.13 1.13 0 0 1 0 2.076L1.913 14.782a1.343 1.343 0 0 1-1.85-1.463L.99 8Zm.603-5.288L2.38 7.25h4.87a.75.75 0 0 1 0 1.5H2.38l-.788 4.538L13.929 8Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 待办事项卡片 -->
+        <section class="card">
+          <header class="card-header">
+            <h2 class="card-title">Todo list</h2>
+            <div class="card-actions">
+              <a href="#" class="card-link">View all</a>
+            </div>
+          </header>
+          <div class="card-body">
+            {
+              todos.length === 0 ? (
+                <p class="card-empty">
+                  No items found, try a different filter.
+                </p>
+              ) : (
+                <ul class="card-list">
+                  {todos.map((item) => (
+                    <li class="card-list-item">
+                      <span class="item-icon item-icon--todo">
+                        <svg
+                          viewBox="0 0 16 16"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                        >
+                          <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
+                          <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z" />
+                        </svg>
+                      </span>
+                      <div class="item-main">
+                        {item.href ? (
+                          <a href={item.href} class="item-title">
+                            {item.text}
+                          </a>
+                        ) : (
+                          <span class="item-title">{item.text}</span>
+                        )}
+                        {item.meta && <p class="item-meta">{item.meta}</p>}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )
+            }
+          </div>
+        </section>
+
+        <!-- 阅读清单卡片 -->
+        <section class="card">
+          <header class="card-header">
+            <h2 class="card-title">Reading list</h2>
+            <div class="card-actions">
+              <a href="#" class="card-link">View all</a>
+            </div>
+          </header>
+          <div class="card-body">
+            {
+              readings.length === 0 ? (
+                <p class="card-empty">
+                  No items found, try a different filter.
+                </p>
+              ) : (
+                <ul class="card-list">
+                  {readings.map((item) => (
+                    <li class="card-list-item">
+                      <span class="item-icon item-icon--reading">
+                        <svg
+                          viewBox="0 0 16 16"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                        >
+                          <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
+                          <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z" />
+                        </svg>
+                      </span>
+                      <div class="item-main">
+                        {item.href ? (
+                          <a href={item.href} class="item-title">
+                            {item.text}
+                          </a>
+                        ) : (
+                          <span class="item-title">{item.text}</span>
+                        )}
+                        {item.meta && <p class="item-meta">{item.meta}</p>}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )
+            }
+          </div>
+        </section>
+      </div>
+
+      <!-- 右侧边栏 -->
+      <aside class="home-column-aside">
+        <ChangelogSection />
+      </aside>
+    </section>
+  </main>
 </BaseLayout>
 
 <style>
-  .main-content {
-    max-width: 1200px;
+  /* ========== 主容器 ========== */
+  .home-main {
+    /* 使用与 Header 相同的内容宽度与左右留白，让布局更“铺开” */
+    max-width: var(--layout-max-width);
+    width: 100%;
     margin: 0 auto;
-    padding: clamp(3rem, 6vw, 5.5rem) 2rem;
+    padding: 1.5rem calc(var(--layout-gap) + 1rem) 3rem;
+    padding-left: calc(var(--layout-gap) + 0.35rem);
     flex: 1;
-    margin-top: 60px;
   }
 
-  @media (max-width: 768px) {
-    .main-content {
-      padding: 2rem 1rem;
+  /* ========== 问候区域（GitHub 风格） ========== */
+  .greeting {
+    display: flex;
+    align-items: center;
+    gap: 0; /* 图标与文字更贴近 */
+    width: 85%;
+    margin: 0 0 -0.6rem; /* 更大的负 margin，让 greeting 与 chatbox 更紧凑 */
+  }
+
+  .greeting-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px; /* 在之前基础上放大约 1.5 倍 */
+    height: 54px;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+
+  .greeting-text {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-text-white);
+  }
+
+  /* ========== Ask Box（GitHub Copilot 风格） ========== */
+  .ask-box {
+    background: var(--bg-color);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 12px; /* 更接近 GitHub 卡片造型 */
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+    width: 85%; /* 真正占据列宽的 85% */
+    margin: 0 0 2rem; /* 左对齐，与 greeting 一致 */
+  }
+
+  .ask-input-area {
+    padding: 1.65rem 1.25rem 2.55rem; /* 在之前基础上高度约 1.5 倍 */
+  }
+
+  .ask-input {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 0.875rem;
+    color: var(--text-color);
+    line-height: 1.5;
+  }
+
+  .ask-input::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  .ask-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem 0.9rem;
+  }
+
+  .ask-context-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+
+  .ask-context-btn:hover {
+    color: var(--link-color);
+  }
+
+  .ask-plus {
+    font-weight: 500;
+  }
+
+  .ask-right {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .ask-model-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+
+  .ask-model-btn:hover {
+    color: var(--link-color);
+  }
+
+  .ask-send-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+
+  .ask-send-btn:hover {
+    color: var(--color-text-white);
+  }
+
+  /* ========== 双列布局（GitHub 风格） ========== */
+  .home-layout {
+    display: grid;
+    /* 左列尽可能宽，右列固定窄栏（更接近 GitHub Dashboard） */
+    grid-template-columns: 1fr 280px;
+    gap: 3rem; /* 左右列之间更宽的间距 */
+    align-items: start;
+  }
+
+  .home-column-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem; /* 模块之间略微拉开 */
+    min-width: 0; /* 防止内容溢出 */
+    max-width: 980px; /* 仅收窄左侧主内容宽度，右侧 changelog 位置不变 */
+    margin: 0 0 0 6.5rem; /*greeting chatbox todolist and readinglist 左右布局位置*/
+  }
+
+  .home-column-aside {
+    position: sticky; /* 滚动时固定在顶部 */
+    top: 1rem;
+    align-self: start;
+  }
+
+  /* ========== GitHub 风格大卡片 ========== */
+  .card {
+    /* 去掉外边框和明显背景，只保留列表项之间的细线 */
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+    width: 85%; /* 与 chatbox 一致缩放 */
+    margin: 0 0 0.25rem; /* 左对齐，列表之间保留少量间距 */
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4rem 0.1rem 0.55rem;
+    background: transparent;
+    border-bottom: none;
+  }
+
+  .card-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-white);
+    margin: 0;
+  }
+
+  .card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .card-link {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .card-link:hover {
+    color: var(--link-color);
+    text-decoration: underline;
+  }
+
+  .card-body {
+    padding: 0.1rem 0;
+  }
+
+  .card-empty {
+    padding: 1rem;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* ========== 卡片列表 ========== */
+  .card-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .card-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.9rem 0.1rem; /* 稍微拉开每一行的上下间距，接近 GitHub */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07); /* 只保留这一条细线 */
+  }
+
+  .card-list-item:last-child {
+    border-bottom: none;
+  }
+
+  .item-icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    color: #3fb950;
+  }
+
+  .item-icon--reading {
+    color: #a371f7;
+  }
+
+  .item-main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .item-title {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-white);
+    text-decoration: none;
+    line-height: 1.4;
+  }
+
+  a.item-title:hover {
+    color: var(--link-color);
+    text-decoration: underline;
+  }
+
+  .item-meta {
+    margin: 0.25rem 0 0;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+
+  /* ========== 响应式 ========== */
+  @media (max-width: 1012px) {
+    .home-main {
+      padding: 1rem 1rem 2.5rem;
+    }
+
+    .home-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .home-column-aside {
+      order: -1;
+    }
+
+    /* 小屏幕保持全宽，避免过窄 */
+    .greeting,
+    .ask-box,
+    .card {
+      width: 100%;
+      margin-left: 0;
     }
   }
 </style>
