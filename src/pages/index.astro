@@ -125,20 +125,14 @@ const {
                         >
                           <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
                           <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z" />
-                        </svg>
-                      </span>
-                      <div class="item-main">
-                        {item.href ? (
-                          <a href={item.href} class="item-title">
-                            {item.text}
-                          </a>
-                        ) : (
-                          <span class="item-title">{item.text}</span>
-                        )}
-                        {item.meta && <p class="item-meta">{item.meta}</p>}
-                      </div>
-                    </li>
-                  ))}
+                    </svg>
+                  </span>
+                  <div class="item-main">
+                    <span class="item-title">{item.text}</span>
+                    {item.meta && <p class="item-meta">{item.meta}</p>}
+                  </div>
+                </li>
+              ))}
                 </ul>
               )
             }
@@ -146,7 +140,7 @@ const {
         </section>
 
         <!-- 阅读清单卡片 -->
-        <section class="card">
+        <section class="card card-reading">
           <header class="card-header">
             <h2 class="card-title">Reading list</h2>
             <div class="card-actions">
@@ -211,6 +205,7 @@ const {
     padding: 1.5rem calc(var(--layout-gap) + 1rem) 3rem;
     padding-left: calc(var(--layout-gap) + 0.35rem);
     flex: 1;
+    --link-brand: #4493f8;
   }
 
   /* ========== 问候区域（GitHub 风格） ========== */
@@ -463,7 +458,12 @@ const {
 
   a.item-title:hover {
     color: var(--link-color);
-    text-decoration: underline;
+    text-decoration: none;
+  }
+
+  .card-reading .item-title:hover {
+    color: var(--link-brand);
+    text-decoration: none;
   }
 
   .item-meta {

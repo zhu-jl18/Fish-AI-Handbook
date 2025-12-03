@@ -43,6 +43,7 @@ const display = Array.isArray(links) ? links : []
 
 <style>
   .links {
+    --link-brand: #4493f8;
     background: transparent;
     border: none;
     border-radius: 0;
@@ -136,8 +137,8 @@ const display = Array.isArray(links) ? links : []
   }
 
   .links-name a:hover {
-    color: var(--link-hover-color);
-    text-decoration: underline;
+    color: var(--link-brand);
+    text-decoration: none;
   }
 
   .links-name {
