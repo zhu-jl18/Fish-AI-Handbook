@@ -6,6 +6,9 @@ contributors:
   - gemini
 ---
 
+The release Timeline: [2025 LLM Horizon](https://2025-llm-horizon.zeabur.app/)
+
+
 ## Big Three Aboard
 
 But wait... why are there four?
