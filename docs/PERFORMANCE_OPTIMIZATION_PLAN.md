@@ -2,7 +2,7 @@
 
 > 创建日期: 2025-12-04
 > 更新日期: 2025-12-04
-> 状态: Phase 1 + Phase 2.2 已完成
+> 状态: Phase 1 + Phase 2 + Phase 3 已完成
 > 预期收益: FCP 15-25%↑, TBT 20-30%↑, LCP 10-20%↑
 
 ---
@@ -255,11 +255,11 @@ input?.addEventListener('keyup', (e) => {
 
 ---
 
-### Phase 3: CSS/字体优化 (中等风险)
+### Phase 3: CSS/字体优化 (中等风险) ✅ 已完成
 
-#### 3.1 KaTeX CSS 条件加载
+#### 3.1 KaTeX CSS 条件加载 ✅
 
-**方案 A: Frontmatter 标记**
+**方案: Frontmatter 标记**
 
 在使用数学公式的 4 个文件中添加：
 
@@ -290,11 +290,10 @@ const hasMath = entry?.data?.hasMath ?? false
 )}
 ```
 
-**需要标记的文件 (4个):**
-1. `src/content/docs/01-concepts/model-params/temperature-top-p-k.md`
-2. `src/content/docs/01-concepts/benchmark/index.md`
-3. `src/content/docs/03-prompts/index.md`
-4. `src/content/docs/01-concepts/model-params/index.md`
+**已标记的文件 (3个，benchmark 无数学公式):**
+1. ✅ `src/content/docs/01-concepts/model-params/temperature-top-p-k.md`
+2. ✅ `src/content/docs/03-prompts/index.md`
+3. ✅ `src/content/docs/01-concepts/model-params/index.md`
 
 **预期收益:** ~28KB CSS 节省 (95% 页面)
 
