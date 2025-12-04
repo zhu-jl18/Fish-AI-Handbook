@@ -335,10 +335,14 @@ const {
   .home-layout {
     display: grid;
     /* 左列尽可能宽，右列固定窄栏（更接近 GitHub Dashboard） */
-    grid-template-columns: minmax(0, var(--content-max-width)) var(--sidebar-width);
+    grid-template-columns: minmax(0, var(--content-max-width)) var(
+        --sidebar-width
+      );
     gap: clamp(2rem, 4vw, 3.5rem); /* 左右列之间更宽的间距，随视口微调 */
     align-items: start;
-    max-width: calc(var(--content-max-width) + var(--sidebar-width) + clamp(2rem, 4vw, 3.5rem)); /* 以两列总宽为基准整体居中 */
+    max-width: calc(
+      var(--content-max-width) + var(--sidebar-width) + clamp(2rem, 4vw, 3.5rem)
+    ); /* 以两列总宽为基准整体居中 */
     margin: 0 auto;
     justify-content: center; /* 将整体网格居中，主列视觉居中 */
   }

@@ -66,7 +66,10 @@ const home = defineCollection({
           text: z.string(),
           href: z
             .string()
-            .regex(/^(\/|https?:\/\/)/, 'href must start with "/" or "http(s)://"')
+            .regex(
+              /^(\/|https?:\/\/)/,
+              'href must start with "/" or "http(s)://"',
+            )
             .optional(),
           meta: z.string().optional(),
         }),
