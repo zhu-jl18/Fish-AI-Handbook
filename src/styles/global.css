@@ -1,4 +1,4 @@
-@import 'katex/dist/katex.min.css';
+/* KaTeX CSS moved to conditional loading - see ContentLayout.astro */
 
 /* 暗色主题 - 统一设计令牌 */
 :root {

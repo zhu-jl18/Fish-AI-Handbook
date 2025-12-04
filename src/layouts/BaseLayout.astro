@@ -3,10 +3,11 @@ import '../styles/global.css'
 import { siteConfig, getRobotsContent } from '../config/index'
 import Footer from '../components/Footer.astro'
 
-const { title, bodyClass, contributors } = Astro.props as {
+const { title, bodyClass, contributors, hasMath } = Astro.props as {
   title?: string
   bodyClass?: string
   contributors?: string[]
+  hasMath?: boolean
 }
 const pageTitle = title
   ? `${title} - ${siteConfig.titleFull}`
@@ -82,6 +83,9 @@ const contributorsContent = contributors?.length ? contributors.join(',') : ''
     />
 
     <!-- 已移除外部 Google Fonts 引用，使用系统英文栈与本地中文字体 -->
+
+    <!-- KaTeX CSS - 仅在需要数学公式的页面加载 -->
+    {hasMath && <link rel="stylesheet" href="/katex/katex.min.css" />}
 
     <!-- 主题初始化脚本（防止闪烁） -->
     <script is:inline>
