@@ -3,10 +3,11 @@ import '../styles/global.css'
 import { siteConfig, getRobotsContent } from '../config/index'
 import Footer from '../components/Footer.astro'
 
-const { title, bodyClass, contributors } = Astro.props as {
+const { title, bodyClass, contributors, hasMath } = Astro.props as {
   title?: string
   bodyClass?: string
   contributors?: string[]
+  hasMath?: boolean
 }
 const pageTitle = title
   ? `${title} - ${siteConfig.titleFull}`
@@ -62,6 +63,8 @@ const contributorsContent = contributors?.length ? contributors.join(',') : ''
       href="https://media.makomako.dpdns.org"
       crossorigin
     />
+    <link rel="preconnect" href="https://static.woshipm.com" crossorigin />
+    <link rel="preconnect" href="https://framerusercontent.com" crossorigin />
 
     <!-- 自托管中文字体预加载（已使用 woff2 子集） -->
     <link
@@ -81,13 +84,19 @@ const contributorsContent = contributors?.length ? contributors.join(',') : ''
 
     <!-- 已移除外部 Google Fonts 引用，使用系统英文栈与本地中文字体 -->
 
+    <!-- KaTeX CSS - 仅在需要数学公式的页面加载 -->
+    {hasMath && <link rel="stylesheet" href="/katex/katex.min.css" />}
+
     <!-- 主题初始化脚本（防止闪烁） -->
     <script is:inline>
       ;(function () {
         const stored = localStorage.getItem('theme-preference')
         if (stored === 'light') {
           document.documentElement.setAttribute('data-theme', 'light')
-        } else if (!stored && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        } else if (
+          !stored &&
+          window.matchMedia('(prefers-color-scheme: light)').matches
+        ) {
           document.documentElement.setAttribute('data-theme', 'light')
         }
       })()
@@ -99,7 +108,10 @@ const contributorsContent = contributors?.length ? contributors.join(',') : ''
       html.theme-transition *,
       html.theme-transition *::before,
       html.theme-transition *::after {
-        transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
+        transition:
+          background-color 0.3s ease,
+          border-color 0.3s ease,
+          color 0.3s ease !important;
         transition-delay: 0s !important;
       }
     </style>
@@ -108,9 +120,23 @@ const contributorsContent = contributors?.length ? contributors.join(',') : ''
     <a href="#main-content" class="skip-link">跳到正文</a>
     <slot />
     <Footer />
-    <script is:inline type="module" src="/scripts/lightbox.js"></script>
-    <script is:inline type="module" src="/scripts/spoiler.js"></script>
-    <script is:inline type="module" src="/scripts/relative-time.js"></script>
+    <!-- Conditional script loading for performance -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Lightbox: only load when page has images in content area
+        if (document.querySelector('.content-inner img')) {
+          import('/scripts/lightbox.js')
+        }
+        // Spoiler: only load when page has spoiler elements
+        if (document.querySelector('.spoiler')) {
+          import('/scripts/spoiler.js')
+        }
+        // Relative-time: load after DOM ready (non-critical)
+        if (document.querySelector('[data-timestamp]')) {
+          import('/scripts/relative-time.js')
+        }
+      })
+    </script>
     <script is:inline src="/scripts/theme-toggle.js"></script>
   </body>
 </html>

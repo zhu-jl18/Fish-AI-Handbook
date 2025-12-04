@@ -11,12 +11,36 @@ import remarkGalleryDirective from './src/plugins/remark-gallery-directive.js'
 import remarkSpoilerDirective from './src/plugins/remark-spoiler-directive.js'
 import remarkMarkDirective from './src/plugins/remark-mark-directive.js'
 import { remarkModifiedTime } from './src/plugins/remark-frontmatter-last-modified.mjs'
+import remarkLazyImages from './src/plugins/remark-lazy-images.js'
 import rehypeKatex from 'rehype-katex'
 
 export default defineConfig({
   site: siteConfig.url,
   title: siteConfig.title,
   output: 'static',
+  image: {
+    // 远程图片域名配置 - 新增图床时需同步更新此列表
+    // 查找遗漏:
+    //   Get-ChildItem -Path src/content -Recurse -Filter "*.md" |
+    //     Select-String -Pattern 'https?://[^\s)]+\.(png|jpg|gif|webp|svg)' -AllMatches |
+    //     ForEach-Object { $_.Matches | ForEach-Object { ([uri]$_.Value).Host } } |
+    //     Sort-Object -Unique
+    domains: [
+      // 自建图床
+      'media.makomako.dpdns.org',
+      // 第三方图床
+      'p.sda1.dev',
+      'static.woshipm.com',
+      'miro.medium.com',
+      'cloud.starkinsider.com',
+      // GitHub 相关
+      'avatars.githubusercontent.com',
+      'raw.githubusercontent.com',
+      // 其他 CDN
+      'framerusercontent.com',
+      'registry.npmmirror.com',
+    ],
+  },
   markdown: {
     smartypants: false,
     remarkPlugins: [
@@ -27,6 +51,7 @@ export default defineConfig({
       remarkSpoilerDirective,
       remarkMarkDirective,
       remarkModifiedTime,
+      remarkLazyImages,
     ],
     rehypePlugins: [rehypeKatex],
   },
@@ -37,7 +62,9 @@ export default defineConfig({
       styleOverrides: codeConfig.styleOverrides,
       frames: codeConfig.frames,
     }),
-    mdx(),
+    mdx({
+      optimize: true,
+    }),
     sitemap(),
     preact(),
   ],

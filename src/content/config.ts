@@ -24,6 +24,8 @@ const docs = defineCollection({
     tab: tabSchema.optional(),
     /** Internal field set during build - identifies content as non-index tab file */
     _isTabVariant: z.boolean().optional(),
+    /** Whether this page uses math notation (KaTeX) - enables conditional CSS loading */
+    hasMath: z.boolean().optional(),
   }),
 })
 
@@ -66,7 +68,10 @@ const home = defineCollection({
           text: z.string(),
           href: z
             .string()
-            .regex(/^(\/|https?:\/\/)/, 'href must start with "/" or "http(s)://"')
+            .regex(
+              /^(\/|https?:\/\/)/,
+              'href must start with "/" or "http(s)://"',
+            )
             .optional(),
           meta: z.string().optional(),
         }),
