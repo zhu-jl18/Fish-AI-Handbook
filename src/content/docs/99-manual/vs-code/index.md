@@ -1,37 +1,29 @@
 ---
-title: VS Code配置
-description: VsCode的基础配置与使用。
+title: VS Code
+description: VS Code 配置与使用指南
 ---
 
-> 大声告诉我谁是宇宙第一编辑器?
+> 大声告诉我谁是宇宙第一编辑器？
 
+## 为什么是 VS Code？
 
-## General Settings
+- 免费、开源、跨平台
+- 扩展生态丰富
+- 远程开发能力（WSL、SSH、Codespaces）
+- AI 辅助编程（Copilot、Continue）
 
-两种配置方式,一种通过UI界面,一种通过`settings.json`
-```json
-{}
+## 快速导航
+
+| 标签 | 内容 |
+| --- | --- |
+| **Settings** | 用户/工作区配置、settings.json、快捷键配置 |
+| **Extensions** | 必装扩展推荐（Git、Markdown、AI 辅助等） |
+| **Advanced** | 远程开发（WSL/SSH/Containers）、多项目工作区、性能优化 |
+
+## 安装
+
+```bash
+winget install Microsoft.VisualStudioCode
 ```
 
-VS Code 有一个叫作工作区的概念。
-
-## Useful Plugins
-
-一些有用的插件：
-- [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
-- [Chinese (Simplified) Language Pack](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
-- [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
-- [GitGraph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)
-
-更具体的一些搭配，随后补充
-
-
-
-## Advanced
-
-定制工作区:
-
-进阶插件:
-- Docker
-- WSL
-- Remote Codespace
+或下载：[code.visualstudio.com](https://code.visualstudio.com/)
