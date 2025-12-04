@@ -409,6 +409,17 @@ const chapterLabelsJson = JSON.stringify(SHARED_CHAPTER_LABELS)
   let searchTicket = 0
   let activeIndex = -1
 
+  // Pagefind shard preloading - avoid duplicate requests
+  const preloaded = new Set()
+  const tryPreload = (char) => {
+    const c = char?.toLowerCase()
+    // Support letters, numbers, and Chinese characters
+    if (c && /[a-z0-9\u4e00-\u9fa5]/.test(c) && !preloaded.has(c)) {
+      preloaded.add(c)
+      pagefind?.preload(c)
+    }
+  }
+
   const debounce = (fn, delay) => {
     let timer
     return (...args) => {
@@ -684,7 +695,7 @@ const chapterLabelsJson = JSON.stringify(SHARED_CHAPTER_LABELS)
     )
   }
 
-  const openDrawer = () => {
+  const openDrawer = async () => {
     if (isOpen || !drawer) return
     positionPanel()
     updateScopes()
@@ -694,7 +705,9 @@ const chapterLabelsJson = JSON.stringify(SHARED_CHAPTER_LABELS)
     window.requestAnimationFrame(() => {
       input?.focus()
     })
-    loadPagefind()
+    // Load engine and preload common first letter
+    await loadPagefind()
+    tryPreload('a')
     emitState()
   }
 
@@ -717,6 +730,10 @@ const chapterLabelsJson = JSON.stringify(SHARED_CHAPTER_LABELS)
 
   input?.addEventListener('input', (event) => {
     const value = (event.target && event.target.value) || ''
+    // Preload shard for first character
+    if (value.length > 0) {
+      tryPreload(value[0])
+    }
     debouncedSearch(value)
   })
 

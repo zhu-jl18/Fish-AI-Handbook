@@ -37,7 +37,9 @@ export default defineConfig({
       styleOverrides: codeConfig.styleOverrides,
       frames: codeConfig.frames,
     }),
-    mdx(),
+    mdx({
+      optimize: true,
+    }),
     sitemap(),
     preact(),
   ],
