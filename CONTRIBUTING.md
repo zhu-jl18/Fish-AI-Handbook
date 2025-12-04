@@ -76,12 +76,17 @@ title: 模型参数详解
 hasMath: true
 ---
 
-Temperature 公式：$$P(x_i) = \frac{e^{z_i/T}}{\sum_j e^{z_j/T}}$$
+Temperature 公式：$$P(x_i) = \\frac{e^{z_i/T}}{\\sum_j e^{z_j/T}}$$
 
 行内公式：$T$ 越小，概率分布越陡峭。
 ```
 
-**注意**：如果页面含有 `$$..$$` 或 `$...$` 语法但未设置 `hasMath: true`，公式将显示为原始 LaTeX 代码而非渲染结果。
+**Tab 页面（多标签内容）说明：**
+
+- 对于使用 `TabContentLayout` 的页面（多标签内容），只要**任意一个标签文件**设置了 `hasMath: true`，整页就会加载一次 KaTeX 样式。
+- 建议在真正包含公式的标签文件上设置 `hasMath: true`（例如 `details.md` / `playground.mdx`），其他不含数学的标签可不写该字段。
+
+**注意**：如果页面（包括任意标签页）含有 `$$..$$` 或 `$...$` 语法但未设置 `hasMath: true`，公式将显示为原始 LaTeX 代码而非渲染结果。
 
 ### 2.3 Astro 路由镜像（强制）
 
