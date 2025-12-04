@@ -24,6 +24,8 @@ const docs = defineCollection({
     tab: tabSchema.optional(),
     /** Internal field set during build - identifies content as non-index tab file */
     _isTabVariant: z.boolean().optional(),
+    /** Whether this page uses math notation (KaTeX) - enables conditional CSS loading */
+    hasMath: z.boolean().optional(),
   }),
 })
 
