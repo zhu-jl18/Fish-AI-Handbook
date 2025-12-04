@@ -659,6 +659,7 @@ npm run build  # 重新构建，会自动生成新的 Pagefind 索引
 - 构建报错缺少 description：补充该文档的 frontmatter `description`。
 - 页面 404：确认内容文件、路由文件、侧栏条目是否一一对应。
 - Header 高亮错位：依据"别名"匹配，与中文标题无关，检查路由前缀。
+- Header 铃铛：通知 Popover 模块已下线，铃铛仅保留静态图标，请勿重新引入 `notifications.ts` 或相关脚本。
 - 搜索无结果：确认已运行 `npm run build` 生成 Pagefind 索引；检查 `CHAPTER_LABELS` 映射是否与实际路径一致。
 
 ---
