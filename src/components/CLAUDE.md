@@ -12,12 +12,11 @@
 
 | 组件 | 功能 | 依赖 |
 |------|------|------|
-| `Header.astro` | 页面头部导航栏 | `navigation.ts`, `notifications.ts` |
+| `Header.astro` | 页面头部导航栏 | `site.ts`, `navigation.ts` |
 | `Footer.astro` | 页面底部 | - |
 | `LeftSidebar.astro` | 左侧章节导航 | `sidebars.ts` |
 | `RightSidebar.astro` | 右侧目录 (TOC) | `toc.ts` |
 | `SearchDrawer.astro` | 搜索抽屉 (Pagefind) | `search.ts` |
-| `NotificationPopover.astro` | 通知 Popover | `notifications.ts` |
 | `MobileMenu.astro` | 移动端菜单 | - |
 | `ContentActions.astro` | 内容操作栏 (编辑/分享) | - |
 | `ContentTabSwitcher.astro` | 多标签内容切换栏 | `tabContent.ts` |
@@ -42,23 +41,19 @@ graph TD
     SidebarPanels --> SidebarStructure
     SidebarPanels --> SidebarContributors
     Header --> SearchDrawer
-    Header --> NotificationPopover
 ```
 
 ## 关键组件说明
+
+### Header.astro
+头部导航组件，负责 Logo、导航链接与工具按钮。
+- 依赖 `site.ts` 与 `navigation.ts` 提供文案与链接
+- 铃铛图标仅保留视觉占位，通知模块已下线，不再挂载 Popover
 
 ### SearchDrawer.astro
 搜索功能入口，集成 Pagefind 搜索引擎。
 - 通过 `data-pagefind-filter` 支持 `chapter:` 过滤
 - 章节映射来自 `src/config/search.ts`
-
-### NotificationPopover.astro
-站点通知系统，显示可配置的通知列表。
-- 点击 Header 铃铛图标显示/隐藏 Popover
-- 通知配置来自 `src/config/notifications.ts`
-- 支持 4 种通知类型：announcement, info, warning, success
-- 通知可设置标题、内容、日期和可选链接
-- 居中显示，支持点击外部和 ESC 键关闭
 
 ### LeftSidebar.astro
 左侧导航栏，根据当前路由动态渲染对应章节的侧栏。

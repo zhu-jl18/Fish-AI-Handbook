@@ -16,9 +16,10 @@
 | `site.ts` | `siteConfig`, `CONTRIBUTORS_MAP`, `getRobotsContent` | 站点元数据、贡献者 |
 | `navigation.ts` | `navigationConfig`, `getCurrentNavKey`, `navItems` | 顶部导航 |
 | `search.ts` | `CHAPTER_LABELS` | 搜索章节映射 |
-| `notifications.ts` | `notificationsConfig`, `getEnabledNotifications`, `Notification` | 站点通知配置 |
 | `code.ts` | `codeConfig` | 代码高亮配置 |
 | `theme.ts` | `theme` | 主题配置 |
+
+> ⚠️ 2025-12-04 起，通知配置模块已移除，仅保留 Header 铃铛图标作为视觉提示。
 
 ## 核心类型
 
@@ -52,15 +53,12 @@ graph LR
     index[index.ts] --> site[site.ts]
     index --> navigation[navigation.ts]
     index --> search[search.ts]
-    index --> notifications[notifications.ts]
     index --> code[code.ts]
     index --> theme[theme.ts]
 
     astro[astro.config.mjs] --> index
     SearchDrawer --> search
     Header --> navigation
-    Header --> notifications
-    NotificationPopover --> notifications
     Layouts --> site
 ```
 
@@ -78,10 +76,3 @@ graph LR
 
 ### 修改代码高亮
 编辑 `code.ts`，配置传递给 `astro-expressive-code`。
-
-### 修改站点通知
-编辑 `notifications.ts` 中的 `notificationsConfig` 数组：
-- 添加/删除/修改通知项
-- 使用 `enabled: false` 禁用通知
-- 支持 4 种通知类型：`announcement`, `info`, `warning`, `success`
-- 可选添加 `link` 字段使通知可点击跳转
