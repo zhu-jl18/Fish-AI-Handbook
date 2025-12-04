@@ -1,3 +1,6 @@
 # Markdown 文件 - 保留用户自定义格式（列表间距等）
 *.md
 
+# KaTeX - 压缩文件不格式化
+public/katex/*
+

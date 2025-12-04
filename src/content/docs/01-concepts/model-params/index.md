@@ -4,6 +4,7 @@ description: Which params affects the outputs of the model.
 contributors:
     - claude
     - codex
+hasMath: true
 ---
 
 想要像我一样熟练调教大模型，那么你需要 懂 ： 用户层调用模型时可设置的生成参数。

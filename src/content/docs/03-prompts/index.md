@@ -4,6 +4,7 @@ description: Prompt Engineering 不是魔法，是逻辑与状态管理的艺术
 contributors:
   - codex
   - gemini
+hasMath: true
 ---
 
 ## Code is cheap, show me the prompt.

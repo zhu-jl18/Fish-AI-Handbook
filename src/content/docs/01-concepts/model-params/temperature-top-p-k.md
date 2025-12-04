@@ -7,6 +7,7 @@ contributors:
 tab:
   label: Temperature+Top-P/K
   order: 20
+hasMath: true
 ---
 
 ## Temperature

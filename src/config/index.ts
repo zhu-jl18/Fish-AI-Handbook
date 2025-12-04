@@ -16,6 +16,3 @@ export { default as codeConfig } from './code'
 export type { CodeConfig } from './code'
 
 export { CHAPTER_LABELS } from './search'
-
-export { notificationsConfig, getEnabledNotifications } from './notifications'
-export type { Notification } from './notifications'

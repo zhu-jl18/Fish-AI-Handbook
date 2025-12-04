@@ -53,9 +53,17 @@ const author =
   contributorsList.find((c: string) => c.toLowerCase() !== 'fish') ||
   contributorsList[0] ||
   'Fish'
+
+// KaTeX CSS 条件加载 - 仅在包含数学公式的页面加载
+const hasMath = entry?.data?.hasMath ?? false
 ---
 
-<BaseLayout title={title} bodyClass={bodyClass} contributors={contributors}>
+<BaseLayout
+  title={title}
+  bodyClass={bodyClass}
+  contributors={contributors}
+  hasMath={hasMath}
+>
   <Header currentPage={currentKey} />
 
   <div class="content-wrapper">

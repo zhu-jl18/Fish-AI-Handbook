@@ -59,8 +59,34 @@
 ---
 title: 标题（必填）
 description: 简短描述（必填，缺失会导致构建失败）
+hasMath: true  # 可选：如果页面使用 KaTeX 数学公式，设为 true
 ---
 ```
+
+#### hasMath 说明
+
+项目使用 KaTeX 渲染数学公式。为优化加载性能，KaTeX CSS（~28KB）**仅在设置 `hasMath: true` 的页面加载**。
+
+- **需要数学公式**：在 frontmatter 添加 `hasMath: true`
+- **不需要**：无需添加（默认 false）
+
+```markdown
+---
+title: 模型参数详解
+hasMath: true
+---
+
+Temperature 公式：$$P(x_i) = \\frac{e^{z_i/T}}{\\sum_j e^{z_j/T}}$$
+
+行内公式：$T$ 越小，概率分布越陡峭。
+```
+
+**Tab 页面（多标签内容）说明：**
+
+- 对于使用 `TabContentLayout` 的页面（多标签内容），只要**任意一个标签文件**设置了 `hasMath: true`，整页就会加载一次 KaTeX 样式。
+- 建议在真正包含公式的标签文件上设置 `hasMath: true`（例如 `details.md` / `playground.mdx`），其他不含数学的标签可不写该字段。
+
+**注意**：如果页面（包括任意标签页）含有 `$$..$$` 或 `$...$` 语法但未设置 `hasMath: true`，公式将显示为原始 LaTeX 代码而非渲染结果。
 
 ### 2.3 Astro 路由镜像（强制）
 
@@ -659,6 +685,62 @@ npm run build  # 重新构建，会自动生成新的 Pagefind 索引
 - 构建报错缺少 description：补充该文档的 frontmatter `description`。
 - 页面 404：确认内容文件、路由文件、侧栏条目是否一一对应。
 - Header 高亮错位：依据"别名"匹配，与中文标题无关，检查路由前缀。
+- Header 铃铛：通知 Popover 模块已下线，铃铛仅保留静态图标，请勿重新引入 `notifications.ts` 或相关脚本。
 - 搜索无结果：确认已运行 `npm run build` 生成 Pagefind 索引；检查 `CHAPTER_LABELS` 映射是否与实际路径一致。
+
+---
+
+## 10. 归档目录 (docs/archive/)
+
+`docs/archive/` 存放重要的历史技术决策和大型重构记录，供后续维护者参考。
+
+**命名规范:** `YYYY-MM-DD_<描述>.md`
+
+**归档时机:**
+- 大型技术重构完成
+- 架构决策变更
+- 性能优化方案实施
+
+**文档必含:**
+- 时间戳（创建/完成时间）
+- Git commit hash（关联代码变更）
+- 回滚方案
+
+示例：`docs/archive/2025-12-04_performance-optimization.md`
+
+---
+
+## 11. 远程图片域名维护
+
+项目使用多个图床和 CDN，所有远程图片域名需在 `astro.config.mjs` 中配置。
+
+### 11.1 当前图床策略
+
+| 类型 | 域名 | 说明 |
+|------|------|------|
+| 自建图床 | `media.makomako.dpdns.org` | 主要图床 |
+| 第三方图床 | `p.sda1.dev`, `static.woshipm.com`, `miro.medium.com`, `cloud.starkinsider.com` | 外部图床 |
+| GitHub | `avatars.githubusercontent.com`, `raw.githubusercontent.com` | 头像/原始文件 |
+| 其他 CDN | `framerusercontent.com`, `registry.npmmirror.com` | 特定平台资源 |
+
+### 11.2 新增图床流程
+
+1. 在 `astro.config.mjs` 的 `image.domains` 数组中添加新域名
+2. 运行 `npm run build` 验证配置正确
+
+### 11.3 检查遗漏域名
+
+运行以下命令查找内容中使用的所有图片域名：
+
+```powershell
+Get-ChildItem -Path src/content -Recurse -Filter "*.md" |
+  Select-String -Pattern 'https?://[^\s)]+\.(png|jpg|gif|webp|svg)' -AllMatches |
+  ForEach-Object {
+    $_.Matches | ForEach-Object { ([uri]$_.Value).Host }
+  } |
+  Sort-Object -Unique
+```
+
+将输出与 `astro.config.mjs` 中的 `image.domains` 对比，确保无遗漏。
 
 ---
