@@ -59,7 +59,7 @@
 
     // 触发自定义事件，供其他组件监听
     document.dispatchEvent(
-      new CustomEvent('theme-change', { detail: { theme } })
+      new CustomEvent('theme-change', { detail: { theme } }),
     )
   }
 
