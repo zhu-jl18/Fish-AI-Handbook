@@ -19,11 +19,22 @@ export default defineConfig({
   title: siteConfig.title,
   output: 'static',
   image: {
+    // 远程图片域名配置 - 新增图床时需同步更新此列表
+    // 查找遗漏: Get-ChildItem -Path src/content -Recurse -Filter "*.md" | Select-String -Pattern 'https?://[^\s)]+\.(png|jpg|gif|webp|svg)' | % { ([uri]$_.Matches.Value).Host } | Sort -Unique
     domains: [
+      // 自建图床
       'media.makomako.dpdns.org',
-      'static.woshipm.com',
-      'framerusercontent.com',
+      // 第三方图床
       'p.sda1.dev',
+      'static.woshipm.com',
+      'miro.medium.com',
+      'cloud.starkinsider.com',
+      // GitHub 相关
+      'avatars.githubusercontent.com',
+      'raw.githubusercontent.com',
+      // 其他 CDN
+      'framerusercontent.com',
+      'registry.npmmirror.com',
     ],
   },
   markdown: {

@@ -684,3 +684,56 @@ npm run build  # 重新构建，会自动生成新的 Pagefind 索引
 - 搜索无结果：确认已运行 `npm run build` 生成 Pagefind 索引；检查 `CHAPTER_LABELS` 映射是否与实际路径一致。
 
 ---
+
+## 10. 归档目录 (docs/archive/)
+
+`docs/archive/` 存放重要的历史技术决策和大型重构记录，供后续维护者参考。
+
+**命名规范:** `YYYY-MM-DD_<描述>.md`
+
+**归档时机:**
+- 大型技术重构完成
+- 架构决策变更
+- 性能优化方案实施
+
+**文档必含:**
+- 时间戳（创建/完成时间）
+- Git commit hash（关联代码变更）
+- 回滚方案
+
+示例：`docs/archive/2025-12-04_performance-optimization.md`
+
+---
+
+## 11. 远程图片域名维护
+
+项目使用多个图床和 CDN，所有远程图片域名需在 `astro.config.mjs` 中配置。
+
+### 11.1 当前图床策略
+
+| 类型 | 域名 | 说明 |
+|------|------|------|
+| 自建图床 | `media.makomako.dpdns.org` | 主要图床 |
+| 第三方图床 | `p.sda1.dev`, `static.woshipm.com`, `miro.medium.com`, `cloud.starkinsider.com` | 外部图床 |
+| GitHub | `avatars.githubusercontent.com`, `raw.githubusercontent.com` | 头像/原始文件 |
+| 其他 CDN | `framerusercontent.com`, `registry.npmmirror.com` | 特定平台资源 |
+
+### 11.2 新增图床流程
+
+1. 在 `astro.config.mjs` 的 `image.domains` 数组中添加新域名
+2. 运行 `npm run build` 验证配置正确
+
+### 11.3 检查遗漏域名
+
+运行以下命令查找内容中使用的所有图片域名：
+
+```powershell
+Get-ChildItem -Path src/content -Recurse -Filter "*.md" |
+  Select-String -Pattern 'https?://[^\s)]+\.(png|jpg|gif|webp|svg)' |
+  ForEach-Object { ([uri]$_.Matches.Value).Host } |
+  Sort-Object -Unique
+```
+
+将输出与 `astro.config.mjs` 中的 `image.domains` 对比，确保无遗漏。
+
+---
