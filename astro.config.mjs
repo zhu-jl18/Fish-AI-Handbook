@@ -11,12 +11,21 @@ import remarkGalleryDirective from './src/plugins/remark-gallery-directive.js'
 import remarkSpoilerDirective from './src/plugins/remark-spoiler-directive.js'
 import remarkMarkDirective from './src/plugins/remark-mark-directive.js'
 import { remarkModifiedTime } from './src/plugins/remark-frontmatter-last-modified.mjs'
+import remarkLazyImages from './src/plugins/remark-lazy-images.js'
 import rehypeKatex from 'rehype-katex'
 
 export default defineConfig({
   site: siteConfig.url,
   title: siteConfig.title,
   output: 'static',
+  image: {
+    domains: [
+      'media.makomako.dpdns.org',
+      'static.woshipm.com',
+      'framerusercontent.com',
+      'p.sda1.dev',
+    ],
+  },
   markdown: {
     smartypants: false,
     remarkPlugins: [
@@ -27,6 +36,7 @@ export default defineConfig({
       remarkSpoilerDirective,
       remarkMarkDirective,
       remarkModifiedTime,
+      remarkLazyImages,
     ],
     rehypePlugins: [rehypeKatex],
   },
