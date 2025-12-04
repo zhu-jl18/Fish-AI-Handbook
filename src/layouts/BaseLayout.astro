@@ -122,18 +122,20 @@ const contributorsContent = contributors?.length ? contributors.join(',') : ''
     <Footer />
     <!-- Conditional script loading for performance -->
     <script is:inline>
-      // Lightbox: only load when page has images in content area
-      if (document.querySelector('.content-inner img')) {
-        import('/scripts/lightbox.js')
-      }
-      // Spoiler: only load when page has spoiler elements
-      if (document.querySelector('.spoiler')) {
-        import('/scripts/spoiler.js')
-      }
-      // Relative-time: load after DOM ready (non-critical)
-      if (document.querySelector('[data-timestamp]')) {
-        import('/scripts/relative-time.js')
-      }
+      document.addEventListener('DOMContentLoaded', () => {
+        // Lightbox: only load when page has images in content area
+        if (document.querySelector('.content-inner img')) {
+          import('/scripts/lightbox.js')
+        }
+        // Spoiler: only load when page has spoiler elements
+        if (document.querySelector('.spoiler')) {
+          import('/scripts/spoiler.js')
+        }
+        // Relative-time: load after DOM ready (non-critical)
+        if (document.querySelector('[data-timestamp]')) {
+          import('/scripts/relative-time.js')
+        }
+      })
     </script>
     <script is:inline src="/scripts/theme-toggle.js"></script>
   </body>
