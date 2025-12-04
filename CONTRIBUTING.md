@@ -729,8 +729,10 @@ npm run build  # 重新构建，会自动生成新的 Pagefind 索引
 
 ```powershell
 Get-ChildItem -Path src/content -Recurse -Filter "*.md" |
-  Select-String -Pattern 'https?://[^\s)]+\.(png|jpg|gif|webp|svg)' |
-  ForEach-Object { ([uri]$_.Matches.Value).Host } |
+  Select-String -Pattern 'https?://[^\s)]+\.(png|jpg|gif|webp|svg)' -AllMatches |
+  ForEach-Object {
+    $_.Matches | ForEach-Object { ([uri]$_.Value).Host }
+  } |
   Sort-Object -Unique
 ```
 

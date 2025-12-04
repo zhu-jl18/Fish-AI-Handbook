@@ -20,7 +20,11 @@ export default defineConfig({
   output: 'static',
   image: {
     // 远程图片域名配置 - 新增图床时需同步更新此列表
-    // 查找遗漏: Get-ChildItem -Path src/content -Recurse -Filter "*.md" | Select-String -Pattern 'https?://[^\s)]+\.(png|jpg|gif|webp|svg)' | % { ([uri]$_.Matches.Value).Host } | Sort -Unique
+    // 查找遗漏:
+    //   Get-ChildItem -Path src/content -Recurse -Filter "*.md" |
+    //     Select-String -Pattern 'https?://[^\s)]+\.(png|jpg|gif|webp|svg)' -AllMatches |
+    //     ForEach-Object { $_.Matches | ForEach-Object { ([uri]$_.Value).Host } } |
+    //     Sort-Object -Unique
     domains: [
       // 自建图床
       'media.makomako.dpdns.org',
