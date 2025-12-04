@@ -59,8 +59,29 @@
 ---
 title: 标题（必填）
 description: 简短描述（必填，缺失会导致构建失败）
+hasMath: true  # 可选：如果页面使用 KaTeX 数学公式，设为 true
 ---
 ```
+
+#### hasMath 说明
+
+项目使用 KaTeX 渲染数学公式。为优化加载性能，KaTeX CSS（~28KB）**仅在设置 `hasMath: true` 的页面加载**。
+
+- **需要数学公式**：在 frontmatter 添加 `hasMath: true`
+- **不需要**：无需添加（默认 false）
+
+```markdown
+---
+title: 模型参数详解
+hasMath: true
+---
+
+Temperature 公式：$$P(x_i) = \frac{e^{z_i/T}}{\sum_j e^{z_j/T}}$$
+
+行内公式：$T$ 越小，概率分布越陡峭。
+```
+
+**注意**：如果页面含有 `$$..$$` 或 `$...$` 语法但未设置 `hasMath: true`，公式将显示为原始 LaTeX 代码而非渲染结果。
 
 ### 2.3 Astro 路由镜像（强制）
 
