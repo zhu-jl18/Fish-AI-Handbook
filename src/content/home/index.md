@@ -7,22 +7,22 @@ todos:
   - text: Write Augment Low-price Guide
 
 readings:
-  - text: 'Prompt foundations：基础原则'
-    href: '/prompts/foundations'
-  - text: 'Workflow：自动化与流水线实践'
-    href: '/advanced/workflow'
-  - text: 'Claude Code 使用手册'
-    href: '/manual/claude-code'
+  - text: 'Deconstructing Serena’s MCP-Powered Semantic Code Understanding Architecture'
+    href: 'https://medium.com/@souradip1000/deconstructing-serenas-mcp-powered-semantic-code-understanding-architecture-75802515d116'
+  - text: 'Serena MCPはClaude Codeを救うのか？'
+    href: 'https://blog.lai.so/serena/'
+  - text: 'Custom Droids (Subagents)'
+    href: 'https://docs.factory.ai/cli/configuration/custom-droids#knowledge-droid'
 links:
-  - text: 'Astro 官方文档'
-    href: 'https://docs.astro.build'
-    meta: '静态站点框架 Astro 的权威文档'
-  - text: 'Pagefind'
-    href: 'https://pagefind.app'
-    meta: '轻量级静态站全文搜索解决方案'
-  - text: 'Vercel'
-    href: 'https://vercel.com'
-    meta: '前端友好的无服务器部署平台'
+  - text: 'Engineering at Anthropic'
+    href: 'https://www.anthropic.com/engineering'
+    meta: 'Learn the design philosophy behind Claude'
+  - text: 'Claude Docs'
+    href: 'https://platform.claude.com/docs/en/home'
+    meta: 'Learn how to get started with the Claude Developer Platform and Claude Code.'
+  - text: 'Kilo Code Blog'
+    href: 'https://blog.kilo.ai/archive'
+    meta: 'Understanding the differentiation of models in real tools'
 ---
 
 这里的正文目前不会在首页展示，你可以忽略。

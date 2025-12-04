@@ -104,8 +104,9 @@ export const FUN_SIDEBAR: SidebarSection = [
     label: 'AI 绘画',
     href: '/fun/ai-drawing',
     items: [
-      { label: '🍌 banana', href: '/fun/ai-drawing/banana' },
+      { label: 'Banana', href: '/fun/ai-drawing/banana' },
       { label: 'ComfyUI', href: '/fun/ai-drawing/comfyui' },
+      { label: 'Z-Image', href: '/fun/ai-drawing/z-image' },
     ],
   },
   {
