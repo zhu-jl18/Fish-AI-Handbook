@@ -9,13 +9,14 @@
 
 ## Git 提交历史
 
-| Phase | Commit Hash | 描述 |
-|-------|-------------|------|
-| Phase 1 | `6487e352` | MDX optimize, Pagefind preload, Vercel cache headers |
-| Phase 1.4 + Phase 2.1 | `a07cd8a3` | Preconnect external domains, defer non-critical scripts |
-| Phase 3 | `5ad8aff7` | Conditional KaTeX CSS loading |
-| Phase 4 | `bb8402d6` | Remote image domains + auto lazy loading |
-| 文档 | `fe910eee` | CONTRIBUTING.md hasMath 说明 |
+|| Phase | Commit Hash | 描述 |
+||-------|-------------|------|
+|| Phase 1 | `6487e352` | MDX optimize, Pagefind preload, Vercel cache headers |
+|| Phase 1.4 + Phase 2.1 | `79646046` | Preconnect external domains (phase1.4) and defer non-critical scripts (phase2.1) |
+|| Phase 3 | `c78edc8f` | Conditional KaTeX CSS loading |
+|| Phase 4 | `141177f7` | Remote image domains + auto lazy loading |
+|| 文档 | `1a2f30c1` | CONTRIBUTING.md hasMath 说明 |
+|| 文档（归档与图床维护） | `7516a231` | archive performance plan & image domain/archive docs guidance |
 
 ---
 
