@@ -36,11 +36,11 @@ pages/
 
 ### 示例
 ```
-内容: src/content/docs/03-prompts/context/index.md
-路由: src/pages/prompts/context/index.astro ✓
+内容: src/content/docs/03-prompts/my-tricks/index.md
+路由: src/pages/prompts/my-tricks/index.astro ✓
 
-内容: src/content/docs/03-prompts/context/dialogue-levels.md
-路由: src/pages/prompts/context/dialogue-levels.astro ✓
+内容: src/content/docs/06-resources/api/details.md (标签页)
+路由: 由 src/pages/resources/api/index.astro 的 TabContentLayout 承载（无需额外路由）
 ```
 
 ## 页面模板
@@ -88,6 +88,7 @@ import { RESOURCES_SIDEBAR } from '../../scripts/sidebars'
 ```
 
 标签内容文件 (带 `tab:` frontmatter) 不需要单独的 `.astro` 路由文件，它们会在对应目录下作为标签被 TabContentLayout 自动渲染。
+TabContentLayout 仅匹配 `basePath` 目录的直接子文件（不递归）。
 
 ## 修改指南
 
@@ -107,4 +108,4 @@ import { RESOURCES_SIDEBAR } from '../../scripts/sidebars'
 3. 检查站内链接 (`npm run test:links`)
 
 ### 路由校验
-运行 `npm run check:routes` 验证内容与路由的镜像一致性（带 `tab:` 的多标签内容由 TabContentLayout 统一承载，已在路由检查脚本中作为特例处理，无需为标签文件创建 `.astro` 路由）。
+运行 `npm run check:page-structure` 与 `npm run check:routes` 验证内容与路由的镜像一致性（带 `tab:` 的多标签内容由 TabContentLayout 统一承载，已在路由检查脚本中作为特例处理，无需为标签文件创建 `.astro` 路由）。

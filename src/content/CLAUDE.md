@@ -6,7 +6,7 @@
 
 ## 模块概览
 
-文档内容存储目录，使用 Astro Content Collections 管理 MDX/Markdown 文档。
+文档内容存储目录，使用 Astro Content Collections 管理 MDX/Markdown 文档。包含 `docs`（正文章节）与 `home`（首页数据）两个集合。
 
 ## 目录结构
 
@@ -22,6 +22,7 @@ content/
     ├── 06-resources/      # 资源汇总
     ├── 07-theoretical/    # 理论基础
     └── 99-manual/         # 使用手册 (置底)
+└── home/              # 首页数据 (todos/readings/links)
 ```
 
 ## 章节映射
@@ -57,6 +58,11 @@ docs/
 ---
 title: 页面标题 (必填)
 description: 简短描述 (必填，缺失会导致构建失败)
+contributors: [fish]      # 可选
+hasMath: true             # 可选；包含公式时标记以加载 KaTeX CSS
+tab:                      # 可选；多标签配置
+  label: Details
+  order: 10
 ---
 ```
 
@@ -67,10 +73,9 @@ description: 简短描述 (必填，缺失会导致构建失败)
 
 ## Content Collections 配置
 
-`config.ts` 定义了 `docs` collection，schema 包含：
-- `title` (string, 必填)
-- `description` (string, 必填)
-- 其他可选字段
+`config.ts` 定义了两个 collection：
+- **docs**：`title`、`description`、`contributors?`、`tab?`、`_isTabVariant?`、`hasMath?`
+- **home**：`todos[]`、`readings[]`、`links[]`（元素为 `text`/`href?`/`meta?`）
 
 ## 自定义 Markdown 语法
 
@@ -89,6 +94,24 @@ description: 简短描述 (必填，缺失会导致构建失败)
 ![图2](url2)
 :::
 ```
+
+### Mark (强调标记)
+```markdown
+:mark[高亮文本]
+```
+
+### Math (数学公式)
+- 行内：`$a^2 + b^2 = c^2$`
+- 块级：
+```markdown
+$$
+E = mc^2
+$$
+```
+- 设置 `hasMath: true` 以加载 KaTeX 样式
+
+### Lazy Images (懒加载)
+- `remark-lazy-images` 自动为所有 Markdown 图片添加 `loading="lazy"` 与 `decoding="async"`
 
 ## Multi-Tab Content (多标签内容)
 
@@ -111,9 +134,14 @@ title: API Key - Details
 description: 详细配置指南
 tab:
   label: Details    # 可选
-  order: 10         # 可选 (index=0, details=10, others=20+)
+  order: 10         # 可选；默认排序见下
+  default: true     # 可选；若未设置则首个 tab 自动为默认
 ---
 ```
+
+默认标签排序与命名：
+- 顺序：`index/overview`=0，`details`=10，`examples`=20，`changelog`=30，其他文件 `100+`
+- 标签名：支持 `Overview` / `Details` / `Examples` / `Changelog` / `Guide` / `Tutorial` / `Reference` / `FAQ` 默认映射，否则按文件名首字母大写
 
 ### 关键文件
 - Schema: `src/content/config.ts` (`tabSchema`)
@@ -126,6 +154,8 @@ tab:
 - 标签文件不需要单独的 `.astro` 路由（由父级使用 TabContentLayout 的路由承载）
 - 单文件目录自动退化为普通页面
 - **章节根目录**（如 `06-resources/index.md`）不会误显示子目录的标签
+- `organizeTabEntries` 仅匹配 `basePath` 目录下的直接子文件（不递归）
+- 任意标签声明 `hasMath: true` 时，布局会为该页面加载 KaTeX CSS（仅加载一次）
 
 ### 响应式行为
 - **桌面/移动端 TOC**：均由 `TabContentLayout` 管理，标签切换时同步更新

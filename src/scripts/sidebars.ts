@@ -70,14 +70,9 @@ export const DAILY_SIDEBAR: SidebarSection = [
 
 export const PROMPTS_SIDEBAR: SidebarSection = [
   { label: '提示词', href: '/prompts' },
-  {
-    label: 'Foundations',
-    href: '/prompts/foundations',
-    items: [
-      { label: 'Principles', href: '/prompts/foundations/principles' },
-      { label: 'Anti-Patterns', href: '/prompts/foundations/anti-patterns' },
-    ],
-  },
+  { label: 'Principles', href: '/prompts/principles' },
+  { label: 'Anti-Patterns', href: '/prompts/anti-patterns' },
+  { label: 'My Tricks', href: '/prompts/my-tricks' },
   { label: 'Context', href: '/prompts/context' },
   { label: 'Assistants', href: '/prompts/assistants' },
   { label: 'AGENTS.MD', href: '/prompts/agents-md' },
@@ -149,19 +144,11 @@ export const THEORETICAL_SIDEBAR: SidebarSection = [
 export const MANUAL_SIDEBAR: SidebarSection = [
   { label: '配置指南', href: '/manual' },
   { label: 'Terminal', href: '/manual/terminal' },
-  { label: 'Vs Code', href: '/manual/vs-code' },
+  { label: 'VS Code', href: '/manual/vs-code' },
   { label: 'Node.js', href: '/manual/nodejs' },
   { label: 'Git', href: '/manual/git' },
-  {
-    label: 'VPN',
-    href: '/manual/vpn',
-  },
-  { label: 'Cherry Studio', href: '/manual/cherrystudio' },
-  {
-    label: 'Claude Code',
-    href: '/manual/claude-code',
-    items: [{ label: 'CCR', href: '/manual/claude-code/ccr' }],
-  },
-  { label: 'Codex', href: '/manual/codex' },
+  { label: 'Network Proxy', href: '/manual/network-proxy' },
+  { label: 'CC Switch', href: '/manual/cc-switch' },
   { label: 'MCP Router', href: '/manual/mcp-router' },
+  { label: 'VPS', href: '/manual/vps' },
 ]

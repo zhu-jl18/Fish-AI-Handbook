@@ -20,12 +20,12 @@
 主样式文件，包含：
 
 ### 样式分类
-- **CSS 变量**: 颜色、字体、间距等设计令牌
+- **CSS 变量 / 主题**: 颜色、字体、间距等设计令牌；`data-theme="light"` 切换浅色主题
 - **基础重置**: 元素默认样式重置
 - **排版**: 标题、段落、链接等
 - **组件样式**: 按钮、卡片、表格等
 - **Markdown 渲染**: 代码块、列表、引用等
-- **插件样式**: Spoiler、Gallery 等扩展语法
+- **插件样式**: Spoiler、Gallery、Mark、高亮等扩展语法
 
 ### 关键类名
 | 类名 | 用途 |
@@ -34,6 +34,7 @@
 | `.spoiler.revealed` | Spoiler 已展开状态 |
 | `.image-gallery` | 图片画廊容器 |
 | `.image-gallery__item` | 画廊单项 |
+| `.theme-transition` | 主题切换过渡（由 theme-toggle 脚本控制） |
 
 ### CSS 变量
 ```css
