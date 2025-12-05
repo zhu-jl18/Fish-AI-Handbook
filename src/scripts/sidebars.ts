@@ -70,14 +70,9 @@ export const DAILY_SIDEBAR: SidebarSection = [
 
 export const PROMPTS_SIDEBAR: SidebarSection = [
   { label: '提示词', href: '/prompts' },
-  {
-    label: 'Foundations',
-    href: '/prompts/foundations',
-    items: [
-      { label: 'Principles', href: '/prompts/foundations/principles' },
-      { label: 'Anti-Patterns', href: '/prompts/foundations/anti-patterns' },
-    ],
-  },
+  { label: 'Principles', href: '/prompts/principles' },
+  { label: 'Anti-Patterns', href: '/prompts/anti-patterns' },
+  { label: 'My Tricks', href: '/prompts/my-tricks' },
   { label: 'Context', href: '/prompts/context' },
   { label: 'Assistants', href: '/prompts/assistants' },
   { label: 'AGENTS.MD', href: '/prompts/agents-md' },
