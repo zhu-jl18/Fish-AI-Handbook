@@ -1,8 +1,8 @@
 ## BASIC RULES
 
-* Always responde in Chinese and think in English.
-
-## Strictly Follow CONTRIBUTING.md
+* Always respond in Chinese and think in English.
+* 始终遵循 `CONTRIBUTING.md`（唯一事实源）。
+* 编辑文件优先使用 `apply_patch`。
 
 
 Repository Guidelines
@@ -17,19 +17,22 @@ Repository Guidelines
 
 ## Build, Test, and Development
 
-- Follow related rules in CONTRIBUTING.md 
+- 跑全套校验：`npm run check:all`（含 format/build/type-check/check:routes/test:links）
+- 常用单项：`npm run check:page-structure`、`npm run check:routes`、`npm run test:links`
+- 预览搜索：`npm run preview:search`（build 后验证 Pagefind）
 
 ## Coding Style & Naming
 
-- Use TypeScript where possible; follow existing Astro/TS patterns.
-- Format code with Prettier (`npm run lint` or configured hooks).
-- Use 2-space indentation; prefer descriptive names (`getUserConfig`, `HandbookSection`).
-- Place shared helpers in `src/lib/` or the closest feature module.
+- 使用 TypeScript；遵循现有 Astro/TS 模式与 2 空格缩进。
+- 统一使用 Prettier (`npm run format`)。
+- 组件/模块命名清晰：如 `getUserConfig`, `HandbookSection`。
+- 共享工具放入 `src/utils/` 或就近模块；布局/组件保持目录边界。
 
 ## Testing Guidelines && Commit & Pull Requests
 
-- Follow related rules in CONTRIBUTING.md 
-- Add or update tests for any behavioral change.
+- 遵循 `CONTRIBUTING.md` 的提交流程与 Conventional Commits。
+- 行为变更需补/更新测试（Playwright、link check、route check 等）。
+- KaTeX/多标签/搜索等改动需同时验证 build + check:routes + test:links。
 
 
 
@@ -37,5 +40,7 @@ Repository Guidelines
 
 ## Agent-Specific Notes
 
-- When editing files, use the `apply_patch` workflow instead of ad-hoc scripts.
-- Follow existing directory boundaries; avoid large restructures without prior discussion.
+- 编辑使用 `apply_patch`，避免大范围重构目录。
+- Content Routes 必须镜像 `src/content/docs`，多标签由 `TabContentLayout` 承载，不额外建路由。
+- 新增图床/远程资源需同步 `astro.config.mjs` image domains。
+- 主题/KaTeX 为按需加载：页面（或任一标签）有 `hasMath: true` 才加载 KaTeX CSS；ThemeToggle 依赖 `/public/scripts/theme-toggle.js`。
