@@ -1,102 +1,69 @@
 # Fish AI Handbook - Gemini Context
 
-This `GEMINI.md` provides essential context and instructions for AI agents working on the **Fish AI Handbook** project.
+简要规则（中文思考/输出）：遵循 `CONTRIBUTING.md`、`AGENTS.md`，使用 `apply_patch` 编辑。
 
 ## Project Overview
-
-**Fish AI Handbook** is a comprehensive documentation site built with **Astro**. It aims to be a quick-reference guide for AI concepts, prompts, and tools. The project emphasizes strict structural conventions to maintain maintainability across a large content base.
+静态文档站点，Astro 5 + TypeScript + MDX/Markdown（Content Collections），Pagefind 搜索，Playwright E2E，Vercel 部署。支持暗/亮主题切换（`ThemeToggle` + `/scripts/theme-toggle.js`）、按需 KaTeX（frontmatter `hasMath`）以及多标签内容（TabContentLayout）。
 
 ### Key Technologies
-- **Framework:** [Astro](https://astro.build/) (Static Site Generation)
-- **Content:** MDX (`.mdx`) and Markdown (`.md`)
-- **Styling:** CSS (Global styles in `src/styles`)
-- **Search:** [Pagefind](https://pagefind.app/)
-- **Testing:** Playwright (E2E), Linkinator (Link checking)
-- **Language:** TypeScript
+- Framework: Astro 5 (SSG)
+- Content: MDX/Markdown via Content Collections (`docs`, `home`)
+- Styling: CSS (`src/styles/global.css`, `right-sidebar.css`)
+- Search: Pagefind
+- Testing: Playwright, Link check
+- Language: TypeScript
 
 ## Architecture & Structure
 
-The project follows a strict mirroring strategy between content and routes.
-
 ```
 src/
-├── content/docs/        # Source of truth for content
-│   ├── 01-concepts/     # Level 1 Directory (Order-Alias)
-│   │   ├── index.md     # Level 1 Index
-│   │   └── topic/       # Level 2 Directory
-│   │       ├── index.md # Level 2 Index
-│   │       └── page.md  # Level 3 Single File (Leaf)
-├── pages/               # Astro Routes (MUST mirror content/docs structure)
-│   ├── index.astro
-│   └── concepts/        # Matches alias 'concepts' from '01-concepts'
-│       ├── index.astro
-│       └── topic/
-│           ├── index.astro
-│           └── page.astro
-├── components/          # Reusable UI components
-├── layouts/             # Page layouts (BaseLayout, ContentLayout)
-├── config/              # Configuration (Nav, Site metadata)
-└── scripts/             # Build and Client scripts (sidebars.ts, docsMap.ts)
+├── components/      # Header/Search/ThemeToggle/Sidebars/TabSwitcher/Home blocks
+├── config/          # site/navigation/search/code/theme
+├── content/         # collections: docs + home
+│   └── docs/01-..99- # 8 章节，NN-alias 命名
+├── layouts/         # BaseLayout / ContentLayout / TabContentLayout
+├── pages/           # 必镜像 docs；TabContentLayout 承载多标签
+├── plugins/         # remark/rehype (spoiler/gallery/mark/lazy-images/math/modified)
+├── scripts/         # sidebars/docsMap/toc
+├── styles/          # global + right-sidebar
+├── utils/           # docsPath/git/tabContent/changelog
+└── public/scripts/  # theme-toggle/toc/lightbox/spoiler/relative-time
 ```
 
-### Critical Structural Rules
+### Chapter Map (docs)
+`01-concepts`, `02-daily`, `03-prompts`, `04-advanced`, `05-fun`, `06-resources`, `07-theoretical`, `99-manual`。
 
-1.  **Route Mirroring:**
-    - Every content file in `src/content/docs` MUST have a corresponding `.astro` file in `src/pages`.
-    - **Level 1 & 2:** MUST use `folder/index.md` (content) and `folder/index.astro` (route).
-    - **Level 3:** MUST use `filename.md` (content) and `filename.astro` (route).
-    - **Prohibited:** Level 2 single files, Level 3 folders. Max depth is 3.
-
-2.  **Frontmatter:**
-    - All content files must include:
-      ```yaml
-      ---
-      title: "Title Here"
-      description: "Short description (Required for build)"
-      ---
-      ```
-
-3.  **Directory Naming:**
-    - Top-level content directories use `NN-alias` format (e.g., `01-concepts`).
-    - Route directories use only the `alias` (e.g., `concepts`).
-    - Mappings are maintained in `src/scripts/docsMap.ts`.
+### Critical Rules
+1) **Route Mirroring**：`src/content/docs/**` ↔ `src/pages/**`；多标签同目录 `*.md` 由 TabContentLayout 渲染，无需额外 `.astro`。  
+2) **Frontmatter**（必填）：`title`, `description`；可选 `contributors`, `tab`, `hasMath`。`tab.default/label/order` 控制多标签。  
+3) **Levels**：最多 3 级；一级/二级必须目录 + `index.md`；三级为目录 + `index.md`，同目录其他 `.md` 作为标签。  
+4) **Assets/Images**：新增远程域需同步 `astro.config.mjs` 的 `image.domains`；Markdown 图片默认懒加载（remark-lazy-images）。  
+5) **Math**：任何标签 `hasMath: true` 即加载 KaTeX CSS 一次。  
+6) **Theme**：BaseLayout 内联初始化，按钮在 `ThemeToggle.astro`，逻辑在 `/public/scripts/theme-toggle.js`。
 
 ## Key Commands
-
-| Command | Description |
-| :--- | :--- |
-| `npm run dev` | Start local development server (default port 4321). |
-| `npm run build` | Build for production (`dist/`) and generate search index. |
-| `npm run preview` | Preview the built site (`dist/`). |
-| `npm run check:routes` | **Mandatory.** Validates structure consistency between content and routes. |
-| `npm run type-check` | Runs `astro check` for TypeScript and Astro component types. |
-| `npm run test:links` | Checks for broken internal links (requires `npm run build` first). |
-| `npm run test:e2e` | Runs Playwright end-to-end tests. |
-| `npm run lint:markdown`| Lints Markdown code blocks. |
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | 本地开发 (4321) |
+| `npm run build` | 构建 + Pagefind 索引 |
+| `npm run preview:search` | 构建后预览并验证搜索 |
+| `npm run type-check` | Astro + TS 类型检查 |
+| `npm run lint:markdown` | Markdown 代码块/图床校验 |
+| `npm run check:page-structure` | 路由/目录综合校验 |
+| `npm run check:routes` | 内容与路由镜像校验 |
+| `npm run test:links` | 站内死链检测（需先 build） |
+| `npm run test:e2e` / `:headed` | Playwright E2E |
+| `npm run check:all` | 一键跑 format/build/type-check/check:routes/test:links |
 
 ## Workflow for Adding Content
-
-To add a new page or section, you must update multiple files to ensure consistency:
-
-1.  **Content:** Create the `.md` file in `src/content/docs/NN-alias/...`.
-2.  **Route:** Create the `.astro` file in `src/pages/alias/...` using `getEntry`.
-3.  **Sidebar:** Update `src/scripts/sidebars.ts` to include the new link.
-4.  **Navigation:** (If Level 1) Update `src/config/navigation.ts`.
-5.  **Mapping:** (If Level 1) Update `src/scripts/docsMap.ts`.
-6.  **Verify:** Run `npm run check:routes` and `npm run test:links`.
+1) 内容：在 `src/content/docs/NN-alias/...` 添加 `index.md`（或同目录标签文件）。  
+2) 路由：在 `src/pages/alias/...` 创建对应 `.astro`；多标签只需父级路由。  
+3) 侧栏：更新 `src/scripts/sidebars.ts`。  
+4) 导航/映射：新增一级章节需改 `src/config/navigation.ts`、`src/scripts/docsMap.ts`。  
+5) 验证：`npm run check:page-structure && npm run check:routes && npm run test:links`。  
 
 ## Commit Conventions
+Conventional Commits，常用 scope：`content`、`sidebar`、`search`、`routing`、`perf`、`ui`、`dx`。  
 
-The project follows **Conventional Commits**:
-- `feat(scope): ...`
-- `fix(scope): ...`
-- `docs(scope): ...`
-- `chore: ...`
-
-Common scopes: `sidebar`, `search`, `content`, `routing`.
-
-## Search Configuration
-
-- Search is powered by **Pagefind**.
-- Search filters (`chapter:`) rely on the first path segment.
-- If renaming chapters, update `src/config/search.ts` (which drives `SearchDrawer`), `docsMap.ts`, and `sidebars.ts`.
+## Search Notes
+Pagefind 过滤依赖路径首段（chapter）。重命名章节时同步 navigation/search/docsMap/sidebars，并重建索引（`npm run build`）。

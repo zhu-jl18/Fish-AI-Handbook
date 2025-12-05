@@ -83,14 +83,18 @@ function hasMultipleTabs(
 ): boolean
 ```
 
-### 默认排序
-- `index.md` → order: 0, label: "Overview"
+### 默认排序/命名
+- `index.md` / `overview.md` → order: 0, label: "Overview"
 - `details.md` → order: 10, label: "Details"
-- 其他 → order: 100+, label: 文件名首字母大写
+- `examples.md` → order: 20, label: "Examples"
+- `changelog.md` → order: 30, label: "Changelog"
+- 其他 → order: 100+，label 为文件名首字母大写
 
 ### 使用场景
 - `TabContentLayout.astro` 布局调用（适用于所有章节）
 - 自动检测同目录下的标签文件并组织为标签页
+- 仅匹配 `basePath` 目录的直接子文件，不递归子目录
+- TabContentLayout 根据各 tab 的 `hasMath` 汇总决定是否加载 KaTeX 样式
 
 ## 修改指南
 

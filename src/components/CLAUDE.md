@@ -12,7 +12,8 @@
 
 | 组件 | 功能 | 依赖 |
 |------|------|------|
-| `Header.astro` | 页面头部导航栏 | `site.ts`, `navigation.ts` |
+| `Header.astro` | 页面头部导航栏（集成主题切换、RSS/Sitemap 复制） | `site.ts`, `navigation.ts` |
+| `ThemeToggle.astro` | 亮/暗主题切换按钮 | `/public/scripts/theme-toggle.js` |
 | `Footer.astro` | 页面底部 | - |
 | `LeftSidebar.astro` | 左侧章节导航 | `sidebars.ts` |
 | `RightSidebar.astro` | 右侧目录 (TOC) | `toc.ts` |
@@ -25,6 +26,8 @@
 | `SidebarToc.astro` | 目录视图 | - |
 | `SidebarContributors.astro` | 贡献者视图 | `site.ts` |
 | `BackToTop.astro` | 返回顶部按钮 | - |
+| `home/HeroSection.astro` | 首页 Hero 区块 | `site.ts` |
+| `home/LinksSection.astro` | 首页推荐链接列表 | `home` collection 数据 |
 
 ## 组件依赖关系
 
@@ -41,6 +44,7 @@ graph TD
     SidebarPanels --> SidebarStructure
     SidebarPanels --> SidebarContributors
     Header --> SearchDrawer
+    Header --> ThemeToggle
 ```
 
 ## 关键组件说明
@@ -48,7 +52,13 @@ graph TD
 ### Header.astro
 头部导航组件，负责 Logo、导航链接与工具按钮。
 - 依赖 `site.ts` 与 `navigation.ts` 提供文案与链接
+- 内置主题切换、Chat Bot 外链、RSS/Sitemap 复制按钮
 - 铃铛图标仅保留视觉占位，通知模块已下线，不再挂载 Popover
+
+### ThemeToggle.astro
+亮/暗主题切换按钮。
+- 通过 `/scripts/theme-toggle.js` 更新 `data-theme`，持久化到 `localStorage`
+- 内联预设脚本在 BaseLayout 中执行，避免主题闪烁
 
 ### SearchDrawer.astro
 搜索功能入口，集成 Pagefind 搜索引擎。

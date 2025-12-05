@@ -397,6 +397,26 @@ tab:
 - 它们通过父级 `index.astro` 渲染，`check:routes` 脚本会自动跳过这些文件
 - 这是对「2.3 Astro 路由镜像」的一处特例：带 `tab:` 的标签文件由父级路由统一承载，无需为每个标签创建单独路由
 
+> [!IMPORTANT]
+> **父级 `index.astro` 必须使用 `TabContentLayout`**，否则标签栏不会渲染。
+>
+> 常见错误：在内容目录添加了 `*.md` 标签文件，但路由仍使用 `ContentLayout`，导致页面只显示 `index.md` 内容而无标签切换。
+>
+> 正确做法：将路由文件从 `ContentLayout` 改为 `TabContentLayout`，并使用 `basePath` 属性：
+>
+> ```astro
+> ---
+> import TabContentLayout from '../../../layouts/TabContentLayout.astro'
+> import { CONCEPTS_SIDEBAR } from '../../../scripts/sidebars'
+> ---
+>
+> <TabContentLayout
+>   basePath="01-concepts/benchmark"
+>   title="Benchmark"
+>   sidebarItems={CONCEPTS_SIDEBAR}
+> />
+> ```
+
 #### 技术实现
 
 - Schema 扩展：`src/content/config.ts` 中的 `tabSchema`

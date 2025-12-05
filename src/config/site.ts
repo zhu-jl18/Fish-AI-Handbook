@@ -134,7 +134,7 @@ export const CONTRIBUTORS_MAP: Record<string, ContributorInfo> = {
     username: 'kimi',
     name: 'Kimi',
     link: 'https://github.com/MoonshotAI',
-    avatar: 'https://media.makomako.dpdns.org/images/2025/12/moonshot',
+    avatar: 'https://media.makomako.dpdns.org/images/2025/12/kimi_circle',
   },
   doubao: {
     username: 'doubao',

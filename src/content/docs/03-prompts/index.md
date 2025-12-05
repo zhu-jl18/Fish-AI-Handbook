@@ -1,11 +1,18 @@
 ---
-title: 提示词工程
-description: Prompt Engineering 不是魔法，是逻辑与状态管理的艺术
+title: Prompts
+description: Prompt 基础，不讲玄学，只教你别问得太蠢
 contributors:
   - codex
-  - gemini
-hasMath: true
 ---
+
+这一章只干一件事：让第一次用 GPT‑5.1、DeepSeek R1、Gemini 2.5 Pro、Claude 4.5 之类模型的人，尽快学会怎么说人话让模型干活。
+
+别指望三页纸把你变成什么「Prompt 大师」。能做到下面三条就算合格：
+
+- 大部分日常任务一次问清楚，不用来回几十轮废话；
+- 知道什么时候要多给信息，什么时候该闭嘴；
+- 知道怎么要结构化输出，方便复制、整理、自动化。
+
 
 ## Code is cheap, show me the prompt.
 
@@ -32,18 +39,22 @@ $$ \text{Output} = f(\text{Instruction}, \text{Context}) $$
 
 如果你想真正掌握这门手艺，按这个顺序看：
 
-1.  [**Foundations (基础)**](/prompts/foundations)
+1.  [**Principles (核心原则与骨架)**](/prompts/principles)
     <br/>先学会怎么写一个合格的单次请求。如果你连单轮对话都写不明白，就别想搞复杂的 Agent 了。
     <br/>*Key: Task, Constraints, Schema.*
 
-2.  [**Context & State (上下文与状态)**](/prompts/context)
+2.  [**Anti-Patterns (反模式)**](/prompts/anti-patterns)
+    <br/>告诉你现在在犯哪些蠢错，顺便教你怎么改。
+    <br/>*Key: Common Mistakes, How to Fix.*
+
+3.  [**Context & State (上下文与状态)**](/prompts/context)
     <br/>**这是目前最被低估的一环。** 学会何时 "Kill the process"（开启新对话），学会如何在不同对话间传递状态 (The Baton Pass)。
     <br/>*Key: State Transfer, Circuit Breaker, Clean Context.*
 
-3.  [**ASSISTANTS**](/prompts/assistants)
+4.  [**ASSISTANTS**](/prompts/assistants)
     <br/>AI Assistants and their configurations.
 
-4.  [**Deepen (进阶)**](/prompts/deepen)
+5.  [**Deepen (进阶)**](/prompts/deepen)
     <br/>当简单的 Prompt 搞不定时，你需要更复杂的框架 (CoT, ReAct, etc.)。
 
 ## 最后给新手的建议

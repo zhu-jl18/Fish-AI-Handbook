@@ -23,35 +23,37 @@ TypeScript 脚本工具集，处理侧栏导航、文档映射和目录生成。
 ### 导出符号
 
 ```typescript
-// 各章节侧栏配置
-const CONCEPTS_SIDEBAR: SidebarSection[]
-const DAILY_SIDEBAR: SidebarSection[]
-const PROMPTS_SIDEBAR: SidebarSection[]
-const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection[]
-const FUN_SIDEBAR: SidebarSection[]
-const RESOURCES_SIDEBAR: SidebarSection[]
-const THEORETICAL_SIDEBAR: SidebarSection[]
-const MANUAL_SIDEBAR: SidebarSection[]
+type SidebarLink = { label: string; href: string; activeMatch?: RegExp | string }
+type SidebarGroup = {
+  label: string
+  href?: string
+  items?: SidebarLink[]
+  openMatch?: RegExp | string
+}
+type SidebarSection = Array<SidebarLink | SidebarGroup>
 
-// 根据路径获取侧栏
-function getSidebarForPath(pathname: string): SidebarSection[] | null
+const CONCEPTS_SIDEBAR: SidebarSection
+const DAILY_SIDEBAR: SidebarSection
+const PROMPTS_SIDEBAR: SidebarSection
+const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection
+const FUN_SIDEBAR: SidebarSection
+const RESOURCES_SIDEBAR: SidebarSection
+const THEORETICAL_SIDEBAR: SidebarSection
+const MANUAL_SIDEBAR: SidebarSection
+
+function getSidebarForPath(pathname: string): SidebarSection
 ```
 
 ### 类型定义
 
 ```typescript
-interface SidebarLink {
-  text: string
-  href: string
-}
-
-interface SidebarGroup {
-  text: string
-  children: SidebarLink[]
-}
-
-type SidebarSection = SidebarLink | SidebarGroup
+// 见上：SidebarSection = Array<SidebarLink | SidebarGroup>
 ```
+
+### 配置要点
+- 侧栏项改为 `label/href` 字段；`items` 用于二级分组
+- Manual 侧栏细分 Terminal / VS Code / Node.js / Git / Network Proxy / CC Switch / MCP Router / VPS
+- 返回空数组代表未匹配章节（无 null）
 
 ## docsMap.ts
 
@@ -78,6 +80,8 @@ function collectHeadings(): TocItem[]     // 收集页面标题
 function mountToc(items: TocItem[]): void // 渲染目录
 function observeActive(): void            // 滚动高亮
 ```
+
+> 构建后输出为 `/public/scripts/toc.js`，TabContentLayout 在浏览器端按需加载，用于多标签 TOC 重建。
 
 ## 修改指南
 
