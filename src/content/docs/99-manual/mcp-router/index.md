@@ -7,7 +7,7 @@ contributors:
 
 顾名思义，这部分介绍如何管理不同 AI 应用的 MCP 配置。
 
-> 注：章节名 "MCP Router" 恰好与下面介绍的一款工具同名，纯属巧合 😄
+> 注：章节名 "MCP Router" 恰好与下面介绍的一款工具同名，纯属巧合。
 
 ## 痛点
 
@@ -30,8 +30,8 @@ contributors:
 
 | 标签 | 工具 | 类型 | 特点 |
 | --- | --- | --- | --- |
-| **MCP Router** | [MCP Router](https://github.com/nicepkg/mcp-router) | GUI | 图形界面，但 bug 较多 |
-| **1MCP Agent** | [1MCP](https://github.com/1mcp-app/agent) | 终端 | 聚合代理，稳定可靠 |
+| **MCP Router** | [MCP Router](https://github.com/nicepkg/mcp-router) | GUI | 图形界面，可视化配置分发 |
+| **1MCP Agent** | [1MCP](https://github.com/1mcp-app/agent) | 终端 | 聚合代理，统一端点 |
 | **Solution** | - | - | 我的配置方案（待补充） |
 
 ## MCP 配置基础

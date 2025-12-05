@@ -38,7 +38,7 @@ tab:
 
 **方案 1**：VPN 开 TUN 模式 / 全局代理
 
-**方案 2**：使用镜像源
+**方案 2**：使用镜像源（推荐 npmmirror.com）
 
 ```bash
 # 临时使用
@@ -54,14 +54,29 @@ npm config get registry
 npm config set registry https://registry.npmjs.org
 ```
 
-**方案 3**：使用 nrm 管理多个源
+**方案 3**：使用 npmrc 管理多配置
+
+需要频繁切换源（如公司内网 vs 公网）时，使用 [npmrc](https://github.com/deoxxa/npmrc) 管理多个 `.npmrc` 配置文件：
 
 ```bash
-npm install -g nrm
-nrm ls        # 查看可用源
-nrm use taobao
-nrm use npm   # 切回官方
+npm install -g npmrc
+
+# 创建配置 (保存当前 .npmrc 为指定名称)
+npmrc -c china    # 创建 china 配置
+npm config set registry https://registry.npmmirror.com
+
+npmrc -c default  # 创建 default 配置
+npm config set registry https://registry.npmjs.org
+
+# 切换配置
+npmrc china       # 使用国内源
+npmrc default     # 使用官方源
+
+# 查看可用配置
+npmrc
 ```
+
+注：nrm 等源管理工具已长期未维护，建议使用 npm 内置命令或 npmrc。
 
 ---
 
@@ -91,7 +106,7 @@ npm cache clean --force
 
 ### peerDependencies 警告
 
-```
+```text
 npm WARN peerDependencies ...
 ```
 
