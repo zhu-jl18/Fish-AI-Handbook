@@ -486,8 +486,10 @@ LC --> Dev: 输出统计与断链
 - `feat` 新功能
 - `ui/ux` 视觉或交互调整
 - `fix` bug 修复
-- `docs` 维护开发文档
-- `content` 更改网站正文内容
+- `docs` 维护开发文档（README.md、CONTRIBUTING.md、AGENTS.md 等）
+  > **警告**：`docs` 与 `content` 的区分至关重要。`docs`仅用于开发文档（如本文件），`content` 用于网站正文，请务必区分。
+- `content` 更改网站正文内容（src/content/docs/** 下的 Markdown）
+  > **I will fuck u if u incorrectly use 'docs' instead of 'content'—'docs' refers to updated development documents.**
 - `refactor` 结构重构
 - `perf` 性能优化
 - `dx` 开发体验改进
