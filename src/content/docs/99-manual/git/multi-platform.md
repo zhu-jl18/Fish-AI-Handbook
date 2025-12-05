@@ -129,7 +129,7 @@ git push gitee --mirror
 
 ### 保持同步
 
-用 GitHub Actions 自动同步到 Gitee：
+用 GitHub Actions 自动同步到 Gitee（纯 Git 命令，无第三方依赖）：
 
 ```yaml
 # .github/workflows/sync-gitee.yml
@@ -137,20 +137,34 @@ name: Sync to Gitee
 on:
   push:
     branches: [main]
+  workflow_dispatch:  # 支持手动触发
+
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-      - uses: wearerequired/git-mirror-action@v1
-        with:
-          source-repo: "git@github.com:username/repo.git"
-          destination-repo: "git@gitee.com:username/repo.git"
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.GITEE_SSH_KEY }}
+          fetch-depth: 0  # 必须：获取完整历史用于镜像
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.GITEE_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan gitee.com >> ~/.ssh/known_hosts
+
+      - name: Mirror to Gitee
+        run: |
+          git remote add gitee git@gitee.com:username/repo.git || true
+          git push gitee --mirror --force
 ```
+
+**配置说明**：
+1. **生成 SSH 密钥**：`ssh-keygen -t ed25519 -C "github-actions"`
+2. **Gitee 添加公钥**：设置 → SSH 公钥 → 添加 `id_ed25519.pub`
+3. **GitHub 添加私钥**：仓库 Settings → Secrets → 新建 `GITEE_SSH_KEY`，粘贴私钥内容
+4. **fetch-depth: 0**：必须设置，否则只能推送浅克隆，镜像会失败
 
 ---
 

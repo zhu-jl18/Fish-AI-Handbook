@@ -33,7 +33,7 @@ git config --global --unset https.proxy
 
 编辑 `~/.ssh/config`：
 
-```
+```text
 Host github.com
     HostName github.com
     User git
@@ -43,7 +43,7 @@ Host github.com
 
 Windows 上用 `connect.exe`（Git for Windows 自带）：
 
-```
+```text
 Host github.com
     HostName github.com
     User git
@@ -79,7 +79,7 @@ Host github.com
 
 GitHub 提供 443 端口的 SSH 服务：
 
-```
+```text
 Host github.com
     HostName ssh.github.com
     Port 443
@@ -104,7 +104,7 @@ Host github.com
 | ghproxy.net | `https://ghproxy.net/https://github.com/...` |
 
 示例：下载 release
-```
+```text
 https://gh-proxy.com/https://github.com/user/repo/releases/download/v1.0/file.zip
 ```
 

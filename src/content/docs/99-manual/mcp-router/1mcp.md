@@ -86,12 +86,14 @@ npx -y @1mcp/agent --config mcp.json --port 3000
 
 ## 相比 MCP Router
 
-| 特性 | MCP Router | 1MCP Agent |
+| 特性 | MCP Router (GUI) | 1MCP Agent |
 | --- | --- | --- |
-| 界面 | GUI | 终端 |
-| 稳定性 | 有 bug | 稳定 |
-| 统一端点 | ❌ | ✅ |
-| 热重载 | ❌ | ✅ |
-| Tags 过滤 | ❌ | ✅ |
+| 界面 | 图形界面 | 终端 |
+| 配置方式 | 分发到各客户端配置文件 | 统一代理端点 |
+| 热重载 | 需重启客户端 | 支持 |
+| Tags 过滤 | 不支持 | 支持 |
+| 适用场景 | 可视化管理、快速配置 | 多服务器聚合、生产部署 |
+
+注：MCP Router 另有 RouterMCP 网关版本，提供统一端点路由能力，详见其 GitHub 文档。
 
 详细文档：[docs.1mcp.app/zh](https://docs.1mcp.app/zh)

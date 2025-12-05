@@ -110,23 +110,23 @@ gh workflow run build.yml
 ### 典型工作流
 
 1. **AI 读取 Issue**
-   ```
+   ```text
    用户：帮我修复 issue #123
    AI：gh issue view 123 → 获取问题描述
    ```
 
 2. **AI 修改代码**
-   ```
+   ```text
    AI：分析问题 → 修改相关文件
    ```
 
 3. **AI 创建 PR**
-   ```
+   ```text
    AI：git commit → git push → gh pr create
    ```
 
 4. **AI 处理 Review**
-   ```
+   ```text
    用户：reviewer 说需要修改
    AI：gh pr view --comments → 读取意见 → 修改 → push
    ```

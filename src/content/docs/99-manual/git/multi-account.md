@@ -54,7 +54,7 @@ ssh-keygen -t ed25519 -C "work@company.com" -f ~/.ssh/id_work
 
 编辑 `~/.ssh/config`：
 
-```
+```text
 # 个人账号
 Host github-personal
     HostName github.com
