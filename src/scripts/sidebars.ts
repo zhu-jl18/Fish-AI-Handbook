@@ -70,15 +70,10 @@ export const DAILY_SIDEBAR: SidebarSection = [
 
 export const PROMPTS_SIDEBAR: SidebarSection = [
   { label: '提示词', href: '/prompts' },
-  {
-    label: 'Foundations',
-    href: '/prompts/foundations',
-    items: [
-      { label: 'Principles', href: '/prompts/foundations/principles' },
-      { label: 'Anti-Patterns', href: '/prompts/foundations/anti-patterns' },
-    ],
-  },
-  { label: 'Context', href: '/prompts/context' },
+  { label: 'Principles', href: '/prompts/principles' },
+  { label: 'Anti-Patterns', href: '/prompts/anti-patterns' },
+  { label: 'My Tricks', href: '/prompts/my-tricks' },
+  { label: '上下文管理', href: '/prompts/context' },
   { label: 'Assistants', href: '/prompts/assistants' },
   { label: 'AGENTS.MD', href: '/prompts/agents-md' },
   { label: '深入拓展', href: '/prompts/deepen' },
@@ -104,8 +99,9 @@ export const FUN_SIDEBAR: SidebarSection = [
     label: 'AI 绘画',
     href: '/fun/ai-drawing',
     items: [
-      { label: '🍌 banana', href: '/fun/ai-drawing/banana' },
+      { label: 'Banana', href: '/fun/ai-drawing/banana' },
       { label: 'ComfyUI', href: '/fun/ai-drawing/comfyui' },
+      { label: 'Z-Image', href: '/fun/ai-drawing/z-image' },
     ],
   },
   {
@@ -126,6 +122,7 @@ export const FUN_SIDEBAR: SidebarSection = [
 export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
   { label: 'Preparation', href: '/resources/preparation' },
+  { label: 'Gemini', href: '/resources/gemini' },
   { label: '2API', href: '/resources/2api' },
   { label: 'Free Tier', href: '/resources/free-tier' },
   { label: 'Little Cost', href: '/resources/little-cost' },
@@ -148,19 +145,11 @@ export const THEORETICAL_SIDEBAR: SidebarSection = [
 export const MANUAL_SIDEBAR: SidebarSection = [
   { label: '配置指南', href: '/manual' },
   { label: 'Terminal', href: '/manual/terminal' },
-  { label: 'Vs Code', href: '/manual/vs-code' },
+  { label: 'VS Code', href: '/manual/vs-code' },
   { label: 'Node.js', href: '/manual/nodejs' },
   { label: 'Git', href: '/manual/git' },
-  {
-    label: 'VPN',
-    href: '/manual/vpn',
-  },
-  { label: 'Cherry Studio', href: '/manual/cherrystudio' },
-  {
-    label: 'Claude Code',
-    href: '/manual/claude-code',
-    items: [{ label: 'CCR', href: '/manual/claude-code/ccr' }],
-  },
-  { label: 'Codex', href: '/manual/codex' },
+  { label: 'Network Proxy', href: '/manual/network-proxy' },
+  { label: 'CC Switch', href: '/manual/cc-switch' },
   { label: 'MCP Router', href: '/manual/mcp-router' },
+  { label: 'VPS', href: '/manual/vps' },
 ]
