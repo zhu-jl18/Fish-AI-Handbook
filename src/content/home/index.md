@@ -3,6 +3,7 @@
 # 你只需要修改这个 frontmatter，就能控制首页展示的内容
 
 todos:
+  - text: Refer to [mkdocs-material](https://squidfunk.github.io/mkdocs-material/)
   - text: add QA Bot
   - text: Write Augment Low-price Guide
 

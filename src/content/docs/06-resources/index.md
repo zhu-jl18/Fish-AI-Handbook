@@ -16,15 +16,6 @@ contributors:
 
 据统计，一名熟练的薅羊毛工人，在面对一只妖娆妩媚的新羊娘，通常五分钟就会缴械投降，心满意足地离开。
 
-:::gallery{cols=4 gap=4 ratio=1/1}
-![1](https://p.sda1.dev/28/b0717ba4dcf1cc61b7d682722b3d688b/薅羊毛.gif)
-![1](https://p.sda1.dev/28/b0717ba4dcf1cc61b7d682722b3d688b/薅羊毛.gif)
-![1](https://p.sda1.dev/28/b0717ba4dcf1cc61b7d682722b3d688b/薅羊毛.gif)
-![1](https://p.sda1.dev/28/b0717ba4dcf1cc61b7d682722b3d688b/薅羊毛.gif)
-:::
-
-
-
 
 
 ~~这部分主要讲怎么薅羊毛~~，这部分主要是一些资源合集，顺带讲下怎么薅羊毛。

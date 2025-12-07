@@ -10,6 +10,7 @@ Git 是版本控制的事实标准。玩 AI 编程必须会用，因为：
 - gh CLI 让 AI 自动创建 PR、修复 issue
 - 多平台协作是常态
 
+[最好的 GitHub 教程 没有之一](https://www.bilibili.com/video/BV1pwC6BxEeb)
 ## 安装
 
 ```bash

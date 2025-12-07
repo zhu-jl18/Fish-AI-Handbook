@@ -73,7 +73,7 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
   { label: 'Principles', href: '/prompts/principles' },
   { label: 'Anti-Patterns', href: '/prompts/anti-patterns' },
   { label: 'My Tricks', href: '/prompts/my-tricks' },
-  { label: 'Context', href: '/prompts/context' },
+  { label: '上下文管理', href: '/prompts/context' },
   { label: 'Assistants', href: '/prompts/assistants' },
   { label: 'AGENTS.MD', href: '/prompts/agents-md' },
   { label: '深入拓展', href: '/prompts/deepen' },
@@ -122,6 +122,7 @@ export const FUN_SIDEBAR: SidebarSection = [
 export const RESOURCES_SIDEBAR: SidebarSection = [
   { label: '资源合集', href: '/resources' },
   { label: 'Preparation', href: '/resources/preparation' },
+  { label: 'Gemini', href: '/resources/gemini' },
   { label: '2API', href: '/resources/2api' },
   { label: 'Free Tier', href: '/resources/free-tier' },
   { label: 'Little Cost', href: '/resources/little-cost' },

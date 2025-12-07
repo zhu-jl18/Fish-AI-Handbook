@@ -12,3 +12,9 @@ contributors:
 - 适用场景、输入/输出结构、约束；
 - 示例与模板；
 - 评估指标（如：是否包含因果链、引用与证据）。
+相信模型强大的泛化能力，及时你的前边的指令存在模糊性，后续的解释也能把模型拉到正规上去。
+
+
+## Ref
+
+- [How to Design a Good Example](https://ai.functorfish.me)

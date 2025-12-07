@@ -43,6 +43,11 @@ wget http://update.aegis.aliyun.com/download/quartz_uninstall.sh && chmod +x qua
 ```
 
 ---
+- [一键清理脚本](https://github.com/bin456789/reinstall)
+
+## 设置探针
+
+- [探针](https://github.com/bin456789/reinstall)
 
 ## 基础安全设置
 

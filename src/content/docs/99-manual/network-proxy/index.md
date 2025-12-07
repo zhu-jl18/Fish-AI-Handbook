@@ -7,6 +7,8 @@ contributors:
 
 玩 AI 必须科学上网。OpenAI、Anthropic、Google 的 API 都需要代理访问。
 
+[Proxifier+Clash 全局扩展脚本 + DNS 覆写脚本（替代系统代理、TUN模式、防止DNS泄露）](https://linux.do/t/topic/1278898)
+
 ## 基础概念
 
 | 术语 | 说明 |
