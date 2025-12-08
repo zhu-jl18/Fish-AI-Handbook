@@ -43,8 +43,8 @@ test.describe('/resources 多标签内容', () => {
 
     // 确保至少有一个其他面板被隐藏
     const allPanels = page.locator('.content-tab-panel')
-    const hiddenCount = await allPanels.evaluateAll((els) =>
-      els.filter((el) => el.hasAttribute('hidden')).length,
+    const hiddenCount = await allPanels.evaluateAll(
+      (els) => els.filter((el) => el.hasAttribute('hidden')).length,
     )
     expect(hiddenCount).toBeGreaterThanOrEqual(1)
   })

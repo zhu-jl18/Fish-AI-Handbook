@@ -77,6 +77,7 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
   { label: 'Assistants', href: '/prompts/assistants' },
   { label: 'AGENTS.MD', href: '/prompts/agents-md' },
   { label: '深入拓展', href: '/prompts/deepen' },
+  { label: 'Injection', href: '/prompts/injection' },
 ]
 
 export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [

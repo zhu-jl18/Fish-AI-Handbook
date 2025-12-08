@@ -41,7 +41,9 @@ describe('normalizeEntryId', () => {
   })
 
   it('should preserve valid paths', () => {
-    expect(normalizeEntryId('docs/chapter/article')).toBe('docs/chapter/article')
+    expect(normalizeEntryId('docs/chapter/article')).toBe(
+      'docs/chapter/article',
+    )
   })
 
   it('should handle case-insensitive extensions', () => {
@@ -71,7 +73,9 @@ describe('buildDocCandidates', () => {
 
   it('should handle nested paths', () => {
     const candidates = buildDocCandidates('01-concepts/developer/automation')
-    expect(candidates).toContain('/src/content/docs/01-concepts/developer/automation.md')
+    expect(candidates).toContain(
+      '/src/content/docs/01-concepts/developer/automation.md',
+    )
     expect(candidates).toContain(
       '/src/content/docs/01-concepts/developer/automation/index.md',
     )

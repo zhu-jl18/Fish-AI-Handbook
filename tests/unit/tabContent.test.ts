@@ -60,11 +60,15 @@ describe('getTabLabel', () => {
 
   describe('with frontmatter config', () => {
     it('should use label from config', () => {
-      expect(getTabLabel('index', { label: 'Custom Label' })).toBe('Custom Label')
+      expect(getTabLabel('index', { label: 'Custom Label' })).toBe(
+        'Custom Label',
+      )
     })
 
     it('should prefer config label over defaults', () => {
-      expect(getTabLabel('overview', { label: 'Start Here' })).toBe('Start Here')
+      expect(getTabLabel('overview', { label: 'Start Here' })).toBe(
+        'Start Here',
+      )
     })
 
     it('should fallback to default when config has no label', () => {

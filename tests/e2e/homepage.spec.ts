@@ -25,6 +25,6 @@ test.describe('首页（精简）', () => {
     const logo = page.locator('.logo')
     await logo.click()
     await page.waitForLoadState('networkidle')
-    expect(page.url()).toMatch(/\/$|\?/) 
+    expect(page.url()).toMatch(/\/$|\?/)
   })
 })

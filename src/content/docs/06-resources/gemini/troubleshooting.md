@@ -15,3 +15,14 @@ She could be everyone's sweetheart, but not yours.
 2. 开了还挂就是节点送中，换干净节点
 
 
+## Case 2
+
+跳手机验证需要接码，被检测到不干净了：
+- 手机号多的
+- sms activate 接码
+- 放俩月再上 
+
+
+
+
+

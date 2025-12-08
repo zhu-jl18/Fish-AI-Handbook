@@ -84,7 +84,7 @@ export type CodeConfig = {
  * - frames 配置控制复制按钮等 UI 元素的样式
  */
 const codeConfig: CodeConfig = {
-  themes: ['github-dark'],
+  themes: ['github-dark', 'github-light'],
   defaultProps: {
     wrap: true,
     preserveIndent: true,

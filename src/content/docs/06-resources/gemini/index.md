@@ -5,7 +5,7 @@ description: Let Gemini fall in love with you  and fuck every part of the little
 
 攻略Gemini大小姐的一百种方法
 
-For required tools, please refer to [Preparations](/resources/preparations).
+For required tools, please refer to [Preparations](/resources/preparation).
 
 
 
@@ -13,14 +13,12 @@ For required tools, please refer to [Preparations](/resources/preparations).
 ## Basic Gemini AI Pro free for one year
 
 
-
-
 The one by one steps:
 
 
 Click Magic Links:
-- Check the country in service terms
-- Gain Pro Qualification with US IP
+- Check the country in [服务条款](https://policies.google.com/terms?hl=zh_CN)
+- Gain [Pro Qualification]() with Pure US IP 
 
 
 Pass SheerID Verification :
