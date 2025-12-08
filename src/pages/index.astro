@@ -2,7 +2,6 @@
 import { getEntry } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Header from '../components/Header.astro'
-import ChangelogSection from '../components/home/ChangelogSection.astro'
 
 type HomeItem = { text: string; href?: string; meta?: string }
 
@@ -189,10 +188,6 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
         </section>
       </div>
 
-      <!-- 右侧边栏 -->
-      <aside class="home-column-aside">
-        <ChangelogSection />
-      </aside>
     </section>
   </main>
 </BaseLayout>
@@ -335,9 +330,8 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
   /* ========== 双列布局（GitHub 风格） ========== */
   .home-layout {
     display: grid;
-    /* 左列尽可能宽，右列固定窄栏（更接近 GitHub Dashboard） */
-    grid-template-columns: 1fr 280px;
-    gap: 3rem; /* 左右列之间更宽的间距 */
+    grid-template-columns: 1fr;
+    gap: 2rem;
     align-items: start;
   }
 
@@ -346,14 +340,9 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
     flex-direction: column;
     gap: 1.25rem; /* 模块之间略微拉开 */
     min-width: 0; /* 防止内容溢出 */
-    max-width: 980px; /* 仅收窄左侧主内容宽度，右侧 changelog 位置不变 */
-    margin: 0 0 0 6.5rem; /*greeting chatbox todolist and readinglist 左右布局位置*/
-  }
-
-  .home-column-aside {
-    position: sticky; /* 滚动时固定在顶部 */
-    top: 1rem;
-    align-self: start;
+    max-width: 980px;
+    width: 100%;
+    margin: 0 auto;
   }
 
   /* ========== GitHub 风格大卡片 ========== */
@@ -476,10 +465,6 @@ const { todos, readings }: { todos: HomeItem[]; readings: HomeItem[] } =
 
     .home-layout {
       grid-template-columns: 1fr;
-    }
-
-    .home-column-aside {
-      order: -1;
     }
 
     /* 小屏幕保持全宽，避免过窄 */
