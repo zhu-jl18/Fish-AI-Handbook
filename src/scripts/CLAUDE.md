@@ -15,6 +15,7 @@ TypeScript 脚本工具集，处理侧栏导航、文档映射和目录生成。
 | `sidebars.ts` | `getSidebarForPath`, `*_SIDEBAR` | 侧栏配置与路径匹配 |
 | `docsMap.ts` | `DOCS_MAP` | 路由别名到内容目录映射 |
 | `toc.ts` | `setupRightSidebar`, `collectHeadings` | 目录生成与高亮 |
+| `content-tabs.ts` | `initTabSwitcher` | 多标签客户端交互逻辑（打包为模块，自动监听 `DOMContentLoaded` 与 `astro:page-load`） |
 
 ## sidebars.ts
 
@@ -82,6 +83,17 @@ function observeActive(): void            // 滚动高亮
 ```
 
 > 构建后输出为 `/public/scripts/toc.js`，TabContentLayout 在浏览器端按需加载，用于多标签 TOC 重建。
+
+## content-tabs.ts
+
+多标签切换的客户端脚本，打包后通过 `?url` 引入：
+
+```astro
+import contentTabsUrl from '../scripts/content-tabs.ts?url'
+<script type="module" src={contentTabsUrl}></script>
+```
+
+模块内部已自动监听 `DOMContentLoaded` 与 `astro:page-load`，无需额外事件绑定。默认会跳过已初始化的 tab 容器，避免重复绑定。修改时保持导出 API 名称不变（`initTabSwitcher`），确保 `TabContentLayout` 与 `ContentTabSwitcher` 的依赖稳定。
 
 ## 修改指南
 

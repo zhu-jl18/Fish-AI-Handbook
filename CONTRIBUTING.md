@@ -423,6 +423,7 @@ tab:
 - 工具函数：`src/utils/tabContent.ts`（`organizeTabEntries` 仅匹配直接子文件，避免章节根目录误匹配所有子目录）
 - 标签组件：`src/components/ContentTabSwitcher.astro`
 - 布局组件：`src/layouts/TabContentLayout.astro`
+- 客户端脚本：`src/scripts/content-tabs.ts`（通过 `?url` 引入为打包资源，避免内联脚本 404；模块内已自动监听 `DOMContentLoaded` 与 `astro:page-load`，无需额外绑定）
 - TOC 脚本：`public/scripts/toc.js`（桌面/移动端共用）
 
 #### 响应式行为

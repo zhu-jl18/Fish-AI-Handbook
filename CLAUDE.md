@@ -212,6 +212,7 @@ Astro 路由页面，与 `src/content/docs` 一一镜像。
 | `sidebars.ts` | `getSidebarForPath`, `*_SIDEBAR`       | 侧栏配置与路径匹配（label/href 结构，涵盖新 Manual 分组） |
 | `docsMap.ts`  | `DOCS_MAP`                             | 别名到内容目录映射                                        |
 | `toc.ts`      | `setupRightSidebar`, `collectHeadings` | 目录生成与交互                                            |
+| `content-tabs.ts` | `initTabSwitcher`                     | 多标签客户端交互逻辑（打包为资源，通过 `?url` 引入，自动监听 DOMContentLoaded 与 `astro:page-load`） |
 
 → 详见: [src/scripts/CLAUDE.md](src/scripts/CLAUDE.md)
 
