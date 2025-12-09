@@ -32,7 +32,7 @@
   --border-radius-sm: 4px;
 
   /* 代码块 */
-  --code-bg: #0d1117;
+  --code-bg: #0f1116;
   --inline-code-bg: #161b22;
 
   /* 阴影 */
@@ -177,7 +177,7 @@
 
   /* Code colors (extended) */
   --code-border: #30363d;
-  --code-fg: #c9d1d9;
+  --code-fg: #e6edf3;
 }
 
 /* ============================================

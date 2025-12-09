@@ -17,8 +17,8 @@ Repository Guidelines
 
 ## Build, Test, and Development
 
-- 跑全套校验：`npm run check:all`（含 format/build/type-check/check:routes/test:links）
-- 常用单项：`npm run check:page-structure`、`npm run check:routes`、`npm run test:links`
+- 跑全套校验：`npm run check:all`（含 format/build/type-check/check:routes/test:links）；仅在大改动/发布前使用
+- 常用单项：`npm run check:page-structure`、`npm run check:routes`、`npm run test:links`，小改动优先用最小必要命令
 - 预览搜索：`npm run preview:search`（build 后验证 Pagefind）
 
 ## Coding Style & Naming

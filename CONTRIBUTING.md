@@ -456,6 +456,12 @@ npm run test:links          # 基于 dist 的站内死链扫描
 npm run lint:markdown       # 校验 Markdown 代码块
 ```
 
+#### 5.1.1 何时跑全量 vs. 精简校验
+- **小改动（文案/样式/单文件修复）**：`npm run format` + （视情况）`npm run type-check` 即可。
+- **路由/内容结构改动**：`npm run check:routes` + `npm run test:links`（必要时先 `npm run build`）。
+- **涉及多标签/搜索/KaTeX/脚本打包**：`npm run build` + `npm run test:links`。
+- **发布前或大规模重构**：才跑 `npm run check:all`。避免每次一行改动就跑全套，节省时间。
+
 ### 5.2 链接检测脚本工作原理
 
 `npm run test:links` 调用 `node scripts/run-link-check.js`，自动覆盖全部路由：
@@ -529,7 +535,8 @@ LC --> Dev: 输出统计与断链
 
 - `init` 初始化
 - `release` 发布新版本
-- `style` 代码格式更改
+- `style` 代码格式更改 
+  > **警告**：此处不是ui改动！而是指代码格式，代码格式！
 - `feat` 新功能
 - `ui/ux` 视觉或交互调整
 - `fix` bug 修复
