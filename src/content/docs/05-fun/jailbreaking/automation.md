@@ -1,5 +1,5 @@
 ---
-title: 'LLM 越狱攻防系列 · 第五篇：自动化与通用越狱攻击'
+title: '越狱破限系列 · 第五篇：自动化与通用越狱攻击'
 description: 自动化越狱攻击技术与通用攻击方法研究
 contributors:
   - codex

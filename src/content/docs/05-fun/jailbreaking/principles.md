@@ -1,5 +1,5 @@
 ---
-title: 'LLM 越狱攻防系列 · 第一篇：概述与原理'
+title: '越狱破限系列 · 第一篇：概述与原理'
 description: 大语言模型越狱攻击的基本概念、历史演变与技术原理
 contributors:
   - codex
@@ -19,4 +19,3 @@ tab:
 - [How Microsoft discovers and mitigates evolving attacks against AI guardrails（Microsoft Security Blog）](https://www.microsoft.com/en-us/security/blog/2024/04/11/how-microsoft-discovers-and-mitigates-evolving-attacks-against-ai-guardrails/)
 - [Claude's Constitution（Anthropic：Constitutional AI 背景介绍）](https://www.anthropic.com/news/claudes-constitution)
 - [Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073)
-

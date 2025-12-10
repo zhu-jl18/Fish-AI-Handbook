@@ -1,5 +1,5 @@
 ---
-title: 'LLM 越狱攻防系列 · 第三篇：多轮诱导与上下文利用'
+title: '越狱破限系列 · 第三篇：多轮诱导与上下文利用'
 description: 多轮对话诱导技术与上下文窗口利用策略
 contributors:
   - codex
@@ -20,4 +20,3 @@ tab:
 - [Great, Now Write an Article About That: The Crescendo Multi-Turn LLM Jailbreak Attack（arXiv）](https://arxiv.org/abs/2404.01833)
 - [Crescendo: The Multi-Turn Jailbreak Attack（项目主页）](https://crescendo-the-multiturn-jailbreak.github.io/)
 - [LLM01:2025 Prompt Injection（OWASP GenAI Security Project）](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
-

@@ -1,14 +1,11 @@
 ---
 title: AI Drawing
-description: text-to-image and image-to-image
+description: Prompt patterns for text-to-image / image-to-image / image-edit
 ---
 
 
-[civitai](https://civitai.com/images)
+> 入口页说明：本节拆为三个标签页，分别覆盖 T2I、I2I、编辑修复。默认标签用于概览与速查索引。
 
-
-
-:::gallery{cols=2 gap=18 ratio=1/1}
-![图1](https://p.sda1.dev/28/dec249690ccfb5c4195ad3516e66e736/unnamed.jpg)
-![图2](https://p.sda1.dev/28/9d7cc503eb7fbfbff67a406f8a4b5389/juya.jpg)
-:::
+- Text2Image：文案结构、风格/相机/光照限定、负面提示词与采样参数速查。
+- Image2Image：ControlNet / IP-Adapter / 参考图引导与权重分配。
+- ImageEdit：inpaint/outpaint、局部修补、遮罩与参考色板技巧。

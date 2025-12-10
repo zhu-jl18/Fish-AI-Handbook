@@ -1,11 +1,11 @@
 ---
-title: LLM 越狱攻防
-description: LLM 越狱攻防系列文章，探索大语言模型安全边界与防护策略
+title: 越狱破限
+description: 越狱破限系列文章，探索大语言模型安全边界与防护策略
 contributors:
   - codex
 ---
 
-# LLM 越狱攻防
+# 越狱破限
 
 > 本系列共五篇文章，系统性地探讨大语言模型（LLM）越狱攻击与防御的技术原理。
 

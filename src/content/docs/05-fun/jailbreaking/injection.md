@@ -1,5 +1,5 @@
 ---
-title: 'LLM 越狱攻防系列 · 第四篇：间接提示注入与多模态攻击'
+title: '越狱破限系列 · 第四篇：间接提示注入与多模态攻击'
 description: 间接提示注入攻击与多模态场景下的越狱技术
 contributors:
   - codex
@@ -19,4 +19,3 @@ tab:
 - [Multi-Modal Prompt Injection Attacks Using Images（Cobalt）](https://www.cobalt.io/blog/multi-modal-prompt-injection-attacks-using-images)
 - [Prompt Injection 2.0: Hybrid AI Threats（arXiv）](https://arxiv.org/abs/2507.13169)
 - [LLM01:2025 Prompt Injection（OWASP GenAI Security Project）](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
-

@@ -1,8 +1,10 @@
 ---
-
-title: 🍌 Nano Banana 理论笔记（2025‑11 更新版）
-description: Nano Banana / Nano Banana Pro 架构与原理（无实战，仅理论）
----------------------------------------------------------
+title: Nano Banana 理论笔记（2025‑11 更新版）
+description: Nano Banana / Nano Banana Pro 架构与原理（纯理论，不含实操）
+tab:
+  label: Nano Banana +
+  order: 10
+---
 
 先把结论摆在前面：
 你原来那套 `CLIP + U‑Net + VAE` 的「典型 latent diffusion」思路，现在已经不适合拿来描述 **Nano Banana** 以及新的 **Nano Banana Pro** 了。

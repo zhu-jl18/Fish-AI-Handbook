@@ -1,5 +1,5 @@
 ---
-title: 'LLM 越狱攻防系列 · 第二篇：经典越狱提示技巧解析'
+title: '越狱破限系列 · 第二篇：经典越狱提示技巧解析'
 description: 经典越狱 Prompt 技巧解析，包括 DAN、角色扮演、假设场景等方法
 contributors:
   - codex
@@ -20,4 +20,3 @@ tab:
 - [AI 时代的猫鼠游戏——一文快速了解 LLM"越狱"（知乎专栏）](https://zhuanlan.zhihu.com/p/685830495)
 - [Novel Universal Bypass for All Major LLMs（HiddenLayer：Policy Puppetry 提示注入技术）](https://hiddenlayer.com/innovation-hub/novel-universal-bypass-for-all-major-llms/)
 - [Scientists Discover "Universal" Jailbreak for Nearly Every AI, and the Poems That Unlock Them（Futurism）](https://futurism.com/artificial-intelligence/universal-jailbreak-ai-poems)
-

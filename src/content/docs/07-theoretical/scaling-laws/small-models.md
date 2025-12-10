@@ -1,6 +1,9 @@
 ---
 title: 小模型的用武之地
-description: SLM技术原理、应用场景与2025前沿模型
+description: SLM 技术原理、场景与模型清单
+tab:
+  label: Small Models
+  order: 20
 ---
 
 ## 核心问题
@@ -181,3 +184,4 @@ DeepSeek-R1的蒸馏版本就是典型案例。DeepSeek团队从R1（671B）收�
 6. Gemma Team. (2025.03). Gemma 3 Technical Report. arXiv:2503.19786
 7. Google DeepMind. (2025.06). Gemma 3n: Powerful, Efficient AI for Mobile Devices.
 8. Meta. (2025.04). Llama 4: Scout and Maverick.
+
