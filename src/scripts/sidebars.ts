@@ -105,14 +105,7 @@ export const FUN_SIDEBAR: SidebarSection = [
       { label: 'Z-Image', href: '/fun/ai-drawing/z-image' },
     ],
   },
-  {
-    label: '模型解锁',
-    href: '/fun/llm-unlocking',
-    items: [
-      { label: '越狱 Prompt', href: '/fun/llm-unlocking/jailbreak' },
-      { label: '高级技巧', href: '/fun/llm-unlocking/advanced' },
-    ],
-  },
+  { label: 'LLM 越狱攻防', href: '/fun/jailbreaking' },
   { label: 'SillyTavern', href: '/fun/sillytavern' },
   { label: 'n8n', href: '/fun/n8n' },
   { label: 'Ollama', href: '/fun/ollama' },
