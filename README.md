@@ -55,7 +55,7 @@ npm run format     # 代码格式化
 
 ```bash
 npm run check:page-structure  # 页面结构检查：build → check:routes → test:links
-npm run check:all             # 全量检查：format → build → type-check → check:routes → test:links
+npm run check:all             # 全量验证：prettier --check → build → type-check → check:routes → test:links（不写文件）
 ```
 
 单项命令：

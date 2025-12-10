@@ -53,7 +53,7 @@ src/
 | `npm run check:routes` | 内容与路由镜像校验 |
 | `npm run test:links` | 站内死链检测（需先 build） |
 | `npm run test:e2e` / `:headed` | Playwright E2E |
-| `npm run check:all` | 一键跑 format/build/type-check/check:routes/test:links |
+| `npm run check:all` | 一键跑 prettier --check/build/type-check/check:routes/test:links（验证，不写文件） |
 
 ## Workflow for Adding Content
 1) 内容：在 `src/content/docs/NN-alias/...` 添加 `index.md`（或同目录标签文件）。  

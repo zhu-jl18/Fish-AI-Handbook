@@ -265,7 +265,7 @@ npm run lint:markdown # Markdown 代码块与图床校验
 npm run type-check   # TypeScript 类型检查
 npm run check:page-structure # 路由/目录综合校验
 npm run check:routes # 路由结构校验
-npm run check:all    # 运行全部校验器
+npm run check:all    # 全量验证（prettier --check + build + type-check + check:routes + test:links，仅读）
 npm run test:links   # 站内链接检测
 npm run test:e2e     # Playwright E2E 测试（无头）
 npm run test:e2e:headed # Playwright E2E（可视化）
