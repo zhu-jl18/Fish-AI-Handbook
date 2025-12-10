@@ -73,6 +73,14 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
   { label: 'Principles', href: '/prompts/principles' },
   { label: 'Anti-Patterns', href: '/prompts/anti-patterns' },
   { label: 'My Tricks', href: '/prompts/my-tricks' },
+  {
+    label: 'AI 绘画',
+    href: '/prompts/ai-drawing',
+    items: [
+      { label: 'Banana', href: '/prompts/ai-drawing/banana' },
+      { label: 'Z-Image', href: '/prompts/ai-drawing/z-image' },
+    ],
+  },
   { label: '上下文管理', href: '/prompts/context' },
   { label: 'Assistants', href: '/prompts/assistants' },
   { label: 'AGENTS.MD', href: '/prompts/agents-md' },
@@ -96,15 +104,7 @@ export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
 
 export const FUN_SIDEBAR: SidebarSection = [
   { label: '好玩的', href: '/fun' },
-  {
-    label: 'AI 绘画',
-    href: '/fun/ai-drawing',
-    items: [
-      { label: 'Banana', href: '/fun/ai-drawing/banana' },
-      { label: 'ComfyUI', href: '/fun/ai-drawing/comfyui' },
-      { label: 'Z-Image', href: '/fun/ai-drawing/z-image' },
-    ],
-  },
+  { label: 'ComfyUI', href: '/fun/comfyui' },
   { label: 'LLM 越狱攻防', href: '/fun/jailbreaking' },
   { label: 'SillyTavern', href: '/fun/sillytavern' },
   { label: 'n8n', href: '/fun/n8n' },

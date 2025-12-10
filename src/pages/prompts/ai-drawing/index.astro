@@ -2,7 +2,7 @@
 import ContentLayout from '../../../layouts/ContentLayout.astro'
 import { getEntry } from 'astro:content'
 
-const entry = await getEntry('docs', '05-fun/ai-drawing')
+const entry = await getEntry('docs', '03-prompts/ai-drawing')
 let Content: any = null
 let hasContent = false
 try {
@@ -12,10 +12,10 @@ try {
     hasContent = true
   }
 } catch (e) {
-  console.error('Render error: fun/ai-drawing', e)
+  console.error('Render error: prompts/ai-drawing', e)
 }
 
-import { FUN_SIDEBAR } from '../../../scripts/sidebars'
+import { PROMPTS_SIDEBAR } from '../../../scripts/sidebars'
 
 // 目录由 RightSidebar 自动生成
 ---
@@ -23,7 +23,7 @@ import { FUN_SIDEBAR } from '../../../scripts/sidebars'
 <ContentLayout
   entry={entry}
   title="AI 绘画教程"
-  sidebarItems={FUN_SIDEBAR}
+  sidebarItems={PROMPTS_SIDEBAR}
   contributors={entry?.data?.contributors}
 >
   {hasContent && Content ? <Content /> : <div>文档未找到或渲染失败</div>}
