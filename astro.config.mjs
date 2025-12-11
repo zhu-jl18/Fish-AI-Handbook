@@ -61,6 +61,8 @@ export default defineConfig({
       defaultProps: codeConfig.defaultProps,
       styleOverrides: codeConfig.styleOverrides,
       frames: codeConfig.frames,
+      useDarkModeMediaQuery: codeConfig.useDarkModeMediaQuery,
+      customizeTheme: codeConfig.customizeTheme,
     }),
     mdx({
       optimize: true,
