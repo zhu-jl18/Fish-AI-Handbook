@@ -86,6 +86,7 @@ export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
   { label: 'RAG', href: '/advanced/rag' },
   { label: 'SDD', href: '/advanced/sdd' },
   { label: 'MCP', href: '/advanced/mcp' },
+  { label: 'Skills', href: '/advanced/skills' },
   {
     label: 'Agents',
     href: '/advanced/agents',

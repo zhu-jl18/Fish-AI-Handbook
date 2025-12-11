@@ -33,9 +33,12 @@ winget install Microsoft.WindowsTerminal
 
 | 标签 | 内容 |
 | --- | --- |
+| **Client** | 终端别名、主题清单、MDX 彩蛋 |
 | **CMD** | Clink 增强、oh-my-posh 美化 |
-| **PowerShell 7** | 安装配置、插件（PSReadLine、posh-git、Terminal-Icons） |
-| **Git Bash** | oh-my-posh、Windows Terminal 集成 |
+| **PowerShell 7** | 安装配置、PSReadLine、posh-git、Terminal-Icons |
+| **Plugins** | onefetch、fzf 历史搜索、git-completion 等必备插件 |
+| **Zsh** | oh-my-zsh、powerlevel10k、常用插件与加速技巧 |
+| **Fish** | Fisher 管理、热门主题、键位映射与代理方案 |
 | **WSL 2** | Fish Shell、Fisher 插件、常见问题 |
 | **SSH** | Terminus、密钥配置、config 简化 |
 

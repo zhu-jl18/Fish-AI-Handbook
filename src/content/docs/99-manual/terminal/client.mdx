@@ -1,19 +1,18 @@
 ---
-title: Terminal Playground
-description: 一些好玩又稍微有点用的终端小彩蛋示例（基于 MDX 渲染）
+title: Terminal Client
+description: Client 标签里的一些终端彩蛋和高阶玩法（基于 MDX 渲染）
 contributors:
-  - fish
   - codex
 tab:
-  label: Playground
-  order: 20
+  label: Client
+  order: 5
 ---
 
-> 这一页是一个 **MDX Demo**：
+> 这一页现在是 **Client 标签**，底层文件改名为 `client.mdx`：
 >
 > - 和 `index.md` 在同一目录，但作为一个额外的标签页存在
 > - 通过 frontmatter 里的 `tab:` 配置接入多标签系统
-> - 内容里可以写一点“带逻辑的 Markdown”
+> - 内容里可以写一点"带逻辑的 Markdown"
 
 ## 1. 常用 alias 自动生成表格
 
@@ -69,7 +68,7 @@ export const aliases = [
 
 ---
 
-## 2. “一键生成” Oh My Posh 主题列表
+## 2. "一键生成" Oh My Posh 主题列表
 
 下面这个代码块的内容，也是用 JS 拼出来的，而不是手写：
 
@@ -89,11 +88,11 @@ export const themes = ['paradox', 'agnoster', 'atomic', 'spaceship']
 
 ## 3. 和现有 Markdown 的关系
 
-- 这一页是 **`playground.mdx`**，和 `index.md` 放在同一目录 `99-manual/terminal/` 里。
-- `index.md` 仍然是默认标签页（Overview）；`playground.mdx` 只是多了一个 `Playground` 标签。
+- 这一页是 **Client 标签**，和 `index.md` 放在同一目录 `99-manual/terminal/` 里（底层文件为 `client.mdx`）。
+- `index.md` 仍然是默认标签页（Overview）；Client 只是多了一个体验向入口。
 - Tab 系统通过 `tab:` frontmatter + `TabContentLayout` 自动把它们拼在一起：
   - 不需要改路由结构
   - 不会影响搜索索引（Pagefind 仍然看到完整 HTML）
   - 和纯 `.md` 完全兼容
 
-以后如果你想在别的章节搞一个“MDX 彩蛋页”，复制这一套结构就可以了。
+以后如果你想在别的章节搞一个"MDX 彩蛋页"，复制这一套结构就可以了。

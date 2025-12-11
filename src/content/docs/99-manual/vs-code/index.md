@@ -19,6 +19,8 @@ description: VS Code 配置与使用指南
 | **Settings** | 用户/工作区配置、settings.json、快捷键配置 |
 | **Extensions** | 必装扩展推荐（Git、Markdown、AI 辅助等） |
 | **Advanced** | 远程开发（WSL/SSH/Containers）、多项目工作区、性能优化 |
+| **Zed** | 轻量原生编辑器、VS Code Keymap、协作与 AI 面板 |
+| **LazyVim** | 键盘优先的 Neovim 发行版、VS Code 双栈工作流 |
 
 ## 安装
 
