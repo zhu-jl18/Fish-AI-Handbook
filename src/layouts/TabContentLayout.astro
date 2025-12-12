@@ -110,7 +110,11 @@ const tabsForSwitcher = renderedTabs.map((tab) => ({
   id: tab.id,
   label: tab.label,
   isDefault: tab.isDefault,
+  entryId: tab.entry.id,
 }))
+
+const tabEntryIds = renderedTabs.map((tab) => tab.entry.id)
+const tabLabels = renderedTabs.map((tab) => tab.label)
 
 // Prepare tab metadata for client-side sidebar sync (including entryId for copy button)
 const tabsMetadata = renderedTabs.map((tab) => ({
@@ -147,7 +151,12 @@ const defaultContributor = siteConfig.defaultContributor
           >
           {
             entryId && (
-              <ContentActions entryId={entryId} lastModified={lastModified} />
+              <ContentActions
+                entryId={entryId}
+                lastModified={lastModified}
+                tabEntryIds={tabEntryIds}
+                tabLabels={tabLabels}
+              />
             )
           }
 

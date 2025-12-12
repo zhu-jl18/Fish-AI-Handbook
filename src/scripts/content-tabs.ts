@@ -3,7 +3,11 @@
  * Handles click and keyboard navigation, updates panels, and dispatches events.
  */
 
-type TabElement = HTMLButtonElement & { dataset: { tabId?: string } }
+import { copyMarkdownSource } from './copy-markdown'
+
+type TabElement = HTMLButtonElement & {
+  dataset: { tabId?: string; entryId?: string }
+}
 
 function activateTab(
   activeTab: TabElement,
@@ -82,6 +86,25 @@ export function initTabSwitcher() {
         }
       })
     })
+
+    const copyBtn = tabList.querySelector<HTMLButtonElement>(
+      '.content-tab-copy-btn',
+    )
+    if (copyBtn && copyBtn.dataset.copyInitialized !== 'true') {
+      copyBtn.dataset.copyInitialized = 'true'
+      copyBtn.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        const activeTab = tabList.querySelector<TabElement>(
+          '.content-tab.active',
+        )
+        const entryId = activeTab?.dataset.entryId
+        const label =
+          activeTab?.querySelector('.content-tab-label')?.textContent?.trim() ||
+          undefined
+        copyMarkdownSource(entryId, label)
+      })
+    }
   })
 }
 
