@@ -431,13 +431,19 @@ if (entryId) {
   const copyBtn = document.getElementById('copy-markdown-btn')
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
-      const tabEntryIds = JSON.parse(
-        copyBtn.getAttribute('data-tab-entry-ids') || '[]',
-      )
-      const tabLabels = JSON.parse(
-        copyBtn.getAttribute('data-tab-labels') || '[]',
-      )
-      if (Array.isArray(tabEntryIds) && tabEntryIds.length > 1) {
+      let tabEntryIds: string[] = []
+      let tabLabels: string[] = []
+      try {
+        tabEntryIds = JSON.parse(
+          copyBtn.getAttribute('data-tab-entry-ids') || '[]',
+        )
+      } catch {}
+      try {
+        tabLabels = JSON.parse(
+          copyBtn.getAttribute('data-tab-labels') || '[]',
+        )
+      } catch {}
+      if (tabEntryIds.length > 1) {
         copyAllTabsMarkdown(tabEntryIds, tabLabels)
         return
       }
