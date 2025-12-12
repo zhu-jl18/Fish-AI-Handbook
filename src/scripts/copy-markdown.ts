@@ -48,18 +48,16 @@ async function loadMarkdown(entryId: string): Promise<string | null> {
     }
   }
 
-  let ok = false
   for (const p of candidates) {
     try {
       const response = await fetch(p)
       if (response.ok) {
-        ok = true
         return await response.text()
       }
     } catch {}
   }
 
-  return ok ? '' : null
+  return null
 }
 
 export async function copyMarkdownSource(
