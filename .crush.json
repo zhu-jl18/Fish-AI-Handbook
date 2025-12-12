@@ -1,0 +1,102 @@
+{
+  "lsp": {
+    "typescript": {
+      "command": "typescript-language-server",
+      "args": ["--stdio"],
+      "env": {
+        "NODE_OPTIONS": "--max-old-space-size=4096"
+      },
+      "enabled": true
+    },
+    "astro": {
+      "command": "astro-ls",
+      "args": ["--stdio"],
+      "env": {
+        "NODE_OPTIONS": "--max-old-space-size=4096"
+      },
+      "enabled": true
+    },
+    "css": {
+      "command": "css-languageserver",
+      "args": ["--stdio"],
+      "enabled": true
+    },
+    "html": {
+      "command": "html-languageserver",
+      "args": ["--stdio"],
+      "enabled": true
+    },
+    "json": {
+      "command": "vscode-json-language-server",
+      "args": ["--stdio"],
+      "enabled": true
+    },
+    "markdown": {
+      "command": "markdown-oxide",
+      "enabled": false
+    },
+    "emmet": {
+      "command": "emmet-ls",
+      "args": ["--stdio"],
+      "enabled": true
+    },
+    "eslint": {
+      "command": "vscode-eslint-language-server",
+      "args": ["--stdio"],
+      "enabled": false
+    }
+  },
+  "mcp": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "X:/WorkSapce/Fish-AI-Handbook-staging"],
+      "enabled": true
+    },
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "X:/WorkSapce/Fish-AI-Handbook-staging"],
+      "enabled": true
+    }
+  },
+  "tools": {
+    "ignore": [
+      ".git",
+      "node_modules",
+      ".astro",
+      "dist",
+      ".DS_Store",
+      "*.log"
+    ]
+  },
+  "context": {
+    "files": [
+      "README.md",
+      "CONTRIBUTING.md",
+      "CLAUDE.md",
+      "AGENTS.md",
+      "src/content/config.ts",
+      "src/config/*.ts",
+      "astro.config.mjs",
+      "tsconfig.json",
+      "package.json"
+    ],
+    "maxTokens": 8000,
+    "includeCode": true,
+    "includeComments": true
+  },
+  "permissions": {
+    "allowWrite": true,
+    "allowExecute": true,
+    "allowNetwork": true,
+    "requireConfirmation": ["rm", "del", "git push", "npm publish"]
+  },
+  "llm": {
+    "model": "gpt-4",
+    "temperature": 0.3,
+    "maxTokens": 4096
+  },
+  "logging": {
+    "level": "info",
+    "file": ".crush/logs/crush.log"
+  }
+}
