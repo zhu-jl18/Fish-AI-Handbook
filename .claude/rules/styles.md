@@ -1,8 +1,8 @@
-# src/styles - 样式模块
-
-> [根索引](../../CLAUDE.md) > styles
-
 ---
+paths: src/styles/**/*
+---
+
+# src/styles - 样式模块
 
 ## 模块概览
 

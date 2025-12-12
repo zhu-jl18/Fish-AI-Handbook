@@ -1,8 +1,8 @@
-# src/utils - 工具函数模块
-
-> [根索引](../../CLAUDE.md) > utils
-
 ---
+paths: src/utils/**/*
+---
+
+# src/utils - 工具函数模块
 
 ## 模块概览
 

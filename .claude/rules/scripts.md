@@ -1,8 +1,8 @@
-# src/scripts - 脚本工具模块
-
-> [根索引](../../CLAUDE.md) > scripts
-
 ---
+paths: src/scripts/**/*
+---
+
+# src/scripts - 脚本工具模块
 
 ## 模块概览
 
@@ -43,12 +43,6 @@ const THEORETICAL_SIDEBAR: SidebarSection
 const MANUAL_SIDEBAR: SidebarSection
 
 function getSidebarForPath(pathname: string): SidebarSection
-```
-
-### 类型定义
-
-```typescript
-// 见上：SidebarSection = Array<SidebarLink | SidebarGroup>
 ```
 
 ### 配置要点

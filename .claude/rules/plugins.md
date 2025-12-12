@@ -1,8 +1,8 @@
-# src/plugins - Remark 插件模块
-
-> [根索引](../../CLAUDE.md) > plugins
-
 ---
+paths: src/plugins/**/*
+---
+
+# src/plugins - Remark 插件模块
 
 ## 模块概览
 

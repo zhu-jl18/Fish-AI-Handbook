@@ -1,8 +1,8 @@
-# src/config - 配置模块
-
-> [根索引](../../CLAUDE.md) > config
-
 ---
+paths: src/config/**/*
+---
+
+# src/config - 配置模块
 
 ## 模块概览
 
@@ -19,7 +19,7 @@
 | `code.ts` | `codeConfig` | 代码高亮配置 |
 | `theme.ts` | `theme` | 主题配置 |
 
-> ⚠️ 2025-12-04 起，通知配置模块已移除，仅保留 Header 铃铛图标作为视觉提示。
+> 2025-12-04 起，通知配置模块已移除，仅保留 Header 铃铛图标作为视觉提示。
 
 ## 核心类型
 

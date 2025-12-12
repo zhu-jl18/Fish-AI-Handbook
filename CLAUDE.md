@@ -1,8 +1,9 @@
 # Fish AI Handbook - AI 上下文索引
 
-> 生成时间: 2025-12-05 16:40:00  
-> 最后更新: 2025-12-05 16:40:00  
+> 生成时间: 2025-12-05 16:40:00
+> 最后更新: 2025-12-12
 > 本文件由 `/init-project` 命令自动生成，用于为 AI Agent 提供项目上下文。
+> 模块规则已迁移至 `.claude/rules/`，支持路径条件匹配。
 
 ---
 
@@ -146,7 +147,7 @@ UI 组件集合，包含页面头部、侧栏、搜索、目录、主题切换�
 || `home/HeroSection.astro` | 首页欢迎区块 |
 || `home/LinksSection.astro` | 首页链接/阅读列表 |
 
-→ 详见: [src/components/CLAUDE.md](src/components/CLAUDE.md)
+→ 详见: [.claude/rules/components.md](.claude/rules/components.md)
 
 ### ⚙️ src/config
 站点配置中心，管理站点信息、导航、主题、搜索和代码高亮。
@@ -160,7 +161,7 @@ UI 组件集合，包含页面头部、侧栏、搜索、目录、主题切换�
 | `theme.ts`      | `theme`                                              | 主题配置                            |
 | `index.ts`      | 统一导出                                             | 配置聚合入口                        |
 
-→ 详见: [src/config/CLAUDE.md](src/config/CLAUDE.md)
+→ 详见: [.claude/rules/config.md](.claude/rules/config.md)
 
 ### 📝 src/content
 Content Collections 管理的 MDX/Markdown。`docs` 集合用于正文，`home` 集合用于首页 Todo / Reading / Links 配置。
@@ -181,7 +182,7 @@ Content Collections 管理的 MDX/Markdown。`docs` 集合用于正文，`home` 
 - `docs`: `title`、`description`、`contributors?`、`tab?`、`_isTabVariant?`、`hasMath?`（为 KaTeX 懒加载标记）
 - `home`: `todos[]` / `readings[]` / `links[]`（均为 text/href/meta）
 
-→ 详见: [src/content/CLAUDE.md](src/content/CLAUDE.md)
+→ 详见: [.claude/rules/content.md](.claude/rules/content.md)
 
 ### 🎨 src/layouts
 页面布局模板。
@@ -192,7 +193,7 @@ Content Collections 管理的 MDX/Markdown。`docs` 集合用于正文，`home` 
 | `ContentLayout.astro`    | 文档页布局 (三栏结构)                           |
 | `TabContentLayout.astro` | 多标签文档布局（任意章节，支持 tab + 侧栏同步） |
 
-→ 详见: [src/layouts/CLAUDE.md](src/layouts/CLAUDE.md)
+→ 详见: [.claude/rules/layouts.md](.claude/rules/layouts.md)
 
 ### 📄 src/pages
 Astro 路由页面，与 `src/content/docs` 一一镜像。
@@ -202,7 +203,7 @@ Astro 路由页面，与 `src/content/docs` 一一镜像。
 - 二级: `<别名>/<子目录>/index.astro`
 - 三级: `<别名>/<子目录>/<页面>.astro`
 
-→ 详见: [src/pages/CLAUDE.md](src/pages/CLAUDE.md)
+→ 详见: [.claude/rules/pages.md](.claude/rules/pages.md)
 
 ### 🔧 src/scripts
 脚本工具集，处理侧栏、文档映射、目录生成。
@@ -214,7 +215,7 @@ Astro 路由页面，与 `src/content/docs` 一一镜像。
 | `toc.ts`      | `setupRightSidebar`, `collectHeadings` | 目录生成与交互                                            |
 | `content-tabs.ts` | `initTabSwitcher`                     | 多标签客户端交互逻辑（打包为资源，通过 `?url` 引入，自动监听 DOMContentLoaded 与 `astro:page-load`） |
 
-→ 详见: [src/scripts/CLAUDE.md](src/scripts/CLAUDE.md)
+→ 详见: [.claude/rules/scripts.md](.claude/rules/scripts.md)
 
 ### 🔌 src/plugins
 Remark / Rehype 插件，扩展 Markdown 语法与性能。
@@ -229,7 +230,7 @@ Remark / Rehype 插件，扩展 Markdown 语法与性能。
 | `remark-frontmatter-last-modified.mjs` | 最后修改时间注入                                   |
 | `remark-math` + `rehype-katex`         | 数学公式解析/渲染（与 frontmatter `hasMath` 联动） |
 
-→ 详见: [src/plugins/CLAUDE.md](src/plugins/CLAUDE.md)
+→ 详见: [.claude/rules/plugins.md](.claude/rules/plugins.md)
 
 ### 🛠️ src/utils
 工具函数。
@@ -241,7 +242,7 @@ Remark / Rehype 插件，扩展 Markdown 语法与性能。
 || `tabContent.ts` | `organizeTabEntries`, `getTabLabel`, `getTabOrder`, `getTabBasePath`, `isTabVariantEntry`, `hasMultipleTabs` | 多标签内容检测与组织（默认标签排序/label 扩展） |
 || `changelog.ts` | `getChangelog`, `type CommitInfo` | 读取 Git 提交记录并为首页生成变更记录数据 |
 
-→ 详见: [src/utils/CLAUDE.md](src/utils/CLAUDE.md)
+→ 详见: [.claude/rules/utils.md](.claude/rules/utils.md)
 
 ### 🎨 src/styles
 全局样式。
@@ -302,11 +303,10 @@ npm run test:e2e:headed # Playwright E2E（可视化）
 | ---------------- | -------------------------------- |
 | 源文件数         | 119 (*.ts, *.astro, *.js, *.css) |
 | 内容文档数       | 125 (*.md / *.mdx)               |
-| 模块文档数       | 9 (1 根索引 + 8 模块索引)        |
-| 核心模块覆盖率   | 8/8 (100%) ✅                     |
-| 模块级 CLAUDE.md | 9/9 (100%) ✅                     |
+| 模块规则数       | 9 (.claude/rules/*.md)           |
+| 核心模块覆盖率   | 9/9 (100%) ✅                     |
 
 ### 建议下一步
-1. ✅ ~~生成各模块级 `CLAUDE.md` 文件~~ (已完成 9/9)
+1. ✅ ~~生成各模块级 `CLAUDE.md` 文件~~ → 已迁移至 `.claude/rules/`
 2. 保持文档与代码同步更新（增量维护）
 3. 定期运行 `check:page-structure`、`check:routes` 与 `test:links` 确保一致性

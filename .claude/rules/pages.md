@@ -1,8 +1,8 @@
-# src/pages - 路由模块
-
-> [根索引](../../CLAUDE.md) > pages
-
 ---
+paths: src/pages/**/*
+---
+
+# src/pages - 路由模块
 
 ## 模块概览
 
@@ -26,11 +26,11 @@ pages/
 
 ## 路由镜像规则
 
-|| 层级 | 内容路径 | 路由路径 |
-||------|----------|----------|
-|| 一级 | `docs/<NN-alias>/index.md` | `<alias>/index.astro` |
-|| 二级 | `docs/<NN-alias>/<sub>/index.md` | `<alias>/<sub>/index.astro` |
-|| 三级 | `docs/<NN-alias>/<sub>/<page>/index.md` | `<alias>/<sub>/<page>/index.astro` |
+| 层级 | 内容路径 | 路由路径 |
+|------|----------|----------|
+| 一级 | `docs/<NN-alias>/index.md` | `<alias>/index.astro` |
+| 二级 | `docs/<NN-alias>/<sub>/index.md` | `<alias>/<sub>/index.astro` |
+| 三级 | `docs/<NN-alias>/<sub>/<page>/index.md` | `<alias>/<sub>/<page>/index.astro` |
 
 > 说明：同一目录下额外的 `*.md`（如 `details.md`、`glm.md`）作为标签文件，由 `TabContentLayout.astro` 渲染，不需要对应的 `.astro` 路由。
 
@@ -65,10 +65,10 @@ const { Content, headings } = await entry.render()
 
 ## 特殊页面
 
-|| 页面 | 功能 |
-||------|------|
-|| `index.astro` | 站点首页 |
-|| `rss.xml.ts` | RSS 订阅端点 |
+| 页面 | 功能 |
+|------|------|
+| `index.astro` | 站点首页 |
+| `rss.xml.ts` | RSS 订阅端点 |
 
 ## TabContentLayout 多标签页面
 

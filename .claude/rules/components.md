@@ -1,8 +1,8 @@
-# src/components - UI 组件模块
-
-> [根索引](../../CLAUDE.md) > components
-
 ---
+paths: src/components/**/*
+---
+
+# src/components - UI 组件模块
 
 ## 模块概览
 

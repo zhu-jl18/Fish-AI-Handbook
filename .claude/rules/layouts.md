@@ -1,8 +1,8 @@
-# src/layouts - 布局模块
-
-> [根索引](../../CLAUDE.md) > layouts
-
 ---
+paths: src/layouts/**/*
+---
+
+# src/layouts - 布局模块
 
 ## 模块概览
 
@@ -10,11 +10,11 @@
 
 ## 文件清单
 
-|| 文件 | 功能 |
-||------|------|
-|| `BaseLayout.astro` | 基础 HTML 结构、SEO meta、全局样式引入 |
-|| `ContentLayout.astro` | 文档页三栏布局 (左侧栏 + 内容 + 右侧栏) |
-|| `TabContentLayout.astro` | 多标签文档布局（任意章节，支持 tab + 侧栏同步） |
+| 文件 | 功能 |
+|------|------|
+| `BaseLayout.astro` | 基础 HTML 结构、SEO meta、全局样式引入 |
+| `ContentLayout.astro` | 文档页三栏布局 (左侧栏 + 内容 + 右侧栏) |
+| `TabContentLayout.astro` | 多标签文档布局（任意章节，支持 tab + 侧栏同步） |
 
 ## 布局层级
 

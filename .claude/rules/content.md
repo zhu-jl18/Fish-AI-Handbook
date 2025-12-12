@@ -1,8 +1,8 @@
-# src/content - 内容模块
-
-> [根索引](../../CLAUDE.md) > content
-
 ---
+paths: src/content/**/*
+---
+
+# src/content - 内容模块
 
 ## 模块概览
 
