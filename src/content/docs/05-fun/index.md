@@ -9,4 +9,3 @@ description: 一些好玩的东西
 - [越狱破限](/fun/jailbreaking)
 - [酒馆](/fun/sillytavern)
 - [n8n](/fun/n8n)
-- [部署与微调](/fun/ollama)

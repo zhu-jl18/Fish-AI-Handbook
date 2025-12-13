@@ -87,6 +87,7 @@ export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
   { label: 'SDD', href: '/advanced/sdd' },
   { label: 'MCP', href: '/advanced/mcp' },
   { label: 'Skills', href: '/advanced/skills' },
+  { label: '微调', href: '/advanced/fine-tuning' },
   {
     label: 'Agents',
     href: '/advanced/agents',
@@ -102,7 +103,6 @@ export const FUN_SIDEBAR: SidebarSection = [
   { label: '越狱破限', href: '/fun/jailbreaking' },
   { label: 'SillyTavern', href: '/fun/sillytavern' },
   { label: 'n8n', href: '/fun/n8n' },
-  { label: '部署与微调', href: '/fun/ollama' },
   { label: 'Fast API', href: '/fun/fast-api' },
 ]
 
