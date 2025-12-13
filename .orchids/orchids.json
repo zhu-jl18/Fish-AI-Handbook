@@ -1,0 +1,5 @@
+{
+  "projectId": "7b6c99d6-90f5-4d27-b83d-9424771fba6a",
+  "createdAt": 1765425757835,
+  "startupCommands": ["npx astro dev"]
+}

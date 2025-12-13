@@ -439,9 +439,7 @@ if (entryId) {
         )
       } catch {}
       try {
-        tabLabels = JSON.parse(
-          copyBtn.getAttribute('data-tab-labels') || '[]',
-        )
+        tabLabels = JSON.parse(copyBtn.getAttribute('data-tab-labels') || '[]')
       } catch {}
       if (tabEntryIds.length > 1) {
         copyAllTabsMarkdown(tabEntryIds, tabLabels)
