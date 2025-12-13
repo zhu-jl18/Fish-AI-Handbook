@@ -6,6 +6,8 @@
 export type CodeConfig = {
   /** 代码块主题 */
   themes: string[]
+  useDarkModeMediaQuery?: boolean
+  customizeTheme?: (theme: { name: string }) => void
   /** 默认属性 */
   defaultProps: {
     /** 是否自动换行 */
@@ -84,7 +86,15 @@ export type CodeConfig = {
  * - frames 配置控制复制按钮等 UI 元素的样式
  */
 const codeConfig: CodeConfig = {
-  themes: ['github-dark'],
+  themes: ['github-dark', 'github-light'],
+  useDarkModeMediaQuery: false,
+  customizeTheme: (theme) => {
+    if (theme.name === 'github-light') {
+      theme.name = 'light'
+    } else if (theme.name === 'github-dark') {
+      theme.name = 'dark'
+    }
+  },
   defaultProps: {
     wrap: true,
     preserveIndent: true,

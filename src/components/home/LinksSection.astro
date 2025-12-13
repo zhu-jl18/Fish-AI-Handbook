@@ -95,7 +95,7 @@ const display = Array.isArray(links) ? links : []
     top: 0.4rem;
     bottom: 0.4rem;
     width: 1px;
-    background: rgba(255, 255, 255, 0.12); /* 提升竖线可视度 */
+    background: var(--color-border-overlay);
   }
 
   .links-item {
@@ -111,7 +111,8 @@ const display = Array.isArray(links) ? links : []
     height: 6px;
     margin-top: 6px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.35); /* 更小更淡 */
+    background: var(--color-text-secondary);
+    opacity: 0.5;
   }
 
   .links-detail {

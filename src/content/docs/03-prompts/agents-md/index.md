@@ -1,5 +1,5 @@
 ---
-title: AGENTS.MD
+title: AGENTS.md
 description: 遵循 AGENTS.md 协议，让 AI 更好地与你协作
 contributors: [gemini]
 ---
@@ -13,7 +13,7 @@ https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools
 [Giga AI](https://gigamind.dev/)
 
 
-# AGENTS.MD
+# AGENTS.md
 
 > [!NOTE]
 > 本章节正在建设中...

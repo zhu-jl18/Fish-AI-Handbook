@@ -447,7 +447,7 @@ tab:
 ```bash
 # 封装命令（推荐，输出简洁）
 npm run check:page-structure  # 页面结构检查：build → check:routes → test:links
-npm run check:all             # 全量检查：format → build → type-check → check:routes → test:links
+npm run check:all             # 全量验证（只读）：prettier --check → build → type-check → check:routes → test:links
 
 # 单项命令
 npm run build               # Astro 构建 + Pagefind 索引
@@ -456,11 +456,13 @@ npm run test:links          # 基于 dist 的站内死链扫描
 npm run lint:markdown       # 校验 Markdown 代码块
 ```
 
+- 说明：`check:all` 不会自动写入格式；如需修正 Prettier 报错，请先运行 `npm run format`，再用封装命令做验证。
+
 #### 5.1.1 何时跑全量 vs. 精简校验
-- **小改动（文案/样式/单文件修复）**：`npm run format` + （视情况）`npm run type-check` 即可。
+- **小改动（文案/样式/单文件修复）**：`npm run format` + （视情况）`npm run type-check` 即可；不必跑 `check:all`。
 - **路由/内容结构改动**：`npm run check:routes` + `npm run test:links`（必要时先 `npm run build`）。
 - **涉及多标签/搜索/KaTeX/脚本打包**：`npm run build` + `npm run test:links`。
-- **发布前或大规模重构**：才跑 `npm run check:all`。避免每次一行改动就跑全套，节省时间。
+- **发布前或大规模重构**：才跑 `npm run check:all`（只读验证，若需自动修复先 `npm run format`）。避免每次一行改动就跑全套，节省时间。
 
 ### 5.2 链接检测脚本工作原理
 
@@ -499,7 +501,7 @@ LC --> Dev: 输出统计与断链
 | 场景 | 推荐命令 | 说明 |
 |------|----------|------|
 | 页面结构变更（增删改页面） | `npm run check:page-structure` | build → check:routes → test:links |
-| 提交前全量检查 | `npm run check:all` | format → build → type-check → check:routes → test:links |
+| 发布前/大改全量验证 | `npm run check:all` | prettier --check → build → type-check → check:routes → test:links（只读，如需修正先跑 format） |
 | E2E 场景变更 | `npm run test:e2e` | 需单独运行 |
 
 封装命令特点：

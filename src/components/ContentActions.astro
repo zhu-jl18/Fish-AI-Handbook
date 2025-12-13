@@ -3,10 +3,15 @@
  * ContentActions - 文档操作按钮组
  * 放置在文档内容顶部，提供复制源码、提交改进等功能
  */
-const { entryId, lastModified } = Astro.props as {
+const { entryId, lastModified, tabEntryIds, tabLabels } = Astro.props as {
   entryId?: string
   lastModified?: string
+  tabEntryIds?: string[]
+  tabLabels?: string[]
 }
+
+const tabEntryIdsJson = JSON.stringify(tabEntryIds ?? [])
+const tabLabelsJson = JSON.stringify(tabLabels ?? [])
 
 // GitHub 仓库基础 URL
 const GITHUB_REPO_BASE = 'https://github.com/zhu-jl18/Fish-AI-Handbook'
@@ -105,6 +110,8 @@ if (entryId) {
     aria-label="复制Markdown源码"
     title="复制Markdown源码"
     data-entry-id={entryId}
+    data-tab-entry-ids={tabEntryIdsJson}
+    data-tab-labels={tabLabelsJson}
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -368,99 +375,13 @@ if (entryId) {
 </style>
 
 <script>
-  /**
-   * Toast 提示辅助函数
-   * 复用 Header.astro 中已有的 toast-container
-   */
-  function showToast(message: string, type: 'success' | 'error' = 'success') {
-    const container = document.getElementById('toast-container')
-    if (!container) {
-      alert(message)
-      return
-    }
-
-    const toast = document.createElement('div')
-    toast.className = 'toast'
-    toast.innerHTML = `
-      <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        ${
-          type === 'success'
-            ? '<polyline points="20 6 9 17 4 12"></polyline>'
-            : '<circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line>'
-        }
-      </svg>
-      <span>${message}</span>
-    `
-
-    container.appendChild(toast)
-
-    // 2秒后开始淡出
-    setTimeout(() => {
-      toast.classList.add('toast-hide')
-      setTimeout(() => {
-        toast.remove()
-      }, 200)
-    }, 2000)
-  }
+  import {
+    copyMarkdownSource,
+    copyAllTabsMarkdown,
+    showToast,
+  } from '../scripts/copy-markdown'
 
   const SHARE_BASES = ['https://ai.011070.xyz', 'https://ai.functorfish.me']
-
-  import { normalizeEntryId, buildDocCandidates } from '../utils/docsPath'
-
-  async function copyMarkdownSource(entryId: string | null | undefined) {
-    if (!entryId) {
-      showToast('未找到文档标识', 'error')
-      return
-    }
-
-    try {
-      // 规范化 entryId，消除 .md/.mdx 扩展与尾部 /index
-      const cleanId = normalizeEntryId(entryId ?? '')
-
-      // 使用 Vite 的 import.meta.glob 预加载所有 Markdown/MDX 文件为原始文本
-      const modules = import.meta.glob('/src/content/docs/**/*.{md,mdx}', {
-        query: '?raw',
-        import: 'default',
-      })
-
-      // 支持两种物理结构（含 md/mdx）：
-      // 1) 目录 + index.{md,mdx}
-      // 2) 叶子单页（三级） {md,mdx}
-      const candidates = buildDocCandidates(cleanId)
-
-      let loaded = false
-      for (const p of candidates) {
-        if (modules[p]) {
-          const content = (await modules[p]()) as string
-          await navigator.clipboard.writeText(content)
-          showToast('已复制Markdown源码')
-          loaded = true
-          break
-        }
-      }
-
-      if (!loaded) {
-        // Fallback（开发模式）依次尝试两种路径
-        let ok = false
-        for (const p of candidates) {
-          try {
-            const response = await fetch(p)
-            if (response.ok) {
-              const content = await response.text()
-              await navigator.clipboard.writeText(content)
-              showToast('已复制Markdown源码')
-              ok = true
-              break
-            }
-          } catch {}
-        }
-        if (!ok) throw new Error('文件不存在或无法访问')
-      }
-    } catch (error) {
-      console.error('复制失败:', error)
-      showToast('复制失败或源文件不存在', 'error')
-    }
-  }
 
   function resolveShareOrigin() {
     const currentOrigin = window.location.origin
@@ -510,6 +431,21 @@ if (entryId) {
   const copyBtn = document.getElementById('copy-markdown-btn')
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
+      let tabEntryIds: string[] = []
+      let tabLabels: string[] = []
+      try {
+        tabEntryIds = JSON.parse(
+          copyBtn.getAttribute('data-tab-entry-ids') || '[]',
+        )
+      } catch {}
+      try {
+        tabLabels = JSON.parse(copyBtn.getAttribute('data-tab-labels') || '[]')
+      } catch {}
+      if (tabEntryIds.length > 1) {
+        copyAllTabsMarkdown(tabEntryIds, tabLabels)
+        return
+      }
+
       const activePanel = document.querySelector(
         '.content-tab-panel:not([hidden])',
       ) as HTMLElement | null

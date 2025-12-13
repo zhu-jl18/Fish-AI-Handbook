@@ -75,7 +75,8 @@ export const PROMPTS_SIDEBAR: SidebarSection = [
   { label: 'My Tricks', href: '/prompts/my-tricks' },
   { label: '上下文管理', href: '/prompts/context' },
   { label: 'Assistants', href: '/prompts/assistants' },
-  { label: 'AGENTS.MD', href: '/prompts/agents-md' },
+  { label: 'AGENTS.md', href: '/prompts/agents-md' },
+  { label: 'AI Drawing', href: '/prompts/ai-drawing' },
   { label: '深入拓展', href: '/prompts/deepen' },
   { label: 'Injection', href: '/prompts/injection' },
 ]
@@ -85,6 +86,8 @@ export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
   { label: 'RAG', href: '/advanced/rag' },
   { label: 'SDD', href: '/advanced/sdd' },
   { label: 'MCP', href: '/advanced/mcp' },
+  { label: 'Skills', href: '/advanced/skills' },
+  { label: '微调', href: '/advanced/fine-tuning' },
   {
     label: 'Agents',
     href: '/advanced/agents',
@@ -96,27 +99,10 @@ export const ADVANCED_TECHNIQUES_SIDEBAR: SidebarSection = [
 
 export const FUN_SIDEBAR: SidebarSection = [
   { label: '好玩的', href: '/fun' },
-  {
-    label: 'AI 绘画',
-    href: '/fun/ai-drawing',
-    items: [
-      { label: 'Banana', href: '/fun/ai-drawing/banana' },
-      { label: 'ComfyUI', href: '/fun/ai-drawing/comfyui' },
-      { label: 'Z-Image', href: '/fun/ai-drawing/z-image' },
-    ],
-  },
-  {
-    label: '模型解锁',
-    href: '/fun/llm-unlocking',
-    items: [
-      { label: '越狱 Prompt', href: '/fun/llm-unlocking/jailbreak' },
-      { label: '高级技巧', href: '/fun/llm-unlocking/advanced' },
-    ],
-  },
+  { label: 'ComfyUI', href: '/fun/comfyui' },
+  { label: '越狱破限', href: '/fun/jailbreaking' },
   { label: 'SillyTavern', href: '/fun/sillytavern' },
   { label: 'n8n', href: '/fun/n8n' },
-  { label: 'Ollama', href: '/fun/ollama' },
-  { label: '小模型', href: '/fun/small-models' },
   { label: 'Fast API', href: '/fun/fast-api' },
 ]
 
@@ -141,6 +127,7 @@ export const THEORETICAL_SIDEBAR: SidebarSection = [
   { label: 'GRPO', href: '/theoretical/grpo' },
   { label: 'TR & TL', href: '/theoretical/tr-and-tl' },
   { label: 'Agents & Training', href: '/theoretical/agents' },
+  { label: 'Models', href: '/theoretical/models' },
 ]
 
 export const MANUAL_SIDEBAR: SidebarSection = [

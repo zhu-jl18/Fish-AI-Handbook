@@ -1,0 +1,12 @@
+{
+  "lsp": {
+    "typescript": {
+      "command": "typescript-language-server",
+      "args": ["--stdio"]
+    },
+    "astro": {
+      "command": "@astrojs/language-server",
+      "args": ["--stdio"]
+    }
+  }
+}
